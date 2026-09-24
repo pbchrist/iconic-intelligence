@@ -400,7 +400,7 @@ button { color: inherit; }
   letter-spacing: .26em;
   white-space: nowrap;
 }
-.marquee div { width: max-content; animation: marquee 28s linear infinite; }
+.marquee > div:not(.marquee-track) { width: max-content; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
 .dashboard-heading {
