@@ -20,11 +20,15 @@
     <nav class="nav" aria-label="Primary navigation">
       <a href="#capability">Capability</a>
       <a href="#dashboard">Dashboard</a>
+      <a href="#deployment">Deployment</a>
       <a href="#models">Models</a>
-      <a href="#lab">Lab</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="header-cta" href="#contact">Give me one problem</a>
+    <a class="header-cta" href="#contact">Talk to Patrick</a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav">MENU</button>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="#capability">Capability</a><a href="#dashboard">Dashboard</a><a href="#deployment">Deployment</a><a href="#models">Models</a><a href="#contact">Contact</a>
+    </nav>
   </header>
 
   <main id="top">
@@ -32,7 +36,8 @@
       <div class="hero-copy" data-reveal>
         <div class="eyebrow"><span class="live-dot"></span> PRIVATE · PERSISTENT · AGENTIC</div>
         <h1>Know more.<br><em>Move first.</em></h1>
-        <p class="hero-deck">A managed intelligence layer that learns your business, watches what matters, remembers what the chat forgot, and keeps working when you are not looking.</p>
+        <p class="hero-deck">Managed intelligence for owner-led businesses and lean executive teams that need more eyes on the business than the team has hours in the day.</p>
+        <p class="hero-buyer">It learns approved context, watches what matters, carries work forward and keeps useful intelligence from disappearing when a chat ends.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#dashboard">Enter the control room</a>
           <a class="button button-ghost" href="#capability">See what it does</a>
@@ -107,6 +112,18 @@
 
       <div class="marquee" aria-hidden="true">
         <div>RESEARCH · MEMORY · MONITORING · ROUTING · PROCEDURES · REPORTING · GOVERNANCE · RESEARCH · MEMORY · MONITORING · ROUTING · PROCEDURES · REPORTING · GOVERNANCE ·</div>
+      </div>
+    </section>
+
+    <section class="section-shell operator-section">
+      <div class="section-kicker" data-reveal>BUILT + OPERATED</div>
+      <div class="operator-grid" data-reveal>
+        <h2>A managed system needs<br><em>an accountable operator.</em></h2>
+        <div class="operator-copy">
+          <p><strong>Patrick Christell</strong> designs and operates ICONIC. The work combines technical sourcing, market research, private and hybrid AI infrastructure, and practical workflow design.</p>
+          <p>The point is not to hand you an AI tool and disappear. It is to keep the intelligence useful, current, governed and aligned with the way the business actually works.</p>
+          <div class="operator-tags"><span>RESEARCH SYSTEMS</span><span>AI INFRASTRUCTURE</span><span>WORKFLOW DESIGN</span></div>
+        </div>
       </div>
     </section>
 
@@ -213,25 +230,25 @@
       <div class="section-kicker" data-reveal>LOCAL ≠ SMALL THINKING</div>
       <div class="section-heading split-heading" data-reveal>
         <h2>The model is a component.<br><em>The system is the product.</em></h2>
-        <p>Some work belongs on frontier models. Some belongs on hardware you control. The advantage is routing each job to the right engine without forcing the client to care.</p>
+        <p>Some work belongs on frontier models. Some belongs on open-weight models running on dedicated infrastructure. The job is to route each workload to the right engine and deployment environment without making the client manage the machinery.</p>
       </div>
 
       <div class="model-explainer" data-reveal>
         <div class="local-visual">
           <div class="server-frame">
-            <div class="server-top"><span>LOCAL NODE</span><b>PRIVATE</b></div>
-            <div class="server-core"><span class="gpu-block">GPU</span><div><strong>QWEN 3.8</strong><small>ON-PREMISE / PRIVATE CLOUD</small></div></div>
+            <div class="server-top"><span>DEDICATED MODEL NODE</span><b>OPTIONAL</b></div>
+            <div class="server-core"><span class="gpu-block">GPU</span><div><strong>OPEN-WEIGHT MODEL</strong><small>MANAGED OR CLIENT-CONTROLLED</small></div></div>
             <div class="server-lines"><i></i><i></i><i></i><i></i><i></i></div>
           </div>
-          <div class="local-caption">Your data can stay inside an environment you control while the intelligence remains available, persistent and fast.</div>
+          <div class="local-caption">Where data lives depends on the deployment. ICONIC can operate a managed environment, or work with your IT team to place designated workloads inside infrastructure your organization controls.</div>
         </div>
         <div class="local-copy">
-          <div class="definition"><span>LOCAL LLM</span><p>A model that runs on dedicated hardware or infrastructure you control instead of sending every request to a third-party model API.</p></div>
+          <div class="definition"><span>OPEN-WEIGHT / LOCAL</span><p>A model can run on dedicated infrastructure rather than sending every workload to a third-party model API. The security and data-residency posture follows the environment we actually deploy.</p></div>
           <ul>
-            <li><span>01</span><div><strong>Privacy + sovereignty</strong><small>Keep sensitive workloads closer to home.</small></div></li>
-            <li><span>02</span><div><strong>Cost predictability</strong><small>High-volume routine work can move off metered APIs.</small></div></li>
-            <li><span>03</span><div><strong>Always-on utility</strong><small>Recurring monitoring and internal jobs can run without burning premium inference on everything.</small></div></li>
-            <li><span>04</span><div><strong>Hybrid power</strong><small>Escalate only the work that actually benefits from frontier capability.</small></div></li>
+            <li><span>01</span><div><strong>Deployment choice</strong><small>ICONIC-managed for speed, or client-controlled when policy and risk require it.</small></div></li>
+            <li><span>02</span><div><strong>Data residency by design</strong><small>No blanket promise: workloads stay where the approved architecture says they stay.</small></div></li>
+            <li><span>03</span><div><strong>Cost predictability</strong><small>High-volume routine work can move away from premium metered inference.</small></div></li>
+            <li><span>04</span><div><strong>Hybrid power</strong><small>Escalate only the work that benefits from frontier capability.</small></div></li>
           </ul>
         </div>
       </div>
@@ -251,21 +268,27 @@
       </div>
     </section>
 
-    <section class="section-shell agentic-section">
-      <div class="section-kicker" data-reveal>WHY AGENTIC MATTERS</div>
-      <div class="agentic-layout">
-        <div class="agentic-copy" data-reveal>
-          <h2>Chat answers.<br><em>Agents pursue outcomes.</em></h2>
-          <p>The shift is from a box that waits for a prompt to software that can observe, plan, use tools, follow procedures, verify work, remember context and keep going.</p>
-          <a href="#lab" class="text-link">RUN THE DEMO EXPERIMENT ↘</a>
-        </div>
-        <div class="evolution" data-reveal>
-          <article><span>1</span><div><small>CHAT</small><strong>Ask → answer</strong><p>Useful, but ephemeral.</p></div></article>
-          <article><span>2</span><div><small>TOOLS</small><strong>Ask → act</strong><p>Models search, calculate, retrieve and operate software.</p></div></article>
-          <article><span>3</span><div><small>AGENTS</small><strong>Goal → plan → execute</strong><p>Multi-step work with verification and branching.</p></div></article>
-          <article class="current"><span>4</span><div><small>PERSISTENT INTELLIGENCE</small><strong>Watch → learn → work → escalate</strong><p>A durable business function, not a session.</p></div></article>
-        </div>
+    <section id="deployment" class="section-shell deployment-section">
+      <div class="section-kicker" data-reveal>WHERE IT LIVES</div>
+      <div class="section-heading split-heading" data-reveal>
+        <h2>Managed here.<br><em>Embedded there.</em></h2>
+        <p>There is no single honest answer to “where does the AI live?” The right deployment depends on the use case, the sensitivity of the data, the integrations required and how much infrastructure control the client needs.</p>
       </div>
+      <div class="deployment-grid" data-reveal>
+        <article>
+          <span>01</span><small>ICONIC-MANAGED</small>
+          <h3>Move faster.</h3>
+          <p>A dedicated environment operated by ICONIC. It is the lighter-weight path when client policy permits managed infrastructure and the goal is to get useful capability running without turning the first project into an internal IT program.</p>
+          <b>LOWER IMPLEMENTATION FRICTION</b>
+        </article>
+        <article>
+          <span>02</span><small>CLIENT ENVIRONMENT</small>
+          <h3>Move inside.</h3>
+          <p>For workloads that need tighter infrastructure control, ICONIC can work with the client's IT and security teams to deploy into approved on-premise, private-cloud or other client-controlled environments.</p>
+          <b>GREATER CONTROL · GREATER IT INVOLVEMENT</b>
+        </article>
+      </div>
+      <p class="deployment-bridge" data-reveal>The system does not have to start at maximum complexity. As useful use cases accumulate, the architecture can move deeper into the business where the value justifies the integration.</p>
     </section>
 
     <section id="lab" class="section-shell lab-section">
@@ -316,19 +339,19 @@
     <section class="section-shell offer-section">
       <div class="offer-card" data-reveal>
         <div class="offer-copy">
-          <div class="section-kicker">THE DOORWAY</div>
-          <h2>Give me one problem.</h2>
-          <p>Something annoying, expensive, repetitive, information-heavy, neglected, slow, or impossible to watch closely enough.</p>
-          <p class="offer-emphasis">The first engagement should not feel like an AI presentation. It should solve something.</p>
+          <div class="section-kicker">FOLLOW THE USEFULNESS</div>
+          <h2>Let value decide what comes next.</h2>
+          <p>Start with one bounded use case where better information, recurring research or persistent context would materially improve the work.</p>
+          <p class="offer-emphasis">If it earns a place in the business, we follow the usefulness outward — into adjacent use cases, deeper context, better workflows and tighter integration.</p>
         </div>
-        <div class="offer-flow" aria-label="Engagement path">
-          <div><span>01</span><strong>PROBLEM</strong><small>Pick something real.</small></div>
+        <div class="offer-flow" aria-label="Usefulness expansion path">
+          <div><span>01</span><strong>START USEFUL</strong><small>Choose a use case worth improving.</small></div>
           <i>→</i>
-          <div><span>02</span><strong>PROOF</strong><small>Create the holy-shit moment.</small></div>
+          <div><span>02</span><strong>WATCH VALUE</strong><small>See what gets used and what changes decisions.</small></div>
           <i>→</i>
-          <div><span>03</span><strong>INSTALL</strong><small>Keep the useful context alive.</small></div>
+          <div><span>03</span><strong>FOLLOW ADJACENCIES</strong><small>Useful outputs reveal the next use cases.</small></div>
           <i>→</i>
-          <div><span>04</span><strong>EXPAND</strong><small>Turn it into capability.</small></div>
+          <div><span>04</span><strong>DEEPEN WHERE EARNED</strong><small>Add integrations and client-side deployment when the value justifies the complexity.</small></div>
         </div>
       </div>
     </section>
@@ -341,7 +364,7 @@
           <div class="card-ornament" aria-hidden="true"><span></span><i></i><b></b><i></i><span></span></div>
           <h2>Build an advantage<br>your competitors <em>cannot rent off the shelf.</em></h2>
           <div class="contact-actions">
-            <a class="button button-primary" href="mailto:patrick@iconic.onl?subject=Give%20me%20one%20problem">patrick@iconic.onl</a>
+            <a class="button button-primary" href="mailto:patrick@iconic.onl?subject=ICONIC%20conversation">patrick@iconic.onl</a>
             <a class="button button-ghost contact-phone" href="tel:+12067738214">206-773-8214</a>
           </div>
         </div>

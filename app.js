@@ -3,6 +3,19 @@
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 
+  // Mobile navigation
+  const menuToggle = $('#menuToggle');
+  const mobileNav = $('#mobileNav');
+  if (menuToggle && mobileNav) {
+    const closeMenu = () => { mobileNav.hidden = true; menuToggle.setAttribute('aria-expanded', 'false'); };
+    menuToggle.addEventListener('click', () => {
+      const opening = mobileNav.hidden;
+      mobileNav.hidden = !opening;
+      menuToggle.setAttribute('aria-expanded', String(opening));
+    });
+    $$('a', mobileNav).forEach((link) => link.addEventListener('click', closeMenu));
+  }
+
   // Cursor light
   window.addEventListener('pointermove', (e) => {
     root.style.setProperty('--mx', `${e.clientX}px`);
@@ -111,10 +124,10 @@
   const models = [
     { name: 'GPT-5.6 Sol', note: 'Frontier API', capability: 98, privacy: 52, latency: 72, cost: 54 },
     { name: 'Claude Opus 5.5', note: 'Frontier API', capability: 97, privacy: 52, latency: 69, cost: 50 },
-    { name: 'Qwen 3.8 27B', note: 'Local / private', capability: 79, privacy: 100, latency: 93, cost: 91 },
+    { name: 'Qwen 3.8 27B', note: 'Open-weight / dedicated', capability: 79, privacy: 94, latency: 93, cost: 91 },
     { name: 'Hybrid Router', note: 'Local + frontier', capability: 96, privacy: 89, latency: 86, cost: 86 }
   ];
-  const metricLabels = { capability: 'Capability', privacy: 'Privacy', latency: 'Latency', cost: 'Cost control' };
+  const metricLabels = { capability: 'Capability', privacy: 'Deployment control', latency: 'Latency', cost: 'Cost control' };
   let activeMetric = 'capability';
 
   function renderChart(metric = activeMetric) {
@@ -197,7 +210,7 @@
     status.innerHTML = '<i></i> RUNNING';
     [...result.children].forEach((d) => d.querySelector('strong').textContent = '…');
 
-    const route = routing === 'local' ? 'LOCAL / QWEN' : routing === 'frontier' ? 'FRONTIER' : (sensitive ? 'HYBRID / LOCAL FIRST' : 'HYBRID / AUTO');
+    const route = routing === 'local' ? 'LOCAL / OPEN-WEIGHT' : routing === 'frontier' ? 'FRONTIER' : (sensitive ? 'HYBRID / LOCAL FIRST' : 'HYBRID / AUTO');
     const latency = routing === 'frontier' ? '2.4 s' : routing === 'local' ? '0.8 s' : '1.3 s';
 
     addTrace('00:00.000', 'MISSION', `${mission.label} accepted`);
