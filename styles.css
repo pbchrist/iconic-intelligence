@@ -97,10 +97,10 @@ button { color: inherit; }
 }
 
 .brand, .dash-logo, .contact-wordmark {
-  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
-  font-weight: 900;
-  letter-spacing: -.065em;
-  line-height: .9;
+  font-family: inherit;
+  font-weight: inherit;
+  letter-spacing: 0;
+  line-height: 1;
 }
 .brand { font-size: 24px; }
 .brand span, .dash-logo span, .contact-wordmark span { color: var(--accent-2); }
@@ -381,6 +381,7 @@ button { color: inherit; }
   margin: auto 0 0;
   font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(54px, 5vw, 82px);
+  font-weight: 900;
   letter-spacing: -.075em;
   line-height: .9;
 }
@@ -400,7 +401,7 @@ button { color: inherit; }
   letter-spacing: .26em;
   white-space: nowrap;
 }
-.marquee div { width: max-content; animation: marquee 28s linear infinite; }
+.marquee > div:not(.marquee-track) { width: max-content; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
 .dashboard-heading {

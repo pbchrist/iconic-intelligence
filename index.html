@@ -15,16 +15,19 @@
   <div class="noise" aria-hidden="true"></div>
   <div class="cursor-glow" aria-hidden="true"></div>
 
-  <header class="site-header" data-reveal>
+  <header class="site-header">
     <a class="brand" href="#top" aria-label="ICONIC home"><img src="iconic-wordmark.webp" alt="ICONIC." /></a>
     <nav class="nav" aria-label="Primary navigation">
       <a href="#capability">Capability</a>
       <a href="#dashboard">Dashboard</a>
-      <a href="#models">Models</a>
-      <a href="#lab">Lab</a>
+      <a href="#deployment">Deployment</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="header-cta" href="#contact">Give me one problem</a>
+    <a class="header-cta" href="#problem">LET'S START WITH ONE PROBLEM</a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav">MENU</button>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="#capability">Capability</a><a href="#dashboard">Dashboard</a><a href="#deployment">Deployment</a><a href="#problem">LET'S START WITH ONE PROBLEM</a>
+    </nav>
   </header>
 
   <main id="top">
@@ -32,10 +35,11 @@
       <div class="hero-copy" data-reveal>
         <div class="eyebrow"><span class="live-dot"></span> PRIVATE · PERSISTENT · AGENTIC</div>
         <h1>Know more.<br><em>Move first.</em></h1>
-        <p class="hero-deck">A managed intelligence layer that learns your business, watches what matters, remembers what the chat forgot, and keeps working when you are not looking.</p>
+        <p class="hero-deck">Managed intelligence for businesses that need to catch what their teams do not have time to watch.</p>
+        <p class="hero-buyer">ICONIC watches competitors and markets, remembers the business, runs recurring research, and brings useful changes forward before someone has to remember to look.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#dashboard">Enter the control room</a>
-          <a class="button button-ghost" href="#capability">See what it does</a>
+          <a class="button button-primary" href="#problem">LET'S START WITH ONE PROBLEM</a>
+          <a class="button button-ghost" href="#dashboard">SEE IT WORK</a>
         </div>
         <div class="hero-proof">
           <div><strong>01</strong><span>Dedicated business intelligence</span></div>
@@ -51,6 +55,7 @@
             <span class="status-pill"><i></i> INTERACTIVE</span>
           </div>
           <div class="map-stage" id="mapStage">
+            <div class="map-preload" aria-hidden="true"><i></i><span></span><b></b></div>
             <canvas id="intelligenceMap" aria-label="Interactive three-dimensional map of the managed intelligence layer"></canvas>
             <div class="map-labels" id="mapLabels" aria-hidden="false"></div>
             <div class="map-hint">DRAG · TAP A NODE</div>
@@ -74,47 +79,53 @@
         </div>
       </div>
 
-      <a class="scroll-cue" href="#capability" aria-label="Scroll to capability">SCROLL <span>↓</span></a>
+      <a class="scroll-cue" href="#proof" aria-label="Scroll to client proof">SCROLL <span>↓</span></a>
     </section>
 
-    <section id="capability" class="section-shell capability-section">
+    <section id="proof" class="section-shell proof-section proof-feature">
+      <div class="section-kicker" data-reveal>IN PRODUCTION · AUTOMOTIVE</div>
+      <div class="proof-feature-grid" data-reveal>
+        <div class="proof-feature-copy">
+          <h2>Competitive intelligence that keeps watching.</h2>
+          <p>A regional automotive business uses ICONIC to monitor competitor offers, pricing transparency, reviews, search visibility, inventory, and service — then turn changes into recurring executive intelligence instead of one-off searches.</p>
+          <p class="proof-result"><strong>RESULT</strong> Competitor offer and pricing changes now surface automatically in a recurring executive brief before anyone has to remember to check them.</p>
+        </div>
+        <div class="proof-feature-steps">
+          <article><span>01</span><strong>WATCHES</strong><p>Offers · pricing · reviews · search · inventory · service</p></article>
+          <article><span>02</span><strong>SURFACES</strong><p>Material changes, patterns, risks and opportunities worth attention.</p></article>
+          <article><span>03</span><strong>DELIVERS</strong><p>Recurring executive intelligence instead of another search someone has to remember to run.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="capability" class="section-shell capability-section compounding-intelligence">
       <div class="section-kicker" data-reveal>THE PRODUCT</div>
-      <div class="section-heading split-heading" data-reveal>
-        <h2>Not another chatbot.<br><em>An intelligence function.</em></h2>
-        <p>Your company gets a capability that persists: approved context, recurring work, research, memory, procedures, routing, monitoring and escalation — operated as one coherent layer.</p>
+      <div class="compound-intro" data-reveal>
+        <h2>COMPOUNDING INTELLIGENCE.</h2>
+        <div>
+          <strong>Compounding works because the gains stay in the system. Intelligence can work the same way.</strong>
+          <p>Every approved fact, monitored signal, completed analysis, procedure and recurring workflow can make the next cycle more useful. The business does not have to start from zero every time someone opens a chat.</p>
+        </div>
       </div>
 
-      <div class="capability-grid">
-        <article class="capability-card" data-reveal>
-          <span class="card-index">01</span>
-          <h3>SEES</h3>
-          <p>Competitors, markets, customers, vendors, reviews, pricing, anomalies and opportunities. It keeps watch instead of waiting to be prompted.</p>
-          <div class="micro-line"><span></span></div>
-        </article>
-        <article class="capability-card" data-reveal>
-          <span class="card-index">02</span>
-          <h3>KNOWS</h3>
-          <p>Approved company facts, files, procedures, prior work and preferences accumulate into durable business context.</p>
-          <div class="micro-line"><span></span></div>
-        </article>
-        <article class="capability-card" data-reveal>
-          <span class="card-index">03</span>
-          <h3>MOVES</h3>
-          <p>Recurring workflows run automatically. Low-risk intelligence work flows. Consequential actions stop for policy and human approval.</p>
-          <div class="micro-line"><span></span></div>
-        </article>
+      <div class="ci-embed" data-reveal>
+        <iframe id="ciFrame" class="ci-frame" src="compounding-widget.html" title="Compounding intelligence interactive story" loading="eager" scrolling="no"></iframe>
       </div>
 
-      <div class="marquee" aria-hidden="true">
-        <div>RESEARCH · MEMORY · MONITORING · ROUTING · PROCEDURES · REPORTING · GOVERNANCE · RESEARCH · MEMORY · MONITORING · ROUTING · PROCEDURES · REPORTING · GOVERNANCE ·</div>
+      <div class="capability-grid compact-capabilities">
+        <article class="capability-card" data-reveal><span class="card-index">01</span><h3>SEES</h3><p>Watches competitors, pricing, reviews, search, inventory, vendors and market changes without waiting to be prompted.</p><div class="micro-line"><span></span></div></article>
+        <article class="capability-card" data-reveal><span class="card-index">02</span><h3>KNOWS</h3><p>Keeps approved facts, files, procedures, prior work and preferences available instead of resetting every session.</p><div class="micro-line"><span></span></div></article>
+        <article class="capability-card" data-reveal><span class="card-index">03</span><h3>MOVES</h3><p>Runs recurring intelligence work automatically and brings consequential actions back to a human.</p><div class="micro-line"><span></span></div></article>
       </div>
+
+      <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>RESEARCH · MEMORY · MONITORING · PROCEDURES · REPORTING · COMPETITORS · CUSTOMERS · VENDORS · SIGNALS · DECISIONS ·</span><span>RESEARCH · MEMORY · MONITORING · PROCEDURES · REPORTING · COMPETITORS · CUSTOMERS · VENDORS · SIGNALS · DECISIONS ·</span></div></div>
     </section>
 
     <section id="dashboard" class="section-shell dashboard-section">
-      <div class="section-kicker" data-reveal>LIVE CONCEPT // EXECUTIVE CONTROL SURFACE</div>
-      <div class="section-heading dashboard-heading" data-reveal>
-        <h2>The machinery disappears.<br><em>The advantage stays visible.</em></h2>
-        <p>This is what a client should see: what the intelligence knows, what it found, what it is doing, and where human judgment is required.</p>
+      <div class="section-kicker" data-reveal>DEMO CONTROL SURFACE</div>
+      <div class="section-heading dashboard-heading direct-heading" data-reveal>
+        <h2>WHAT THE CLIENT SEES.</h2>
+        <p>Ask what changed. See what is being watched. Review recurring work. Inspect what the system knows. Approve the decisions that actually need you.</p>
       </div>
 
       <div class="dashboard-shell" data-reveal>
@@ -146,6 +157,10 @@
                 <div class="system-message">
                   <span class="sigil">✦</span>
                   <div><small>ICONIC INTELLIGENCE</small><p>Good morning. I found four developments worth your attention. Ask me what changed, what matters, or what to do next.</p></div>
+                </div>
+                <div class="prefill-thread">
+                  <div class="user-message"><div><small>YOU</small><p>Which competitor changed pricing?</p></div></div>
+                  <div class="assistant-message"><span class="sigil">✦</span><div><small>ICONIC INTELLIGENCE</small><p>A primary competitor moved advertised entry pricing down across 11 monitored listings. The pattern is broad enough to look deliberate, so I prepared a response brief with the affected offers and what changed.</p></div></div>
                 </div>
                 <div class="suggestions">
                   <button data-prompt="What should I be worried about this week?">What should I be worried about this week?</button>
@@ -209,70 +224,41 @@
       </div>
     </section>
 
-    <section id="models" class="section-shell models-section">
-      <div class="section-kicker" data-reveal>LOCAL ≠ SMALL THINKING</div>
-      <div class="section-heading split-heading" data-reveal>
-        <h2>The model is a component.<br><em>The system is the product.</em></h2>
-        <p>Some work belongs on frontier models. Some belongs on hardware you control. The advantage is routing each job to the right engine without forcing the client to care.</p>
+    <section id="deployment" class="section-shell deployment-section">
+      <div class="section-kicker" data-reveal>WHERE IT LIVES</div>
+      <div class="section-heading split-heading direct-heading" data-reveal>
+        <h2>TWO WAYS TO DEPLOY.</h2>
+        <p>Most owner-led businesses start with ICONIC-managed infrastructure because it gets useful capability running without creating an internal IT project. Larger, regulated or security-sensitive organizations can move designated workloads into environments they control.</p>
       </div>
-
-      <div class="model-explainer" data-reveal>
-        <div class="local-visual">
-          <div class="server-frame">
-            <div class="server-top"><span>LOCAL NODE</span><b>PRIVATE</b></div>
-            <div class="server-core"><span class="gpu-block">GPU</span><div><strong>QWEN 3.8</strong><small>ON-PREMISE / PRIVATE CLOUD</small></div></div>
-            <div class="server-lines"><i></i><i></i><i></i><i></i><i></i></div>
-          </div>
-          <div class="local-caption">Your data can stay inside an environment you control while the intelligence remains available, persistent and fast.</div>
-        </div>
-        <div class="local-copy">
-          <div class="definition"><span>LOCAL LLM</span><p>A model that runs on dedicated hardware or infrastructure you control instead of sending every request to a third-party model API.</p></div>
-          <ul>
-            <li><span>01</span><div><strong>Privacy + sovereignty</strong><small>Keep sensitive workloads closer to home.</small></div></li>
-            <li><span>02</span><div><strong>Cost predictability</strong><small>High-volume routine work can move off metered APIs.</small></div></li>
-            <li><span>03</span><div><strong>Always-on utility</strong><small>Recurring monitoring and internal jobs can run without burning premium inference on everything.</small></div></li>
-            <li><span>04</span><div><strong>Hybrid power</strong><small>Escalate only the work that actually benefits from frontier capability.</small></div></li>
-          </ul>
-        </div>
+      <div class="deployment-grid" data-reveal>
+        <article>
+          <span>01</span><small>MOST CLIENTS START HERE · ICONIC-MANAGED</small>
+          <h3>Start useful.</h3>
+          <p>A dedicated environment operated by ICONIC. This is the normal starting point for owner-led businesses and lean teams: faster to launch, easier to manage, and no need to build an internal AI infrastructure function first.</p>
+          <b>FASTEST PATH TO A WORKING CAPABILITY</b>
+        </article>
+        <article>
+          <span>02</span><small>LARGER / REGULATED · CLIENT ENVIRONMENT</small>
+          <h3>Move inside.</h3>
+          <p>When policy, regulation or existing infrastructure requires it, ICONIC works with the client's IT or security team to place designated workloads into approved on-premise, private-cloud or other client-controlled environments.</p>
+          <b>MORE CONTROL · MORE IMPLEMENTATION COORDINATION</b>
+        </article>
       </div>
-
-      <div class="comparison" data-reveal>
-        <div class="comparison-head">
-          <div><small>INTERACTIVE ROUTING MATRIX</small><h3>Different engines. One capability.</h3></div>
-          <div class="metric-switch" role="group" aria-label="Comparison metric">
-            <button class="metric active" data-metric="capability">Capability</button>
-            <button class="metric" data-metric="privacy">Privacy</button>
-            <button class="metric" data-metric="latency">Latency</button>
-            <button class="metric" data-metric="cost">Cost control</button>
-          </div>
-        </div>
-        <div class="chart" id="modelChart" aria-live="polite"></div>
-        <p class="chart-note">Illustrative architecture tradeoffs for demonstration — not benchmark claims. Real routing is task-, policy-, hardware- and model-dependent.</p>
-      </div>
-    </section>
-
-    <section class="section-shell agentic-section">
-      <div class="section-kicker" data-reveal>WHY AGENTIC MATTERS</div>
-      <div class="agentic-layout">
-        <div class="agentic-copy" data-reveal>
-          <h2>Chat answers.<br><em>Agents pursue outcomes.</em></h2>
-          <p>The shift is from a box that waits for a prompt to software that can observe, plan, use tools, follow procedures, verify work, remember context and keep going.</p>
-          <a href="#lab" class="text-link">RUN THE DEMO EXPERIMENT ↘</a>
-        </div>
-        <div class="evolution" data-reveal>
-          <article><span>1</span><div><small>CHAT</small><strong>Ask → answer</strong><p>Useful, but ephemeral.</p></div></article>
-          <article><span>2</span><div><small>TOOLS</small><strong>Ask → act</strong><p>Models search, calculate, retrieve and operate software.</p></div></article>
-          <article><span>3</span><div><small>AGENTS</small><strong>Goal → plan → execute</strong><p>Multi-step work with verification and branching.</p></div></article>
-          <article class="current"><span>4</span><div><small>PERSISTENT INTELLIGENCE</small><strong>Watch → learn → work → escalate</strong><p>A durable business function, not a session.</p></div></article>
+      <div class="deployment-model-note" data-reveal>
+        <small>THE MODEL IS NOT THE PRODUCT</small>
+        <div>
+          <strong>Use the right engine without turning it into the client's job.</strong>
+          <p>ICONIC can use frontier models, open-weight models on dedicated infrastructure, or both. Routine and high-volume work can stay on local infrastructure; harder reasoning can escalate when it earns the cost. The routing stays managed.</p>
         </div>
       </div>
+      <p class="deployment-bridge" data-reveal>The system does not have to start at maximum complexity. As useful use cases accumulate, the architecture can move deeper into the business where the value justifies the integration.</p>
     </section>
 
     <section id="lab" class="section-shell lab-section">
-      <div class="section-kicker" data-reveal>EXPERIMENT // ROUTING LAB</div>
-      <div class="section-heading lab-heading" data-reveal>
-        <h2>Give the system a job.<br><em>Watch the stack decide.</em></h2>
-        <p>This interactive mockup shows how a managed intelligence layer could route work, apply policy and return an executive result.</p>
+      <div class="section-kicker" data-reveal>INTERACTIVE DEMO</div>
+      <div class="section-heading lab-heading direct-heading" data-reveal>
+        <h2>GIVE IT A JOB. SEE WHAT COMES BACK.</h2>
+        <p>Choose a business question. ICONIC handles the research, context, verification and policy checks behind the scenes.</p>
       </div>
 
       <div class="lab-shell" data-reveal>
@@ -285,50 +271,52 @@
               <option value="vendor">Investigate a vendor risk</option>
             </select>
           </label>
-          <label>ROUTING
-            <select id="routingSelect">
-              <option value="auto">Auto / Hybrid</option>
-              <option value="local">Local first</option>
-              <option value="frontier">Frontier first</option>
-            </select>
-          </label>
-          <label class="toggle-label">SENSITIVE DATA
-            <button id="privacyToggle" class="switch on" type="button" aria-pressed="true"><span></span></button>
-          </label>
           <button id="runExperiment" class="button button-primary lab-run">RUN EXPERIMENT</button>
         </div>
 
         <div class="lab-console">
-          <div class="console-top"><span>ICONIC / EXECUTION TRACE</span><span id="labStatus"><i></i> READY</span></div>
+          <div class="console-top"><span>ICONIC / EXECUTION TRACE · CONDENSED DEMO</span><span id="labStatus"><i></i> READY</span></div>
           <div class="trace" id="traceOutput">
             <div class="trace-idle">SELECT A MISSION AND RUN THE STACK.</div>
           </div>
+          <div class="sample-brief" id="sampleBrief" hidden>
+            <small>EXAMPLE OUTPUT</small>
+            <h3>Executive response brief</h3>
+            <div id="sampleBriefLines"></div>
+          </div>
           <div class="lab-result" id="labResult">
-            <div><small>ROUTE</small><strong>—</strong></div>
+            <div><small>SYSTEM</small><strong>—</strong></div>
             <div><small>POLICY</small><strong>—</strong></div>
-            <div><small>LATENCY</small><strong>—</strong></div>
+            <div><small>VERIFY</small><strong>—</strong></div>
             <div><small>OUTPUT</small><strong>—</strong></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section-shell offer-section">
+    <section id="problem" class="section-shell offer-section">
       <div class="offer-card" data-reveal>
         <div class="offer-copy">
           <div class="section-kicker">THE DOORWAY</div>
-          <h2>Give me one problem.</h2>
-          <p>Something annoying, expensive, repetitive, information-heavy, neglected, slow, or impossible to watch closely enough.</p>
-          <p class="offer-emphasis">The first engagement should not feel like an AI presentation. It should solve something.</p>
+          <h2>LET'S START WITH ONE PROBLEM.</h2>
+          <p>One problem means one thing in the business that is annoying, expensive, repetitive, information-heavy, neglected, slow, or impossible to watch closely enough.</p>
+          <div class="problem-examples">
+            <span>“I never know when competitors change their offers.”</span>
+            <span>“We have hundreds of reviews and nobody is synthesizing them.”</span>
+            <span>“Tell me what changed in my market every Monday morning.”</span>
+            <span>“My team keeps researching the same things over and over.”</span>
+            <span>“We notice pricing, inventory or search changes too late.”</span>
+          </div>
+          <p class="offer-emphasis">We define what useful looks like, build something the business can actually use in hours, and then decide whether it deserves to grow.</p>
         </div>
-        <div class="offer-flow" aria-label="Engagement path">
-          <div><span>01</span><strong>PROBLEM</strong><small>Pick something real.</small></div>
+        <div class="offer-flow" aria-label="Usefulness expansion path">
+          <div><span>01</span><strong>BOUND IT</strong><small>One problem. Clear scope. Clear success criteria.</small></div>
           <i>→</i>
-          <div><span>02</span><strong>PROOF</strong><small>Create the holy-shit moment.</small></div>
+          <div><span>02</span><strong>MAKE IT USEFUL</strong><small>Deliver a working intelligence capability, not an AI presentation.</small></div>
           <i>→</i>
-          <div><span>03</span><strong>INSTALL</strong><small>Keep the useful context alive.</small></div>
+          <div><span>03</span><strong>WATCH THE VALUE</strong><small>See what gets used, trusted and acted on.</small></div>
           <i>→</i>
-          <div><span>04</span><strong>EXPAND</strong><small>Turn it into capability.</small></div>
+          <div><span>04</span><strong>FOLLOW THE ADJACENCIES</strong><small>Let real usefulness reveal the next use cases and deeper integrations.</small></div>
         </div>
       </div>
     </section>
@@ -337,11 +325,17 @@
       <div class="contact-inner" data-reveal>
         <div class="contact-wordmark"><img src="iconic-wordmark.webp" alt="ICONIC." /></div>
         <div class="contact-copy">
-          <div class="section-kicker card-identity">PATRICK CHRISTELL <em>Principal</em></div>
-          <div class="card-ornament" aria-hidden="true"><span></span><i></i><b></b><i></i><span></span></div>
+          <div class="principal-lockup">
+            <img class="principal-photo" src="patrick-christell.jpg" alt="Patrick Christell" />
+            <div>
+              <div class="section-kicker card-identity">PATRICK CHRISTELL <em>Principal</em></div>
+              <div class="card-ornament" aria-hidden="true"><span></span><i></i><b></b><i></i><span></span></div>
+              <p class="principal-line">Film and recruiting taught me to find signal in noise. I became convinced local inference was the future, so I built and run my own stack.</p>
+            </div>
+          </div>
           <h2>Build an advantage<br>your competitors <em>cannot rent off the shelf.</em></h2>
           <div class="contact-actions">
-            <a class="button button-primary" href="mailto:patrick@iconic.onl?subject=Give%20me%20one%20problem">patrick@iconic.onl</a>
+            <a class="button button-primary" href="mailto:patrick@iconic.onl?subject=Let%27s%20start%20with%20one%20problem">patrick@iconic.onl</a>
             <a class="button button-ghost contact-phone" href="tel:+12067738214">206-773-8214</a>
           </div>
         </div>

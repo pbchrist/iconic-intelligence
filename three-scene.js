@@ -1,4 +1,4 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.min.js';
+import * as THREE from './three.module.min.js';
 
 const canvas = document.getElementById('intelligenceMap');
 const stage = document.getElementById('mapStage');
@@ -297,4 +297,5 @@ function frame() {
 }
 
 selectNode('core', false);
+stage.classList.add('three-ready');
 frame();

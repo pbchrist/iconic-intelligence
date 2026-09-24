@@ -3,6 +3,19 @@
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 
+  // Mobile navigation
+  const menuToggle = $('#menuToggle');
+  const mobileNav = $('#mobileNav');
+  if (menuToggle && mobileNav) {
+    const closeMenu = () => { mobileNav.hidden = true; menuToggle.setAttribute('aria-expanded', 'false'); };
+    menuToggle.addEventListener('click', () => {
+      const opening = mobileNav.hidden;
+      mobileNav.hidden = !opening;
+      menuToggle.setAttribute('aria-expanded', String(opening));
+    });
+    $$('a', mobileNav).forEach((link) => link.addEventListener('click', closeMenu));
+  }
+
   // Cursor light
   window.addEventListener('pointermove', (e) => {
     root.style.setProperty('--mx', `${e.clientX}px`);
@@ -30,6 +43,36 @@
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // Deterministic primary-nav state: nothing is active at the top.
+  const navTargets = ['capability', 'dashboard', 'deployment', 'contact'];
+  const navLinks = $$('.nav a[href^="#"]');
+  const updateNavState = () => {
+    if (window.scrollY < 180) {
+      navLinks.forEach((link) => link.classList.remove('active'));
+      return;
+    }
+    const line = Math.min(160, window.innerHeight * 0.28);
+    let activeId = '';
+    navTargets.forEach((id) => {
+      const section = document.getElementById(id);
+      if (!section) return;
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= line && rect.bottom > line) activeId = id;
+    });
+    navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${activeId}`));
+  };
+  window.addEventListener('scroll', updateNavState, { passive: true });
+  window.addEventListener('resize', updateNavState, { passive: true });
+  updateNavState();
+
+  // Compounding widget: same-origin iframe reports its content height so mobile never clips or double-scrolls.
+  const ciFrame = $('#ciFrame');
+  window.addEventListener('message', (event) => {
+    if (event.origin !== window.location.origin || event.data?.type !== 'iconic-ci-height' || !ciFrame) return;
+    const height = Math.max(560, Math.min(Number(event.data.height) || 0, 1800));
+    if (height) ciFrame.style.height = `${height}px`;
+  });
 
   // Dashboard tabs
   const tabTitles = {
@@ -107,68 +150,35 @@
     input.value = '';
   });
 
-  // Model comparison matrix — deliberately illustrative, not benchmark data.
-  const models = [
-    { name: 'GPT-5.6 Sol', note: 'Frontier API', capability: 98, privacy: 52, latency: 72, cost: 54 },
-    { name: 'Claude Opus 5.5', note: 'Frontier API', capability: 97, privacy: 52, latency: 69, cost: 50 },
-    { name: 'Qwen 3.8 27B', note: 'Local / private', capability: 79, privacy: 100, latency: 93, cost: 91 },
-    { name: 'Hybrid Router', note: 'Local + frontier', capability: 96, privacy: 89, latency: 86, cost: 86 }
-  ];
-  const metricLabels = { capability: 'Capability', privacy: 'Privacy', latency: 'Latency', cost: 'Cost control' };
-  let activeMetric = 'capability';
-
-  function renderChart(metric = activeMetric) {
-    activeMetric = metric;
-    const chart = $('#modelChart');
-    chart.innerHTML = models.map((m) => `
-      <div class="chart-row">
-        <div class="chart-label"><strong>${m.name}</strong><small>${m.note}</small></div>
-        <div class="bar-track"><div class="bar-fill" data-value="${m[metric]}"></div></div>
-        <div class="chart-value">${m[metric]}</div>
-      </div>`).join('');
-    requestAnimationFrame(() => {
-      $$('.bar-fill', chart).forEach((b) => b.style.width = `${b.dataset.value}%`);
-    });
-    chart.setAttribute('aria-label', `${metricLabels[metric]} comparison`);
-  }
-  renderChart();
-  $$('.metric').forEach((b) => b.addEventListener('click', () => {
-    $$('.metric').forEach((x) => x.classList.toggle('active', x === b));
-    renderChart(b.dataset.metric);
-  }));
-
   // Experiment lab
-  const privacyToggle = $('#privacyToggle');
-  privacyToggle.addEventListener('click', () => {
-    const pressed = privacyToggle.getAttribute('aria-pressed') === 'true';
-    privacyToggle.setAttribute('aria-pressed', String(!pressed));
-    privacyToggle.classList.toggle('on', !pressed);
-  });
-
   const missions = {
     competitor: {
       label: 'COMPETITOR PRICING',
       source: '11 monitored listings + 4 offer pages',
       output: '3 material changes',
-      result: 'Competitor entry pricing moved down. Response brief generated.'
+      result: 'Competitor entry pricing moved down. Response brief generated.',
+      brief: ['11 monitored listings changed in the same direction.', 'The move appears deliberate rather than inventory noise.', 'Review the affected offers before the next pricing meeting.', 'Keep the competitor set on watch for follow-on changes.']
     },
     reviews: {
       label: 'CUSTOMER VOICE',
       source: '428 reviews + 76 service notes',
       output: '2 complaint clusters',
-      result: 'Tuesday wait-time complaints exceed the recent baseline.'
+      result: 'Tuesday wait-time complaints exceed the recent baseline.',
+      brief: ['Wait-time complaints are clustering around Tuesdays.', 'Communication handoff complaints are the second strongest theme.', 'Staff courtesy remains a positive counter-signal.', 'Review Tuesday staffing and handoff coverage first.']
     },
     brief: {
       label: 'EXECUTIVE BRIEF',
       source: '7 internal + 18 external feeds',
       output: '5-item brief',
-      result: 'Morning brief assembled with risks, opportunities and actions.'
+      result: 'Morning brief assembled with risks, opportunities and actions.',
+      brief: ['One competitor pricing move deserves attention.', 'Service complaints strengthened around a recurring daypart.', 'A local search gap remains under-contested.', 'No material vendor change requires action this morning.']
     },
     vendor: {
       label: 'VENDOR RISK',
       source: 'Terms, price history + market signals',
       output: '1 emerging risk',
-      result: 'Minimum-order change could create peak-demand exposure.'
+      result: 'Minimum-order change could create peak-demand exposure.',
+      brief: ['A supplier changed minimum-order terms.', 'Current exposure is limited at normal demand.', 'Peak-demand inventory could be affected.', 'Compare alternate supplier terms before the next reorder.']
     }
   };
 
@@ -184,11 +194,11 @@
 
   $('#runExperiment').addEventListener('click', async () => {
     const mission = missions[$('#missionSelect').value];
-    const routing = $('#routingSelect').value;
-    const sensitive = privacyToggle.getAttribute('aria-pressed') === 'true';
     const trace = $('#traceOutput');
     const status = $('#labStatus');
     const result = $('#labResult');
+    const sampleBrief = $('#sampleBrief');
+    const sampleBriefLines = $('#sampleBriefLines');
     const runButton = $('#runExperiment');
 
     runButton.disabled = true;
@@ -196,33 +206,30 @@
     status.className = 'running';
     status.innerHTML = '<i></i> RUNNING';
     [...result.children].forEach((d) => d.querySelector('strong').textContent = '…');
+    if (sampleBrief) sampleBrief.hidden = true;
+    if (sampleBriefLines) sampleBriefLines.innerHTML = '';
 
-    const route = routing === 'local' ? 'LOCAL / QWEN' : routing === 'frontier' ? 'FRONTIER' : (sensitive ? 'HYBRID / LOCAL FIRST' : 'HYBRID / AUTO');
-    const latency = routing === 'frontier' ? '2.4 s' : routing === 'local' ? '0.8 s' : '1.3 s';
-
-    addTrace('00:00.000', 'MISSION', `${mission.label} accepted`);
-    await wait(280);
-    addTrace('00:00.021', 'CONTEXT', `Loaded approved procedure + ${mission.source}`);
-    await wait(330);
-    addTrace('00:00.084', 'CLASSIFY', sensitive ? 'Sensitive business context detected' : 'Standard business context detected', sensitive ? 'warn' : '');
-    await wait(280);
-    addTrace('00:00.112', 'ROUTE', `${route} selected by task + policy`);
-    await wait(360);
-    addTrace('00:00.327', 'RESEARCH', 'Gathering internal context and external evidence');
-    await wait(420);
-    addTrace('00:00.691', 'VERIFY', 'Cross-checking claims against independent sources');
-    await wait(330);
-    addTrace('00:00.931', 'POLICY', 'Read-only intelligence task → autonomous execution permitted', 'ok');
-    await wait(300);
-    addTrace('00:01.144', 'RESULT', `${mission.output} · confidence gate passed`, 'ok');
-    await wait(250);
-    addTrace('00:01.301', 'EXEC BRIEF', mission.result, 'ok');
+    addTrace('01', 'QUESTION', `${mission.label} accepted`);
+    await wait(650);
+    addTrace('02', 'CONTEXT', `Loaded approved business context + ${mission.source}`);
+    await wait(720);
+    addTrace('03', 'RESEARCH', 'Checking internal context and monitored external signals');
+    await wait(820);
+    addTrace('04', 'VERIFY', 'Cross-checking material claims against independent evidence');
+    await wait(820);
+    addTrace('05', 'POLICY', 'Read-only intelligence task → autonomous execution permitted', 'ok');
+    await wait(720);
+    addTrace('06', 'RESULT', `${mission.output} · confidence gate passed`, 'ok');
+    await wait(650);
+    addTrace('07', 'EXEC BRIEF', mission.result, 'ok');
 
     const vals = result.querySelectorAll('strong');
-    vals[0].textContent = route;
+    vals[0].textContent = 'AUTOMATIC';
     vals[1].textContent = 'AUTO / LOW RISK';
-    vals[2].textContent = latency;
+    vals[2].textContent = 'CROSS-CHECKED';
     vals[3].textContent = mission.output.toUpperCase();
+    if (sampleBriefLines) sampleBriefLines.innerHTML = mission.brief.map((line) => `<p>${escapeHtml(line)}</p>`).join('');
+    if (sampleBrief) sampleBrief.hidden = false;
     status.className = 'done';
     status.innerHTML = '<i></i> COMPLETE';
     runButton.disabled = false;
