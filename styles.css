@@ -379,11 +379,11 @@ button { color: inherit; }
 .card-index { color: var(--accent-2); font-size: 10px; letter-spacing: .2em; }
 .capability-card h3 {
   margin: auto 0 0;
-  font-family: Baskerville, "Iowan Old Style", Georgia, serif;
-  font-size: clamp(48px, 4.5vw, 74px);
-  font-weight: 400;
-  letter-spacing: -.045em;
-  line-height: .94;
+  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(54px, 5vw, 82px);
+  font-weight: 900;
+  letter-spacing: -.075em;
+  line-height: .9;
 }
 .capability-card p { max-width: 420px; color: #9ea4b9; font-size: 14px; line-height: 1.6; }
 .micro-line { margin-top: 22px; height: 1px; background: rgba(255,255,255,.07); }
