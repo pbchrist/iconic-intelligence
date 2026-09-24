@@ -383,27 +383,7 @@ footer { flex-direction: column; margin-top: 65px; gap: 10px; }
 }
 .mobile-nav a:last-child { border-bottom: 0; }
 
-.operator-section, .deployment-section { padding-top: 90px; padding-bottom: 90px; }
-.operator-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 28px;
-  margin-top: 20px;
-  padding-top: 28px;
-  border-top: 1px solid var(--line);
-}
-.operator-grid h2 {
-  margin: 0;
-  font-size: clamp(42px, 12vw, 58px);
-  line-height: .98;
-  letter-spacing: -.035em;
-}
-.operator-grid h2 em { color: var(--accent-2); font-family: Georgia, serif; font-weight: 400; }
-.operator-copy { min-width: 0; }
-.operator-copy p { margin: 0 0 16px; color: #a2a8bb; font-family: Georgia, serif; font-size: 18px; line-height: 1.58; }
-.operator-copy p strong { color: var(--pearl); font-family: inherit; font-weight: 400; }
-.operator-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 24px; }
-.operator-tags span { padding: 8px 9px; border: 1px solid var(--line); border-radius: 8px; color: #8d95aa; font-size: 7px; font-weight: 900; letter-spacing: .13em; }
+.deployment-section { padding-top: 90px; padding-bottom: 90px; }
 
 .deployment-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 42px; }
 .deployment-grid article {
@@ -432,9 +412,7 @@ footer { flex-direction: column; margin-top: 65px; gap: 10px; }
 }
 
 @media (min-width: 768px) {
-  .operator-section, .deployment-section { padding-top: 120px; padding-bottom: 120px; }
-  .operator-grid { grid-template-columns: .95fr 1.05fr; gap: 60px; }
-  .operator-grid h2 { font-size: clamp(54px, 7.2vw, 86px); }
+  .deployment-section { padding-top: 120px; padding-bottom: 120px; }
   .deployment-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   .deployment-grid article { padding: 32px; }
   .deployment-grid h3 { font-size: 46px; }
@@ -446,7 +424,6 @@ footer { flex-direction: column; margin-top: 65px; gap: 10px; }
   .menu-toggle { display: none; }
   .mobile-nav { display: none !important; }
   .hero-buyer { font-size: 14px; }
-  .operator-grid { gap: 90px; }
   .deployment-grid article { padding: 40px; }
 }
 
@@ -490,7 +467,7 @@ footer { flex-direction: column; margin-top: 65px; gap: 10px; }
   border-radius: 20px;
   background: rgba(255,255,255,.018);
 }
-.proof-copy h2 { margin: 0; font-size: clamp(40px, 11vw, 56px); line-height: .98; }
+.proof-copy h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(40px, 11vw, 56px); font-weight: 400; letter-spacing: -.045em; line-height: .98; }
 .proof-copy h2 em { color: var(--accent-2); font-family: Georgia, serif; font-weight: 400; }
 .proof-copy p, .proof-grid article p { color: #9da4b8; font-size: 14px; line-height: 1.65; }
 .proof-grid article small { color: var(--accent-2); font-size: 7px; font-weight: 900; letter-spacing: .15em; }
@@ -510,42 +487,3 @@ footer { flex-direction: column; margin-top: 65px; gap: 10px; }
   .capability-card { grid-template-rows: auto minmax(155px, 1fr) 74px auto; }
 }
 
-.compounding-section {
-  padding-top: 70px;
-  padding-bottom: 95px;
-}
-.compounding-rule { height: 1px; background: var(--line); }
-.compounding-word {
-  margin-top: 24px;
-  color: var(--pearl);
-  font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(54px, 17vw, 86px);
-  font-weight: 900;
-  line-height: .82;
-  letter-spacing: -.075em;
-  overflow-wrap: normal;
-}
-.compounding-copy {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  margin-top: 34px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
-}
-.compounding-copy p, .compounding-copy strong {
-  margin: 0;
-  font-family: Georgia, serif;
-  font-weight: 400;
-  line-height: 1.55;
-}
-.compounding-copy p { color: #9da4b8; font-size: 17px; }
-.compounding-copy strong { color: var(--pearl); font-size: 21px; }
-
-@media (min-width: 768px) {
-  .compounding-section { padding-top: 95px; padding-bottom: 125px; }
-  .compounding-word { font-size: clamp(100px, 13vw, 190px); }
-  .compounding-copy { grid-template-columns: .85fr 1.15fr; gap: 70px; align-items: start; }
-  .compounding-copy p { font-size: 19px; }
-  .compounding-copy strong { font-size: 28px; }
-}
