@@ -21,13 +21,12 @@
       <a href="#capability">Capability</a>
       <a href="#dashboard">Dashboard</a>
       <a href="#deployment">Deployment</a>
-      <a href="#models">Models</a>
       <a href="#contact">Contact</a>
     </nav>
     <a class="header-cta" href="#problem">LET'S START WITH ONE PROBLEM</a>
     <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav">MENU</button>
     <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
-      <a href="#capability">Capability</a><a href="#dashboard">Dashboard</a><a href="#deployment">Deployment</a><a href="#models">Models</a><a href="#problem">LET'S START WITH ONE PROBLEM</a>
+      <a href="#capability">Capability</a><a href="#dashboard">Dashboard</a><a href="#deployment">Deployment</a><a href="#problem">LET'S START WITH ONE PROBLEM</a>
     </nav>
   </header>
 
@@ -36,7 +35,7 @@
       <div class="hero-copy" data-reveal>
         <div class="eyebrow"><span class="live-dot"></span> PRIVATE · PERSISTENT · AGENTIC</div>
         <h1>Know more.<br><em>Move first.</em></h1>
-        <p class="hero-deck">Managed intelligence for businesses that need to know more than their teams have time to find out.</p>
+        <p class="hero-deck">Managed intelligence for businesses that need to catch what their teams do not have time to watch.</p>
         <p class="hero-buyer">ICONIC watches competitors and markets, remembers the business, runs recurring research, and brings useful changes forward before someone has to remember to look.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#problem">LET'S START WITH ONE PROBLEM</a>
@@ -56,6 +55,7 @@
             <span class="status-pill"><i></i> INTERACTIVE</span>
           </div>
           <div class="map-stage" id="mapStage">
+            <div class="map-preload" aria-hidden="true"><i></i><span></span><b></b></div>
             <canvas id="intelligenceMap" aria-label="Interactive three-dimensional map of the managed intelligence layer"></canvas>
             <div class="map-labels" id="mapLabels" aria-hidden="false"></div>
             <div class="map-hint">DRAG · TAP A NODE</div>
@@ -88,6 +88,7 @@
         <div class="proof-feature-copy">
           <h2>Competitive intelligence that keeps watching.</h2>
           <p>A regional automotive business uses ICONIC to monitor competitor offers, pricing transparency, reviews, search visibility, inventory, and service — then turn changes into recurring executive intelligence instead of one-off searches.</p>
+          <p class="proof-result"><strong>RESULT</strong> Competitor offer and pricing changes now surface automatically in a recurring executive brief before anyone has to remember to check them.</p>
         </div>
         <div class="proof-feature-steps">
           <article><span>01</span><strong>WATCHES</strong><p>Offers · pricing · reviews · search · inventory · service</p></article>
@@ -107,17 +108,8 @@
         </div>
       </div>
 
-      <div class="compound-story" id="compoundStory" data-reveal>
-        <div class="compound-stage" id="compoundStage">
-          <canvas id="compoundCanvas" aria-label="Three-dimensional visualization of business intelligence accumulating over time"></canvas>
-          <div class="compound-stage-label"><span>BUSINESS INTELLIGENCE</span><b id="compoundCount">01</b></div>
-        </div>
-        <div class="compound-steps">
-          <article data-compound-step="0"><span>01</span><strong>SIGNAL</strong><p>A competitor changes an offer. Reviews cluster around a problem. Search visibility moves.</p></article>
-          <article data-compound-step="1"><span>02</span><strong>CONTEXT</strong><p>The change joins what ICONIC already knows about the business, the market and prior work.</p></article>
-          <article data-compound-step="2"><span>03</span><strong>PROCEDURE</strong><p>Useful analysis becomes repeatable instead of being rediscovered from scratch.</p></article>
-          <article data-compound-step="3"><span>04</span><strong>ADVANTAGE</strong><p>Each cycle leaves more context and capability behind for the next one.</p></article>
-        </div>
+      <div class="ci-embed" data-reveal>
+        <iframe id="ciFrame" class="ci-frame" src="compounding-widget.html" title="Compounding intelligence interactive story" loading="eager" scrolling="no"></iframe>
       </div>
 
       <div class="capability-grid compact-capabilities">
@@ -165,6 +157,10 @@
                 <div class="system-message">
                   <span class="sigil">✦</span>
                   <div><small>ICONIC INTELLIGENCE</small><p>Good morning. I found four developments worth your attention. Ask me what changed, what matters, or what to do next.</p></div>
+                </div>
+                <div class="prefill-thread">
+                  <div class="user-message"><div><small>YOU</small><p>Which competitor changed pricing?</p></div></div>
+                  <div class="assistant-message"><span class="sigil">✦</span><div><small>ICONIC INTELLIGENCE</small><p>A primary competitor moved advertised entry pricing down across 11 monitored listings. The pattern is broad enough to look deliberate, so I prepared a response brief with the affected offers and what changed.</p></div></div>
                 </div>
                 <div class="suggestions">
                   <button data-prompt="What should I be worried about this week?">What should I be worried about this week?</button>
@@ -228,35 +224,6 @@
       </div>
     </section>
 
-    <section id="models" class="section-shell models-section">
-      <div class="section-kicker" data-reveal>THE MACHINERY</div>
-      <div class="section-heading split-heading direct-heading" data-reveal>
-        <h2>THE MODEL IS NOT THE PRODUCT.</h2>
-        <p>ICONIC can use frontier models, open-weight models on dedicated infrastructure, or both. The client does not manage that routing. Work goes where capability, privacy, speed and cost make sense.</p>
-      </div>
-
-      <div class="model-explainer" data-reveal>
-        <div class="local-visual">
-          <div class="server-frame">
-            <div class="server-top"><span>DEDICATED MODEL NODE</span><b>OPTIONAL</b></div>
-            <div class="server-core"><span class="gpu-block">GPU</span><div><strong>OPEN-WEIGHT MODEL</strong><small>MANAGED OR CLIENT-CONTROLLED</small></div></div>
-            <div class="server-lines"><i></i><i></i><i></i><i></i><i></i></div>
-          </div>
-          <div class="local-caption">Most clients can start in an ICONIC-managed environment. Organizations with stricter infrastructure or regulatory requirements can place designated workloads inside systems they control.</div>
-        </div>
-        <div class="local-copy">
-          <div class="definition"><span>OPEN-WEIGHT / LOCAL</span><p>Dedicated infrastructure gives us another place to run routine, sensitive or high-volume workloads instead of sending every job to a third-party model API.</p></div>
-          <ul>
-            <li><span>01</span><div><strong>Managed by default</strong><small>Start quickly in an ICONIC-operated environment when client policy permits it.</small></div></li>
-            <li><span>02</span><div><strong>Client-controlled when required</strong><small>Move designated workloads into approved client infrastructure when governance or regulation calls for it.</small></div></li>
-            <li><span>03</span><div><strong>Cost predictability</strong><small>High-volume routine work can move away from premium metered inference.</small></div></li>
-            <li><span>04</span><div><strong>Hybrid power</strong><small>Escalate only the work that benefits from frontier capability.</small></div></li>
-          </ul>
-        </div>
-      </div>
-
-    </section>
-
     <section id="deployment" class="section-shell deployment-section">
       <div class="section-kicker" data-reveal>WHERE IT LIVES</div>
       <div class="section-heading split-heading direct-heading" data-reveal>
@@ -276,6 +243,13 @@
           <p>When policy, regulation or existing infrastructure requires it, ICONIC works with the client's IT or security team to place designated workloads into approved on-premise, private-cloud or other client-controlled environments.</p>
           <b>MORE CONTROL · MORE IMPLEMENTATION COORDINATION</b>
         </article>
+      </div>
+      <div class="deployment-model-note" data-reveal>
+        <small>THE MODEL IS NOT THE PRODUCT</small>
+        <div>
+          <strong>Use the right engine without turning it into the client's job.</strong>
+          <p>ICONIC can use frontier models, open-weight models on dedicated infrastructure, or both. Routine and high-volume work can stay on local infrastructure; harder reasoning can escalate when it earns the cost. The routing stays managed.</p>
+        </div>
       </div>
       <p class="deployment-bridge" data-reveal>The system does not have to start at maximum complexity. As useful use cases accumulate, the architecture can move deeper into the business where the value justifies the integration.</p>
     </section>
@@ -301,9 +275,14 @@
         </div>
 
         <div class="lab-console">
-          <div class="console-top"><span>ICONIC / EXECUTION TRACE</span><span id="labStatus"><i></i> READY</span></div>
+          <div class="console-top"><span>ICONIC / EXECUTION TRACE · CONDENSED DEMO</span><span id="labStatus"><i></i> READY</span></div>
           <div class="trace" id="traceOutput">
             <div class="trace-idle">SELECT A MISSION AND RUN THE STACK.</div>
+          </div>
+          <div class="sample-brief" id="sampleBrief" hidden>
+            <small>EXAMPLE OUTPUT</small>
+            <h3>Executive response brief</h3>
+            <div id="sampleBriefLines"></div>
           </div>
           <div class="lab-result" id="labResult">
             <div><small>SYSTEM</small><strong>—</strong></div>
@@ -346,9 +325,14 @@
       <div class="contact-inner" data-reveal>
         <div class="contact-wordmark"><img src="iconic-wordmark.webp" alt="ICONIC." /></div>
         <div class="contact-copy">
-          <div class="section-kicker card-identity">PATRICK CHRISTELL <em>Principal</em></div>
-          <div class="card-ornament" aria-hidden="true"><span></span><i></i><b></b><i></i><span></span></div>
-          <p class="principal-line">Research, recruiting, story development and private AI systems.</p>
+          <div class="principal-lockup">
+            <img class="principal-photo" src="patrick-christell.jpg" alt="Patrick Christell" />
+            <div>
+              <div class="section-kicker card-identity">PATRICK CHRISTELL <em>Principal</em></div>
+              <div class="card-ornament" aria-hidden="true"><span></span><i></i><b></b><i></i><span></span></div>
+              <p class="principal-line">Film and recruiting taught me to find signal in noise. I became convinced local inference was the future, so I built and run my own stack.</p>
+            </div>
+          </div>
           <h2>Build an advantage<br>your competitors <em>cannot rent off the shelf.</em></h2>
           <div class="contact-actions">
             <a class="button button-primary" href="mailto:patrick@iconic.onl?subject=Let%27s%20start%20with%20one%20problem">patrick@iconic.onl</a>

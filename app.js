@@ -45,7 +45,7 @@
   onScroll();
 
   // Deterministic primary-nav state: nothing is active at the top.
-  const navTargets = ['capability', 'dashboard', 'models', 'deployment', 'contact'];
+  const navTargets = ['capability', 'dashboard', 'deployment', 'contact'];
   const navLinks = $$('.nav a[href^="#"]');
   const updateNavState = () => {
     if (window.scrollY < 180) {
@@ -65,6 +65,14 @@
   window.addEventListener('scroll', updateNavState, { passive: true });
   window.addEventListener('resize', updateNavState, { passive: true });
   updateNavState();
+
+  // Compounding widget: same-origin iframe reports its content height so mobile never clips or double-scrolls.
+  const ciFrame = $('#ciFrame');
+  window.addEventListener('message', (event) => {
+    if (event.origin !== window.location.origin || event.data?.type !== 'iconic-ci-height' || !ciFrame) return;
+    const height = Math.max(560, Math.min(Number(event.data.height) || 0, 1800));
+    if (height) ciFrame.style.height = `${height}px`;
+  });
 
   // Dashboard tabs
   const tabTitles = {
@@ -148,25 +156,29 @@
       label: 'COMPETITOR PRICING',
       source: '11 monitored listings + 4 offer pages',
       output: '3 material changes',
-      result: 'Competitor entry pricing moved down. Response brief generated.'
+      result: 'Competitor entry pricing moved down. Response brief generated.',
+      brief: ['11 monitored listings changed in the same direction.', 'The move appears deliberate rather than inventory noise.', 'Review the affected offers before the next pricing meeting.', 'Keep the competitor set on watch for follow-on changes.']
     },
     reviews: {
       label: 'CUSTOMER VOICE',
       source: '428 reviews + 76 service notes',
       output: '2 complaint clusters',
-      result: 'Tuesday wait-time complaints exceed the recent baseline.'
+      result: 'Tuesday wait-time complaints exceed the recent baseline.',
+      brief: ['Wait-time complaints are clustering around Tuesdays.', 'Communication handoff complaints are the second strongest theme.', 'Staff courtesy remains a positive counter-signal.', 'Review Tuesday staffing and handoff coverage first.']
     },
     brief: {
       label: 'EXECUTIVE BRIEF',
       source: '7 internal + 18 external feeds',
       output: '5-item brief',
-      result: 'Morning brief assembled with risks, opportunities and actions.'
+      result: 'Morning brief assembled with risks, opportunities and actions.',
+      brief: ['One competitor pricing move deserves attention.', 'Service complaints strengthened around a recurring daypart.', 'A local search gap remains under-contested.', 'No material vendor change requires action this morning.']
     },
     vendor: {
       label: 'VENDOR RISK',
       source: 'Terms, price history + market signals',
       output: '1 emerging risk',
-      result: 'Minimum-order change could create peak-demand exposure.'
+      result: 'Minimum-order change could create peak-demand exposure.',
+      brief: ['A supplier changed minimum-order terms.', 'Current exposure is limited at normal demand.', 'Peak-demand inventory could be affected.', 'Compare alternate supplier terms before the next reorder.']
     }
   };
 
@@ -185,6 +197,8 @@
     const trace = $('#traceOutput');
     const status = $('#labStatus');
     const result = $('#labResult');
+    const sampleBrief = $('#sampleBrief');
+    const sampleBriefLines = $('#sampleBriefLines');
     const runButton = $('#runExperiment');
 
     runButton.disabled = true;
@@ -192,26 +206,30 @@
     status.className = 'running';
     status.innerHTML = '<i></i> RUNNING';
     [...result.children].forEach((d) => d.querySelector('strong').textContent = '…');
+    if (sampleBrief) sampleBrief.hidden = true;
+    if (sampleBriefLines) sampleBriefLines.innerHTML = '';
 
-    addTrace('00:00.000', 'QUESTION', `${mission.label} accepted`);
-    await wait(220);
-    addTrace('00:00.021', 'CONTEXT', `Loaded approved business context + ${mission.source}`);
-    await wait(280);
-    addTrace('00:00.084', 'RESEARCH', 'Checking internal context and monitored external signals');
-    await wait(320);
-    addTrace('00:00.327', 'VERIFY', 'Cross-checking material claims against independent evidence');
-    await wait(320);
-    addTrace('00:00.691', 'POLICY', 'Read-only intelligence task → autonomous execution permitted', 'ok');
-    await wait(280);
-    addTrace('00:00.931', 'RESULT', `${mission.output} · confidence gate passed`, 'ok');
-    await wait(220);
-    addTrace('00:01.144', 'EXEC BRIEF', mission.result, 'ok');
+    addTrace('01', 'QUESTION', `${mission.label} accepted`);
+    await wait(650);
+    addTrace('02', 'CONTEXT', `Loaded approved business context + ${mission.source}`);
+    await wait(720);
+    addTrace('03', 'RESEARCH', 'Checking internal context and monitored external signals');
+    await wait(820);
+    addTrace('04', 'VERIFY', 'Cross-checking material claims against independent evidence');
+    await wait(820);
+    addTrace('05', 'POLICY', 'Read-only intelligence task → autonomous execution permitted', 'ok');
+    await wait(720);
+    addTrace('06', 'RESULT', `${mission.output} · confidence gate passed`, 'ok');
+    await wait(650);
+    addTrace('07', 'EXEC BRIEF', mission.result, 'ok');
 
     const vals = result.querySelectorAll('strong');
     vals[0].textContent = 'AUTOMATIC';
     vals[1].textContent = 'AUTO / LOW RISK';
     vals[2].textContent = 'CROSS-CHECKED';
     vals[3].textContent = mission.output.toUpperCase();
+    if (sampleBriefLines) sampleBriefLines.innerHTML = mission.brief.map((line) => `<p>${escapeHtml(line)}</p>`).join('');
+    if (sampleBrief) sampleBrief.hidden = false;
     status.className = 'done';
     status.innerHTML = '<i></i> COMPLETE';
     runButton.disabled = false;

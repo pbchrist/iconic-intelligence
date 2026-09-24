@@ -572,3 +572,71 @@ footer { margin-top: 78px; }
   .compact-capabilities .capability-card h3 { font-size: clamp(58px, 5vw, 76px); }
   .problem-examples { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+
+/* v1.3b review pass — mobile first */
+.map-preload { position:absolute; inset:0; display:grid; place-items:center; pointer-events:none; transition:opacity .35s ease; background:radial-gradient(circle at 50% 48%, rgba(105,115,235,.14), transparent 42%); }
+.map-preload i, .map-preload span, .map-preload b { position:absolute; display:block; border-radius:50%; }
+.map-preload i { width:72px; height:72px; background:radial-gradient(circle at 35% 30%, #fff, #aeb6ff 26%, #4c57bb 58%, #171b3d 76%); box-shadow:0 0 42px rgba(139,151,255,.55); }
+.map-preload span { width:145px; height:145px; border:1px solid rgba(184,191,255,.25); }
+.map-preload b { width:220px; height:130px; border:1px solid rgba(184,191,255,.14); transform:rotate(25deg); }
+.map-stage.three-ready .map-preload { opacity:0; }
+
+.proof-result { margin-top:18px !important; padding:14px 16px; border-left:2px solid var(--accent-2); background:rgba(146,156,255,.06); font-family:inherit !important; font-size:13px !important; }
+.proof-result strong { margin-right:8px; color:var(--accent-2); font-size:8px; letter-spacing:.16em; }
+
+.ci-embed { width:100%; margin-top:42px; }
+.ci-frame { display:block; width:100%; height:1050px; border:0; border-radius:22px; background:#070817; overflow:hidden; }
+
+/* The middle of the page speaks more quietly so the hero, COMPOUNDING INTELLIGENCE and close remain the major beats. */
+.dashboard-heading h2 { font-size:clamp(40px,10.5vw,54px); }
+.deployment-section .section-heading h2 { font-size:clamp(36px,9.5vw,48px); }
+.lab-section .section-heading h2 { font-size:clamp(36px,9.5vw,48px); }
+.dashboard-section { padding-top:72px; padding-bottom:72px; }
+.deployment-section { padding-top:72px; padding-bottom:72px; }
+.lab-section { padding-top:72px; padding-bottom:78px; }
+.dashboard-shell { margin-top:30px; }
+.lab-shell { margin-top:28px; }
+
+.prefill-thread { display:grid; gap:14px; margin-bottom:4px; }
+.prefill-thread .user-message { margin-left:0; flex-direction:row; }
+.prefill-thread .user-message p { border-radius:4px 14px 14px 14px; }
+
+.deployment-model-note { display:grid; gap:12px; margin-top:18px; padding:22px; border:1px solid var(--line); border-radius:18px; background:rgba(255,255,255,.018); }
+.deployment-model-note > small { color:var(--accent-2); font-size:8px; font-weight:900; letter-spacing:.15em; }
+.deployment-model-note strong { display:block; font-family:Georgia,serif; font-size:24px; font-weight:400; line-height:1.25; }
+.deployment-model-note p { margin:9px 0 0; color:#939aaf; font-size:13px; line-height:1.6; }
+
+.lab-controls { grid-template-columns:1fr !important; }
+.lab-controls label, .lab-controls select { min-width:0; width:100%; }
+.sample-brief { padding:18px 20px; border-top:1px solid var(--line); background:linear-gradient(90deg, rgba(86,96,207,.09), transparent); }
+.sample-brief small { color:var(--accent-2); font-size:7px; font-weight:900; letter-spacing:.15em; }
+.sample-brief h3 { margin:7px 0 12px; font-family:Georgia,serif; font-size:22px; font-weight:400; }
+#sampleBriefLines { display:grid; gap:7px; }
+#sampleBriefLines p { margin:0; color:#aab0c4; font-size:11px; line-height:1.45; }
+#sampleBriefLines p::before { content:'— '; color:var(--accent-2); }
+
+.principal-lockup { display:grid; grid-template-columns:72px minmax(0,1fr); gap:16px; align-items:start; }
+.principal-photo { width:72px; aspect-ratio:1; object-fit:cover; border-radius:16px; border:1px solid rgba(243,240,231,.18); filter:saturate(.86) contrast(1.04); }
+.principal-lockup .card-ornament { margin-top:14px; }
+.principal-line { max-width:620px; }
+
+@media (min-width: 768px) {
+  .ci-embed { margin-top:56px; }
+  .ci-frame { height:940px; }
+  .dashboard-heading h2 { font-size:clamp(46px,5.1vw,70px); }
+  .deployment-section .section-heading h2, .lab-section .section-heading h2 { font-size:clamp(42px,4.2vw,62px); }
+  .dashboard-section { padding-top:90px; padding-bottom:88px; }
+  .deployment-section { padding-top:92px; padding-bottom:92px; }
+  .lab-section { padding-top:88px; padding-bottom:94px; }
+  .dashboard-shell { margin-top:44px; }
+  .lab-shell { margin-top:38px; }
+  .deployment-model-note { grid-template-columns:.34fr 1fr; gap:28px; padding:28px; align-items:start; }
+  .deployment-model-note strong { font-size:28px; }
+  .principal-lockup { grid-template-columns:92px minmax(0,1fr); gap:22px; }
+  .principal-photo { width:92px; border-radius:18px; }
+}
+
+@media (min-width: 1180px) {
+  .ci-frame { height:860px; }
+}
