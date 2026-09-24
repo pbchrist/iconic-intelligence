@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#080912" />
+  <meta name="description" content="ICONIC. Managed business intelligence that learns, watches, remembers and acts." />
+  <title>ICONIC. — Managed Intelligence</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="mobile-first.css" />
+</head>
+<body>
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="site-header" data-reveal>
+    <a class="brand" href="#top" aria-label="ICONIC home"><img src="iconic-wordmark.webp" alt="ICONIC." /></a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="#capability">Capability</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#models">Models</a>
+      <a href="#lab">Lab</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="header-cta" href="#contact">Give me one problem</a>
+  </header>
+
+  <main id="top">
+    <section class="hero section-shell">
+      <div class="hero-copy" data-reveal>
+        <div class="eyebrow"><span class="live-dot"></span> PRIVATE · PERSISTENT · AGENTIC</div>
+        <h1>Know more.<br><em>Move first.</em></h1>
+        <p class="hero-deck">A managed intelligence layer that learns your business, watches what matters, remembers what the chat forgot, and keeps working when you are not looking.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#dashboard">Enter the control room</a>
+          <a class="button button-ghost" href="#capability">See what it does</a>
+        </div>
+        <div class="hero-proof">
+          <div><strong>01</strong><span>Dedicated business intelligence</span></div>
+          <div><strong>02</strong><span>Recurring research + monitoring</span></div>
+          <div><strong>03</strong><span>Human control where it matters</span></div>
+        </div>
+      </div>
+
+      <div class="hero-orbit" data-reveal>
+        <div class="intelligence-map-card glass-card">
+          <div class="orbit-topline">
+            <span>ICONIC // LIVE INTELLIGENCE MAP</span>
+            <span class="status-pill"><i></i> INTERACTIVE</span>
+          </div>
+          <div class="map-stage" id="mapStage">
+            <canvas id="intelligenceMap" aria-label="Interactive three-dimensional map of the managed intelligence layer"></canvas>
+            <div class="map-labels" id="mapLabels" aria-hidden="false"></div>
+            <div class="map-hint">DRAG · TAP A NODE</div>
+          </div>
+          <div class="map-readout" aria-live="polite">
+            <small id="mapEyebrow">PERSISTENT INTELLIGENCE</small>
+            <div class="map-readout-row">
+              <div>
+                <strong id="mapTitle">THE BUSINESS CORE</strong>
+                <p id="mapDescription">One persistent layer connects what the company knows, what it watches, what it is doing, and where humans stay in control.</p>
+              </div>
+              <button id="mapAction" type="button" data-tab="ask">OPEN IN DASHBOARD ↗</button>
+            </div>
+          </div>
+          <div class="signal-stack map-signals">
+            <div><span>MONITORED SIGNALS</span><b>LIVE</b></div>
+            <div><span>BUSINESS MEMORY</span><b>PERSISTENT</b></div>
+            <div><span>MODEL ROUTING</span><b>HYBRID</b></div>
+            <div><span>POLICY GATES</span><b>HUMAN-CONTROLLED</b></div>
+          </div>
+        </div>
+      </div>
+
+      <a class="scroll-cue" href="#capability" aria-label="Scroll to capability">SCROLL <span>↓</span></a>
+    </section>
+
+    <section id="capability" class="section-shell capability-section">
+      <div class="section-kicker" data-reveal>THE PRODUCT</div>
+      <div class="section-heading split-heading" data-reveal>
+        <h2>Not another chatbot.<br><em>An intelligence function.</em></h2>
+        <p>Your company gets a capability that persists: approved context, recurring work, research, memory, procedures, routing, monitoring and escalation — operated as one coherent layer.</p>
+      </div>
+
+      <div class="capability-grid">
+        <article class="capability-card" data-reveal>
+          <span class="card-index">01</span>
+          <h3>SEES</h3>
+          <p>Competitors, markets, customers, vendors, reviews, pricing, anomalies and opportunities. It keeps watch instead of waiting to be prompted.</p>
+          <div class="micro-line"><span></span></div>
+        </article>
+        <article class="capability-card" data-reveal>
+          <span class="card-index">02</span>
+          <h3>KNOWS</h3>
+          <p>Approved company facts, files, procedures, prior work and preferences accumulate into durable business context.</p>
+          <div class="micro-line"><span></span></div>
+        </article>
+        <article class="capability-card" data-reveal>
+          <span class="card-index">03</span>
+          <h3>MOVES</h3>
+          <p>Recurring workflows run automatically. Low-risk intelligence work flows. Consequential actions stop for policy and human approval.</p>
+          <div class="micro-line"><span></span></div>
+        </article>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div>RESEARCH · MEMORY · MONITORING · ROUTING · PROCEDURES · REPORTING · GOVERNANCE · RESEARCH · MEMORY · MONITORING · ROUTING · PROCEDURES · REPORTING · GOVERNANCE ·</div>
+      </div>
+    </section>
+
+    <section id="dashboard" class="section-shell dashboard-section">
+      <div class="section-kicker" data-reveal>LIVE CONCEPT // EXECUTIVE CONTROL SURFACE</div>
+      <div class="section-heading dashboard-heading" data-reveal>
+        <h2>The machinery disappears.<br><em>The advantage stays visible.</em></h2>
+        <p>This is what a client should see: what the intelligence knows, what it found, what it is doing, and where human judgment is required.</p>
+      </div>
+
+      <div class="dashboard-shell" data-reveal>
+        <aside class="dash-sidebar">
+          <div class="dash-logo"><img src="iconic-wordmark.webp" alt="ICONIC." /></div>
+          <div class="client-chip"><span class="client-avatar">D</span><div><small>DEMO CLIENT</small><strong>Executive Intelligence</strong></div></div>
+          <nav class="dash-nav" aria-label="Demo dashboard">
+            <button class="dash-tab active" data-tab="ask"><span>⌁</span>ASK</button>
+            <button class="dash-tab" data-tab="intelligence"><span>✦</span>INTELLIGENCE <i>4</i></button>
+            <button class="dash-tab" data-tab="work"><span>↻</span>WORK</button>
+            <button class="dash-tab" data-tab="knowledge"><span>◫</span>KNOWLEDGE</button>
+            <button class="dash-tab" data-tab="control"><span>◇</span>CONTROL <i>2</i></button>
+          </nav>
+          <div class="dash-health">
+            <div><span class="live-dot"></span> SYSTEM HEALTH</div>
+            <strong>ALL SYSTEMS NOMINAL</strong>
+          </div>
+        </aside>
+
+        <div class="dash-main">
+          <div class="dash-topbar">
+            <div><small>WEDNESDAY · 09:42</small><strong id="dashTitle">ASK THE COMPANY INTELLIGENCE</strong></div>
+            <div class="model-route">ROUTE <span id="routeBadge">HYBRID / AUTO</span></div>
+          </div>
+
+          <div class="dash-panel active" id="panel-ask">
+            <div class="ask-layout">
+              <div class="ask-conversation" id="askConversation">
+                <div class="system-message">
+                  <span class="sigil">✦</span>
+                  <div><small>ICONIC INTELLIGENCE</small><p>Good morning. I found four developments worth your attention. Ask me what changed, what matters, or what to do next.</p></div>
+                </div>
+                <div class="suggestions">
+                  <button data-prompt="What should I be worried about this week?">What should I be worried about this week?</button>
+                  <button data-prompt="Which competitor changed pricing?">Which competitor changed pricing?</button>
+                  <button data-prompt="What are customers complaining about?">What are customers complaining about?</button>
+                  <button data-prompt="What are we missing?">What are we missing?</button>
+                </div>
+              </div>
+              <form class="ask-box" id="askForm">
+                <input id="askInput" type="text" autocomplete="off" placeholder="Ask the business anything…" aria-label="Ask the demo intelligence" />
+                <button type="submit">↗</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="dash-panel" id="panel-intelligence">
+            <div class="panel-header"><div><small>AUTONOMOUSLY DISCOVERED</small><h3>Intelligence feed</h3></div><button class="tiny-button">FILTER</button></div>
+            <div class="intel-feed">
+              <article><span class="severity hot">HIGH</span><div><small>COMPETITOR PRICING · 34 MIN AGO</small><h4>Primary competitor reduced advertised entry price by 6.2%</h4><p>Change detected across 11 listings. Margin impact and response options are ready.</p></div><button>OPEN ↗</button></article>
+              <article><span class="severity warm">WATCH</span><div><small>CUSTOMER SIGNAL · 2 HRS AGO</small><h4>Service wait-time complaints are clustering around Tuesdays</h4><p>Pattern strengthened across 42 new reviews. The issue is now statistically unusual versus the prior eight weeks.</p></div><button>OPEN ↗</button></article>
+              <article><span class="severity cool">OPP</span><div><small>MARKET GAP · TODAY</small><h4>Competitors are under-answering a high-intent search category</h4><p>Search demand is present; direct local competition is thin. Draft content and offer angle are prepared.</p></div><button>OPEN ↗</button></article>
+              <article><span class="severity cool">NEW</span><div><small>VENDOR · TODAY</small><h4>A supplier changed minimum-order terms</h4><p>Potential inventory impact is minor now but material during peak demand. A comparison brief is ready.</p></div><button>OPEN ↗</button></article>
+            </div>
+          </div>
+
+          <div class="dash-panel" id="panel-work">
+            <div class="panel-header"><div><small>AUTOMATED + REQUESTED WORK</small><h3>Work queue</h3></div><button class="tiny-button">+ NEW JOB</button></div>
+            <div class="work-board">
+              <div class="work-col"><h4>ACTIVE <span>3</span></h4><div class="work-card"><small>RECURRING</small><strong>Weekly competitor report</strong><div class="progress"><i style="width:76%"></i></div><p>12 sources checked · 4 changes found</p></div><div class="work-card"><small>INVESTIGATION</small><strong>Customer churn signals</strong><div class="progress"><i style="width:42%"></i></div><p>Correlating reviews, tickets and pricing</p></div></div>
+              <div class="work-col"><h4>WAITING <span>1</span></h4><div class="work-card approval"><small>HUMAN APPROVAL</small><strong>Publish internal pricing brief</strong><p>Medium-risk write action. Approval required by policy.</p><div class="approval-actions"><button>REVIEW</button><button>APPROVE</button></div></div></div>
+              <div class="work-col"><h4>COMPLETE <span>18</span></h4><div class="work-card complete"><small>TODAY · 08:12</small><strong>Morning executive brief</strong><p>Delivered to approved recipients.</p></div><div class="work-card complete"><small>YESTERDAY · 17:03</small><strong>Vendor price scan</strong><p>No material changes found.</p></div></div>
+            </div>
+          </div>
+
+          <div class="dash-panel" id="panel-knowledge">
+            <div class="panel-header"><div><small>APPROVED BUSINESS CONTEXT</small><h3>Knowledge map</h3></div><button class="tiny-button">+ ADD SOURCE</button></div>
+            <div class="knowledge-grid">
+              <div class="knowledge-stat"><span>2,481</span><small>APPROVED FACTS</small></div>
+              <div class="knowledge-stat"><span>164</span><small>SOURCE DOCUMENTS</small></div>
+              <div class="knowledge-stat"><span>28</span><small>PROCEDURES</small></div>
+              <div class="knowledge-stat"><span>9</span><small>MONITORED ENTITIES</small></div>
+            </div>
+            <div class="knowledge-list">
+              <article><span>01</span><div><strong>Company operating profile</strong><small>Products, locations, roles, policies, terminology</small></div><b>98% VERIFIED</b></article>
+              <article><span>02</span><div><strong>Competitor universe</strong><small>Known players, offers, positioning, pricing sources</small></div><b>LIVE SOURCES</b></article>
+              <article><span>03</span><div><strong>Customer voice corpus</strong><small>Reviews, survey themes, complaint patterns</small></div><b>UPDATED DAILY</b></article>
+              <article><span>04</span><div><strong>Operating procedures</strong><small>Approved workflows, escalation rules, output standards</small></div><b>28 SKILLS</b></article>
+            </div>
+          </div>
+
+          <div class="dash-panel" id="panel-control">
+            <div class="panel-header"><div><small>GOVERNANCE + TRUST</small><h3>Control plane</h3></div><button class="tiny-button">AUDIT LOG</button></div>
+            <div class="control-grid">
+              <article><small>AUTONOMY</small><h4>Read-heavy. Write-light.</h4><p>Research, analysis, summarization and monitoring run automatically. Consequential actions stop at policy gates.</p><div class="policy-bars"><span><i style="width:95%"></i><b>LOW RISK · AUTO</b></span><span><i style="width:56%"></i><b>MEDIUM · POLICY</b></span><span><i style="width:12%"></i><b>HIGH · HUMAN</b></span></div></article>
+              <article><small>APPROVAL QUEUE</small><h4>2 decisions need a human.</h4><div class="approval-item"><span>MED</span><div><strong>Publish internal pricing brief</strong><small>Confidence 94% · policy requires review</small></div></div><div class="approval-item"><span>HIGH</span><div><strong>External customer outreach</strong><small>Draft prepared · execution blocked</small></div></div></article>
+              <article><small>MODEL CONTROL</small><h4>Route work by need.</h4><div class="route-list"><span><b>PRIVATE / ROUTINE</b><i>LOCAL</i></span><span><b>DEEP REASONING</b><i>FRONTIER</i></span><span><b>SENSITIVE + COMPLEX</b><i>HYBRID</i></span></div></article>
+              <article><small>TRACEABILITY</small><h4>Every answer has a why.</h4><p>Source provenance, confidence, model route, procedure and policy decision remain inspectable without exposing factory machinery.</p><button class="trace-button">VIEW SAMPLE TRACE ↗</button></article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="models" class="section-shell models-section">
+      <div class="section-kicker" data-reveal>LOCAL ≠ SMALL THINKING</div>
+      <div class="section-heading split-heading" data-reveal>
+        <h2>The model is a component.<br><em>The system is the product.</em></h2>
+        <p>Some work belongs on frontier models. Some belongs on hardware you control. The advantage is routing each job to the right engine without forcing the client to care.</p>
+      </div>
+
+      <div class="model-explainer" data-reveal>
+        <div class="local-visual">
+          <div class="server-frame">
+            <div class="server-top"><span>LOCAL NODE</span><b>PRIVATE</b></div>
+            <div class="server-core"><span class="gpu-block">GPU</span><div><strong>QWEN 3.8</strong><small>ON-PREMISE / PRIVATE CLOUD</small></div></div>
+            <div class="server-lines"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="local-caption">Your data can stay inside an environment you control while the intelligence remains available, persistent and fast.</div>
+        </div>
+        <div class="local-copy">
+          <div class="definition"><span>LOCAL LLM</span><p>A model that runs on dedicated hardware or infrastructure you control instead of sending every request to a third-party model API.</p></div>
+          <ul>
+            <li><span>01</span><div><strong>Privacy + sovereignty</strong><small>Keep sensitive workloads closer to home.</small></div></li>
+            <li><span>02</span><div><strong>Cost predictability</strong><small>High-volume routine work can move off metered APIs.</small></div></li>
+            <li><span>03</span><div><strong>Always-on utility</strong><small>Recurring monitoring and internal jobs can run without burning premium inference on everything.</small></div></li>
+            <li><span>04</span><div><strong>Hybrid power</strong><small>Escalate only the work that actually benefits from frontier capability.</small></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="comparison" data-reveal>
+        <div class="comparison-head">
+          <div><small>INTERACTIVE ROUTING MATRIX</small><h3>Different engines. One capability.</h3></div>
+          <div class="metric-switch" role="group" aria-label="Comparison metric">
+            <button class="metric active" data-metric="capability">Capability</button>
+            <button class="metric" data-metric="privacy">Privacy</button>
+            <button class="metric" data-metric="latency">Latency</button>
+            <button class="metric" data-metric="cost">Cost control</button>
+          </div>
+        </div>
+        <div class="chart" id="modelChart" aria-live="polite"></div>
+        <p class="chart-note">Illustrative architecture tradeoffs for demonstration — not benchmark claims. Real routing is task-, policy-, hardware- and model-dependent.</p>
+      </div>
+    </section>
+
+    <section class="section-shell agentic-section">
+      <div class="section-kicker" data-reveal>WHY AGENTIC MATTERS</div>
+      <div class="agentic-layout">
+        <div class="agentic-copy" data-reveal>
+          <h2>Chat answers.<br><em>Agents pursue outcomes.</em></h2>
+          <p>The shift is from a box that waits for a prompt to software that can observe, plan, use tools, follow procedures, verify work, remember context and keep going.</p>
+          <a href="#lab" class="text-link">RUN THE DEMO EXPERIMENT ↘</a>
+        </div>
+        <div class="evolution" data-reveal>
+          <article><span>1</span><div><small>CHAT</small><strong>Ask → answer</strong><p>Useful, but ephemeral.</p></div></article>
+          <article><span>2</span><div><small>TOOLS</small><strong>Ask → act</strong><p>Models search, calculate, retrieve and operate software.</p></div></article>
+          <article><span>3</span><div><small>AGENTS</small><strong>Goal → plan → execute</strong><p>Multi-step work with verification and branching.</p></div></article>
+          <article class="current"><span>4</span><div><small>PERSISTENT INTELLIGENCE</small><strong>Watch → learn → work → escalate</strong><p>A durable business function, not a session.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="lab" class="section-shell lab-section">
+      <div class="section-kicker" data-reveal>EXPERIMENT // ROUTING LAB</div>
+      <div class="section-heading lab-heading" data-reveal>
+        <h2>Give the system a job.<br><em>Watch the stack decide.</em></h2>
+        <p>This interactive mockup shows how a managed intelligence layer could route work, apply policy and return an executive result.</p>
+      </div>
+
+      <div class="lab-shell" data-reveal>
+        <div class="lab-controls">
+          <label>MISSION
+            <select id="missionSelect">
+              <option value="competitor">Find competitor pricing changes</option>
+              <option value="reviews">Analyze customer complaints</option>
+              <option value="brief">Build an executive morning brief</option>
+              <option value="vendor">Investigate a vendor risk</option>
+            </select>
+          </label>
+          <label>ROUTING
+            <select id="routingSelect">
+              <option value="auto">Auto / Hybrid</option>
+              <option value="local">Local first</option>
+              <option value="frontier">Frontier first</option>
+            </select>
+          </label>
+          <label class="toggle-label">SENSITIVE DATA
+            <button id="privacyToggle" class="switch on" type="button" aria-pressed="true"><span></span></button>
+          </label>
+          <button id="runExperiment" class="button button-primary lab-run">RUN EXPERIMENT</button>
+        </div>
+
+        <div class="lab-console">
+          <div class="console-top"><span>ICONIC / EXECUTION TRACE</span><span id="labStatus"><i></i> READY</span></div>
+          <div class="trace" id="traceOutput">
+            <div class="trace-idle">SELECT A MISSION AND RUN THE STACK.</div>
+          </div>
+          <div class="lab-result" id="labResult">
+            <div><small>ROUTE</small><strong>—</strong></div>
+            <div><small>POLICY</small><strong>—</strong></div>
+            <div><small>LATENCY</small><strong>—</strong></div>
+            <div><small>OUTPUT</small><strong>—</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell offer-section">
+      <div class="offer-card" data-reveal>
+        <div class="offer-copy">
+          <div class="section-kicker">THE DOORWAY</div>
+          <h2>Give me one problem.</h2>
+          <p>Something annoying, expensive, repetitive, information-heavy, neglected, slow, or impossible to watch closely enough.</p>
+          <p class="offer-emphasis">The first engagement should not feel like an AI presentation. It should solve something.</p>
+        </div>
+        <div class="offer-flow" aria-label="Engagement path">
+          <div><span>01</span><strong>PROBLEM</strong><small>Pick something real.</small></div>
+          <i>→</i>
+          <div><span>02</span><strong>PROOF</strong><small>Create the holy-shit moment.</small></div>
+          <i>→</i>
+          <div><span>03</span><strong>INSTALL</strong><small>Keep the useful context alive.</small></div>
+          <i>→</i>
+          <div><span>04</span><strong>EXPAND</strong><small>Turn it into capability.</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section-shell contact-section">
+      <div class="contact-inner" data-reveal>
+        <div class="contact-wordmark"><img src="iconic-wordmark.webp" alt="ICONIC." /></div>
+        <div class="contact-copy">
+          <div class="section-kicker card-identity">PATRICK CHRISTELL <em>Principal</em></div>
+          <div class="card-ornament" aria-hidden="true"><span></span><i></i><b></b><i></i><span></span></div>
+          <h2>Build an advantage<br>your competitors <em>cannot rent off the shelf.</em></h2>
+          <div class="contact-actions">
+            <a class="button button-primary" href="mailto:patrick@iconic.onl?subject=Give%20me%20one%20problem">patrick@iconic.onl</a>
+            <a class="button button-ghost contact-phone" href="tel:+12067738214">206-773-8214</a>
+          </div>
+        </div>
+      </div>
+      <footer><span>© 2026 ICONIC.</span><span>MANAGED BUSINESS INTELLIGENCE</span><a href="#top">BACK TO TOP ↑</a></footer>
+    </section>
+  </main>
+
+  <script src="app.js" defer></script>
+  <script type="module" src="three-scene.js"></script>
+</body>
+</html>
