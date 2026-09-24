@@ -16,6 +16,8 @@
 }
 
 html { overflow-x: clip; }
+section[id] { scroll-margin-top: 96px; }
+#top { scroll-margin-top: 0; }
 body { min-width: 0; background: radial-gradient(circle at 70% 6%, rgba(48,52,95,.34), transparent 32rem), var(--ink); }
 img { max-width: 100%; }
 .section-shell { width: calc(100% - (var(--mobile-gutter) * 2)); }
