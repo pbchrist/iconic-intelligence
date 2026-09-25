@@ -8,12 +8,18 @@
   const mobileNav = $('#mobileNav');
   if (menuToggle && mobileNav) {
     const closeMenu = () => { mobileNav.hidden = true; menuToggle.setAttribute('aria-expanded', 'false'); };
-    menuToggle.addEventListener('click', () => {
+    menuToggle.addEventListener('click', (event) => {
+      event.stopPropagation();
       const opening = mobileNav.hidden;
       mobileNav.hidden = !opening;
       menuToggle.setAttribute('aria-expanded', String(opening));
     });
     $$('a', mobileNav).forEach((link) => link.addEventListener('click', closeMenu));
+    window.addEventListener('scroll', closeMenu, { passive: true });
+    document.addEventListener('pointerdown', (event) => {
+      if (!mobileNav.hidden && !mobileNav.contains(event.target) && !menuToggle.contains(event.target)) closeMenu();
+    });
+    window.addEventListener('resize', () => { if (window.innerWidth >= 900) closeMenu(); }, { passive: true });
   }
 
   // Cursor light
@@ -45,7 +51,7 @@
   onScroll();
 
   // Deterministic primary-nav state: nothing is active at the top.
-  const navTargets = ['capability', 'dashboard', 'deployment', 'contact'];
+  const navTargets = ['capability', 'dashboard', 'deployment'];
   const navLinks = $$('.nav a[href^="#"]');
   const updateNavState = () => {
     if (window.scrollY < 180) {
@@ -66,13 +72,84 @@
   window.addEventListener('resize', updateNavState, { passive: true });
   updateNavState();
 
-  // Compounding widget: same-origin iframe reports its content height so mobile never clips or double-scrolls.
+  // Compounding signal thread + independent cross-industry use-case rotator.
   const ciFrame = $('#ciFrame');
+  const signalData = {
+    pricing: { missionValue:'competitor', quote:'I never know when competitors change their offers.', question:'Which competitor changed pricing?', answer:'A primary competitor moved advertised entry pricing down across 11 monitored listings. The pattern is broad enough to look deliberate, so I prepared a response brief with the affected offers and what changed.' },
+    reviews: { missionValue:'reviews', quote:'We have hundreds of reviews and nobody is synthesizing them.', question:'What are customers complaining about?', answer:'The strongest complaint cluster is service wait time, followed by communication gaps during handoffs. Positive mentions of staff courtesy remain a useful counter-signal.' },
+    vendor: { missionValue:'vendor', quote:'We notice pricing, inventory or search changes too late.', question:'Where is operating exposure building?', answer:'Inventory and service signals are tracked beside competitor changes so a developing constraint can be investigated before it becomes a separate fire drill.' },
+    market: { missionValue:'brief', quote:'Tell me what changed in my market every Monday morning.', question:'What changed in my market?', answer:'A local search gap remains under-contested while competitor pricing and offer movement continue to be watched. The point is one brief that says what changed and what deserves attention.' }
+  };
+  const useCases = {
+    automotive: { kicker:'AUTOMOTIVE · COMPETITIVE INTELLIGENCE', client:'REGIONAL DEALER GROUP', title:'Know what changed before the morning meeting.', body:'ICONIC watches competitor offers, pricing, inventory, reviews, search visibility and service signals, then condenses the material changes into recurring executive intelligence.', result:'A recurring brief that says what changed, why it matters and what deserves attention next.', watch:'Offers · pricing · inventory · reviews · search · service', surface:'Material competitive and operating changes', deliver:'Recurring executive intelligence' },
+    legal: { kicker:'LEGAL · MATTER + REGULATORY INTELLIGENCE', client:'LAW FIRM / LEGAL TEAM', title:'The ruling changed. Who needs to know?', body:'ICONIC can watch rulings, regulations, dockets, client matters and relevant company activity, then connect the change to the clients and matters it actually touches.', result:'A partner-ready brief that identifies the change, affected clients or matters, supporting sources and the next questions worth asking.', watch:'Rulings · regulations · dockets · client matters', surface:'Changes with direct client or matter relevance', deliver:'Partner briefs · research trails · follow-up work' },
+    wealth: { kicker:'WEALTH MANAGEMENT · CLIENT INTELLIGENCE', client:'PRIVATE WEALTH / ADVISORY', title:'See the client impact before the client asks.', body:'ICONIC can monitor market developments, portfolio-relevant news, client communications, meetings and recurring obligations so the advisor sees the intersection before it becomes another inbox search.', result:'An advisor brief that connects an external development to the clients, conversations and obligations that need review.', watch:'Markets · holdings context · client communications · obligations', surface:'Developments with client-specific relevance', deliver:'Advisor briefs · meeting context · review queues' },
+    marketing: { kicker:'MARKETING · GROWTH INTELLIGENCE', client:'AGENCY / GROWTH TEAM', title:'Turn the market into a live brief, not a quarterly deck.', body:'ICONIC can watch competitor campaigns, site changes, search position, ad messaging, prospect activity and lead flow, then turn the changes into work instead of another research project.', result:'A growth brief that shows what competitors changed, where demand is moving and which opportunities deserve action now.', watch:'Campaigns · sites · search · offers · prospects · lead flow', surface:'Competitive shifts and neglected opportunities', deliver:'Growth briefs · outreach inputs · campaign actions' },
+    executive: { kicker:'EXECUTIVE · OPERATING INTELLIGENCE', client:'OWNER-LED / PROFESSIONAL SERVICES', title:'One morning brief instead of six places to check.', body:'ICONIC can connect meetings, client accounts, competitors, vendors, pipeline activity and recurring research into one persistent operating picture for the principal.', result:'A principal-level brief that says what changed overnight, what needs attention and what can wait.', watch:'Clients · meetings · competitors · vendors · pipeline', surface:'Changes that deserve executive attention', deliver:'Morning briefs · follow-up queues · recurring research' }
+  };
+  const caseOrder = ['automotive','legal','wealth','marketing','executive'];
+  let caseIndex = 0;
+  let useCaseTimer = null;
+  let currentSignal = 'pricing';
+
+  function renderUseCase(id) {
+    const d = useCases[id] || useCases.automotive;
+    caseIndex = Math.max(0, caseOrder.indexOf(id));
+    $('#useCaseKicker') && ($('#useCaseKicker').textContent = d.kicker);
+    $('#useCaseClient') && ($('#useCaseClient').textContent = d.client);
+    $('#useCaseTitle') && ($('#useCaseTitle').textContent = d.title);
+    $('#useCaseBody') && ($('#useCaseBody').textContent = d.body);
+    $('#useCaseResult') && ($('#useCaseResult').innerHTML = `<strong>OUTPUT</strong> ${escapeHtml(d.result)}`);
+    $('#useCaseWatch') && ($('#useCaseWatch').textContent = d.watch);
+    $('#useCaseSurface') && ($('#useCaseSurface').textContent = d.surface);
+    $('#useCaseDeliver') && ($('#useCaseDeliver').textContent = d.deliver);
+    $$('.use-case-dots button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.case === id)));
+    const copy = $('#useCaseCopy');
+    if (copy?.animate) copy.animate([{opacity:.34,transform:'translateY(5px)'},{opacity:1,transform:'none'}],{duration:360,easing:'ease-out'});
+  }
+  function armUseCaseRotation() {
+    clearInterval(useCaseTimer);
+    useCaseTimer = setInterval(() => { caseIndex = (caseIndex + 1) % caseOrder.length; renderUseCase(caseOrder[caseIndex]); }, 5600);
+  }
+  $$('.use-case-dots button').forEach((b) => b.addEventListener('click', () => { renderUseCase(b.dataset.case); armUseCaseRotation(); }));
+  renderUseCase(caseOrder[0]);
+  armUseCaseRotation();
+
+  function renderDashboardThread(id) {
+    const d = signalData[id] || signalData.pricing;
+    const thread = $('.prefill-thread');
+    if (!thread) return;
+    thread.innerHTML = `<div class="user-message"><div><small>YOU</small><p>${escapeHtml(d.question)}</p></div></div><div class="assistant-message"><span class="sigil">✦</span><div><small>ICONIC INTELLIGENCE</small><p>${escapeHtml(d.answer)}</p></div></div>`;
+  }
+  function renderProblemThread(id) {
+    const d = signalData[id] || signalData.pricing;
+    const select = $('#missionSelect');
+    if (select) select.value = d.missionValue;
+    $$('#problemExamples button').forEach((button) => button.classList.toggle('active', button.dataset.signal === id));
+  }
+  function setSignal(id, { syncWidget = false } = {}) {
+    if (!signalData[id]) return;
+    currentSignal = id;
+    renderDashboardThread(id);
+    renderProblemThread(id);
+    document.documentElement.dataset.iconicSignal = id;
+    if (syncWidget && ciFrame?.contentWindow) ciFrame.contentWindow.postMessage({ source:'iconic-site', type:'setSignal', id }, '*');
+  }
+  $$('#problemExamples button').forEach((button) => button.addEventListener('click', () => {
+    const id = button.dataset.signal;
+    if (signalData[id]) setSignal(id, { syncWidget:true });
+    else if (button.dataset.mission && $('#missionSelect')) $('#missionSelect').value = button.dataset.mission;
+  }));
   window.addEventListener('message', (event) => {
-    if (event.origin !== window.location.origin || event.data?.type !== 'iconic-ci-height' || !ciFrame) return;
-    const height = Math.max(560, Math.min(Number(event.data.height) || 0, 1800));
-    if (height) ciFrame.style.height = `${height}px`;
+    const data = event.data || {};
+    if (data.source !== 'iconic-compounding') return;
+    if (data.type === 'height' && ciFrame && window.innerWidth < 980) {
+      const height = Math.max(620, Math.min(Number(data.height) || 0, 2200));
+      if (height) ciFrame.style.height = `${height}px`;
+    }
+    if ((data.type === 'signal' || data.type === 'ready') && data.signal?.id) setSignal(data.signal.id);
   });
+  setSignal('pricing');
 
   // Dashboard tabs
   const tabTitles = {
@@ -247,7 +324,7 @@
   }));
 
   function resizeCanvas() {
-    dpr = Math.min(window.devicePixelRatio || 1, 1.7);
+    dpr = 1;
     width = window.innerWidth;
     height = window.innerHeight;
     canvas.width = width * dpr;
@@ -282,7 +359,7 @@
     });
     requestAnimationFrame(fallbackFrame);
   }
-  requestAnimationFrame(fallbackFrame);
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(fallbackFrame);
   window.__ICONIC_STOP_FALLBACK__ = () => { fallbackRunning = false; ctx.clearRect(0, 0, width, height); };
 
   function escapeHtml(value) {
