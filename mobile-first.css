@@ -746,3 +746,30 @@ footer { margin-top: 78px; }
   .dashboard-map-card .map-stage { height:560px; }
   .compact-capabilities .capability-card { min-height:220px; }
 }
+
+
+/* Sep 24 final QA hardening */
+.hero > *, .hero-copy, .hero-visual-summary, .compound-intro > *, .use-case-wrap > *, .dashboard-shell > *, .lab-shell > * { min-width:0; max-width:100%; }
+.hero-copy, .hero-visual-summary { width:100%; }
+.compound-intro { grid-template-columns:minmax(0,1fr); }
+.compound-intro h2 { max-width:100%; overflow-wrap:anywhere; }
+.compound-intro strong, .compound-intro em { max-width:100%; overflow-wrap:anywhere; }
+.use-case-dots { display:flex; flex-wrap:wrap; gap:8px; }
+.use-case-dots button { width:auto; height:auto; min-height:32px; padding:8px 10px; border:1px solid rgba(185,188,255,.16); border-radius:999px; color:#8e96ad; background:rgba(185,188,255,.055); font-size:8px; font-weight:900; letter-spacing:.11em; cursor:pointer; }
+.use-case-dots button[aria-pressed="true"] { color:var(--pearl); border-color:rgba(185,188,255,.45); background:rgba(185,188,255,.14); box-shadow:0 0 20px rgba(185,188,255,.14); }
+.private-edge { display:grid; grid-template-columns:1fr; gap:14px; margin-top:18px; padding:24px; border:1px solid rgba(185,188,255,.22); border-radius:20px; background:linear-gradient(135deg,rgba(48,52,95,.3),rgba(255,255,255,.015)); }
+.private-edge small { color:var(--accent-2); font-size:9px; font-weight:900; letter-spacing:.16em; }
+.private-edge strong { display:block; font-family:Georgia,serif; font-size:clamp(28px,7vw,46px); font-weight:400; line-height:1; letter-spacing:-.035em; }
+.private-edge p { max-width:980px; margin:13px 0 0; color:#aeb4c7; font-size:15px; line-height:1.65; }
+.dash-topbar small, .orbit-topline, .panel-header small, .intel-feed small, .knowledge-list small, .control-grid small { font-size:max(8px, .52rem); }
+@media (max-width:559px) {
+  .hero-visual-summary { grid-template-columns:1fr 1fr; gap:10px; text-align:left; }
+  .hero-visual-summary i { display:none; }
+  .hero-visual-summary span, .hero-visual-summary strong { min-width:0; overflow-wrap:anywhere; }
+  .compound-intro h2 { font-size:clamp(46px,13vw,66px); line-height:.92; }
+  .dash-nav { max-width:100%; overflow-x:auto; }
+}
+@media (min-width:768px) {
+  .compound-intro { grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr); }
+  .private-edge { grid-template-columns:180px 1fr; gap:28px; align-items:start; padding:30px; }
+}

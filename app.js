@@ -72,101 +72,74 @@
   window.addEventListener('resize', updateNavState, { passive: true });
   updateNavState();
 
-  // One storyline threads from the compounding widget through proof, dashboard and the closing demo.
+  // Compounding signal thread + independent cross-industry use-case rotator.
   const ciFrame = $('#ciFrame');
   const signalData = {
-    pricing: {
-      missionValue: 'competitor', mission: 'Find competitor pricing changes', quote: 'I never know when competitors change their offers.',
-      title: 'Competitor pricing that keeps watching.',
-      body: 'ICONIC monitors competitor offers and pricing transparency, then carries material changes into recurring executive intelligence instead of waiting for someone to remember to search.',
-      watch: 'Offers · advertised pricing · pricing transparency', surface: 'Material competitor moves worth attention', deliver: 'Recurring executive intelligence',
-      question: 'Which competitor changed pricing?', answer: 'A primary competitor moved advertised entry pricing down across 11 monitored listings. The pattern is broad enough to look deliberate, so I prepared a response brief with the affected offers and what changed.'
-    },
-    reviews: {
-      missionValue: 'reviews', mission: 'Analyze customer complaints', quote: 'We have hundreds of reviews and nobody is synthesizing them.',
-      title: 'Customer signals without the review slog.',
-      body: 'ICONIC monitors reviews alongside the rest of the competitive picture so recurring themes can be surfaced without an owner or manager reading hundreds of comments by hand.',
-      watch: 'Reviews · complaint themes · service signals', surface: 'Patterns that strengthen enough to deserve attention', deliver: 'Recurring customer-voice intelligence',
-      question: 'What are customers complaining about?', answer: 'The strongest complaint cluster is service wait time, followed by communication gaps during handoffs. Positive mentions of staff courtesy remain a useful counter-signal.'
-    },
-    vendor: {
-      missionValue: 'vendor', mission: 'Investigate a vendor risk', quote: 'We notice pricing, inventory or search changes too late.',
-      title: 'Inventory and service exposure in the same picture.',
-      body: 'The automotive deployment already watches inventory and service alongside competitor movement, so emerging operating exposure can sit in the same executive intelligence stream.',
-      watch: 'Inventory · service · operating exposure', surface: 'Changes that could affect availability or response', deliver: 'One recurring executive picture',
-      question: 'Where is operating exposure building?', answer: 'Inventory and service signals are tracked beside competitor changes so a developing constraint can be investigated before it becomes a separate fire drill.'
-    },
-    market: {
-      missionValue: 'brief', mission: 'Build an executive morning brief', quote: 'Tell me what changed in my market every Monday morning.',
-      title: 'Market visibility that arrives before the meeting.',
-      body: 'ICONIC monitors search visibility and competitor movement alongside pricing, reviews and inventory, then condenses what changed into recurring executive intelligence.',
-      watch: 'Search visibility · competitors · market movement', surface: 'Changes and gaps worth a closer look', deliver: 'A recurring executive brief',
-      question: 'What changed in my market?', answer: 'A local search gap remains under-contested while competitor pricing and offer movement continue to be watched. The point is one brief that says what changed and what deserves attention.'
-    }
+    pricing: { missionValue:'competitor', quote:'I never know when competitors change their offers.', question:'Which competitor changed pricing?', answer:'A primary competitor moved advertised entry pricing down across 11 monitored listings. The pattern is broad enough to look deliberate, so I prepared a response brief with the affected offers and what changed.' },
+    reviews: { missionValue:'reviews', quote:'We have hundreds of reviews and nobody is synthesizing them.', question:'What are customers complaining about?', answer:'The strongest complaint cluster is service wait time, followed by communication gaps during handoffs. Positive mentions of staff courtesy remain a useful counter-signal.' },
+    vendor: { missionValue:'vendor', quote:'We notice pricing, inventory or search changes too late.', question:'Where is operating exposure building?', answer:'Inventory and service signals are tracked beside competitor changes so a developing constraint can be investigated before it becomes a separate fire drill.' },
+    market: { missionValue:'brief', quote:'Tell me what changed in my market every Monday morning.', question:'What changed in my market?', answer:'A local search gap remains under-contested while competitor pricing and offer movement continue to be watched. The point is one brief that says what changed and what deserves attention.' }
   };
-  let currentSignal = 'pricing';
-  let useCaseIndex = 0;
-  const signalOrder = ['pricing', 'reviews', 'vendor', 'market'];
+  const useCases = {
+    automotive: { kicker:'AUTOMOTIVE · COMPETITIVE INTELLIGENCE', client:'REGIONAL DEALER GROUP', title:'Know what changed before the morning meeting.', body:'ICONIC watches competitor offers, pricing, inventory, reviews, search visibility and service signals, then condenses the material changes into recurring executive intelligence.', result:'A recurring brief that says what changed, why it matters and what deserves attention next.', watch:'Offers · pricing · inventory · reviews · search · service', surface:'Material competitive and operating changes', deliver:'Recurring executive intelligence' },
+    legal: { kicker:'LEGAL · MATTER + REGULATORY INTELLIGENCE', client:'LAW FIRM / LEGAL TEAM', title:'The ruling changed. Who needs to know?', body:'ICONIC can watch rulings, regulations, dockets, client matters and relevant company activity, then connect the change to the clients and matters it actually touches.', result:'A partner-ready brief that identifies the change, affected clients or matters, supporting sources and the next questions worth asking.', watch:'Rulings · regulations · dockets · client matters', surface:'Changes with direct client or matter relevance', deliver:'Partner briefs · research trails · follow-up work' },
+    wealth: { kicker:'WEALTH MANAGEMENT · CLIENT INTELLIGENCE', client:'PRIVATE WEALTH / ADVISORY', title:'See the client impact before the client asks.', body:'ICONIC can monitor market developments, portfolio-relevant news, client communications, meetings and recurring obligations so the advisor sees the intersection before it becomes another inbox search.', result:'An advisor brief that connects an external development to the clients, conversations and obligations that need review.', watch:'Markets · holdings context · client communications · obligations', surface:'Developments with client-specific relevance', deliver:'Advisor briefs · meeting context · review queues' },
+    marketing: { kicker:'MARKETING · GROWTH INTELLIGENCE', client:'AGENCY / GROWTH TEAM', title:'Turn the market into a live brief, not a quarterly deck.', body:'ICONIC can watch competitor campaigns, site changes, search position, ad messaging, prospect activity and lead flow, then turn the changes into work instead of another research project.', result:'A growth brief that shows what competitors changed, where demand is moving and which opportunities deserve action now.', watch:'Campaigns · sites · search · offers · prospects · lead flow', surface:'Competitive shifts and neglected opportunities', deliver:'Growth briefs · outreach inputs · campaign actions' },
+    executive: { kicker:'EXECUTIVE · OPERATING INTELLIGENCE', client:'OWNER-LED / PROFESSIONAL SERVICES', title:'One morning brief instead of six places to check.', body:'ICONIC can connect meetings, client accounts, competitors, vendors, pipeline activity and recurring research into one persistent operating picture for the principal.', result:'A principal-level brief that says what changed overnight, what needs attention and what can wait.', watch:'Clients · meetings · competitors · vendors · pipeline', surface:'Changes that deserve executive attention', deliver:'Morning briefs · follow-up queues · recurring research' }
+  };
+  const caseOrder = ['automotive','legal','wealth','marketing','executive'];
+  let caseIndex = 0;
   let useCaseTimer = null;
+  let currentSignal = 'pricing';
 
-  function renderUseCase(id, { thread = false } = {}) {
-    const data = signalData[id] || signalData.pricing;
-    useCaseIndex = Math.max(0, signalOrder.indexOf(id));
-    $('#useCaseTitle') && ($('#useCaseTitle').textContent = data.title);
-    $('#useCaseBody') && ($('#useCaseBody').textContent = data.body);
-    $('#useCaseWatch') && ($('#useCaseWatch').textContent = data.watch);
-    $('#useCaseSurface') && ($('#useCaseSurface').textContent = data.surface);
-    $('#useCaseDeliver') && ($('#useCaseDeliver').textContent = data.deliver);
-    $$('.use-case-dots button').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.signal === id)));
-    const caseCopy = $('#useCaseCopy');
-    if (caseCopy?.animate) caseCopy.animate([{opacity:.35,transform:'translateY(4px)'},{opacity:1,transform:'none'}],{duration:360,easing:'ease-out'});
-    if (thread) setSignal(id, { syncWidget: true, resetRotation: true });
+  function renderUseCase(id) {
+    const d = useCases[id] || useCases.automotive;
+    caseIndex = Math.max(0, caseOrder.indexOf(id));
+    $('#useCaseKicker') && ($('#useCaseKicker').textContent = d.kicker);
+    $('#useCaseClient') && ($('#useCaseClient').textContent = d.client);
+    $('#useCaseTitle') && ($('#useCaseTitle').textContent = d.title);
+    $('#useCaseBody') && ($('#useCaseBody').textContent = d.body);
+    $('#useCaseResult') && ($('#useCaseResult').innerHTML = `<strong>OUTPUT</strong> ${escapeHtml(d.result)}`);
+    $('#useCaseWatch') && ($('#useCaseWatch').textContent = d.watch);
+    $('#useCaseSurface') && ($('#useCaseSurface').textContent = d.surface);
+    $('#useCaseDeliver') && ($('#useCaseDeliver').textContent = d.deliver);
+    $$('.use-case-dots button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.case === id)));
+    const copy = $('#useCaseCopy');
+    if (copy?.animate) copy.animate([{opacity:.34,transform:'translateY(5px)'},{opacity:1,transform:'none'}],{duration:360,easing:'ease-out'});
   }
+  function armUseCaseRotation() {
+    clearInterval(useCaseTimer);
+    useCaseTimer = setInterval(() => { caseIndex = (caseIndex + 1) % caseOrder.length; renderUseCase(caseOrder[caseIndex]); }, 5600);
+  }
+  $$('.use-case-dots button').forEach((b) => b.addEventListener('click', () => { renderUseCase(b.dataset.case); armUseCaseRotation(); }));
+  renderUseCase(caseOrder[0]);
+  armUseCaseRotation();
 
   function renderDashboardThread(id) {
-    const data = signalData[id] || signalData.pricing;
+    const d = signalData[id] || signalData.pricing;
     const thread = $('.prefill-thread');
     if (!thread) return;
-    thread.innerHTML = `<div class="user-message"><div><small>YOU</small><p>${escapeHtml(data.question)}</p></div></div><div class="assistant-message"><span class="sigil">✦</span><div><small>ICONIC INTELLIGENCE</small><p>${escapeHtml(data.answer)}</p></div></div>`;
+    thread.innerHTML = `<div class="user-message"><div><small>YOU</small><p>${escapeHtml(d.question)}</p></div></div><div class="assistant-message"><span class="sigil">✦</span><div><small>ICONIC INTELLIGENCE</small><p>${escapeHtml(d.answer)}</p></div></div>`;
   }
-
   function renderProblemThread(id) {
-    const data = signalData[id] || signalData.pricing;
+    const d = signalData[id] || signalData.pricing;
     const select = $('#missionSelect');
-    if (select) select.value = data.missionValue;
+    if (select) select.value = d.missionValue;
     $$('#problemExamples button').forEach((button) => button.classList.toggle('active', button.dataset.signal === id));
   }
-
-  function setSignal(id, { syncWidget = false, resetRotation = false } = {}) {
+  function setSignal(id, { syncWidget = false } = {}) {
     if (!signalData[id]) return;
     currentSignal = id;
-    renderUseCase(id);
     renderDashboardThread(id);
     renderProblemThread(id);
     document.documentElement.dataset.iconicSignal = id;
-    if (syncWidget && ciFrame?.contentWindow) ciFrame.contentWindow.postMessage({ source: 'iconic-site', type: 'setSignal', id }, '*');
-    if (resetRotation) armUseCaseRotation();
+    if (syncWidget && ciFrame?.contentWindow) ciFrame.contentWindow.postMessage({ source:'iconic-site', type:'setSignal', id }, '*');
   }
-
-  function armUseCaseRotation() {
-    clearInterval(useCaseTimer);
-    useCaseIndex = Math.max(0, signalOrder.indexOf(currentSignal));
-    useCaseTimer = setInterval(() => {
-      useCaseIndex = (useCaseIndex + 1) % signalOrder.length;
-      renderUseCase(signalOrder[useCaseIndex]);
-    }, 6500);
-  }
-  const useCaseSection = $('.use-case-section');
-  useCaseSection?.addEventListener('mouseenter', () => clearInterval(useCaseTimer));
-  useCaseSection?.addEventListener('mouseleave', armUseCaseRotation);
-  $$('.use-case-dots button').forEach((button) => button.addEventListener('click', () => renderUseCase(button.dataset.signal, { thread: true })));
-
   $$('#problemExamples button').forEach((button) => button.addEventListener('click', () => {
     const id = button.dataset.signal;
-    if (signalData[id]) setSignal(id, { syncWidget: true, resetRotation: true });
+    if (signalData[id]) setSignal(id, { syncWidget:true });
     else if (button.dataset.mission && $('#missionSelect')) $('#missionSelect').value = button.dataset.mission;
   }));
-
   window.addEventListener('message', (event) => {
     const data = event.data || {};
     if (data.source !== 'iconic-compounding') return;
@@ -174,11 +147,9 @@
       const height = Math.max(620, Math.min(Number(data.height) || 0, 2200));
       if (height) ciFrame.style.height = `${height}px`;
     }
-    if ((data.type === 'signal' || data.type === 'ready') && data.signal?.id) setSignal(data.signal.id, { resetRotation: true });
+    if ((data.type === 'signal' || data.type === 'ready') && data.signal?.id) setSignal(data.signal.id);
   });
-
   setSignal('pricing');
-  armUseCaseRotation();
 
   // Dashboard tabs
   const tabTitles = {
