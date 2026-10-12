@@ -1,0 +1,36 @@
+# Publishes iconic.onl on GitHub Pages from main. Only site files go out;
+# notes (README, CHANGELOG) and the old Railway server stay private.
+name: Publish iconic.onl
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Collect site files
+        run: |
+          mkdir _site
+          rsync -a --exclude '.git' --exclude '.github' --exclude '_site' \
+            --exclude 'README.md' --exclude 'CHANGELOG.md' --exclude 'server.js' \
+            --exclude 'package.json' --exclude '.gitignore' --exclude '*.patch' ./ _site/
+          touch _site/.nojekyll
+          ls -la _site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

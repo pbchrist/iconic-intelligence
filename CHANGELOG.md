@@ -3,6 +3,9 @@
 Newest first. One line per change: what changed and why.
 Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
+## 2026-10-11
+- Moved hosting from Railway (free trial ending) to GitHub Pages, free, like the other sites. Also makes www.iconic.onl work. Site content unchanged.
+
 ## 2026-10-08
 - Added this change log and the bookmark `live-2026-10-08` for what iconic.onl serves today. Nothing on the site changed.
 
