@@ -75,16 +75,16 @@
   // Compounding signal thread + independent cross-industry use-case rotator.
   const ciFrame = $('#ciFrame');
   const signalData = {
-    pricing: { missionValue:'competitor', quote:'I find out a competitor moved only after a client mentions it.', question:'Which competitor changed pricing?', answer:'In this sample, a primary competitor moved advertised entry pricing down across the listings being watched. The pattern is broad enough to look deliberate, so a response brief is ready. These are not Elk Grove’s figures.' },
-    reviews: { missionValue:'reviews', quote:'We have a pile of client comments and nobody reads them as one picture.', question:'What are customers complaining about?', answer:'In this sample, the strongest complaint cluster is service wait time, then gaps when a job changes hands. Courtesy still shows up as a counter-signal. This is desk copy, not a client study.' },
-    vendor: { missionValue:'vendor', quote:'We notice a market or supplier change too late.', question:'Where is exposure building?', answer:'In this sample, supplier and market changes sit next to the rest of the watch-list, so a developing constraint can be looked at before it is a separate fire drill.' },
-    market: { missionValue:'brief', quote:'Tell me what changed in my market every Monday morning.', question:'What changed in my market?', answer:'A Monday brief says what changed, why it matters here, and what deserves attention this week. This sample desk is only showing the shape of that answer.' }
+    pricing: { missionValue:'competitor', quote:'I hear about a competitor move from a client.', question:'Which competitor changed pricing?', answer:'A primary competitor moved advertised entry pricing down across the listings being watched. The pattern is broad enough to look deliberate, so a response brief is ready.' },
+    reviews: { missionValue:'reviews', quote:'We have a pile of client comments and nobody reads them as one picture.', question:'What are customers complaining about?', answer:'The strongest complaint cluster is service wait time, then gaps when a job changes hands. Courtesy still shows up as a counter-signal.' },
+    vendor: { missionValue:'vendor', quote:'We notice a market or supplier change too late.', question:'Where is exposure building?', answer:'Supplier and market changes sit on the same watch-list, so a developing constraint shows up before it becomes a separate fire drill.' },
+    market: { missionValue:'brief', quote:'Tell me what changed in my market every Monday morning.', question:'What changed in my market?', answer:'The Monday brief says what changed, why it matters here, and what deserves attention this week.' }
   };
   const useCases = {
-    live: { kicker:'LIVE PROOF · AUTOMOTIVE', client:'ELK GROVE BUICK GMC', title:'A weekly report the GM reads.', body:'Elk Grove Buick GMC runs an always-on assistant and a weekly market report. The general manager likes the reports. That is the live proof. Nothing else on this page is a client result.', resultLabel:'WHAT IS LIVE', result:'An always-on assistant, and a weekly market report the general manager likes.', watchLabel:'RUNS', watch:'An assistant that stays on', surfaceLabel:'SENDS', surface:'A weekly market report', deliverLabel:'KNOWN', deliver:'The general manager likes the reports' },
-    legal: { kicker:'THE OFFER · NOT A CASE STUDY', client:'MANAGING PARTNERS · 5 TO 40 LAWYERS', title:'Monday, before someone else moves.', body:'No law firm is named here, because none has a result to report yet. The offer is a Monday Market Brief for managing partners of firms with 5 to 40 lawyers in Seattle and on the Eastside: what changed, why it matters to your clients, and what is worth doing this week.', resultLabel:'THE PRODUCT', result:'A written Monday brief. Your team can run it. Nothing goes to a client until a person sends it.', watchLabel:'WATCHES', watch:'The market a partner has to know', surfaceLabel:'TIES TO', surface:'Your clients or matters', deliverLabel:'DELIVERS', deliver:'One brief, every Monday' },
-    wealth: { kicker:'WHO ELSE · WEALTH MANAGERS', client:'NO WEALTH CLIENT IS NAMED', title:'The same Monday habit, for an advisor.', body:'Wealth managers are part of the audience, starting with Washington Athletic Club members. There is no wealth-management result to cite yet. The setup is the same: private hardware, a written policy, and your team taught to run it.', resultLabel:'HONEST LIMIT', result:'No advisor result is claimed. The Elk Grove proof is the only live one.', watchLabel:'FOR', watch:'Advisors whose clients will ask', surfaceLabel:'NOT YET', surface:'No wealth result is claimed', deliverLabel:'SAME EDGE', deliver:'Private hardware, taught to your team' },
-    owners: { kicker:'WHO ELSE · OWNERS', client:'AUDIENCE · NOT A CLIENT', title:'Members already in the building.', body:'The first conversations are with Washington Athletic Club members: attorneys, wealth managers, and business owners. Membership is the doorway. It is not an endorsement, and it is not a result.', resultLabel:'WHERE IT STARTS', result:'A conversation. Then a fixed-price setup if a Monday brief is worth building.', watchLabel:'WHO', watch:'Attorneys, wealth managers, owners', surfaceLabel:'WHERE', surface:'Washington Athletic Club members', deliverLabel:'NEXT', deliver:'A conversation, then a setup if it fits' }
+    live: { kicker:'LIVE PROOF · AUTOMOTIVE', client:'A NORTHERN CALIFORNIA AUTO DEALERSHIP', title:'A Monday report the GM reads.', body:'A Sacramento-area dealership runs an always-on assistant and a Monday market report. The general manager reads it every week.', resultLabel:'WHAT IS LIVE', result:'An always-on assistant, and a Monday market report the general manager reads every week.', watchLabel:'RUNS', watch:'An assistant that stays on', surfaceLabel:'SENDS', surface:'A Monday market report', deliverLabel:'READS', deliver:'The general manager, every week' },
+    legal: { kicker:'THE OFFER · LAW FIRMS', client:'MANAGING PARTNERS · 5 TO 40 LAWYERS', title:'Monday, before someone else moves.', body:'A Monday Market Brief for managing partners of firms with 5 to 40 lawyers in Seattle and on the Eastside. What changed, why it matters to your clients, and what is worth doing this week.', resultLabel:'EVERY MONDAY', result:'A written brief your team can run. A person sends anything that goes to a client.', watchLabel:'WATCHES', watch:'The market a partner has to know', surfaceLabel:'TIES TO', surface:'Your clients or matters', deliverLabel:'DELIVERS', deliver:'One brief, every Monday' },
+    wealth: { kicker:'ALSO FOR · WEALTH MANAGERS', client:'ADVISORS', title:'The same Monday habit.', body:'Wealth managers get the same setup: private hardware, a written policy, and a team taught to run it. The brief is there before the client asks.', resultLabel:'THE SETUP', result:'Private hardware, a written policy, and your team taught to run it.', watchLabel:'FOR', watch:'Advisors whose clients will ask', surfaceLabel:'BRINGS', surface:'What changed, before the meeting', deliverLabel:'KEEPS', deliver:'The work on your hardware' },
+    owners: { kicker:'ALSO FOR · OWNERS', client:'WAC MEMBERS', title:'Start in the room you are already in.', body:'The first conversations are with Washington Athletic Club members: attorneys, wealth managers, and business owners.', resultLabel:'WHERE IT STARTS', result:'A conversation, then a fixed-price setup when a Monday brief fits.', watchLabel:'WHO', watch:'Attorneys, wealth managers, owners', surfaceLabel:'WHERE', surface:'Washington Athletic Club members', deliverLabel:'NEXT', deliver:'A conversation, then a setup when it fits' }
   };
   const caseOrder = ['live','legal','wealth','owners'];
   let caseIndex = 0;
@@ -173,23 +173,23 @@
   const responses = [
     {
       match: /monday/i,
-      text: 'A Monday brief would say three things: what changed, which clients or matters it touches, and what can wait. This box is a sample of the desk. It is not a brief for a firm, and it is not the Elk Grove report.'
+      text: 'Three things: what changed, which clients or matters it touches, and what can wait.'
     },
     {
       match: /worried|risk|week/i,
-      text: 'In this sample, two things would be flagged. A competitor moved advertised entry pricing, and service complaints are clustering on one weekday. A person would look at margin first, then staffing. These are not measured client results.'
+      text: 'Two things to look at. A competitor moved advertised entry pricing, and service complaints are clustering on one weekday. Margin first, then staffing.'
     },
     {
       match: /competitor|pricing|price/i,
-      text: 'In this sample, one primary competitor changed advertised entry pricing. The move looks deliberate rather than a one-off listing. A response brief would be ready. No percentage is claimed, because this is not a client file.'
+      text: 'One primary competitor changed advertised entry pricing. The move looks deliberate. A response brief is ready.'
     },
     {
       match: /customer|complain|review/i,
-      text: 'In this sample, the strongest complaint cluster is service wait time, then gaps when work changes hands. Courtesy still shows up as a counter-signal. No review count is claimed.'
+      text: 'The strongest complaint cluster is service wait time, then gaps when work changes hands. Courtesy still shows up as a counter-signal.'
     },
     {
       match: /missing|opportun|what else/i,
-      text: 'In this sample, the desk would point at a question clients are already asking that competitors answer thinly. A real brief would name that question only after it is checked.'
+      text: 'Clients are already asking a question competitors answer thinly. The brief names that question once it has been checked.'
     }
   ];
 
@@ -231,31 +231,31 @@
   const missions = {
     competitor: {
       label: 'COMPETITOR PRICING',
-      source: 'sample listings + offer pages',
-      output: 'Sample changes',
-      result: 'Sample only. Competitor entry pricing moved. A response brief would be ready.',
-      brief: ['Sample: several watched listings moved in the same direction.', 'The move looks deliberate rather than a one-off.', 'A person reviews the affected offers before any price change.', 'The competitor set stays on the watch-list.']
+      source: 'watched listings + offer pages',
+      output: 'Pricing moves',
+      result: 'Competitor entry pricing moved. A response brief is ready.',
+      brief: ['Watched listings moved in the same direction.', 'The move looks deliberate.', 'A person reviews the affected offers before any price change.', 'The competitor set stays on the watch-list.']
     },
     reviews: {
       label: 'CUSTOMER VOICE',
-      source: 'sample reviews + service notes',
-      output: 'Sample clusters',
-      result: 'Sample only. Wait-time complaints are the strongest cluster.',
-      brief: ['Sample: wait-time complaints cluster on one weekday.', 'Handoff complaints are the second theme.', 'Courtesy still shows up as a counter-signal.', 'A person looks at staffing and handoffs before acting.']
+      source: 'reviews + service notes',
+      output: 'Complaint clusters',
+      result: 'Wait-time complaints are the strongest cluster.',
+      brief: ['Wait-time complaints cluster on one weekday.', 'Handoff complaints are the second theme.', 'Courtesy still shows up as a counter-signal.', 'A person looks at staffing and handoffs before acting.']
     },
     brief: {
       label: 'MONDAY BRIEF',
-      source: 'sample internal + external notes',
-      output: 'Sample brief',
-      result: 'Sample only. A Monday brief with what changed and what can wait.',
-      brief: ['What changed: one competitor pricing move.', 'Why it matters: it touches offers you still advertise.', 'What can wait: no vendor change needs a decision today.', 'Nothing here is an Elk Grove figure or a law-firm result.']
+      source: 'internal notes + market watch',
+      output: 'Monday brief',
+      result: 'What changed, why it matters, and what can wait.',
+      brief: ['What changed: one competitor pricing move.', 'Why it matters: it touches offers you still advertise.', 'What can wait: no vendor change needs a decision today.', 'A person decides what goes out.']
     },
     vendor: {
       label: 'VENDOR RISK',
-      source: 'sample terms + market notes',
-      output: 'Sample risk',
-      result: 'Sample only. A terms change that might matter at peak demand.',
-      brief: ['Sample: a supplier changed minimum-order terms.', 'Exposure looks limited at normal demand.', 'Peak demand is where it could matter.', 'Compare a backup before the next order. A person decides.']
+      source: 'terms + market notes',
+      output: 'Terms change',
+      result: 'A terms change that can matter at peak demand.',
+      brief: ['A supplier changed minimum-order terms.', 'Exposure looks limited at normal demand.', 'Peak demand is where it can matter.', 'Compare a backup before the next order. A person decides.']
     }
   };
 

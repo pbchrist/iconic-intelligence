@@ -5,6 +5,7 @@ Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
 ## 2026-10-16
 - Draft homepage: lead with the Elk Grove report the GM likes, publish the Monday brief and setup prices, and make four included briefs the first step. Logo, compounding scene, and the demo desk stay.
+- Copy polish: the live proof is a Sacramento-area dealership, unnamed in public. The GM reads a Monday market report every week. Hedging lines tightened. The dealership name stays in a placeholder until the client consents.
 
 ## 2026-10-11
 - Moved hosting from Railway (free trial ending) to GitHub Pages, free, like the other sites. Also makes www.iconic.onl work. Site content unchanged.
