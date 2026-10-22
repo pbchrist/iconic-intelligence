@@ -4,9 +4,8 @@ Production website for ICONIC.
 
 ## Deployment model
 
-- `main` = production candidate / production
-- `staging` = live staging branch
-- Railway serves the site with `npm start`
+- `main` = production. Every push to `main` publishes to iconic.onl through GitHub Pages (`.github/workflows/pages.yml`), since 2026-10-11. Railway is no longer used.
+- `staging` = working branch (there is no hosted staging preview)
 - `iconic.onl` is the production custom domain
 
 ## Local run
@@ -15,7 +14,7 @@ Production website for ICONIC.
 npm start
 ```
 
-The server uses `PORT` when provided and otherwise listens on 3000.
+The local server (`server.js`) uses `PORT` when provided and otherwise listens on 3000. It is only for local checks; production is static on GitHub Pages.
 
 ## Making a change
 
@@ -23,8 +22,8 @@ Same habits as every Patrick site (ICONIC OS skill `web-build-release`):
 
 1. Work on `staging`. Don't make copies like `index-v2.html`; every saved change is kept in GitHub history.
 2. Save with a one-line note and add the same line to `CHANGELOG.md`.
-3. Check the Railway staging link (the practice run for this site).
-4. Only when Patrick says it goes live: promote the tested `staging` to `main`; Railway puts `main` on iconic.onl. Then check iconic.onl.
+3. Check it locally with `npm start` (there is no hosted staging preview).
+4. Only when Patrick says it goes live: promote the tested `staging` to `main`; GitHub Pages puts `main` on iconic.onl within a few minutes. Then check iconic.onl.
 
 ## Bookmarks
 
