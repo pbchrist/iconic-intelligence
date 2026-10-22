@@ -62,7 +62,7 @@ img { max-width: 100%; }
 .hero-actions { display: grid; grid-template-columns: 1fr; margin-top: 26px; }
 .hero-actions .button { width: 100%; }
 .hero-proof { grid-template-columns: 1fr; gap: 17px; margin-top: 35px; padding-top: 18px; }
-.hero-proof div { grid-template-columns: 30px 1fr; align-items: baseline; gap: 10px; }
+.hero-proof div { grid-template-columns: 1fr; align-items: start; gap: 8px; }
 .hero-proof span { font-size: 12px; }
 
 /* Three.js now explains the product and acts as navigation. */
@@ -768,4 +768,117 @@ footer { margin-top: 78px; }
 @media (min-width:1180px) {
   .hero { grid-template-columns:minmax(0,1fr) !important; gap:0; }
   .hero-copy { max-width:1040px; }
+}
+
+/* Draft revision — prices, brief, and placeholders. Same cards, same type. */
+.hero-proof strong.price {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(26px, 3.1vw, 34px);
+  font-weight: 400;
+  letter-spacing: -.03em;
+  line-height: 1.05;
+  text-transform: none;
+}
+.hero-proof { max-width: 980px; }
+.demo-note {
+  max-width: 720px;
+  margin: 16px 0 0;
+  color: var(--warning);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.brief-section, .pricing-section { padding-top: 72px; padding-bottom: 72px; }
+.brief-grid, .price-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 28px;
+}
+.brief-grid article, .price-grid article {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255,255,255,.018);
+}
+.brief-grid article > span, .price-grid article > span {
+  color: var(--accent-2);
+  font-size: 8px;
+  letter-spacing: .16em;
+}
+.brief-grid small, .price-grid small {
+  display: block;
+  margin-top: 22px;
+  color: #727a93;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .14em;
+}
+.brief-grid h3, .price-grid h3 {
+  margin: 8px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(32px, 8vw, 40px);
+  font-weight: 400;
+  letter-spacing: -.03em;
+  line-height: 1;
+}
+.brief-grid p, .price-grid p { color: #9ca3b8; font-size: 14px; line-height: 1.65; }
+.price-grid .amount {
+  margin: 16px 0 0;
+  color: var(--pearl);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 7vw, 36px);
+  font-weight: 400;
+  letter-spacing: -.03em;
+  line-height: 1.05;
+}
+.price-grid .amount em {
+  color: var(--accent-2);
+  font-size: .48em;
+  font-style: italic;
+  letter-spacing: 0;
+}
+.price-grid b {
+  display: block;
+  margin-top: 22px;
+  color: #c3c7d6;
+  font-size: 8px;
+  letter-spacing: .13em;
+}
+.price-card-featured {
+  border-color: rgba(174,183,255,.34);
+  background: linear-gradient(145deg, rgba(70,77,158,.28), rgba(255,255,255,.018));
+}
+.brief-section .section-heading h2,
+.pricing-section .section-heading h2 { font-size: clamp(36px, 9.5vw, 48px); }
+.fill-in {
+  margin-top: 22px;
+  padding: 22px;
+  border: 1px dashed rgba(255,217,161,.55);
+  border-radius: 18px;
+  background: rgba(255,217,161,.04);
+}
+.fill-in small {
+  color: var(--warning);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+.fill-in strong {
+  display: block;
+  margin-top: 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(22px, 5vw, 28px);
+  font-weight: 400;
+  letter-spacing: -.02em;
+  line-height: 1.15;
+}
+.fill-in p { margin: 10px 0 0; color: #c3bba8; font-size: 14px; line-height: 1.6; }
+@media (min-width: 768px) {
+  .brief-section, .pricing-section { padding-top: 104px; padding-bottom: 96px; }
+  .brief-grid, .price-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .brief-grid article, .price-grid article { padding: 28px; }
+  .brief-section .section-heading h2,
+  .pricing-section .section-heading h2 { font-size: clamp(42px, 4.4vw, 68px); }
+  .price-grid .amount { font-size: clamp(26px, 2.1vw, 34px); }
 }

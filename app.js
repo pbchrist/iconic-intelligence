@@ -51,7 +51,7 @@
   onScroll();
 
   // Deterministic primary-nav state: nothing is active at the top.
-  const navTargets = ['capability', 'dashboard', 'deployment'];
+  const navTargets = ['proof', 'brief', 'pricing', 'start'];
   const navLinks = $$('.nav a[href^="#"]');
   const updateNavState = () => {
     if (window.scrollY < 180) {
@@ -75,31 +75,32 @@
   // Compounding signal thread + independent cross-industry use-case rotator.
   const ciFrame = $('#ciFrame');
   const signalData = {
-    pricing: { missionValue:'competitor', quote:'I never know when competitors change their offers.', question:'Which competitor changed pricing?', answer:'A primary competitor moved advertised entry pricing down across 11 monitored listings. The pattern is broad enough to look deliberate, so I prepared a response brief with the affected offers and what changed.' },
-    reviews: { missionValue:'reviews', quote:'We have hundreds of reviews and nobody is synthesizing them.', question:'What are customers complaining about?', answer:'The strongest complaint cluster is service wait time, followed by communication gaps during handoffs. Positive mentions of staff courtesy remain a useful counter-signal.' },
-    vendor: { missionValue:'vendor', quote:'We notice pricing, inventory or search changes too late.', question:'Where is operating exposure building?', answer:'Inventory and service signals are tracked beside competitor changes so a developing constraint can be investigated before it becomes a separate fire drill.' },
-    market: { missionValue:'brief', quote:'Tell me what changed in my market every Monday morning.', question:'What changed in my market?', answer:'A local search gap remains under-contested while competitor pricing and offer movement continue to be watched. The point is one brief that says what changed and what deserves attention.' }
+    pricing: { missionValue:'competitor', quote:'I hear about a competitor move from a client.', question:'Which competitor changed pricing?', answer:'A primary competitor moved advertised entry pricing down across the listings being watched. The pattern is broad enough to look deliberate, so a response brief is ready.' },
+    reviews: { missionValue:'reviews', quote:'We have a pile of client comments and nobody reads them as one picture.', question:'What are customers complaining about?', answer:'The strongest complaint cluster is service wait time, then gaps when a job changes hands. Courtesy still shows up as a counter-signal.' },
+    vendor: { missionValue:'vendor', quote:'We notice a market or supplier change too late.', question:'Where is exposure building?', answer:'Supplier and market changes sit on the same watch-list, so a developing constraint shows up before it becomes a separate fire drill.' },
+    market: { missionValue:'brief', quote:'Tell me what changed in my market every Monday morning.', question:'What changed in my market?', answer:'The Monday brief says what changed, why it matters here, and what deserves attention this week.' }
   };
   const useCases = {
-    automotive: { kicker:'AUTOMOTIVE · COMPETITIVE INTELLIGENCE', client:'REGIONAL DEALER GROUP', title:'Know what changed before the morning meeting.', body:'ICONIC watches competitor offers, pricing, inventory, reviews, search visibility and service signals, then condenses the material changes into recurring executive intelligence.', result:'A recurring brief that says what changed, why it matters and what deserves attention next.', watch:'Offers · pricing · inventory · reviews · search · service', surface:'Material competitive and operating changes', deliver:'Recurring executive intelligence' },
-    legal: { kicker:'LEGAL · MATTER + REGULATORY INTELLIGENCE', client:'LAW FIRM / LEGAL TEAM', title:'The ruling changed. Who needs to know?', body:'ICONIC can watch rulings, regulations, dockets, client matters and relevant company activity, then connect the change to the clients and matters it actually touches.', result:'A partner-ready brief that identifies the change, affected clients or matters, supporting sources and the next questions worth asking.', watch:'Rulings · regulations · dockets · client matters', surface:'Changes with direct client or matter relevance', deliver:'Partner briefs · research trails · follow-up work' },
-    wealth: { kicker:'WEALTH MANAGEMENT · CLIENT INTELLIGENCE', client:'PRIVATE WEALTH / ADVISORY', title:'See the client impact before the client asks.', body:'ICONIC can monitor market developments, portfolio-relevant news, client communications, meetings and recurring obligations so the advisor sees the intersection before it becomes another inbox search.', result:'An advisor brief that connects an external development to the clients, conversations and obligations that need review.', watch:'Markets · holdings context · client communications · obligations', surface:'Developments with client-specific relevance', deliver:'Advisor briefs · meeting context · review queues' },
-    marketing: { kicker:'MARKETING · GROWTH INTELLIGENCE', client:'AGENCY / GROWTH TEAM', title:'Turn the market into a live brief, not a quarterly deck.', body:'ICONIC can watch competitor campaigns, site changes, search position, ad messaging, prospect activity and lead flow, then turn the changes into work instead of another research project.', result:'A growth brief that shows what competitors changed, where demand is moving and which opportunities deserve action now.', watch:'Campaigns · sites · search · offers · prospects · lead flow', surface:'Competitive shifts and neglected opportunities', deliver:'Growth briefs · outreach inputs · campaign actions' },
-    executive: { kicker:'EXECUTIVE · OPERATING INTELLIGENCE', client:'OWNER-LED / PROFESSIONAL SERVICES', title:'One morning brief instead of six places to check.', body:'ICONIC can connect meetings, client accounts, competitors, vendors, pipeline activity and recurring research into one persistent operating picture for the principal.', result:'A principal-level brief that says what changed overnight, what needs attention and what can wait.', watch:'Clients · meetings · competitors · vendors · pipeline', surface:'Changes that deserve executive attention', deliver:'Morning briefs · follow-up queues · recurring research' }
+    live: { kicker:'LIVE PROOF · AUTOMOTIVE', client:'A NORTHERN CALIFORNIA AUTO DEALERSHIP', title:'A Monday report the GM reads.', body:'A Sacramento-area dealership runs an always-on assistant and a Monday market report. The general manager reads it every week.', resultLabel:'WHAT IS LIVE', result:'An always-on assistant, and a Monday market report the general manager reads every week.', watchLabel:'RUNS', watch:'An assistant that stays on', surfaceLabel:'SENDS', surface:'A Monday market report', deliverLabel:'READS', deliver:'The general manager, every week' },
+    legal: { kicker:'THE OFFER · LAW FIRMS', client:'MANAGING PARTNERS · 5 TO 40 LAWYERS', title:'Monday, before someone else moves.', body:'A Monday Market Brief for managing partners of firms with 5 to 40 lawyers in Seattle and on the Eastside. What changed, why it matters to your clients, and what is worth doing this week.', resultLabel:'EVERY MONDAY', result:'A written brief your team can run. A person sends anything that goes to a client.', watchLabel:'WATCHES', watch:'The market a partner has to know', surfaceLabel:'TIES TO', surface:'Your clients or matters', deliverLabel:'DELIVERS', deliver:'One brief, every Monday' },
+    wealth: { kicker:'ALSO FOR · WEALTH MANAGERS', client:'ADVISORS', title:'The same Monday habit.', body:'Wealth managers get the same setup: private hardware, a written policy, and a team taught to run it. The brief is there before the client asks.', resultLabel:'THE SETUP', result:'Private hardware, a written policy, and your team taught to run it.', watchLabel:'FOR', watch:'Advisors whose clients will ask', surfaceLabel:'BRINGS', surface:'What changed, before the meeting', deliverLabel:'KEEPS', deliver:'The work on your hardware' },
+    owners: { kicker:'ALSO FOR · OWNERS', client:'WAC MEMBERS', title:'Start in the room you are already in.', body:'The first conversations are with Washington Athletic Club members: attorneys, wealth managers, and business owners.', resultLabel:'WHERE IT STARTS', result:'A conversation, then a fixed-price setup when a Monday brief fits.', watchLabel:'WHO', watch:'Attorneys, wealth managers, owners', surfaceLabel:'WHERE', surface:'Washington Athletic Club members', deliverLabel:'NEXT', deliver:'A conversation, then a setup when it fits' }
   };
-  const caseOrder = ['automotive','legal','wealth','marketing','executive'];
+  const caseOrder = ['live','legal','wealth','owners'];
   let caseIndex = 0;
-  let useCaseTimer = null;
   let currentSignal = 'pricing';
 
   function renderUseCase(id) {
-    const d = useCases[id] || useCases.automotive;
+    const d = useCases[id] || useCases.live;
     caseIndex = Math.max(0, caseOrder.indexOf(id));
     $('#useCaseKicker') && ($('#useCaseKicker').textContent = d.kicker);
     $('#useCaseClient') && ($('#useCaseClient').textContent = d.client);
     $('#useCaseTitle') && ($('#useCaseTitle').textContent = d.title);
     $('#useCaseBody') && ($('#useCaseBody').textContent = d.body);
-    $('#useCaseResult') && ($('#useCaseResult').innerHTML = `<strong>OUTPUT</strong> ${escapeHtml(d.result)}`);
+    $('#useCaseResult') && ($('#useCaseResult').innerHTML = `<strong>${escapeHtml(d.resultLabel || 'OUTPUT')}</strong> ${escapeHtml(d.result)}`);
+    $('#useCaseWatchLabel') && ($('#useCaseWatchLabel').textContent = d.watchLabel || 'WATCHES');
+    $('#useCaseSurfaceLabel') && ($('#useCaseSurfaceLabel').textContent = d.surfaceLabel || 'SURFACES');
+    $('#useCaseDeliverLabel') && ($('#useCaseDeliverLabel').textContent = d.deliverLabel || 'DELIVERS');
     $('#useCaseWatch') && ($('#useCaseWatch').textContent = d.watch);
     $('#useCaseSurface') && ($('#useCaseSurface').textContent = d.surface);
     $('#useCaseDeliver') && ($('#useCaseDeliver').textContent = d.deliver);
@@ -107,13 +108,8 @@
     const copy = $('#useCaseCopy');
     if (copy?.animate) copy.animate([{opacity:.34,transform:'translateY(5px)'},{opacity:1,transform:'none'}],{duration:360,easing:'ease-out'});
   }
-  function armUseCaseRotation() {
-    clearInterval(useCaseTimer);
-    useCaseTimer = setInterval(() => { caseIndex = (caseIndex + 1) % caseOrder.length; renderUseCase(caseOrder[caseIndex]); }, 5600);
-  }
-  $$('.use-case-dots button').forEach((b) => b.addEventListener('click', () => { renderUseCase(b.dataset.case); armUseCaseRotation(); }));
+  $$('.use-case-dots button').forEach((b) => b.addEventListener('click', () => { renderUseCase(b.dataset.case); }));
   renderUseCase(caseOrder[0]);
-  armUseCaseRotation();
 
   function renderDashboardThread(id) {
     const d = signalData[id] || signalData.pricing;
@@ -176,20 +172,24 @@
   // Demo Ask intelligence
   const responses = [
     {
+      match: /monday/i,
+      text: 'Three things: what changed, which clients or matters it touches, and what can wait.'
+    },
+    {
       match: /worried|risk|week/i,
-      text: 'Two things deserve attention. First, a competitor cut advertised entry pricing across 11 listings this morning. Second, service wait-time complaints are clustering on Tuesdays. I would inspect margin exposure first, then staffing patterns.'
+      text: 'Two things to look at. A competitor moved advertised entry pricing, and service complaints are clustering on one weekday. Margin first, then staffing.'
     },
     {
       match: /competitor|pricing|price/i,
-      text: 'One primary competitor changed pricing. The median advertised entry price moved down 6.2% across the monitored set. The change is broad enough to look deliberate rather than inventory noise. I have a response brief ready.'
+      text: 'One primary competitor changed advertised entry pricing. The move looks deliberate. A response brief is ready.'
     },
     {
       match: /customer|complain|review/i,
-      text: 'The strongest complaint cluster is service wait time, followed by communication gaps during handoffs. Tuesday mentions are now materially above the eight-week baseline. Positive mentions of staff courtesy remain strong.'
+      text: 'The strongest complaint cluster is service wait time, then gaps when work changes hands. Courtesy still shows up as a counter-signal.'
     },
     {
       match: /missing|opportun|what else/i,
-      text: 'You may be underestimating a search opportunity. Competitors are weak on a high-intent category that has visible demand but poor local answers. I would test a dedicated offer page and measure qualified inbound response.'
+      text: 'Clients are already asking a question competitors answer thinly. The brief names that question once it has been checked.'
     }
   ];
 
@@ -231,31 +231,31 @@
   const missions = {
     competitor: {
       label: 'COMPETITOR PRICING',
-      source: '11 monitored listings + 4 offer pages',
-      output: '3 material changes',
-      result: 'Competitor entry pricing moved down. Response brief generated.',
-      brief: ['11 monitored listings changed in the same direction.', 'The move appears deliberate rather than inventory noise.', 'Review the affected offers before the next pricing meeting.', 'Keep the competitor set on watch for follow-on changes.']
+      source: 'watched listings + offer pages',
+      output: 'Pricing moves',
+      result: 'Competitor entry pricing moved. A response brief is ready.',
+      brief: ['Watched listings moved in the same direction.', 'The move looks deliberate.', 'A person reviews the affected offers before any price change.', 'The competitor set stays on the watch-list.']
     },
     reviews: {
       label: 'CUSTOMER VOICE',
-      source: '428 reviews + 76 service notes',
-      output: '2 complaint clusters',
-      result: 'Tuesday wait-time complaints exceed the recent baseline.',
-      brief: ['Wait-time complaints are clustering around Tuesdays.', 'Communication handoff complaints are the second strongest theme.', 'Staff courtesy remains a positive counter-signal.', 'Review Tuesday staffing and handoff coverage first.']
+      source: 'reviews + service notes',
+      output: 'Complaint clusters',
+      result: 'Wait-time complaints are the strongest cluster.',
+      brief: ['Wait-time complaints cluster on one weekday.', 'Handoff complaints are the second theme.', 'Courtesy still shows up as a counter-signal.', 'A person looks at staffing and handoffs before acting.']
     },
     brief: {
-      label: 'EXECUTIVE BRIEF',
-      source: '7 internal + 18 external feeds',
-      output: '5-item brief',
-      result: 'Morning brief assembled with risks, opportunities and actions.',
-      brief: ['One competitor pricing move deserves attention.', 'Service complaints strengthened around a recurring daypart.', 'A local search gap remains under-contested.', 'No material vendor change requires action this morning.']
+      label: 'MONDAY BRIEF',
+      source: 'internal notes + market watch',
+      output: 'Monday brief',
+      result: 'What changed, why it matters, and what can wait.',
+      brief: ['What changed: one competitor pricing move.', 'Why it matters: it touches offers you still advertise.', 'What can wait: no vendor change needs a decision today.', 'A person decides what goes out.']
     },
     vendor: {
       label: 'VENDOR RISK',
-      source: 'Terms, price history + market signals',
-      output: '1 emerging risk',
-      result: 'Minimum-order change could create peak-demand exposure.',
-      brief: ['A supplier changed minimum-order terms.', 'Current exposure is limited at normal demand.', 'Peak-demand inventory could be affected.', 'Compare alternate supplier terms before the next reorder.']
+      source: 'terms + market notes',
+      output: 'Terms change',
+      result: 'A terms change that can matter at peak demand.',
+      brief: ['A supplier changed minimum-order terms.', 'Exposure looks limited at normal demand.', 'Peak demand is where it can matter.', 'Compare a backup before the next order. A person decides.']
     }
   };
 
