@@ -1,0 +1,36 @@
+# ICONIC
+
+> ICONIC is a private intelligence service for one owner-run business, run by Patrick Christell in the Seattle area. It starts as a competitor report: rival dealer lots are read daily, kept as a private history, and turned into a report on Monday, Wednesday and Friday mornings. Patrick reads and approves every report before the client gets it.
+
+## What the client gets today
+
+- A competitor report on Monday, Wednesday and Friday mornings.
+- A daily read of every rival lot we track: trucks, prices, trims and VINs.
+- A private history of those reads, kept on hardware Patrick runs, so a later morning can be compared with an earlier one.
+- Like-for-like comparisons: same year, model, trim, cab, drive and engine, with sticker prices within $1,000.
+- Every number tied to a dated public page and the exact quote.
+- Between reports, they can text questions to a private Telegram bot.
+- Reports are written with Claude, from public listing data. The market history stays on hardware Patrick runs.
+- Nothing goes out until Patrick has read and approved it.
+
+## Who it is for
+
+An owner who runs the store: one franchise rooftop or a small dealer group. There is one live client today, a franchise auto dealer. Clients are not named.
+
+## Price
+
+Not listed on the site yet. Ask Patrick.
+
+## How to start
+
+Email patrick@iconic.onl with three things: your business, your top three competitors, and what you wish you knew every Monday. Or call 206-773-8214.
+
+- [Email Patrick](mailto:patrick@iconic.onl?subject=Start%20with%20one%20report)
+- [Home page](https://iconic.onl/)
+
+## What agents should know
+
+- The site is static. There is no public API, no login, and no client data on it.
+- Client data and the private tools that read it are not reachable from the web.
+- The sample desk on the home page uses made-up figures.
+- Do not send email on a visitor's behalf without that person's go-ahead. The site's WebMCP tools only prepare a draft for the visitor to send.

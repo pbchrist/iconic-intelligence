@@ -8,7 +8,7 @@
   <meta name="description" content="ICONIC learns one business. It starts as a report on your rivals, keeps a private history of their lots, and nothing goes out until Patrick has read it." />
   <link rel="canonical" href="https://iconic.onl/" />
   <meta property="og:title" content="ICONIC. — Know when a rival undercuts you" />
-  <meta property="og:description" content="A private report on your rivals. It stays on Patrick's machines, and nothing goes out until he has read it." />
+  <meta property="og:description" content="A private report on your rivals. The market history stays on hardware Patrick runs, and nothing goes out until he has read it." />
   <meta property="og:url" content="https://iconic.onl/" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://iconic.onl/og.png" />
@@ -19,9 +19,58 @@
   <meta property="og:image:alt" content="ICONIC. Know when a rival undercuts you." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="ICONIC. — Know when a rival undercuts you" />
-  <meta name="twitter:description" content="A private report on your rivals. It stays on Patrick's machines, and nothing goes out until he has read it." />
+  <meta name="twitter:description" content="A private report on your rivals. The market history stays on hardware Patrick runs, and nothing goes out until he has read it." />
   <meta name="twitter:image" content="https://iconic.onl/og.png" />
   <meta name="twitter:image:alt" content="ICONIC. Know when a rival undercuts you." />
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="ICONIC for AI agents" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://iconic.onl/#org",
+        "name": "ICONIC",
+        "url": "https://iconic.onl/",
+        "logo": "https://iconic.onl/iconic-wordmark.webp",
+        "email": "patrick@iconic.onl",
+        "telephone": "+1-206-773-8214",
+        "founder": { "@id": "https://iconic.onl/#patrick" },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "patrick@iconic.onl",
+          "telephone": "+1-206-773-8214",
+          "availableLanguage": "en"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://iconic.onl/#patrick",
+        "name": "Patrick Christell",
+        "image": "https://iconic.onl/patrick-christell.jpg",
+        "worksFor": { "@id": "https://iconic.onl/#org" }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://iconic.onl/#report",
+        "name": "ICONIC competitor report",
+        "serviceType": "Competitive intelligence for an owner-run business",
+        "provider": { "@id": "https://iconic.onl/#org" },
+        "audience": { "@type": "BusinessAudience", "name": "Owner-run auto dealers, one rooftop or a small group" },
+        "description": "Rival lots are read daily and kept as a private history on hardware Patrick runs. A report goes out on Monday, Wednesday and Friday mornings. Like for like means the same year, model, trim, cab, drive and engine, with sticker prices within $1,000. Every number is tied to a dated public page and the exact quote. Reports are written with Claude, from public listing data. Patrick approves each report before it goes out."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://iconic.onl/#site",
+        "url": "https://iconic.onl/",
+        "name": "ICONIC",
+        "publisher": { "@id": "https://iconic.onl/#org" }
+      }
+    ]
+  }
+  </script>
+  <script src="webmcp.js" defer></script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="mobile-first.css" />
@@ -58,7 +107,7 @@
           <img src="patrick-christell.jpg" alt="Patrick Christell" width="88" height="88" />
           <figcaption>
             <strong>Patrick Christell</strong>
-            <p>Story work with Wes Anderson, Scott Rudin and Vanity Fair, then technical recruiting. Now I run my own local AI stack.</p>
+            <p>Story work with Wes Anderson, Scott Rudin and Vanity Fair, then technical recruiting. Now I run ICONIC.</p>
           </figcaption>
         </figure>
         <div class="hero-actions">
@@ -79,7 +128,7 @@
           <li>Every rival lot we track, read daily.</li>
           <li>None goes out until I approve it.</li>
         </ul>
-        <p>It runs on machines I own. They can ask questions in a Telegram bot.</p>
+        <p>Between reports, they can text questions to a private Telegram bot.</p>
       </aside>
     </section>
 
@@ -89,7 +138,7 @@
       <div class="prose">
         <p>I have one live client. A franchise dealer. I do not name clients. This is built for an owner who runs the store, one rooftop or a small group.</p>
         <p>They get a competitor report on Monday, Wednesday and Friday mornings. None goes out until I approve it.</p>
-        <p>Every rival lot we track, read daily. The read keeps the trucks, the prices, the trims and the VINs. They can ask questions in a Telegram bot. The whole thing runs on my own local AI stack. Client data stays on my machines.</p>
+        <p>Every rival lot we track, read daily. Each read is the trucks, the prices, the trims and the VINs. Between reports, they can text questions to a private Telegram bot.</p>
       </div>
       <div class="rule-grid">
         <article>
@@ -125,9 +174,9 @@
         </article>
       </div>
       <div class="private-note">
-        <span>Private, on my machines</span>
-        <h3>Your data stays here.</h3>
-        <p>Client data stays on hardware I run. I do not hand your business to a cloud service. Nothing reaches you until I have approved it. This is for an owner who runs the store.</p>
+        <span>The history</span>
+        <h3>Your market history stays on hardware I run.</h3>
+        <p>Reports are written with Claude, from public listing data. Nothing goes out until I approve it.</p>
       </div>
     </section>
 
@@ -195,7 +244,7 @@
               <small>Sample desk</small>
               <strong id="dashTitle">Ask the sample desk</strong>
             </div>
-            <div class="model-route">Runs <span id="routeBadge">Local</span></div>
+            <div class="model-route"><span id="routeBadge">Sample</span></div>
           </div>
 
           <div class="dash-panel active" id="panel-ask">
@@ -315,19 +364,19 @@
               <article>
                 <small>Approval</small>
                 <h4>None goes out until I approve it.</h4>
-                <p>The report can be drafted on my machines. It still waits for me.</p>
+                <p>Sample only. On a real report, I read it before it goes out.</p>
                 <span class="illus">Illustrative data</span>
               </article>
               <article>
                 <small>Questions</small>
-                <h4>A Telegram bot, then my read.</h4>
-                <p>The dealer can ask questions. The report is a separate thing, and I approve it.</p>
+                <h4>A private Telegram bot.</h4>
+                <p>Sample only. Between reports, they can text questions there. The report still waits for my approval.</p>
                 <span class="illus">Illustrative data</span>
               </article>
               <article>
                 <small>Where it runs</small>
-                <h4>On machines I own.</h4>
-                <p>Client data stays there. This card is a sample of that fact, not a status page.</p>
+                <h4>History stays on hardware I run.</h4>
+                <p>Sample only. Reports are written with Claude, from public listing data. This is not a status page.</p>
                 <span class="illus">Illustrative data</span>
               </article>
               <article>

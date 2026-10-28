@@ -193,7 +193,7 @@
       result: 'Sample: the bot can take a question. The report still waits for approval.',
       brief: [
         'Sample only.',
-        'The dealer can ask a Telegram bot.',
+        'Between reports, they can text questions to a private Telegram bot.',
         'The report is separate, and I approve it before it goes out.',
         'For a price, use Start with one report and email patrick@iconic.onl.'
       ]
