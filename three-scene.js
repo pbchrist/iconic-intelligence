@@ -12,7 +12,7 @@ const coarsePointer = matchMedia('(pointer: coarse)').matches;
 
 if (canvas && stage && labelsRoot) {
   const nodeDefs = [
-    { id:'core', label:'ICONIC', tab:'ask', eyebrow:'SAMPLE DESK', title:'ONE BUSINESS', pos:[0,.1,.35], radius:.72, description:'A sample of the desk. The real work is a report on the rival lots we track. None goes out until I approve it.' },
+    { id:'core', label:'ICONIC', tab:'ask', eyebrow:'SAMPLE DESK', title:'ONE BUSINESS', pos:[0,.1,.35], radius:.72, description:'A sample of the desk. The real work is a private memory of one market. The dealer on it now gets a briefing, and none goes out until I approve it.' },
     { id:'ask', label:'ASK', tab:'ask', eyebrow:'SAMPLE DESK', title:'ASK A QUESTION', pos:[-2.45,1.42,.15], radius:.42, description:'Between reports, they can text questions to a private Telegram bot. This box is a sample. Ask what a report costs and it will point you to the offer.' },
     { id:'intelligence', label:'INTELLIGENCE', tab:'intelligence', eyebrow:'SAMPLE DESK', title:'WHAT CHANGED', pos:[2.5,1.38,-.28], radius:.45, description:'Sample findings. A real number traces to a dated public page, with the exact quote.' },
     { id:'work', label:'WORK', tab:'work', eyebrow:'SAMPLE DESK', title:'THE MORNING REPORT', pos:[2.62,-1.3,.2], radius:.43, description:'Sample queue. The live rhythm is Monday, Wednesday and Friday mornings.' },

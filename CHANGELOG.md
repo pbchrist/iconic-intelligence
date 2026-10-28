@@ -6,6 +6,7 @@ Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 ## 2026-10-28
 - Rewrote the page for the WAC ad: plain offer, the real Monday/Wednesday/Friday report, Patrick's photo under the hero, sample desk labeled illustrative, and a price placeholder Patrick still has to fill.
 - Added llms.txt, WebMCP tools, JSON-LD, robots.txt and a sitemap lastmod. Corrected the privacy line: history stays on Patrick's hardware, reports are written with Claude from public listings, and nothing goes out until he approves it.
+- Led the page with the private memory of one market. The dealer briefings are the proof under Running now, not the headline.
 
 ## 2026-10-11
 - Moved hosting from Railway (free trial ending) to GitHub Pages, free, like the other sites. Also makes www.iconic.onl work. Site content unchanged.

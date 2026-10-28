@@ -51,7 +51,7 @@
   onScroll();
 
   // Deterministic primary-nav state: nothing is active at the top.
-  const navTargets = ['running', 'how', 'demo'];
+  const navTargets = ['how', 'running', 'demo'];
   const navLinks = $$('.nav a[href^="#"]');
   const updateNavState = () => {
     if (window.scrollY < 180) {
@@ -95,7 +95,7 @@
   mapAction?.addEventListener('click', () => openDashboardTab(mapAction.dataset.tab || 'ask', true));
 
   // Demo Ask intelligence. Price questions about the offer get a straight answer.
-  const offerPriceAnswer = 'The price is on this page, under Start with one report. That line is a placeholder until I set it. Email patrick@iconic.onl with your business, your top three competitors, and what you wish you knew every Monday.';
+  const offerPriceAnswer = 'The price is on this page, under Start with your market. That line is a placeholder until I set it. Email patrick@iconic.onl with your business, your top three competitors, and what you wish you knew every Monday.';
   function isOfferPriceQuestion(prompt) {
     const p = prompt.trim().toLowerCase();
     const aboutLots = /\b(rival|competitor|lot|truck|vin|inventory|listing)s?\b/.test(p);
@@ -195,7 +195,7 @@
         'Sample only.',
         'Between reports, they can text questions to a private Telegram bot.',
         'The report is separate, and I approve it before it goes out.',
-        'For a price, use Start with one report and email patrick@iconic.onl.'
+        'For a price, use Start with your market and email patrick@iconic.onl.'
       ]
     }
   };
