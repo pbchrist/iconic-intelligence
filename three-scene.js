@@ -12,12 +12,12 @@ const coarsePointer = matchMedia('(pointer: coarse)').matches;
 
 if (canvas && stage && labelsRoot) {
   const nodeDefs = [
-    { id:'core', label:'ICONIC', tab:'ask', eyebrow:'PERSISTENT INTELLIGENCE', title:'THE BUSINESS CORE', pos:[0,.1,.35], radius:.72, description:'One persistent layer connects what the company knows, what it watches, what it is doing, and where humans stay in control.' },
-    { id:'ask', label:'ASK', tab:'ask', eyebrow:'DIRECT INTELLIGENCE', title:'ASK THE BUSINESS', pos:[-2.45,1.42,.15], radius:.42, description:'Ask a business question. The system pulls approved context, live research and procedures into one answer.' },
-    { id:'intelligence', label:'INTELLIGENCE', tab:'intelligence', eyebrow:'AUTONOMOUS DISCOVERY', title:'WHAT CHANGED?', pos:[2.5,1.38,-.28], radius:.45, description:'The layer keeps watch without waiting for a prompt and surfaces changes, threats, opportunities and anomalies.' },
-    { id:'work', label:'WORK', tab:'work', eyebrow:'PERSISTENT EXECUTION', title:'WHAT IS RUNNING?', pos:[2.62,-1.3,.2], radius:.43, description:'Recurring reports, monitoring jobs and investigations stay visible from active through completed or blocked.' },
-    { id:'knowledge', label:'KNOWLEDGE', tab:'knowledge', eyebrow:'BUSINESS MEMORY', title:'WHAT DOES IT KNOW?', pos:[-2.55,-1.4,-.18], radius:.44, description:'Approved facts, documents, procedures, entities and provenance accumulate instead of disappearing with a chat.' },
-    { id:'control', label:'CONTROL', tab:'control', eyebrow:'GOVERNANCE', title:'WHERE DOES A HUMAN DECIDE?', pos:[.06,-2.18,.6], radius:.44, description:'Policy gates make autonomy visible. Low-risk intelligence flows; consequential actions stop for explicit human judgment.' }
+    { id:'core', label:'ICONIC', tab:'ask', eyebrow:'SAMPLE DESK', title:'ONE BUSINESS', pos:[0,.1,.35], radius:.72, description:'A sample of the desk. The real work is a report on the rival lots we track. None goes out until I approve it.' },
+    { id:'ask', label:'ASK', tab:'ask', eyebrow:'SAMPLE DESK', title:'ASK A QUESTION', pos:[-2.45,1.42,.15], radius:.42, description:'In real use, questions go to a Telegram bot. This box is a sample. Ask what a report costs and it will point you to the offer.' },
+    { id:'intelligence', label:'INTELLIGENCE', tab:'intelligence', eyebrow:'SAMPLE DESK', title:'WHAT CHANGED', pos:[2.5,1.38,-.28], radius:.45, description:'Sample findings. A real number traces to a dated public page, with the exact quote.' },
+    { id:'work', label:'WORK', tab:'work', eyebrow:'SAMPLE DESK', title:'THE MORNING REPORT', pos:[2.62,-1.3,.2], radius:.43, description:'Sample queue. The live rhythm is Monday, Wednesday and Friday mornings.' },
+    { id:'knowledge', label:'KNOWLEDGE', tab:'knowledge', eyebrow:'SAMPLE DESK', title:'THE LOT HISTORY', pos:[-2.55,-1.4,-.18], radius:.44, description:'Sample memory. The real record is a daily read of every rival lot we track.' },
+    { id:'control', label:'CONTROL', tab:'control', eyebrow:'SAMPLE DESK', title:'MY APPROVAL', pos:[.06,-2.18,.6], radius:.44, description:'None goes out until I approve it. This panel is a sample of that pause.' }
   ];
 
   let renderer = null;
@@ -126,7 +126,7 @@ if (canvas && stage && labelsRoot) {
     if(eyebrowEl) eyebrowEl.textContent=def.eyebrow;
     if(titleEl) titleEl.textContent=def.title;
     if(descriptionEl) descriptionEl.textContent=def.description;
-    if(actionEl){actionEl.dataset.tab=def.tab; actionEl.textContent=def.id==='core'?'OPEN IN DASHBOARD ↗':`OPEN ${def.label} ↗`;}
+    if(actionEl){actionEl.dataset.tab=def.tab; actionEl.textContent=def.id==='core'?'Open the sample':`Open ${def.label.toLowerCase()}`;}
     nodeMeshes.forEach(mesh=>{const selected=mesh.userData.id===def.id; mesh.material.color.copy(selected?colorSelected:(mesh.userData.id==='core'?colorCore:colorBase)); mesh.material.emissiveIntensity=selected?1.8:(mesh.userData.id==='core'?1.3:.7); labelEls.get(mesh.userData.id)?.classList.toggle('active',selected);});
     edgeLines.forEach(line=>line.material.opacity=line.userData.nodeId===def.id||def.id==='core'?.48:.12);
     if(switchDashboard) window.__ICONIC_OPEN_DASHBOARD_TAB__?.(def.tab);

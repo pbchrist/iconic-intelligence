@@ -3,6 +3,9 @@
 Newest first. One line per change: what changed and why.
 Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
+## 2026-10-28
+- Rewrote the page for the WAC ad: plain offer, the real Monday/Wednesday/Friday report, Patrick's photo under the hero, sample desk labeled illustrative, and a price placeholder Patrick still has to fill.
+
 ## 2026-10-11
 - Moved hosting from Railway (free trial ending) to GitHub Pages, free, like the other sites. Also makes www.iconic.onl work. Site content unchanged.
 

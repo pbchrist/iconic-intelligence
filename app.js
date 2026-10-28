@@ -51,7 +51,7 @@
   onScroll();
 
   // Deterministic primary-nav state: nothing is active at the top.
-  const navTargets = ['capability', 'dashboard', 'deployment'];
+  const navTargets = ['running', 'how', 'demo'];
   const navLinks = $$('.nav a[href^="#"]');
   const updateNavState = () => {
     if (window.scrollY < 180) {
@@ -72,92 +72,13 @@
   window.addEventListener('resize', updateNavState, { passive: true });
   updateNavState();
 
-  // Compounding signal thread + independent cross-industry use-case rotator.
-  const ciFrame = $('#ciFrame');
-  const signalData = {
-    pricing: { missionValue:'competitor', quote:'I never know when competitors change their offers.', question:'Which competitor changed pricing?', answer:'A primary competitor moved advertised entry pricing down across 11 monitored listings. The pattern is broad enough to look deliberate, so I prepared a response brief with the affected offers and what changed.' },
-    reviews: { missionValue:'reviews', quote:'We have hundreds of reviews and nobody is synthesizing them.', question:'What are customers complaining about?', answer:'The strongest complaint cluster is service wait time, followed by communication gaps during handoffs. Positive mentions of staff courtesy remain a useful counter-signal.' },
-    vendor: { missionValue:'vendor', quote:'We notice pricing, inventory or search changes too late.', question:'Where is operating exposure building?', answer:'Inventory and service signals are tracked beside competitor changes so a developing constraint can be investigated before it becomes a separate fire drill.' },
-    market: { missionValue:'brief', quote:'Tell me what changed in my market every Monday morning.', question:'What changed in my market?', answer:'A local search gap remains under-contested while competitor pricing and offer movement continue to be watched. The point is one brief that says what changed and what deserves attention.' }
-  };
-  const useCases = {
-    automotive: { kicker:'AUTOMOTIVE · COMPETITIVE INTELLIGENCE', client:'REGIONAL DEALER GROUP', title:'Know what changed before the morning meeting.', body:'ICONIC watches competitor offers, pricing, inventory, reviews, search visibility and service signals, then condenses the material changes into recurring executive intelligence.', result:'A recurring brief that says what changed, why it matters and what deserves attention next.', watch:'Offers · pricing · inventory · reviews · search · service', surface:'Material competitive and operating changes', deliver:'Recurring executive intelligence' },
-    legal: { kicker:'LEGAL · MATTER + REGULATORY INTELLIGENCE', client:'LAW FIRM / LEGAL TEAM', title:'The ruling changed. Who needs to know?', body:'ICONIC can watch rulings, regulations, dockets, client matters and relevant company activity, then connect the change to the clients and matters it actually touches.', result:'A partner-ready brief that identifies the change, affected clients or matters, supporting sources and the next questions worth asking.', watch:'Rulings · regulations · dockets · client matters', surface:'Changes with direct client or matter relevance', deliver:'Partner briefs · research trails · follow-up work' },
-    wealth: { kicker:'WEALTH MANAGEMENT · CLIENT INTELLIGENCE', client:'PRIVATE WEALTH / ADVISORY', title:'See the client impact before the client asks.', body:'ICONIC can monitor market developments, portfolio-relevant news, client communications, meetings and recurring obligations so the advisor sees the intersection before it becomes another inbox search.', result:'An advisor brief that connects an external development to the clients, conversations and obligations that need review.', watch:'Markets · holdings context · client communications · obligations', surface:'Developments with client-specific relevance', deliver:'Advisor briefs · meeting context · review queues' },
-    marketing: { kicker:'MARKETING · GROWTH INTELLIGENCE', client:'AGENCY / GROWTH TEAM', title:'Turn the market into a live brief, not a quarterly deck.', body:'ICONIC can watch competitor campaigns, site changes, search position, ad messaging, prospect activity and lead flow, then turn the changes into work instead of another research project.', result:'A growth brief that shows what competitors changed, where demand is moving and which opportunities deserve action now.', watch:'Campaigns · sites · search · offers · prospects · lead flow', surface:'Competitive shifts and neglected opportunities', deliver:'Growth briefs · outreach inputs · campaign actions' },
-    executive: { kicker:'EXECUTIVE · OPERATING INTELLIGENCE', client:'OWNER-LED / PROFESSIONAL SERVICES', title:'One morning brief instead of six places to check.', body:'ICONIC can connect meetings, client accounts, competitors, vendors, pipeline activity and recurring research into one persistent operating picture for the principal.', result:'A principal-level brief that says what changed overnight, what needs attention and what can wait.', watch:'Clients · meetings · competitors · vendors · pipeline', surface:'Changes that deserve executive attention', deliver:'Morning briefs · follow-up queues · recurring research' }
-  };
-  const caseOrder = ['automotive','legal','wealth','marketing','executive'];
-  let caseIndex = 0;
-  let useCaseTimer = null;
-  let currentSignal = 'pricing';
-
-  function renderUseCase(id) {
-    const d = useCases[id] || useCases.automotive;
-    caseIndex = Math.max(0, caseOrder.indexOf(id));
-    $('#useCaseKicker') && ($('#useCaseKicker').textContent = d.kicker);
-    $('#useCaseClient') && ($('#useCaseClient').textContent = d.client);
-    $('#useCaseTitle') && ($('#useCaseTitle').textContent = d.title);
-    $('#useCaseBody') && ($('#useCaseBody').textContent = d.body);
-    $('#useCaseResult') && ($('#useCaseResult').innerHTML = `<strong>OUTPUT</strong> ${escapeHtml(d.result)}`);
-    $('#useCaseWatch') && ($('#useCaseWatch').textContent = d.watch);
-    $('#useCaseSurface') && ($('#useCaseSurface').textContent = d.surface);
-    $('#useCaseDeliver') && ($('#useCaseDeliver').textContent = d.deliver);
-    $$('.use-case-dots button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.case === id)));
-    const copy = $('#useCaseCopy');
-    if (copy?.animate) copy.animate([{opacity:.34,transform:'translateY(5px)'},{opacity:1,transform:'none'}],{duration:360,easing:'ease-out'});
-  }
-  function armUseCaseRotation() {
-    clearInterval(useCaseTimer);
-    useCaseTimer = setInterval(() => { caseIndex = (caseIndex + 1) % caseOrder.length; renderUseCase(caseOrder[caseIndex]); }, 5600);
-  }
-  $$('.use-case-dots button').forEach((b) => b.addEventListener('click', () => { renderUseCase(b.dataset.case); armUseCaseRotation(); }));
-  renderUseCase(caseOrder[0]);
-  armUseCaseRotation();
-
-  function renderDashboardThread(id) {
-    const d = signalData[id] || signalData.pricing;
-    const thread = $('.prefill-thread');
-    if (!thread) return;
-    thread.innerHTML = `<div class="user-message"><div><small>YOU</small><p>${escapeHtml(d.question)}</p></div></div><div class="assistant-message"><span class="sigil">✦</span><div><small>ICONIC INTELLIGENCE</small><p>${escapeHtml(d.answer)}</p></div></div>`;
-  }
-  function renderProblemThread(id) {
-    const d = signalData[id] || signalData.pricing;
-    const select = $('#missionSelect');
-    if (select) select.value = d.missionValue;
-    $$('#problemExamples button').forEach((button) => button.classList.toggle('active', button.dataset.signal === id));
-  }
-  function setSignal(id, { syncWidget = false } = {}) {
-    if (!signalData[id]) return;
-    currentSignal = id;
-    renderDashboardThread(id);
-    renderProblemThread(id);
-    document.documentElement.dataset.iconicSignal = id;
-    if (syncWidget && ciFrame?.contentWindow) ciFrame.contentWindow.postMessage({ source:'iconic-site', type:'setSignal', id }, '*');
-  }
-  $$('#problemExamples button').forEach((button) => button.addEventListener('click', () => {
-    const id = button.dataset.signal;
-    if (signalData[id]) setSignal(id, { syncWidget:true });
-    else if (button.dataset.mission && $('#missionSelect')) $('#missionSelect').value = button.dataset.mission;
-  }));
-  window.addEventListener('message', (event) => {
-    const data = event.data || {};
-    if (data.source !== 'iconic-compounding') return;
-    if (data.type === 'height' && ciFrame && window.innerWidth < 980) {
-      const height = Math.max(620, Math.min(Number(data.height) || 0, 2200));
-      if (height) ciFrame.style.height = `${height}px`;
-    }
-    if ((data.type === 'signal' || data.type === 'ready') && data.signal?.id) setSignal(data.signal.id);
-  });
-  setSignal('pricing');
-
   // Dashboard tabs
   const tabTitles = {
-    ask: 'ASK THE COMPANY INTELLIGENCE',
-    intelligence: 'INTELLIGENCE FEED',
-    work: 'WORK QUEUE',
-    knowledge: 'BUSINESS KNOWLEDGE',
-    control: 'CONTROL PLANE'
+    ask: 'ASK THE SAMPLE DESK',
+    intelligence: 'SAMPLE FINDINGS',
+    work: 'SAMPLE QUEUE',
+    knowledge: 'SAMPLE MEMORY',
+    control: 'WHERE I STAY IN IT'
   };
   function openDashboardTab(tab, shouldScroll = false) {
     const button = $(`.dash-tab[data-tab="${tab}"]`);
@@ -165,7 +86,7 @@
     $$('.dash-tab').forEach((b) => b.classList.toggle('active', b === button));
     $$('.dash-panel').forEach((panel) => panel.classList.toggle('active', panel.id === `panel-${tab}`));
     $('#dashTitle').textContent = tabTitles[tab] || tab.toUpperCase();
-    if (shouldScroll) $('#dashboard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (shouldScroll) $('#demo')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   window.__ICONIC_OPEN_DASHBOARD_TAB__ = openDashboardTab;
   $$('.dash-tab').forEach((button) => button.addEventListener('click', () => openDashboardTab(button.dataset.tab)));
@@ -173,23 +94,28 @@
   const mapAction = $('#mapAction');
   mapAction?.addEventListener('click', () => openDashboardTab(mapAction.dataset.tab || 'ask', true));
 
-  // Demo Ask intelligence
+  // Demo Ask intelligence. Price questions about the offer get a straight answer.
+  const offerPriceAnswer = 'The price is on this page, under Start with one report. That line is a placeholder until I set it. Email patrick@iconic.onl with your business, your top three competitors, and what you wish you knew every Monday.';
+  function isOfferPriceQuestion(prompt) {
+    const p = prompt.trim().toLowerCase();
+    const aboutLots = /\b(rival|competitor|lot|truck|vin|inventory|listing)s?\b/.test(p);
+    const aboutOffer = /\b(how much|what do you charge|what does (?:this|it|a report|iconic) cost|your (?:price|fee|fees|rate|pricing)|iconic(?:'s)? (?:price|cost|fee)|cost to (?:start|hire)|do you charge|retainer|what(?:'s| is) (?:the |your )?(?:price|cost|fee))\b/.test(p)
+      || /^(?:what(?:'s| is) )?(?:the )?(?:price|pricing|cost|fee|fees)\??$/.test(p);
+    if (aboutLots && !/\b(you charge|your (?:price|fee)|iconic|this cost|a report cost)\b/.test(p)) return false;
+    return aboutOffer;
+  }
   const responses = [
     {
-      match: /worried|risk|week/i,
-      text: 'Two things deserve attention. First, a competitor cut advertised entry pricing across 11 listings this morning. Second, service wait-time complaints are clustering on Tuesdays. I would inspect margin exposure first, then staffing patterns.'
+      match: /worried|worry|risk|week/i,
+      text: 'Sample only. I would look for a rival sticker that moved on a like-for-like truck. You would see that in the Monday, Wednesday or Friday morning report, and none goes out until I approve it.'
     },
     {
-      match: /competitor|pricing|price/i,
-      text: 'One primary competitor changed pricing. The median advertised entry price moved down 6.2% across the monitored set. The change is broad enough to look deliberate rather than inventory noise. I have a response brief ready.'
+      match: /where|source|quote|number come|trace/i,
+      text: 'Sample only. Every number in a real report traces to a dated public page, with the exact quote.'
     },
     {
-      match: /customer|complain|review/i,
-      text: 'The strongest complaint cluster is service wait time, followed by communication gaps during handoffs. Tuesday mentions are now materially above the eight-week baseline. Positive mentions of staff courtesy remain strong.'
-    },
-    {
-      match: /missing|opportun|what else/i,
-      text: 'You may be underestimating a search opportunity. Competitors are weak on a high-intent category that has visible demand but poor local answers. I would test a dedicated offer page and measure qualified inbound response.'
+      match: /rival|competitor|price|pricing|sticker|truck/i,
+      text: 'Sample only. I would name the rival, the truck and the sticker, and tie the number to a dated public page and the exact quote. Like for like means the same year, model, trim, cab, drive and engine, with sticker prices within $1,000. None of that goes out until I approve it.'
     }
   ];
 
@@ -200,21 +126,23 @@
 
     const user = document.createElement('div');
     user.className = 'user-message';
-    user.innerHTML = `<div><small>YOU</small><p>${escapeHtml(prompt)}</p></div>`;
+    user.innerHTML = `<div><small>You</small><p>${escapeHtml(prompt)}</p></div>`;
     conversation.appendChild(user);
 
     const thinking = document.createElement('div');
     thinking.className = 'assistant-message';
-    thinking.innerHTML = `<span class="sigil">✦</span><div><small>ICONIC INTELLIGENCE</small><p>Checking monitored signals, approved context and active procedures…</p></div>`;
+    thinking.innerHTML = `<span class="sigil">✦</span><div><small>ICONIC</small><p>One moment.</p></div>`;
     conversation.appendChild(thinking);
     conversation.scrollTop = conversation.scrollHeight;
 
-    const found = responses.find((r) => r.match.test(prompt));
-    const text = found?.text || 'I would treat that as an investigation rather than guess. I would identify the approved internal sources, search the relevant external signals, compare against the company baseline, and return the strongest findings with provenance and confidence.';
+    const text = isOfferPriceQuestion(prompt)
+      ? offerPriceAnswer
+      : (responses.find((r) => r.match.test(prompt))?.text
+        || 'This box only knows the sample desk. For your store, email patrick@iconic.onl with your business, your top three competitors, and what you wish you knew every Monday.');
     window.setTimeout(() => {
       thinking.querySelector('p').textContent = text;
       conversation.scrollTop = conversation.scrollHeight;
-    }, 650);
+    }, 400);
   }
 
   $$('.suggestions button').forEach((b) => b.addEventListener('click', () => answerPrompt(b.dataset.prompt)));
@@ -229,33 +157,46 @@
 
   // Experiment lab
   const missions = {
-    competitor: {
-      label: 'COMPETITOR PRICING',
-      source: '11 monitored listings + 4 offer pages',
-      output: '3 material changes',
-      result: 'Competitor entry pricing moved down. Response brief generated.',
-      brief: ['11 monitored listings changed in the same direction.', 'The move appears deliberate rather than inventory noise.', 'Review the affected offers before the next pricing meeting.', 'Keep the competitor set on watch for follow-on changes.']
+    price: {
+      label: 'RIVAL STICKER',
+      result: 'Sample: a like-for-like sticker moved. This is not a client report.',
+      brief: [
+        'Sample only. This is not a client report.',
+        'A like-for-like truck is the same year, model, trim, cab, drive and engine.',
+        'Sticker prices have to sit within $1,000 of each other.',
+        'A real number would cite a dated public page and the exact quote.',
+        'None of it goes out until I approve it.'
+      ]
     },
-    reviews: {
-      label: 'CUSTOMER VOICE',
-      source: '428 reviews + 76 service notes',
-      output: '2 complaint clusters',
-      result: 'Tuesday wait-time complaints exceed the recent baseline.',
-      brief: ['Wait-time complaints are clustering around Tuesdays.', 'Communication handoff complaints are the second strongest theme.', 'Staff courtesy remains a positive counter-signal.', 'Review Tuesday staffing and handoff coverage first.']
+    source: {
+      label: 'WHERE A NUMBER COMES FROM',
+      result: 'Sample: the number points at a dated public page.',
+      brief: [
+        'Sample only.',
+        'Every number in a real report traces to a dated public page, with the exact quote.',
+        'The quote is what was on the page that day.',
+        'None goes out until I approve it.'
+      ]
     },
-    brief: {
-      label: 'EXECUTIVE BRIEF',
-      source: '7 internal + 18 external feeds',
-      output: '5-item brief',
-      result: 'Morning brief assembled with risks, opportunities and actions.',
-      brief: ['One competitor pricing move deserves attention.', 'Service complaints strengthened around a recurring daypart.', 'A local search gap remains under-contested.', 'No material vendor change requires action this morning.']
+    morning: {
+      label: 'MORNING REPORT',
+      result: 'Sample: Monday, Wednesday and Friday mornings.',
+      brief: [
+        'Sample only.',
+        'The live report goes out on Monday, Wednesday and Friday mornings.',
+        'Every rival lot we track is read daily.',
+        'None goes out until I approve it.'
+      ]
     },
-    vendor: {
-      label: 'VENDOR RISK',
-      source: 'Terms, price history + market signals',
-      output: '1 emerging risk',
-      result: 'Minimum-order change could create peak-demand exposure.',
-      brief: ['A supplier changed minimum-order terms.', 'Current exposure is limited at normal demand.', 'Peak-demand inventory could be affected.', 'Compare alternate supplier terms before the next reorder.']
+    ask: {
+      label: 'A QUESTION',
+      result: 'Sample: the bot can take a question. The report still waits for approval.',
+      brief: [
+        'Sample only.',
+        'The dealer can ask a Telegram bot.',
+        'The report is separate, and I approve it before it goes out.',
+        'For a price, use Start with one report and email patrick@iconic.onl.'
+      ]
     }
   };
 
@@ -286,25 +227,23 @@
     if (sampleBrief) sampleBrief.hidden = true;
     if (sampleBriefLines) sampleBriefLines.innerHTML = '';
 
-    addTrace('01', 'QUESTION', `${mission.label} accepted`);
-    await wait(650);
-    addTrace('02', 'CONTEXT', `Loaded approved business context + ${mission.source}`);
-    await wait(720);
-    addTrace('03', 'RESEARCH', 'Checking internal context and monitored external signals');
-    await wait(820);
-    addTrace('04', 'VERIFY', 'Cross-checking material claims against independent evidence');
-    await wait(820);
-    addTrace('05', 'POLICY', 'Read-only intelligence task → autonomous execution permitted', 'ok');
-    await wait(720);
-    addTrace('06', 'RESULT', `${mission.output} · confidence gate passed`, 'ok');
-    await wait(650);
-    addTrace('07', 'EXEC BRIEF', mission.result, 'ok');
+    addTrace('01', 'QUESTION', `${mission.label} — sample`);
+    await wait(420);
+    addTrace('02', 'LOTS', 'Read the sample snapshots. Not a client file.');
+    await wait(420);
+    addTrace('03', 'COMPARE', 'Like for like: year, model, trim, cab, drive, engine. Stickers within $1,000.');
+    await wait(420);
+    addTrace('04', 'SOURCE', 'A real number would cite a dated public page and the exact quote.');
+    await wait(420);
+    addTrace('05', 'APPROVAL', 'None goes out until I approve it.', 'ok');
+    await wait(360);
+    addTrace('06', 'BRIEF', mission.result, 'ok');
 
     const vals = result.querySelectorAll('strong');
-    vals[0].textContent = 'AUTOMATIC';
-    vals[1].textContent = 'AUTO / LOW RISK';
-    vals[2].textContent = 'CROSS-CHECKED';
-    vals[3].textContent = mission.output.toUpperCase();
+    vals[0].textContent = 'SAMPLE';
+    vals[1].textContent = 'MY READ';
+    vals[2].textContent = 'NOT LIVE';
+    vals[3].textContent = 'SAMPLE BRIEF';
     if (sampleBriefLines) sampleBriefLines.innerHTML = mission.brief.map((line) => `<p>${escapeHtml(line)}</p>`).join('');
     if (sampleBrief) sampleBrief.hidden = false;
     status.className = 'done';
