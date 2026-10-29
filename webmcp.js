@@ -22,17 +22,17 @@
   const SERVICE = {
     name: "ICONIC",
     summary:
-      "ICONIC learns one business. It records that market every day and keeps the history on hardware Patrick runs. The longer it runs, the more of that market it holds. A private connector lets Patrick's own AI assistant read the same history. It is in testing and is not offered to clients. There is no public install and no public API. A cloud AI writes the briefings from public listing data and the client's requests. Patrick approves every Monday, Wednesday and Friday briefing before it goes out. The Telegram bot answers questions on its own. The Monday, Wednesday and Friday briefings are what the current dealer receives. They are not the whole product.",
+      "ICONIC learns one business. It records that market every day and keeps the history on hardware Patrick runs, with a nightly backup to a private GitHub repository. The longer it runs, the more of that market it holds. A private connector lets Patrick's own AI assistant read the same history. It is in testing and is not offered to clients. There is no public install and no public API. Patrick puts each Monday, Wednesday and Friday briefing together from public listing data and the client's requests, and approves it before it goes out. The Telegram bot answers questions on its own. The Monday, Wednesday and Friday briefings are what the current dealer receives. They are not the whole product.",
     for_whom: "An owner who runs the store: one franchise rooftop or a small dealer group.",
     includes: [
       "A private memory of one market, recorded every day",
-      "History kept on hardware Patrick runs",
+      "History kept on hardware Patrick runs, with a nightly backup to a private GitHub repository",
       "A private connector for Patrick's own AI assistant, in testing, not offered to clients",
       "Every number in a briefing points to the dated listing or page it came from",
       "No public install and no public API",
-      "Running now for one franchise dealer: the rivals' lots read every briefing morning, a briefing Monday, Wednesday and Friday mornings, questions by text to a private Telegram bot",
+      "Running now for one franchise dealer: the rivals' Sierra 1500 lots read every morning, a briefing Monday, Wednesday and Friday mornings, questions by text to a private Telegram bot",
       "Like-for-like comparisons: same year, model, trim, cab, drive and engine, sticker within $1,000",
-      "A cloud AI writes the briefings from public listing data and the client's requests",
+      "Patrick puts each briefing together from public listing data and the client's requests",
       "Patrick approves every Monday, Wednesday and Friday briefing before it goes out; the Telegram bot answers on its own"
     ],
     live_clients: "One franchise auto dealer. Clients are not named. The private connector is in testing and is not offered to clients. No third-party AI is offered as a public connection.",

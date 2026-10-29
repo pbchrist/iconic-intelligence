@@ -1,21 +1,21 @@
 # ICONIC
 
-> ICONIC learns one business. It is a private memory of that market, run by Patrick Christell in the Seattle area. It records the market every day and keeps the history on hardware Patrick runs. The longer it runs, the more of that market it holds. The Monday, Wednesday and Friday briefings are what the current dealer receives. They are not the whole product.
+> ICONIC learns one business. It is a private memory of that market, run by Patrick Christell in the Seattle area. It records the market every day and keeps the history on hardware Patrick runs, with a nightly backup to a private GitHub repository. The longer it runs, the more of that market it holds. The Monday, Wednesday and Friday briefings are what the current dealer receives. They are not the whole product.
 
 ## What it is
 
 - A private memory of one market, not a report generator.
-- The market is recorded every day. The history stays on hardware Patrick runs.
+- The market is recorded every day. The history lives on hardware Patrick runs, with a nightly backup to a private GitHub repository.
 - The longer it runs, the more of that market it holds.
 - A private connector lets Patrick's own AI assistant read the same history and the stored numbers. It is in testing and is not offered to clients.
 - There is no public install and no public API. No third-party AI is offered as a public connection.
-- A cloud AI writes the briefings from public listing data plus the client's own requests. Patrick approves every Monday, Wednesday and Friday briefing before it goes out. The Telegram bot answers questions directly, without review, and Patrick gets a copy.
+- Patrick puts each briefing together from public listing data plus the client's own requests. The Telegram bot answers questions directly, without review, and Patrick gets a copy.
 
 ## Running now
 
 This is the work already in use, for one franchise auto dealer. Clients are not named.
 
-- On each briefing morning it reads the rivals' lots: each truck, price, trim and VIN.
+- Every morning it reads the rivals' Sierra 1500 lots: each truck, price, trim and VIN.
 - A briefing goes out Monday, Wednesday and Friday mornings.
 - Between briefings, they can text questions to a private Telegram bot.
 - Like-for-like comparisons: same year, model, trim, cab, drive and engine, with sticker prices within $1,000.
@@ -31,7 +31,7 @@ Pricing is quoted on the call.
 
 ## How to start
 
-Email patrick@iconic.onl or call 206-773-8214 to set up a 20-minute call. Bring your business and your top three competitors. Pricing is quoted on the call.
+Email patrick@iconic.onl or call 206-773-8214 to set up a 20-minute call. Bring your business and your top three competitors.
 
 - [Email Patrick](mailto:patrick@iconic.onl?subject=20-minute%20call)
 - [Home page](https://iconic.onl/)

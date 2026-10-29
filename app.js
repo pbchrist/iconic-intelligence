@@ -181,7 +181,7 @@
       brief: [
         'Sample only.',
         'The live report goes out on Monday, Wednesday and Friday mornings.',
-        'On each briefing morning it reads the rivals\' lots: each truck, price, trim and VIN.'
+        'Every morning it reads the rivals\' Sierra 1500 lots: each truck, price, trim and VIN.'
       ]
     },
     ask: {
