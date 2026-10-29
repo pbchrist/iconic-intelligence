@@ -95,7 +95,7 @@
   mapAction?.addEventListener('click', () => openDashboardTab(mapAction.dataset.tab || 'ask', true));
 
   // Demo Ask intelligence. Price questions about the offer get a straight answer.
-  const offerPriceAnswer = 'The price is on this page, under Start with your market. That line is a placeholder until I set it. Email patrick@iconic.onl with your business, your top three competitors, and what you wish you knew every Monday.';
+  const offerPriceAnswer = 'I quote the price on a 20-minute call, once I know your market. Email patrick@iconic.onl or call 206-773-8214.';
   function isOfferPriceQuestion(prompt) {
     const p = prompt.trim().toLowerCase();
     const aboutLots = /\b(rival|competitor|lot|truck|vin|inventory|listing)s?\b/.test(p);
@@ -111,11 +111,11 @@
     },
     {
       match: /where|source|quote|number come|trace/i,
-      text: 'Sample only. Every number in a real report traces to a dated public page, with the exact quote.'
+      text: 'Sample only. A real number points to the dated listing or page it came from.'
     },
     {
       match: /rival|competitor|price|pricing|sticker|truck/i,
-      text: 'Sample only. I would name the rival, the truck and the sticker, and tie the number to a dated public page and the exact quote. Like for like means the same year, model, trim, cab, drive and engine, with sticker prices within $1,000. None of that goes out until I approve it.'
+      text: 'Sample only. I would name the rival, the truck and the sticker. Like for like means the same year, model, trim, cab, drive and engine, with sticker prices within $1,000. None of that goes out until I approve it.'
     }
   ];
 
@@ -164,7 +164,7 @@
         'Sample only. This is not a client report.',
         'A like-for-like truck is the same year, model, trim, cab, drive and engine.',
         'Sticker prices have to sit within $1,000 of each other.',
-        'A real number would cite a dated public page and the exact quote.',
+        'A real number would point to the dated listing or page it came from.',
         'None of it goes out until I approve it.'
       ]
     },
@@ -173,8 +173,7 @@
       result: 'Sample: the number points at a dated public page.',
       brief: [
         'Sample only.',
-        'Every number in a real report traces to a dated public page, with the exact quote.',
-        'The quote is what was on the page that day.',
+        'Every number in a briefing points to the dated listing or page it came from.',
         'None goes out until I approve it.'
       ]
     },
@@ -184,7 +183,7 @@
       brief: [
         'Sample only.',
         'The live report goes out on Monday, Wednesday and Friday mornings.',
-        'Every rival lot we track is read daily.',
+        'Every morning it reads the rivals\' Sierra 1500 lots: each truck, price, trim and VIN.',
         'None goes out until I approve it.'
       ]
     },
@@ -233,7 +232,7 @@
     await wait(420);
     addTrace('03', 'COMPARE', 'Like for like: year, model, trim, cab, drive, engine. Stickers within $1,000.');
     await wait(420);
-    addTrace('04', 'SOURCE', 'A real number would cite a dated public page and the exact quote.');
+    addTrace('04', 'SOURCE', 'A real number would point to the dated listing or page it came from.');
     await wait(420);
     addTrace('05', 'APPROVAL', 'None goes out until I approve it.', 'ok');
     await wait(360);

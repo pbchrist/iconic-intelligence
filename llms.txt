@@ -1,25 +1,25 @@
 # ICONIC
 
-> ICONIC learns one business. It is a private memory of that market, run by Patrick Christell in the Seattle area. It records the market every day and keeps the history on hardware Patrick runs. The longer it runs, the more of that market it holds. A rival cannot copy a history they never recorded. The Monday, Wednesday and Friday briefings are what the current dealer receives. They are not the whole product.
+> ICONIC learns one business. It is a private memory of that market, run by Patrick Christell in the Seattle area. It records the market every day and keeps the history on hardware Patrick runs. The longer it runs, the more of that market it holds. The Monday, Wednesday and Friday briefings are what the current dealer receives. They are not the whole product.
 
 ## What it is
 
 - A private memory of one market, not a report generator.
 - The market is recorded every day. The history stays on hardware Patrick runs.
 - The longer it runs, the more of that market it holds.
-- One private connector. Patrick sets it up. An AI the owner already uses can read the same memory through it, and the numbers behind it. Each number is tied to a dated public page and the exact quote.
-- Today that connector is private to the one client. There is no public install and no public API. No third-party AI is offered as a public connection.
-- The writing model only sees public listing data. Nothing goes out until Patrick approves it.
+- A private connector lets Claude Code read the same history and the stored numbers. It works only with Claude Code, it is in testing, and it is not offered to clients.
+- There is no public install and no public API. No third-party AI is offered as a public connection.
+- Briefings are written with Claude (cloud) from public listing data plus the client's own requests. Patrick reads every briefing before it goes out. The Telegram bot answers questions directly, without review.
 
 ## Running now
 
 This is the work already in use, for one franchise auto dealer. Clients are not named.
 
-- Every rival lot we track is read daily: trucks, prices, trims and VINs.
+- Every morning it reads the rivals' Sierra 1500 lots: each truck, price, trim and VIN.
 - A briefing goes out Monday, Wednesday and Friday mornings.
 - Between briefings, they can text questions to a private Telegram bot.
 - Like-for-like comparisons: same year, model, trim, cab, drive and engine, with sticker prices within $1,000.
-- Nothing goes out until Patrick has read and approved it.
+- Patrick reads and approves every briefing before it goes out.
 
 ## Who it is for
 

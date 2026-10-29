@@ -22,21 +22,20 @@
   const SERVICE = {
     name: "ICONIC",
     summary:
-      "ICONIC learns one business. It records that market every day and keeps the history on hardware Patrick runs. The longer it runs, the more of that market it holds. One private connector is in use for the current client. Patrick sets it up so an AI the owner already uses can read the same memory and the same numbers. There is no public install and no public API. The writing model only sees public listing data. Nothing goes out until Patrick approves it. The Monday, Wednesday and Friday briefings are what the current dealer receives. They are not the whole product.",
+      "ICONIC learns one business. It records that market every day and keeps the history on hardware Patrick runs. The longer it runs, the more of that market it holds. A private connector lets Claude Code read the same history. It works only with Claude Code, it is in testing, and it is not offered to clients. There is no public install and no public API. Briefings are written with Claude (cloud) from public listing data and the client's requests. Patrick approves every briefing before it goes out. The Monday, Wednesday and Friday briefings are what the current dealer receives. They are not the whole product.",
     for_whom: "An owner who runs the store: one franchise rooftop or a small dealer group.",
     includes: [
       "A private memory of one market, recorded every day",
       "History kept on hardware Patrick runs",
-      "One private connector, set up by Patrick, in use for the current client only",
-      "The same memory and the same numbers for the AI that connector serves",
-      "Every number tied to a dated public page and the exact quote",
+      "A private connector for Claude Code only, in testing, not offered to clients",
+      "Every number in a briefing points to the dated listing or page it came from",
       "No public install and no public API",
-      "Running now for one franchise dealer: rival lots read daily, a briefing Monday, Wednesday and Friday mornings, questions by text to a private Telegram bot",
+      "Running now for one franchise dealer: the rivals' Sierra 1500 lots read every morning, a briefing Monday, Wednesday and Friday mornings, questions by text to a private Telegram bot",
       "Like-for-like comparisons: same year, model, trim, cab, drive and engine, sticker within $1,000",
-      "The writing model only sees public listing data",
-      "Nothing goes out until Patrick approves it"
+      "Briefings are written with Claude (cloud) from public listing data and the client's requests",
+      "Patrick approves every briefing before it goes out"
     ],
-    live_clients: "One franchise auto dealer. Clients are not named. The private connector is in use for that client only. No third-party AI is offered as a public connection.",
+    live_clients: "One franchise auto dealer. Clients are not named. The private connector works only with Claude Code, is in testing, and is not offered to clients. No third-party AI is offered as a public connection.",
     price: "Not listed yet. Ask Patrick.",
     how_to_start: `Email ${EMAIL} with your business, your top three competitors, and what you wish you knew every Monday. Or call ${PHONE}.`
   };
