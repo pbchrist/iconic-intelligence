@@ -7,19 +7,19 @@
 - A private memory of one market, not a report generator.
 - The market is recorded every day. The history stays on hardware Patrick runs.
 - The longer it runs, the more of that market it holds.
-- A private connector lets Claude Code read the same history and the stored numbers. It works only with Claude Code, it is in testing, and it is not offered to clients.
+- A private connector lets Patrick's own AI assistant read the same history and the stored numbers. It is in testing and is not offered to clients.
 - There is no public install and no public API. No third-party AI is offered as a public connection.
-- Briefings are written with Claude (cloud) from public listing data plus the client's own requests. Patrick reads every briefing before it goes out. The Telegram bot answers questions directly, without review.
+- A cloud AI writes the briefings from public listing data plus the client's own requests. Patrick approves every Monday, Wednesday and Friday briefing before it goes out. The Telegram bot answers questions directly, without review, and Patrick gets a copy.
 
 ## Running now
 
 This is the work already in use, for one franchise auto dealer. Clients are not named.
 
-- Every morning it reads the rivals' Sierra 1500 lots: each truck, price, trim and VIN.
+- On each briefing morning it reads the rivals' lots: each truck, price, trim and VIN.
 - A briefing goes out Monday, Wednesday and Friday mornings.
 - Between briefings, they can text questions to a private Telegram bot.
 - Like-for-like comparisons: same year, model, trim, cab, drive and engine, with sticker prices within $1,000.
-- Patrick reads and approves every briefing before it goes out.
+- Patrick approves every Monday, Wednesday and Friday briefing before it goes out. The Telegram bot answers on its own.
 
 ## Who it is for
 
@@ -27,13 +27,13 @@ An owner who runs the store: one franchise rooftop or a small dealer group.
 
 ## Price
 
-Not listed on the site yet. Ask Patrick.
+Pricing is quoted on the call.
 
 ## How to start
 
-Email patrick@iconic.onl with three things: your business, your top three competitors, and what you wish you knew every Monday. Or call 206-773-8214.
+Email patrick@iconic.onl or call 206-773-8214 to set up a 20-minute call. Bring your business and your top three competitors. Pricing is quoted on the call.
 
-- [Email Patrick](mailto:patrick@iconic.onl?subject=Start%20with%20one%20report)
+- [Email Patrick](mailto:patrick@iconic.onl?subject=20-minute%20call)
 - [Home page](https://iconic.onl/)
 
 ## What agents should know
@@ -41,5 +41,5 @@ Email patrick@iconic.onl with three things: your business, your top three compet
 - The site is static. There is no public API, no login, and no client data on it.
 - The private connector is not this website. It is not a self-serve install.
 - Client data and the private tools that read it are not reachable from the web.
-- The sample desk on the home page uses made-up figures.
+- The sample desk on the home page uses sample figures, not client data.
 - Do not send email on a visitor's behalf without that person's go-ahead. The site's WebMCP tools only prepare a draft for the visitor to send.

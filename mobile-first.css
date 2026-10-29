@@ -1,4 +1,4 @@
-/* ICONIC 1.1 — mobile-first override layer.
+/* ICONIC 1.1: mobile-first override layer.
    Base styles target 360–430px phones. Larger layouts are progressive enhancements. */
 :root {
   --brand-indigo: #30345f;
@@ -335,7 +335,7 @@ footer { flex-direction: column; margin-top: 65px; gap: 10px; }
   footer { flex-direction: row; margin-top: 110px; }
 }
 
-/* ICONIC 1.2 staging — buyer clarity, deployment architecture, navigation and overflow hardening */
+/* ICONIC 1.2 staging: buyer clarity, deployment architecture, navigation and overflow hardening */
 .hero-buyer {
   max-width: 700px;
   margin: 12px 0 0;
@@ -574,7 +574,7 @@ footer { margin-top: 78px; }
 }
 
 
-/* v1.3b review pass — mobile first */
+/* v1.3b review pass: mobile first */
 .map-preload { position:absolute; inset:0; display:grid; place-items:center; pointer-events:none; transition:opacity .35s ease; background:radial-gradient(circle at 50% 48%, rgba(105,115,235,.14), transparent 42%); }
 .map-preload i, .map-preload span, .map-preload b { position:absolute; display:block; border-radius:50%; }
 .map-preload i { width:72px; height:72px; background:radial-gradient(circle at 35% 30%, #fff, #aeb6ff 26%, #4c57bb 58%, #171b3d 76%); box-shadow:0 0 42px rgba(139,151,255,.55); }
@@ -614,7 +614,7 @@ footer { margin-top: 78px; }
 .sample-brief h3 { margin:7px 0 12px; font-family:Georgia,serif; font-size:22px; font-weight:400; }
 #sampleBriefLines { display:grid; gap:7px; }
 #sampleBriefLines p { margin:0; color:#aab0c4; font-size:11px; line-height:1.45; }
-#sampleBriefLines p::before { content:'— '; color:var(--accent-2); }
+#sampleBriefLines p::before { content:'· '; color:var(--accent-2); }
 
 .principal-lockup { display:grid; grid-template-columns:72px minmax(0,1fr); gap:16px; align-items:start; }
 .principal-photo { width:72px; aspect-ratio:1; object-fit:cover; border-radius:16px; border:1px solid rgba(243,240,231,.18); filter:saturate(.86) contrast(1.04); }
@@ -641,7 +641,7 @@ footer { margin-top: 78px; }
   .ci-frame { height:860px; }
 }
 
-/* Sep 24 handoff — navigation, threaded story, mobile-first integration */
+/* Sep 24 handoff: navigation, threaded story, mobile-first integration */
 .hero-actions-threaded { align-items:center; }
 .hero-problem-link { margin:0; padding:14px 2px; }
 .ci-shell { width:100%; margin-top:42px; border:1px solid rgba(185,188,255,.18); border-radius:22px; overflow:hidden; background:#070817; }
@@ -764,7 +764,7 @@ footer { margin-top: 78px; }
   .private-edge { grid-template-columns:180px 1fr; gap:28px; align-items:start; padding:30px; }
 }
 
-/* Desktop composition repair — Sep 25. The empty second column is gone.
+/* Desktop composition repair, Sep 25. The empty second column is gone.
    The hero is a written claim plus a fact card, so it still reads if the
    sample map never starts. */
 @media (min-width:1180px) {
@@ -772,7 +772,7 @@ footer { margin-top: 78px; }
   .hero-copy { max-width:none; }
 }
 
-/* Visitor pass — plain hero, real work above the sample desk, no empty column. */
+/* Visitor pass: plain hero, real work above the sample desk, no empty column. */
 .hero { min-height: 0 !important; align-items: start; }
 .hero h1 {
   font-size: clamp(36px, 9.4vw, 56px) !important;

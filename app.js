@@ -95,7 +95,7 @@
   mapAction?.addEventListener('click', () => openDashboardTab(mapAction.dataset.tab || 'ask', true));
 
   // Demo Ask intelligence. Price questions about the offer get a straight answer.
-  const offerPriceAnswer = 'I quote the price on a 20-minute call, once I know your market. Email patrick@iconic.onl or call 206-773-8214.';
+  const offerPriceAnswer = 'Pricing is quoted on the call. Email patrick@iconic.onl or call 206-773-8214 to set one up.';
   function isOfferPriceQuestion(prompt) {
     const p = prompt.trim().toLowerCase();
     const aboutLots = /\b(rival|competitor|lot|truck|vin|inventory|listing)s?\b/.test(p);
@@ -107,7 +107,7 @@
   const responses = [
     {
       match: /worried|worry|risk|week/i,
-      text: 'Sample only. I would look for a rival sticker that moved on a like-for-like truck. You would see that in the Monday, Wednesday or Friday morning report, and none goes out until I approve it.'
+      text: 'Sample only. I would look for a rival sticker that moved on a like-for-like truck. You would see that in the Monday, Wednesday or Friday morning report.'
     },
     {
       match: /where|source|quote|number come|trace/i,
@@ -115,7 +115,7 @@
     },
     {
       match: /rival|competitor|price|pricing|sticker|truck/i,
-      text: 'Sample only. I would name the rival, the truck and the sticker. Like for like means the same year, model, trim, cab, drive and engine, with sticker prices within $1,000. None of that goes out until I approve it.'
+      text: 'Sample only. I would name the rival, the truck and the sticker. Like for like means the same year, model, trim, cab, drive and engine, with sticker prices within $1,000.'
     }
   ];
 
@@ -138,7 +138,7 @@
     const text = isOfferPriceQuestion(prompt)
       ? offerPriceAnswer
       : (responses.find((r) => r.match.test(prompt))?.text
-        || 'This box only knows the sample desk. For your store, email patrick@iconic.onl with your business, your top three competitors, and what you wish you knew every Monday.');
+        || 'This box only knows the sample desk. For your business, email patrick@iconic.onl or call 206-773-8214 to set up a call.');
     window.setTimeout(() => {
       thinking.querySelector('p').textContent = text;
       conversation.scrollTop = conversation.scrollHeight;
@@ -164,17 +164,15 @@
         'Sample only. This is not a client report.',
         'A like-for-like truck is the same year, model, trim, cab, drive and engine.',
         'Sticker prices have to sit within $1,000 of each other.',
-        'A real number would point to the dated listing or page it came from.',
-        'None of it goes out until I approve it.'
+        'A real number would point to the dated listing or page it came from.'
       ]
     },
     source: {
       label: 'WHERE A NUMBER COMES FROM',
-      result: 'Sample: the number points at a dated public page.',
+      result: 'Sample: the number points to a dated listing.',
       brief: [
         'Sample only.',
-        'Every number in a briefing points to the dated listing or page it came from.',
-        'None goes out until I approve it.'
+        'Every number in a briefing points to the dated listing or page it came from.'
       ]
     },
     morning: {
@@ -183,18 +181,18 @@
       brief: [
         'Sample only.',
         'The live report goes out on Monday, Wednesday and Friday mornings.',
-        'Every morning it reads the rivals\' Sierra 1500 lots: each truck, price, trim and VIN.',
-        'None goes out until I approve it.'
+        'On each briefing morning it reads the rivals\' lots: each truck, price, trim and VIN.'
       ]
     },
     ask: {
       label: 'A QUESTION',
-      result: 'Sample: the bot can take a question. The report still waits for approval.',
+      result: 'Sample: the bot answers on its own.',
       brief: [
         'Sample only.',
         'Between reports, they can text questions to a private Telegram bot.',
+        'The bot answers on its own. I get a copy.',
         'The report is separate, and I approve it before it goes out.',
-        'For a price, use Start with your market and email patrick@iconic.onl.'
+        'Pricing is quoted on the call. Email patrick@iconic.onl or call 206-773-8214.'
       ]
     }
   };
@@ -226,7 +224,7 @@
     if (sampleBrief) sampleBrief.hidden = true;
     if (sampleBriefLines) sampleBriefLines.innerHTML = '';
 
-    addTrace('01', 'QUESTION', `${mission.label} — sample`);
+    addTrace('01', 'QUESTION', `${mission.label} (sample)`);
     await wait(420);
     addTrace('02', 'LOTS', 'Read the sample snapshots. Not a client file.');
     await wait(420);
@@ -234,13 +232,17 @@
     await wait(420);
     addTrace('04', 'SOURCE', 'A real number would point to the dated listing or page it came from.');
     await wait(420);
-    addTrace('05', 'APPROVAL', 'None goes out until I approve it.', 'ok');
-    await wait(360);
-    addTrace('06', 'BRIEF', mission.result, 'ok');
+    if (mission === missions.ask) {
+      addTrace('05', 'BRIEF', mission.result, 'ok');
+    } else {
+      addTrace('05', 'APPROVAL', 'I approve every Monday, Wednesday and Friday briefing before it goes out.', 'ok');
+      await wait(360);
+      addTrace('06', 'BRIEF', mission.result, 'ok');
+    }
 
     const vals = result.querySelectorAll('strong');
     vals[0].textContent = 'SAMPLE';
-    vals[1].textContent = 'MY READ';
+    vals[1].textContent = mission === missions.ask ? 'BOT ANSWERS' : 'MY APPROVAL';
     vals[2].textContent = 'NOT LIVE';
     vals[3].textContent = 'SAMPLE BRIEF';
     if (sampleBriefLines) sampleBriefLines.innerHTML = mission.brief.map((line) => `<p>${escapeHtml(line)}</p>`).join('');

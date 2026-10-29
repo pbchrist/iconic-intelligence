@@ -1,11 +1,14 @@
-# ICONIC website (iconic.onl) — change log
+# ICONIC website (iconic.onl): change log
 
 Newest first. One line per change: what changed and why.
 Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
+## 2026-10-29
+- PR #4 review fixes: the approval line now covers only the Monday, Wednesday and Friday briefing (the Telegram bot answers on its own), no AI vendor is named, lot coverage says every briefing morning, buttons say Set up a call, and pricing is quoted on the call everywhere.
+
 ## 2026-10-28
 - Rewrote the page for the WAC ad: plain offer, the real Monday/Wednesday/Friday report, Patrick's photo under the hero, sample desk labeled illustrative, and a price placeholder Patrick still has to fill.
-- Added llms.txt, WebMCP tools, JSON-LD, robots.txt and a sitemap lastmod. Corrected the privacy line: history stays on Patrick's hardware, reports are written with Claude from public listings, and nothing goes out until he approves it.
+- Added llms.txt, WebMCP tools, JSON-LD, robots.txt and a sitemap lastmod. Corrected the privacy line: history stays on Patrick's hardware, reports are written by a cloud AI from public listings, and he approves every Monday, Wednesday and Friday briefing before it goes out.
 - Led the page with the private memory of one market. The dealer briefings are the proof under Running now, not the headline.
 
 ## 2026-10-11

@@ -22,22 +22,22 @@
   const SERVICE = {
     name: "ICONIC",
     summary:
-      "ICONIC learns one business. It records that market every day and keeps the history on hardware Patrick runs. The longer it runs, the more of that market it holds. A private connector lets Claude Code read the same history. It works only with Claude Code, it is in testing, and it is not offered to clients. There is no public install and no public API. Briefings are written with Claude (cloud) from public listing data and the client's requests. Patrick approves every briefing before it goes out. The Monday, Wednesday and Friday briefings are what the current dealer receives. They are not the whole product.",
+      "ICONIC learns one business. It records that market every day and keeps the history on hardware Patrick runs. The longer it runs, the more of that market it holds. A private connector lets Patrick's own AI assistant read the same history. It is in testing and is not offered to clients. There is no public install and no public API. A cloud AI writes the briefings from public listing data and the client's requests. Patrick approves every Monday, Wednesday and Friday briefing before it goes out. The Telegram bot answers questions on its own. The Monday, Wednesday and Friday briefings are what the current dealer receives. They are not the whole product.",
     for_whom: "An owner who runs the store: one franchise rooftop or a small dealer group.",
     includes: [
       "A private memory of one market, recorded every day",
       "History kept on hardware Patrick runs",
-      "A private connector for Claude Code only, in testing, not offered to clients",
+      "A private connector for Patrick's own AI assistant, in testing, not offered to clients",
       "Every number in a briefing points to the dated listing or page it came from",
       "No public install and no public API",
-      "Running now for one franchise dealer: the rivals' Sierra 1500 lots read every morning, a briefing Monday, Wednesday and Friday mornings, questions by text to a private Telegram bot",
+      "Running now for one franchise dealer: the rivals' lots read every briefing morning, a briefing Monday, Wednesday and Friday mornings, questions by text to a private Telegram bot",
       "Like-for-like comparisons: same year, model, trim, cab, drive and engine, sticker within $1,000",
-      "Briefings are written with Claude (cloud) from public listing data and the client's requests",
-      "Patrick approves every briefing before it goes out"
+      "A cloud AI writes the briefings from public listing data and the client's requests",
+      "Patrick approves every Monday, Wednesday and Friday briefing before it goes out; the Telegram bot answers on its own"
     ],
-    live_clients: "One franchise auto dealer. Clients are not named. The private connector works only with Claude Code, is in testing, and is not offered to clients. No third-party AI is offered as a public connection.",
-    price: "Not listed yet. Ask Patrick.",
-    how_to_start: `Email ${EMAIL} with your business, your top three competitors, and what you wish you knew every Monday. Or call ${PHONE}.`
+    live_clients: "One franchise auto dealer. Clients are not named. The private connector is in testing and is not offered to clients. No third-party AI is offered as a public connection.",
+    price: "Pricing is quoted on the call.",
+    how_to_start: `Email ${EMAIL} or call ${PHONE} to set up a 20-minute call. Bring your business and your top three competitors.`
   };
 
   const tools = [
@@ -84,7 +84,7 @@
       execute: ({ business, competitors = [], wish_you_knew = "" }) => {
         const list = [0, 1, 2].map((i) => `${i + 1}. ${competitors[i] || ""}`).join("\n");
         const body = `Your business:\n${business}\n\nYour top three competitors:\n${list}\n\nWhat you wish you knew every Monday:\n${wish_you_knew}\n`;
-        const href = `mailto:${EMAIL}?subject=${encodeURIComponent("Start with one report")}&body=${encodeURIComponent(body)}`;
+        const href = `mailto:${EMAIL}?subject=${encodeURIComponent("20-minute call")}&body=${encodeURIComponent(body)}`;
         window.location.href = href;
         return text({ status: "draft_opened", note: "An email draft opened in the visitor's mail app. Nothing was sent.", mailto: href });
       }
