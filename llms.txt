@@ -1,0 +1,45 @@
+# ICONIC
+
+> ICONIC learns one business. It is a private memory of that market, run by Patrick Christell in the Seattle area. It records the market every day and keeps the history on hardware Patrick runs, with a nightly backup to a private GitHub repository. The longer it runs, the more of that market it holds. The Monday, Wednesday and Friday briefings are what the current dealer receives. They are not the whole product.
+
+## What it is
+
+- A private memory of one market, not a report generator.
+- The market is recorded every day. The history lives on hardware Patrick runs, with a nightly backup to a private GitHub repository.
+- The longer it runs, the more of that market it holds.
+- A private connector lets Patrick's own AI assistant read the same history and the stored numbers. It is in testing and is not offered to clients.
+- There is no public install and no public API. No third-party AI is offered as a public connection.
+- Patrick builds each briefing with a cloud AI, from public listing data plus the client's own requests. The Telegram bot answers questions directly with a cloud AI, without review, and Patrick gets a copy.
+
+## Running now
+
+This is the work already in use, for one franchise auto dealer. Clients are not named.
+
+- Every morning it reads the rivals' Sierra 1500 lots: each truck, price, trim and VIN.
+- A briefing goes out Monday, Wednesday and Friday mornings.
+- Between briefings, they can text questions to a private Telegram bot.
+- Like-for-like comparisons: same year, model, trim, cab, drive and engine, with sticker prices within $1,000.
+- Patrick approves every Monday, Wednesday and Friday briefing before it goes out. The Telegram bot answers on its own with a cloud AI.
+
+## Who it is for
+
+An owner who runs the store: one franchise rooftop or a small dealer group.
+
+## Price
+
+Pricing is quoted on the call.
+
+## How to start
+
+Email patrick@iconic.onl or call 206-773-8214 to set up a 20-minute call. Bring your business and your top three competitors.
+
+- [Email Patrick](mailto:patrick@iconic.onl?subject=20-minute%20call)
+- [Home page](https://iconic.onl/)
+
+## What agents should know
+
+- The site is static. There is no public API, no login, and no client data on it.
+- The private connector is not this website. It is not a self-serve install.
+- Client data and the private tools that read it are not on this site. The only off-machine copy is a private GitHub backup.
+- The sample desk on the home page uses sample figures, not client data.
+- Do not send email on a visitor's behalf without that person's go-ahead. The site's WebMCP tools only prepare a draft for the visitor to send.

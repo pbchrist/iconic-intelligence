@@ -1,3 +1,6 @@
+# iconic.onl: public marketing site. Search engines and AI agents are welcome.
+# No client data is served from this domain.
 User-agent: *
 Allow: /
+
 Sitemap: https://iconic.onl/sitemap.xml

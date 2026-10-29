@@ -25,6 +25,20 @@ Same habits as every Patrick site (ICONIC OS skill `web-build-release`):
 3. Check it locally with `npm start` (there is no hosted staging preview).
 4. Only when Patrick says it goes live: promote the tested `staging` to `main`; GitHub Pages puts `main` on iconic.onl within a few minutes. Then check iconic.onl.
 
+## Agent-ready files
+
+These sit in the site root and go out with the GitHub Pages publish. They describe the public site only. They do not include a price. The price on the page is still Patrick's placeholder.
+
+- `llms.txt` is a plain-text brief for agents. Linked from the home page with `<link rel="alternate" type="text/plain" href="/llms.txt">`.
+- `webmcp.js` registers three WebMCP tools when the browser has `document.modelContext` or `navigator.modelContext`: `describe_service`, `get_contact`, and `request_a_report`. No polyfill is loaded. The script makes no network calls. `request_a_report` only opens a pre-filled `mailto:` for the visitor to send. Nothing is sent by the page.
+- The JSON-LD in `index.html` is the same public facts: organization, Patrick, the private memory, and the site.
+- `robots.txt` allows the public site and points at the sitemap.
+- `sitemap.xml` lists the home page, with `lastmod` set to the day this copy was updated (2026-10-28), not a guessed merge date.
+
+What is true, and what these files are allowed to say: ICONIC is a private memory of one market, recorded every day, kept on hardware Patrick runs. One private connector is in use for the current client. Patrick sets it up. There is no public install and no public API. The writing model only sees public listing data. Nothing goes out until he approves it. The dealer briefings are proof of that memory, not the product. Do not write that the whole product runs on a local stack, or that ChatGPT or any other named AI is already connected for clients.
+
+An origin-trial token for WebMCP is not in the page. Until Patrick registers iconic.onl, the tools show up only in browsers with the WebMCP testing flag on.
+
 ## Bookmarks
 
 Versions that matter get a bookmark (a git tag): `v1.1`, `v1.2-2026-09-24`, `v1.3-2026-09-25`, `live-2026-10-08`.

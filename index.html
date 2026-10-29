@@ -4,13 +4,73 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#080912" />
-  <meta name="description" content="ICONIC. Private, persistent business intelligence that watches, remembers and acts." />
+  <title>ICONIC. A private memory of your market</title>
+  <meta name="description" content="ICONIC learns one business. It records that market every day and keeps the history on hardware Patrick runs, with a nightly backup to a private GitHub repository. A private connector lets Patrick's own AI assistant read that history. It is in testing. Patrick approves every Monday, Wednesday and Friday briefing before it goes out." />
   <link rel="canonical" href="https://iconic.onl/" />
-  <meta property="og:title" content="ICONIC. — Managed Intelligence" />
-  <meta property="og:description" content="Private, persistent business intelligence that compounds around your business." />
+  <meta property="og:title" content="ICONIC. A private memory of your market" />
+  <meta property="og:description" content="ICONIC learns one business. It records that market every day and keeps the history on hardware Patrick runs, with a nightly backup to a private GitHub repository. Patrick approves every Monday, Wednesday and Friday briefing before it goes out." />
   <meta property="og:url" content="https://iconic.onl/" />
   <meta property="og:type" content="website" />
-  <title>ICONIC. — Managed Intelligence</title>
+  <meta property="og:image" content="https://iconic.onl/og.png" />
+  <meta property="og:image:secure_url" content="https://iconic.onl/og.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="ICONIC. A private memory of your market." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ICONIC. A private memory of your market" />
+  <meta name="twitter:description" content="ICONIC learns one business. It records that market every day and keeps the history on hardware Patrick runs, with a nightly backup to a private GitHub repository. Patrick approves every Monday, Wednesday and Friday briefing before it goes out." />
+  <meta name="twitter:image" content="https://iconic.onl/og.png" />
+  <meta name="twitter:image:alt" content="ICONIC. A private memory of your market." />
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="ICONIC for AI agents" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://iconic.onl/#org",
+        "name": "ICONIC",
+        "url": "https://iconic.onl/",
+        "logo": "https://iconic.onl/iconic-wordmark.webp",
+        "email": "patrick@iconic.onl",
+        "telephone": "+1-206-773-8214",
+        "founder": { "@id": "https://iconic.onl/#patrick" },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "patrick@iconic.onl",
+          "telephone": "+1-206-773-8214",
+          "availableLanguage": "en"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://iconic.onl/#patrick",
+        "name": "Patrick Christell",
+        "image": "https://iconic.onl/patrick-christell.jpg",
+        "worksFor": { "@id": "https://iconic.onl/#org" }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://iconic.onl/#service",
+        "name": "ICONIC",
+        "serviceType": "Private intelligence for one business",
+        "provider": { "@id": "https://iconic.onl/#org" },
+        "audience": { "@type": "BusinessAudience", "name": "Owner-run auto dealers, one rooftop or a small group" },
+        "description": "ICONIC learns one business. It records that market every day and keeps the history on hardware Patrick runs, with a nightly backup to a private GitHub repository. The longer it runs, the more of that market it holds. A private connector lets Patrick's own AI assistant read the same history. It is in testing and is not offered to clients yet. There is no public install and no public API. For the one franchise dealer on it now, the rivals' Sierra 1500 lots are read every morning, and a briefing goes out Monday, Wednesday and Friday mornings. Like for like means the same year, model, trim, cab, drive and engine, with sticker prices within $1,000. Patrick builds each Monday, Wednesday and Friday briefing with a cloud AI, from public listing data and the client's requests, and approves it before it goes out."
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://iconic.onl/#site",
+        "url": "https://iconic.onl/",
+        "name": "ICONIC",
+        "publisher": { "@id": "https://iconic.onl/#org" }
+      }
+    ]
+  }
+  </script>
+  <script src="webmcp.js" defer></script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="mobile-first.css" />
@@ -23,304 +83,372 @@
   <header class="site-header">
     <a class="brand" href="#top" aria-label="ICONIC home"><img src="iconic-wordmark.webp" alt="ICONIC." /></a>
     <nav class="nav" aria-label="Primary navigation">
-      <a href="#capability">Capability</a>
-      <a href="#dashboard">Dashboard</a>
-      <a href="#deployment">Deployment</a>
+      <a href="#how">How it works</a>
+      <a href="#running">Running now</a>
+      <a href="#demo">The demo</a>
     </nav>
-    <a class="header-cta" href="#problem">LET'S START WITH ONE PROBLEM</a>
+    <a class="header-cta" href="#start">Set up a call</a>
     <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav">MENU</button>
     <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
-      <a href="#capability">Capability</a><a href="#dashboard">Dashboard</a><a href="#deployment">Deployment</a><a href="#problem">LET'S START WITH ONE PROBLEM</a>
+      <a href="#how">How it works</a>
+      <a href="#running">Running now</a>
+      <a href="#demo">The demo</a>
+      <a href="#start">Set up a call</a>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero section-shell">
-      <div class="hero-copy" data-reveal>
-        <div class="eyebrow"><span class="live-dot"></span> PRIVATE · PERSISTENT · AGENTIC</div>
-        <h1>Know more.<br><em>Move first.</em></h1>
-        <p class="hero-deck">Managed intelligence for businesses that need to catch what their teams do not have time to watch.</p>
-        <p class="hero-buyer">ICONIC watches competitors and markets, remembers the business, runs recurring research, and brings useful changes forward before someone has to remember to look.</p>
-        <div class="hero-actions hero-actions-threaded">
-          <a class="button button-primary" href="#capability">WATCH IT COMPOUND ↓</a>
-          <a class="text-link hero-problem-link" href="#problem">LET'S START WITH ONE PROBLEM →</a>
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live-dot"></span> Private intelligence for one business</div>
+        <h1>A private memory<br><em>of your market.</em></h1>
+        <p class="hero-deck">Every morning ICONIC reads your rivals' listings and saves a dated copy. Last month's listings are gone unless someone saved them. From the day we start, ICONIC saves them. Three mornings a week, you see what your rivals changed.</p>
+        <p class="hero-deck">Your history is private. It lives on hardware I run, with a nightly backup to a private GitHub repository only my account can open.</p>
+        <figure class="hero-bio">
+          <img src="patrick-christell.jpg" alt="Patrick Christell" width="88" height="88" />
+          <figcaption>
+            <strong>Patrick Christell</strong>
+            <p>Story work with Wes Anderson, Scott Rudin and Vanity Fair, then technical recruiting. Now I run ICONIC.</p>
+          </figcaption>
+        </figure>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#start">Set up a call</a>
+          <a class="button button-ghost" href="#running">See what is running</a>
         </div>
         <div class="hero-proof">
-          <div><strong>01</strong><span>Dedicated business intelligence</span></div>
-          <div><strong>02</strong><span>Recurring research + monitoring</span></div>
-          <div><strong>03</strong><span>Human control where it matters</span></div>
+          <div><strong>01</strong><span>Recorded every day</span></div>
+          <div><strong>02</strong><span>Every briefing approved by me first</span></div>
+          <div><strong>03</strong><span>Every briefing number tied to a dated source</span></div>
         </div>
       </div>
+      <aside class="hero-now" aria-label="What is running now">
+        <div class="eyebrow"><span class="live-dot"></span> Running now</div>
+        <h2>One dealer is on it.</h2>
+        <ul>
+          <li>Rivals' Sierra 1500 lots, read every morning.</li>
+          <li>A briefing Monday, Wednesday and Friday mornings.</li>
+        </ul>
+        <p>Between briefings, they text questions to a private Telegram bot. It answers on its own with a cloud AI, and I get a copy. I do not name clients.</p>
+      </aside>
     </section>
 
-<section id="capability" class="section-shell capability-section compounding-intelligence">
-      <div class="section-kicker" data-reveal>THE PRODUCT</div>
-      <div class="compound-intro" data-reveal>
-        <h2><span>COMPOUNDING</span><span>INTELLIGENCE.</span></h2>
-        <div><strong>Capital compounds because the returns stay invested. <em>Intelligence should work the same way.</em></strong></div>
+    <section id="how" class="section-shell page-block">
+      <div class="section-kicker">How it works</div>
+      <h2>It learns one business, and it keeps the record.</h2>
+      <div class="fact-grid">
+        <article class="fact-card">
+          <span>01</span>
+          <h3>The record</h3>
+          <p>For the one market it runs on today, ICONIC reads the rivals' Sierra 1500 listings every morning and saves a dated copy. The history lives on hardware I run, with a nightly backup to a private GitHub repository. The longer it runs, the more of that market it holds.</p>
+        </article>
+        <article class="fact-card">
+          <span>02</span>
+          <h3>The connector</h3>
+          <p>I built a private connector so my own AI assistant can ask this history questions and get the stored numbers back. In a test on my own hardware, a local AI scored 25 out of 100 on questions about what changed without the history, and 96 with it. It still got some wrong. The connector is in testing. There is no public install.</p>
+        </article>
+        <article class="fact-card">
+          <span>03</span>
+          <h3>Last month's history</h3>
+          <p>Anyone can read today's listings. Last month's are gone unless someone saved them. ICONIC starts building a market's history the day it starts on that market.</p>
+        </article>
       </div>
-      <div class="ci-shell" data-reveal>
-        <iframe id="ciFrame" class="ci-frame" src="compounding-widget.html" title="Compounding intelligence interactive story" loading="eager" scrolling="no"></iframe>
-      </div>
-    </section>
-
-<section id="proof" class="section-shell proof-section proof-feature use-case-section">
-      <div class="section-kicker" data-reveal id="useCaseKicker">AUTOMOTIVE · COMPETITIVE INTELLIGENCE</div>
-      <div class="use-case-wrap" data-reveal>
-        <div class="use-case-copy" id="useCaseCopy" aria-live="polite">
-          <small id="useCaseClient">REGIONAL DEALER GROUP</small>
-          <h2 id="useCaseTitle">Know what changed before the morning meeting.</h2>
-          <p id="useCaseBody">ICONIC watches competitor offers, pricing, inventory, reviews, search visibility and service signals, then condenses the material changes into recurring executive intelligence.</p>
-          <p class="proof-result" id="useCaseResult"><strong>OUTPUT</strong> A recurring brief that says what changed, why it matters and what deserves attention next.</p>
-        </div>
-        <div class="use-case-steps" id="useCaseSteps">
-          <article><span>WATCHES</span><strong id="useCaseWatch">Offers · pricing · inventory · reviews · search · service</strong></article>
-          <article><span>SURFACES</span><strong id="useCaseSurface">Material competitive and operating changes</strong></article>
-          <article><span>DELIVERS</span><strong id="useCaseDeliver">Recurring executive intelligence</strong></article>
-        </div>
-      </div>
-      <div class="use-case-dots" role="tablist" aria-label="Business intelligence use cases">
-        <button type="button" data-case="automotive" aria-label="Automotive" aria-pressed="true">AUTOMOTIVE</button>
-        <button type="button" data-case="legal" aria-label="Legal" aria-pressed="false">LEGAL</button>
-        <button type="button" data-case="wealth" aria-label="Wealth management" aria-pressed="false">WEALTH</button>
-        <button type="button" data-case="marketing" aria-label="Marketing" aria-pressed="false">MARKETING</button>
-        <button type="button" data-case="executive" aria-label="Executive and professional services" aria-pressed="false">EXECUTIVE</button>
+      <div class="private-note">
+        <span>The history</span>
+        <h3>Your market history lives on hardware I run.</h3>
+        <p>A nightly backup goes to a private GitHub repository. I build each briefing with a cloud AI, from public listing data and the requests you give me.</p>
       </div>
     </section>
 
-<section id="capability-cards" class="section-shell capability-cards-section">
-      <div class="capability-grid compact-capabilities">
-        <article class="capability-card" data-reveal><span class="card-index">01</span><h3>SEES</h3><p>Watches competitors, pricing, reviews, search, inventory, vendors and market changes without waiting to be prompted.</p><div class="micro-line"><span></span></div></article>
-        <article class="capability-card" data-reveal><span class="card-index">02</span><h3>KNOWS</h3><p>Keeps approved facts, files, procedures, prior work and preferences available instead of resetting every session.</p><div class="micro-line"><span></span></div></article>
-        <article class="capability-card" data-reveal><span class="card-index">03</span><h3>MOVES</h3><p>Runs recurring intelligence work automatically and brings consequential actions back to a human.</p><div class="micro-line"><span></span></div></article>
+    <section id="running" class="section-shell page-block">
+      <div class="section-kicker">Running now</div>
+      <h2>What runs today</h2>
+      <div class="prose">
+        <p>I have one live client, a franchise dealer. I do not name clients. ICONIC is for an owner who runs the store, one rooftop or a small group.</p>
+        <p>Every morning it reads the rivals' Sierra 1500 lots: each truck, price, trim and VIN. A briefing goes out Monday, Wednesday and Friday mornings. I approve each one before it goes out.</p>
+        <p>Between briefings, they can text questions to a private Telegram bot. It answers on its own from the saved dated readings, and I get a copy of each answer.</p>
       </div>
-      <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>RESEARCH · MEMORY · MONITORING · PROCEDURES · REPORTING · COMPETITORS · CUSTOMERS · VENDORS · SIGNALS · DECISIONS ·</span><span>RESEARCH · MEMORY · MONITORING · PROCEDURES · REPORTING · COMPETITORS · CUSTOMERS · VENDORS · SIGNALS · DECISIONS ·</span></div></div>
+      <div class="rule-grid">
+        <article>
+          <span>The number</span>
+          <p>Every number in a briefing points to the dated listing or page it came from.</p>
+        </article>
+        <article>
+          <span>The same truck</span>
+          <p>Like for like means the same year, model, trim, cab, drive and engine, with sticker prices within $1,000.</p>
+        </article>
+      </div>
+      <p class="pain-line">A month from now, I can still tell you what a rival's truck listed at today.</p>
     </section>
 
-<section id="dashboard" class="section-shell dashboard-section">
-      <div class="section-kicker" data-reveal>DEMO CONTROL SURFACE</div>
-      <div class="section-heading dashboard-heading direct-heading" data-reveal>
-        <h2>WHAT THE CLIENT SEES.</h2>
-        <p>Ask what changed. See what is being watched. Review recurring work. Inspect what the system knows. Approve the decisions that actually need you.</p>
+    <section id="demo" class="section-shell page-block">
+      <div class="section-kicker">A sample desk</div>
+      <div class="section-heading dashboard-heading direct-heading">
+        <h2>A sample of the desk</h2>
+        <p>This is what the briefing desk looks like. Nothing in it is client data.</p>
       </div>
 
-
-      <div class="dashboard-map-wrap" data-reveal>
+      <div class="dashboard-map-wrap">
         <div class="intelligence-map-card glass-card dashboard-map-card">
-          <div class="orbit-topline"><span>ICONIC // LIVE INTELLIGENCE MAP</span><span class="status-pill"><i></i> INTERACTIVE</span></div>
+          <div class="orbit-topline"><span>Sample map</span><span class="illus">Illustrative data</span></div>
           <div class="map-stage" id="mapStage">
             <div class="map-preload" aria-hidden="true"><i></i><span></span><b></b></div>
-            <div class="map-fallback" id="mapFallback" aria-hidden="true"><span>ASK</span><span>INTELLIGENCE</span><span>WORK</span><span>KNOWLEDGE</span><span>CONTROL</span></div>
-            <canvas id="intelligenceMap" aria-label="Interactive three-dimensional map of Ask, Intelligence, Work, Knowledge and Control"></canvas>
-            <div class="map-labels" id="mapLabels" aria-hidden="false"></div>
-            <div class="map-hint map-hint-prominent">TAP A NODE · SWITCH THE DASHBOARD</div>
+            <div class="map-fallback" id="mapFallback">
+              <span>ASK</span><span>INTELLIGENCE</span><span>WORK</span><span>KNOWLEDGE</span><span>CONTROL</span>
+            </div>
+            <canvas id="intelligenceMap" aria-label="Sample map of Ask, Intelligence, Work, Knowledge and Control"></canvas>
+            <div class="map-labels" id="mapLabels"></div>
+            <div class="map-hint map-hint-prominent">Tap a node to switch the sample</div>
           </div>
           <div class="map-readout" aria-live="polite">
-            <small id="mapEyebrow">PERSISTENT INTELLIGENCE</small>
-            <div class="map-readout-row"><div><strong id="mapTitle">THE BUSINESS CORE</strong><p id="mapDescription">One persistent layer connects what the company knows, what it watches, what it is doing, and where humans stay in control.</p></div><button id="mapAction" type="button" data-tab="ask">OPEN IN DASHBOARD ↗</button></div>
+            <small id="mapEyebrow">Sample desk</small>
+            <div class="map-readout-row">
+              <div>
+                <strong id="mapTitle">One business</strong>
+                <p id="mapDescription">A sample of the desk. The real work is a private memory of one market. The dealer on it now gets a briefing three mornings a week.</p>
+              </div>
+              <button id="mapAction" type="button" data-tab="ask">Open the sample</button>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="dashboard-shell" data-reveal>
+      <div class="dashboard-shell">
         <aside class="dash-sidebar">
           <div class="dash-logo"><img src="iconic-wordmark.webp" alt="ICONIC." /></div>
-          <div class="client-chip"><span class="client-avatar">D</span><div><small>DEMO CLIENT</small><strong>Executive Intelligence</strong></div></div>
-          <nav class="dash-nav" aria-label="Demo dashboard">
-            <button class="dash-tab active" data-tab="ask"><span>⌁</span>ASK</button>
-            <button class="dash-tab" data-tab="intelligence"><span>✦</span>INTELLIGENCE <i>4</i></button>
-            <button class="dash-tab" data-tab="work"><span>↻</span>WORK</button>
-            <button class="dash-tab" data-tab="knowledge"><span>◫</span>KNOWLEDGE</button>
-            <button class="dash-tab" data-tab="control"><span>◇</span>CONTROL <i>2</i></button>
+          <div class="client-chip">
+            <span class="client-avatar" aria-hidden="true">S</span>
+            <div>
+              <small>Sample</small>
+              <strong>Not a client file</strong>
+              <span class="illus">Illustrative data</span>
+            </div>
+          </div>
+          <nav class="dash-nav" aria-label="Sample dashboard">
+            <button class="dash-tab active" type="button" data-tab="ask"><span>⌁</span>Ask</button>
+            <button class="dash-tab" type="button" data-tab="intelligence"><span>✦</span>Findings</button>
+            <button class="dash-tab" type="button" data-tab="work"><span>↻</span>Mornings</button>
+            <button class="dash-tab" type="button" data-tab="knowledge"><span>◫</span>Memory</button>
+            <button class="dash-tab" type="button" data-tab="control"><span>◇</span>Approval</button>
           </nav>
           <div class="dash-health">
-            <div><span class="live-dot"></span> SYSTEM HEALTH</div>
-            <strong>ALL SYSTEMS NOMINAL</strong>
+            <div><span class="live-dot"></span> Sample desk</div>
+            <strong>Not a live account</strong>
           </div>
         </aside>
 
         <div class="dash-main">
           <div class="dash-topbar">
-            <div><small>WEDNESDAY · 09:42</small><strong id="dashTitle">ASK THE COMPANY INTELLIGENCE</strong></div>
-            <div class="model-route">ROUTE <span id="routeBadge">HYBRID / AUTO</span></div>
+            <div>
+              <small>Sample desk</small>
+              <strong id="dashTitle">Ask the sample desk</strong>
+            </div>
+            <div class="model-route"><span id="routeBadge">Sample</span></div>
           </div>
 
           <div class="dash-panel active" id="panel-ask">
             <div class="ask-layout">
               <div class="ask-conversation" id="askConversation">
+                <span class="illus">Illustrative data</span>
                 <div class="system-message">
                   <span class="sigil">✦</span>
-                  <div><small>ICONIC INTELLIGENCE</small><p>Good morning. I found four developments worth your attention. Ask me what changed, what matters, or what to do next.</p></div>
+                  <div>
+                    <small>ICONIC</small>
+                    <p>This is a sample desk. Ask what a rival did, where a number comes from, or what a report costs.</p>
+                  </div>
                 </div>
                 <div class="prefill-thread">
-                  <div class="user-message"><div><small>YOU</small><p>Which competitor changed pricing?</p></div></div>
-                  <div class="assistant-message"><span class="sigil">✦</span><div><small>ICONIC INTELLIGENCE</small><p>A primary competitor moved advertised entry pricing down across 11 monitored listings. The pattern is broad enough to look deliberate, so I prepared a response brief with the affected offers and what changed.</p></div></div>
+                  <div class="user-message"><div><small>You</small><p>Which rival moved a price?</p></div></div>
+                  <div class="assistant-message"><span class="sigil">✦</span><div><small>ICONIC</small><p>I would name the rival, the truck and the sticker. Like for like means the same year, model, trim, cab, drive and engine, with sticker prices within $1,000.</p></div></div>
                 </div>
                 <div class="suggestions">
-                  <button data-prompt="What should I be worried about this week?">What should I be worried about this week?</button>
-                  <button data-prompt="Which competitor changed pricing?">Which competitor changed pricing?</button>
-                  <button data-prompt="What are customers complaining about?">What are customers complaining about?</button>
-                  <button data-prompt="What are we missing?">What are we missing?</button>
+                  <button type="button" data-prompt="What should I worry about?">What should I worry about?</button>
+                  <button type="button" data-prompt="Which rival moved a price?">Which rival moved a price?</button>
+                  <button type="button" data-prompt="What does this cost?">What does this cost?</button>
+                  <button type="button" data-prompt="Where does a number come from?">Where does a number come from?</button>
                 </div>
               </div>
               <form class="ask-box" id="askForm">
-                <input id="askInput" type="text" autocomplete="off" placeholder="Ask the business anything…" aria-label="Ask the demo intelligence" />
-                <button type="submit">↗</button>
+                <input id="askInput" type="text" autocomplete="off" placeholder="Ask the sample desk…" aria-label="Ask the sample desk" />
+                <button type="submit" aria-label="Send">↗</button>
               </form>
             </div>
           </div>
 
           <div class="dash-panel" id="panel-intelligence">
-            <div class="panel-header"><div><small>AUTONOMOUSLY DISCOVERED</small><h3>Intelligence feed</h3></div><button class="tiny-button">FILTER</button></div>
+            <div class="panel-header"><div><small>Sample findings</small><h3>What a morning might flag</h3></div><span class="illus">Illustrative data</span></div>
             <div class="intel-feed">
-              <article><span class="severity hot">HIGH</span><div><small>COMPETITOR PRICING · 34 MIN AGO</small><h4>Primary competitor reduced advertised entry price by 6.2%</h4><p>Change detected across 11 listings. Margin impact and response options are ready.</p></div><button>OPEN ↗</button></article>
-              <article><span class="severity warm">WATCH</span><div><small>CUSTOMER SIGNAL · 2 HRS AGO</small><h4>Service wait-time complaints are clustering around Tuesdays</h4><p>Pattern strengthened across 42 new reviews. The issue is now statistically unusual versus the prior eight weeks.</p></div><button>OPEN ↗</button></article>
-              <article><span class="severity cool">OPP</span><div><small>MARKET GAP · TODAY</small><h4>Competitors are under-answering a high-intent search category</h4><p>Search demand is present; direct local competition is thin. Draft content and offer angle are prepared.</p></div><button>OPEN ↗</button></article>
-              <article><span class="severity cool">NEW</span><div><small>VENDOR · TODAY</small><h4>A supplier changed minimum-order terms</h4><p>Potential inventory impact is minor now but material during peak demand. A comparison brief is ready.</p></div><button>OPEN ↗</button></article>
+              <article>
+                <span class="severity hot">Note</span>
+                <div>
+                  <small>Sample · rival sticker</small>
+                  <h4>A like-for-like sticker moved</h4>
+                  <p>A real line would name the truck and the sticker.</p>
+                </div>
+              </article>
+              <article>
+                <span class="severity warm">Watch</span>
+                <div>
+                  <small>Sample · lot read</small>
+                  <h4>A truck showed up on a lot we track</h4>
+                  <p>The live read is the rivals' Sierra 1500 lots, every morning.</p>
+                </div>
+              </article>
+              <article>
+                <span class="severity cool">Source</span>
+                <div>
+                  <small>Sample · provenance</small>
+                  <h4>Where a number came from</h4>
+                  <p>A real number points to the dated listing or page it came from.</p>
+                </div>
+              </article>
             </div>
           </div>
 
           <div class="dash-panel" id="panel-work">
-            <div class="panel-header"><div><small>AUTOMATED + REQUESTED WORK</small><h3>Work queue</h3></div><button class="tiny-button">+ NEW JOB</button></div>
+            <div class="panel-header"><div><small>Sample queue</small><h3>Monday, Wednesday and Friday mornings</h3></div><span class="illus">Illustrative data</span></div>
             <div class="work-board">
-              <div class="work-col"><h4>ACTIVE <span>3</span></h4><div class="work-card"><small>RECURRING</small><strong>Weekly competitor report</strong><div class="progress"><i style="width:76%"></i></div><p>12 sources checked · 4 changes found</p></div><div class="work-card"><small>INVESTIGATION</small><strong>Customer churn signals</strong><div class="progress"><i style="width:42%"></i></div><p>Correlating reviews, tickets and pricing</p></div></div>
-              <div class="work-col"><h4>WAITING <span>1</span></h4><div class="work-card approval"><small>HUMAN APPROVAL</small><strong>Publish internal pricing brief</strong><p>Medium-risk write action. Approval required by policy.</p><div class="approval-actions"><button>REVIEW</button><button>APPROVE</button></div></div></div>
-              <div class="work-col"><h4>COMPLETE <span>18</span></h4><div class="work-card complete"><small>TODAY · 08:12</small><strong>Morning executive brief</strong><p>Delivered to approved recipients.</p></div><div class="work-card complete"><small>YESTERDAY · 17:03</small><strong>Vendor price scan</strong><p>No material changes found.</p></div></div>
+              <div class="work-col">
+                <h4>In progress</h4>
+                <div class="work-card">
+                  <small>Sample</small>
+                  <strong>Morning report</strong>
+                  <p>A sample of the Monday, Wednesday and Friday report. Not a live queue.</p>
+                </div>
+              </div>
+              <div class="work-col">
+                <h4>Waiting on me</h4>
+                <div class="work-card approval">
+                  <small>Sample</small>
+                  <strong>My approval</strong>
+                  <p>A real briefing waits here for my APPROVE.</p>
+                </div>
+              </div>
+              <div class="work-col">
+                <h4>Already sent</h4>
+                <div class="work-card complete">
+                  <small>Sample</small>
+                  <strong>A morning that already went</strong>
+                  <p>Not a live send log.</p>
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="dash-panel" id="panel-knowledge">
-            <div class="panel-header"><div><small>APPROVED BUSINESS CONTEXT</small><h3>Knowledge map</h3></div><button class="tiny-button">+ ADD SOURCE</button></div>
+            <div class="panel-header"><div><small>Sample memory</small><h3>What the record holds</h3></div><span class="illus">Illustrative data</span></div>
             <div class="knowledge-grid">
-              <div class="knowledge-stat"><span>2,481</span><small>APPROVED FACTS</small></div>
-              <div class="knowledge-stat"><span>164</span><small>SOURCE DOCUMENTS</small></div>
-              <div class="knowledge-stat"><span>28</span><small>PROCEDURES</small></div>
-              <div class="knowledge-stat"><span>9</span><small>MONITORED ENTITIES</small></div>
+              <div class="knowledge-stat"><span>Lots</span><small>Rivals' Sierra 1500 lots</small></div>
+              <div class="knowledge-stat"><span>Reads</span><small>Trucks, prices, trims, VINs</small></div>
+              <div class="knowledge-stat"><span>Sources</span><small>Dated listings</small></div>
+              <div class="knowledge-stat"><span>Pairs</span><small>Like-for-like trucks</small></div>
             </div>
             <div class="knowledge-list">
-              <article><span>01</span><div><strong>Company operating profile</strong><small>Products, locations, roles, policies, terminology</small></div><b>98% VERIFIED</b></article>
-              <article><span>02</span><div><strong>Competitor universe</strong><small>Known players, offers, positioning, pricing sources</small></div><b>LIVE SOURCES</b></article>
-              <article><span>03</span><div><strong>Customer voice corpus</strong><small>Reviews, survey themes, complaint patterns</small></div><b>UPDATED DAILY</b></article>
-              <article><span>04</span><div><strong>Operating procedures</strong><small>Approved workflows, escalation rules, output standards</small></div><b>28 SKILLS</b></article>
+              <article><span>01</span><div><strong>Sample lot file</strong><small>Not an export from the live client</small></div></article>
+              <article><span>02</span><div><strong>Sample snapshot</strong><small>A stand-in for one lot read</small></div></article>
+              <article><span>03</span><div><strong>Sample pair</strong><small>Same year, model, trim, cab, drive and engine</small></div></article>
+              <article><span>04</span><div><strong>Sample source</strong><small>A stand-in for a dated listing</small></div></article>
             </div>
           </div>
 
           <div class="dash-panel" id="panel-control">
-            <div class="panel-header"><div><small>GOVERNANCE + TRUST</small><h3>Control plane</h3></div><button class="tiny-button">AUDIT LOG</button></div>
+            <div class="panel-header"><div><small>Sample approval</small><h3>My approval</h3></div><span class="illus">Illustrative data</span></div>
             <div class="control-grid">
-              <article><small>AUTONOMY</small><h4>Read-heavy. Write-light.</h4><p>Research, analysis, summarization and monitoring run automatically. Consequential actions stop at policy gates.</p><div class="policy-bars"><span><i style="width:95%"></i><b>LOW RISK · AUTO</b></span><span><i style="width:56%"></i><b>MEDIUM · POLICY</b></span><span><i style="width:12%"></i><b>HIGH · HUMAN</b></span></div></article>
-              <article><small>APPROVAL QUEUE</small><h4>2 decisions need a human.</h4><div class="approval-item"><span>MED</span><div><strong>Publish internal pricing brief</strong><small>Confidence 94% · policy requires review</small></div></div><div class="approval-item"><span>HIGH</span><div><strong>External customer outreach</strong><small>Draft prepared · execution blocked</small></div></div></article>
-              <article><small>MODEL CONTROL</small><h4>Route work by need.</h4><div class="route-list"><span><b>PRIVATE / ROUTINE</b><i>LOCAL</i></span><span><b>DEEP REASONING</b><i>FRONTIER</i></span><span><b>SENSITIVE + COMPLEX</b><i>HYBRID</i></span></div></article>
-              <article><small>TRACEABILITY</small><h4>Every answer has a why.</h4><p>Source provenance, confidence, model route, procedure and policy decision remain inspectable without exposing factory machinery.</p><button class="trace-button">VIEW SAMPLE TRACE ↗</button></article>
+              <article>
+                <small>Approval</small>
+                <h4>I approve each briefing.</h4>
+                <p>This is where a real briefing waits.</p>
+              </article>
+              <article>
+                <small>Questions</small>
+                <h4>A private Telegram bot.</h4>
+                <p>Between reports, they can text questions there. The bot answers on its own with a cloud AI, and I get a copy.</p>
+              </article>
+              <article>
+                <small>Where it runs</small>
+                <h4>History lives on hardware I run.</h4>
+                <p>A nightly backup goes to a private GitHub repository. I build each briefing with a cloud AI, from public listing data and the requests you give me. This is not a status page.</p>
+              </article>
+              <article>
+                <small>A number</small>
+                <h4>Dated listing or page.</h4>
+                <p>That is the rule on a real report. The trace below is still a sample.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sample-lab">
+        <div class="section-kicker">Sample trace</div>
+        <p class="prose">Run a sample to see the steps behind one briefing line.</p>
+        <div class="lab-shell">
+          <div class="lab-controls">
+            <label>Sample mission
+              <select id="missionSelect">
+                <option value="price">A rival sticker moved</option>
+                <option value="source">Where a number comes from</option>
+                <option value="morning">The morning report</option>
+                <option value="ask">A question to the bot</option>
+              </select>
+            </label>
+            <button id="runExperiment" class="button button-primary lab-run" type="button">Run sample</button>
+            <span class="illus">Illustrative data</span>
+          </div>
+          <div class="lab-console">
+            <div class="console-top"><span>Sample trace</span><span id="labStatus"><i></i> Ready</span></div>
+            <div class="trace" id="traceOutput"><div class="trace-idle">Choose a sample and run it.</div></div>
+            <div class="sample-brief" id="sampleBrief" hidden>
+              <small>Illustrative data · sample output</small>
+              <h3>Sample brief</h3>
+              <div id="sampleBriefLines"></div>
+            </div>
+            <div class="lab-result" id="labResult">
+              <div><small>Desk</small><strong>Ready</strong></div>
+              <div><small>Gate</small><strong>Approval</strong></div>
+              <div><small>Source</small><strong>Not live</strong></div>
+              <div><small>Output</small><strong>Sample</strong></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-<section id="deployment" class="section-shell deployment-section">
-      <div class="section-kicker" data-reveal>WHERE IT LIVES</div>
-      <div class="section-heading split-heading direct-heading" data-reveal>
-        <h2>TWO WAYS TO DEPLOY.</h2>
-        <p>Most owner-led businesses start with ICONIC-managed infrastructure because it gets useful capability running without creating an internal IT project. Larger, regulated or security-sensitive organizations can move designated workloads into environments they control.</p>
+    <section id="start" class="section-shell page-block">
+      <div class="offer-card start-card">
+        <div class="section-kicker">The start</div>
+        <h2>Start with your market.</h2>
+        <div class="prose">
+          <p>Email or call me to set up a 20-minute call. Bring your business and the three competitors you worry about most.</p>
+          <p>It runs today for one auto dealer. A new market takes setup work, so on the call we check whether yours fits.</p>
+        </div>
+        <div class="price-placeholder">
+          <span>Price</span>
+          <strong>Pricing is quoted on the call</strong>
+          <p>I quote it once I know your market.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="button button-primary" href="mailto:patrick@iconic.onl?subject=20-minute%20call&amp;body=Your%20business%3A%0A%0AYour%20top%20three%20competitors%3A%0A1.%20%0A2.%20%0A3.%20%0A%0AWhat%20you%20wish%20you%20knew%20every%20Monday%3A%0A">Email to set up a call</a>
+          <a class="button button-ghost contact-phone" href="tel:+12067738214">206-773-8214</a>
+        </div>
       </div>
-      <div class="deployment-grid" data-reveal>
-        <article>
-          <span>01</span><small>MOST CLIENTS START HERE · ICONIC-MANAGED</small>
-          <h3>Start useful.</h3>
-          <p>A dedicated environment operated by ICONIC. This is the normal starting point for owner-led businesses and lean teams: faster to launch, easier to manage, and no need to build an internal AI infrastructure function first.</p>
-          <b>FASTEST PATH TO A WORKING CAPABILITY</b>
-        </article>
-        <article>
-          <span>02</span><small>LARGER / REGULATED · CLIENT ENVIRONMENT</small>
-          <h3>Move inside.</h3>
-          <p>When policy, regulation or existing infrastructure requires it, ICONIC works with the client's IT or security team to place designated workloads into approved on-premise, private-cloud or other client-controlled environments.</p>
-          <b>MORE CONTROL · MORE IMPLEMENTATION COORDINATION</b>
-        </article>
-      </div>
-      <div class="deployment-model-note" data-reveal>
-        <small>THE MODEL IS NOT THE PRODUCT</small>
+    </section>
+
+    <section class="section-shell end-strip" aria-label="Contact">
+      <div class="end-strip-inner">
+        <a href="#top" aria-label="ICONIC home"><img src="iconic-wordmark.webp" alt="ICONIC." /></a>
         <div>
-          <strong>Use the right engine without turning it into the client's job.</strong>
-          <p>ICONIC can use frontier models, open-weight models on dedicated infrastructure, or both. Routine and high-volume work can stay on local infrastructure; harder reasoning can escalate when it earns the cost. The routing stays managed.</p>
-        </div>
-      </div>
-      <div class="private-edge" data-reveal>
-        <small>PRIVATE BY DESIGN</small>
-        <div>
-          <strong>Do not teach the landlord your edge.</strong>
-          <p>A cloud agent can sit inside the problem, the iterations, the dead ends, the architecture and the pattern of demand while you are still paying to discover what works. At platform scale, recurring private experiments can become a roadmap for somebody else's product. ICONIC can keep sensitive context, routine inference and proprietary workflows on infrastructure you control, escalating outward only when the job earns it. Your intelligence layer should compound for you.</p>
-        </div>
-      </div>
-      <p class="deployment-bridge" data-reveal>The system does not have to start at maximum complexity. As useful use cases accumulate, the architecture can move deeper into the business where the value justifies the integration.</p>
-    </section>
-
-<section id="problem" class="section-shell offer-section merged-close">
-      <div class="offer-card" data-reveal>
-        <div class="offer-copy">
-          <div class="section-kicker">THE DOORWAY</div>
-          <h2>LET'S START WITH ONE PROBLEM.</h2>
-          <p>One problem means one thing in the business that is annoying, expensive, repetitive, information-heavy, neglected, slow, or impossible to watch closely enough.</p>
-          <div class="problem-examples" id="problemExamples">
-            <button type="button" data-signal="pricing">“I never know when competitors change their offers.”</button>
-            <button type="button" data-signal="reviews">“We have hundreds of reviews and nobody is synthesizing them.”</button>
-            <button type="button" data-signal="market">“Tell me what changed in my market every Monday morning.”</button>
-            <button type="button" data-signal="repeat" data-mission="brief">“My team keeps researching the same things over and over.”</button>
-            <button type="button" data-signal="vendor">“We notice pricing, inventory or search changes too late.”</button>
-            <button type="button" data-signal="vendor" class="supplier-quote">“I need to know when a supplier change creates exposure.”</button>
-          </div>
-          <p class="offer-emphasis">We define what useful looks like, build something the business can actually use in hours, and then decide whether it deserves to grow.</p>
-        </div>
-
-        <div class="closing-demo">
-          <div class="section-kicker">GIVE IT A JOB</div>
-          <div class="lab-shell">
-            <div class="lab-controls">
-              <label>MISSION<select id="missionSelect"><option value="competitor">Find competitor pricing changes</option><option value="reviews">Analyze customer complaints</option><option value="brief">Build an executive morning brief</option><option value="vendor">Investigate a vendor risk</option></select></label>
-              <button id="runExperiment" class="button button-primary lab-run">RUN EXPERIMENT</button>
-            </div>
-            <div class="lab-console">
-              <div class="console-top"><span>ICONIC / EXECUTION TRACE · CONDENSED DEMO</span><span id="labStatus"><i></i> READY</span></div>
-              <div class="trace" id="traceOutput"><div class="trace-idle">SELECT A MISSION AND RUN THE STACK.</div></div>
-              <div class="sample-brief" id="sampleBrief" hidden><small>EXAMPLE OUTPUT</small><h3>Executive response brief</h3><div id="sampleBriefLines"></div></div>
-              <div class="lab-result" id="labResult"><div><small>SYSTEM</small><strong>—</strong></div><div><small>POLICY</small><strong>—</strong></div><div><small>VERIFY</small><strong>—</strong></div><div><small>OUTPUT</small><strong>—</strong></div></div>
-            </div>
-          </div>
-          <div class="closing-contact">
-            <strong>Want this for your business? Let's start with one problem.</strong>
-            <div><a href="mailto:patrick@iconic.onl?subject=Let%27s%20start%20with%20one%20problem">patrick@iconic.onl</a><a href="tel:+12067738214">206-773-8214</a></div>
-          </div>
-        </div>
-
-        <div class="offer-flow" aria-label="Usefulness expansion path">
-          <div><span>01</span><strong>BOUND IT</strong><small>One problem. Clear scope. Clear success criteria.</small></div><i>→</i>
-          <div><span>02</span><strong>MAKE IT USEFUL</strong><small>Deliver a working intelligence capability, not an AI presentation.</small></div><i>→</i>
-          <div><span>03</span><strong>WATCH THE VALUE</strong><small>See what gets used, trusted and acted on.</small></div><i>→</i>
-          <div><span>04</span><strong>FOLLOW THE ADJACENCIES</strong><small>Let real usefulness reveal the next use cases and deeper integrations.</small></div>
-        </div>
-      </div>
-    </section>
-
-<section id="contact" class="section-shell contact-section">
-      <div class="contact-inner" data-reveal>
-        <div class="contact-wordmark"><img src="iconic-wordmark.webp" alt="ICONIC." /></div>
-        <div class="contact-copy">
-          <div class="principal-lockup">
-            <img class="principal-photo" src="patrick-christell.jpg" alt="Patrick Christell" />
-            <div>
-              <div class="section-kicker card-identity">PATRICK CHRISTELL <em>Principal</em></div>
-              <div class="card-ornament" aria-hidden="true"><span></span><i></i><b></b><i></i><span></span></div>
-              <p class="principal-line">Story work with Wes Anderson, Scott Rudin and Vanity Fair, then technical recruiting, taught me to find signal in noise. I became convinced local inference was the future, so I built and run my own stack.</p>
-            </div>
-          </div>
-          <h2>Build an advantage<br>your competitors <em>cannot rent off the shelf.</em></h2>
+          <p>Patrick Christell</p>
           <div class="contact-actions">
-            <a class="button button-primary" href="mailto:patrick@iconic.onl?subject=Let%27s%20start%20with%20one%20problem">patrick@iconic.onl</a>
+            <a class="button button-primary" href="mailto:patrick@iconic.onl?subject=20-minute%20call&amp;body=Your%20business%3A%0A%0AYour%20top%20three%20competitors%3A%0A1.%20%0A2.%20%0A3.%20%0A%0AWhat%20you%20wish%20you%20knew%20every%20Monday%3A%0A">patrick@iconic.onl</a>
             <a class="button button-ghost contact-phone" href="tel:+12067738214">206-773-8214</a>
           </div>
         </div>
       </div>
-      <footer><span>© 2026 ICONIC.</span><span>MANAGED BUSINESS INTELLIGENCE</span><a href="#top">BACK TO TOP ↑</a></footer>
+      <footer>
+        <span>© 2026 ICONIC.</span>
+        <span>A private memory of one market</span>
+        <a href="#top">Back to top</a>
+      </footer>
     </section>
   </main>
 
