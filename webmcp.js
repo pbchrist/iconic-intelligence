@@ -33,7 +33,7 @@
       "Running now for one franchise dealer: the rivals' Sierra 1500 lots read every morning, a briefing Monday, Wednesday and Friday mornings, questions by text to a private Telegram bot",
       "Like-for-like comparisons: same year, model, trim, cab, drive and engine, sticker within $1,000",
       "Patrick builds each briefing with a cloud AI, from public listing data and the client's requests",
-      "Patrick approves every Monday, Wednesday and Friday briefing before it goes out; the Telegram bot answers on its own"
+      "Patrick approves every Monday, Wednesday and Friday briefing before it goes out; the Telegram bot answers on its own with a cloud AI"
     ],
     live_clients: "One franchise auto dealer. Clients are not named. The private connector is in testing and is not offered to clients. No third-party AI is offered as a public connection.",
     price: "Pricing is quoted on the call.",

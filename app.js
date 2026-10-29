@@ -107,15 +107,15 @@
   const responses = [
     {
       match: /worried|worry|risk|week/i,
-      text: 'Sample only. I would look for a rival sticker that moved on a like-for-like truck. You would see that in the Monday, Wednesday or Friday morning report.'
+      text: 'I would look for a rival sticker that moved on a like-for-like truck. You would see that in the Monday, Wednesday or Friday morning report.'
     },
     {
       match: /where|source|quote|number come|trace/i,
-      text: 'Sample only. A real number points to the dated listing or page it came from.'
+      text: 'A real number points to the dated listing or page it came from.'
     },
     {
       match: /rival|competitor|price|pricing|sticker|truck/i,
-      text: 'Sample only. I would name the rival, the truck and the sticker. Like for like means the same year, model, trim, cab, drive and engine, with sticker prices within $1,000.'
+      text: 'I would name the rival, the truck and the sticker. Like for like means the same year, model, trim, cab, drive and engine, with sticker prices within $1,000.'
     }
   ];
 
@@ -161,7 +161,7 @@
       label: 'RIVAL STICKER',
       result: 'Sample: a like-for-like sticker moved. This is not a client report.',
       brief: [
-        'Sample only. This is not a client report.',
+        'This is not a client report.',
         'A like-for-like truck is the same year, model, trim, cab, drive and engine.',
         'Sticker prices have to sit within $1,000 of each other.',
         'A real number would point to the dated listing or page it came from.'
@@ -171,7 +171,6 @@
       label: 'WHERE A NUMBER COMES FROM',
       result: 'Sample: the number points to a dated listing.',
       brief: [
-        'Sample only.',
         'Every number in a briefing points to the dated listing or page it came from.'
       ]
     },
@@ -179,7 +178,6 @@
       label: 'MORNING REPORT',
       result: 'Sample: Monday, Wednesday and Friday mornings.',
       brief: [
-        'Sample only.',
         'The live report goes out on Monday, Wednesday and Friday mornings.',
         'Every morning it reads the rivals\' Sierra 1500 lots: each truck, price, trim and VIN.'
       ]
@@ -188,9 +186,8 @@
       label: 'A QUESTION',
       result: 'Sample: the bot answers on its own.',
       brief: [
-        'Sample only.',
         'Between reports, they can text questions to a private Telegram bot.',
-        'The bot answers on its own. I get a copy.',
+        'It answers from the saved, dated readings. I get a copy.',
         'The report is separate, and I approve it before it goes out.',
         'Pricing is quoted on the call. Email patrick@iconic.onl or call 206-773-8214.'
       ]
@@ -226,19 +223,21 @@
 
     addTrace('01', 'QUESTION', `${mission.label} (sample)`);
     await wait(420);
-    addTrace('02', 'LOTS', 'Read the sample snapshots. Not a client file.');
-    await wait(420);
-    addTrace('03', 'COMPARE', 'Like for like: year, model, trim, cab, drive, engine. Stickers within $1,000.');
-    await wait(420);
     if (mission === missions.ask) {
-      addTrace('04', 'ANSWER', 'The bot answers on its own. I get a copy.');
+      addTrace('02', 'READ', 'Open the saved, dated lot readings. Sample data, not a client file.');
+      await wait(420);
+      addTrace('03', 'MATCH', 'Find the trucks the question is about: same year, model, trim, cab, drive and engine.');
+      await wait(420);
+      addTrace('04', 'ANSWER', 'The bot writes the answer with a cloud AI from those readings and sends it. No one reviews it first.');
+      await wait(420);
+      addTrace('05', 'COPY', 'I get a copy of the question and the answer.', 'ok');
     } else {
+      addTrace('02', 'LOTS', 'Read the sample snapshots. Not a client file.');
+      await wait(420);
+      addTrace('03', 'COMPARE', 'Like for like: year, model, trim, cab, drive, engine. Stickers within $1,000.');
+      await wait(420);
       addTrace('04', 'SOURCE', 'A real number would point to the dated listing or page it came from.');
-    }
-    await wait(420);
-    if (mission === missions.ask) {
-      addTrace('05', 'BRIEF', mission.result, 'ok');
-    } else {
+      await wait(420);
       addTrace('05', 'APPROVAL', 'I approve every Monday, Wednesday and Friday briefing before it goes out.', 'ok');
       await wait(360);
       addTrace('06', 'BRIEF', mission.result, 'ok');

@@ -9,7 +9,7 @@
 - The longer it runs, the more of that market it holds.
 - A private connector lets Patrick's own AI assistant read the same history and the stored numbers. It is in testing and is not offered to clients.
 - There is no public install and no public API. No third-party AI is offered as a public connection.
-- Patrick builds each briefing with a cloud AI, from public listing data plus the client's own requests. The Telegram bot answers questions directly, without review, and Patrick gets a copy.
+- Patrick builds each briefing with a cloud AI, from public listing data plus the client's own requests. The Telegram bot answers questions directly with a cloud AI, without review, and Patrick gets a copy.
 
 ## Running now
 
