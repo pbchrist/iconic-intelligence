@@ -19,7 +19,7 @@ This is the work already in use, for one franchise auto dealer. Clients are not 
 - A briefing goes out Monday, Wednesday and Friday mornings.
 - Between briefings, they can text questions to a private Telegram bot.
 - Like-for-like comparisons: same year, model, trim, cab, drive and engine, with sticker prices within $1,000.
-- Patrick approves every Monday, Wednesday and Friday briefing before it goes out. The Telegram bot answers on its own.
+- Patrick approves every Monday, Wednesday and Friday briefing before it goes out. The Telegram bot answers on its own with a cloud AI.
 
 ## Who it is for
 

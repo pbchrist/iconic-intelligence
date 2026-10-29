@@ -22,7 +22,7 @@
   const SERVICE = {
     name: "ICONIC",
     summary:
-      "ICONIC learns one business. It records that market every day and keeps the history on hardware Patrick runs, with a nightly backup to a private GitHub repository. The longer it runs, the more of that market it holds. A private connector lets Patrick's own AI assistant read the same history. It is in testing and is not offered to clients. There is no public install and no public API. Patrick builds each Monday, Wednesday and Friday briefing with a cloud AI, from public listing data and the client's requests, and approves it before it goes out. The Telegram bot answers questions on its own. The Monday, Wednesday and Friday briefings are what the current dealer receives. They are not the whole product.",
+      "ICONIC learns one business. It records that market every day and keeps the history on hardware Patrick runs, with a nightly backup to a private GitHub repository. The longer it runs, the more of that market it holds. A private connector lets Patrick's own AI assistant read the same history. It is in testing and is not offered to clients. There is no public install and no public API. Patrick builds each Monday, Wednesday and Friday briefing with a cloud AI, from public listing data and the client's requests, and approves it before it goes out. The Telegram bot answers questions on its own with a cloud AI. The Monday, Wednesday and Friday briefings are what the current dealer receives. They are not the whole product.",
     for_whom: "An owner who runs the store: one franchise rooftop or a small dealer group.",
     includes: [
       "A private memory of one market, recorded every day",
