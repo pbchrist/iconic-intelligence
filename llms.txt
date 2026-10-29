@@ -9,7 +9,7 @@
 - The longer it runs, the more of that market it holds.
 - A private connector lets Patrick's own AI assistant read the same history and the stored numbers. It is in testing and is not offered to clients.
 - There is no public install and no public API. No third-party AI is offered as a public connection.
-- Patrick puts each briefing together from public listing data plus the client's own requests. The Telegram bot answers questions directly, without review, and Patrick gets a copy.
+- Patrick builds each briefing with a cloud AI, from public listing data plus the client's own requests. The Telegram bot answers questions directly, without review, and Patrick gets a copy.
 
 ## Running now
 
@@ -40,6 +40,6 @@ Email patrick@iconic.onl or call 206-773-8214 to set up a 20-minute call. Bring 
 
 - The site is static. There is no public API, no login, and no client data on it.
 - The private connector is not this website. It is not a self-serve install.
-- Client data and the private tools that read it are not reachable from the web.
+- Client data and the private tools that read it are not on this site. The only off-machine copy is a private GitHub backup.
 - The sample desk on the home page uses sample figures, not client data.
 - Do not send email on a visitor's behalf without that person's go-ahead. The site's WebMCP tools only prepare a draft for the visitor to send.

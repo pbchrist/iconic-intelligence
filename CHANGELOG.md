@@ -4,11 +4,12 @@ Newest first. One line per change: what changed and why.
 Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
 ## 2026-10-29
+- PR #4 round 4: hero subhead leads with the daily dated copy, the backup moved to its own privacy line, the cloud AI that builds each briefing is disclosed again, the connector test is a score (25 out of 100, then 96), and the bot-question sample trace no longer claims a source step.
 - PR #4 review fixes: the approval line now covers only the Monday, Wednesday and Friday briefing (the Telegram bot answers on its own), no AI vendor is named, lots say Sierra 1500 lots read every morning, storage lines name the nightly backup to a private GitHub repository, Patrick puts each briefing together, buttons say Set up a call, and pricing is quoted on the call everywhere.
 
 ## 2026-10-28
 - Rewrote the page for the WAC ad: plain offer, the real Monday/Wednesday/Friday report, Patrick's photo under the hero, sample desk labeled illustrative, and a price placeholder Patrick still has to fill.
-- Added llms.txt, WebMCP tools, JSON-LD, robots.txt and a sitemap lastmod. Corrected the privacy line: history stays on Patrick's hardware, Patrick puts reports together from public listings and approves every Monday, Wednesday and Friday briefing before it goes out.
+- Added llms.txt, WebMCP tools, JSON-LD, robots.txt and a sitemap lastmod. Corrected the privacy line: history lives on Patrick's hardware with a nightly private GitHub backup, Patrick puts reports together from public listings and approves every Monday, Wednesday and Friday briefing before it goes out.
 - Led the page with the private memory of one market. The dealer briefings are the proof under Running now, not the headline.
 
 ## 2026-10-11

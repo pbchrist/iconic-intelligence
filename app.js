@@ -78,7 +78,7 @@
     intelligence: 'SAMPLE FINDINGS',
     work: 'SAMPLE QUEUE',
     knowledge: 'SAMPLE MEMORY',
-    control: 'WHERE I STAY IN IT'
+    control: 'MY APPROVAL'
   };
   function openDashboardTab(tab, shouldScroll = false) {
     const button = $(`.dash-tab[data-tab="${tab}"]`);
@@ -230,7 +230,11 @@
     await wait(420);
     addTrace('03', 'COMPARE', 'Like for like: year, model, trim, cab, drive, engine. Stickers within $1,000.');
     await wait(420);
-    addTrace('04', 'SOURCE', 'A real number would point to the dated listing or page it came from.');
+    if (mission === missions.ask) {
+      addTrace('04', 'ANSWER', 'The bot answers on its own. I get a copy.');
+    } else {
+      addTrace('04', 'SOURCE', 'A real number would point to the dated listing or page it came from.');
+    }
     await wait(420);
     if (mission === missions.ask) {
       addTrace('05', 'BRIEF', mission.result, 'ok');
