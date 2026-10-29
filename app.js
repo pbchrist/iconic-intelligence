@@ -226,7 +226,7 @@
     if (mission === missions.ask) {
       addTrace('02', 'READ', 'Open the saved, dated lot readings. Sample data, not a client file.');
       await wait(420);
-      addTrace('03', 'MATCH', 'Find the trucks the question is about: same year, model, trim, cab, drive and engine.');
+      addTrace('03', 'MATCH', 'Find the readings for the trim, cab and drive the question is about.');
       await wait(420);
       addTrace('04', 'ANSWER', 'The bot writes the answer with a cloud AI from those readings and sends it. No one reviews it first.');
       await wait(420);
