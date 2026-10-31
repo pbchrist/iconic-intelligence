@@ -3,6 +3,9 @@
 Newest first. One line per change: what changed and why.
 Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
+## 2026-10-31 (draft, not live)
+- Rebuilt the page around the private AI offer: a private AI on the client's own computer, learn it or have it done, free 30-minute check. Kept the compounding story. Removed the dealer-first use cases, the demo dashboard and the experiment demo. Added llms.txt and structured data.
+
 ## 2026-10-11
 - Moved hosting from Railway (free trial ending) to GitHub Pages, free, like the other sites. Also makes www.iconic.onl work. Site content unchanged.
 

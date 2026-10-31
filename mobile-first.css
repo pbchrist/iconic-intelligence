@@ -769,3 +769,16 @@ footer { margin-top: 78px; }
   .hero { grid-template-columns:minmax(0,1fr) !important; gap:0; }
   .hero-copy { max-width:1040px; }
 }
+
+/* Private AI offer (Oct 31): notes, example questions, proof scores */
+.compound-note, .proof-disclosure { max-width: 900px; margin: 28px 0 0; color: #8d94a9; font-family: Georgia, serif; font-size: 17px; line-height: 1.6; }
+.proof-disclosure { font-size: 15px; }
+.memory-section .section-heading p { max-width: 760px; }
+.ask-examples { margin-top: 22px; padding: 22px 24px; border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,.02); }
+.ask-examples small { color: var(--accent-2); font-size: 9px; font-weight: 900; letter-spacing: .16em; }
+.ask-examples ul { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 12px; }
+.ask-examples li { font-family: Georgia, serif; font-size: clamp(17px, 2.2vw, 21px); line-height: 1.4; color: var(--pearl); }
+.use-case-steps strong.score { font-family: Georgia, serif; font-size: clamp(30px, 4vw, 44px); font-weight: 400; letter-spacing: -.03em; line-height: 1; }
+@media (min-width: 900px) {
+  .ask-examples ul { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+}
