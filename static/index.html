@@ -28,9 +28,9 @@
 
       <nav class="tabs" aria-label="Sections">
         <button class="tab active" data-tab="ask"><span class="ico">⌁</span><b>Ask</b></button>
-        <button class="tab" data-tab="intel"><span class="ico">✦</span><b>Intelligence</b><i id="cntIntel"></i></button>
+        <button class="tab" data-tab="intel"><span class="ico">✦</span><b>Graph</b><i id="cntIntel"></i></button>
         <button class="tab" data-tab="work"><span class="ico">↻</span><b>Work</b><i id="cntWork"></i></button>
-        <button class="tab" data-tab="knowledge"><span class="ico">◫</span><b>Knowledge</b><i id="cntDocs"></i></button>
+        <button class="tab" data-tab="knowledge"><span class="ico">◫</span><b>Files</b><i id="cntDocs"></i></button>
         <button class="tab" data-tab="control"><span class="ico">◇</span><b>Control</b></button>
       </nav>
 
@@ -73,11 +73,29 @@
 
       <!-- INTELLIGENCE -->
       <section class="panel" id="panel-intel">
-        <div class="phead">
-          <div><small>WRITTEN BY THE LOCAL MODEL FROM YOUR FILES</small><h2>Intelligence feed</h2><p class="psub" id="feedSub">—</p></div>
-          <button class="ghost" id="feedRefresh" type="button">RE-READ FILES ↻</button>
+        <div class="phead ghead">
+          <div><small>HOW EVERYTHING CONNECTS · MAPPED BY THE LOCAL MODEL</small><h2>Intelligence graph</h2><p class="psub" id="graphSub">—</p></div>
+          <div class="gstats">
+            <div><b id="gConn">0</b><span>connections made</span></div>
+            <div><b id="gConv">0</b><span>conversations</span></div>
+          </div>
         </div>
-        <div class="feed" id="feed"></div>
+        <div class="glayout">
+          <div class="gwrap" id="gwrap">
+            <canvas id="graph" aria-label="Knowledge graph of the business"></canvas>
+            <div class="gempty" id="gEmpty" hidden></div>
+            <div class="glegend"><span><i class="lg-tunnel"></i>Hidden connection</span><span><i class="lg-learned"></i>Learned from questions</span><span><i class="lg-urgent"></i>Needs attention</span></div>
+          </div>
+          <div class="gside">
+            <div class="gdetail" id="gDetail" hidden></div>
+            <div class="tunnels" id="tunnels"></div>
+            <div class="briefing">
+              <div class="bhead"><small>TODAY'S BRIEFING</small><button class="ghost" id="feedRefresh" type="button">RE-READ ↻</button></div>
+              <p class="psub" id="feedSub">—</p>
+              <div class="feed" id="feed"></div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- WORK -->
@@ -153,6 +171,7 @@
   </aside>
   <div class="scrim" id="scrim"></div>
 
+  <script src="graph.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

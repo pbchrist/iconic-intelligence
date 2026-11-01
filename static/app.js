@@ -5,10 +5,11 @@
   const fmt = (n) => Number(n || 0).toLocaleString('en-US');
   const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
 
-  const S = { ws: store.get('iconic.ws') || '', status: null, workspace: null, feed: null, jobs: [], tab: 'ask', history: [], busy: false, folder: 'all', picked: false, asked: new Set(), revealed: '' };
+  const S = { ws: store.get('iconic.ws') || '', status: null, workspace: null, feed: null, jobs: [], tab: 'ask', history: [], busy: false, folder: 'all', picked: false, asked: new Set(), revealed: '', graph: null, answers: 0, extras: null, totals: { connections: 0, conversations: 0 } };
+  const sess = (() => { let v = null; try { v = sessionStorage.getItem('iconic.sess'); if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); sessionStorage.setItem('iconic.sess', v); } } catch { v = Math.random().toString(36).slice(2); } return v; })();
   const EMBED = /[?&]embed=1/.test(location.search);
   if (EMBED) document.body.classList.add('embed');
-  const TITLES = { ask: 'ASK THE BUSINESS', intel: 'INTELLIGENCE', work: 'WORK', knowledge: 'KNOWLEDGE', control: 'CONTROL' };
+  const TITLES = { ask: 'ASK THE BUSINESS', intel: 'INTELLIGENCE GRAPH', work: 'WORK', knowledge: 'KNOWLEDGE', control: 'CONTROL' };
 
   // ---------- atmosphere
   addEventListener('pointermove', (e) => { document.documentElement.style.setProperty('--mx', e.clientX + 'px'); document.documentElement.style.setProperty('--my', e.clientY + 'px'); }, { passive: true });
@@ -35,7 +36,7 @@
     $$('.panel').forEach((p) => p.classList.toggle('active', p.id === 'panel-' + t));
     $('#panelTitle').textContent = TITLES[t];
     if (t === 'work') loadJobs();
-    if (t === 'intel') loadFeed();
+    if (t === 'intel') { loadFeed(); loadGraph(); requestAnimationFrame(() => window.IconicGraph && IconicGraph.resize()); }
     if (t === 'ask') setTimeout(() => $('#askInput').focus(), 50);
   }
   $$('.tab').forEach((b) => b.addEventListener('click', () => setTab(b.dataset.tab)));
@@ -53,10 +54,10 @@
   }
   function switchWs(id) {
     if (id === S.ws) { S.picked = true; renderHello(); return; }
-    S.ws = id; store.set('iconic.ws', id); S.history = []; S.feed = null; S.folder = 'all'; S.picked = true; S.revealed = ''; S.asked = new Set();
+    S.ws = id; store.set('iconic.ws', id); S.history = []; S.feed = null; S.folder = 'all'; S.picked = true; S.revealed = ''; S.asked = new Set(); S.graph = null; S.answers = 0; $('#gDetail').hidden = true;
     $$('.turn', $('#convo')).forEach((t) => t.remove());
     $('#hello').hidden = false;
-    loadWorkspace(); loadFeed();
+    loadWorkspace(); loadFeed(); loadGraph();
   }
 
   // ---------- status
@@ -168,7 +169,6 @@
   function ago(ts) { const s = Math.floor(Date.now() / 1000 - ts); return s < 90 ? 'just now' : s < 3600 ? Math.floor(s / 60) + ' min ago' : s < 86400 ? Math.floor(s / 3600) + ' hr ago' : Math.floor(s / 86400) + ' days ago'; }
   function renderFeed() {
     const f = S.feed || {}, items = f.items || [];
-    $('#cntIntel').textContent = items.length || '';
     $('#feedRefresh').disabled = f.status === 'running';
     const online = S.status && S.status.model.online;
     if (f.status === 'running' && !items.length) {
@@ -187,6 +187,51 @@
     $$('#feed .ask-this').forEach((b) => b.addEventListener('click', () => { setTab('ask'); ask(b.dataset.q); }));
   }
   $('#feedRefresh').addEventListener('click', async () => { await api('/api/refresh-feed', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ws: S.ws }) }); S.feed = Object.assign({}, S.feed, { status: 'running' }); renderFeed(); });
+
+  // ---------- intelligence graph
+  function countTo(el, v) { if (el) countUp(el, v); }
+  async function loadGraph() {
+    if (!S.ws || !window.IconicGraph) return;
+    let g; try { g = await api('/api/graph?ws=' + encodeURIComponent(S.ws)); } catch { return; }
+    const sig = JSON.stringify([g.generated_at, g.status, (g.learned || []).length, (g.learned || []).reduce((a, l) => a + l.n, 0), (g.urgent_docs || []).join()]);
+    S.totals = g.totals || S.totals; countTo($('#gConn'), S.totals.connections); countTo($('#gConv'), S.totals.conversations);
+    if (S.graphSig === sig && S.graphWs === S.ws) return;
+    S.graphSig = sig; S.graphWs = S.ws; S.graph = g;
+    const ready = (g.entities || []).length > 0;
+    $('#gEmpty').hidden = ready;
+    if (!ready) { $('#gEmpty').innerHTML = `<div class="orb"></div><p>${g.status === 'error' ? 'The map failed: ' + esc(g.error || '') : 'Mapping how ' + esc(S.workspace ? S.workspace.name : 'the business') + ' connects…'}</p><small>The local model is reading every file. It takes about a minute, once.</small>`; }
+    IconicGraph.build(g, { name: S.workspace ? S.workspace.name : '', urgentDocs: g.urgent_docs || [] });
+    $('#graphSub').textContent = ready ? `${(g.entities || []).length} people, companies and deadlines across ${(g.wings || []).length} areas, ${(g.facts || []).length} facts, mapped by ${g.model || 'the local model'}. Every question adds connections, for everyone.` : '—';
+    $('#cntIntel').textContent = (g.tunnels || []).length || '';
+    const T = g.tunnels || [];
+    const lbl = (id) => ((g.entities || []).find((e) => e.id === id) || {}).label || id;
+    $('#tunnels').innerHTML = T.map((t, i) => `<button type="button" class="tunnel" data-i="${i}"><small>✦ HIDDEN CONNECTION</small><strong>${esc(lbl(t.a))} <em>⇄</em> ${esc(lbl(t.b))}</strong><p>${esc(t.insight)}</p></button>`).join('');
+    $$('#tunnels .tunnel').forEach((b) => b.addEventListener('click', () => IconicGraph.select('tunnel:' + b.dataset.i, true)));
+  }
+  function onGraphSelect(info, user) {
+    const box = $('#gDetail');
+    if (!info) { box.hidden = true; return; }
+    const docTitle = (id) => { const d = (S.graph && S.graph.docs || []).find((x) => x.id === id); return d ? d.title : 'File ' + id; };
+    const docBtns = (ids) => (ids || []).slice(0, 5).map((id) => `<button type="button" class="chip" data-doc="${id}">◫ ${esc(docTitle(id))}</button>`).join('');
+    let html = '', q = '';
+    if (info.kind === 'tunnel') {
+      const t = info.tunnel; q = `Explain the connection between ${info.a.label} and ${info.b.label}. Why does it matter?`;
+      html = `<small class="gold">✦ HIDDEN CONNECTION</small><h3>${esc(info.a.label)} ⇄ ${esc(info.b.label)}</h3><p>${esc(t.insight)}</p><div class="gchips">${docBtns(t.docs)}</div>`;
+    } else {
+      const n = info.node; const kindName = { core: 'THE BUSINESS', wing: 'AREA', ent: (n.ekind || 'ENTITY').toUpperCase(), doc: 'FILE' }[n.kind];
+      q = n.kind === 'doc' ? `What matters in "${n.label}"?` : `What should I know about ${n.label}?`;
+      const facts = (info.facts || []).slice(0, 6).map((f) => `<li><span class="fstate ${f.state}">${esc(f.state.toUpperCase())}</span><span>${esc(f.label)} <b>${esc(f.other ? f.other.label : '')}</b>${f.date ? ` · ${esc(f.date)}` : ''}</span></li>`).join('');
+      const tun = (info.tunnels || []).map((t) => `<p class="tline">✦ ${esc(t.insight)}</p>`).join('');
+      const kids = (info.kids || []).slice(0, 8).map((k) => `<span class="pill-s">${esc(k.label)}</span>`).join('');
+      const lrn = (info.learned || []).length ? `<p class="lline">Linked to ${(info.learned || []).length} other file${info.learned.length > 1 ? 's' : ''} by visitors' questions.</p>` : '';
+      html = `<small>${kindName}</small><h3>${esc(n.label)}</h3>${tun}${kids ? `<div class="gchips">${kids}</div>` : ''}${facts ? `<ul class="facts">${facts}</ul>` : ''}${lrn}<div class="gchips">${docBtns(info.docs)}</div>`;
+    }
+    box.innerHTML = html + `<button type="button" class="ask-this" data-q="${esc(q)}">ASK ABOUT THIS →</button>`;
+    box.hidden = false;
+    $$('[data-doc]', box).forEach((b) => b.addEventListener('click', () => openDoc(Number(b.dataset.doc))));
+    $('.ask-this', box).addEventListener('click', (e) => { setTab('ask'); ask(e.currentTarget.dataset.q); });
+    if (user && matchMedia('(max-width: 860px)').matches) setTimeout(() => box.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 60);
+  }
 
   // ---------- jobs
   async function loadJobs() {
@@ -235,8 +280,25 @@
     return html || '<p></p>';
   }
 
+  // "show sources" / "hide sources" / "where did you get that": handled here, instantly.
+  function localCommand(q) {
+    const show = /^(please\s+)?(show|bring back|turn on|give me|i want)\b.*\b(sources?|suggestions?|boxes|box|cards?|files)\b/i.test(q);
+    const hide = /^(please\s+)?(hide|stop showing|turn off|no more|lose)\b.*\b(sources?|suggestions?|boxes|box|cards?)\b/i.test(q);
+    const where = /\b(where('?d| did| do) you get (that|this)|what('?s| is| are) (your|the) sources?|show me the sources?|prove it)\b/i.test(q);
+    if (!show && !hide && !where) return false;
+    const turns = $$('.turn'), last = turns[turns.length - 1];
+    if (show || where) { if (show) S.extras = true; (show ? turns : [last]).forEach((t) => t && t.classList.remove('quiet')); }
+    if (hide) { S.extras = false; turns.forEach((t) => t.classList.add('quiet')); }
+    const note = document.createElement('div'); note.className = 'turn';
+    note.innerHTML = `<div class="q"><p>${esc(q)}</p></div><p class="sysnote">${show ? 'Done. Sources and suggestions are back on every answer.' : hide ? 'Done. Clean answers from here. Say “show sources” anytime.' : last ? 'Here’s where that came from. Tap any file to read it.' : 'Ask me something first.'}</p>`;
+    $('#convo').appendChild(note); $('#hello').hidden = true; $('#askInput').value = '';
+    const target = where && last ? $('.srcs', last) : note; setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50);
+    return true;
+  }
+
   async function ask(q) {
     q = (q || '').trim(); if (!q || S.busy || !S.ws) return;
+    if (localCommand(q)) return;
     S.busy = true; S.picked = true; S.asked.add(q); $('#askBtn').disabled = true; $('#askInput').value = '';
     $('#hello').hidden = S.history.length === 0 ? false : $('#hello').hidden;
     const turn = document.createElement('div'); turn.className = 'turn';
@@ -248,7 +310,7 @@
     let sources = [], text = '', t0 = performance.now();
     const paint = () => { bodyEl.innerHTML = md(text, sources); $$('.cite', bodyEl).forEach((c) => c.onclick = () => { const s = sources.find((x) => String(x.n) === c.dataset.n); if (s) openDoc(s.id, s.snippet); }); };
     try {
-      const res = await fetch('/api/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ws: S.ws, q, history: S.history.slice(-3) }) });
+      const res = await fetch('/api/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ws: S.ws, q, history: S.history.slice(-3), session: sess }) });
       if (!res.ok) { const j = await res.json().catch(() => ({})); throw new Error(j.error || 'Request failed'); }
       const reader = res.body.getReader(), dec = new TextDecoder(); let buf = '';
       for (;;) {
@@ -272,12 +334,16 @@
             text += data; paint(); convo.scrollTop = convo.scrollHeight;
           } else if (ev === 'done') {
             bodyEl.classList.remove('streaming'); paint();
-            metaEl.innerHTML = `<span>ANSWERED ON ${esc(String(data.location || 'THIS COMPUTER').toUpperCase())} IN ${(data.ms / 1000).toFixed(1)}s</span>${data.tps ? `<span>${data.tps} TOK/S</span>` : ''}<span><b>COST $0.00</b></span>${data.private ? '<span><b>SENT TO NO AI COMPANY</b></span>' : ''}`;
+            metaEl.innerHTML = `<span>ANSWERED ON ${esc(String(data.location || 'THIS COMPUTER').toUpperCase())} IN ${(data.ms / 1000).toFixed(1)}s</span>${data.tps ? `<span>${data.tps} TOK/S</span>` : ''}<span><b>COST $0.00</b></span>${data.private ? '<span><b>SENT TO NO AI COMPANY</b></span>' : ''}${data.learned && data.learned.new && data.learned.new.length ? `<button type="button" class="grow">+${data.learned.new.length} CONNECTION${data.learned.new.length > 1 ? 'S' : ''} · ${fmt(data.learned.connections)} TOTAL ↗</button>` : ''}`;
+            if (data.learned) { S.totals = { connections: data.learned.connections, conversations: data.learned.conversations }; if (window.IconicGraph) IconicGraph.addLearned(data.learned.new); S.graphSig = ''; const gb = $('.grow', metaEl); if (gb) gb.addEventListener('click', () => setTab('intel')); }
           } else if (ev === 'error') { throw new Error(data); }
         }
       }
       if (!text) throw new Error('The model returned nothing.');
-      S.history.push({ q, a: text });
+      S.history.push({ q, a: text }); S.answers++;
+      const showExtras = S.extras === true || (S.extras === null && S.answers <= 2);
+      if (!showExtras) turn.classList.add('quiet');
+      if (S.extras === null && S.answers === 2) { const n = document.createElement('p'); n.className = 'sysnote'; n.textContent = 'I’ll keep it clean from here. Say “show sources” anytime.'; turn.appendChild(n); }
       const cta = (S.status && S.status.cta_url) || '';
       const nq = nextQuestions(2);
       nextEl.innerHTML = nq.map((x) => `<button type="button" class="next" data-q="${esc(x)}">${esc(x)} →</button>`).join('') +
@@ -299,13 +365,23 @@
   }
   $('#askForm').addEventListener('submit', (e) => { e.preventDefault(); ask($('#askInput').value); });
 
+  // ---------- the host page (iconic.onl) can ask the demo a question
+  window.addEventListener('message', (e) => {
+    if (!/^https:\/\/(www\.)?iconic\.onl$|^http:\/\/localhost(:\d+)?$/.test(e.origin)) return;
+    const d = e.data || {}; if (d.source !== 'iconic-site' || d.type !== 'ask' || !d.q) return;
+    const go = () => { setTab('ask'); ask(String(d.q).slice(0, 300)); };
+    if (d.ws && d.ws !== S.ws) { switchWs(d.ws); setTimeout(go, 900); } else { S.picked = true; go(); }
+  });
+
   // ---------- loops
   (async () => {
-    await loadStatus(); await loadWorkspace().catch(() => {}); await loadFeed(); loadJobs();
+    if (window.IconicGraph) IconicGraph.mount($('#graph'), onGraphSelect);
+    await loadStatus(); await loadWorkspace().catch(() => {}); await loadFeed(); loadJobs(); loadGraph();
     if (EMBED && window.parent !== window) { try { window.parent.postMessage({ source: 'iconic-demo', type: 'ready', online: !!(S.status && S.status.model.online) }, '*'); } catch {} }
     setInterval(loadStatus, 5000);
     setInterval(() => { if (!S.feed || S.feed.status !== 'ready' || S.tab === 'intel') loadFeed(); }, 4000);
     setInterval(() => { loadJobs(); }, 3000);
+    setInterval(() => { if (S.tab === 'intel' || !S.graph || S.graph.status !== 'ready') loadGraph(); }, 6000);
     setInterval(() => { if (S.workspace) api('/api/workspace?ws=' + encodeURIComponent(S.ws)).then((w) => { if (w.indexed_at !== S.workspace.indexed_at) { S.workspace = w; renderKnowledge(); renderHello(); $('#cntDocs').textContent = w.documents || ''; } }).catch(() => {}); }, 10000);
   })();
 })();

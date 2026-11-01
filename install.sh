@@ -65,8 +65,29 @@ RestartSec=3
 [Install]
 WantedBy=default.target
 UNIT
+  # Self-update: every 10 minutes, pull the newest version and restart only if it changed.
+  cat > "$HOME/.config/systemd/user/iconic-command-update.service" <<UNIT
+[Unit]
+Description=Update ICONIC Command
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh $APP/update.sh
+UNIT
+  cat > "$HOME/.config/systemd/user/iconic-command-update.timer" <<UNIT
+[Unit]
+Description=Check for ICONIC Command updates every 10 minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=10min
+
+[Install]
+WantedBy=timers.target
+UNIT
   systemctl --user daemon-reload
   systemctl --user enable -q iconic-command
+  systemctl --user enable -q --now iconic-command-update.timer
   systemctl --user restart iconic-command
   loginctl enable-linger "$USER" >/dev/null 2>&1 || true
   started="systemd"
@@ -102,6 +123,7 @@ say "ICONIC Command is running ($started)."
 echo "    Open:        http://${IP:-localhost}:$PORT"
 echo "    Your files:  $DATA/<workspace>/   (one folder per business; new files are read within 20 seconds)"
 echo "    Settings:    $ENVF"
+[ "$started" = "systemd" ] && echo "    Updates:     automatic, checked every 10 minutes"
 echo "    $MODEL_LINE"
 [ -n "$PUBLIC_URL" ] && echo "    Public link: $PUBLIC_URL   (visitors see only the sample businesses, with an hourly limit)"
 case "$MODEL_LINE" in NO\ MODEL*)

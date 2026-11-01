@@ -30,7 +30,27 @@ class H(BaseHTTPRequestHandler):
     def do_POST(self):
         req = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
         prompt = req["messages"][-1]["content"]
-        if "JSON array" in prompt:
+        if '"tunnels"' in prompt:
+            docs = re.findall(r"\[doc (\d+)\] (.+?) \((\w+),", prompt)
+            folders = []
+            for _, _, f in docs:
+                if f not in folders:
+                    folders.append(f)
+            wings = [{"id": f, "label": f.title(), "kind": "area"} for f in folders[:6]]
+            ents, facts = [], []
+            for i, (n, t, f) in enumerate(docs[:18]):
+                if f not in folders[:6]:
+                    continue
+                ents.append({"id": "e%s" % n, "label": t.split(":")[0][:28], "wing": f, "kind": "company", "docs": [int(n)]})
+            for i in range(len(ents) - 1):
+                facts.append({"a": ents[i]["id"], "b": ents[i + 1]["id"], "label": "linked in the files",
+                              "date": "2026-11-12" if i % 4 == 0 else "", "state": ["due", "active", "broken", "active"][i % 4],
+                              "docs": ents[i]["docs"]})
+            cross = [(x, y) for x in ents for y in ents if x["wing"] != y["wing"]][:2]
+            tunnels = [{"a": x["id"], "b": y["id"], "insight": "%s and %s are connected, and nobody has noticed." % (x["label"], y["label"]),
+                        "docs": x["docs"] + y["docs"]} for x, y in cross]
+            text = json.dumps({"wings": wings, "entities": ents, "facts": facts, "tunnels": tunnels})
+        elif "JSON array" in prompt:
             ids = [int(x) for x in re.findall(r"\[doc (\d+)\]", prompt)]
             titles = re.findall(r"\[doc \d+\] (.+?) \(", prompt)
             items = []
