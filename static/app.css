@@ -508,7 +508,7 @@ h1, h2, h3, .hello h1, .phead h2, .story h3, .gdetail h3 { overflow-wrap: break-
 @media (max-width: 860px) {
   body.embed .kicker, body.embed .ws-text small, body.embed .askhint, body.embed .dare { display: none; }
   body.embed .hello h1 { margin: .2rem 0 .5rem; }
-  body.embed #pick ~ .brief:empty ~ .suggest:empty, body.embed .hello #helloSub:has(+ .pick:not(:empty)) { display: none; }
+  body.embed .hello.picking #helloSub { display: none; }
   body.embed .pick { gap: .6rem; margin-top: .8rem; }
   body.embed .pick-card { padding: .8rem; gap: .7rem; }
   body.embed .pick-card small { display: none; }

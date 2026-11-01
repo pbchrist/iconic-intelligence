@@ -111,6 +111,7 @@
     const st = S.status, w = S.workspace; if (!st || !w) return;
     $('#helloKicker').textContent = `LIVE · RUNNING ON ${String(st.location || 'this computer').toUpperCase()}`;
     const list = st.workspaces || [];
+    $('#hello').classList.toggle('picking', !S.picked && list.length > 1);
     if (!S.picked && list.length > 1) {
       $('#helloTitle').innerHTML = 'Pick a business.<br><em>Watch it think.</em>';
       $('#helloSub').innerHTML = 'Each one is a made-up company with real-looking files. A private AI on this machine has read every page. Choose one and see what it found.';
