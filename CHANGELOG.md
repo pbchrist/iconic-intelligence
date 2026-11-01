@@ -5,6 +5,8 @@ Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
 
 ## 2026-11-01
+- (branch live-demo) Added "Try it live" section after the hero: embeds ICONIC Command from the demo machine, with an honest offline fallback and booking link. Hero link now "TRY IT LIVE".
+
 - Added version tags to the stylesheet and script links so returning visitors get the new files, not stale cached ones.
 - Revised the pitch around private AI and agents: no meter, no rate limits, models no one can change on you. Named Sam Altman in the quote. Added the Fable shutdown as a "More →" detail, an agent row and a plain-English rule for each use case, a Proof section (dealer case study, 23 agents, the rig), the Learn-it ladder, where to draw the line between private and cloud, and fixed the remote-access wording. Nav: "How it compounds" became "Proof". Plan and open items: PLAN.md.
 ## 2026-10-31 (draft, not live)

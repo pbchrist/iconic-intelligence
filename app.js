@@ -115,7 +115,7 @@
   // hidden while either free-check offer block is on screen.
   const sticky = $('#stickyCta');
   if (sticky && 'IntersectionObserver' in window) {
-    const watched = ['.hero', '#check', '#start', '#contact'].map((sel) => $(sel)).filter(Boolean);
+    const watched = ['.hero', '#live', '#check', '#start', '#contact'].map((sel) => $(sel)).filter(Boolean);
     const visible = new Set();
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));

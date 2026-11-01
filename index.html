@@ -67,7 +67,7 @@
   </script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css?v=20261101" />
-  <link rel="stylesheet" href="mobile-first.css?v=20261101" />
+  <link rel="stylesheet" href="mobile-first.css?v=20261101b" />
   <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
   <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 </head>
@@ -100,7 +100,7 @@
         <p class="hero-buyer">Cloud AI is rented. The company behind it can change the model, the price or the rules overnight, and every file you send it leaves your building. ICONIC puts your own AI on a computer in your office: models no one can take away, a memory of your business that belongs to you, and agents that do real work around the clock with no meter running.</p>
         <div class="hero-actions hero-actions-threaded">
           <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking>BOOK MY FREE CHECK →</a>
-          <a class="text-link hero-problem-link" href="#own">WHY OWN IT ↓</a>
+          <a class="text-link hero-problem-link" href="#live">TRY IT LIVE ↓</a>
         </div>
         <p class="cta-note">Free. Thirty minutes. No commitment.</p>
         <div class="hero-proof">
@@ -108,6 +108,17 @@
           <div><strong>02</strong><span>No meter. No rate limits.</span></div>
           <div><strong>03</strong><span>Agents that do the work</span></div>
         </div>
+      </div>
+    </section>
+
+    <section id="live" class="section-shell live-section" data-demo-url="">
+      <div class="section-kicker" data-reveal>TRY IT · LIVE RIGHT NOW</div>
+      <div class="section-heading split-heading direct-heading" data-reveal>
+        <h2>DON'T TAKE MY WORD FOR IT.<br><em>ASK IT YOURSELF.</em></h2>
+        <p>This is a private AI running on a computer in Seattle, not in any AI company's cloud. It has read every file of two made-up businesses. Pick one, see what it found, then try to trip it up.</p>
+      </div>
+      <div class="live-frame" id="liveFrame" data-reveal>
+        <div class="live-wait" id="liveWait"><span class="live-dot"></span> Waking up the demo…</div>
       </div>
     </section>
 
@@ -305,7 +316,26 @@
   </main>
 
   <a class="sticky-cta" id="stickyCta" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking aria-hidden="true" tabindex="-1">BOOK MY FREE 30-MINUTE CHECK →</a>
-  <script src="app.js?v=20261101" defer></script>
+  <script src="app.js?v=20261101b" defer></script>
+  <script>
+    // Live demo: shown only when the demo machine answers; otherwise an honest note and the booking link.
+    (function () {
+      var sec = document.getElementById('live'); if (!sec) return;
+      var url = (sec.getAttribute('data-demo-url') || '').replace(/\/$/, '');
+      var box = document.getElementById('liveFrame');
+      var book = 'https://calendly.com/patrick-iconic/30min';
+      function offline() {
+        box.innerHTML = '<div class="live-off"><strong>The live demo is resting right now.</strong><p>It runs on one private computer in Seattle, and that computer is offline at the moment. Book the free check and I\'ll show it to you running, on your kind of files.</p><a class="button button-primary" href="' + book + '" data-calendly-booking>BOOK MY FREE CHECK →</a></div>';
+      }
+      if (!url) { offline(); return; }
+      var done = false, t = setTimeout(function () { if (!done) { done = true; offline(); } }, 6000);
+      fetch(url + '/api/status', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (s) {
+        if (done) return; done = true; clearTimeout(t);
+        if (!s.model || !s.model.online) return offline();
+        box.innerHTML = '<iframe src="' + url + '/?embed=1" title="ICONIC live demo" loading="lazy" allow="clipboard-write"></iframe>';
+      }).catch(function () { if (!done) { done = true; clearTimeout(t); offline(); } });
+    })();
+  </script>
   <script>
     // Keep booking on ICONIC; the href remains a working fallback if the widget is blocked.
     document.addEventListener('click', function (event) {
