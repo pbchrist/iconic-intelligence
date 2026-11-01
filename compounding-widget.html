@@ -316,6 +316,9 @@ function applySignal(id){
 }
 applySignal(sig.id);
 
+/* Report height so the host can size the iframe (before the 3D loads, so it still works without WebGL). */
+new ResizeObserver(()=>post('height',{height:document.body.scrollHeight})).observe(document.body);
+
 /* Create the 3D only when the section is near the viewport. */
 await new Promise(res=>{
   const io=new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ io.disconnect(); res(); } },{rootMargin:'600px 0px'});
@@ -856,8 +859,6 @@ window.addEventListener('message',e=>{
   if(d.type==='setSignal' && step===0 && !busy) applySignal(d.id);
   if(d.type==='replay') replayBtn.click();
 });
-/* Report height so the host can size the iframe. */
-new ResizeObserver(()=>post('height',{height:document.documentElement.scrollHeight})).observe(document.body);
 document.addEventListener('visibilitychange',()=>{ if(document.hidden) clearAuto(); else if(!busy) armAuto(); });
 skipBtn.addEventListener('click',e=>{ e.stopPropagation(); skip(); });
 replayBtn.addEventListener('click',e=>{
