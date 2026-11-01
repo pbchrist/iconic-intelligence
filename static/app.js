@@ -302,6 +302,7 @@
   // ---------- loops
   (async () => {
     await loadStatus(); await loadWorkspace().catch(() => {}); await loadFeed(); loadJobs();
+    if (EMBED && window.parent !== window) { try { window.parent.postMessage({ source: 'iconic-demo', type: 'ready', online: !!(S.status && S.status.model.online) }, '*'); } catch {} }
     setInterval(loadStatus, 5000);
     setInterval(() => { if (!S.feed || S.feed.status !== 'ready' || S.tab === 'intel') loadFeed(); }, 4000);
     setInterval(() => { loadJobs(); }, 3000);

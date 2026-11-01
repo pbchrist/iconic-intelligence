@@ -646,7 +646,7 @@ def private_addr(ip):
 
 MIME = {".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "application/javascript",
         ".svg": "image/svg+xml", ".png": "image/png", ".webp": "image/webp", ".ico": "image/x-icon",
-        ".json": "application/json"}
+        ".json": "application/json", ".txt": "text/plain; charset=utf-8"}
 
 
 class Handler(BaseHTTPRequestHandler):
