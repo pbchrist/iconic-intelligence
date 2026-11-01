@@ -51,7 +51,7 @@
   onScroll();
 
   // Deterministic primary-nav state: nothing is active at the top.
-  const navTargets = ['capability', 'dashboard', 'deployment'];
+  const navTargets = ['own', 'uses', 'capability', 'ways'];
   const navLinks = $$('.nav a[href^="#"]');
   const updateNavState = () => {
     if (window.scrollY < 180) {
@@ -72,245 +72,60 @@
   window.addEventListener('resize', updateNavState, { passive: true });
   updateNavState();
 
-  // Compounding signal thread + independent cross-industry use-case rotator.
+  // The compounding widget reports its height so it fits on small screens.
   const ciFrame = $('#ciFrame');
-  const signalData = {
-    pricing: { missionValue:'competitor', quote:'I never know when competitors change their offers.', question:'Which competitor changed pricing?', answer:'A primary competitor moved advertised entry pricing down across 11 monitored listings. The pattern is broad enough to look deliberate, so I prepared a response brief with the affected offers and what changed.' },
-    reviews: { missionValue:'reviews', quote:'We have hundreds of reviews and nobody is synthesizing them.', question:'What are customers complaining about?', answer:'The strongest complaint cluster is service wait time, followed by communication gaps during handoffs. Positive mentions of staff courtesy remain a useful counter-signal.' },
-    vendor: { missionValue:'vendor', quote:'We notice pricing, inventory or search changes too late.', question:'Where is operating exposure building?', answer:'Inventory and service signals are tracked beside competitor changes so a developing constraint can be investigated before it becomes a separate fire drill.' },
-    market: { missionValue:'brief', quote:'Tell me what changed in my market every Monday morning.', question:'What changed in my market?', answer:'A local search gap remains under-contested while competitor pricing and offer movement continue to be watched. The point is one brief that says what changed and what deserves attention.' }
-  };
-  const useCases = {
-    automotive: { kicker:'AUTOMOTIVE · COMPETITIVE INTELLIGENCE', client:'REGIONAL DEALER GROUP', title:'Know what changed before the morning meeting.', body:'ICONIC watches competitor offers, pricing, inventory, reviews, search visibility and service signals, then condenses the material changes into recurring executive intelligence.', result:'A recurring brief that says what changed, why it matters and what deserves attention next.', watch:'Offers · pricing · inventory · reviews · search · service', surface:'Material competitive and operating changes', deliver:'Recurring executive intelligence' },
-    legal: { kicker:'LEGAL · MATTER + REGULATORY INTELLIGENCE', client:'LAW FIRM / LEGAL TEAM', title:'The ruling changed. Who needs to know?', body:'ICONIC can watch rulings, regulations, dockets, client matters and relevant company activity, then connect the change to the clients and matters it actually touches.', result:'A partner-ready brief that identifies the change, affected clients or matters, supporting sources and the next questions worth asking.', watch:'Rulings · regulations · dockets · client matters', surface:'Changes with direct client or matter relevance', deliver:'Partner briefs · research trails · follow-up work' },
-    wealth: { kicker:'WEALTH MANAGEMENT · CLIENT INTELLIGENCE', client:'PRIVATE WEALTH / ADVISORY', title:'See the client impact before the client asks.', body:'ICONIC can monitor market developments, portfolio-relevant news, client communications, meetings and recurring obligations so the advisor sees the intersection before it becomes another inbox search.', result:'An advisor brief that connects an external development to the clients, conversations and obligations that need review.', watch:'Markets · holdings context · client communications · obligations', surface:'Developments with client-specific relevance', deliver:'Advisor briefs · meeting context · review queues' },
-    marketing: { kicker:'MARKETING · GROWTH INTELLIGENCE', client:'AGENCY / GROWTH TEAM', title:'Turn the market into a live brief, not a quarterly deck.', body:'ICONIC can watch competitor campaigns, site changes, search position, ad messaging, prospect activity and lead flow, then turn the changes into work instead of another research project.', result:'A growth brief that shows what competitors changed, where demand is moving and which opportunities deserve action now.', watch:'Campaigns · sites · search · offers · prospects · lead flow', surface:'Competitive shifts and neglected opportunities', deliver:'Growth briefs · outreach inputs · campaign actions' },
-    executive: { kicker:'EXECUTIVE · OPERATING INTELLIGENCE', client:'OWNER-LED / PROFESSIONAL SERVICES', title:'One morning brief instead of six places to check.', body:'ICONIC can connect meetings, client accounts, competitors, vendors, pipeline activity and recurring research into one persistent operating picture for the principal.', result:'A principal-level brief that says what changed overnight, what needs attention and what can wait.', watch:'Clients · meetings · competitors · vendors · pipeline', surface:'Changes that deserve executive attention', deliver:'Morning briefs · follow-up queues · recurring research' }
-  };
-  const caseOrder = ['automotive','legal','wealth','marketing','executive'];
-  let caseIndex = 0;
-  let useCaseTimer = null;
-  let currentSignal = 'pricing';
-
-  function renderUseCase(id) {
-    const d = useCases[id] || useCases.automotive;
-    caseIndex = Math.max(0, caseOrder.indexOf(id));
-    $('#useCaseKicker') && ($('#useCaseKicker').textContent = d.kicker);
-    $('#useCaseClient') && ($('#useCaseClient').textContent = d.client);
-    $('#useCaseTitle') && ($('#useCaseTitle').textContent = d.title);
-    $('#useCaseBody') && ($('#useCaseBody').textContent = d.body);
-    $('#useCaseResult') && ($('#useCaseResult').innerHTML = `<strong>OUTPUT</strong> ${escapeHtml(d.result)}`);
-    $('#useCaseWatch') && ($('#useCaseWatch').textContent = d.watch);
-    $('#useCaseSurface') && ($('#useCaseSurface').textContent = d.surface);
-    $('#useCaseDeliver') && ($('#useCaseDeliver').textContent = d.deliver);
-    $$('.use-case-dots button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.case === id)));
-    const copy = $('#useCaseCopy');
-    if (copy?.animate) copy.animate([{opacity:.34,transform:'translateY(5px)'},{opacity:1,transform:'none'}],{duration:360,easing:'ease-out'});
-  }
-  function armUseCaseRotation() {
-    clearInterval(useCaseTimer);
-    useCaseTimer = setInterval(() => { caseIndex = (caseIndex + 1) % caseOrder.length; renderUseCase(caseOrder[caseIndex]); }, 5600);
-  }
-  $$('.use-case-dots button').forEach((b) => b.addEventListener('click', () => { renderUseCase(b.dataset.case); armUseCaseRotation(); }));
-  renderUseCase(caseOrder[0]);
-  armUseCaseRotation();
-
-  function renderDashboardThread(id) {
-    const d = signalData[id] || signalData.pricing;
-    const thread = $('.prefill-thread');
-    if (!thread) return;
-    thread.innerHTML = `<div class="user-message"><div><small>YOU</small><p>${escapeHtml(d.question)}</p></div></div><div class="assistant-message"><span class="sigil">✦</span><div><small>ICONIC INTELLIGENCE</small><p>${escapeHtml(d.answer)}</p></div></div>`;
-  }
-  function renderProblemThread(id) {
-    const d = signalData[id] || signalData.pricing;
-    const select = $('#missionSelect');
-    if (select) select.value = d.missionValue;
-    $$('#problemExamples button').forEach((button) => button.classList.toggle('active', button.dataset.signal === id));
-  }
-  function setSignal(id, { syncWidget = false } = {}) {
-    if (!signalData[id]) return;
-    currentSignal = id;
-    renderDashboardThread(id);
-    renderProblemThread(id);
-    document.documentElement.dataset.iconicSignal = id;
-    if (syncWidget && ciFrame?.contentWindow) ciFrame.contentWindow.postMessage({ source:'iconic-site', type:'setSignal', id }, '*');
-  }
-  $$('#problemExamples button').forEach((button) => button.addEventListener('click', () => {
-    const id = button.dataset.signal;
-    if (signalData[id]) setSignal(id, { syncWidget:true });
-    else if (button.dataset.mission && $('#missionSelect')) $('#missionSelect').value = button.dataset.mission;
-  }));
   window.addEventListener('message', (event) => {
     const data = event.data || {};
     if (data.source !== 'iconic-compounding') return;
-    if (data.type === 'height' && ciFrame && window.innerWidth < 980) {
-      const height = Math.max(620, Math.min(Number(data.height) || 0, 2200));
+    if (data.type === 'height' && ciFrame) {
+      const height = Math.max(400, Math.min(Number(data.height) || 0, 3000));
       if (height) ciFrame.style.height = `${height}px`;
     }
-    if ((data.type === 'signal' || data.type === 'ready') && data.signal?.id) setSignal(data.signal.id);
   });
-  setSignal('pricing');
 
-  // Dashboard tabs
-  const tabTitles = {
-    ask: 'ASK THE COMPANY INTELLIGENCE',
-    intelligence: 'INTELLIGENCE FEED',
-    work: 'WORK QUEUE',
-    knowledge: 'BUSINESS KNOWLEDGE',
-    control: 'CONTROL PLANE'
+  // Who it's for: five use cases, toggled by the buttons and rotated slowly.
+  const useCases = {
+    law: { client:'LAW FIRM', title:'Every matter the firm has handled, in one place it controls.', body:'Briefs, contracts, research and correspondence from every matter, searchable in plain English on a computer inside the firm.', ask:'“Have we argued this before, and how did it go?”', holds:'Matters · briefs · contracts · research · correspondence', why:'Client confidences never leave the firm.', check:'A lawyer reviews anything that matters.' },
+    wealth: { client:'WEALTH MANAGEMENT', title:'Know the whole client before the meeting starts.', body:'Meeting notes, plans, account reviews and years of letters and emails, kept together so the advisor walks in knowing everything the firm knows.', ask:'“What has this client told us about risk and family over the last three years?”', holds:'Meeting notes · plans · reviews · correspondence', why:'Client finances and family details stay in your office.', check:'The advisor reviews anything sent to a client.' },
+    realestate: { client:'REAL ESTATE', title:'Your deal history is your edge. Keep it.', body:'Every deal, lease, comp, inspection and negotiation note, so the next negotiation starts with everything you learned from the last ones.', ask:'“What did we give up on the last three leases like this one?”', holds:'Deals · leases · comps · inspections · negotiation notes', why:'Your terms and your counterparties stay private.', check:'The broker reviews anything that matters.' },
+    owner: { client:'OWNER-RUN COMPANY', title:'Twenty years of how the business works, kept by the business.', body:'Customers, vendors, pricing, contracts and procedures, including what the people who retired or moved on used to know.', ask:'“What did we pay this vendor last year, and what did they promise?”', holds:'Customers · vendors · pricing · contracts · procedures', why:'How your business runs is not anyone else\'s data.', check:'You decide what it can see and who can ask it.' },
+    accounting: { client:'ACCOUNTING FIRM', title:'Every client year, one question away.', body:'Returns, workpapers, client letters and the decisions made along the way, so the firm can see what it decided for a client and why.', ask:'“What did we decide for this client on this issue two years ago, and why?”', holds:'Returns · workpapers · client letters · prior-year decisions', why:'Taxpayer information stays on your own computer.', check:'A CPA reviews anything that matters.' }
   };
-  function openDashboardTab(tab, shouldScroll = false) {
-    const button = $(`.dash-tab[data-tab="${tab}"]`);
-    if (!button) return;
-    $$('.dash-tab').forEach((b) => b.classList.toggle('active', b === button));
-    $$('.dash-panel').forEach((panel) => panel.classList.toggle('active', panel.id === `panel-${tab}`));
-    $('#dashTitle').textContent = tabTitles[tab] || tab.toUpperCase();
-    if (shouldScroll) $('#dashboard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const caseOrder = Object.keys(useCases);
+  let caseIndex = 0, caseTimer = null;
+  const setText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
+  function renderUseCase(id) {
+    const d = useCases[id]; if (!d) return;
+    caseIndex = caseOrder.indexOf(id);
+    setText('useCaseClient', d.client); setText('useCaseTitle', d.title); setText('useCaseBody', d.body);
+    setText('useCaseAsk', d.ask); setText('useCaseHolds', d.holds); setText('useCaseWhy', d.why); setText('useCaseCheck', d.check);
+    $$('.use-case-dots button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.case === id)));
+    const copy = $('#useCaseCopy');
+    if (copy?.animate) copy.animate([{ opacity:.34, transform:'translateY(5px)' }, { opacity:1, transform:'none' }], { duration:360, easing:'ease-out' });
   }
-  window.__ICONIC_OPEN_DASHBOARD_TAB__ = openDashboardTab;
-  $$('.dash-tab').forEach((button) => button.addEventListener('click', () => openDashboardTab(button.dataset.tab)));
-
-  const mapAction = $('#mapAction');
-  mapAction?.addEventListener('click', () => openDashboardTab(mapAction.dataset.tab || 'ask', true));
-
-  // Demo Ask intelligence
-  const responses = [
-    {
-      match: /worried|risk|week/i,
-      text: 'Two things deserve attention. First, a competitor cut advertised entry pricing across 11 listings this morning. Second, service wait-time complaints are clustering on Tuesdays. I would inspect margin exposure first, then staffing patterns.'
-    },
-    {
-      match: /competitor|pricing|price/i,
-      text: 'One primary competitor changed pricing. The median advertised entry price moved down 6.2% across the monitored set. The change is broad enough to look deliberate rather than inventory noise. I have a response brief ready.'
-    },
-    {
-      match: /customer|complain|review/i,
-      text: 'The strongest complaint cluster is service wait time, followed by communication gaps during handoffs. Tuesday mentions are now materially above the eight-week baseline. Positive mentions of staff courtesy remain strong.'
-    },
-    {
-      match: /missing|opportun|what else/i,
-      text: 'You may be underestimating a search opportunity. Competitors are weak on a high-intent category that has visible demand but poor local answers. I would test a dedicated offer page and measure qualified inbound response.'
-    }
-  ];
-
-  function answerPrompt(prompt) {
-    const conversation = $('#askConversation');
-    const suggestionBox = $('.suggestions', conversation);
-    if (suggestionBox) suggestionBox.style.display = 'none';
-
-    const user = document.createElement('div');
-    user.className = 'user-message';
-    user.innerHTML = `<div><small>YOU</small><p>${escapeHtml(prompt)}</p></div>`;
-    conversation.appendChild(user);
-
-    const thinking = document.createElement('div');
-    thinking.className = 'assistant-message';
-    thinking.innerHTML = `<span class="sigil">✦</span><div><small>ICONIC INTELLIGENCE</small><p>Checking monitored signals, approved context and active procedures…</p></div>`;
-    conversation.appendChild(thinking);
-    conversation.scrollTop = conversation.scrollHeight;
-
-    const found = responses.find((r) => r.match.test(prompt));
-    const text = found?.text || 'I would treat that as an investigation rather than guess. I would identify the approved internal sources, search the relevant external signals, compare against the company baseline, and return the strongest findings with provenance and confidence.';
-    window.setTimeout(() => {
-      thinking.querySelector('p').textContent = text;
-      conversation.scrollTop = conversation.scrollHeight;
-    }, 650);
+  function armRotation() {
+    clearInterval(caseTimer);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    caseTimer = setInterval(() => renderUseCase(caseOrder[(caseIndex + 1) % caseOrder.length]), 7000);
   }
+  $$('.use-case-dots button').forEach((b) => b.addEventListener('click', () => { renderUseCase(b.dataset.case); clearInterval(caseTimer); }));
+  if ($('#useCaseCopy')) armRotation();
 
-  $$('.suggestions button').forEach((b) => b.addEventListener('click', () => answerPrompt(b.dataset.prompt)));
-  $('#askForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const input = $('#askInput');
-    const value = input.value.trim();
-    if (!value) return;
-    answerPrompt(value);
-    input.value = '';
-  });
-
-  // Experiment lab
-  const missions = {
-    competitor: {
-      label: 'COMPETITOR PRICING',
-      source: '11 monitored listings + 4 offer pages',
-      output: '3 material changes',
-      result: 'Competitor entry pricing moved down. Response brief generated.',
-      brief: ['11 monitored listings changed in the same direction.', 'The move appears deliberate rather than inventory noise.', 'Review the affected offers before the next pricing meeting.', 'Keep the competitor set on watch for follow-on changes.']
-    },
-    reviews: {
-      label: 'CUSTOMER VOICE',
-      source: '428 reviews + 76 service notes',
-      output: '2 complaint clusters',
-      result: 'Tuesday wait-time complaints exceed the recent baseline.',
-      brief: ['Wait-time complaints are clustering around Tuesdays.', 'Communication handoff complaints are the second strongest theme.', 'Staff courtesy remains a positive counter-signal.', 'Review Tuesday staffing and handoff coverage first.']
-    },
-    brief: {
-      label: 'EXECUTIVE BRIEF',
-      source: '7 internal + 18 external feeds',
-      output: '5-item brief',
-      result: 'Morning brief assembled with risks, opportunities and actions.',
-      brief: ['One competitor pricing move deserves attention.', 'Service complaints strengthened around a recurring daypart.', 'A local search gap remains under-contested.', 'No material vendor change requires action this morning.']
-    },
-    vendor: {
-      label: 'VENDOR RISK',
-      source: 'Terms, price history + market signals',
-      output: '1 emerging risk',
-      result: 'Minimum-order change could create peak-demand exposure.',
-      brief: ['A supplier changed minimum-order terms.', 'Current exposure is limited at normal demand.', 'Peak-demand inventory could be affected.', 'Compare alternate supplier terms before the next reorder.']
-    }
-  };
-
-  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-  function addTrace(time, step, detail, kind = '') {
-    const trace = $('#traceOutput');
-    const line = document.createElement('div');
-    line.className = `trace-line ${kind}`;
-    line.innerHTML = `<span class="time">${time}</span><span class="step">${step}</span><span class="detail">${detail}</span>`;
-    trace.appendChild(line);
-    trace.scrollTop = trace.scrollHeight;
+  // Phones: a slim "book" button pinned to the bottom, shown once the hero is passed,
+  // hidden while either free-check offer block is on screen.
+  const sticky = $('#stickyCta');
+  if (sticky && 'IntersectionObserver' in window) {
+    const watched = ['.hero', '#check', '#start', '#contact'].map((sel) => $(sel)).filter(Boolean);
+    const visible = new Set();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
+      const show = visible.size === 0;
+      sticky.classList.toggle('show', show);
+      sticky.setAttribute('aria-hidden', String(!show));
+      sticky.tabIndex = show ? 0 : -1;
+    }, { threshold: 0.05 });
+    watched.forEach((el) => io.observe(el));
   }
-
-  $('#runExperiment').addEventListener('click', async () => {
-    const mission = missions[$('#missionSelect').value];
-    const trace = $('#traceOutput');
-    const status = $('#labStatus');
-    const result = $('#labResult');
-    const sampleBrief = $('#sampleBrief');
-    const sampleBriefLines = $('#sampleBriefLines');
-    const runButton = $('#runExperiment');
-
-    runButton.disabled = true;
-    trace.innerHTML = '';
-    status.className = 'running';
-    status.innerHTML = '<i></i> RUNNING';
-    [...result.children].forEach((d) => d.querySelector('strong').textContent = '…');
-    if (sampleBrief) sampleBrief.hidden = true;
-    if (sampleBriefLines) sampleBriefLines.innerHTML = '';
-
-    addTrace('01', 'QUESTION', `${mission.label} accepted`);
-    await wait(650);
-    addTrace('02', 'CONTEXT', `Loaded approved business context + ${mission.source}`);
-    await wait(720);
-    addTrace('03', 'RESEARCH', 'Checking internal context and monitored external signals');
-    await wait(820);
-    addTrace('04', 'VERIFY', 'Cross-checking material claims against independent evidence');
-    await wait(820);
-    addTrace('05', 'POLICY', 'Read-only intelligence task → autonomous execution permitted', 'ok');
-    await wait(720);
-    addTrace('06', 'RESULT', `${mission.output} · confidence gate passed`, 'ok');
-    await wait(650);
-    addTrace('07', 'EXEC BRIEF', mission.result, 'ok');
-
-    const vals = result.querySelectorAll('strong');
-    vals[0].textContent = 'AUTOMATIC';
-    vals[1].textContent = 'AUTO / LOW RISK';
-    vals[2].textContent = 'CROSS-CHECKED';
-    vals[3].textContent = mission.output.toUpperCase();
-    if (sampleBriefLines) sampleBriefLines.innerHTML = mission.brief.map((line) => `<p>${escapeHtml(line)}</p>`).join('');
-    if (sampleBrief) sampleBrief.hidden = false;
-    status.className = 'done';
-    status.innerHTML = '<i></i> COMPLETE';
-    runButton.disabled = false;
-  });
 
   // Basic 2D fallback field so the site still looks alive if Three.js cannot load.
   // three-scene.js replaces this renderer when the remote module is available.
