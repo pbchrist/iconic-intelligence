@@ -1,6 +1,6 @@
 # ICONIC
 
-> Own your intelligence, don't rent it. ICONIC puts a private AI on a computer in a business's own office. It works on the business's real files, the data does not leave the building, and it keeps a growing memory of that business. Patrick Christell, in Seattle, either teaches the owner to run it or sets it up and looks after it. Both start with a free 30-minute check.
+> Own your intelligence, don't rent it. ICONIC puts a private AI and agents on a computer in a business's own office. It works on the business's real files, the data does not leave the building, and it keeps a growing memory of that business. Patrick Christell, in Seattle, either teaches the owner to run it or sets it up and looks after it. Both start with a free 30-minute check.
 
 ## The problem it answers
 
@@ -10,7 +10,13 @@ A business's people are either putting client files into cloud chatbots, or not 
 
 - A private AI on a computer in the client's office, connected to the client's own files.
 - A memory of the business that grows every day the system runs. Any AI the client uses can read it, and the client owns it.
-- Not a cloud service, and not a report generator.
+- Agents that run recurring work on a schedule: briefs, monitoring, drafting. No per-token cost and no rate limits, because the model runs on the client's own hardware.
+- A model no vendor can change, restrict, reprice or withdraw. Cloud models remain available for public work; part of the job is knowing where to draw that line.
+- Not a cloud service.
+
+## Proof
+
+Patrick runs 23 agents on his own private AI rig. One delivers competitor pricing intelligence to a GMC dealership every morning.
 
 ## Two ways in
 
@@ -22,20 +28,18 @@ Both start with a free 30-minute check of where the business's client data goes 
 ## Worth knowing
 
 - Local AI models are less accurate than the largest cloud models. A person checks anything that matters. At a law firm, a lawyer checks it.
-- Monthly care needs either remote access to the client's computer or an on-site visit.
+- Monthly care runs over a secure, encrypted connection the client can switch off at any time. Patrick maintains the software, not the files.
 - Prices for setup, teaching and care are quoted after the free check.
 
 ## Who it is for
 
 Owner-led businesses and professional firms with years of their own records: law firms, wealth managers, real estate firms, accounting firms and owner-run companies.
 
-Recurring work, such as a weekly summary, can be set up on top. The foundation is the business's own AI, on its own computer, with its own records.
-
 ## How to start
 
 Email patrick@iconic.onl or call 206-773-8214 to book the free 30-minute check.
 
-- [Book the free check](mailto:patrick@iconic.onl?subject=Free%20private%20AI%20check)
+- [Book the free check](https://calendly.com/patrick-iconic/30min)
 - [Home page](https://iconic.onl/)
 
 ## What agents should know

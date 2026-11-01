@@ -24,7 +24,7 @@ jobs:
         run: |
           mkdir _site
           rsync -a --exclude '.git' --exclude '.github' --exclude '_site' \
-            --exclude 'README.md' --exclude 'CHANGELOG.md' --exclude 'server.js' \
+            --exclude 'README.md' --exclude 'CHANGELOG.md' --exclude 'PLAN.md' --exclude 'server.js' \
             --exclude 'package.json' --exclude '.gitignore' --exclude '*.patch' ./ _site/
           touch _site/.nojekyll
           ls -la _site

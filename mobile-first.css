@@ -832,3 +832,25 @@ main > section { overflow-x: clip; }
 p, li, .use-case-steps strong { overflow-wrap: break-word; }
 .capability-card, .deployment-grid article, .use-case-steps article { min-width: 0; }
 @media (max-width: 899px) { .capability-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* 2026-11-01: "More →" expanders (simple line first, detail on click), the Learn-it ladder, proof stats */
+.more-detail { max-width: 900px; margin: 22px 0 0; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.018); }
+.more-detail > summary { list-style: none; cursor: pointer; padding: 16px 18px; color: #c9cddb; font-family: Georgia, serif; font-size: 16px; line-height: 1.45; overflow-wrap: break-word; }
+.more-detail > summary::-webkit-details-marker { display: none; }
+.more-detail > summary span { color: var(--pearl, #fff); }
+.more-detail > summary b { display: inline-block; margin-left: 6px; color: var(--accent-2); font-family: inherit; font-size: 10px; font-weight: 900; letter-spacing: .14em; white-space: nowrap; }
+.more-detail[open] > summary b { opacity: .55; }
+.more-detail > summary:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; border-radius: 14px; }
+.more-body { padding: 0 18px 16px; }
+.more-body p, .case-detail p { margin: 10px 0 0; color: #aeb4c7; font-size: 14px; line-height: 1.6; overflow-wrap: break-word; }
+.more-body .more-sources { color: #737b94; font-size: 12px; }
+.more-body a { color: var(--accent-2); }
+.case-detail { margin: 10px 0 0; border: 0; background: none; }
+.case-detail > summary { padding: 0; font-size: 12px; }
+.case-detail > summary b { margin-left: 0; }
+.case-detail p { margin-top: 8px; font-size: 13px; }
+.deployment-grid .ladder { margin: 14px 0 0; padding-left: 20px; color: #c3c7d6; font-size: 14px; line-height: 1.55; }
+.deployment-grid .ladder li { margin: 6px 0 0; padding-left: 4px; }
+.deployment-grid .ladder li::marker { color: var(--accent-2); font-size: 11px; font-weight: 900; }
+.proof-stats { margin-top: 28px; }
+.proof-stats .card-index { font-family: Georgia, serif; font-size: clamp(28px, 4vw, 40px); letter-spacing: -.02em; line-height: 1; }
