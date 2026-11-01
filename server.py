@@ -329,26 +329,38 @@ class Model:
             req.add_header("Authorization", "Bearer " + LLM_KEY)
         return urllib.request.urlopen(req, timeout=timeout)
 
+    EMBED = re.compile(r"(?i)embed|nomic|bge|\be5[-_]|minilm|rerank|gte-")
+
     def detect(self):
-        candidates = [self.url] if self.url else [
-            "http://127.0.0.1:%d/v1" % p for p in (8080, 8000, 8081, 8082, 8001, 5000, 1234, 11434)]
+        """Find a chat model. Skips embedding-only servers. Scans common local ports."""
+        ports = list(range(8000, 8101)) + [5000, 1234, 11434, 30000, 9000]
+        candidates = ([LLM_URL] if LLM_URL else []) + ["http://127.0.0.1:%d/v1" % p for p in ports]
+        if self.url and self.url not in candidates[:1]:
+            candidates.insert(0, self.url)
+        seen, skipped = set(), []
         for base in candidates:
+            if base in seen:
+                continue
+            seen.add(base)
             try:
-                with urllib.request.urlopen(base + "/models", timeout=2) as r:
+                with urllib.request.urlopen(base + "/models", timeout=1.5) as r:
                     j = json.load(r)
-                ids = [m.get("id") for m in j.get("data", []) if m.get("id")]
-                ids = [i for i in ids if "embed" not in i.lower()] or ids
-                with self.lock:
-                    self.url = base
-                    if not LLM_MODEL:
-                        self.model = ids[0] if ids else "local-model"
-                    self.online, self.error = True, ""
-                    self.last_check = time.time()
-                return True
-            except Exception as e:
-                err = str(e)
+            except Exception:
+                continue
+            ids = [m.get("id") or m.get("name") for m in (j.get("data") or j.get("models") or [])]
+            ids = [i for i in ids if i]
+            chat = [i for i in ids if not self.EMBED.search(i)]
+            if ids and not chat:
+                skipped.append("%s (embeddings only)" % urlparse(base).netloc)
+                continue
+            with self.lock:
+                self.url = base
+                self.model = LLM_MODEL or (chat[0] if chat else "local-model")
+                self.online, self.error, self.last_check = True, "", time.time()
+            return True
         with self.lock:
-            self.online, self.error, self.last_check = False, "No model server answered (%s)" % err[:120], time.time()
+            self.online, self.last_check = False, time.time()
+            self.error = "No chat model is running" + ("; found only " + ", ".join(skipped) if skipped else "")
         return False
 
     def is_private(self):

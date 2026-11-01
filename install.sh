@@ -39,21 +39,10 @@ if [ -z "$PORT" ]; then
   while (exec 3<>"/dev/tcp/127.0.0.1/$PORT") 2>/dev/null; do PORT=$((PORT + 1)); done
 fi
 
-say "Looking for your local model"
-LLM=""
-[ -f "$ENVF" ] && LLM="$(sed -n 's/^ICONIC_LLM_URL=//p' "$ENVF" | tail -1)"
-if [ -z "$LLM" ]; then
-  for p in 8080 8000 8081 8082 8001 5000 1234 11434; do
-    if curl -fsS -m 2 "http://127.0.0.1:$p/v1/models" 2>/dev/null | grep -q '"data"'; then LLM="http://127.0.0.1:$p/v1"; break; fi
-  done
-fi
-if [ -n "$LLM" ]; then say "Model server found at $LLM"; else say "No model server answered yet. The dashboard will keep looking every 15 seconds."; fi
-
 {
   echo "ICONIC_PORT=$PORT"
   echo "ICONIC_DATA=$DATA"
   echo "ICONIC_STATE=$STATE"
-  [ -n "$LLM" ] && echo "ICONIC_LLM_URL=$LLM"
   grep -E '^ICONIC_(LLM_MODEL|LLM_KEY|RATE_PER_HOUR|SCAN_SECONDS)=' "$ENVF" 2>/dev/null || true
 } > "$ENVF.tmp" && mv "$ENVF.tmp" "$ENVF"
 
@@ -93,6 +82,9 @@ for _ in $(seq 1 30); do
 done
 curl -fsS -m 2 "http://127.0.0.1:$PORT/api/status" >/dev/null 2>&1 || die "It didn't start. Check: journalctl --user -u iconic-command -n 50"
 
+sleep 3
+MODEL_LINE="$(curl -fsS -m 5 "http://127.0.0.1:$PORT/api/status" | python3 -c 'import json,sys; m=json.load(sys.stdin)["model"]; print(("Model: " + m["model"] + " at " + m["endpoint"]) if m["online"] else ("NO MODEL: " + m["error"]))' 2>/dev/null || true)"
+
 IP="$(command -v tailscale >/dev/null && tailscale ip -4 2>/dev/null | head -1 || true)"
 [ -z "$IP" ] && IP="$(hostname -I 2>/dev/null | awk '{print $1}')"
 echo
@@ -100,3 +92,11 @@ say "ICONIC Command is running ($started)."
 echo "    Open:        http://${IP:-localhost}:$PORT"
 echo "    Your files:  $DATA/<workspace>/   (one folder per business; new files are read within 20 seconds)"
 echo "    Settings:    $ENVF"
+echo "    $MODEL_LINE"
+case "$MODEL_LINE" in NO\ MODEL*)
+  echo
+  echo "    Start your chat model (llama-server with Qwen) and the dashboard connects on its own within 15 seconds."
+  echo "    Model servers running right now:"
+  (ps -eo pid,args | grep -E "llama-server|llama_cpp|ollama|vllm|lmstudio" | grep -v grep | cut -c1-160 | sed 's/^/      /') || echo "      none"
+  ;;
+esac
