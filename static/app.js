@@ -53,6 +53,7 @@
     $$('button', menu).forEach((b) => b.addEventListener('click', () => switchWs(b.dataset.ws)));
   }
   function switchWs(id) {
+    if (EMBED && window.parent !== window) { try { window.parent.postMessage({ source: 'iconic-demo', type: 'ws', ws: id }, '*'); } catch {} }
     if (id === S.ws) { S.picked = true; renderHello(); return; }
     S.ws = id; store.set('iconic.ws', id); S.history = []; S.feed = null; S.folder = 'all'; S.picked = true; S.revealed = ''; S.asked = new Set(); S.graph = null; S.answers = 0; $('#gDetail').hidden = true;
     $$('.turn', $('#convo')).forEach((t) => t.remove());
