@@ -866,3 +866,5 @@ p, li, .use-case-steps strong { overflow-wrap: break-word; }
 .live-frame iframe.is-loading { position: absolute; inset: 0; opacity: 0; }
 .live-frame .live-wait { position: absolute; inset: 0; }
 .live-off-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.live-callback b { color: var(--accent-2); font-family: Georgia, serif; font-weight: 400; }
+.live-callback a { color: var(--accent-2); white-space: nowrap; }

@@ -67,7 +67,7 @@
   </script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css?v=20261101" />
-  <link rel="stylesheet" href="mobile-first.css?v=20261101c" />
+  <link rel="stylesheet" href="mobile-first.css?v=20261101d" />
   <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
   <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 </head>
@@ -234,9 +234,10 @@
         <div><strong>Capital compounds because the returns stay invested. <em>Intelligence should work the same way.</em></strong></div>
       </div>
       <div class="ci-shell" data-reveal>
-        <iframe id="ciFrame" class="ci-frame" src="compounding-widget.html" title="Compounding intelligence interactive story" loading="eager" scrolling="no"></iframe>
+        <iframe id="ciFrame" class="ci-frame" src="compounding-widget.html?v=20261101c" title="Compounding intelligence interactive story" loading="eager" scrolling="no"></iframe>
       </div>
       <p class="compound-note" data-reveal>Everything it learns stays in your business. Start sooner, and it knows more by the time anyone else begins. That is what moving first means here.</p>
+      <p class="compound-note live-callback" id="liveCallback" data-reveal hidden>The live demo at the top of this page has made <b id="liveConn">0</b> connections so far, from <b id="liveConv">0</b> conversations. <a href="#live">Ask it something and watch the number move ↑</a></p>
     </section>
 
     <section id="ways" class="section-shell deployment-section">
@@ -316,7 +317,7 @@
   </main>
 
   <a class="sticky-cta" id="stickyCta" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking aria-hidden="true" tabindex="-1">BOOK MY FREE 30-MINUTE CHECK →</a>
-  <script src="app.js?v=20261101b" defer></script>
+  <script src="app.js?v=20261101c" defer></script>
   <script>
     // Live demo: load it straight away; the demo says "ready" when it's up. If it never does, offer a direct link.
     (function () {
@@ -341,6 +342,20 @@
         settled = true; frame.className = ''; var w = document.getElementById('liveWait'); if (w) w.remove();
       });
       setTimeout(fallback, 15000);
+    })();
+    // Callback in the compounding section: the live demo's real connection count.
+    (function () {
+      var sec = document.getElementById('live'), out = document.getElementById('liveCallback');
+      var url = sec && (sec.getAttribute('data-demo-url') || '').replace(/\/$/, ''); if (!url || !out) return;
+      function poll() {
+        fetch(url + '/api/status', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (s) {
+          var l = s.learned || {}; if (typeof l.connections !== 'number') return;
+          document.getElementById('liveConn').textContent = l.connections.toLocaleString('en-US');
+          document.getElementById('liveConv').textContent = (l.conversations || 0).toLocaleString('en-US');
+          out.hidden = false;
+        }).catch(function () {});
+      }
+      poll(); setInterval(function () { if (!document.hidden) poll(); }, 20000);
     })();
   </script>
   <script>

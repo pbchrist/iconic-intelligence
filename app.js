@@ -77,6 +77,15 @@
   window.addEventListener('message', (event) => {
     const data = event.data || {};
     if (data.source !== 'iconic-compounding') return;
+    if (data.type === 'askDemo') {
+      const live = document.getElementById('live'), frame = document.querySelector('#liveFrame iframe');
+      if (live) live.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const url = live && (live.getAttribute('data-demo-url') || '').replace(/\/$/, '');
+      if (frame && url && !frame.classList.contains('is-loading')) {
+        setTimeout(() => frame.contentWindow.postMessage({ source: 'iconic-site', type: 'ask', ws: data.ws, q: data.q }, url), 700);
+      } else if (url) { window.open(url + '/', '_blank', 'noopener'); }
+      return;
+    }
     if (data.type === 'height' && ciFrame) {
       const height = Math.max(400, Math.min(Number(data.height) || 0, 3000));
       if (height) ciFrame.style.height = `${height}px`;

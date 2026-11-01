@@ -52,6 +52,11 @@ h1{font-family:var(--serif);font-weight:400;font-size:clamp(42px,8vw,112px);line
 .stat b{display:block;font:400 clamp(24px,2.6vw,32px)/1 var(--serif);font-variant-numeric:tabular-nums;color:var(--ink)}
 .stat span{display:block;margin-top:6px;font:500 9px/1.2 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 .stat.gold b{color:var(--gold)}
+.livestat{display:flex;align-items:baseline;gap:8px;margin-top:10px;font:500 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.livestat i{width:7px;height:7px;border-radius:50%;background:#a5ffc4;box-shadow:0 0 10px #a5ffc4;align-self:center}
+.livestat b{font:400 22px/1 var(--serif);letter-spacing:0;color:var(--ink);font-variant-numeric:tabular-nums;transition:color .4s,text-shadow .4s}
+.livestat.bump b{color:#c9ceff;text-shadow:0 0 18px rgba(141,152,255,.9)}
+.live-cta{cursor:pointer;border:0}
 .skip{background:none;border:1px solid var(--line2);color:var(--muted);font:500 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;padding:9px 12px;border-radius:999px;cursor:pointer;transition:color .2s,border-color .2s}
 .skip:hover{color:var(--ink);border-color:var(--lav)}
 .skip:focus-visible,.next:focus-visible,.cta:focus-visible,.ghost:focus-visible{outline:2px solid var(--lav);outline-offset:3px}
@@ -155,6 +160,7 @@ body.embed .stage{border:0;border-radius:0;height:820px;min-height:0}
       <div class="hud">
         <div>
           <div class="stamp"><i></i>ICONIC // Compounding engine</div>
+          <div class="livestat" id="liveStat" hidden><i></i><b id="liveN">0</b><span>connections made by the live demo so far</span></div>
           <div class="counter" id="counter" aria-live="polite">
             <div class="stat"><b id="statCycle">01</b><span>Cycle</span></div>
             <div class="stat"><b id="statIns">4</b><span>Insights retained</span></div>
@@ -180,7 +186,8 @@ body.embed .stage{border:0;border-radius:0;height:820px;min-height:0}
       <div class="finale" id="finale" hidden>
         <p class="fin-line">Every cycle, you start further ahead. <em>Your competitors start from zero.</em></p>
         <div class="fin-actions">
-          <a class="cta" href="./#check" target="_parent">Book my free check</a>
+          <button class="cta live-cta" id="watchLive" type="button">Watch the live AI do this ↑</button>
+          <a class="ghost" href="./#check" target="_parent">Book my free check</a>
           <button class="ghost" id="replay" type="button">Replay</button>
         </div>
       </div>
@@ -195,7 +202,7 @@ body.embed .stage{border:0;border-radius:0;height:820px;min-height:0}
         <li class="card" style="--c:#E8CF8E"><div class="row"><span class="dot"></span>04 · Advantage</div><div class="t">You move Monday morning.</div><div class="s">They find out in two weeks. Everything learned goes back into the nucleus.</div></li>
         <li class="card" style="--c:#E8CF8E"><div class="row"><span class="dot"></span>05 · Compound</div><div class="t">Then it runs again, faster.</div><div class="s">Each cycle leaves more behind, so the next one starts further ahead.</div></li>
       </ol>
-      <p class="note">Illustrative examples. Pick a different signal to follow a different story.</p>
+      <p class="note">Real numbers from Northline Supply, the company in the live demo above. Pick a different signal to follow a different story.</p>
     </aside>
   </div>
 </section>
@@ -225,55 +232,56 @@ const V = (x,y,z)=>new THREE.Vector3(x,y,z);
 const COL = { nIn:0x23267a, nRim:0xd2d4ff, signal:0xAEB4FF, context:0x7F86FF, procedure:0xF4EFE4, advantage:0xE8CF8E };
 /* Each signal is one storyline. The page reads the chosen one (postMessage / 'iconic:signal' event)
    so the use cases, dashboard, demo and closing quote can follow the same thread. */
+const DEMO_URL='https://patrick-beastmaster.tailf32530.ts.net', DEMO_WS='northline-supply';
 const SIGNALS = [
-  { id:'pricing', chip:'A competitor cuts pricing',
+  { id:'pricing', chip:'A competitor cuts pricing', ask:'Which competitor changed pricing, and on what?',
     mission:'Find competitor pricing changes', quote:'I never know when competitors change their offers.',
     steps:[
-      'Overnight, a competitor cuts lease pricing by <em>$2,000</em>. ICONIC catches it.',
-      'It checks the move against your inventory, your margins, and <em>what this competitor did last time.</em>',
-      'The response becomes a playbook. <em>Next time, it runs without being asked.</em>',
-      'Monday, 8 a.m.: you have the brief and a recommended move. <em>They find out in two weeks.</em>'],
+      'Sound Mechanical cuts contractor prices on <em>11 items</em>, by up to 9%. ICONIC catches it.',
+      'It checks the cuts against Northline’s own prices, margins, and <em>water heater sales already down 12%.</em>',
+      'Matching only the two PEX coils becomes the playbook. <em>Next time, the price check runs itself.</em>',
+      'Ray decides before the week starts. <em>No price war, no surprise.</em>'],
     cards:[
-      ['A competitor cuts lease pricing by $2,000.','ICONIC was already watching their offer pages. Nobody had to remember to check.'],
-      ['It meets what the business already knows.','Inventory, margins, and how this competitor behaved the last time it moved.'],
-      ['The response becomes a playbook.','A one-off answer turns into a check that runs itself next time.'],
-      ['You move Monday morning.','They find out in two weeks. Everything learned goes back into the business.']] },
-  { id:'reviews', chip:'Reviews turn on you',
+      ['Sound Mechanical cuts prices on 11 items.','PEX coils and water heaters, 6 to 9% below Northline. Nobody had to remember to check.'],
+      ['It meets what the business already knows.','Northline’s prices, its margin, and water heater volume already down 12%.'],
+      ['The response becomes a playbook.','Match the two PEX coils, hold the rest, and watch the price list every week.'],
+      ['Ray moves first.','No price war. Everything learned goes back into the business.']] },
+  { id:'reviews', chip:'Reviews turn on you', ask:'What are customers complaining about, and why?',
     mission:'Analyze customer complaints', quote:'We have hundreds of reviews and nobody is synthesizing them.',
     steps:[
-      'Reviews at two locations start mentioning <em>the same service delay</em>. ICONIC catches the pattern.',
-      'It connects them to staffing schedules, past complaints, and <em>which customers are at risk.</em>',
-      'Review monitoring becomes a weekly check. <em>Patterns surface before they spread.</em>',
-      'You fix it this week. <em>Before it shows up in your star rating.</em>'],
+      '13 reviews say the same thing: <em>Tuesday mornings</em> at the will-call counter. ICONIC catches it.',
+      'It connects them to the staffing schedule: <em>one person at the counter</em> while the trucks load.',
+      'A 6 a.m. loader shift becomes the fix. <em>Review checks now run every week.</em>',
+      'Pierce Heating & Air stays. <em>Before it moves to Sound Mechanical.</em>'],
     cards:[
-      ['The same complaint shows up at two locations.','Nobody on the team had read every review. ICONIC had.'],
-      ['It meets what the business already knows.','Staffing schedules, past complaints, and which customers matter most.'],
-      ['Review analysis becomes a weekly check.','The pattern search runs itself from now on.'],
-      ['You fix it before the rating drops.','Everything learned goes back into the business.']] },
-  { id:'vendor', chip:'A key vendor wobbles',
+      ['13 reviews, one complaint: Tuesday mornings.','Nobody had read every review side by side. ICONIC had.'],
+      ['It meets what the business already knows.','The staffing schedule, the truck-loading hours, and which accounts are slipping.'],
+      ['The fix becomes routine.','An earlier loader shift, and a weekly check on what customers are saying.'],
+      ['The customers stay.','Everything learned goes back into the business.']] },
+  { id:'vendor', chip:'A key vendor wobbles', ask:'What do the Pacific Brass terms cost us, and what should we do?',
     mission:'Investigate a vendor risk', quote:'We notice pricing, inventory or search changes too late.',
     steps:[
-      'A key supplier <em>quietly delays shipments</em> to other customers. ICONIC catches it.',
-      'It checks that against your open orders, your contract terms, and <em>your backup suppliers.</em>',
-      'Vendor risk checks now run every week. <em>No one has to remember.</em>',
-      'You line up a backup before the delay reaches you. <em>Competitors find out at the loading dock.</em>'],
+      'Pacific Brass raises its minimums. The new terms would have cost <em>$7,030</em> in freight this year.',
+      'It checks that against 61 orders, Ridgeline’s 14% late shipments, and <em>who to call for an exception.</em>',
+      'Consolidating orders becomes a monthly routine. <em>No one has to remember.</em>',
+      'Northline keeps its free freight. <em>Competitors pay it.</em>'],
     cards:[
-      ['A key supplier starts slipping.','The signal came from outside your business, before it touched your orders.'],
-      ['It meets what the business already knows.','Open orders, contract terms, and which backups can step in.'],
-      ['Vendor checks become routine.','The risk scan runs every week without a reminder.'],
-      ['You switch before it costs you.','Everything learned goes back into the business.']] },
-  { id:'market', chip:'The market shifts',
-    mission:'Build an executive morning brief', quote:'Tell me what changed in my market every Monday morning.',
+      ['Pacific Brass raises its minimums.','The new terms would have cost $7,030 in freight on this year’s orders.'],
+      ['It meets what the business already knows.','61 orders, a late-shipping backup vendor, and the rep who grants exceptions.'],
+      ['Ordering becomes a routine.','Fewer, bigger orders, timed before the 20th of the month.'],
+      ['The freight stays free.','Everything learned goes back into the business.']] },
+  { id:'market', chip:'Your expert retires', ask:"What does Dale know that we'll lose when he retires?",
+    mission:'Keep what a retiring expert knows', quote:'When he leaves, thirty years of know-how leaves with him.',
     steps:[
-      'Search demand for <em>your top service</em> jumps 30% in your region. ICONIC catches it.',
-      'It checks that against your capacity, your ad spend, and <em>who ranks above you.</em>',
-      'The market scan becomes a Monday brief. <em>It is waiting when you sit down.</em>',
-      'You shift budget while demand is rising. <em>Competitors notice next quarter.</em>'],
+      'Dale Pruitt retires December 19, after <em>31 years</em>. ICONIC flags the risk.',
+      'It pulls together what only Dale knows: <em>vendor contacts, 300 obsolete part numbers, who pays late.</em>',
+      'His know-how becomes the business’s memory. <em>It stays when he goes.</em>',
+      'The next buyer starts on day one with Dale’s playbook. <em>Nothing walks out the door.</em>'],
     cards:[
-      ['Demand for your top service jumps.','Search and market data moved before your sales numbers did.'],
-      ['It meets what the business already knows.','Capacity, ad spend, and where you rank against competitors.'],
-      ['The scan becomes a Monday brief.','It runs every week, whether anyone asks or not.'],
-      ['You move while demand is rising.','Everything learned goes back into the business.']] },
+      ['Dale retires December 19.','31 years of vendor relationships, and no successor named yet.'],
+      ['It meets what the business already knows.','His contacts, his part-number spreadsheet, and which accounts pay late.'],
+      ['His know-how becomes memory.','Written down, searchable, and part of every answer from now on.'],
+      ['Nothing walks out the door.','Everything learned stays in the business.']] },
 ];
 let sig = SIGNALS[0];
 const EYEBROWS=['00 · Your business','01 · Signal','02 · Context','03 · Procedure','04 · Advantage','05 · Compound'];
@@ -853,6 +861,22 @@ canvas.addEventListener('pointermove',e=>{
   const targets=[S.core, ...Object.values(S.nodes).map(n=>n.core)];
   view.classList.toggle('hot', ray.intersectObjects(targets,false).length>0);
 });
+/* Hand off to the live demo above: the page scrolls up and the real model answers this story's question. */
+$('watchLive').addEventListener('click',e=>{ e.stopPropagation(); post('askDemo',{ws:DEMO_WS,q:sig.ask}); });
+/* Live counter: connections the real demo has made. Each new one adds a ring around the nucleus. */
+let liveLast=null;
+async function pollLive(){
+  try{
+    const c=new AbortController(); setTimeout(()=>c.abort(),6000);
+    const st=await fetch(DEMO_URL+'/api/status',{cache:'no-store',signal:c.signal}).then(r=>r.json());
+    const n=(st.learned||{}).connections; if(typeof n!=='number') return;
+    const el=$('liveStat'); el.hidden=false; $('liveN').textContent=n.toLocaleString('en-US');
+    if(liveLast!==null && n>liveLast){ el.classList.add('bump'); setTimeout(()=>el.classList.remove('bump'),1600);
+      const k=Math.min(4,n-liveLast); for(let i=0;i<k;i++) if(S && S.rings && S.ringCount<14) setTimeout(addRing,i*350); }
+    liveLast=n;
+  }catch(e){}
+}
+pollLive(); setInterval(()=>{ if(!document.hidden) pollLive(); },20000);
 /* The host page can preselect a signal or restart the story. */
 window.addEventListener('message',e=>{
   const d=e.data; if(!d || d.source!=='iconic-site') return;
