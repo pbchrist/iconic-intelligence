@@ -8,6 +8,7 @@
   const S = { ws: store.get('iconic.ws') || '', status: null, workspace: null, feed: null, jobs: [], tab: 'ask', history: [], busy: false, folder: 'all', picked: false, asked: new Set(), revealed: '', graph: null, answers: 0, extras: null, totals: { connections: 0, conversations: 0 } };
   const sess = (() => { let v = null; try { v = sessionStorage.getItem('iconic.sess'); if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); sessionStorage.setItem('iconic.sess', v); } } catch { v = Math.random().toString(36).slice(2); } return v; })();
   const EMBED = /[?&]embed=1/.test(location.search);
+  const PHONE = () => matchMedia('(max-width: 860px)').matches;
   if (EMBED) document.body.classList.add('embed');
   // Opened full-screen from the phone card on iconic.onl: calm phone layout plus a way back.
   const QS = new URLSearchParams(location.search);
@@ -119,6 +120,8 @@
     $('#helloKicker').textContent = `LIVE · RUNNING ON ${String(st.location || 'this computer').toUpperCase()}`;
     const list = st.workspaces || [];
     $('#hello').classList.toggle('picking', !S.picked && list.length > 1);
+    document.body.classList.toggle('picked', !!S.picked || list.length <= 1);
+    $('#askInput').placeholder = 'Ask about ' + w.name + '…';
     if (!S.picked && list.length > 1) {
       $('#helloTitle').innerHTML = 'Pick a business.<br><em>Watch it think.</em>';
       $('#helloSub').innerHTML = 'Each one is a made-up company with real-looking files. A private AI on this machine has read every page. Choose one and see what it found.';
@@ -139,7 +142,7 @@
       return;
     }
     clearInterval(S.tickT);
-    $('#helloSub').innerHTML = `I read all <b>${fmt(w.documents)} files</b> for <b>${esc(w.name)}</b>. Here's what needs attention:`;
+    $('#helloSub').innerHTML = PHONE() ? `I read all ${fmt(w.documents)} files. <b>The top thing that needs attention:</b>` : `I read all <b>${fmt(w.documents)} files</b> for <b>${esc(w.name)}</b>. Here's what needs attention:`;
     const key = w.id + ':' + (S.feed.generated_at || '');
     const top = items.slice(0, 3);
     if (S.revealed !== key) {
@@ -327,7 +330,9 @@
     turn.innerHTML = `<div class="q"><p>${esc(q)}</p></div><div class="a"><div class="sigil">✦</div><div><div class="a-label">ICONIC · RUNNING ON ${esc((S.status && S.status.host || 'THIS COMPUTER').toUpperCase())}</div><div class="reading"><span class="shimmer">Searching ${fmt(S.workspace ? S.workspace.documents : 0)} documents…</span></div><div class="a-body streaming" hidden></div><div class="srcs"></div><div class="a-meta"></div><div class="nexts"></div></div></div>`;
     $('#convo').appendChild(turn);
     if (S.history.length === 0) $('#hello').hidden = true;
-    const convo = $('#convo'); convo.scrollTop = convo.scrollHeight;
+    const convo = $('#convo');
+    const keepAnswer = () => { if (PHONE()) convo.scrollTop = Math.max(0, turn.offsetTop - 8); else convo.scrollTop = convo.scrollHeight; };
+    keepAnswer();
     const reading = $('.reading', turn), bodyEl = $('.a-body', turn), srcEl = $('.srcs', turn), metaEl = $('.a-meta', turn), nextEl = $('.nexts', turn);
     let sources = [], text = '', t0 = performance.now();
     const paint = () => { bodyEl.innerHTML = md(text, sources); $$('.cite', bodyEl).forEach((c) => c.onclick = () => { const s = sources.find((x) => String(x.n) === c.dataset.n); if (s) openDoc(s.id, s.snippet); }); };
@@ -347,13 +352,14 @@
           if (ev === 'sources') {
             sources = data;
             reading.innerHTML = sources.length ? `<span class="shimmer">Reading ${sources.length} passages from ${new Set(sources.map((s) => s.id)).size} documents…</span>` : '<span class="shimmer">No matching passages. Asking anyway…</span>';
+            if (sources.length) { const tg = document.createElement('button'); tg.type = 'button'; tg.className = 'src-toggle'; tg.textContent = `${sources.length} files it read ›`; tg.onclick = () => { turn.classList.toggle('show-src'); tg.textContent = turn.classList.contains('show-src') ? 'Hide files ‹' : `${sources.length} files it read ›`; }; srcEl.before(tg); }
             srcEl.innerHTML = sources.map((s, k) => `<button class="src" style="animation-delay:${k * 70}ms" data-n="${s.n}"><span>${s.n}</span><span><strong>${esc(s.title)}</strong><small>${esc(s.folder)} · ${esc(s.date)}</small></span></button>`).join('');
             $$('.src', srcEl).forEach((b) => b.addEventListener('click', () => { const s = sources.find((x) => String(x.n) === b.dataset.n); openDoc(s.id, s.snippet); }));
           } else if (ev === 'thinking') {
             reading.innerHTML = '<span class="shimmer">Thinking it through…</span>';
           } else if (ev === 'token') {
             if (bodyEl.hidden) { bodyEl.hidden = false; reading.remove(); }
-            text += data; paint(); convo.scrollTop = convo.scrollHeight;
+            text += data; paint(); if (!PHONE()) convo.scrollTop = convo.scrollHeight; else if (!S.pinned) { keepAnswer(); S.pinned = true; }
           } else if (ev === 'done') {
             bodyEl.classList.remove('streaming'); paint();
             metaEl.innerHTML = `<span>ANSWERED ON ${esc(String(data.location || 'THIS COMPUTER').toUpperCase())} IN ${(data.ms / 1000).toFixed(1)}s</span>${data.tps ? `<span>${data.tps} TOK/S</span>` : ''}<span><b>COST $0.00</b></span>${data.private ? '<span><b>SENT TO NO AI COMPANY</b></span>' : ''}${data.learned && data.learned.added > 0 ? `<button type="button" class="grow">+${data.learned.added} NEW LINK${data.learned.added > 1 ? 'S' : ''} ON THE GRAPH ↗</button>` : ''}`;
@@ -369,11 +375,11 @@
       const cta = (S.status && S.status.cta_url) || '';
       const nq = nextQuestions(2);
       nextEl.innerHTML = nq.map((x) => `<button type="button" class="next" data-q="${esc(x)}">${esc(x)} →</button>`).join('') +
-        (cta ? `<a class="next cta-chip" href="${esc(cta)}" target="_blank" rel="noopener">Put this on my files →</a>` : '');
+        (cta ? `<a class="next cta-chip" href="${esc(cta)}" target="_blank" rel="noopener">Book a free 30-minute call →</a>` : '');
       $$('.next[data-q]', nextEl).forEach((b) => b.addEventListener('click', () => ask(b.dataset.q)));
       if (cta && S.history.length === 3) {
         const card = document.createElement('div'); card.className = 'cta-card';
-        card.innerHTML = `<div><small>${S.workspace && S.workspace.sample ? 'THAT WAS A MADE-UP BUSINESS' : 'LIKE WHAT YOU SEE?'}</small><h3>Now picture it on yours.</h3><p>Your files, on a computer in your office. Nothing goes to an AI company, and there's no meter running.</p></div><a href="${esc(cta)}" target="_blank" rel="noopener">BOOK THE FREE 30-MINUTE CHECK →</a>`;
+        card.innerHTML = `<div><small>${S.workspace && S.workspace.sample ? 'THAT WAS A MADE-UP BUSINESS' : 'LIKE WHAT YOU SEE?'}</small><h3>Now picture it on yours.</h3><p>Your files, on a computer in your office. Nothing goes to an AI company, and there's no meter running.</p></div><a href="${esc(cta)}" target="_blank" rel="noopener">BOOK A FREE 30-MINUTE CALL →</a>`;
         turn.appendChild(card);
       }
     } catch (e) {
@@ -381,7 +387,7 @@
       bodyEl.innerHTML = `<p class="a-err">${esc(e.message)}</p>`;
     } finally {
       S.busy = false; $('#askBtn').disabled = false; bodyEl.classList.remove('streaming');
-      convo.scrollTop = convo.scrollHeight; loadStatus();
+      S.pinned = false; if (PHONE()) keepAnswer(); else convo.scrollTop = convo.scrollHeight; loadStatus();
       if (matchMedia('(pointer: fine)').matches) $('#askInput').focus();
     }
   }
