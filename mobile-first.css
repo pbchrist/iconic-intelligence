@@ -788,6 +788,8 @@ main > section { overflow-x: clip; }
   .hero h1 { font-size: min(clamp(3rem, 15vw, 4rem), calc((100vw - 32px) / 4.9)); max-width: 12ch; }
   .section-heading h2, .use-case-copy h2, .contact-copy h2, .proof-copy h2 { font-size: min(clamp(2rem, 9.5vw, 2.9rem), calc((100vw - 32px) / 4.6)); }
   #own .section-heading h2 { font-size: min(clamp(2rem, 9.5vw, 2.9rem), calc((100vw - 32px) / 6.9)); }
+  #live .section-heading h2 { font-size: min(clamp(1.5rem, 7vw, 2.1rem), calc((100vw - 32px) / 6)); }
+  #live .section-heading p { font-size: 1rem; }
   .compound-intro h2 { font-size: min(clamp(2.1rem, 10vw, 2.9rem), calc((100vw - 32px) / 7.5)); letter-spacing: -.04em; }
   .check-copy h2 { font-size: min(clamp(2rem, 9.5vw, 2.75rem), calc((100vw - 84px) / 4.1)); }
   .offer-copy h2 { font-size: min(clamp(2rem, 9.5vw, 2.75rem), calc((100vw - 76px) / 3.5)); line-height: .98; }

@@ -5,6 +5,8 @@ Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
 
 ## 2026-11-01
+- (branch compound-tie) Animation follows the business picked in the demo (law firm or supply company), works even without 3D; live counter moved below the picture on phones; demo section headline smaller on phones (rem, capped to the screen).
+
 - (branch compound-tie) Compounding animation now tells Northline Supply's real stories, ends with "Watch the live AI do this" which asks the live demo, and shows the live demo's connection count, adding rings as it grows. The compounding section links back with the live count.
 
 - Live demo now loads directly and reveals when the demo says it is ready; if it never does, a direct link and the booking button show instead.

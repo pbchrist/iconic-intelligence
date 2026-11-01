@@ -52,7 +52,7 @@ h1{font-family:var(--serif);font-weight:400;font-size:clamp(42px,8vw,112px);line
 .stat b{display:block;font:400 clamp(24px,2.6vw,32px)/1 var(--serif);font-variant-numeric:tabular-nums;color:var(--ink)}
 .stat span{display:block;margin-top:6px;font:500 9px/1.2 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 .stat.gold b{color:var(--gold)}
-.livestat{display:flex;align-items:baseline;gap:8px;margin-top:10px;font:500 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.livestat{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin:0 0 14px;font:500 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .livestat i{width:7px;height:7px;border-radius:50%;background:#a5ffc4;box-shadow:0 0 10px #a5ffc4;align-self:center}
 .livestat b{font:400 22px/1 var(--serif);letter-spacing:0;color:var(--ink);font-variant-numeric:tabular-nums;transition:color .4s,text-shadow .4s}
 .livestat.bump b{color:#c9ceff;text-shadow:0 0 18px rgba(141,152,255,.9)}
@@ -160,7 +160,6 @@ body.embed .stage{border:0;border-radius:0;height:820px;min-height:0}
       <div class="hud">
         <div>
           <div class="stamp"><i></i>ICONIC // Compounding engine</div>
-          <div class="livestat" id="liveStat" hidden><i></i><b id="liveN">0</b><span>connections made by the live demo so far</span></div>
           <div class="counter" id="counter" aria-live="polite">
             <div class="stat"><b id="statCycle">01</b><span>Cycle</span></div>
             <div class="stat"><b id="statIns">4</b><span>Insights retained</span></div>
@@ -194,6 +193,7 @@ body.embed .stage{border:0;border-radius:0;height:820px;min-height:0}
     </div>
 
     <aside class="ledger" aria-label="What stays in the system">
+      <div class="livestat" id="liveStat" hidden><i></i><b id="liveN">0</b><span>links the live demo has learned so far</span></div>
       <h2>What stays in the system</h2>
       <ol class="cards">
         <li class="card" style="--c:#AEB4FF"><div class="row"><span class="dot"></span>01 · Signal</div><div class="t">A competitor drops lease pricing by $2,000.</div><div class="s">ICONIC was already watching their offer pages. Nobody had to remember to check.</div></li>
@@ -380,6 +380,23 @@ function applySignal(id){
   sig.cards.forEach(([t,sub],i)=>{ cards[i].querySelector('.t').textContent=t; cards[i].querySelector('.s').textContent=sub; });
 }
 applySignal(sig.id);
+
+/* The visitor picked a business in the live demo: tell that business's stories from now on.
+   Registered early so it works even where the 3D can't run. */
+let pendingWs=null;
+function setBusiness(ws){
+  const set=SETS[ws]; if(!set || ws===DEMO_WS) return;
+  let mid=false; try{ mid = step!==0 || busy; }catch(e){}
+  if(mid){
+    let seen=false; try{ seen=inView; }catch(e){}
+    if(seen){ pendingWs=ws; return; }      // someone is watching a story: switch after it ends
+    try{ reset(); }catch(e){}              // off screen: switch now, from the start
+  }
+  DEMO_WS=ws; SIGNALS=set.list; sig=SIGNALS[0]; buildChips(); applySignal(sig.id);
+  const note=document.querySelector('.ledger .note'); if(note) note.textContent='Real numbers from '+set.name+', the company you picked in the live demo above. Pick a different signal to follow a different story.';
+}
+window.addEventListener('message',e=>{ const d=e.data; if(d && d.source==='iconic-site' && d.type==='setBusiness') setBusiness(d.ws); });
+replayBtn.addEventListener('click',()=>{ if(pendingWs){ const w=pendingWs; pendingWs=null; setTimeout(()=>setBusiness(w),50); } });
 
 /* Report height so the host can size the iframe (before the 3D loads, so it still works without WebGL). */
 new ResizeObserver(()=>post('height',{height:document.body.scrollHeight})).observe(document.body);
@@ -934,21 +951,11 @@ async function pollLive(){
   }catch(e){}
 }
 pollLive(); setInterval(()=>{ if(!document.hidden) pollLive(); },20000);
-/* The visitor picked a business in the live demo: tell that business's stories from now on. */
-let pendingWs=null;
-function setBusiness(ws){
-  const set=SETS[ws]; if(!set || ws===DEMO_WS) return;
-  if(step!==0 || busy){ pendingWs=ws; return; }
-  DEMO_WS=ws; SIGNALS=set.list; sig=SIGNALS[0]; buildChips(); applySignal(sig.id);
-  const note=document.querySelector('.ledger .note'); if(note) note.textContent='Real numbers from '+set.name+', the company you picked in the live demo above. Pick a different signal to follow a different story.';
-}
-replayBtn.addEventListener('click',()=>{ if(pendingWs){ const w=pendingWs; pendingWs=null; setTimeout(()=>setBusiness(w),50); } });
 /* The host page can preselect a signal or restart the story. */
 window.addEventListener('message',e=>{
   const d=e.data; if(!d || d.source!=='iconic-site') return;
   if(d.type==='setSignal' && step===0 && !busy) applySignal(d.id);
   if(d.type==='replay') replayBtn.click();
-  if(d.type==='setBusiness') setBusiness(d.ws);
 });
 document.addEventListener('visibilitychange',()=>{ if(document.hidden) clearAuto(); else if(!busy) armAuto(); });
 skipBtn.addEventListener('click',e=>{ e.stopPropagation(); skip(); });
