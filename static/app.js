@@ -367,7 +367,7 @@
 
   // ---------- the host page (iconic.onl) can ask the demo a question
   window.addEventListener('message', (e) => {
-    if (!/^https:\/\/(www\.)?iconic\.onl$|^http:\/\/localhost(:\d+)?$/.test(e.origin)) return;
+    if (!/^https:\/\/(www\.)?iconic\.onl$|^https:\/\/pbchrist\.github\.io$|^http:\/\/localhost(:\d+)?$/.test(e.origin)) return;
     const d = e.data || {}; if (d.source !== 'iconic-site' || d.type !== 'ask' || !d.q) return;
     const go = () => { setTab('ask'); ask(String(d.q).slice(0, 300)); };
     if (d.ws && d.ws !== S.ws) { switchWs(d.ws); setTimeout(go, 900); } else { S.picked = true; go(); }
