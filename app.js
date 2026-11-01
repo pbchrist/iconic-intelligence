@@ -51,7 +51,7 @@
   onScroll();
 
   // Deterministic primary-nav state: nothing is active at the top.
-  const navTargets = ['capability', 'own', 'uses', 'ways'];
+  const navTargets = ['own', 'uses', 'capability', 'ways'];
   const navLinks = $$('.nav a[href^="#"]');
   const updateNavState = () => {
     if (window.scrollY < 180) {

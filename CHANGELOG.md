@@ -7,6 +7,7 @@ Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 - Rebuilt the page around the private AI offer: a private AI on the client's own computer, learn it or have it done, free 30-minute check. Kept the compounding story. Removed the dealer-first use cases, the demo dashboard and the experiment demo. Added llms.txt and structured data.
 - Added the "own your intelligence" pitch, a "why own it" section quoting Sam Altman (Cheeky Pint, Oct 29, 2026), and five toggleable use cases: law, wealth, real estate, owner-run, accounting.
 - Added the free 30-minute check offer right after the hero, a booking button after the proof and at the end, a reassurance line under each, and a pinned booking button on phones. Rewrote the proof in plain English, including why it is not 100 out of 100.
+- Reordered: free check, then why own it, who it is for, what memory gets you, then the compounding story.
 
 ## 2026-10-11
 - Moved hosting from Railway (free trial ending) to GitHub Pages, free, like the other sites. Also makes www.iconic.onl work. Site content unchanged.
