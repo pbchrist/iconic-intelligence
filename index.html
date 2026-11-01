@@ -67,7 +67,7 @@
   </script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css?v=20261101" />
-  <link rel="stylesheet" href="mobile-first.css?v=20261101b" />
+  <link rel="stylesheet" href="mobile-first.css?v=20261101c" />
   <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
   <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 </head>
@@ -318,22 +318,29 @@
   <a class="sticky-cta" id="stickyCta" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking aria-hidden="true" tabindex="-1">BOOK MY FREE 30-MINUTE CHECK →</a>
   <script src="app.js?v=20261101b" defer></script>
   <script>
-    // Live demo: shown only when the demo machine answers; otherwise an honest note and the booking link.
+    // Live demo: load it straight away; the demo says "ready" when it's up. If it never does, offer a direct link.
     (function () {
       var sec = document.getElementById('live'); if (!sec) return;
       var url = (sec.getAttribute('data-demo-url') || '').replace(/\/$/, '');
       var box = document.getElementById('liveFrame');
       var book = 'https://calendly.com/patrick-iconic/30min';
-      function offline() {
-        box.innerHTML = '<div class="live-off"><strong>The live demo is resting right now.</strong><p>It runs on one private computer in Seattle, and that computer is offline at the moment. Book the free check and I\'ll show it to you running, on your kind of files.</p><a class="button button-primary" href="' + book + '" data-calendly-booking>BOOK MY FREE CHECK →</a></div>';
+      var settled = false;
+      function fallback() {
+        if (settled) return; settled = true;
+        box.innerHTML = '<div class="live-off"><strong>The live demo isn\'t loading here.</strong><p>It runs on one private computer in Seattle. Try opening it directly, or book the free check and I\'ll show it to you running, on your kind of files.</p><div class="live-off-actions">' +
+          (url ? '<a class="button button-ghost" href="' + url + '/" target="_blank" rel="noopener">OPEN THE DEMO ↗</a>' : '') +
+          '<a class="button button-primary" href="' + book + '" data-calendly-booking>BOOK MY FREE CHECK →</a></div></div>';
       }
-      if (!url) { offline(); return; }
-      var done = false, t = setTimeout(function () { if (!done) { done = true; offline(); } }, 6000);
-      fetch(url + '/api/status', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (s) {
-        if (done) return; done = true; clearTimeout(t);
-        if (!s.model || !s.model.online) return offline();
-        box.innerHTML = '<iframe src="' + url + '/?embed=1" title="ICONIC live demo" loading="lazy" allow="clipboard-write"></iframe>';
-      }).catch(function () { if (!done) { done = true; clearTimeout(t); offline(); } });
+      if (!url) { fallback(); return; }
+      var frame = document.createElement('iframe');
+      frame.src = url + '/?embed=1'; frame.title = 'ICONIC live demo'; frame.setAttribute('allow', 'clipboard-write');
+      frame.className = 'is-loading';
+      box.appendChild(frame);
+      window.addEventListener('message', function (e) {
+        if (e.origin !== url || !e.data || e.data.source !== 'iconic-demo' || e.data.type !== 'ready' || settled) return;
+        settled = true; frame.className = ''; var w = document.getElementById('liveWait'); if (w) w.remove();
+      });
+      setTimeout(fallback, 15000);
     })();
   </script>
   <script>
