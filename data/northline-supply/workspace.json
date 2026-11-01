@@ -1,0 +1,14 @@
+{
+  "name": "Northline Supply Co.",
+  "kind": "an owner-run plumbing and HVAC supply distributor in Tacoma",
+  "initials": "N",
+  "tagline": "Sample company · fictional data",
+  "sample": true,
+  "order": 2,
+  "suggestions": [
+    "What should I be worried about this week?",
+    "Which competitor changed pricing, and on what?",
+    "What are customers complaining about?",
+    "What does Dale know that we'll lose when he retires?"
+  ]
+}

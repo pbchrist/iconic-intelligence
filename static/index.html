@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#070912" />
+  <title>ICONIC. Command</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true"></div>
+
+  <div class="app">
+    <aside class="side">
+      <img class="wordmark" src="iconic-wordmark.webp" alt="ICONIC." />
+
+      <div class="ws-wrap">
+        <button class="ws-chip" id="wsChip" type="button" aria-haspopup="listbox" aria-expanded="false">
+          <span class="ws-avatar" id="wsAvatar">·</span>
+          <span class="ws-text"><small id="wsTag">LOADING</small><strong id="wsName">…</strong></span>
+          <span class="ws-caret">⌄</span>
+        </button>
+        <div class="ws-menu" id="wsMenu" role="listbox" hidden></div>
+      </div>
+
+      <nav class="tabs" aria-label="Sections">
+        <button class="tab active" data-tab="ask"><span class="ico">⌁</span><b>Ask</b></button>
+        <button class="tab" data-tab="intel"><span class="ico">✦</span><b>Intelligence</b><i id="cntIntel"></i></button>
+        <button class="tab" data-tab="work"><span class="ico">↻</span><b>Work</b><i id="cntWork"></i></button>
+        <button class="tab" data-tab="knowledge"><span class="ico">◫</span><b>Knowledge</b><i id="cntDocs"></i></button>
+        <button class="tab" data-tab="control"><span class="ico">◇</span><b>Control</b></button>
+      </nav>
+
+      <div class="health" id="health">
+        <div class="health-row"><span class="dot" id="healthDot"></span><span id="healthText">CHECKING MODEL</span></div>
+        <strong id="healthModel">—</strong>
+        <div class="meter"><span id="meterCost">$0.00</span><small id="meterTokens">0 tokens</small></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="top">
+        <div class="top-l"><small id="clock">—</small><strong id="panelTitle">ASK THE BUSINESS</strong></div>
+        <div class="top-r">
+          <span class="pill"><em>ROUTE</em> <b id="routePill">LOCAL</b></span>
+          <span class="pill hide-sm"><em>SPEED</em> <b id="tpsPill">—</b></span>
+          <span class="pill ok"><em>DATA OUT</em> <b id="outPill">0 BYTES</b></span>
+        </div>
+      </header>
+
+      <!-- ASK -->
+      <section class="panel active" id="panel-ask">
+        <div class="convo" id="convo">
+          <div class="hello" id="hello">
+            <div class="kicker">PRIVATE INTELLIGENCE · ON THIS COMPUTER</div>
+            <h1 id="helloTitle">Good morning.</h1>
+            <p id="helloSub">Reading the files…</p>
+            <div class="suggest" id="suggest"></div>
+          </div>
+        </div>
+        <form class="askbar" id="askForm" autocomplete="off">
+          <input id="askInput" type="text" placeholder="Ask the business anything…" aria-label="Ask a question" maxlength="600" />
+          <button type="submit" id="askBtn" aria-label="Ask">↗</button>
+        </form>
+        <p class="askhint" id="askHint">Answers come only from this business's own files, with sources. Nothing leaves this computer.</p>
+      </section>
+
+      <!-- INTELLIGENCE -->
+      <section class="panel" id="panel-intel">
+        <div class="phead">
+          <div><small>WRITTEN BY THE LOCAL MODEL FROM YOUR FILES</small><h2>Intelligence feed</h2><p class="psub" id="feedSub">—</p></div>
+          <button class="ghost" id="feedRefresh" type="button">RE-READ FILES ↻</button>
+        </div>
+        <div class="feed" id="feed"></div>
+      </section>
+
+      <!-- WORK -->
+      <section class="panel" id="panel-work">
+        <div class="phead">
+          <div><small>EVERY JOB THE SYSTEM RAN · LIVE</small><h2>Work</h2><p class="psub">Nothing here is staged. This is the real log from this machine.</p></div>
+        </div>
+        <div class="board">
+          <div class="col"><h4>RUNNING NOW <span id="nRunning">0</span></h4><div id="colRunning"></div></div>
+          <div class="col"><h4>COMPLETED <span id="nDone">0</span></h4><div id="colDone"></div></div>
+          <div class="col"><h4>ALWAYS ON</h4><div id="colAlways"></div></div>
+        </div>
+      </section>
+
+      <!-- KNOWLEDGE -->
+      <section class="panel" id="panel-knowledge">
+        <div class="phead">
+          <div><small>WHAT IT HAS READ</small><h2>Knowledge</h2><p class="psub" id="kSub">—</p></div>
+        </div>
+        <div class="stats">
+          <div><span id="sDocs">0</span><small>DOCUMENTS</small></div>
+          <div><span id="sPass">0</span><small>PASSAGES INDEXED</small></div>
+          <div><span id="sWords">0</span><small>WORDS</small></div>
+          <div><span id="sTypes">—</span><small>FILE TYPES</small></div>
+        </div>
+        <div class="folders" id="folders"></div>
+        <div class="doclist" id="docList"></div>
+      </section>
+
+      <!-- CONTROL -->
+      <section class="panel" id="panel-control">
+        <div class="phead">
+          <div><small>GOVERNANCE · LIVE FROM THIS MACHINE</small><h2>Control</h2><p class="psub">Where it runs, what it costs, and who checks it.</p></div>
+        </div>
+        <div class="cgrid">
+          <article><small>WHERE IT RUNS</small><h3 id="cHost">—</h3>
+            <ul class="kv">
+              <li><span>Model</span><b id="cModel">—</b></li>
+              <li><span>Endpoint</span><b id="cEndpoint">—</b></li>
+              <li><span>Network</span><b id="cPrivate">—</b></li>
+              <li><span>Running for</span><b id="cUptime">—</b></li>
+            </ul>
+          </article>
+          <article><small>WHAT IT COSTS</small><h3><span id="cCost">$0.00</span> <em>per token</em></h3>
+            <ul class="kv">
+              <li><span>Tokens generated</span><b id="cTokens">0</b></li>
+              <li><span>Questions answered</span><b id="cQuestions">0</b></li>
+              <li><span>Average speed</span><b id="cTps">—</b></li>
+              <li><span>Rate limits</span><b>None. It's your hardware.</b></li>
+            </ul>
+          </article>
+          <article><small>ROUTE WORK BY NEED</small><h3>Private stays local.</h3>
+            <div class="routes">
+              <span><b>CLIENT FILES · ROUTINE WORK</b><i class="on">LOCAL · THIS MACHINE</i></span>
+              <span><b>PUBLIC RESEARCH · HARDEST REASONING</b><i>FRONTIER · OFF</i></span>
+              <span><b>SENSITIVE AND COMPLEX</b><i>LOCAL FIRST</i></span>
+            </div>
+          </article>
+          <article><small>HUMAN IN THE LOOP</small><h3>Every answer has a why.</h3>
+            <p>Each answer names the files it came from, and you can open them. The model reads; it doesn't send, sign or file anything. A person checks anything that matters.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <div><small id="dMeta">—</small><h3 id="dTitle">—</h3></div>
+      <button class="ghost" id="dClose" type="button" aria-label="Close">CLOSE ✕</button>
+    </div>
+    <div class="drawer-body" id="dBody"></div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

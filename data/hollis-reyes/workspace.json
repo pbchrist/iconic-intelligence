@@ -1,0 +1,14 @@
+{
+  "name": "Hollis & Reyes LLP",
+  "kind": "an employment and business litigation firm in Seattle",
+  "initials": "H",
+  "tagline": "Sample firm · fictional data",
+  "sample": true,
+  "order": 1,
+  "suggestions": [
+    "Have we fought a non-compete like Kessler's before, and how did it go?",
+    "What deadlines are coming up in the next two weeks?",
+    "Why did our realization rate drop last quarter?",
+    "Should we renew LexVault?"
+  ]
+}
