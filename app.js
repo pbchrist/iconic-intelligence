@@ -51,7 +51,7 @@
   onScroll();
 
   // Deterministic primary-nav state: nothing is active at the top.
-  const navTargets = ['capability', 'memory', 'ways'];
+  const navTargets = ['capability', 'own', 'uses', 'ways'];
   const navLinks = $$('.nav a[href^="#"]');
   const updateNavState = () => {
     if (window.scrollY < 180) {
@@ -82,6 +82,34 @@
       if (height) ciFrame.style.height = `${height}px`;
     }
   });
+
+  // Who it's for: five use cases, toggled by the buttons and rotated slowly.
+  const useCases = {
+    law: { client:'LAW FIRM', title:'Every matter the firm has handled, in one place it controls.', body:'Briefs, contracts, research and correspondence from every matter, searchable in plain English on a computer inside the firm.', ask:'“Have we argued this before, and how did it go?”', holds:'Matters · briefs · contracts · research · correspondence', why:'Client confidences never leave the firm.', check:'A lawyer reviews anything that matters.' },
+    wealth: { client:'WEALTH MANAGEMENT', title:'Know the whole client before the meeting starts.', body:'Meeting notes, plans, account reviews and years of letters and emails, kept together so the advisor walks in knowing everything the firm knows.', ask:'“What has this client told us about risk and family over the last three years?”', holds:'Meeting notes · plans · reviews · correspondence', why:'Client finances and family details stay in your office.', check:'The advisor reviews anything sent to a client.' },
+    realestate: { client:'REAL ESTATE', title:'Your deal history is your edge. Keep it.', body:'Every deal, lease, comp, inspection and negotiation note, so the next negotiation starts with everything you learned from the last ones.', ask:'“What did we give up on the last three leases like this one?”', holds:'Deals · leases · comps · inspections · negotiation notes', why:'Your terms and your counterparties stay private.', check:'The broker reviews anything that matters.' },
+    owner: { client:'OWNER-RUN COMPANY', title:'Twenty years of how the business works, kept by the business.', body:'Customers, vendors, pricing, contracts and procedures, including what the people who retired or moved on used to know.', ask:'“What did we pay this vendor last year, and what did they promise?”', holds:'Customers · vendors · pricing · contracts · procedures', why:'How your business runs is not anyone else\'s data.', check:'You decide what it can see and who can ask it.' },
+    accounting: { client:'ACCOUNTING FIRM', title:'Every client year, one question away.', body:'Returns, workpapers, client letters and the decisions made along the way, so the firm can see what it decided for a client and why.', ask:'“What did we decide for this client on this issue two years ago, and why?”', holds:'Returns · workpapers · client letters · prior-year decisions', why:'Taxpayer information stays on your own computer.', check:'A CPA reviews anything that matters.' }
+  };
+  const caseOrder = Object.keys(useCases);
+  let caseIndex = 0, caseTimer = null;
+  const setText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
+  function renderUseCase(id) {
+    const d = useCases[id]; if (!d) return;
+    caseIndex = caseOrder.indexOf(id);
+    setText('useCaseClient', d.client); setText('useCaseTitle', d.title); setText('useCaseBody', d.body);
+    setText('useCaseAsk', d.ask); setText('useCaseHolds', d.holds); setText('useCaseWhy', d.why); setText('useCaseCheck', d.check);
+    $$('.use-case-dots button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.case === id)));
+    const copy = $('#useCaseCopy');
+    if (copy?.animate) copy.animate([{ opacity:.34, transform:'translateY(5px)' }, { opacity:1, transform:'none' }], { duration:360, easing:'ease-out' });
+  }
+  function armRotation() {
+    clearInterval(caseTimer);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    caseTimer = setInterval(() => renderUseCase(caseOrder[(caseIndex + 1) % caseOrder.length]), 7000);
+  }
+  $$('.use-case-dots button').forEach((b) => b.addEventListener('click', () => { renderUseCase(b.dataset.case); clearInterval(caseTimer); }));
+  if ($('#useCaseCopy')) armRotation();
 
   // Basic 2D fallback field so the site still looks alive if Three.js cannot load.
   // three-scene.js replaces this renderer when the remote module is available.

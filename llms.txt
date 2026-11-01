@@ -1,6 +1,6 @@
 # ICONIC
 
-> ICONIC puts a private AI on a computer in a business's own office. It works on the business's real files, the data does not leave the building, and it keeps a growing memory of that business. Patrick Christell, in Seattle, either teaches the owner to run it or sets it up and looks after it. Both start with a free 30-minute check.
+> Own your intelligence, don't rent it. ICONIC puts a private AI on a computer in a business's own office. It works on the business's real files, the data does not leave the building, and it keeps a growing memory of that business. Patrick Christell, in Seattle, either teaches the owner to run it or sets it up and looks after it. Both start with a free 30-minute check.
 
 ## The problem it answers
 
@@ -31,7 +31,9 @@ ICONIC's first engagement is a regional auto dealer. On the same set of business
 
 ## Who it is for
 
-Owner-led businesses and professional firms with years of their own records, including law firms, wealth managers and owner-run companies.
+Owner-led businesses and professional firms with years of their own records: law firms, wealth managers, real estate firms, accounting firms and owner-run companies.
+
+Recurring work, such as a weekly summary, can be set up on top. The foundation is the business's own AI, on its own computer, with its own records.
 
 ## How to start
 
