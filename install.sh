@@ -91,7 +91,8 @@ if [ "${1:-}" = "--public" ]; then
   command -v tailscale >/dev/null || die "--public needs Tailscale installed"
   say "Opening it to the internet with Tailscale Funnel (port $PORT only)"
   sudo tailscale funnel --bg "$PORT" || die "Funnel didn't start. If it printed a link, open it to allow Funnel for this machine, then run this again."
-  PUBLIC_URL="$(tailscale funnel status 2>/dev/null | grep -Eo 'https://[^ ]+' | head -1)"
+  # Pick the public address that points at THIS app's port (other Funnels may already exist).
+  PUBLIC_URL="$(tailscale funnel status 2>/dev/null | awk -v p=":$PORT" '/^https:\/\//{u=$1} index($0,p) && u {print u; exit}')"
 fi
 
 IP="$(command -v tailscale >/dev/null && tailscale ip -4 2>/dev/null | head -1 || true)"

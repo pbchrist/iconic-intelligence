@@ -367,6 +367,14 @@ class Model:
             self.error = "No chat model is running" + ("; found only " + ", ".join(skipped) if skipped else "")
         return False
 
+    @property
+    def label(self):
+        """Readable model name: '/home/x/models/Qwen3.8-27B-Q4_K_M.gguf' -> 'Qwen3.8-27B'."""
+        name = os.path.basename(self.model or "") or "local model"
+        name = re.sub(r"(?i)\.gguf$", "", name)
+        name = re.sub(r"(?i)[-_.](q\d[\w]*|f16|bf16|fp16|iq\d\w*)$", "", name)
+        return name
+
     def is_private(self):
         try:
             host = urlparse(self.url).hostname or ""
@@ -378,7 +386,7 @@ class Model:
     def status(self):
         if time.time() - self.last_check > 15:
             self.detect()
-        return {"online": self.online, "model": self.model, "endpoint": urlparse(self.url).netloc if self.url else "",
+        return {"online": self.online, "model": self.label, "endpoint": urlparse(self.url).netloc if self.url else "",
                 "private": self.is_private() if self.url else True, "error": self.error}
 
     def stream(self, messages, max_tokens=700, temperature=0.2):
@@ -568,7 +576,7 @@ def build_feed(ws, force=False):
         text = MODEL.complete(messages, max_tokens=1400, temperature=0.2)
         items = parse_items(text, ws)
         data = {"signature": sig, "items": items, "generated_at": time.time(), "status": "ready", "error": "",
-                "model": MODEL.model}
+                "model": MODEL.label}
         with FEED_LOCK:
             FEED[ws.id] = data
         with open(feed_path(ws.id), "w", encoding="utf-8") as f:
@@ -814,7 +822,7 @@ class Handler(BaseHTTPRequestHandler):
             brief = (FEED.get(w.id) or {}).get("items") or []
             brief_txt = "\n".join("- [%s] %s %s" % (b["severity"], b["title"], b["detail"]) for b in brief[:5]) or "(not written yet)"
             messages = [{"role": "system", "content": SYSTEM_PROMPT.format(
-                location=LOCATION, owner=OWNER, model=MODEL.model or "an open model", name=meta.get("name"),
+                location=LOCATION, owner=OWNER, model=MODEL.label, name=meta.get("name"),
                 kind=meta.get("kind") or "a business", sample=("a made-up business with fictional files"
                                                                if meta.get("sample") else "a real business"),
                 today=time.strftime("%A, %B %d, %Y"), brief=brief_txt)}]
@@ -840,7 +848,7 @@ class Handler(BaseHTTPRequestHandler):
             with JOBS.lock:
                 JOBS.questions += 1
             done = {"ms": int((time.time() - t0) * 1000), "tokens": n_tok,
-                    "tps": round(n_tok / secs, 1) if secs > 0 else 0, "model": MODEL.model,
+                    "tps": round(n_tok / secs, 1) if secs > 0 else 0, "model": MODEL.label,
                     "private": MODEL.is_private(), "cost": 0, "location": LOCATION}
             self.sse("done", done)
             JOBS.finish(job, "done", "%d sources · %d tokens · %.1fs" % (len(sources), n_tok, done["ms"] / 1000))
