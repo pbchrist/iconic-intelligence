@@ -782,3 +782,16 @@ footer { margin-top: 78px; }
 @media (min-width: 900px) {
   .ask-examples ul { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 }
+
+/* Phones: stop Android Chrome from enlarging text on its own, and keep big headings inside the screen. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+h1, h2, h3 { overflow-wrap: break-word; }
+@media (max-width: 599px) {
+  .hero h1 { font-size: clamp(48px, 15vw, 64px); }
+  .section-heading h2, .use-case-copy h2 { font-size: clamp(32px, 9.5vw, 46px); }
+  .compound-intro h2 { font-size: clamp(34px, 10vw, 46px); letter-spacing: -.04em; }
+  .offer-copy h2 { font-size: clamp(32px, 9.5vw, 44px); line-height: .98; }
+  .contact-copy h2 { font-size: clamp(32px, 9.5vw, 44px); }
+  .capability-card h3, .compact-capabilities .capability-card h3 { font-size: clamp(34px, 11vw, 46px); }
+  .private-edge strong { font-size: clamp(26px, 8vw, 36px); }
+}

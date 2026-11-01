@@ -105,6 +105,8 @@ h1{font-family:var(--serif);font-weight:400;font-size:clamp(42px,8vw,112px);line
 .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .view.nogl canvas,.view.nogl .labels,.view.nogl .prompt,.view.nogl .picker,.view.nogl .next,.view.nogl .skip{display:none}
 @media (prefers-reduced-motion: reduce){ .prompt i{animation:none} }
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (max-width:560px){ .prompt{display:none} }
 
 body.embed{padding:0;margin:0;background:var(--bg)}
 body.embed .ci{max-width:none;gap:0}
