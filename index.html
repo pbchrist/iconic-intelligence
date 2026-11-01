@@ -72,7 +72,7 @@
     (function () { try { var d = document.createElement('div'); d.style.cssText = 'position:absolute;visibility:hidden;font-size:100px;line-height:1'; d.textContent = 'x'; document.documentElement.appendChild(d); var z = parseFloat(getComputedStyle(d).fontSize) / 100; d.remove(); if (z > 1.04 && z < 3) document.documentElement.style.setProperty('--tz', z.toFixed(2)); } catch (e) {} })();
   </script>
   <link rel="stylesheet" href="styles.css?v=20261101" />
-  <link rel="stylesheet" href="mobile-first.css?v=20261101g" />
+  <link rel="stylesheet" href="mobile-first.css?v=20261101h" />
   <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
   <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 </head>
@@ -102,25 +102,21 @@
         <div class="eyebrow"><span class="live-dot"></span> PRIVATE BY DESIGN · AI AND AGENTS ON YOUR OWN COMPUTER</div>
         <h1>Know more.<br><em>Move first.</em></h1>
         <p class="hero-deck">Own your intelligence. Don't rent it.</p>
-        <p class="hero-buyer">Cloud AI is rented. The company behind it can change the model, the price or the rules overnight, and every file you send it leaves your building. ICONIC puts your own AI on a computer in your office: models no one can take away, a memory of your business that belongs to you, and agents that do real work around the clock with no meter running.</p>
+        <p class="hero-buyer">Cloud AI is rented. The company that owns it can change the model, the price or the rules whenever it wants. And everything you type into it leaves your building.</p>
+        <p class="hero-buyer">ICONIC puts your own AI on a computer in your office. It knows your business, it works around the clock, and there's no meter running.</p>
         <div class="hero-actions hero-actions-threaded">
-          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking>BOOK MY FREE CHECK →</a>
-          <a class="text-link hero-problem-link" href="#live">TRY IT LIVE ↓</a>
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking>BOOK MY FREE CHECK</a>
+          <a class="button button-ghost hero-try" href="#live">TRY IT LIVE</a>
         </div>
         <p class="cta-note">Free. Thirty minutes. No commitment.</p>
-        <div class="hero-proof">
-          <div><strong>01</strong><span>Your files stay in your office</span></div>
-          <div><strong>02</strong><span>No meter. No rate limits.</span></div>
-          <div><strong>03</strong><span>Agents that do the work</span></div>
-        </div>
       </div>
     </section>
 
     <section id="live" class="section-shell live-section" data-demo-url="https://patrick-beastmaster.tailf32530.ts.net">
-      <div class="section-kicker" data-reveal>TRY IT · LIVE RIGHT NOW</div>
+      <div class="section-kicker" data-reveal>LIVE DEMO</div>
       <div class="section-heading split-heading direct-heading" data-reveal>
-        <h2>DON'T TAKE MY WORD FOR IT.<br><em>ASK IT YOURSELF.</em></h2>
-        <p><span class="long-copy">This is a private AI running on a computer in Seattle, not in any AI company's cloud. It has read every file of two made-up businesses. Pick one, see what it found, then try to trip it up.</span><span class="short-copy">A private AI on a computer in Seattle. Pick a business, then try to trip it up.</span></p>
+        <h2>THIS IS RUNNING ON MY COMPUTER<br><em>RIGHT NOW.</em></h2>
+        <p>Not in a data center. On my own machine, on my own network, in Seattle. It has read every file of two made-up businesses. Ask it anything.</p>
       </div>
       <div class="live-frame" id="liveFrame" data-reveal>
         <div class="live-wait" id="liveWait"><span class="live-dot"></span> Waking up the demo…</div>
@@ -342,7 +338,7 @@
       if (window.matchMedia('(max-width: 899px)').matches) {
         settled = true;
         box.className = 'live-card-wrap';
-        box.innerHTML = '<a class="live-card" href="' + url + '/?back=1"><span class="live-dot"></span><strong>Try the live AI</strong><span>Opens full-screen. No sign-up, nothing to install.</span><b>OPEN THE DEMO →</b></a>';
+        box.innerHTML = '<a class="live-card" href="' + url + '/?back=1"><span class="live-dot"></span><strong>Try my AI →</strong></a>';
         return;
       }
       var frame = document.createElement('iframe');

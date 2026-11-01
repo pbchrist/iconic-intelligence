@@ -881,3 +881,11 @@ p, li, .use-case-steps strong { overflow-wrap: break-word; }
 .live-card strong { font-family: Georgia, serif; font-size: 1.6rem; font-weight: 400; line-height: 1.1; }
 .live-card span:not(.live-dot) { color: #aeb4c7; font-size: 1rem; line-height: 1.5; }
 .live-card b { justify-self: start; margin-top: .4rem; padding: .85rem 1.1rem; border-radius: 999px; background: var(--pearl, #f3f0e7); color: #070912; font-size: .8125rem; letter-spacing: .1em; }
+/* Hero: two buttons side by side */
+.hero-actions .hero-try { min-width: 0; }
+@media (max-width: 899px) {
+  .hero-actions.hero-actions-threaded { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; align-items: stretch; }
+  .hero-actions .button { display: flex; align-items: center; justify-content: center; min-height: 3rem; padding: .7rem .6rem; text-align: center; white-space: normal; font-size: .75rem; letter-spacing: .08em; line-height: 1.25; }
+  .hero-buyer + .hero-buyer { margin-top: .6rem; }
+  .live-card strong { font-size: 1.5rem; }
+}
