@@ -43,6 +43,7 @@ OWNER = os.environ.get("ICONIC_OWNER", "Patrick Christell")
 CTA_URL = os.environ.get("ICONIC_CTA_URL", "https://calendly.com/patrick-iconic/30min")
 TEXT_EXT = {".md", ".markdown", ".txt", ".csv", ".tsv", ".json", ".log", ".html", ".htm", ".eml"}
 STARTED = time.time()
+ASSET_VERSION = str(int(max((os.path.getmtime(os.path.join(ROOT, "static", f)) for f in os.listdir(os.path.join(ROOT, "static"))), default=STARTED))).encode()
 os.makedirs(STATE, exist_ok=True)
 
 
@@ -973,10 +974,14 @@ class Handler(BaseHTTPRequestHandler):
             full = os.path.join(STATIC, "index.html")
         with open(full, "rb") as f:
             data = f.read()
+        if full.endswith("index.html"):
+            # Every file the page loads gets a version stamp, so phones never keep an old copy after an update.
+            data = re.sub(rb'(src|href)="((?:app|graph)\.(?:js|css))"', lambda m: m.group(1) + b'="' + m.group(2) + b'?v=' + ASSET_VERSION + b'"', data)
         self.send_response(200)
         self.send_header("Content-Type", MIME.get(os.path.splitext(full)[1], "application/octet-stream"))
         self.send_header("Content-Length", str(len(data)))
-        self.send_header("Cache-Control", "no-cache")
+        self.send_header("Cache-Control", "no-cache" if full.endswith(".html") else "public, max-age=31536000, immutable"
+                         if "v=" in (self.path or "") else "no-cache")
         self.end_headers()
         self.wfile.write(data)
 
