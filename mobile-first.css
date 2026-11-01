@@ -779,23 +779,25 @@ footer { margin-top: 78px; }
   .ask-examples ul { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 }
 
+/* Phones at any text size or zoom. --tz is the extra text zoom some in-app browsers (Messenger, Facebook,
+   Instagram) apply after the page sets its sizes; dividing the caps by it keeps the longest word on screen. */
 /* Phones at any text size or zoom. Each big heading follows the reader's text size (rem),
    but is capped so its longest word always fits the screen: (screen - side padding) / word length in em. */
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 h1, h2, h3 { overflow-wrap: break-word; text-wrap: balance; }
 main > section { overflow-x: clip; }
 @media (max-width: 899px) {
-  .hero h1 { font-size: min(clamp(3rem, 15vw, 4rem), calc((100vw - 32px) / 4.9)); max-width: 12ch; }
-  .section-heading h2, .use-case-copy h2, .contact-copy h2, .proof-copy h2 { font-size: min(clamp(2rem, 9.5vw, 2.9rem), calc((100vw - 32px) / 4.6)); }
-  #own .section-heading h2 { font-size: min(clamp(2rem, 9.5vw, 2.9rem), calc((100vw - 32px) / 6.9)); }
-  #live .section-heading h2 { font-size: min(clamp(1.5rem, 7vw, 2.1rem), calc((100vw - 32px) / 6)); }
+  .hero h1 { font-size: min(clamp(3rem, 15vw, 4rem), calc((100vw - 32px) / 4.9 / var(--tz, 1))); max-width: 12ch; }
+  .section-heading h2, .use-case-copy h2, .contact-copy h2, .proof-copy h2 { font-size: min(clamp(2rem, 9.5vw, 2.9rem), calc((100vw - 32px) / 4.6 / var(--tz, 1))); }
+  #own .section-heading h2 { font-size: min(clamp(2rem, 9.5vw, 2.9rem), calc((100vw - 32px) / 6.9 / var(--tz, 1))); }
+  #live .section-heading h2 { font-size: min(clamp(1.5rem, 7vw, 2.1rem), calc((100vw - 32px) / 6 / var(--tz, 1))); }
   #live .section-heading p { font-size: 1rem; }
-  .compound-intro h2 { font-size: min(clamp(2.1rem, 10vw, 2.9rem), calc((100vw - 32px) / 7.5)); letter-spacing: -.04em; }
-  .check-copy h2 { font-size: min(clamp(2rem, 9.5vw, 2.75rem), calc((100vw - 84px) / 4.1)); }
-  .offer-copy h2 { font-size: min(clamp(2rem, 9.5vw, 2.75rem), calc((100vw - 76px) / 3.5)); line-height: .98; }
-  .capability-card h3, .compact-capabilities .capability-card h3 { font-size: min(clamp(2.1rem, 11vw, 2.9rem), calc((100vw - 80px) / 5.1)); }
-  .deployment-grid h3 { font-size: min(clamp(2rem, 10vw, 2.4rem), calc((100vw - 84px) / 2.6)); }
-  .private-edge strong { font-size: min(clamp(1.6rem, 8vw, 2.25rem), calc((100vw - 84px) / 3.5)); }
+  .compound-intro h2 { font-size: min(clamp(2.1rem, 10vw, 2.9rem), calc((100vw - 32px) / 7.5 / var(--tz, 1))); letter-spacing: -.04em; }
+  .check-copy h2 { font-size: min(clamp(2rem, 9.5vw, 2.75rem), calc((100vw - 84px) / 4.1 / var(--tz, 1))); }
+  .offer-copy h2 { font-size: min(clamp(2rem, 9.5vw, 2.75rem), calc((100vw - 76px) / 3.5 / var(--tz, 1))); line-height: .98; }
+  .capability-card h3, .compact-capabilities .capability-card h3 { font-size: min(clamp(2.1rem, 11vw, 2.9rem), calc((100vw - 80px) / 5.1 / var(--tz, 1))); }
+  .deployment-grid h3 { font-size: min(clamp(2rem, 10vw, 2.4rem), calc((100vw - 84px) / 2.6 / var(--tz, 1))); }
+  .private-edge strong { font-size: min(clamp(1.6rem, 8vw, 2.25rem), calc((100vw - 84px) / 3.5 / var(--tz, 1))); }
 }
 
 /* The free check: offer block after the hero, buttons with a reassurance line, phone sticky button */
@@ -870,3 +872,5 @@ p, li, .use-case-steps strong { overflow-wrap: break-word; }
 .live-off-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .live-callback b { color: var(--accent-2); font-family: Georgia, serif; font-weight: 400; }
 .live-callback a { color: var(--accent-2); white-space: nowrap; }
+.short-copy { display: none; }
+@media (max-width: 899px) { #live .long-copy { display: none; } #live .short-copy { display: inline; } #live .section-heading p { margin-top: .6rem; } .live-frame { margin-top: 1rem; } }

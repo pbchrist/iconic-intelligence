@@ -66,8 +66,13 @@
   }
   </script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <script>
+    /* Some in-app browsers (Messenger, Facebook, Instagram on Android) enlarge all text after the page sets its
+       sizes. Measure that once, before anything is drawn, so big headings can be capped to still fit the screen. */
+    (function () { try { var d = document.createElement('div'); d.style.cssText = 'position:absolute;visibility:hidden;font-size:100px;line-height:1'; d.textContent = 'x'; document.documentElement.appendChild(d); var z = parseFloat(getComputedStyle(d).fontSize) / 100; d.remove(); if (z > 1.04 && z < 3) document.documentElement.style.setProperty('--tz', z.toFixed(2)); } catch (e) {} })();
+  </script>
   <link rel="stylesheet" href="styles.css?v=20261101" />
-  <link rel="stylesheet" href="mobile-first.css?v=20261101e" />
+  <link rel="stylesheet" href="mobile-first.css?v=20261101f" />
   <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
   <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 </head>
@@ -115,7 +120,7 @@
       <div class="section-kicker" data-reveal>TRY IT · LIVE RIGHT NOW</div>
       <div class="section-heading split-heading direct-heading" data-reveal>
         <h2>DON'T TAKE MY WORD FOR IT.<br><em>ASK IT YOURSELF.</em></h2>
-        <p>This is a private AI running on a computer in Seattle, not in any AI company's cloud. It has read every file of two made-up businesses. Pick one, see what it found, then try to trip it up.</p>
+        <p><span class="long-copy">This is a private AI running on a computer in Seattle, not in any AI company's cloud. It has read every file of two made-up businesses. Pick one, see what it found, then try to trip it up.</span><span class="short-copy">A private AI on a computer in Seattle. Pick a business, then try to trip it up.</span></p>
       </div>
       <div class="live-frame" id="liveFrame" data-reveal>
         <div class="live-wait" id="liveWait"><span class="live-dot"></span> Waking up the demo…</div>
