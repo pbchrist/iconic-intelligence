@@ -50,7 +50,7 @@
         "audience": { "@type": "BusinessAudience", "name": "Owner-led businesses and professional firms with years of their own records" },
         "description": "ICONIC puts a private AI on a computer in the client's office, connected to the client's own files. The data does not leave the building, and the system keeps a growing memory of the business. Two ways in: Patrick teaches the client to run it, or Patrick sets it up and looks after it month to month. Both start with a free 30-minute check of where the client's data goes today. Local AI models are less accurate than the largest cloud models, so a person checks anything that matters.",
         "offers": [
-          { "@type": "Offer", "name": "Free 30-minute private AI check", "price": "0", "priceCurrency": "USD" },
+          { "@type": "Offer", "name": "Free 30-minute private AI check", "price": "0", "priceCurrency": "USD", "url": "https://calendly.com/patrick-iconic/30min" },
           { "@type": "Offer", "name": "Learn it: guided setup and teaching", "description": "Priced after the free check." },
           { "@type": "Offer", "name": "Have it done: fixed-fee setup and monthly care", "description": "Priced after the free check." }
         ]
@@ -68,6 +68,8 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="mobile-first.css" />
+  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 </head>
 <body>
   <canvas id="field" aria-hidden="true"></canvas>
@@ -97,7 +99,7 @@
         <p class="hero-deck">Own your intelligence. Don't rent it.</p>
         <p class="hero-buyer">Every file you send to a cloud AI leaves your building, and the company you rent it from can change the price, the rules or the terms whenever it likes. ICONIC puts a private AI on a computer in your office. It works on your real files, keeps a growing record of your business, and belongs to you.</p>
         <div class="hero-actions hero-actions-threaded">
-          <a class="button button-primary" href="#check">BOOK MY FREE CHECK →</a>
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking>BOOK MY FREE CHECK →</a>
           <a class="text-link hero-problem-link" href="#own">WHY OWN IT ↓</a>
         </div>
         <p class="cta-note">Free. Thirty minutes. No commitment.</p>
@@ -123,7 +125,7 @@
             <li><b>What is exposed,</b> in plain English.</li>
             <li><b>What a private AI on your own computer</b> could do for your business, and whether it is worth it for you.</li>
           </ol>
-          <a class="button button-primary check-button" href="https://calendly.com/patrick-iconic/30min">BOOK MY FREE CHECK →</a>
+          <a class="button button-primary check-button" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking>BOOK MY FREE CHECK →</a>
           <p class="cta-note">Or call <a href="tel:+12067738214">206-773-8214</a>. You talk to me, not a sales team.</p>
         </div>
       </div>
@@ -227,7 +229,7 @@
           <div class="section-kicker">THE FREE 30-MINUTE PRIVATE AI CHECK</div>
           <h2>READY WHEN YOU ARE.</h2>
           <p>I look at where your client data goes today, including any AI tools your staff already use, and show you what is exposed. Then we decide whether learning it or having it done makes sense for you.</p>
-          <a class="button button-primary check-button" href="https://calendly.com/patrick-iconic/30min">BOOK MY FREE CHECK →</a>
+          <a class="button button-primary check-button" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking>BOOK MY FREE CHECK →</a>
           <p class="cta-note">Free. Thirty minutes. No commitment. Or call <a href="tel:+12067738214">206-773-8214</a>.</p>
         </div>
         <div class="offer-flow" aria-label="How it starts">
@@ -261,7 +263,20 @@
     </section>
   </main>
 
-  <a class="sticky-cta" id="stickyCta" href="https://calendly.com/patrick-iconic/30min" aria-hidden="true" tabindex="-1">BOOK MY FREE 30-MINUTE CHECK →</a>
+  <a class="sticky-cta" id="stickyCta" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking aria-hidden="true" tabindex="-1">BOOK MY FREE 30-MINUTE CHECK →</a>
   <script src="app.js" defer></script>
+  <script>
+    // Keep booking on ICONIC; the href remains a working fallback if the widget is blocked.
+    document.addEventListener('click', function (event) {
+      const link = event.target.closest('a[data-calendly-booking]');
+      if (!link || event.defaultPrevented || event.button !== 0 ||
+          event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (!window.Calendly || typeof window.Calendly.initPopupWidget !== 'function') return;
+      event.preventDefault();
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/patrick-iconic/30min?background_color=ffffff&text_color=070912&primary_color=8d98ff'
+      });
+    });
+  </script>
 </body>
 </html>
