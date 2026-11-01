@@ -42,7 +42,7 @@ class H(BaseHTTPRequestHandler):
             text = "<think>planning the briefing</think>" + json.dumps(items)
         else:
             srcs = re.findall(r"^\[(\d+)\] (.+?) \(", prompt, re.M)
-            q = prompt.split("Question:")[-1].strip()
+            q = prompt.split("message:")[-1].strip()
             if srcs:
                 parts = ["<think>reading sources</think>Short answer to “%s”: yes, the files cover it [1]." % q, "\n\n"]
                 for n, t in srcs[:3]:

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # ICONIC Command installer. Run on the machine that runs your local model:
 #   curl -fsSL https://raw.githubusercontent.com/pbchrist/iconic-intelligence/dashboard/install.sh | bash
+# Add "-s -- --public" after bash to also put it on the internet with Tailscale Funnel.
 # Safe to run again: it updates the app and keeps your files and settings.
 set -euo pipefail
 
@@ -85,6 +86,14 @@ curl -fsS -m 2 "http://127.0.0.1:$PORT/api/status" >/dev/null 2>&1 || die "It di
 sleep 3
 MODEL_LINE="$(curl -fsS -m 5 "http://127.0.0.1:$PORT/api/status" | python3 -c 'import json,sys; m=json.load(sys.stdin)["model"]; print(("Model: " + m["model"] + " at " + m["endpoint"]) if m["online"] else ("NO MODEL: " + m["error"]))' 2>/dev/null || true)"
 
+PUBLIC_URL=""
+if [ "${1:-}" = "--public" ]; then
+  command -v tailscale >/dev/null || die "--public needs Tailscale installed"
+  say "Opening it to the internet with Tailscale Funnel (port $PORT only)"
+  sudo tailscale funnel --bg "$PORT" || die "Funnel didn't start. If it printed a link, open it to allow Funnel for this machine, then run this again."
+  PUBLIC_URL="$(tailscale funnel status 2>/dev/null | grep -Eo 'https://[^ ]+' | head -1)"
+fi
+
 IP="$(command -v tailscale >/dev/null && tailscale ip -4 2>/dev/null | head -1 || true)"
 [ -z "$IP" ] && IP="$(hostname -I 2>/dev/null | awk '{print $1}')"
 echo
@@ -93,6 +102,7 @@ echo "    Open:        http://${IP:-localhost}:$PORT"
 echo "    Your files:  $DATA/<workspace>/   (one folder per business; new files are read within 20 seconds)"
 echo "    Settings:    $ENVF"
 echo "    $MODEL_LINE"
+[ -n "$PUBLIC_URL" ] && echo "    Public link: $PUBLIC_URL   (visitors see only the sample businesses, with an hourly limit)"
 case "$MODEL_LINE" in NO\ MODEL*)
   echo
   echo "    Start your chat model (llama-server with Qwen) and the dashboard connects on its own within 15 seconds."

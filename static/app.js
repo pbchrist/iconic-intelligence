@@ -5,7 +5,9 @@
   const fmt = (n) => Number(n || 0).toLocaleString('en-US');
   const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
 
-  const S = { ws: store.get('iconic.ws') || '', status: null, workspace: null, feed: null, jobs: [], tab: 'ask', history: [], busy: false, folder: 'all' };
+  const S = { ws: store.get('iconic.ws') || '', status: null, workspace: null, feed: null, jobs: [], tab: 'ask', history: [], busy: false, folder: 'all', picked: false, asked: new Set(), revealed: '' };
+  const EMBED = /[?&]embed=1/.test(location.search);
+  if (EMBED) document.body.classList.add('embed');
   const TITLES = { ask: 'ASK THE BUSINESS', intel: 'INTELLIGENCE', work: 'WORK', knowledge: 'KNOWLEDGE', control: 'CONTROL' };
 
   // ---------- atmosphere
@@ -50,8 +52,8 @@
     $$('button', menu).forEach((b) => b.addEventListener('click', () => switchWs(b.dataset.ws)));
   }
   function switchWs(id) {
-    if (id === S.ws) return;
-    S.ws = id; store.set('iconic.ws', id); S.history = []; S.feed = null; S.folder = 'all';
+    if (id === S.ws) { S.picked = true; renderHello(); return; }
+    S.ws = id; store.set('iconic.ws', id); S.history = []; S.feed = null; S.folder = 'all'; S.picked = true; S.revealed = ''; S.asked = new Set();
     $$('.turn', $('#convo')).forEach((t) => t.remove());
     $('#hello').hidden = false;
     loadWorkspace(); loadFeed();
@@ -95,21 +97,52 @@
   }
 
   function greeting() { const h = new Date().getHours(); return h < 12 ? 'Good morning.' : h < 18 ? 'Good afternoon.' : 'Good evening.'; }
+  function typeInto(el, text, speed = 14) {
+    return new Promise((res) => { let i = 0; const t = setInterval(() => { el.textContent = text.slice(0, ++i); if (i >= text.length) { clearInterval(t); res(); } }, speed); });
+  }
+  function nextQuestions(n) {
+    const items = ((S.feed && S.feed.items) || []).slice().sort((a, b) => ['HIGH', 'WATCH', 'OPP', 'NEW'].indexOf(a.severity) - ['HIGH', 'WATCH', 'OPP', 'NEW'].indexOf(b.severity));
+    const qs = items.map((i) => i.question).concat((S.workspace && S.workspace.suggestions) || []);
+    return [...new Set(qs)].filter((q) => !S.asked.has(q)).slice(0, n);
+  }
   function renderHello() {
-    const w = S.workspace; if (!w) return;
+    const st = S.status, w = S.workspace; if (!st || !w) return;
+    $('#helloKicker').textContent = `LIVE · RUNNING ON ${String(st.location || 'this computer').toUpperCase()}`;
+    const list = st.workspaces || [];
+    if (!S.picked && list.length > 1) {
+      $('#helloTitle').innerHTML = 'Pick a business.<br><em>Watch it think.</em>';
+      $('#helloSub').innerHTML = 'Each one is a made-up company with real-looking files. A private AI on this machine has read every page. Choose one and see what it found.';
+      $('#pick').innerHTML = list.map((x) => `<button type="button" class="pick-card" data-ws="${esc(x.id)}"><span class="ws-avatar">${esc(x.initials || '·')}</span><span><strong>${esc(x.name)}</strong><small>${esc(x.kind || '')}</small><em>${fmt(x.documents)} files${x.developments ? ` · ${x.developments} things need attention` : ''}</em></span><b>→</b></button>`).join('');
+      $$('#pick .pick-card').forEach((b) => b.addEventListener('click', () => switchWs(b.dataset.ws)));
+      $('#brief').innerHTML = ''; $('#suggest').innerHTML = ''; $('#dare').hidden = true;
+      return;
+    }
+    $('#pick').innerHTML = '';
     $('#helloTitle').textContent = greeting();
-    const items = (S.feed && S.feed.items) || [];
-    const n = items.length, hot = items.filter((i) => i.severity === 'HIGH').length;
-    let sub = `I've read <b>${fmt(w.documents)} documents</b> for <b>${esc(w.name)}</b>`;
-    if (n) sub += `. <b>${n} developments</b> are worth your attention${hot ? `, ${hot} of them urgent` : ''}.`;
-    else if (S.feed && S.feed.status === 'running') sub += '. Writing this morning’s briefing now.';
-    else sub += '. Ask me anything they cover.';
-    $('#helloSub').innerHTML = sub;
-    const sugg = [];
-    items.filter((i) => i.severity === 'HIGH').slice(0, 2).forEach((i) => sugg.push({ label: 'FROM THE BRIEFING', q: i.question }));
-    (w.suggestions || []).forEach((q) => { if (sugg.length < 4 && !sugg.find((s) => s.q === q)) sugg.push({ label: 'TRY', q }); });
-    $('#suggest').innerHTML = sugg.slice(0, 4).map((s) => `<button type="button" data-q="${esc(s.q)}"><small>${s.label}</small>${esc(s.q)}</button>`).join('');
+    const items = ((S.feed && S.feed.items) || []).slice().sort((a, b) => ['HIGH', 'WATCH', 'OPP', 'NEW'].indexOf(a.severity) - ['HIGH', 'WATCH', 'OPP', 'NEW'].indexOf(b.severity));
+    if (!items.length) {
+      $('#helloSub').innerHTML = `I'm reading all <b>${fmt(w.documents)} files</b> for <b>${esc(w.name)}</b> and writing the briefing.`;
+      const docs = (w.docs || []).map((d) => d.title);
+      $('#brief').innerHTML = `<div class="ticker"><span class="shimmer" id="tick">${esc(docs[0] || '')}</span></div>`;
+      let i = 0; clearInterval(S.tickT); S.tickT = setInterval(() => { const t = $('#tick'); if (!t) return clearInterval(S.tickT); t.textContent = docs[++i % docs.length] || ''; }, 420);
+      $('#suggest').innerHTML = ''; $('#dare').hidden = false;
+      return;
+    }
+    clearInterval(S.tickT);
+    $('#helloSub').innerHTML = `I read all <b>${fmt(w.documents)} files</b> for <b>${esc(w.name)}</b>. Here's what needs attention:`;
+    const key = w.id + ':' + (S.feed.generated_at || '');
+    const top = items.slice(0, 3);
+    if (S.revealed !== key) {
+      S.revealed = key;
+      $('#brief').innerHTML = top.map((it, i) => `<button type="button" class="brief-card" style="animation-delay:${i * 380}ms" data-q="${esc(it.question)}"><span class="sev ${it.severity}">${it.severity}</span><span><strong data-t="${esc(it.title)}"></strong><small>${esc(it.category)}</small></span><b>SHOW ME →</b></button>`).join('');
+      (async () => { for (const el of $$('#brief strong')) { await new Promise((r) => setTimeout(r, 250)); await typeInto(el, el.dataset.t); } })();
+      $$('#brief .brief-card').forEach((b) => b.addEventListener('click', () => ask(b.dataset.q)));
+    }
+    const briefQs = new Set(top.map((t) => t.question));
+    const more = nextQuestions(8).filter((q) => !briefQs.has(q)).slice(0, 3);
+    $('#suggest').innerHTML = more.map((q) => `<button type="button" data-q="${esc(q)}"><small>TRY</small>${esc(q)}</button>`).join('');
     $$('#suggest button').forEach((b) => b.addEventListener('click', () => ask(b.dataset.q)));
+    $('#dare').hidden = false;
   }
 
   function renderKnowledge() {
@@ -204,14 +237,14 @@
 
   async function ask(q) {
     q = (q || '').trim(); if (!q || S.busy || !S.ws) return;
-    S.busy = true; $('#askBtn').disabled = true; $('#askInput').value = '';
+    S.busy = true; S.picked = true; S.asked.add(q); $('#askBtn').disabled = true; $('#askInput').value = '';
     $('#hello').hidden = S.history.length === 0 ? false : $('#hello').hidden;
     const turn = document.createElement('div'); turn.className = 'turn';
-    turn.innerHTML = `<div class="q"><p>${esc(q)}</p></div><div class="a"><div class="sigil">✦</div><div><div class="a-label">ICONIC · RUNNING ON ${esc((S.status && S.status.host || 'THIS COMPUTER').toUpperCase())}</div><div class="reading"><span class="shimmer">Searching ${fmt(S.workspace ? S.workspace.documents : 0)} documents…</span></div><div class="a-body streaming" hidden></div><div class="srcs"></div><div class="a-meta"></div></div></div>`;
+    turn.innerHTML = `<div class="q"><p>${esc(q)}</p></div><div class="a"><div class="sigil">✦</div><div><div class="a-label">ICONIC · RUNNING ON ${esc((S.status && S.status.host || 'THIS COMPUTER').toUpperCase())}</div><div class="reading"><span class="shimmer">Searching ${fmt(S.workspace ? S.workspace.documents : 0)} documents…</span></div><div class="a-body streaming" hidden></div><div class="srcs"></div><div class="a-meta"></div><div class="nexts"></div></div></div>`;
     $('#convo').appendChild(turn);
     if (S.history.length === 0) $('#hello').hidden = true;
     const convo = $('#convo'); convo.scrollTop = convo.scrollHeight;
-    const reading = $('.reading', turn), bodyEl = $('.a-body', turn), srcEl = $('.srcs', turn), metaEl = $('.a-meta', turn);
+    const reading = $('.reading', turn), bodyEl = $('.a-body', turn), srcEl = $('.srcs', turn), metaEl = $('.a-meta', turn), nextEl = $('.nexts', turn);
     let sources = [], text = '', t0 = performance.now();
     const paint = () => { bodyEl.innerHTML = md(text, sources); $$('.cite', bodyEl).forEach((c) => c.onclick = () => { const s = sources.find((x) => String(x.n) === c.dataset.n); if (s) openDoc(s.id, s.snippet); }); };
     try {
@@ -239,12 +272,22 @@
             text += data; paint(); convo.scrollTop = convo.scrollHeight;
           } else if (ev === 'done') {
             bodyEl.classList.remove('streaming'); paint();
-            metaEl.innerHTML = `<span>ANSWERED IN ${(data.ms / 1000).toFixed(1)}s</span><span>${fmt(data.tokens)} TOKENS</span>${data.tps ? `<span>${data.tps} TOK/S</span>` : ''}<span><b>$0.00</b></span>${data.private ? '<span><b>0 BYTES LEFT THIS NETWORK</b></span>' : ''}`;
+            metaEl.innerHTML = `<span>ANSWERED ON ${esc(String(data.location || 'THIS COMPUTER').toUpperCase())} IN ${(data.ms / 1000).toFixed(1)}s</span>${data.tps ? `<span>${data.tps} TOK/S</span>` : ''}<span><b>COST $0.00</b></span>${data.private ? '<span><b>SENT TO NO AI COMPANY</b></span>' : ''}`;
           } else if (ev === 'error') { throw new Error(data); }
         }
       }
       if (!text) throw new Error('The model returned nothing.');
       S.history.push({ q, a: text });
+      const cta = (S.status && S.status.cta_url) || '';
+      const nq = nextQuestions(2);
+      nextEl.innerHTML = nq.map((x) => `<button type="button" class="next" data-q="${esc(x)}">${esc(x)} →</button>`).join('') +
+        (cta ? `<a class="next cta-chip" href="${esc(cta)}" target="_blank" rel="noopener">Put this on my files →</a>` : '');
+      $$('.next[data-q]', nextEl).forEach((b) => b.addEventListener('click', () => ask(b.dataset.q)));
+      if (cta && S.history.length === 3) {
+        const card = document.createElement('div'); card.className = 'cta-card';
+        card.innerHTML = `<div><small>${S.workspace && S.workspace.sample ? 'THAT WAS A MADE-UP BUSINESS' : 'LIKE WHAT YOU SEE?'}</small><h3>Now picture it on yours.</h3><p>Your files, on a computer in your office. Nothing goes to an AI company, and there's no meter running.</p></div><a href="${esc(cta)}" target="_blank" rel="noopener">BOOK THE FREE 30-MINUTE CHECK →</a>`;
+        turn.appendChild(card);
+      }
     } catch (e) {
       reading.remove?.(); bodyEl.hidden = false; bodyEl.classList.remove('streaming');
       bodyEl.innerHTML = `<p class="a-err">${esc(e.message)}</p>`;

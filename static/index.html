@@ -47,7 +47,7 @@
         <div class="top-r">
           <span class="pill"><em>ROUTE</em> <b id="routePill">LOCAL</b></span>
           <span class="pill hide-sm"><em>SPEED</em> <b id="tpsPill">—</b></span>
-          <span class="pill ok"><em>DATA OUT</em> <b id="outPill">0 BYTES</b></span>
+          <span class="pill ok"><em>SENT TO AI COMPANIES</em> <b id="outPill">0 BYTES</b></span>
         </div>
       </header>
 
@@ -55,17 +55,20 @@
       <section class="panel active" id="panel-ask">
         <div class="convo" id="convo">
           <div class="hello" id="hello">
-            <div class="kicker">PRIVATE INTELLIGENCE · ON THIS COMPUTER</div>
-            <h1 id="helloTitle">Good morning.</h1>
-            <p id="helloSub">Reading the files…</p>
+            <div class="kicker" id="helloKicker">LIVE · PRIVATE AI</div>
+            <h1 id="helloTitle">Pick a business.<br><em>Watch it think.</em></h1>
+            <p id="helloSub">Loading…</p>
+            <div class="pick" id="pick"></div>
+            <div class="brief" id="brief"></div>
             <div class="suggest" id="suggest"></div>
+            <p class="dare" id="dare" hidden>Or type anything. Say hi, test it, try to trip it up.</p>
           </div>
         </div>
         <form class="askbar" id="askForm" autocomplete="off">
           <input id="askInput" type="text" placeholder="Ask the business anything…" aria-label="Ask a question" maxlength="600" />
           <button type="submit" id="askBtn" aria-label="Ask">↗</button>
         </form>
-        <p class="askhint" id="askHint">Answers come only from this business's own files, with sources. Nothing leaves this computer.</p>
+        <p class="askhint" id="askHint">Answers come only from this business's own files, with sources. The AI runs on a private computer, not in any AI company's cloud.</p>
       </section>
 
       <!-- INTELLIGENCE -->
