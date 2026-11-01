@@ -315,6 +315,13 @@ JOBS = Jobs()
 
 # ---------------------------------------------------------------- model client
 
+def pretty_model(m):
+    """'/home/x/models/Qwen3.8-27B-Q4_K_M.gguf' -> 'Qwen3.8-27B'."""
+    name = os.path.basename(m or "") or "local model"
+    name = re.sub(r"(?i)\.gguf$", "", name)
+    return re.sub(r"(?i)[-_.](q\d[\w]*|f16|bf16|fp16|iq\d\w*)$", "", name)
+
+
 class Model:
     def __init__(self):
         self.url = LLM_URL
@@ -369,11 +376,7 @@ class Model:
 
     @property
     def label(self):
-        """Readable model name: '/home/x/models/Qwen3.8-27B-Q4_K_M.gguf' -> 'Qwen3.8-27B'."""
-        name = os.path.basename(self.model or "") or "local model"
-        name = re.sub(r"(?i)\.gguf$", "", name)
-        name = re.sub(r"(?i)[-_.](q\d[\w]*|f16|bf16|fp16|iq\d\w*)$", "", name)
-        return name
+        return pretty_model(self.model)
 
     def is_private(self):
         try:
@@ -719,6 +722,7 @@ class Learned:
         self.events = 0
         self.sessions = set()
         self.convos = 0
+        self.added = 0
         try:
             with open(self.path, encoding="utf-8") as f:
                 j = json.load(f)
@@ -741,6 +745,8 @@ class Learned:
                 for j in range(i + 1, len(doc_ids)):
                     k = "%d|%d" % (doc_ids[i], doc_ids[j])
                     rec = self.links[wid].setdefault(k, {"n": 0, "last": 0})
+                    if rec["n"] == 0:
+                        self.added += 1
                     rec["n"] += 1
                     rec["last"] = time.time()
                     self.events += 1
@@ -754,9 +760,13 @@ class Learned:
                 log("learned save failed", e)
         return new
 
-    def totals(self):
+    def totals(self, wid=None):
+        """connections = distinct file-to-file links learned, i.e. the lines a visitor can see."""
         with self.lock:
-            return {"connections": self.events, "conversations": self.convos}
+            t = {"connections": sum(len(d) for d in self.links.values()), "conversations": self.convos}
+            if wid is not None:
+                t["here"] = len(self.links.get(wid, {}))
+            return t
 
     def for_ws(self, wid):
         with self.lock:
@@ -889,13 +899,17 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send_json(w.summary())
             if u.path == "/api/feed":
                 w = self.ws(qs)
-                f = FEED.get(w.id) if w else None
-                return self.send_json(f or {"status": "waiting", "items": []})
+                f = dict(FEED.get(w.id) or {"status": "waiting", "items": []}) if w else {"status": "waiting", "items": []}
+                if f.get("model"):
+                    f["model"] = pretty_model(f["model"])
+                return self.send_json(f)
             if u.path == "/api/graph":
                 w = self.ws(qs)
                 if not w:
                     return self.send_json({"error": "no workspaces"}, 404)
                 g = dict(GRAPH.get(w.id) or {"status": "waiting"})
+                if g.get("model"):
+                    g["model"] = pretty_model(g["model"])
                 g.pop("signature", None)
                 with w.lock:
                     g["docs"] = [{"id": d["id"], "title": d["title"], "folder": d["folder"]} for d in w.docs]
@@ -906,7 +920,7 @@ class Handler(BaseHTTPRequestHandler):
                 g["urgent_docs"] = sorted(urgent)
                 g["briefing"] = (FEED.get(w.id) or {}).get("items") or []
                 g["learned"] = LEARNED.for_ws(w.id)
-                g["totals"] = LEARNED.totals()
+                g["totals"] = LEARNED.totals(w.id)
                 return self.send_json(g)
             if u.path == "/api/jobs":
                 return self.send_json({"jobs": JOBS.snapshot(), "scan_seconds": SCAN_SECONDS})
@@ -1050,9 +1064,11 @@ class Handler(BaseHTTPRequestHandler):
             cited = {int(n) for n in re.findall(r"\[(\d+)(?:\s*,\s*\d+)*\]", answer)}
             cited |= {int(n) for grp in re.findall(r"\[((?:\d+\s*,\s*)+\d+)\]", answer) for n in re.split(r"\s*,\s*", grp)}
             cited_docs = [s["id"] for s in sources if s["n"] in cited]
+            before_here = LEARNED.totals(w.id)["here"]
             new = LEARNED.add(w.id, cited_docs, str(body.get("session", ""))[:64]) if len(set(cited_docs)) >= 2 else \
                 (LEARNED.add(w.id, [], str(body.get("session", ""))[:64]) and [])
-            done["learned"] = {"new": new, **LEARNED.totals()}
+            done["learned"] = dict(LEARNED.totals(w.id), new=new)
+            done["learned"]["added"] = done["learned"]["here"] - before_here
             self.sse("done", done)
             JOBS.finish(job, "done", "%d sources · %d tokens · %.1fs" % (len(sources), n_tok, done["ms"] / 1000))
         except (BrokenPipeError, ConnectionResetError):

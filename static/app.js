@@ -36,7 +36,7 @@
     $$('.panel').forEach((p) => p.classList.toggle('active', p.id === 'panel-' + t));
     $('#panelTitle').textContent = TITLES[t];
     if (t === 'work') loadJobs();
-    if (t === 'intel') { loadFeed(); loadGraph(); requestAnimationFrame(() => window.IconicGraph && IconicGraph.resize()); }
+    if (t === 'intel') { loadFeed(); loadGraph(); requestAnimationFrame(() => { if (window.IconicGraph) IconicGraph.resize(); if (S.storyPending || (S.graph && (S.graph.tunnels || []).length && !S.story)) { S.storyPending = false; showStory(0); } }); }
     if (t === 'ask') setTimeout(() => $('#askInput').focus(), 50);
   }
   $$('.tab').forEach((b) => b.addEventListener('click', () => setTab(b.dataset.tab)));
@@ -55,7 +55,7 @@
   function switchWs(id) {
     if (EMBED && window.parent !== window) { try { window.parent.postMessage({ source: 'iconic-demo', type: 'ws', ws: id }, '*'); } catch {} }
     if (id === S.ws) { S.picked = true; renderHello(); return; }
-    S.ws = id; store.set('iconic.ws', id); S.history = []; S.feed = null; S.folder = 'all'; S.picked = true; S.revealed = ''; S.asked = new Set(); S.graph = null; S.answers = 0; $('#gDetail').hidden = true;
+    S.ws = id; store.set('iconic.ws', id); S.history = []; S.feed = null; S.folder = 'all'; S.picked = true; S.revealed = ''; S.asked = new Set(); S.graph = null; S.story = null; S.answers = 0; $('#gDetail').hidden = true; $('#story').hidden = true;
     $$('.turn', $('#convo')).forEach((t) => t.remove());
     $('#hello').hidden = false;
     loadWorkspace(); loadFeed(); loadGraph();
@@ -171,6 +171,7 @@
   function renderFeed() {
     const f = S.feed || {}, items = f.items || [];
     $('#feedRefresh').disabled = f.status === 'running';
+    $('#briefCount').textContent = items.length ? String(items.length) : '';
     const online = S.status && S.status.model.online;
     if (f.status === 'running' && !items.length) {
       $('#feedSub').textContent = 'The agent is reading the files now.';
@@ -189,48 +190,60 @@
   }
   $('#feedRefresh').addEventListener('click', async () => { await api('/api/refresh-feed', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ws: S.ws }) }); S.feed = Object.assign({}, S.feed, { status: 'running' }); renderFeed(); });
 
-  // ---------- intelligence graph
-  function countTo(el, v) { if (el) countUp(el, v); }
+  // ---------- intelligence graph: quiet map, then one hidden connection draws itself
+  function showStory(i) {
+    const st = IconicGraph.setStory(i); const box = $('#story');
+    if (!st) { box.hidden = true; return; }
+    box.hidden = false; box.classList.remove('in'); void box.offsetWidth; box.classList.add('in');
+    $('#storyCount').textContent = st.total > 1 ? `HIDDEN CONNECTION ${st.i + 1}/${st.total}` : 'HIDDEN CONNECTION';
+    $('#storyTitle').innerHTML = `${esc(st.a)} <em>⇄</em> ${esc(st.b)}`;
+    const p = $('#storyText'); p.textContent = ''; clearTimeout(S.storyT);
+    S.storyT = setTimeout(() => typeInto(p, st.insight, 16), 1500);
+    $('#storyNext').hidden = st.total < 2;
+    S.story = st; $('#gDetail').hidden = true;
+  }
+  $('#storyNext').addEventListener('click', () => showStory((S.story ? S.story.i : -1) + 1));
+  $('#storyAsk').addEventListener('click', () => { if (S.story) { setTab('ask'); ask(`Explain the connection between ${S.story.a} and ${S.story.b}. Why does it matter?`); } });
+
   async function loadGraph() {
     if (!S.ws || !window.IconicGraph) return;
-    let g; try { g = await api('/api/graph?ws=' + encodeURIComponent(S.ws)); } catch { return; }
-    const sig = JSON.stringify([g.generated_at, g.status, (g.learned || []).length, (g.learned || []).reduce((a, l) => a + l.n, 0), (g.urgent_docs || []).join()]);
-    S.totals = g.totals || S.totals; countTo($('#gConn'), S.totals.connections); countTo($('#gConv'), S.totals.conversations);
-    if (S.graphSig === sig && S.graphWs === S.ws) return;
-    S.graphSig = sig; S.graphWs = S.ws; S.graph = g;
+    const ws = S.ws; let g;
+    try { g = await api('/api/graph?ws=' + encodeURIComponent(ws)); } catch { return; }
+    if (ws !== S.ws) return; // the visitor switched business while this was loading
+    S.totals = g.totals || S.totals;
+    countUp($('#gConn'), (g.totals && g.totals.here) || 0); countUp($('#gConv'), (g.totals && g.totals.conversations) || 0);
+    const sig = JSON.stringify([ws, g.generated_at, g.status, (g.learned || []).length]);
+    if (S.graphSig === sig) return;
+    const fresh = S.graphWs !== ws || !S.graph || S.graph.generated_at !== g.generated_at;
+    S.graphSig = sig; S.graphWs = ws; S.graph = g;
     const ready = (g.entities || []).length > 0;
     $('#gEmpty').hidden = ready;
-    if (!ready) { $('#gEmpty').innerHTML = `<div class="orb"></div><p>${g.status === 'error' ? 'The map failed: ' + esc(g.error || '') : 'Mapping how ' + esc(S.workspace ? S.workspace.name : 'the business') + ' connects…'}</p><small>The local model is reading every file. It takes about a minute, once.</small>`; }
-    IconicGraph.build(g, { name: S.workspace ? S.workspace.name : '', urgentDocs: g.urgent_docs || [] });
-    $('#graphSub').textContent = ready ? `${(g.entities || []).length} people, companies and deadlines across ${(g.wings || []).length} areas, ${(g.facts || []).length} facts, mapped by ${g.model || 'the local model'}. Every question adds connections, for everyone.` : '—';
+    if (!ready) {
+      $('#gEmpty').innerHTML = `<div class="orb"></div><p>${g.status === 'error' ? 'The map didn’t finish. It will try again.' : 'Mapping how ' + esc((((S.status && S.status.workspaces) || []).find((x) => x.id === ws) || {}).name || 'the business') + ' connects…'}</p><small>The local model reads every file once. About a minute.</small>`;
+      $('#story').hidden = true;
+    }
+    const wsInfo = ((S.status && S.status.workspaces) || []).find((x) => x.id === ws);
+    IconicGraph.build(g, { name: wsInfo ? wsInfo.name : (S.workspace && S.workspace.id === ws ? S.workspace.name : ''), fresh });
     $('#cntIntel').textContent = (g.tunnels || []).length || '';
-    const T = g.tunnels || [];
-    const lbl = (id) => ((g.entities || []).find((e) => e.id === id) || {}).label || id;
-    $('#tunnels').innerHTML = T.map((t, i) => `<button type="button" class="tunnel" data-i="${i}"><small>✦ HIDDEN CONNECTION</small><strong>${esc(lbl(t.a))} <em>⇄</em> ${esc(lbl(t.b))}</strong><p>${esc(t.insight)}</p></button>`).join('');
-    $$('#tunnels .tunnel').forEach((b) => b.addEventListener('click', () => IconicGraph.select('tunnel:' + b.dataset.i, true)));
+    if (ready && fresh) setTimeout(() => { if (S.tab === 'intel' && S.graphWs === ws) showStory(0); else S.storyPending = true; }, 500);
   }
   function onGraphSelect(info, user) {
     const box = $('#gDetail');
     if (!info) { box.hidden = true; return; }
+    $('#story').hidden = true;
     const docTitle = (id) => { const d = (S.graph && S.graph.docs || []).find((x) => x.id === id); return d ? d.title : 'File ' + id; };
-    const docBtns = (ids) => (ids || []).slice(0, 5).map((id) => `<button type="button" class="chip" data-doc="${id}">◫ ${esc(docTitle(id))}</button>`).join('');
-    let html = '', q = '';
-    if (info.kind === 'tunnel') {
-      const t = info.tunnel; q = `Explain the connection between ${info.a.label} and ${info.b.label}. Why does it matter?`;
-      html = `<small class="gold">✦ HIDDEN CONNECTION</small><h3>${esc(info.a.label)} ⇄ ${esc(info.b.label)}</h3><p>${esc(t.insight)}</p><div class="gchips">${docBtns(t.docs)}</div>`;
-    } else {
-      const n = info.node; const kindName = { core: 'THE BUSINESS', wing: 'AREA', ent: (n.ekind || 'ENTITY').toUpperCase(), doc: 'FILE' }[n.kind];
-      q = n.kind === 'doc' ? `What matters in "${n.label}"?` : `What should I know about ${n.label}?`;
-      const facts = (info.facts || []).slice(0, 6).map((f) => `<li><span class="fstate ${f.state}">${esc(f.state.toUpperCase())}</span><span>${esc(f.label)} <b>${esc(f.other ? f.other.label : '')}</b>${f.date ? ` · ${esc(f.date)}` : ''}</span></li>`).join('');
-      const tun = (info.tunnels || []).map((t) => `<p class="tline">✦ ${esc(t.insight)}</p>`).join('');
-      const kids = (info.kids || []).slice(0, 8).map((k) => `<span class="pill-s">${esc(k.label)}</span>`).join('');
-      const lrn = (info.learned || []).length ? `<p class="lline">Linked to ${(info.learned || []).length} other file${info.learned.length > 1 ? 's' : ''} by visitors' questions.</p>` : '';
-      html = `<small>${kindName}</small><h3>${esc(n.label)}</h3>${tun}${kids ? `<div class="gchips">${kids}</div>` : ''}${facts ? `<ul class="facts">${facts}</ul>` : ''}${lrn}<div class="gchips">${docBtns(info.docs)}</div>`;
-    }
-    box.innerHTML = html + `<button type="button" class="ask-this" data-q="${esc(q)}">ASK ABOUT THIS →</button>`;
+    const docBtns = (ids) => (ids || []).slice(0, 4).map((id) => `<button type="button" class="chip" data-doc="${id}">◫ ${esc(docTitle(id))}</button>`).join('');
+    const n = info.node, kindName = { core: 'THE BUSINESS', wing: 'AREA', ent: (n.ekind || 'IN THE FILES').toUpperCase(), doc: 'FILE' }[n.kind];
+    const q = n.kind === 'doc' ? `What matters in "${n.label}"?` : n.kind === 'wing' ? `What's going on with ${n.label}?` : `What should I know about ${n.label}?`;
+    const stateWord = { due: 'DUE', broken: 'BROKEN', expired: 'OVER', active: '' };
+    const facts = (info.facts || []).slice(0, 5).map((f) => `<li>${stateWord[f.state] ? `<span class="fstate ${f.state}">${stateWord[f.state]}</span>` : ''}<span>${esc(f.label)} <b>${esc(f.other ? f.other.label : '')}</b>${f.date ? ` · ${esc(f.date)}` : ''}</span></li>`).join('');
+    const tun = (info.tunnels || []).map((t) => `<p class="tline">✦ ${esc(t.insight)}</p>`).join('');
+    const kids = n.kind === 'wing' ? `<p class="psub">${(info.kids || []).length} things in this area. They’re showing on the map now.</p>` : '';
+    const lrn = info.learned ? `<p class="lline">Linked to ${info.learned} other file${info.learned > 1 ? 's' : ''} by visitors’ questions.</p>` : '';
+    box.innerHTML = `<small>${kindName}</small><h3>${esc(n.label)}</h3>${tun}${kids}${facts ? `<ul class="facts">${facts}</ul>` : ''}${lrn}${n.kind !== 'wing' ? `<div class="gchips">${docBtns(info.docs)}</div>` : ''}<button type="button" class="btn" data-q="${esc(q)}">Ask about this →</button>`;
     box.hidden = false;
     $$('[data-doc]', box).forEach((b) => b.addEventListener('click', () => openDoc(Number(b.dataset.doc))));
-    $('.ask-this', box).addEventListener('click', (e) => { setTab('ask'); ask(e.currentTarget.dataset.q); });
+    $('.btn', box).addEventListener('click', (e) => { setTab('ask'); ask(e.currentTarget.dataset.q); });
     if (user && matchMedia('(max-width: 860px)').matches) setTimeout(() => box.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 60);
   }
 
@@ -335,8 +348,8 @@
             text += data; paint(); convo.scrollTop = convo.scrollHeight;
           } else if (ev === 'done') {
             bodyEl.classList.remove('streaming'); paint();
-            metaEl.innerHTML = `<span>ANSWERED ON ${esc(String(data.location || 'THIS COMPUTER').toUpperCase())} IN ${(data.ms / 1000).toFixed(1)}s</span>${data.tps ? `<span>${data.tps} TOK/S</span>` : ''}<span><b>COST $0.00</b></span>${data.private ? '<span><b>SENT TO NO AI COMPANY</b></span>' : ''}${data.learned && data.learned.new && data.learned.new.length ? `<button type="button" class="grow">+${data.learned.new.length} CONNECTION${data.learned.new.length > 1 ? 'S' : ''} · ${fmt(data.learned.connections)} TOTAL ↗</button>` : ''}`;
-            if (data.learned) { S.totals = { connections: data.learned.connections, conversations: data.learned.conversations }; if (window.IconicGraph) IconicGraph.addLearned(data.learned.new); S.graphSig = ''; const gb = $('.grow', metaEl); if (gb) gb.addEventListener('click', () => setTab('intel')); }
+            metaEl.innerHTML = `<span>ANSWERED ON ${esc(String(data.location || 'THIS COMPUTER').toUpperCase())} IN ${(data.ms / 1000).toFixed(1)}s</span>${data.tps ? `<span>${data.tps} TOK/S</span>` : ''}<span><b>COST $0.00</b></span>${data.private ? '<span><b>SENT TO NO AI COMPANY</b></span>' : ''}${data.learned && data.learned.added > 0 ? `<button type="button" class="grow">+${data.learned.added} NEW LINK${data.learned.added > 1 ? 'S' : ''} ON THE GRAPH ↗</button>` : ''}`;
+            if (data.learned) { S.totals = data.learned; if (window.IconicGraph) IconicGraph.addLearned(data.learned.new); S.graphSig = ''; const gb = $('.grow', metaEl); if (gb) gb.addEventListener('click', () => setTab('intel')); }
           } else if (ev === 'error') { throw new Error(data); }
         }
       }
