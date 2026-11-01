@@ -503,3 +503,23 @@ h1, h2, h3, .hello h1, .phead h2, .story h3, .gdetail h3 { overflow-wrap: break-
   .story-actions .btn, .story-actions .ghost { padding: .6rem .8rem; white-space: nowrap; }
   .story h3 { margin: .3rem 0 .35rem; }
 }
+
+/* ===== Inside iconic.onl on a phone: only what the visitor needs. The page around it already explains. ===== */
+@media (max-width: 860px) {
+  body.embed .kicker, body.embed .ws-text small, body.embed .askhint, body.embed .dare { display: none; }
+  body.embed .hello h1 { margin: .2rem 0 .5rem; }
+  body.embed #pick ~ .brief:empty ~ .suggest:empty, body.embed .hello #helloSub:has(+ .pick:not(:empty)) { display: none; }
+  body.embed .pick { gap: .6rem; margin-top: .8rem; }
+  body.embed .pick-card { padding: .8rem; gap: .7rem; }
+  body.embed .pick-card small { display: none; }
+  body.embed .askbar { margin: .5rem .6rem calc(.6rem + env(safe-area-inset-bottom)); padding: .3rem .3rem .3rem .5rem; border-radius: .9rem; }
+  body.embed .askbar input { padding: .55rem .4rem; }
+  body.embed .askbar button { width: 2.6rem; height: 2.6rem; border-radius: .7rem; }
+  body.embed .ws-chip { padding: .35rem .5rem; }
+  body.embed .side { padding: .45rem .6rem; gap: .4rem; }
+  body.embed .tab { height: 2.3rem; }
+  body.embed .convo { padding: .9rem .9rem .6rem; }
+  body.embed .brief { gap: .5rem; margin-top: .8rem; }
+  body.embed .brief-card { padding: .75rem .8rem; }
+  body.embed .suggest { display: none; }
+}
