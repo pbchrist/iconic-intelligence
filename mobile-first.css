@@ -826,3 +826,9 @@ h1, h2, h3 { overflow-wrap: break-word; }
   .sticky-cta.show { transform: none; }
   body { padding-bottom: 76px; }
 }
+
+/* Any text size: nothing wider than the screen */
+.section-heading > *, .use-case-wrap > *, .check-card > *, .offer-card > * { min-width: 0; }
+p, li, .use-case-steps strong { overflow-wrap: break-word; }
+.capability-card, .deployment-grid article, .use-case-steps article { min-width: 0; }
+@media (max-width: 899px) { .capability-grid { grid-template-columns: minmax(0, 1fr); } }

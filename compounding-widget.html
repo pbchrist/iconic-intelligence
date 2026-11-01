@@ -107,6 +107,20 @@ h1{font-family:var(--serif);font-weight:400;font-size:clamp(42px,8vw,112px);line
 @media (prefers-reduced-motion: reduce){ .prompt i{animation:none} }
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @media (max-width:560px){ .prompt{display:none} }
+/* Phones: the animation gets its own space; the words sit below it, never on top. */
+@media (max-width:760px){
+  html body.embed .view, html body .view{height:auto;min-height:0;display:flex;flex-direction:column}
+  .view canvas{flex:none;height:clamp(360px,100vw,440px)}
+  .view::after{display:none}
+  .caption{position:relative;left:auto;right:auto;bottom:auto;max-width:none;padding:20px 18px 26px;background:var(--bg)}
+  .finale{background:var(--bg);padding-top:20px}
+  .cap-t{overflow-wrap:break-word}
+  .hud{flex-wrap:nowrap;align-items:flex-start;gap:10px}
+  .stamp{min-width:0;flex:1 1 0;line-height:1.4;overflow-wrap:anywhere}
+  .hud > *{min-width:0}
+  .skip{flex:none;white-space:nowrap;font-size:0;padding:7px 9px}
+  .skip::after{content:"Skip \2192";font:500 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase}
+}
 
 body.embed{padding:0;margin:0;background:var(--bg)}
 body.embed .ci{max-width:none;gap:0}
@@ -333,12 +347,12 @@ composer.addPass(new OutputPass());
 
 let W=1, H=1, fit=1;
 function resize(){
-  W=view.clientWidth; H=view.clientHeight;
+  W=canvas.clientWidth||view.clientWidth; H=canvas.clientHeight||view.clientHeight;
   renderer.setSize(W,H,false); composer.setSize(W,H);
   camera.aspect=W/H; camera.updateProjectionMatrix();
   fit=Math.min(2.3, Math.max(1, 1.3/camera.aspect));
 }
-new ResizeObserver(resize).observe(view); resize();
+{ const ro=new ResizeObserver(resize); ro.observe(view); ro.observe(canvas); } resize();
 
 /* ---------- shared assets ---------- */
 function glowTexture(){

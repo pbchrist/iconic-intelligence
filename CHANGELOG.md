@@ -8,6 +8,7 @@ Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 - Added the "own your intelligence" pitch, a "why own it" section quoting Sam Altman (Cheeky Pint, Oct 29, 2026), and five toggleable use cases: law, wealth, real estate, owner-run, accounting.
 - Added the free 30-minute check offer right after the hero, a booking button after the proof and at the end, a reassurance line under each, and a pinned booking button on phones. Rewrote the proof in plain English, including why it is not 100 out of 100.
 - Reordered: free check, then why own it, who it is for, what memory gets you, then the compounding story.
+- Phones with larger text settings: big headings now shrink to fit the screen, and in the compounding story the words sit below the animation instead of on top of it. Tested at 100% to 175% text size.
 
 ## 2026-10-11
 - Moved hosting from Railway (free trial ending) to GitHub Pages, free, like the other sites. Also makes www.iconic.onl work. Site content unchanged.

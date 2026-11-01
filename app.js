@@ -127,6 +127,25 @@
     watched.forEach((el) => io.observe(el));
   }
 
+  // Big headings: shrink any that are wider than their box, so a phone with a larger
+  // text setting never pushes a word off the screen.
+  const fitSel = '.hero h1, .section-heading h2, .compound-intro h2, .use-case-copy h2, .check-copy h2, .offer-copy h2, .contact-copy h2, .capability-card h3, .deployment-grid h3, .private-edge strong, .use-case-steps strong';
+  function fitHeadings() {
+    $$(fitSel).forEach((el) => {
+      el.style.fontSize = '';
+      const start = parseFloat(getComputedStyle(el).fontSize);
+      let size = start;
+      const tooWide = () => el.scrollWidth > el.clientWidth + 1 || [...el.children].some((c) => c.scrollWidth > el.clientWidth + 1) || el.getBoundingClientRect().right > document.documentElement.clientWidth - 4;
+      while (tooWide() && size > start * 0.4) { size *= 0.94; el.style.fontSize = `${size}px`; }
+    });
+  }
+  let fitTimer = null;
+  const fitSoon = () => { clearTimeout(fitTimer); fitTimer = setTimeout(fitHeadings, 120); };
+  fitHeadings();
+  window.addEventListener('load', fitHeadings);
+  window.addEventListener('resize', fitSoon, { passive: true });
+  if (document.fonts?.ready) document.fonts.ready.then(fitHeadings);
+
   // Basic 2D fallback field so the site still looks alive if Three.js cannot load.
   // three-scene.js replaces this renderer when the remote module is available.
   const canvas = $('#field');
