@@ -81,6 +81,12 @@ From the first best-in-class review. None of these can be written without his an
 
 ## Demo: the live dashboard
 
+**Built Nov 1: ICONIC Command** (branch `dashboard` of this repo). Real, not a mockup. Answers from the local model with sources, a briefing the model writes, a live job log, knowledge stats and a control panel, plus two fictional sample workspaces (Hollis & Reyes LLP, Northline Supply Co.). Install or update on Beastmaster with:
+`curl -fsSL https://raw.githubusercontent.com/pbchrist/iconic-intelligence/dashboard/install.sh | bash`
+It runs on port 8770, and files go in `~/iconic-command-data/<workspace>/`. Patrick decided: no video, people use the real thing, and nobody uploads their own files. Still open: whether to put it on the public internet, for example with Tailscale Funnel.
+
+### Earlier notes
+
 - **What exists:** `http://100.73.250.50:8769/#dashboard`, on beastmaster, reachable over Tailscale only.
   - "Live concept // Executive control surface" with tabs: Ask / Intelligence / Work / Knowledge / Control.
   - **It is a mockup.** The answers are canned, there is no model behind it, and the feed data is invented. Typed questions get a generic non-answer, or nothing.
