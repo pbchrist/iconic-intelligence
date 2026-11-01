@@ -9,6 +9,13 @@
   const sess = (() => { let v = null; try { v = sessionStorage.getItem('iconic.sess'); if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); sessionStorage.setItem('iconic.sess', v); } } catch { v = Math.random().toString(36).slice(2); } return v; })();
   const EMBED = /[?&]embed=1/.test(location.search);
   if (EMBED) document.body.classList.add('embed');
+  // Opened full-screen from the phone card on iconic.onl: calm phone layout plus a way back.
+  const QS = new URLSearchParams(location.search);
+  if (QS.get('back') === '1') {
+    document.body.classList.add('embed', 'standalone');
+    const ref = document.referrer; const bb = document.getElementById('backbar');
+    if (bb && /^https:\/\/(www\.)?iconic\.onl|^https:\/\/pbchrist\.github\.io/.test(ref)) bb.href = ref.split('#')[0] + '#live';
+  }
   const TITLES = { ask: 'ASK THE BUSINESS', intel: 'INTELLIGENCE GRAPH', work: 'WORK', knowledge: 'KNOWLEDGE', control: 'CONTROL' };
 
   // ---------- atmosphere
@@ -392,6 +399,7 @@
   (async () => {
     if (window.IconicGraph) IconicGraph.mount($('#graph'), onGraphSelect);
     await loadStatus(); await loadWorkspace().catch(() => {}); await loadFeed(); loadJobs(); loadGraph();
+    if (QS.get('ws') || QS.get('q')) { const w = QS.get('ws'), q = QS.get('q'); if (w) switchWs(w); else S.picked = true; if (q) setTimeout(() => { setTab('ask'); ask(q.slice(0, 300)); }, w ? 900 : 100); }
     if (EMBED && window.parent !== window) { try { window.parent.postMessage({ source: 'iconic-demo', type: 'ready', online: !!(S.status && S.status.model.online) }, '*'); } catch {} }
     setInterval(loadStatus, 5000);
     setInterval(() => { if (!S.feed || S.feed.status !== 'ready' || S.tab === 'intel') loadFeed(); }, 4000);

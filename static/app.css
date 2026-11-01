@@ -523,3 +523,7 @@ h1, h2, h3, .hello h1, .phead h2, .story h3, .gdetail h3 { overflow-wrap: break-
   body.embed .brief-card { padding: .75rem .8rem; }
   body.embed .suggest { display: none; }
 }
+.backbar { display: none; }
+body.standalone { display: flex; flex-direction: column; }
+body.standalone .backbar { display: flex; align-items: center; position: relative; z-index: 6; flex: none; min-height: 2.75rem; padding: 0 1rem; color: var(--accent-2); font-size: .9375rem; font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--line); background: rgba(7,9,18,.9); }
+body.standalone .app { flex: 1; height: auto; min-height: 0; }
