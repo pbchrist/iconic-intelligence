@@ -72,7 +72,7 @@
     (function () { try { var d = document.createElement('div'); d.style.cssText = 'position:absolute;visibility:hidden;font-size:100px;line-height:1'; d.textContent = 'x'; document.documentElement.appendChild(d); var z = parseFloat(getComputedStyle(d).fontSize) / 100; d.remove(); if (z > 1.04 && z < 3) document.documentElement.style.setProperty('--tz', z.toFixed(2)); } catch (e) {} })();
   </script>
   <link rel="stylesheet" href="styles.css?v=20261101" />
-  <link rel="stylesheet" href="mobile-first.css?v=20261101f" />
+  <link rel="stylesheet" href="mobile-first.css?v=20261101g" />
   <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
   <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 </head>
@@ -322,7 +322,7 @@
   </main>
 
   <a class="sticky-cta" id="stickyCta" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking aria-hidden="true" tabindex="-1">BOOK MY FREE 30-MINUTE CHECK →</a>
-  <script src="app.js?v=20261101c" defer></script>
+  <script src="app.js?v=20261101d" defer></script>
   <script>
     // Live demo: load it straight away; the demo says "ready" when it's up. If it never does, offer a direct link.
     (function () {
@@ -338,6 +338,13 @@
           '<a class="button button-primary" href="' + book + '" data-calendly-booking>BOOK MY FREE CHECK →</a></div></div>';
       }
       if (!url) { fallback(); return; }
+      // Phones: no app squeezed into the page. One card; the demo opens full-screen with a way back.
+      if (window.matchMedia('(max-width: 899px)').matches) {
+        settled = true;
+        box.className = 'live-card-wrap';
+        box.innerHTML = '<a class="live-card" href="' + url + '/?back=1"><span class="live-dot"></span><strong>Try the live AI</strong><span>Pick a business. See what it found. Try to trip it up.</span><b>OPEN THE DEMO →</b></a>';
+        return;
+      }
       var frame = document.createElement('iframe');
       frame.src = url + '/?embed=1'; frame.title = 'ICONIC live demo'; frame.setAttribute('allow', 'clipboard-write');
       frame.className = 'is-loading';

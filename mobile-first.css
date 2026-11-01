@@ -874,3 +874,10 @@ p, li, .use-case-steps strong { overflow-wrap: break-word; }
 .live-callback a { color: var(--accent-2); white-space: nowrap; }
 .short-copy { display: none; }
 @media (max-width: 899px) { #live .long-copy { display: none; } #live .short-copy { display: inline; } #live .section-heading p { margin-top: .6rem; } .live-frame { margin-top: 1rem; } }
+/* Phones: the demo is one clear card that opens it full-screen */
+.live-card-wrap { margin-top: 1.2rem; }
+.live-card { display: grid; gap: .5rem; padding: 1.4rem 1.2rem; border: 1px solid rgba(185,188,255,.35); border-radius: 1.2rem; background: linear-gradient(135deg, rgba(94,104,218,.22), rgba(255,255,255,.02)); box-shadow: 0 0 60px rgba(82,91,199,.25); color: var(--pearl, #f3f0e7); text-decoration: none; }
+.live-card .live-dot { width: .6rem; height: .6rem; }
+.live-card strong { font-family: Georgia, serif; font-size: 1.6rem; font-weight: 400; line-height: 1.1; }
+.live-card span:not(.live-dot) { color: #aeb4c7; font-size: 1rem; line-height: 1.5; }
+.live-card b { justify-self: start; margin-top: .4rem; padding: .85rem 1.1rem; border-radius: 999px; background: var(--pearl, #f3f0e7); color: #070912; font-size: .8125rem; letter-spacing: .1em; }

@@ -83,7 +83,7 @@
       const url = live && (live.getAttribute('data-demo-url') || '').replace(/\/$/, '');
       if (frame && url && !frame.classList.contains('is-loading')) {
         setTimeout(() => frame.contentWindow.postMessage({ source: 'iconic-site', type: 'ask', ws: data.ws, q: data.q }, url), 700);
-      } else if (url) { window.open(url + '/', '_blank', 'noopener'); }
+      } else if (url) { location.href = url + '/?back=1&ws=' + encodeURIComponent(data.ws || '') + '&q=' + encodeURIComponent(data.q || ''); }
       return;
     }
     if (data.type === 'height' && ciFrame) {
