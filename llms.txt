@@ -25,10 +25,6 @@ Both start with a free 30-minute check of where the business's client data goes 
 - Monthly care needs either remote access to the client's computer or an on-site visit.
 - Prices for setup, teaching and care are quoted after the free check.
 
-## Proof
-
-ICONIC's first engagement is a regional auto dealer. On the same set of business questions, an AI without the dealer's history scored 25 out of 100. With ICONIC's history it scored 96 out of 100. That engagement runs on hardware Patrick operates, and its written briefings use a cloud AI model. Clients are not named.
-
 ## Who it is for
 
 Owner-led businesses and professional firms with years of their own records: law firms, wealth managers, real estate firms, accounting firms and owner-run companies.
