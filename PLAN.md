@@ -85,6 +85,15 @@ From the first best-in-class review. None of these can be written without his an
 `curl -fsSL https://raw.githubusercontent.com/pbchrist/iconic-intelligence/dashboard/install.sh | bash`
 It runs on port 8770, and files go in `~/iconic-command-data/<workspace>/`. Patrick decided: no video, people use the real thing, and nobody uploads their own files. Still open: whether to put it on the public internet, for example with Tailscale Funnel.
 
+**Nov 1, later:** the demo is live on iconic.onl under the hero ("Try it live"), at the public address https://patrick-beastmaster.tailf32530.ts.net.
+- **Intelligence Graph:** the model maps each business MemPalace-style: wings, entities, facts with dates and states, and glowing "hidden connections" (tunnels) with a one-line insight.
+- **Shared learning:** every answer that cites two or more files adds permanent connections, shared by all visitors. The counters show connections and conversations.
+- **Answers:** the first two show sources and suggestions, then it stays clean. "show sources" brings them back. No "I can't" and no disclaimers.
+- **Phones first:** the embed is built for the QR code traffic.
+- **Self-updating:** Beastmaster checks the `dashboard` branch every 10 minutes.
+- **The 3D compounding animation** uses Northline's real numbers. "Watch the live AI do this ↑" asks the demo, and a live connection counter adds rings.
+- On Patrick's own devices (on Tailscale), Chrome blocks the embed, so he sees an "Open the demo" button. Public visitors are unaffected.
+
 ### Earlier notes
 
 - **What exists:** `http://100.73.250.50:8769/#dashboard`, on beastmaster, reachable over Tailscale only.
