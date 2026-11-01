@@ -234,7 +234,7 @@
         <div><strong>Capital compounds because the returns stay invested. <em>Intelligence should work the same way.</em></strong></div>
       </div>
       <div class="ci-shell" data-reveal>
-        <iframe id="ciFrame" class="ci-frame" src="compounding-widget.html?v=20261101c" title="Compounding intelligence interactive story" loading="eager" scrolling="no"></iframe>
+        <iframe id="ciFrame" class="ci-frame" src="compounding-widget.html?v=20261101d" title="Compounding intelligence interactive story" loading="eager" scrolling="no"></iframe>
       </div>
       <p class="compound-note" data-reveal>Everything it learns stays in your business. Start sooner, and it knows more by the time anyone else begins. That is what moving first means here.</p>
       <p class="compound-note live-callback" id="liveCallback" data-reveal hidden>The live demo at the top of this page has made <b id="liveConn">0</b> connections so far, from <b id="liveConv">0</b> conversations. <a href="#live">Ask it something and watch the number move ↑</a></p>
@@ -337,7 +337,13 @@
       frame.src = url + '/?embed=1'; frame.title = 'ICONIC live demo'; frame.setAttribute('allow', 'clipboard-write');
       frame.className = 'is-loading';
       box.appendChild(frame);
+      // The visitor's pick in the demo steers the compounding animation further down, for the rest of the visit.
+      function tellWidget(ws) { var f = document.getElementById('ciFrame'); if (f && f.contentWindow && ws) f.contentWindow.postMessage({ source: 'iconic-site', type: 'setBusiness', ws: ws }, '*'); }
+      var savedWs = null; try { savedWs = sessionStorage.getItem('iconic.ws'); } catch (err) {}
+      var ci = document.getElementById('ciFrame'); if (ci && savedWs) ci.addEventListener('load', function () { tellWidget(savedWs); });
+      if (savedWs) setTimeout(function () { tellWidget(savedWs); }, 1500);
       window.addEventListener('message', function (e) {
+        if (e.origin === url && e.data && e.data.source === 'iconic-demo' && e.data.type === 'ws') { try { sessionStorage.setItem('iconic.ws', e.data.ws); } catch (err) {} tellWidget(e.data.ws); return; }
         if (e.origin !== url || !e.data || e.data.source !== 'iconic-demo' || e.data.type !== 'ready' || settled) return;
         settled = true; frame.className = ''; var w = document.getElementById('liveWait'); if (w) w.remove();
       });
