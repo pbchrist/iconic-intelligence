@@ -111,6 +111,22 @@
   $$('.use-case-dots button').forEach((b) => b.addEventListener('click', () => { renderUseCase(b.dataset.case); clearInterval(caseTimer); }));
   if ($('#useCaseCopy')) armRotation();
 
+  // Phones: a slim "book" button pinned to the bottom, shown once the hero is passed,
+  // hidden while either free-check offer block is on screen.
+  const sticky = $('#stickyCta');
+  if (sticky && 'IntersectionObserver' in window) {
+    const watched = ['.hero', '#check', '#start', '#contact'].map((sel) => $(sel)).filter(Boolean);
+    const visible = new Set();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
+      const show = visible.size === 0;
+      sticky.classList.toggle('show', show);
+      sticky.setAttribute('aria-hidden', String(!show));
+      sticky.tabIndex = show ? 0 : -1;
+    }, { threshold: 0.05 });
+    watched.forEach((el) => io.observe(el));
+  }
+
   // Basic 2D fallback field so the site still looks alive if Three.js cannot load.
   // three-scene.js replaces this renderer when the remote module is available.
   const canvas = $('#field');
