@@ -895,3 +895,13 @@ p, li, .use-case-steps strong { overflow-wrap: break-word; }
 @media (max-width: 899px) {
   .hero h1.h1-own { font-size: min(clamp(2.4rem, 12vw, 4rem), calc((100vw - 32px) / 6.6 / var(--tz, 1))); max-width: none; }
 }
+
+/* Moat + pricing */
+.moat-lead strong { color: var(--pearl, #f3f0e7); font-weight: 600; }
+.moat-copy p + p { margin-top: 1rem; font-size: .92em; }
+.pricing-terms { margin-top: 28px; display: grid; gap: 18px; }
+.pricing-terms p { max-width: 46rem; color: var(--muted, #a8adc7); font-size: 1.05rem; line-height: 1.55; }
+.pricing-terms strong { color: var(--pearl, #f3f0e7); }
+.pricing-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+@media (min-width: 900px) { .capability-grid.pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 899px) { .pricing-actions { display: grid; grid-template-columns: 1fr; } .pricing-actions .button { justify-content: center; text-align: center; } .pricing-grid .capability-card h3 { font-size: min(44px, calc((100vw - 80px) / 5.6 / var(--tz, 1))); } }
