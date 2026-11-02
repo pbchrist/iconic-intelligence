@@ -114,3 +114,12 @@ It runs on port 8770, and files go in `~/iconic-command-data/<workspace>/`. Patr
   - 0:15 ask an unrehearsed question and show the cited files (it knows your business)
   - 0:50 the brief arriving by phone (it works while you sleep)
   - 1:20 "no meter; the check is free"
+
+## Nov 1, evening (live)
+
+- Headline: "Own your intelligence. Don't rent it." Tagline "Know more. Move first." sits under the bottom wordmark.
+- Why own it now leads with THE NEW MOAT (compounding intelligence you own is the moat).
+- Pricing section with NO numbers (Patrick's call: well-heeled WAC audience). Hardware / Setup / Teaching / Level up; billed hourly, by the project or on monthly care; hardware at cost, no meter. Rate ($150/hr) is discussed on the call only.
+- One-page guide PDF (`iconic-own-your-ai-guide.pdf`) is a free download, no email gate.
+- Decided: no timeline claim, no guarantee. Agents and models are free and open; Patrick sells his time.
+- Phone: demo opens full screen from a TRY MY AI button; desktop embeds it.
