@@ -72,7 +72,7 @@
     (function () { try { var d = document.createElement('div'); d.style.cssText = 'position:absolute;visibility:hidden;font-size:100px;line-height:1'; d.textContent = 'x'; document.documentElement.appendChild(d); var z = parseFloat(getComputedStyle(d).fontSize) / 100; d.remove(); if (z > 1.04 && z < 3) document.documentElement.style.setProperty('--tz', z.toFixed(2)); } catch (e) {} })();
   </script>
   <link rel="stylesheet" href="styles.css?v=20261101" />
-  <link rel="stylesheet" href="mobile-first.css?v=20261102f" />
+  <link rel="stylesheet" href="mobile-first.css?v=20261102g" />
   <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
   <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 </head>
@@ -114,10 +114,7 @@
 
     <section id="live" class="section-shell live-section" data-demo-url="https://patrick-beastmaster.tailf32530.ts.net">
       <div class="section-kicker" data-reveal>LIVE DEMO</div>
-      <div class="section-heading split-heading direct-heading" data-reveal>
-        <h2>THIS IS RUNNING ON MY COMPUTER<br><em>RIGHT NOW.</em></h2>
-        <p>A private AI, live on my own hardware in Seattle. It holds the complete files of two sample companies. Ask it what you'd ask about yours.</p>
-      </div>
+      <p class="live-intro" data-reveal>A private AI that has read every file of two sample businesses, a law firm and a supply company. Ask it what an owner would: <em>Which client is about to walk? What did that vendor promise us? Where are we losing money?</em></p>
       <div class="live-frame" id="liveFrame" data-reveal>
         <div class="live-wait" id="liveWait"><span class="live-dot"></span> Waking up the demo…</div>
       </div>
@@ -201,7 +198,7 @@
       </div>
       <div class="capability-grid compact-capabilities">
         <article class="capability-card" data-reveal><span class="card-index">01</span><h3>KNOWS</h3><p>No more re-explaining. Your clients, prices, past decisions and the way you like things done are already there, and it answers from your own history: what changed since last month, what you paid a vendor last year.</p><div class="micro-line"><span></span></div></article>
-        <article class="capability-card" data-reveal><span class="card-index">02</span><h3>WORKS</h3><p>Agents take on the recurring jobs: reading the market every morning, watching for changes that matter, writing the weekly brief, drafting from your templates. They run while you sleep, and with no meter, running them costs nothing extra.</p><div class="micro-line"><span></span></div></article>
+        <article class="capability-card" data-reveal><span class="card-index">02</span><h3>WORKS</h3><p>Agents take on the recurring jobs: reading the market every morning, watching for changes that matter, writing the weekly brief, drafting from your templates. They run while you sleep.</p><div class="micro-line"><span></span></div></article>
         <article class="capability-card" data-reveal><span class="card-index">03</span><h3>STAYS</h3><p>With you. When someone leaves, what they knew stays. When a better model comes out, swap it in, and the memory and the agents carry on.</p><div class="micro-line"><span></span></div></article>
       </div>
     </section>
@@ -328,7 +325,7 @@
             <div>
               <div class="section-kicker card-identity">PATRICK CHRISTELL <em>Principal</em></div>
               <div class="card-ornament" aria-hidden="true"><span></span><i></i><b></b><i></i><span></span></div>
-              <p class="principal-line">Story work with Wes Anderson, Scott Rudin and Vanity Fair, then technical recruiting, taught me to find signal in noise. I became convinced AI belongs on your own machine, so I built my own: a private AI rig in Seattle running 23 agents every day, including the competitor intelligence a car dealership reads before it opens.</p>
+              <p class="principal-line">Story work with Wes Anderson, Scott Rudin and Vanity Fair, then technical recruiting, taught me to find signal in noise. I became convinced AI belongs on your own machine, so I built my own: a private AI rig in Seattle running 23 agents every day, including the always-on agent a car dealership's owners ask every morning.</p>
             </div>
           </div>
           <h2>Build an advantage<br>your competitors <em>cannot rent off the shelf.</em></h2>
