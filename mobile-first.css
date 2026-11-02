@@ -875,17 +875,14 @@ p, li, .use-case-steps strong { overflow-wrap: break-word; }
 .short-copy { display: none; }
 @media (max-width: 899px) { #live .long-copy { display: none; } #live .short-copy { display: inline; } #live .section-heading p { margin-top: .6rem; } .live-frame { margin-top: 1rem; } }
 /* Phones: the demo is one clear card that opens it full-screen */
-.live-card-wrap { margin-top: 1.2rem; }
-.live-card { display: grid; gap: .5rem; padding: 1.4rem 1.2rem; border: 1px solid rgba(185,188,255,.35); border-radius: 1.2rem; background: linear-gradient(135deg, rgba(94,104,218,.22), rgba(255,255,255,.02)); box-shadow: 0 0 60px rgba(82,91,199,.25); color: var(--pearl, #f3f0e7); text-decoration: none; }
-.live-card .live-dot { width: .6rem; height: .6rem; }
-.live-card strong { font-family: Georgia, serif; font-size: 1.6rem; font-weight: 400; line-height: 1.1; }
-.live-card span:not(.live-dot) { color: #aeb4c7; font-size: 1rem; line-height: 1.5; }
-.live-card b { justify-self: start; margin-top: .4rem; padding: .85rem 1.1rem; border-radius: 999px; background: var(--pearl, #f3f0e7); color: #070912; font-size: .8125rem; letter-spacing: .1em; }
+.live-card-wrap { margin-top: 1.4rem; }
+.live-card { display: flex; align-items: center; justify-content: center; gap: .7rem; width: 100%; min-height: 3.5rem; padding: .9rem 1.2rem; border-radius: 999px; background: linear-gradient(135deg, #f5f2e9, #d9deff); box-shadow: 0 14px 36px rgba(116,126,255,.22); color: #090b14; font-size: .875rem; font-weight: 700; letter-spacing: .14em; text-decoration: none; }
+.live-card .live-dot { width: .55rem; height: .55rem; background: #1fbf6a; box-shadow: 0 0 0 4px rgba(31,191,106,.18); }
+@media (max-width: 899px) { #live { padding-bottom: 4.5rem; } #live + #check { margin-top: 1.5rem; } }
 /* Hero: two buttons side by side */
 .hero-actions .hero-try { min-width: 0; }
 @media (max-width: 899px) {
   .hero-actions.hero-actions-threaded { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; align-items: stretch; }
   .hero-actions .button { display: flex; align-items: center; justify-content: center; min-height: 3rem; padding: .7rem .6rem; text-align: center; white-space: normal; font-size: .75rem; letter-spacing: .08em; line-height: 1.25; }
   .hero-buyer + .hero-buyer { margin-top: .6rem; }
-  .live-card strong { font-size: 1.5rem; }
 }

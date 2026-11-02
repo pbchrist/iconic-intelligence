@@ -72,7 +72,7 @@
     (function () { try { var d = document.createElement('div'); d.style.cssText = 'position:absolute;visibility:hidden;font-size:100px;line-height:1'; d.textContent = 'x'; document.documentElement.appendChild(d); var z = parseFloat(getComputedStyle(d).fontSize) / 100; d.remove(); if (z > 1.04 && z < 3) document.documentElement.style.setProperty('--tz', z.toFixed(2)); } catch (e) {} })();
   </script>
   <link rel="stylesheet" href="styles.css?v=20261101" />
-  <link rel="stylesheet" href="mobile-first.css?v=20261101h" />
+  <link rel="stylesheet" href="mobile-first.css?v=20261102a" />
   <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
   <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 </head>
@@ -126,7 +126,6 @@
     <section id="check" class="section-shell check-section">
       <div class="check-card" data-reveal>
         <div class="check-copy">
-          <div class="section-kicker">START HERE · FREE</div>
           <h2>The free 30-minute<br><em>private AI check.</em></h2>
           <p>One call with me. No cost, no pitch deck, no commitment.</p>
         </div>
@@ -338,7 +337,7 @@
       if (window.matchMedia('(max-width: 899px)').matches) {
         settled = true;
         box.className = 'live-card-wrap';
-        box.innerHTML = '<a class="live-card" href="' + url + '/?back=1"><span class="live-dot"></span><strong>Try my AI →</strong></a>';
+        box.innerHTML = '<a class="live-card" href="' + url + '/?back=1"><span class="live-dot"></span>TRY MY AI</a>';
         return;
       }
       var frame = document.createElement('iframe');
