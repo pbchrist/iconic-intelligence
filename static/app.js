@@ -15,7 +15,7 @@
   if (QS.get('back') === '1') {
     document.body.classList.add('embed', 'standalone');
     const ref = document.referrer; const bb = document.getElementById('backbar');
-    if (bb && /^https:\/\/(www\.)?iconic\.onl|^https:\/\/pbchrist\.github\.io/.test(ref)) bb.href = ref.split('#')[0] + '#live';
+    if (bb && /^https:\/\/pbchrist\.github\.io/.test(ref)) bb.href = 'https://pbchrist.github.io/iconic-preview/#live';
   }
   const TITLES = { ask: 'ASK THE BUSINESS', intel: 'INTELLIGENCE GRAPH', work: 'WORK', knowledge: 'KNOWLEDGE', control: 'CONTROL' };
 
