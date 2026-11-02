@@ -118,6 +118,14 @@
     caseTimer = setInterval(() => renderUseCase(caseOrder[(caseIndex + 1) % caseOrder.length]), 7000);
   }
   $$('.use-case-dots button').forEach((b) => b.addEventListener('click', () => { renderUseCase(b.dataset.case); clearInterval(caseTimer); }));
+  // Pause while the cursor is over the use case; resume when it leaves (unless a tab was clicked).
+  let casePicked = false;
+  $$('.use-case-dots button').forEach((b) => b.addEventListener('click', () => { casePicked = true; }));
+  const caseWrap = $('#uses .use-case-wrap');
+  if (caseWrap) {
+    caseWrap.addEventListener('mouseenter', () => clearInterval(caseTimer));
+    caseWrap.addEventListener('mouseleave', () => { if (!casePicked) armRotation(); });
+  }
   if ($('#useCaseCopy')) armRotation();
 
   // Phones: a slim "book" button pinned to the bottom, shown once the hero is passed,

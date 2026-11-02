@@ -914,3 +914,19 @@ p, li, .use-case-steps strong { overflow-wrap: break-word; }
 /* Headings start at the top of split headings (no gap under the kicker) */
 @media (min-width: 900px) { .split-heading { align-items: start; } }
 footer a[href$=".html"] { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Hero body copy: same serif as the other section subheads */
+.hero .hero-buyer { max-width: 640px; color: #aeb3c7; font-family: Georgia, "Times New Roman", serif; font-size: clamp(17px, 1.35vw, 22px); line-height: 1.55; }
+.hero .hero-buyer + .hero-buyer { margin-top: 14px; }
+@media (max-width: 899px) { .hero .hero-buyer { font-size: 17px; } .hero .hero-buyer + .hero-buyer { margin-top: 10px; } }
+/* Space between the demo and the free check */
+@media (min-width: 900px) { #live + #check { margin-top: 56px; } }
+/* Pricing: ways to work together */
+.engage-list { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: 36px; border-top: 1px solid rgba(244,241,232,.14); }
+.engage-list article { padding: 20px 0; border-bottom: 1px solid rgba(244,241,232,.14); }
+.engage-list h3 { margin: 0 0 6px; font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: 1.35rem; letter-spacing: -.01em; color: var(--pearl, #f3f0e7); }
+.engage-list p { margin: 0; color: #aeb3c7; font-size: 1rem; line-height: 1.55; }
+@media (min-width: 900px) { .engage-list { grid-template-columns: 1fr 1fr; column-gap: 56px; } .engage-list article { padding: 24px 0; } }
+/* Live callback reads as a callout */
+.live-callback { padding: 18px 22px; border: 1px solid rgba(185,188,255,.22); border-radius: 16px; background: rgba(48,53,111,.18); }
+.live-callback strong { color: var(--pearl, #f3f0e7); font-weight: 400; }
