@@ -366,7 +366,7 @@
         return;
       }
       var frame = document.createElement('iframe');
-      frame.src = url + '/?embed=1'; frame.title = 'ICONIC live demo'; frame.setAttribute('allow', 'clipboard-write');
+      frame.src = url + '/?embed=1'; frame.title = 'ICONIC live demo'; frame.setAttribute('allow', 'clipboard-write; local-network; local-network-access');
       frame.className = 'is-loading';
       box.appendChild(frame);
       // The visitor's pick in the demo steers the compounding animation further down, for the rest of the visit.
@@ -379,7 +379,7 @@
         if (e.origin !== url || !e.data || e.data.source !== 'iconic-demo' || e.data.type !== 'ready' || settled) return;
         settled = true; frame.className = ''; var w = document.getElementById('liveWait'); if (w) w.remove();
       });
-      setTimeout(fallback, 15000);
+      setTimeout(fallback, 40000);
     })();
     // Callback in the compounding section: the live demo's real connection count.
     (function () {
