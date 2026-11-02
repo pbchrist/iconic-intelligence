@@ -124,7 +124,7 @@
     $('#askInput').placeholder = 'Ask about ' + w.name + '…';
     if (!S.picked && list.length > 1) {
       $('#helloTitle').innerHTML = 'Pick a business.<br><em>Watch it think.</em>';
-      $('#helloSub').innerHTML = 'Each one is a made-up company with real-looking files. A private AI on this machine has read every page. Choose one and see what it found.';
+      $('#helloSub').innerHTML = 'Each one is a sample business with realistic files. A private AI on this machine has read every page. Choose one and see what it found.';
       $('#pick').innerHTML = list.map((x) => `<button type="button" class="pick-card" data-ws="${esc(x.id)}"><span class="ws-avatar">${esc(x.initials || '·')}</span><span><strong>${esc(x.name)}</strong><small>${esc(x.kind || '')}</small><em>${fmt(x.documents)} files${x.developments ? ` · ${x.developments} things need attention` : ''}</em></span><b>→</b></button>`).join('');
       $$('#pick .pick-card').forEach((b) => b.addEventListener('click', () => switchWs(b.dataset.ws)));
       $('#brief').innerHTML = ''; $('#suggest').innerHTML = ''; $('#dare').hidden = true;
