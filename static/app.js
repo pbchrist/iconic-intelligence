@@ -1,6 +1,12 @@
 (() => {
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  // Scroll an element to the middle of its own panel without moving the website the demo is embedded in.
+  function scrollWithin(box, el) {
+    if (!box || !el) return;
+    const top = el.getBoundingClientRect().top - box.getBoundingClientRect().top + box.scrollTop - box.clientHeight / 2 + el.offsetHeight / 2;
+    box.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const fmt = (n) => Number(n || 0).toLocaleString('en-US');
   const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
@@ -45,7 +51,7 @@
     $('#panelTitle').textContent = TITLES[t];
     if (t === 'work') loadJobs();
     if (t === 'intel') { loadFeed(); loadGraph(); requestAnimationFrame(() => { if (window.IconicGraph) IconicGraph.resize(); if (S.storyPending || (S.graph && (S.graph.tunnels || []).length && !S.story)) { S.storyPending = false; showStory(0); } }); }
-    if (t === 'ask') setTimeout(() => $('#askInput').focus(), 50);
+    if (t === 'ask') setTimeout(() => $('#askInput').focus({ preventScroll: true }), 50);
   }
   $$('.tab').forEach((b) => b.addEventListener('click', () => setTab(b.dataset.tab)));
 
@@ -283,7 +289,7 @@
     }
     $('#dBody').innerHTML = body;
     $('#drawer').classList.add('open'); $('#drawer').setAttribute('aria-hidden', 'false'); $('#scrim').classList.add('on');
-    const hit = $('#hit'); $('#dBody').scrollTop = 0; if (hit) setTimeout(() => hit.scrollIntoView({ block: 'center', behavior: 'smooth' }), 250);
+    const hit = $('#hit'); $('#dBody').scrollTop = 0; if (hit) setTimeout(() => scrollWithin($('#dBody'), hit), 250);
   }
   function closeDoc() { $('#drawer').classList.remove('open'); $('#drawer').setAttribute('aria-hidden', 'true'); $('#scrim').classList.remove('on'); }
   $('#dClose').addEventListener('click', closeDoc); $('#scrim').addEventListener('click', closeDoc);
@@ -317,7 +323,7 @@
     const note = document.createElement('div'); note.className = 'turn';
     note.innerHTML = `<div class="q"><p>${esc(q)}</p></div><p class="sysnote">${show ? 'Done. Sources and suggestions are back on every answer.' : hide ? 'Done. Clean answers from here. Say “show sources” anytime.' : last ? 'Here’s where that came from. Tap any file to read it.' : 'Ask me something first.'}</p>`;
     $('#convo').appendChild(note); $('#hello').hidden = true; $('#askInput').value = '';
-    const target = where && last ? $('.srcs', last) : note; setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50);
+    const target = where && last ? $('.srcs', last) : note; setTimeout(() => scrollWithin($('#convo'), target), 50);
     return true;
   }
 
@@ -388,7 +394,7 @@
     } finally {
       S.busy = false; $('#askBtn').disabled = false; bodyEl.classList.remove('streaming');
       S.pinned = false; if (PHONE()) keepAnswer(); else convo.scrollTop = convo.scrollHeight; loadStatus();
-      if (matchMedia('(pointer: fine)').matches) $('#askInput').focus();
+      if (matchMedia('(pointer: fine)').matches) $('#askInput').focus({ preventScroll: true });
     }
   }
   $('#askForm').addEventListener('submit', (e) => { e.preventDefault(); ask($('#askInput').value); });
