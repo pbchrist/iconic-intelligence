@@ -72,7 +72,7 @@
     (function () { try { var d = document.createElement('div'); d.style.cssText = 'position:absolute;visibility:hidden;font-size:100px;line-height:1'; d.textContent = 'x'; document.documentElement.appendChild(d); var z = parseFloat(getComputedStyle(d).fontSize) / 100; d.remove(); if (z > 1.04 && z < 3) document.documentElement.style.setProperty('--tz', z.toFixed(2)); } catch (e) {} })();
   </script>
   <link rel="stylesheet" href="styles.css?v=20261101" />
-  <link rel="stylesheet" href="mobile-first.css?v=20261102a" />
+  <link rel="stylesheet" href="mobile-first.css?v=20261102b" />
   <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
   <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 </head>
@@ -100,8 +100,7 @@
     <section class="hero section-shell">
       <div class="hero-copy" data-reveal>
         <div class="eyebrow"><span class="live-dot"></span> PRIVATE BY DESIGN · AI AND AGENTS ON YOUR OWN COMPUTER</div>
-        <h1>Know more.<br><em>Move first.</em></h1>
-        <p class="hero-deck">Own your intelligence. Don't rent it.</p>
+        <h1 class="h1-own">Own your <span class="nw">intelligence.</span><br><em>Don't rent it.</em></h1>
         <p class="hero-buyer">Cloud AI is rented. The company that owns it can change the model, the price or the rules whenever it wants. And everything you type into it leaves your building.</p>
         <p class="hero-buyer">ICONIC puts your own AI on a computer in your office. It knows your business, it works around the clock, and there's no meter running.</p>
         <div class="hero-actions hero-actions-threaded">
@@ -295,7 +294,7 @@
 
     <section id="contact" class="section-shell contact-section">
       <div class="contact-inner" data-reveal>
-        <div class="contact-wordmark"><img src="iconic-wordmark.webp" alt="ICONIC." /></div>
+        <div class="contact-brand"><div class="contact-wordmark"><img src="iconic-wordmark.webp" alt="ICONIC." /></div><p class="contact-tagline">Know more. <em>Move first.</em></p></div>
         <div class="contact-copy">
           <div class="principal-lockup">
             <img class="principal-photo" src="patrick-christell.jpg" alt="Patrick Christell" />

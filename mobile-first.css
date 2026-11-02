@@ -886,3 +886,12 @@ p, li, .use-case-steps strong { overflow-wrap: break-word; }
   .hero-actions .button { display: flex; align-items: center; justify-content: center; min-height: 3rem; padding: .7rem .6rem; text-align: center; white-space: normal; font-size: .75rem; letter-spacing: .08em; line-height: 1.25; }
   .hero-buyer + .hero-buyer { margin-top: .6rem; }
 }
+
+/* Headline: Own your intelligence. Don't rent it. */
+.hero h1.h1-own { font-size: clamp(56px, 6.2vw, 112px); }
+.hero h1.h1-own .nw { white-space: nowrap; }
+.contact-tagline { margin: .9rem 0 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.25rem, 2vw, 1.75rem); letter-spacing: -.02em; color: var(--pearl, #f3f0e7); }
+.contact-tagline em { color: var(--accent-2); }
+@media (max-width: 899px) {
+  .hero h1.h1-own { font-size: min(clamp(2.4rem, 12vw, 4rem), calc((100vw - 32px) / 6.6 / var(--tz, 1))); max-width: none; }
+}
