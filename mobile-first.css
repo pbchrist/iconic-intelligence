@@ -910,3 +910,7 @@ p, li, .use-case-steps strong { overflow-wrap: break-word; }
   #own .moat-copy { padding-top: .4rem; }
   #own .compact-capabilities, #pricing .compact-capabilities { margin-top: 56px; }
 }
+
+/* Headings start at the top of split headings (no gap under the kicker) */
+@media (min-width: 900px) { .split-heading { align-items: start; } }
+footer a[href$=".html"] { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
