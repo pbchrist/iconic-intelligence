@@ -902,8 +902,8 @@ p, li, .use-case-steps strong { overflow-wrap: break-word; }
 .live-card-wrap { margin-top: 1.4rem; }
 .live-card { display: flex; align-items: center; justify-content: center; gap: .7rem; width: 100%; min-height: 3.5rem; padding: .9rem 1.2rem; border-radius: 999px; background: linear-gradient(135deg, #f5f2e9, #d9deff); box-shadow: 0 14px 36px rgba(116,126,255,.22); color: #090b14; font-size: .875rem; font-weight: 700; letter-spacing: .14em; text-decoration: none; }
 .live-card .live-dot { width: .55rem; height: .55rem; background: #1fbf6a; box-shadow: 0 0 0 4px rgba(31,191,106,.18); }
-@media (max-width: 899px) { #live { padding-bottom: 4.5rem; } #live + #check { margin-top: 1.5rem; } }
-@media (min-width: 900px) { #live + #check { margin-top: 56px; } }
+@media (max-width: 899px) { #live { padding-bottom: 4.5rem; } #live + section { margin-top: 1.5rem; } }
+@media (min-width: 900px) { #live + section { margin-top: 56px; } }
 
 /* Why own it: the moat */
 .moat-lead strong { color: var(--pearl, #f3f0e7); font-weight: 600; }
