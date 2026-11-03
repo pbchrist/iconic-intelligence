@@ -362,7 +362,7 @@
           if (ev === 'web_offer') { offer = data.query; }
           else if (ev === 'sources') {
             sources = data;
-            reading.innerHTML = sources.length ? `<span class="shimmer">Reading ${sources.length} passages from ${new Set(sources.map((s) => s.id)).size} documents…</span>` : '<span class="shimmer">No matching passages. Asking anyway…</span>';
+            reading.innerHTML = `<span class="shimmer">${sources.some((x) => x.web) ? 'Reading what the web found…' : sources.length ? 'Checking the files…' : 'Thinking…'}</span>`;
             if (sources.length) { const tg = document.createElement('button'); tg.type = 'button'; tg.className = 'src-toggle'; const nWeb = sources.filter((x) => x.web).length, nFile = sources.length - nWeb; const lbl = [nFile ? `${nFile} file${nFile > 1 ? 's' : ''}` : '', nWeb ? `${nWeb} web page${nWeb > 1 ? 's' : ''}` : ''].filter(Boolean).join(' + ') + ' it read ›'; tg.textContent = lbl; tg.onclick = () => { turn.classList.toggle('show-src'); tg.textContent = turn.classList.contains('show-src') ? 'Hide sources ‹' : lbl; }; srcEl.before(tg); }
             srcEl.innerHTML = sources.map((s, k) => `<button class="src" style="animation-delay:${k * 70}ms" data-n="${s.n}"><span>${s.n}</span><span><strong>${esc(s.title)}</strong><small>${esc(s.folder)} · ${esc(s.date)}</small></span></button>`).join('');
             $$('.src', srcEl).forEach((b) => b.addEventListener('click', () => { const s = sources.find((x) => String(x.n) === b.dataset.n); if (s.web) window.open(s.url, '_blank', 'noopener'); else openDoc(s.id, s.snippet); }));

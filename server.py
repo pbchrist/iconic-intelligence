@@ -507,13 +507,11 @@ if it is harmless, or a light decline if it is not.
 2. If the files are relevant, answer from them. Lead with the answer. Use the specific names, numbers and dates, and \
 cite each fact with its file number in square brackets, like [2]. Never invent facts about the business. If the files \
 do not say, say that plainly and name the file that would.
-3. Finish by bringing up ONE item from today's briefing below. First give it one or two plain sentences of context, \
-so someone who has never seen these files knows what it is and why it matters. Vary how you introduce it and never \
-open two replies the same way: for example "Something else caught my eye: ...", "One thing worth knowing: ...", \
-"Also on the radar: ...", "There's a related problem: ...", or simply state the fact. Mention "this morning's \
-briefing" at most once in a conversation. Then ask ONE short question offering to dig into it. Never offer something you already offered or covered earlier in this \
-conversation: move on to a different briefing item, or go one level deeper on what they are asking about. If they \
-said yes (or ok, sure, go on) to your last offer, deliver exactly that offer first.
+3. End the way the ENDING note at the bottom of their message says. Either bring up ONE item from today's \
+briefing below (one or two plain sentences of context so a newcomer knows what it is and why it matters, then one \
+short question offering to dig in; never offer the same item twice; vary how you introduce it), or simply finish \
+your answer, with at most one natural follow-up about what THEY asked. Never steer them back to the business when \
+they are talking about something else. If they said yes (or ok, sure, go on) to your last offer, deliver exactly that.
 
 Keep the whole reply under 150 words. Short paragraphs. Bullets only for real lists. No headings. Never give a menu \
 of options or a list of topics you can help with.
@@ -1080,7 +1078,8 @@ class Handler(BaseHTTPRequestHandler):
             # Broad questions ("what should I worry about?") match few words; widen to the newest files.
             broad = re.search(r"(?i)\b(worr|concern|missing|priorit|urgent|attention|overview|summar|happening|"
                               r"this week|today|going on|should i know|risks?)\b", q)
-            if len(hits) < 4 or broad:
+            off_topic = bool(WEB and WEB.likely_needs_web(q)) and len(hits) < 2
+            if (len(hits) < 4 or broad) and not off_topic:
                 have = {c["doc"] for _, c in hits}
                 for d in sorted(docs.values(), key=lambda d: d["date"], reverse=True):
                     if len(hits) >= 7:
@@ -1140,13 +1139,21 @@ class Handler(BaseHTTPRequestHandler):
                 if h.get("q") and h.get("a"):
                     messages.append({"role": "user", "content": str(h["q"])[:600]})
                     messages.append({"role": "assistant", "content": str(h["a"])[:1500]})
-            tail = ""
+            hist = body.get("history") or []
+            open_ended = re.search(r"(?i)^(hi|hey|hello|yo|sup|good (morning|afternoon|evening))\b|what else|anything else|"
+                                   r"what should i|worried|what('s| is) (new|going on|important|urgent)|surprise me|"
+                                   r"show me something|what do you (have|know)|^(yes|yeah|yep|sure|ok|okay|go on|more)\W*$", q.strip())
             if web_used:
-                tail = ("\n\n(This was a web question. Answer it and stop. Do NOT add a briefing item or any "
-                        "question about the business at the end.)")
-            elif not (body.get("history") or []):
-                tail = ("\n\n(This is their first message. When you bring up the briefing item, don't start it "
-                        "with \"else\" or \"also\", since nothing came before it.)")
+                tail = "ENDING: this was a web question. Answer it and stop. No briefing item, no question about the business."
+            elif not hist:
+                tail = ("ENDING: this is their first message, so bring up one briefing item. Don't start it with "
+                        "\"else\" or \"also\", since nothing came before it.")
+            elif open_ended:
+                tail = "ENDING: they're open to suggestions, so bring up one briefing item they haven't seen yet."
+            else:
+                tail = ("ENDING: just answer. Add at most one short follow-up about what they asked, or nothing. "
+                        "Do NOT bring up a briefing item or change the subject.")
+            tail = "\n\n(" + tail + ")"
             messages.append({"role": "user", "content": "Files that may be relevant:\n\n%s\n\n%s---\nVisitor's message: %s%s"
                              % (ctx, web_note + "\n\n" if web_note else "", q, tail)})
             n_tok, first, answer = 0, None, ""
