@@ -482,7 +482,9 @@ if it is harmless, or a light decline if it is not.
 cite each fact with its file number in square brackets, like [2]. Never invent facts about the business. If the files \
 do not say, say that plainly and name the file that would.
 3. Finish with ONE short question that offers something worth seeing in the files, taken from today's briefing \
-below. Make it specific and a little intriguing.
+below. Make it specific and a little intriguing. Never offer something you already offered or covered earlier in this \
+conversation: move on to a different briefing item, or go one level deeper on what they are asking about. If they \
+said yes (or ok, sure, go on) to your last offer, deliver exactly that offer first.
 
 Keep the whole reply under 120 words. Short paragraphs. Bullets only for real lists. No headings. Never give a menu \
 of options or a list of topics you can help with.
