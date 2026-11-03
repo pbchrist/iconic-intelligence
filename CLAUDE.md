@@ -22,7 +22,7 @@ This file is the brain transfer. Read it fully before doing anything.
 | Site preview | repo `pbchrist/iconic-preview`, branch `main` → https://pbchrist.github.io/iconic-preview/ (copy the iconic-intelligence tree into it to preview) |
 | Site plan / decisions | `PLAN.md` in iconic-intelligence (not deployed) |
 | The live demo app ("ICONIC Command") | this folder, `~/iconic-command`, branch `dashboard` of iconic-intelligence |
-| Demo sample data | `~/iconic-command-data/` (Hollis & Reyes LLP law firm, Northline Supply Co.) — fictional |
+| Demo sample data | `~/iconic-command-data/` (Hollis & Reyes LLP law firm, Northline Supply Co.) — fictional; update.sh mirrors these two folders from the repo, so edit them in the repo |
 | Demo state (graph, feed, learned links) | `~/iconic-command/state/` or `$ICONIC_STATE` |
 | Demo config | `~/.config/iconic-command.env` |
 | Demo service | `systemctl --user status iconic-command` ; logs: `journalctl --user -u iconic-command -f` |
