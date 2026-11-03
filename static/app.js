@@ -325,6 +325,7 @@
     const note = document.createElement('div'); note.className = 'turn';
     note.innerHTML = `<div class="q"><p>${esc(q)}</p></div><p class="sysnote">${show ? 'Done. Sources and suggestions are back on every answer.' : hide ? 'Done. Clean answers from here. Say “show sources” anytime.' : last ? 'Here’s where that came from. Tap any file to read it.' : 'Ask me something first.'}</p>`;
     $('#convo').appendChild(note); $('#hello').hidden = true; $('#askInput').value = '';
+    if (where && last) last.classList.add('show-src');
     const target = where && last ? $('.srcs', last) : note; setTimeout(() => scrollWithin($('#convo'), target), 50);
     return true;
   }
@@ -362,7 +363,7 @@
           else if (ev === 'sources') {
             sources = data;
             reading.innerHTML = sources.length ? `<span class="shimmer">Reading ${sources.length} passages from ${new Set(sources.map((s) => s.id)).size} documents…</span>` : '<span class="shimmer">No matching passages. Asking anyway…</span>';
-            if (sources.length) { const tg = document.createElement('button'); tg.type = 'button'; tg.className = 'src-toggle'; tg.textContent = `${sources.length} files it read ›`; tg.onclick = () => { turn.classList.toggle('show-src'); tg.textContent = turn.classList.contains('show-src') ? 'Hide files ‹' : `${sources.length} files it read ›`; }; srcEl.before(tg); }
+            if (sources.length) { const tg = document.createElement('button'); tg.type = 'button'; tg.className = 'src-toggle'; const nWeb = sources.filter((x) => x.web).length, nFile = sources.length - nWeb; const lbl = [nFile ? `${nFile} file${nFile > 1 ? 's' : ''}` : '', nWeb ? `${nWeb} web page${nWeb > 1 ? 's' : ''}` : ''].filter(Boolean).join(' + ') + ' it read ›'; tg.textContent = lbl; tg.onclick = () => { turn.classList.toggle('show-src'); tg.textContent = turn.classList.contains('show-src') ? 'Hide sources ‹' : lbl; }; srcEl.before(tg); }
             srcEl.innerHTML = sources.map((s, k) => `<button class="src" style="animation-delay:${k * 70}ms" data-n="${s.n}"><span>${s.n}</span><span><strong>${esc(s.title)}</strong><small>${esc(s.folder)} · ${esc(s.date)}</small></span></button>`).join('');
             $$('.src', srcEl).forEach((b) => b.addEventListener('click', () => { const s = sources.find((x) => String(x.n) === b.dataset.n); if (s.web) window.open(s.url, '_blank', 'noopener'); else openDoc(s.id, s.snippet); }));
           } else if (ev === 'thinking') {

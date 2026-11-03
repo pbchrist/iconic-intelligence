@@ -595,3 +595,9 @@ body.standalone .app { flex: 1; height: auto; min-height: 0; }
 /* Match the site: one size for intro text */
 .hello p { font-size: clamp(1.0625rem, 1.3vw, 1.25rem); }
 @media (max-width: 860px) { .hello p { font-size: 1.0625rem; } }
+
+/* Desktop too: sources stay folded behind one line until clicked */
+.turn .srcs { display: none; }
+.turn.show-src .srcs { display: grid; }
+.src-toggle { display: inline-block; margin-top: .6rem; padding: .35rem 0; border: 0; background: none; color: var(--accent-2); font-size: .875rem; font-weight: 700; cursor: pointer; }
+.turn.quiet .src-toggle { display: none; }
