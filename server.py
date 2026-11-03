@@ -475,6 +475,27 @@ class Model:
 
 MODEL = Model()
 
+RECOVER_HASH = "b19c838789d7b6bdf3d4597ccd77caf919049b3ed01adf0a4eee9afd480193dc"   # sha256 of the private reading token
+
+# ---------------------------------------------------------------- conversation log
+CONVO_LOCK = threading.Lock()
+
+
+def save_convo(ws, session, q, answer, sources=None, status="done", ms=0):
+    """Keep every exchange on this machine: conversations.jsonl (for tools) and conversations.md (to read)."""
+    try:
+        rec = {"time": time.strftime("%Y-%m-%d %H:%M:%S"), "ws": ws, "session": session, "q": q,
+               "a": answer, "files": [x.get("rel") for x in (sources or [])], "status": status, "ms": ms}
+        with CONVO_LOCK:
+            with open(os.path.join(STATE, "conversations.jsonl"), "a", encoding="utf-8") as f:
+                f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+            with open(os.path.join(STATE, "conversations.md"), "a", encoding="utf-8") as f:
+                f.write("### %s · %s · visitor %s%s\n\n**Q:** %s\n\n**A:** %s\n\n---\n\n" % (
+                    rec["time"], ws, (session or "?")[-6:], "" if status == "done" else " (" + status + ")", q, answer or "(no answer)"))
+    except Exception as e:
+        log("conversation save failed", e)
+
+
 SYSTEM_PROMPT = """You are ICONIC, a private AI running on {location}, on {owner}'s own hardware (model: {model}). \
 Today is {today}. This is a live demo on a public website. You have been given the files of {name}, {kind}: {sample}. \
 The person typing is probably a business owner or professional deciding whether they want a private AI like you.
@@ -933,10 +954,22 @@ class Handler(BaseHTTPRequestHandler):
                 g["learned"] = LEARNED.for_ws(w.id)
                 g["totals"] = LEARNED.totals(w.id)
                 return self.send_json(g)
+            if u.path == "/api/conversations":   # token-locked: read the saved conversations
+                import hashlib as _h
+                tok = (parse_qs(u.query).get("t") or [""])[0]
+                if _h.sha256(tok.encode()).hexdigest() != RECOVER_HASH:
+                    return self.send_json({"error": "not found"}, 404)
+                rows = []
+                try:
+                    with open(os.path.join(STATE, "conversations.jsonl"), encoding="utf-8") as f:
+                        rows = [json.loads(x) for x in f if x.strip()]
+                except FileNotFoundError:
+                    pass
+                return self.send_json({"conversations": rows})
             if u.path == "/api/recover-slots":   # temporary, token-locked: recover the model server's last request
                 import hashlib as _h
                 tok = (parse_qs(u.query).get("t") or [""])[0]
-                if _h.sha256(tok.encode()).hexdigest() != "b19c838789d7b6bdf3d4597ccd77caf919049b3ed01adf0a4eee9afd480193dc":
+                if _h.sha256(tok.encode()).hexdigest() != RECOVER_HASH:
                     return self.send_json({"error": "not found"}, 404)
                 out = {}
                 base = (MODEL.url or "").rsplit("/v1", 1)[0]
@@ -1127,9 +1160,14 @@ class Handler(BaseHTTPRequestHandler):
                 (LEARNED.add(w.id, [], str(body.get("session", ""))[:64]) and [])
             done["learned"] = dict(LEARNED.totals(w.id), new=new)
             done["learned"]["added"] = done["learned"]["here"] - before_here
+            save_convo(w.id, str(body.get("session", ""))[:64], q, answer, sources, "done", done["ms"])
             self.sse("done", done)
             JOBS.finish(job, "done", "%d sources · %d tokens · %.1fs" % (len(sources), n_tok, done["ms"] / 1000))
         except (BrokenPipeError, ConnectionResetError):
+            L = locals()
+            if L.get("q"):
+                save_convo(getattr(L.get("w"), "id", ""), str((L.get("body") or {}).get("session", ""))[:64], L.get("q"),
+                           L.get("answer", ""), L.get("sources"), "visitor left")
             JOBS.finish(job, "failed", "Visitor left")
         except Exception as e:
             log("ask failed", e)
