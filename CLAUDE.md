@@ -54,7 +54,7 @@ Chrome on Tailscale devices: the iframe has `allow="local-network; local-network
 
 1. **Compounding animation**: Patrick said "something's wrong with it" after the section reorder; not diagnosed (he didn't say what). Ask him what he sees, then fix that one thing.
 2. **Demo jump fix** (pushed Nov 2): embedded demo must not scroll the host page after an answer. Verify by asking a question on iconic.onl on desktop.
-3. **Optional, not requested**: ask-before-web-search in the demo. If ever built, use self-hosted SearXNG or DuckDuckGo (not Exa/Parallel/Firecrawl, which are AI companies and would make the "0 bytes" label false), show the exact query, ask yes/no, label what left.
+3. **Ask-before-web-search** built Nov 2 on branch `web-search` (see README). Rules: use self-hosted SearXNG or DuckDuckGo (not Exa/Parallel/Firecrawl, which are AI companies and would make the "0 bytes" label false), show the exact query, ask yes/no, label what left.
 4. Offer gaps Patrick has decided on: no prices on the site, no timeline, no guarantee. $150/hr is discussed on calls only.
 
 ## Patrick's setup

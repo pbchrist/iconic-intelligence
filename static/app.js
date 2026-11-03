@@ -79,6 +79,8 @@
   async function loadStatus() {
     try {
       const s = await api('/api/status'); S.status = s;
+      // Optional web search add-on: load it only when the server has it switched on.
+      if (s.web_search && !window.IconicWeb && !S.webLoading) { S.webLoading = true; const sc = document.createElement('script'); sc.src = 'websearch.js'; document.head.appendChild(sc); }
       if (!S.ws || !s.workspaces.find((w) => w.id === S.ws)) { S.ws = s.workspaces[0] ? s.workspaces[0].id : ''; }
       const m = s.model;
       $('#healthDot').className = 'dot ' + (m.online ? 'on' : 'off');
@@ -327,9 +329,10 @@
     return true;
   }
 
-  async function ask(q) {
+  async function ask(q, opts = {}) {
     q = (q || '').trim(); if (!q || S.busy || !S.ws) return;
-    if (localCommand(q)) return;
+    if (!opts.web && localCommand(q)) return;
+    let offer = null;
     S.busy = true; S.picked = true; S.asked.add(q); $('#askBtn').disabled = true; $('#askInput').value = '';
     $('#hello').hidden = S.history.length === 0 ? false : $('#hello').hidden;
     const turn = document.createElement('div'); turn.className = 'turn';
@@ -341,9 +344,9 @@
     keepAnswer();
     const reading = $('.reading', turn), bodyEl = $('.a-body', turn), srcEl = $('.srcs', turn), metaEl = $('.a-meta', turn), nextEl = $('.nexts', turn);
     let sources = [], text = '', t0 = performance.now();
-    const paint = () => { bodyEl.innerHTML = md(text, sources); $$('.cite', bodyEl).forEach((c) => c.onclick = () => { const s = sources.find((x) => String(x.n) === c.dataset.n); if (s) openDoc(s.id, s.snippet); }); };
+    const paint = () => { bodyEl.innerHTML = md(text, sources); $$('.cite', bodyEl).forEach((c) => c.onclick = () => { const s = sources.find((x) => String(x.n) === c.dataset.n); if (s && s.web) window.open(s.url, '_blank', 'noopener'); else if (s) openDoc(s.id, s.snippet); }); };
     try {
-      const res = await fetch('/api/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ws: S.ws, q, history: S.history.slice(-3), session: sess }) });
+      const res = await fetch('/api/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ws: S.ws, q, history: S.history.slice(-3), session: sess, web: opts.web }) });
       if (!res.ok) { const j = await res.json().catch(() => ({})); throw new Error(j.error || 'Request failed'); }
       const reader = res.body.getReader(), dec = new TextDecoder(); let buf = '';
       for (;;) {
@@ -355,12 +358,13 @@
           const ev = (block.match(/^event: (.*)$/m) || [])[1], dataLine = (block.match(/^data: (.*)$/m) || [])[1];
           if (!ev || dataLine == null) continue;
           const data = JSON.parse(dataLine);
-          if (ev === 'sources') {
+          if (ev === 'web_offer') { offer = data.query; }
+          else if (ev === 'sources') {
             sources = data;
             reading.innerHTML = sources.length ? `<span class="shimmer">Reading ${sources.length} passages from ${new Set(sources.map((s) => s.id)).size} documents…</span>` : '<span class="shimmer">No matching passages. Asking anyway…</span>';
             if (sources.length) { const tg = document.createElement('button'); tg.type = 'button'; tg.className = 'src-toggle'; tg.textContent = `${sources.length} files it read ›`; tg.onclick = () => { turn.classList.toggle('show-src'); tg.textContent = turn.classList.contains('show-src') ? 'Hide files ‹' : `${sources.length} files it read ›`; }; srcEl.before(tg); }
             srcEl.innerHTML = sources.map((s, k) => `<button class="src" style="animation-delay:${k * 70}ms" data-n="${s.n}"><span>${s.n}</span><span><strong>${esc(s.title)}</strong><small>${esc(s.folder)} · ${esc(s.date)}</small></span></button>`).join('');
-            $$('.src', srcEl).forEach((b) => b.addEventListener('click', () => { const s = sources.find((x) => String(x.n) === b.dataset.n); openDoc(s.id, s.snippet); }));
+            $$('.src', srcEl).forEach((b) => b.addEventListener('click', () => { const s = sources.find((x) => String(x.n) === b.dataset.n); if (s.web) window.open(s.url, '_blank', 'noopener'); else openDoc(s.id, s.snippet); }));
           } else if (ev === 'thinking') {
             reading.innerHTML = '<span class="shimmer">Thinking it through…</span>';
           } else if (ev === 'token') {
@@ -369,10 +373,12 @@
           } else if (ev === 'done') {
             bodyEl.classList.remove('streaming'); paint();
             metaEl.innerHTML = `<span>ANSWERED ON ${esc(String(data.location || 'THIS COMPUTER').toUpperCase())} IN ${(data.ms / 1000).toFixed(1)}s</span>${data.tps ? `<span>${data.tps} TOK/S</span>` : ''}<span><b>COST $0.00</b></span>${data.private ? '<span><b>SENT TO NO AI COMPANY</b></span>' : ''}${data.learned && data.learned.added > 0 ? `<button type="button" class="grow">+${data.learned.added} NEW LINK${data.learned.added > 1 ? 'S' : ''} ON THE GRAPH ↗</button>` : ''}`;
+            if (data.web && window.IconicWeb) IconicWeb.label(metaEl, data.web);
             if (data.learned) { S.totals = data.learned; if (window.IconicGraph) IconicGraph.addLearned(data.learned.new); S.graphSig = ''; const gb = $('.grow', metaEl); if (gb) gb.addEventListener('click', () => setTab('intel')); }
           } else if (ev === 'error') { throw new Error(data); }
         }
       }
+      if (offer) { reading.remove?.(); return; }
       if (!text) throw new Error('The model returned nothing.');
       S.history.push({ q, a: text }); S.answers++;
       const showExtras = S.extras === true || (S.extras === null && S.answers <= 2);
@@ -395,6 +401,11 @@
       S.busy = false; $('#askBtn').disabled = false; bodyEl.classList.remove('streaming');
       S.pinned = false; if (PHONE()) keepAnswer(); else convo.scrollTop = convo.scrollHeight; loadStatus();
       if (matchMedia('(pointer: fine)').matches) $('#askInput').focus({ preventScroll: true });
+      if (offer) {
+        const again = (ok) => { turn.remove(); ask(q, { web: { ok, query: offer } }); };
+        if (window.IconicWeb) IconicWeb.offer(turn, offer, () => again(true), () => again(false)); else again(false);
+        setTimeout(() => scrollWithin(convo, turn), 50);
+      }
     }
   }
   $('#askForm').addEventListener('submit', (e) => { e.preventDefault(); ask($('#askInput').value); });

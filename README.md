@@ -40,3 +40,11 @@ After changing settings: `systemctl --user restart iconic-command`
 Python standard library only, no packages to install. Files are split into passages and ranked with BM25. The best passages go to the model with the question, and the answer streams back with citations. Model calls go only to the address in `ICONIC_LLM_URL`.
 
 To test without a GPU: `python3 tests/mock_llm.py 18080`, then `ICONIC_LLM_URL=http://127.0.0.1:18080/v1 python3 server.py`.
+
+## Optional: ask before searching the web
+
+`websearch.py` + `static/websearch.js`. When a question needs the open web (news, prices, weather, laws), the local model writes a short search, the demo shows those exact words and asks yes or no. Only on yes do those words go to SearXNG on this computer (`ICONIC_SEARXNG_URL`, default `http://127.0.0.1:8888`), which asks public search engines. No AI company is involved; the answer shows what was sent.
+
+- Turn off: `ICONIC_WEB_SEARCH=0` in the settings file, then restart.
+- Take out: delete `websearch.py` and `static/websearch.js`. Nothing else needs changing.
+- Tests: `python3 -m unittest tests.test_websearch`

@@ -26,6 +26,11 @@ from collections import Counter, defaultdict, deque
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlparse
 
+try:  # optional add-on: ask before searching the open web (delete websearch.py to remove it)
+    import websearch as WEB
+except ImportError:
+    WEB = None
+
 ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC = os.path.join(ROOT, "static")
 DATA = os.path.expanduser(os.environ.get("ICONIC_DATA", os.path.join(ROOT, "data")))
@@ -985,7 +990,7 @@ class Handler(BaseHTTPRequestHandler):
                                             "documents": len(w.docs),
                                             "developments": len((FEED.get(w.id) or {}).get("items") or [])}
                                            for w in self.visible()],
-                "location": LOCATION, "owner": OWNER, "cta_url": CTA_URL, "public": self.is_public(),
+                "location": LOCATION, "owner": OWNER, "web_search": bool(WEB and WEB.enabled()), "cta_url": CTA_URL, "public": self.is_public(),
                 "tokens": JOBS.tokens, "questions": JOBS.questions, "learned": LEARNED.totals(), "tokens_per_second": round(tps, 1),
                 "cost": 0, "bytes_external": 0 if m["private"] else None, "uptime": int(time.time() - STARTED),
                 "host": socket.gethostname(), "now": time.time()}
@@ -1053,10 +1058,34 @@ class Handler(BaseHTTPRequestHandler):
                 d = docs[c["doc"]]
                 sources.append({"n": n, "id": d["id"], "title": d["title"], "rel": d["rel"], "folder": d["folder"],
                                 "date": d["date"], "snippet": c["text"][:420], "chunk": c["text"]})
-            self.sse("sources", [{k: s[k] for k in ("n", "id", "title", "rel", "folder", "date", "snippet")}
-                                 for s in sources])
             ctx = "\n\n".join("[%d] %s (%s, %s)\n%s" % (s["n"], s["title"], s["rel"], s["date"], s["chunk"])
                               for s in sources) or "(no matching documents)"
+            # Web search add-on. First pass: if the question needs the open web, offer the exact search and stop.
+            # Nothing leaves this computer until the visitor answers yes (web.ok with the same words).
+            web, web_note, web_used = body.get("web") or {}, "", None
+            if WEB and WEB.enabled():
+                if not isinstance(web, dict) or "ok" not in web:
+                    offer = WEB.decide(q, w.meta.get("name"), [s["title"] for s in sources[:8]], MODEL.complete)
+                    if offer:
+                        self.sse("web_offer", {"query": offer})
+                        JOBS.finish(job, "done", "Asked before searching the web: %s" % offer[:60])
+                        return
+                elif web.get("ok") and str(web.get("query") or "").strip():
+                    wq = str(web["query"]).strip()[:WEB.MAX_QUERY]
+                    try:
+                        found = WEB.search(wq)
+                    except WEB.WebSearchError as e:
+                        found, web_note = [], str(e)
+                    wtext, wsrc = WEB.as_sources(found, len(sources) + 1)
+                    sources += wsrc
+                    web_used = {"query": wq, "results": len(found), "error": web_note}
+                    web_note = ("The visitor said yes to a web search for \"%s\". Web results (cite them by number "
+                                "like the files; say plainly they came from the web):\n\n%s" % (wq, wtext or "(the search found nothing)"))
+                else:
+                    web_note = ("The visitor chose not to search the web. Answer from the files and what you know, "
+                                "and say in one line what a web search would have added.")
+            self.sse("sources", [{k: s.get(k) for k in ("n", "id", "title", "rel", "folder", "date", "snippet", "web", "url")}
+                                 for s in sources])
             meta = w.meta
             brief = (FEED.get(w.id) or {}).get("items") or []
             brief_txt = "\n".join("- [%s] %s %s" % (b["severity"], b["title"], b["detail"]) for b in brief[:5]) or "(not written yet)"
@@ -1069,8 +1098,8 @@ class Handler(BaseHTTPRequestHandler):
                 if h.get("q") and h.get("a"):
                     messages.append({"role": "user", "content": str(h["q"])[:600]})
                     messages.append({"role": "assistant", "content": str(h["a"])[:1500]})
-            messages.append({"role": "user", "content": "Files that may be relevant:\n\n%s\n\n---\nVisitor's message: %s"
-                             % (ctx, q)})
+            messages.append({"role": "user", "content": "Files that may be relevant:\n\n%s\n\n%s---\nVisitor's message: %s"
+                             % (ctx, web_note + "\n\n" if web_note else "", q)})
             n_tok, first, answer = 0, None, ""
             for kind, val in MODEL.stream(messages, max_tokens=420, temperature=0.4):
                 if kind == "token":
@@ -1089,10 +1118,10 @@ class Handler(BaseHTTPRequestHandler):
                 JOBS.questions += 1
             done = {"ms": int((time.time() - t0) * 1000), "tokens": n_tok,
                     "tps": round(n_tok / secs, 1) if secs > 0 else 0, "model": MODEL.label,
-                    "private": MODEL.is_private(), "cost": 0, "location": LOCATION}
+                    "private": MODEL.is_private(), "cost": 0, "location": LOCATION, "web": web_used}
             cited = {int(n) for n in re.findall(r"\[(\d+)(?:\s*,\s*\d+)*\]", answer)}
             cited |= {int(n) for grp in re.findall(r"\[((?:\d+\s*,\s*)+\d+)\]", answer) for n in re.split(r"\s*,\s*", grp)}
-            cited_docs = [s["id"] for s in sources if s["n"] in cited]
+            cited_docs = [s["id"] for s in sources if s["n"] in cited and s.get("id") is not None]
             before_here = LEARNED.totals(w.id)["here"]
             new = LEARNED.add(w.id, cited_docs, str(body.get("session", ""))[:64]) if len(set(cited_docs)) >= 2 else \
                 (LEARNED.add(w.id, [], str(body.get("session", ""))[:64]) and [])
