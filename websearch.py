@@ -16,8 +16,20 @@ import os
 import re
 import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 
 MAX_QUERY = 80
+
+# Cheap first check so ordinary questions about the files never pay for an extra model call.
+WEB_CUES = re.compile(r"(?i)\b(today|tonight|tomorrow|yesterday|this (week|weekend|month|year)|right now|currently|current|"
+                      r"latest|news|score|game|playing|schedule|weather|forecast|price of|stock|market|rate|rates|"
+                      r"interest|inflation|election|law|laws|regulation|ruling|court ruled|who (is|won|was)|when (is|does|did)|"
+                      r"where (is|can)|how much (is|does)|movie|movies|restaurant|open now|traffic|seahawks|mariners|"
+                      r"kraken|sounders|nfl|nba|mlb|20[2-3][0-9])\b")
+
+
+def likely_needs_web(question):
+    return bool(WEB_CUES.search(question or ""))
 
 
 class WebSearchError(Exception):
@@ -40,6 +52,9 @@ Say SEARCH only when a good answer needs current or public facts the files canno
 prices, interest rates, laws and regulations, public facts about real companies, people or places, or events \
 after the files were written. Greetings, small talk, and anything about {name} itself need NO search.
 
+Today is {today}. If the question is about now (today, tonight, this week, latest), put the date or "today" in the \
+search words so the results are current, for example "Seahawks game tonight November 2 2026".
+
 Reply with exactly one line:
 NO
 or
@@ -56,10 +71,10 @@ def parse_decision(text):
     return q or None
 
 
-def decide(question, ws_name, file_titles, complete):
+def decide(question, ws_name, file_titles, complete, today=""):
     """Return the search words to offer, or None. `complete(messages, max_tokens, temperature)` -> text."""
     titles = "\n".join("- " + t for t in list(file_titles)[:8]) or "(none matched)"
-    msgs = [{"role": "system", "content": DECIDE_PROMPT.format(name=ws_name or "this business")},
+    msgs = [{"role": "system", "content": DECIDE_PROMPT.format(name=ws_name or "this business", today=today or "unknown")},
             {"role": "user", "content": "Files that matched the question:\n%s\n\nQuestion: %s" % (titles, question[:600])}]
     try:
         return parse_decision(complete(msgs, 30, 0.0))
@@ -67,9 +82,11 @@ def decide(question, ws_name, file_titles, complete):
         return None
 
 
-def search(query, url=None, n=5, timeout=8):
+def search(query, url=None, n=5, timeout=8, extra=None):
     """Send exactly `query` to SearXNG. Returns [{title, url, snippet}]."""
-    qs = urllib.parse.urlencode({"q": query[:MAX_QUERY], "format": "json", "safesearch": "1"})
+    params = {"q": query[:MAX_QUERY], "format": "json", "safesearch": "1"}
+    params.update(extra or {})
+    qs = urllib.parse.urlencode(params)
     req = urllib.request.Request("%s/search?%s" % (url or searx_url(), qs), headers={"User-Agent": "ICONIC-Command"})
     try:
         with urllib.request.urlopen(req, timeout=timeout) as r:
@@ -95,5 +112,53 @@ def as_sources(results, start):
         host = urllib.parse.urlparse(r["url"]).netloc
         sources.append({"n": n, "id": None, "web": True, "title": r["title"], "url": r["url"], "rel": r["url"],
                         "folder": host, "date": "web", "snippet": r["snippet"]})
-        parts.append("[%d] %s (web: %s)\n%s" % (n, r["title"], host, r["snippet"]))
+        parts.append("[%d] %s (web: %s)\n%s%s" % (n, r["title"], host, r["snippet"],
+                                                 ("\nFrom the page: " + r["page"]) if r.get("page") else ""))
     return "\n\n".join(parts), sources
+
+
+def _page_text(url, terms, timeout=5, limit=1400):
+    """Read one result page and keep the part that mentions the search words."""
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (ICONIC demo)"})
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            if "html" not in (r.headers.get("Content-Type") or "html"):
+                return ""
+            raw = r.read(600000).decode("utf-8", "replace")
+    except Exception:
+        return ""
+    raw = re.sub(r"(?is)<(script|style|noscript|svg|head)[^>]*>.*?</\1>", " ", raw)
+    text = re.sub(r"\s+", " ", re.sub(r"(?s)<[^>]+>", " ", raw))
+    text = re.sub(r"&nbsp;|&#160;", " ", text).strip()
+    low, best = text.lower(), 0
+    for t in terms:
+        i = low.find(t)
+        if i > 0:
+            best = max(0, i - 300)
+            break
+    return text[best:best + limit]
+
+
+def search_best(query, url=None, n=5):
+    """General results plus fresh news, then read the top pages so the model sees real content, not just blurbs."""
+    out, seen = [], set()
+    for extra in ({"categories": "news", "time_range": "week"}, {}):
+        try:
+            got = search(query, url, n, extra=extra)
+        except WebSearchError:
+            if extra:
+                continue
+            if not out:
+                raise
+            got = []
+        for r in got:
+            if r["url"] not in seen:
+                seen.add(r["url"]); out.append(r)
+    out = out[:n]
+    terms = [w.lower() for w in re.findall(r"[A-Za-z0-9]{4,}", query)][:4]
+    with ThreadPoolExecutor(3) as ex:
+        texts = list(ex.map(lambda r: _page_text(r["url"], terms), out[:3]))
+    for r, t in zip(out, texts):
+        if t:
+            r["page"] = t
+    return out

@@ -1100,7 +1100,8 @@ class Handler(BaseHTTPRequestHandler):
             web, web_note, web_used = body.get("web") or {}, "", None
             if WEB and WEB.enabled():
                 if not isinstance(web, dict) or "ok" not in web:
-                    offer = WEB.decide(q, w.meta.get("name"), [s["title"] for s in sources[:8]], MODEL.complete)
+                    offer = WEB.decide(q, w.meta.get("name"), [s["title"] for s in sources[:8]], MODEL.complete,
+                                       time.strftime("%A, %B %d, %Y")) if WEB.likely_needs_web(q) else None
                     if offer:
                         self.sse("web_offer", {"query": offer})
                         JOBS.finish(job, "done", "Asked before searching the web: %s" % offer[:60])
@@ -1108,14 +1109,20 @@ class Handler(BaseHTTPRequestHandler):
                 elif web.get("ok") and str(web.get("query") or "").strip():
                     wq = str(web["query"]).strip()[:WEB.MAX_QUERY]
                     try:
-                        found = WEB.search(wq)
+                        found = WEB.search_best(wq)
                     except WEB.WebSearchError as e:
                         found, web_note = [], str(e)
+                    sources = sources[:2]   # a web question rarely needs the business files; keep the answer about the web
                     wtext, wsrc = WEB.as_sources(found, len(sources) + 1)
                     sources += wsrc
                     web_used = {"query": wq, "results": len(found), "error": web_note}
                     web_note = ("The visitor said yes to a web search for \"%s\". Web results (cite them by number "
-                                "like the files; say plainly they came from the web):\n\n%s" % (wq, wtext or "(the search found nothing)"))
+                                "like the files; say plainly they came from the web):\n\n%s\n\nAnswer their question directly "
+                                "and specifically from these results first (names, dates, times, numbers). Today is %s, so work out "
+                                "what \"today\" or \"tonight\" means from the dates in the results. If the results truly don't "
+                                "say, say so in one line and name the best place to check. If the question has nothing to do "
+                                "with the business, skip the briefing item at the end." % (
+                                    wq, wtext or "(the search found nothing)", time.strftime("%A, %B %d, %Y")))
                 else:
                     web_note = ("The visitor chose not to search the web. Answer from the files and what you know, "
                                 "and say in one line what a web search would have added.")
