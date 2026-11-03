@@ -44,7 +44,7 @@ fi
   echo "ICONIC_PORT=$PORT"
   echo "ICONIC_DATA=$DATA"
   echo "ICONIC_STATE=$STATE"
-  grep -E '^ICONIC_(LLM_MODEL|LLM_KEY|RATE_PER_HOUR|SCAN_SECONDS)=' "$ENVF" 2>/dev/null || true
+  grep -E '^ICONIC_(LLM_URL|LLM_MODEL|LLM_KEY|RATE_PER_HOUR|SCAN_SECONDS|PUBLIC_PER_HOUR)=' "$ENVF" 2>/dev/null || true
 } > "$ENVF.tmp" && mv "$ENVF.tmp" "$ENVF"
 
 say "Starting ICONIC Command on port $PORT"
