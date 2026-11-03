@@ -28,6 +28,9 @@ WEB_CUES = re.compile(r"(?i)\b(today|tonight|tomorrow|yesterday|this (week|weeke
                       r"kraken|sounders|nfl|nba|mlb|20[2-3][0-9])\b")
 
 
+JUNK = re.compile(r"(?i)promo code|bonus code|sportsbook|betting|bet \$|odds boost|coupon|casino")
+
+
 def likely_needs_web(question):
     return bool(WEB_CUES.search(question or ""))
 
@@ -96,6 +99,8 @@ def search(query, url=None, n=5, timeout=8, extra=None):
     out = []
     for item in data.get("results") or []:
         if not item.get("url") or not item.get("title"):
+            continue
+        if JUNK.search(str(item["title"])):   # skip betting promos and coupon spam
             continue
         out.append({"title": str(item["title"])[:160], "url": str(item["url"])[:500],
                     "snippet": re.sub(r"\s+", " ", str(item.get("content") or ""))[:400]})

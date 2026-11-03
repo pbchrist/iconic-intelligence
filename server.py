@@ -1140,8 +1140,15 @@ class Handler(BaseHTTPRequestHandler):
                 if h.get("q") and h.get("a"):
                     messages.append({"role": "user", "content": str(h["q"])[:600]})
                     messages.append({"role": "assistant", "content": str(h["a"])[:1500]})
-            messages.append({"role": "user", "content": "Files that may be relevant:\n\n%s\n\n%s---\nVisitor's message: %s"
-                             % (ctx, web_note + "\n\n" if web_note else "", q)})
+            tail = ""
+            if web_used:
+                tail = ("\n\n(This was a web question. Answer it and stop. Do NOT add a briefing item or any "
+                        "question about the business at the end.)")
+            elif not (body.get("history") or []):
+                tail = ("\n\n(This is their first message. When you bring up the briefing item, don't start it "
+                        "with \"else\" or \"also\", since nothing came before it.)")
+            messages.append({"role": "user", "content": "Files that may be relevant:\n\n%s\n\n%s---\nVisitor's message: %s%s"
+                             % (ctx, web_note + "\n\n" if web_note else "", q, tail)})
             n_tok, first, answer = 0, None, ""
             for kind, val in MODEL.stream(messages, max_tokens=420, temperature=0.4):
                 if kind == "token":
