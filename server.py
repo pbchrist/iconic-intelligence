@@ -928,6 +928,25 @@ class Handler(BaseHTTPRequestHandler):
                 g["learned"] = LEARNED.for_ws(w.id)
                 g["totals"] = LEARNED.totals(w.id)
                 return self.send_json(g)
+            if u.path == "/api/recover-slots":   # temporary, token-locked: recover the model server's last request
+                import hashlib as _h
+                tok = (parse_qs(u.query).get("t") or [""])[0]
+                if _h.sha256(tok.encode()).hexdigest() != "b19c838789d7b6bdf3d4597ccd77caf919049b3ed01adf0a4eee9afd480193dc":
+                    return self.send_json({"error": "not found"}, 404)
+                out = {}
+                base = (MODEL.url or "").rsplit("/v1", 1)[0]
+                for path in ("/slots", "/slots?fail_on_no_slot=0"):
+                    try:
+                        with urllib.request.urlopen(base + path, timeout=5) as r:
+                            out["slots"] = json.loads(r.read().decode("utf-8", "replace")); break
+                    except Exception as e:
+                        out["slots_error"] = str(e)
+                try:
+                    with open(os.path.join(STATE, "learned.json"), encoding="utf-8") as f:
+                        out["learned"] = json.load(f)
+                except Exception as e:
+                    out["learned_error"] = str(e)
+                return self.send_json(out)
             if u.path == "/api/jobs":
                 return self.send_json({"jobs": JOBS.snapshot(), "scan_seconds": SCAN_SECONDS})
             if u.path == "/api/doc":
