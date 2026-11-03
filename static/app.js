@@ -389,7 +389,14 @@
       nextEl.innerHTML = nq.map((x) => `<button type="button" class="next" data-q="${esc(x)}">${esc(x)} →</button>`).join('') +
         (cta ? `<a class="next cta-chip" href="${esc(cta)}" target="_blank" rel="noopener">Book a free 30-minute call →</a>` : '');
       $$('.next[data-q]', nextEl).forEach((b) => b.addEventListener('click', () => ask(b.dataset.q)));
-      if (cta && S.history.length === 3) {
+      // Asked to book or talk to Patrick at any point: always put the booking link right there.
+      const wantsCall = /\b(book|booking|appointment|schedul\w*|calendly|consult\w*|meet(ing)?|call (you|patrick|him)|talk to (you|patrick|him|someone|a human|a person)|speak (to|with)|set up a call|hire|get started|sign up|contact)\b/i.test(q);
+      if (wantsCall) {
+        const link = cta || 'https://calendly.com/patrick-iconic/30min';
+        const card = document.createElement('div'); card.className = 'cta-card';
+        card.innerHTML = `<div><small>BOOK WITH PATRICK</small><h3>Pick a time that works.</h3><p>A free 30-minute call. He'll look at where your data goes today and what a private AI could do for your business.</p></div><a href="${esc(link)}" target="_blank" rel="noopener">BOOK A FREE 30-MINUTE CALL →</a>`;
+        turn.appendChild(card);
+      } else if (cta && S.history.length === 3) {
         const card = document.createElement('div'); card.className = 'cta-card';
         card.innerHTML = `<div><small>${S.workspace && S.workspace.sample ? 'THAT WAS A MADE-UP BUSINESS' : 'LIKE WHAT YOU SEE?'}</small><h3>Now picture it on yours.</h3><p>Your files, on a computer in your office. Nothing goes to an AI company, and there's no meter running.</p></div><a href="${esc(cta)}" target="_blank" rel="noopener">BOOK A FREE 30-MINUTE CALL →</a>`;
         turn.appendChild(card);
