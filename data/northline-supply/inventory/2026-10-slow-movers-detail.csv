@@ -1,0 +1,19 @@
+part_number,description,vendor,category,qty_on_hand,unit_cost,extended_cost,last_sale,box_opened,pacific_brass_buyback_eligible
+PB-GV200-34,"Gate valve, brass, 3/4 in, threaded (discontinued line)",Pacific Brass,Obsolete brass valve lines,300,24.50,7350.00,2025-11-04,no,yes
+PB-GV200-1,"Gate valve, brass, 1 in, threaded (discontinued line)",Pacific Brass,Obsolete brass valve lines,200,36.00,7200.00,2025-10-17,no,yes
+PB-BV150-12,"Ball valve, brass, 1/2 in, lead-free series 150 (replaced by 160)",Pacific Brass,Obsolete brass valve lines,600,14.25,8550.00,2026-02-09,no,yes
+PB-CK90-34,"Check valve, brass, 3/4 in, swing (discontinued)",Pacific Brass,Obsolete brass valve lines,90,41.00,3690.00,2025-12-01,yes,no
+PB-PRV25-1,"Pressure reducing valve, 1 in, old body style",Pacific Brass,Obsolete brass valve lines,60,118.00,7080.00,2025-09-22,yes,no
+AV-GLB-112,"Globe valve, bronze, 1-1/2 in",Atlas Valve,Obsolete brass valve lines,60,211.50,12690.00,2025-08-30,no,no
+AV-GLB-2,"Globe valve, bronze, 2 in",Atlas Valve,Obsolete brass valve lines,48,305.00,14640.00,2025-07-14,no,no
+RC-CF-58RED,"Copper reducing coupling, 5/8 x 1/2 (discontinued size)",Ridgeline Copper,Copper fittings in discontinued sizes,900,6.80,6120.00,2025-12-11,no,no
+RC-CF-118EL,"Copper 90 elbow, 1-1/8 in ACR (discontinued size)",Ridgeline Copper,Copper fittings in discontinued sizes,650,14.20,9230.00,2026-01-20,no,no
+RC-CF-138T,"Copper tee, 1-3/8 in ACR (discontinued size)",Ridgeline Copper,Copper fittings in discontinued sizes,310,31.50,9765.00,2025-11-28,no,no
+RC-CF-218C,"Copper coupling, 2-1/8 in (discontinued size)",Ridgeline Copper,Copper fittings in discontinued sizes,260,52.25,13585.00,2025-10-06,yes,no
+CT-ICB-400,"Furnace integrated control board, series 400 (superseded)",Cascade Controls,Older HVAC control boards,62,265.00,16430.00,2025-12-19,no,no
+CT-ICB-410,"Furnace integrated control board, series 410 (superseded)",Cascade Controls,Older HVAC control boards,50,288.00,14400.00,2026-01-30,no,no
+HT-DFB-22,"Defrost control board, heat pump, model 22 (discontinued)",Heatwell,Older HVAC control boards,67,210.00,14070.00,2025-11-15,yes,no
+MISC-WH-ANODE,"Water heater anode rods, magnesium, assorted",Various,Other,410,18.00,7380.00,2026-03-02,no,no
+MISC-THERM-OLD,"Non-programmable thermostats, 2019 models",Various,Other,160,64.00,10240.00,2026-02-14,no,no
+MISC-PVC-SCH80,"PVC Schedule 80 fittings, odd sizes",Various,Other,1200,8.50,10200.00,2026-01-08,no,no
+MISC-GAS-FLEX,"Gas flex connectors, 1/2 x 72 in, old certification",Various,Other,400,34.45,13780.00,2025-12-22,no,no
