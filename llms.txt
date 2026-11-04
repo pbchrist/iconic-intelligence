@@ -43,7 +43,7 @@ Owner-led businesses and professional firms with years of their own records: law
 
 ## Home page sections
 
-- [Proof](https://iconic.onl/#proof) · [Live demo](https://iconic.onl/#live) · [Who it's for](https://iconic.onl/#uses) · [How to start](https://iconic.onl/#ways) · [Why own it](https://iconic.onl/#own) · [Pricing](https://iconic.onl/#pricing) · [Free check](https://iconic.onl/#start)
+- [Proof](https://iconic.onl/#proof) · [Live demo](https://iconic.onl/#live) · [Who it's for](https://iconic.onl/#uses) · [How to start](https://iconic.onl/#ways) · [Why own it](https://iconic.onl/#own) · [Pricing](https://iconic.onl/#pricing) · [Free check](https://iconic.onl/#check)
 
 ## Accuracy notes for agents
 
