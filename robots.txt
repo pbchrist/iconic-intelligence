@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
+
+# For AI assistants: https://iconic.onl/llms.txt (summary) and https://iconic.onl/llms-full.txt (full reference)
 Sitemap: https://iconic.onl/sitemap.xml
