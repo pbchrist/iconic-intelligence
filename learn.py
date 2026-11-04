@@ -127,7 +127,7 @@ class Lessons:
             json.dump({"lessons": self.items, "rejected": self.rejected}, f, ensure_ascii=False, indent=1)
         os.replace(self.path + ".tmp", self.path)
         lines = ["# What ICONIC has learned from visitors", "",
-                 "Each rule came from a visitor correcting it, and was kept only after testing better. Every answer follows these.",
+                 "Each rule came from a visitor correcting it, and was kept only after a test showed it made no answer worse. Every answer follows these.",
                  "Remove one: python3 ~/iconic-command/learn.py --forget N, then restart the demo.", ""]
         for n, x in enumerate(self.items, 1):
             lines += ["%d. **%s**" % (n, x["rule"]),
