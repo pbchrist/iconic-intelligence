@@ -12,6 +12,7 @@ import ipaddress
 import json
 import math
 import os
+import queue
 import re
 import shutil
 import socket
@@ -30,6 +31,10 @@ try:  # optional add-on: ask before searching the open web (delete websearch.py 
     import websearch as WEB
 except ImportError:
     WEB = None
+try:  # optional add-on: learn from visitors' corrections (delete learn.py to remove it)
+    import learn as LEARN
+except ImportError:
+    LEARN = None
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC = os.path.join(ROOT, "static")
@@ -531,7 +536,7 @@ say warmly that his calendar is right below this message for a free 30-minute ca
 - This demo only reads these files. If asked to browse, email or act, say what you would do with it running on \
 their own machine, then bring it back to the files. Never pretend you already did it.
 
-Today's briefing for {name}:
+{lessons}Today's briefing for {name}:
 {brief}"""
 
 
@@ -809,6 +814,162 @@ class Learned:
 LEARNED = Learned()
 
 
+# ---------------------------------------------------------------- composing an answer
+
+SAID_YES = re.compile(r"(?i)^(yes|yeah|yep|yup|sure|ok|okay|go on|more|please)\W*$")
+
+
+def find_sources(w, q, history):
+    if SAID_YES.search(q.strip()) and history:   # "yes" means the offer at the end of the last answer
+        hits = w.search(q + " " + str(history[-1].get("a", ""))[-250:])
+    else:
+        hits = w.search(q + " " + " ".join(h.get("q", "") for h in history[-1:]))
+    with w.lock:
+        docs = {d["id"]: d for d in w.docs}
+        first_chunk = {}
+        for c in w.chunks:
+            first_chunk.setdefault(c["doc"], c)
+    # Broad questions ("what should I worry about?") match few words; widen to the newest files.
+    broad = re.search(r"(?i)\b(worr|concern|missing|priorit|urgent|attention|overview|summar|happening|"
+                      r"this week|today|going on|should i know|risks?)\b", q)
+    off_topic = bool(WEB and WEB.likely_needs_web(q)) and len(hits) < 2
+    if (len(hits) < 4 or broad) and not off_topic:
+        have = {c["doc"] for _, c in hits}
+        for d in sorted(docs.values(), key=lambda d: d["date"], reverse=True):
+            if len(hits) >= 7:
+                break
+            if d["id"] not in have and d["id"] in first_chunk:
+                hits.append((0, first_chunk[d["id"]]))
+                have.add(d["id"])
+    sources = []
+    for n, (score, c) in enumerate(hits, 1):
+        d = docs[c["doc"]]
+        sources.append({"n": n, "id": d["id"], "title": d["title"], "rel": d["rel"], "folder": d["folder"],
+                        "date": d["date"], "snippet": c["text"][:420], "chunk": c["text"]})
+    return sources
+
+
+def build_messages(w, q, hist, sources, web_note="", web_used=None, trying=None):
+    """Everything the model sees for one answer. `trying` = a new lesson being tested, not yet kept."""
+    ctx = "\n\n".join("[%d] %s (%s, %s)\n%s" % (s["n"], s["title"], s["rel"], s["date"], s["chunk"])
+                      for s in sources) or "(no matching documents)"
+    meta = w.meta
+    brief = (FEED.get(w.id) or {}).get("items") or []
+    brief_txt = "\n".join("- [%s] %s %s" % (b["severity"], b["title"], b["detail"]) for b in brief[:5]) or "(not written yet)"
+    lessons = LESSONS.prompt_block(trying) if LESSONS else ""
+    messages = [{"role": "system", "content": SYSTEM_PROMPT.format(
+        location=LOCATION, owner=OWNER, model=MODEL.label, name=meta.get("name"),
+        kind=meta.get("kind") or "a business", sample=("a made-up business with fictional files"
+                                                       if meta.get("sample") else "a real business"),
+        today=time.strftime("%A, %B %d, %Y"), brief=brief_txt, lessons=lessons + "\n\n" if lessons else "")}]
+    for h in hist[-3:]:
+        if h.get("q") and h.get("a"):
+            messages.append({"role": "user", "content": str(h["q"])[:600]})
+            messages.append({"role": "assistant", "content": str(h["a"])[:1500]})
+    open_ended = re.search(r"(?i)^(hi|hey|hello|yo|sup|good (morning|afternoon|evening))\b|what else|anything else|"
+                           r"what should i|worried|what('s| is) (new|going on|important|urgent)|surprise me|"
+                           r"show me something|what do you (have|know)", q.strip())
+    said_yes = SAID_YES.search(q.strip())
+    if web_used:
+        tail = "ENDING: this was a web question. Answer it and stop. No briefing item, no question about the business."
+    elif not hist:
+        tail = ("ENDING: this is their first message, so bring up one briefing item. Don't start it with "
+                "\"else\" or \"also\", since nothing came before it.")
+    elif said_yes:
+        asked = re.findall(r"[^.!?\n]*\?", str(hist[-1].get("a", "")))
+        tail = ("ENDING: they said yes to what you last offered%s. Deliver exactly that, with more specific facts "
+                "from the files. Don't bring up a new item or ask the same question again." % (
+                    ": \"%s\"" % asked[-1].strip() if asked else ""))
+    elif open_ended:
+        tail = "ENDING: they're open to suggestions, so bring up one briefing item they haven't seen yet."
+    else:
+        tail = ("ENDING: just answer. Add at most one short follow-up about what they asked, or nothing. "
+                "Do NOT bring up a briefing item or change the subject.")
+    tail = "\n\n(" + tail + ")"
+    messages.append({"role": "user", "content": "Files that may be relevant:\n\n%s\n\n%s---\nVisitor's message: %s%s"
+                     % (ctx, web_note + "\n\n" if web_note else "", q, tail)})
+    return messages
+
+
+# ---------------------------------------------------------------- learning from corrections (learn.py)
+
+LESSONS = LEARN.Lessons(STATE) if LEARN else None
+VISITS = {}            # (ws, session) -> this visit's exchanges as the server saved them (never the browser's copy)
+LEARN_TRIED = set()    # visits that already produced a lesson: one per visit, so one visitor can't write many
+LEARN_QUEUE = queue.Queue()
+
+
+ANSWERING = [0]        # visitor answers being written right now; learning waits for zero
+ANSWERING_LOCK = threading.Lock()
+
+
+class answering:
+    def __enter__(self):
+        with ANSWERING_LOCK:
+            ANSWERING[0] += 1
+
+    def __exit__(self, *a):
+        with ANSWERING_LOCK:
+            ANSWERING[0] -= 1
+
+
+def busy():
+    return ANSWERING[0] > 0
+
+
+def remember_exchange(wid, session, q, a):
+    if session:
+        if len(VISITS) > 5000:
+            VISITS.clear()
+        VISITS.setdefault((wid, session), []).append({"q": q, "a": a})
+
+
+def replay_answer(wid):
+    """Answer the way the demo does, with a lesson being tested on. Used only by the lesson test."""
+    def answer(q, history, rule):
+        w = WORKSPACES[wid]
+        return MODEL.complete(build_messages(w, q, history, find_sources(w, q, history), trying=rule),
+                              max_tokens=420, temperature=0.4)
+    return answer
+
+
+def learn_from_visit(wid, session, q, past=None):
+    past = list(VISITS.get((wid, session), [])) if past is None else past
+    if not LESSONS or not past or (wid, session) in LEARN_TRIED:
+        return
+    case = {"history": past[-4:-1], "prev_q": past[-1]["q"], "prev_a": past[-1]["a"], "q": q}
+    try:
+        with open(os.path.join(STATE, "conversations.jsonl"), encoding="utf-8") as f:
+            rows = [json.loads(x) for x in f if x.strip()]
+    except (OSError, ValueError):
+        rows = []
+    rule, ok, why = LESSONS.consider(wid, case, MODEL.complete, replay_answer(wid), LEARN.checks_from_log(rows, wid))
+    if rule:
+        LEARN_TRIED.add((wid, session))
+        log("lesson %s: %s%s" % ("kept" if ok else "thrown out", rule, "" if ok else " (" + why + ")"))
+
+
+def learner():
+    while True:
+        wid, session, q, past = LEARN_QUEUE.get()
+        while busy():
+            time.sleep(1)
+        try:
+            learn_from_visit(wid, session, q, past)
+        except Exception as e:
+            log("learning failed", e)
+
+
+def start_offline(detect_model=True):
+    """Load the workspaces without starting the web server (tests, and learn.py run by hand)."""
+    discover()
+    for ws in ordered_workspaces():
+        ws.reindex()
+    load_feed_cache()
+    if detect_model:
+        MODEL.detect()
+
+
 # ---------------------------------------------------------------- background watcher
 
 def watcher():
@@ -1069,31 +1230,7 @@ class Handler(BaseHTTPRequestHandler):
         job = JOBS.start("QUESTION", q[:90], w.id)
         t0 = time.time()
         try:
-            hits = w.search(q + " " + " ".join(h.get("q", "") for h in (body.get("history") or [])[-1:]))
-            with w.lock:
-                docs = {d["id"]: d for d in w.docs}
-                first_chunk = {}
-                for c in w.chunks:
-                    first_chunk.setdefault(c["doc"], c)
-            # Broad questions ("what should I worry about?") match few words; widen to the newest files.
-            broad = re.search(r"(?i)\b(worr|concern|missing|priorit|urgent|attention|overview|summar|happening|"
-                              r"this week|today|going on|should i know|risks?)\b", q)
-            off_topic = bool(WEB and WEB.likely_needs_web(q)) and len(hits) < 2
-            if (len(hits) < 4 or broad) and not off_topic:
-                have = {c["doc"] for _, c in hits}
-                for d in sorted(docs.values(), key=lambda d: d["date"], reverse=True):
-                    if len(hits) >= 7:
-                        break
-                    if d["id"] not in have and d["id"] in first_chunk:
-                        hits.append((0, first_chunk[d["id"]]))
-                        have.add(d["id"])
-            sources = []
-            for n, (score, c) in enumerate(hits, 1):
-                d = docs[c["doc"]]
-                sources.append({"n": n, "id": d["id"], "title": d["title"], "rel": d["rel"], "folder": d["folder"],
-                                "date": d["date"], "snippet": c["text"][:420], "chunk": c["text"]})
-            ctx = "\n\n".join("[%d] %s (%s, %s)\n%s" % (s["n"], s["title"], s["rel"], s["date"], s["chunk"])
-                              for s in sources) or "(no matching documents)"
+            sources = find_sources(w, q, body.get("history") or [])
             # Web search add-on. First pass: if the question needs the open web, offer the exact search and stop.
             # Nothing leaves this computer until the visitor answers yes (web.ok with the same words).
             web, web_note, web_used = body.get("web") or {}, "", None
@@ -1127,47 +1264,20 @@ class Handler(BaseHTTPRequestHandler):
                                 "and say in one line what a web search would have added.")
             self.sse("sources", [{k: s.get(k) for k in ("n", "id", "title", "rel", "folder", "date", "snippet", "web", "url")}
                                  for s in sources])
-            meta = w.meta
-            brief = (FEED.get(w.id) or {}).get("items") or []
-            brief_txt = "\n".join("- [%s] %s %s" % (b["severity"], b["title"], b["detail"]) for b in brief[:5]) or "(not written yet)"
-            messages = [{"role": "system", "content": SYSTEM_PROMPT.format(
-                location=LOCATION, owner=OWNER, model=MODEL.label, name=meta.get("name"),
-                kind=meta.get("kind") or "a business", sample=("a made-up business with fictional files"
-                                                               if meta.get("sample") else "a real business"),
-                today=time.strftime("%A, %B %d, %Y"), brief=brief_txt)}]
-            for h in (body.get("history") or [])[-3:]:
-                if h.get("q") and h.get("a"):
-                    messages.append({"role": "user", "content": str(h["q"])[:600]})
-                    messages.append({"role": "assistant", "content": str(h["a"])[:1500]})
-            hist = body.get("history") or []
-            open_ended = re.search(r"(?i)^(hi|hey|hello|yo|sup|good (morning|afternoon|evening))\b|what else|anything else|"
-                                   r"what should i|worried|what('s| is) (new|going on|important|urgent)|surprise me|"
-                                   r"show me something|what do you (have|know)|^(yes|yeah|yep|sure|ok|okay|go on|more)\W*$", q.strip())
-            if web_used:
-                tail = "ENDING: this was a web question. Answer it and stop. No briefing item, no question about the business."
-            elif not hist:
-                tail = ("ENDING: this is their first message, so bring up one briefing item. Don't start it with "
-                        "\"else\" or \"also\", since nothing came before it.")
-            elif open_ended:
-                tail = "ENDING: they're open to suggestions, so bring up one briefing item they haven't seen yet."
-            else:
-                tail = ("ENDING: just answer. Add at most one short follow-up about what they asked, or nothing. "
-                        "Do NOT bring up a briefing item or change the subject.")
-            tail = "\n\n(" + tail + ")"
-            messages.append({"role": "user", "content": "Files that may be relevant:\n\n%s\n\n%s---\nVisitor's message: %s%s"
-                             % (ctx, web_note + "\n\n" if web_note else "", q, tail)})
+            messages = build_messages(w, q, body.get("history") or [], sources, web_note, web_used)
             n_tok, first, answer = 0, None, ""
-            for kind, val in MODEL.stream(messages, max_tokens=420, temperature=0.4):
-                if kind == "token":
-                    if first is None:
-                        first = time.time()
-                    n_tok += 1
-                    answer += val
-                    self.sse("token", val)
-                elif kind == "thinking":
-                    self.sse("thinking", True)
-                elif kind == "usage":
-                    n_tok = val
+            with answering():
+                for kind, val in MODEL.stream(messages, max_tokens=420, temperature=0.4):
+                    if kind == "token":
+                        if first is None:
+                            first = time.time()
+                        n_tok += 1
+                        answer += val
+                        self.sse("token", val)
+                    elif kind == "thinking":
+                        self.sse("thinking", True)
+                    elif kind == "usage":
+                        n_tok = val
             secs = time.time() - (first or t0)
             JOBS.add_tokens(n_tok, secs)
             with JOBS.lock:
@@ -1183,8 +1293,12 @@ class Handler(BaseHTTPRequestHandler):
                 (LEARNED.add(w.id, [], str(body.get("session", ""))[:64]) and [])
             done["learned"] = dict(LEARNED.totals(w.id), new=new)
             done["learned"]["added"] = done["learned"]["here"] - before_here
-            save_convo(w.id, str(body.get("session", ""))[:64], q, answer, sources, "done", done["ms"])
+            session = str(body.get("session", ""))[:64]
+            save_convo(w.id, session, q, answer, sources, "done", done["ms"])
             self.sse("done", done)
+            if not web_used:   # learning runs after the visitor has the answer, one at a time
+                LEARN_QUEUE.put((w.id, session, q, list(VISITS.get((w.id, session), []))))
+            remember_exchange(w.id, session, q, answer)
             JOBS.finish(job, "done", "%d sources · %d tokens · %.1fs" % (len(sources), n_tok, done["ms"] / 1000))
         except (BrokenPipeError, ConnectionResetError):
             L = locals()
@@ -1210,6 +1324,7 @@ def main():
     MODEL.detect()
     log("model:", MODEL.model if MODEL.online else "not found", MODEL.url)
     threading.Thread(target=watcher, daemon=True).start()
+    threading.Thread(target=learner, daemon=True).start()
     srv = ThreadingHTTPServer((HOST, PORT), Handler)
     srv.daemon_threads = True
     log("ICONIC Command on http://%s:%d  data=%s" % (HOST, PORT, DATA))
