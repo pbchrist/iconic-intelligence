@@ -23,7 +23,7 @@ Patrick runs 23 agents on his own private AI rig. One delivers competitor pricin
 1. Learn it. Patrick teaches the owner to run their own private AI. They set it up together, and the owner leaves with it working.
 2. Have it done. Patrick sets it up in the office, connects it to the files and trains the staff. Monthly care keeps it updated and adds new uses.
 
-Both start with a free 30-minute check of where the business's client data goes today, including AI tools staff already use.
+Both start with a free 30-minute check of where the business's client data goes today, including AI tools staff already use, and whether a self-hosted AI is right for the business.
 
 ## Worth knowing
 
