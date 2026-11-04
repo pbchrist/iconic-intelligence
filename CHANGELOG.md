@@ -4,6 +4,9 @@ Newest first. One line per change: what changed and why.
 Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
 
+## 2026-11-04
+- Removed the "Worth knowing first / The plain answers, before you book" box: it talked people out of booking and promised a remote-support setup Patrick never confirmed.
+
 ## 2026-11-03
 - Link previews (texts, LinkedIn, etc.) now show the ICONIC star icon (the square logo from the browser tab) instead of Patrick's photo: added a share image and told previews to use it.
 
