@@ -27,8 +27,6 @@ Both start with a free 30-minute check of where the business's client data goes 
 
 ## Worth knowing
 
-- Local AI models are less accurate than the largest cloud models. A person checks anything that matters. At a law firm, a lawyer checks it.
-- Monthly care runs over a secure, encrypted connection the client can switch off at any time. Patrick maintains the software, not the files.
 - Prices for setup, teaching and care are quoted after the free check.
 
 ## Who it is for
