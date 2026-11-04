@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#080912" />
+  <title>ICONIC. Private AI and agents that work for your business</title>
+  <meta name="description" content="Own your intelligence. ICONIC puts a private AI and agents on a computer in your office: models no one can change on you, a memory of your business that belongs to you, and no meter running. Learn to run it yourself, or have Patrick Christell set it up and look after it. Both start with a free 30-minute check." />
+  <link rel="canonical" href="https://iconic.onl/" />
+  <meta property="og:title" content="ICONIC. Private AI and agents that work for your business" />
+  <meta property="og:description" content="A private AI and agents on a computer in your office. Your files never leave, no one can change the model on you, and there is no meter running. Start with a free 30-minute check." />
+  <meta property="og:url" content="https://iconic.onl/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://iconic.onl/iconic-share.png" />
+  <meta property="og:image:width" content="600" />
+  <meta property="og:image:height" content="600" />
+  <meta property="og:image:alt" content="ICONIC" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="https://iconic.onl/iconic-share.png" />
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="ICONIC for AI agents" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://iconic.onl/#org",
+        "name": "ICONIC",
+        "url": "https://iconic.onl/",
+        "logo": "https://iconic.onl/iconic-wordmark.webp",
+        "email": "patrick@iconic.onl",
+        "telephone": "+1-206-773-8214",
+        "founder": { "@id": "https://iconic.onl/#patrick" },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "patrick@iconic.onl",
+          "telephone": "+1-206-773-8214",
+          "availableLanguage": "en"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://iconic.onl/#patrick",
+        "name": "Patrick Christell",
+        "jobTitle": "Principal",
+        "image": "https://iconic.onl/patrick-christell-2026.jpg",
+        "worksFor": { "@id": "https://iconic.onl/#org" }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://iconic.onl/#service",
+        "name": "ICONIC private AI",
+        "serviceType": "Private AI set up on the client's own computer",
+        "provider": { "@id": "https://iconic.onl/#org" },
+        "audience": { "@type": "BusinessAudience", "name": "Owner-led businesses and professional firms with years of their own records" },
+        "description": "ICONIC puts a private AI and agents on a computer in the client's office, connected to the client's own files. The data does not leave the building, the model cannot be changed or withdrawn by a vendor, there is no per-token cost, and the system keeps a growing memory of the business. Agents run recurring work such as briefs, monitoring and drafting. Two ways in: Patrick teaches the client to run it, or Patrick sets it up and looks after it month to month. Both start with a free 30-minute check, including where to draw the line between local and cloud models. Local AI models are less capable than the largest cloud models, so a person checks anything that matters.",
+        "offers": [
+          { "@type": "Offer", "name": "Free 30-minute private AI check", "price": "0", "priceCurrency": "USD", "url": "https://calendly.com/patrick-iconic/30min" },
+          { "@type": "Offer", "name": "Taught to you: guided setup and teaching", "description": "Priced after the free check." },
+          { "@type": "Offer", "name": "Built for you: setup and ongoing support", "description": "Priced after the free check." }
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://iconic.onl/#site",
+        "url": "https://iconic.onl/",
+        "name": "ICONIC",
+        "publisher": { "@id": "https://iconic.onl/#org" }
+      }
+    ]
+  }
+  </script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <script>
+    /* Some in-app browsers (Messenger, Facebook, Instagram on Android) enlarge all text after the page sets its
+       sizes. Measure that once, before anything is drawn, so big headings can be capped to still fit the screen. */
+    (function () { try { var d = document.createElement('div'); d.style.cssText = 'position:absolute;visibility:hidden;font-size:100px;line-height:1'; d.textContent = 'x'; document.documentElement.appendChild(d); var z = parseFloat(getComputedStyle(d).fontSize) / 100; d.remove(); if (z > 1.04 && z < 3) document.documentElement.style.setProperty('--tz', z.toFixed(2)); } catch (e) {} })();
+  </script>
+  <link rel="stylesheet" href="styles.css?v=20261101" />
+  <link rel="stylesheet" href="mobile-first.css?v=20261102h" />
+  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
+</head>
+<body>
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="ICONIC home"><img src="iconic-wordmark.webp" alt="ICONIC." /></a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="#proof">Proof</a>
+      <a href="#uses">Who it's for</a>
+      <a href="#ways">How to start</a>
+      <a href="#own">Why own it</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <a class="header-cta" href="#check">FREE PRIVATE AI CHECK</a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav">MENU</button>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="#proof">Proof</a><a href="#uses">Who it's for</a><a href="#ways">How to start</a><a href="#own">Why own it</a><a href="#pricing">Pricing</a><a href="#check">FREE PRIVATE AI CHECK</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero section-shell">
+      <div class="hero-copy" data-reveal>
+        <div class="eyebrow"><span class="live-dot"></span> PRIVATE BY DESIGN · AI AND AGENTS ON YOUR OWN COMPUTER</div>
+        <h1 class="h1-own">Own your <span class="nw">intelligence.</span><br><em>Don't rent it.</em></h1>
+        <p class="hero-buyer">An AI that knows your business: which client is about to walk, what a vendor promised, where you're losing money. It learns every day, nothing leaves your building, and there's no meter. On your hardware. Under your control.</p>
+        <div class="hero-actions hero-actions-threaded">
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking>BOOK MY FREE CHECK</a>
+          <a class="button button-ghost hero-try" href="#live">TRY IT LIVE</a>
+        </div>
+        <p class="cta-note">Free. Thirty minutes. No commitment.</p>
+      </div>
+    </section>
+
+    <section id="live" class="section-shell live-section" data-demo-url="https://patrick-beastmaster.tailf32530.ts.net">
+      <div class="section-kicker" data-reveal>LIVE DEMO</div>
+      <div class="section-heading split-heading direct-heading" data-reveal>
+        <h2>TRY IT ON A<br><em>SAMPLE BUSINESS.</em></h2>
+        <p>It has read every file of two: a law firm and a supply company. Ask it anything an owner would.</p>
+      </div>
+      <div class="live-frame" id="liveFrame" data-reveal>
+        <div class="live-wait" id="liveWait"><span class="live-dot"></span> Waking up the demo…</div>
+      </div>
+    </section>
+    <section id="proof" class="section-shell proof-section proof-feature use-case-section">
+      <div class="section-kicker" data-reveal>PROOF · RUNNING NOW</div>
+      <div class="use-case-wrap" data-reveal>
+        <div class="use-case-copy">
+          <small>COMPETITOR INTELLIGENCE · A GMC DEALERSHIP</small>
+          <h2>He thought his competitor was $800 cheaper. His AI found a $4,472 gap.</h2>
+          <p>It started with one question. Now an always-on agent, built on the dealership's own data, watches its lot and the lots of five competitors every morning: price, discount, trim and drive, truck by truck. Both owners can ask it anything from their phones, and it writes them a brief three times a week. Every number is dated and linked to the page it came from.</p>
+          <p class="proof-result"><strong>THE OWNER'S VERDICT</strong> <span>“Exceptional.”</span></p>
+        </div>
+        <div class="use-case-steps">
+          <article><span>IN SIX WEEKS</span><strong>From one rival and one truck to five competitors and the whole lineup, with 20 briefs delivered.</strong></article>
+          <article><span>A HUNCH BECAME HARD NUMBERS</span><strong>The owner thought a Bay Area dealer was $500 to $800 cheaper. Matched truck for truck, it was cheaper on 20 of 22, by an average price gap of $4,472.</strong></article>
+          <article><span>IT CAUGHT WHAT PEOPLE MISSED</span><strong>A pricing error on the dealership's own website. Fixed two days later.</strong></article>
+        </div>
+      </div>
+      <div class="capability-grid compact-capabilities proof-stats">
+        <article class="capability-card" data-reveal><span class="card-index">23</span><h3>AGENTS</h3><p>Running every day on my own hardware, across my own business and my clients' work: research, monitoring, writing, code, and phone and chat access. The dealership's agent is one of them.</p><div class="micro-line"><span></span></div></article>
+        <article class="capability-card" data-reveal><span class="card-index">1</span><h3>DESKTOP</h3><p>One computer with 40 GB of graphics memory runs a 27-billion-parameter model privately, writing roughly 50 words a second.</p><div class="micro-line"><span></span></div></article>
+        <article class="capability-card" data-reveal><span class="card-index">$0</span><h3>PER TOKEN</h3><p>The agents can draft, check, revise and retest as many times as the job needs. More work doesn't mean a bigger bill.</p><div class="micro-line"><span></span></div></article>
+      </div>
+    </section>
+    <section id="memory" class="section-shell capability-cards-section memory-section">
+      <div class="section-kicker" data-reveal>WHAT IT DOES</div>
+      <div class="section-heading direct-heading" data-reveal>
+        <h2>IT KNOWS. IT WORKS.</h2>
+        <p>A chat window answers when you ask and forgets when you close it. Agents are different: they are given a job, they do it on a schedule, they check their own work, and they report back. ICONIC gives your business both a memory and a staff of agents, on your own computer.</p>
+      </div>
+      <div class="capability-grid compact-capabilities">
+        <article class="capability-card" data-reveal><span class="card-index">01</span><h3>KNOWS</h3><p>No more re-explaining. Your clients, prices, past decisions and the way you like things done are already there, and it answers from your own history: what changed since last month, what you paid a vendor last year.</p><div class="micro-line"><span></span></div></article>
+        <article class="capability-card" data-reveal><span class="card-index">02</span><h3>WORKS</h3><p>Agents take on the recurring jobs: reading the market every morning, watching for changes that matter, writing the weekly brief, drafting from your templates. They run while you sleep.</p><div class="micro-line"><span></span></div></article>
+        <article class="capability-card" data-reveal><span class="card-index">03</span><h3>STAYS</h3><p>With you. When someone leaves, what they knew stays. When a better model comes out, swap it in, and the memory and the agents carry on.</p><div class="micro-line"><span></span></div></article>
+      </div>
+    </section>
+    <section id="uses" class="section-shell proof-section proof-feature use-case-section">
+      <div class="section-kicker" data-reveal>WHO IT'S FOR</div>
+      <div class="use-case-wrap" data-reveal>
+        <div class="use-case-copy" id="useCaseCopy" aria-live="polite">
+          <small id="useCaseClient">LAW FIRM</small>
+          <h2 id="useCaseTitle">Every matter the firm has handled, in one place it controls.</h2>
+          <p id="useCaseBody">Briefs, contracts, research and correspondence from every matter, searchable in plain English on a computer inside the firm.</p>
+          <p class="proof-result"><strong>YOU ASK</strong> <span id="useCaseAsk">“Have we argued this before, and how did it go?”</span></p>
+        </div>
+        <div class="use-case-steps">
+          <article><span>IT HOLDS</span><strong id="useCaseHolds">Matters · briefs · contracts · research · correspondence</strong></article>
+          <article><span>ITS AGENTS RUN</span><strong id="useCaseRuns">A Monday brief on every open matter, deadline alerts, and first drafts from the firm's own past work.</strong></article>
+          <article><span>WHY IT STAYS IN-HOUSE</span><strong id="useCaseWhy">Client confidences never leave the firm.</strong>
+            <details class="more-detail case-detail" id="useCaseMoreWrap"><summary><b>More →</b></summary><p id="useCaseMore">The American Bar Association's Formal Opinion 512 (July 2024) says lawyers using AI must protect client confidences, understand the tools they use, and in some cases get the client's informed consent before putting client information into one. A system inside the firm makes that much simpler.</p></details>
+          </article>
+        </div>
+      </div>
+      <div class="use-case-dots" role="tablist" aria-label="Who it's for">
+        <button type="button" data-case="law" aria-pressed="true">LAW</button>
+        <button type="button" data-case="wealth" aria-pressed="false">WEALTH</button>
+        <button type="button" data-case="realestate" aria-pressed="false">REAL ESTATE</button>
+        <button type="button" data-case="owner" aria-pressed="false">OWNER-RUN</button>
+        <button type="button" data-case="accounting" aria-pressed="false">ACCOUNTING</button>
+      </div>
+    </section>
+    <section id="ways" class="section-shell deployment-section">
+      <div class="section-kicker" data-reveal>HOW TO START</div>
+      <div class="section-heading split-heading direct-heading" data-reveal>
+        <h2>YOUR FIRST<br><em>WORKING AGENT.</em></h2>
+        <p>Pick one recurring job that's costing you time or money. I'll show you whether an agent can do it, build it, and prove it works before we go any further. Then it's your call: I teach you to run it, or I build it for you.</p>
+      </div>
+      <div class="deployment-grid" data-reveal>
+        <article>
+          <span>01</span><small>FOR PEOPLE WHO WANT TO RUN IT</small>
+          <h3>I teach you.</h3>
+          <p>I teach you to run your own private AI and agents, the way I run mine. Start at whatever rung you're on:</p>
+          <ol class="ladder">
+            <li>Run a model privately on your own computer.</li>
+            <li>Connect it to your files, so it knows your business.</li>
+            <li>Build agents that do recurring work on a schedule.</li>
+            <li>Know where to draw the line between private and frontier cloud models.</li>
+          </ol>
+          <b>YOU RUN IT · NOBODY ELSE NEEDS ACCESS</b>
+        </article>
+        <article>
+          <span>02</span><small>FOR PEOPLE WHO WANT IT HANDLED</small>
+          <h3>I build it for you.</h3>
+          <p>I set it up on a computer in your office, connect it to your files, build the agents your business needs and train your people. Then I keep it updated, add new agents as new jobs come up, and make it sharper about your business month after month.</p>
+          <b>SETUP · ONGOING SUPPORT</b>
+        </article>
+      </div>
+    </section>
+    <section id="check" class="section-shell check-section">
+      <div class="check-card" data-reveal>
+        <div class="check-copy">
+          <h2>The free 30-minute<br><em>private AI check.</em></h2>
+          <p>One call with me. No cost, no pitch deck, no commitment.</p>
+        </div>
+        <div class="check-list">
+          <small>WHAT YOU WALK AWAY WITH</small>
+          <ol>
+            <li><b>Where your client data goes today and what is exposed,</b> including the AI tools your staff already use.</li>
+            <li><b>Whether a self-hosted AI is right for you.</b></li>
+            <li><b>If you also want to use cloud AI, where to draw the line:</b> what should stay on your own computer and what is fine to send out.</li>
+            <li><b>What bespoke agents built on your own data</b> could do for your business.</li>
+          </ol>
+          <a class="button button-primary check-button" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking>BOOK MY FREE CHECK →</a>
+          <p class="cta-note">Or call <a href="tel:+12067738214">206-773-8214</a>. You talk to me, not a sales team.</p>
+        </div>
+      </div>
+    </section>
+    <section id="own" class="section-shell deployment-section own-section">
+      <div class="section-kicker" data-reveal>WHY OWN IT</div>
+      <div class="section-heading split-heading direct-heading" data-reveal>
+        <h2>THE NEW<br><em>MOAT.</em></h2>
+        <div class="moat-copy"><p class="moat-lead"><strong>Every business is about to run on AI. Renting it gets you what everyone else has: the same models, the same answers, on someone else's terms.</strong> Owning it gets you something no competitor can buy: an intelligence that has learned your business, every client, every deal, every lesson, and keeps compounding every day it runs. A year in, that's a lead nobody closes by signing up for a subscription. Intelligence you own is the new moat. Most businesses haven't started digging.</p>
+        <p>On October 29, 2026, OpenAI CEO Sam Altman said on the Cheeky Pint podcast that running AI on your own computer is, "from a global allocation perspective, actually, it's quite terrible." Of course he would. He rents it to you. Your business should decide where its intelligence lives.</p></div>
+      </div>
+      <div class="capability-grid compact-capabilities">
+        <article class="capability-card" data-reveal><span class="card-index">01</span><h3>KEPT</h3><p>Your records stay in your building. Nothing about your clients goes to anyone else's servers. Cloud models are used only for public work, and only if you choose.</p><div class="micro-line"><span></span></div></article>
+        <article class="capability-card" data-reveal><span class="card-index">02</span><h3>STEADY</h3><p>Cloud models get changed, restricted, repriced and withdrawn without asking you. The model on your own computer is the same tomorrow as it is today, and when a better one comes out, you choose when to switch.</p><div class="micro-line"><span></span></div></article>
+        <article class="capability-card" data-reveal><span class="card-index">03</span><h3>NO METER</h3><p>Cloud AI bills by the word. Yours doesn't. Run billions of tokens and pay only for the computer and the power. No rate limits, no surprise invoice, and agents can work all night.</p><div class="micro-line"><span></span></div></article>
+      </div>
+      <details class="more-detail" data-reveal>
+        <summary><span>It already happened.</span> One of the most powerful AI models in the world was switched off for nearly three weeks. <b>More →</b></summary>
+        <div class="more-body">
+          <p>On June 12, 2026, Anthropic pulled its two most capable models, Claude Fable 5 and Mythos 5, to comply with U.S. export controls. Customers who had built on them lost access overnight, through no fault of their own. Access came back on July 1.</p>
+          <p>Then the rules changed again. Fable was taken off Anthropic's standard $20 plans and moved to pay-per-use credits, so the same work suddenly carried a meter. It is still on the API and the top-tier plans, at a price.</p>
+          <p>None of that was anyone's bad behavior. It is simply what renting looks like. A model running on your own computer cannot be recalled, restricted or repriced.</p>
+          <p class="more-sources">Sources: <a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noopener">Anthropic</a> · <a href="https://www.pcworld.com/article/3194944/fable-will-stay-in-claude-plans-but-not-for-everyone.html" target="_blank" rel="noopener">PCWorld</a> · <a href="https://www.bleepingcomputer.com/news/artificial-intelligence/claude-fable-5-isnt-permanently-leaving-subscriptions-anthropic-says/" target="_blank" rel="noopener">BleepingComputer</a></p>
+        </div>
+      </details>
+    </section>
+    <section id="capability" class="section-shell capability-section compounding-intelligence">
+      <div class="section-kicker" data-reveal>WHY IT GETS BETTER</div>
+      <div class="compound-intro" data-reveal>
+        <h2><span>COMPOUNDING</span><span>INTELLIGENCE.</span></h2>
+        <div><strong>Capital compounds because the returns stay invested. <em>Intelligence should work the same way.</em></strong></div>
+      </div>
+      <div class="ci-shell" data-reveal>
+        <iframe id="ciFrame" class="ci-frame" src="compounding-widget.html?v=20261101e" title="Compounding intelligence interactive story" loading="eager" scrolling="no"></iframe>
+      </div>
+      <p class="compound-note" data-reveal>Everything it learns stays in your business. Start sooner, and it knows more by the time anyone else begins. That is what moving first means here.</p>
+      <p class="compound-note live-callback" id="liveCallback" data-reveal hidden><strong>This is happening on this page right now.</strong> Every question someone asks the live demo teaches it new links between the files it has read, and it keeps them for the next visitor. So far it has learned <b id="liveConn">0</b> connections from <b id="liveConv">0</b> conversations. The more it's used, the more it knows. That's the compounding above, for real. <a href="#live">Ask it something and watch the number move ↑</a></p>
+    </section>
+    <section id="pricing" class="section-shell deployment-section pricing-section">
+      <div class="section-kicker" data-reveal>PRICING</div>
+      <div class="section-heading split-heading direct-heading" data-reveal>
+        <h2>PAY FOR WHAT<br><em>YOU NEED.</em></h2>
+        <p>The models and agent software are free and open. You own the computer. You pay for my time, only where it helps. Every engagement is shaped on the free check, and most combine a few of these.</p>
+      </div>
+      <div class="engage-list" data-reveal>
+        <article><h3>Pick the right computer</h3><p>I size it to the work you actually do, order it at cost and set it up, so you don't overbuy or underbuy.</p></article>
+        <article><h3>Build the whole system</h3><p>Your own AI on that computer, connected to your files, with agents doing real work from the first week.</p></article>
+        <article><h3>Start with one agent</h3><p>Hand one time-eating job to an agent, like watching competitors, sorting intake or writing the weekly report. Grow from there.</p></article>
+        <article><h3>Train your team</h3><p>Sessions for your staff, from running their first private model to building agents of their own.</p></article>
+        <article><h3>Coach one person</h3><p>One-on-one for an owner, or for whoever will run it day to day, starting from wherever they are.</p></article>
+        <article><h3>Move off rented AI</h3><p>Bring the work your team already does in ChatGPT and other cloud tools onto your own computer, without losing what works.</p></article>
+        <article><h3>Get a second opinion</h3><p>Before you sign with an AI vendor or approve a plan, a plain answer on what it really does, what it costs and what should stay in-house.</p></article>
+        <article><h3>Keep it growing</h3><p>I keep it updated, add agents as new jobs come up and make it sharper about your business, month after month.</p></article>
+      </div>
+      <div class="pricing-terms" data-reveal>
+        <p><strong>Hourly, by the project or on retainer.</strong> Whichever fits how you work. Hardware at cost. No meter.</p>
+        <div class="pricing-actions">
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking>BOOK MY FREE CHECK</a>
+          <a class="button button-ghost" href="iconic-own-your-ai-guide.pdf" download>GET THE ONE-PAGE GUIDE</a>
+        </div>
+      </div>
+    </section>
+    <section id="start" class="section-shell offer-section merged-close">
+      <div class="offer-card" data-reveal>
+        <div class="offer-copy">
+          <div class="section-kicker">THE FREE 30-MINUTE PRIVATE AI CHECK</div>
+          <h2>READY WHEN YOU ARE.</h2>
+          <p>I look at where your client data goes today, including any AI tools your staff already use, show you what is exposed, and tell you whether a self-hosted AI is right for you. Then we decide whether I teach you or build it for you.</p>
+          <a class="button button-primary check-button" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking>BOOK MY FREE CHECK →</a>
+          <p class="cta-note">Free. Thirty minutes. No commitment. Or call <a href="tel:+12067738214">206-773-8214</a>.</p>
+        </div>
+        <div class="offer-flow" aria-label="How it starts">
+          <div><span>01</span><strong>THE CHECK</strong><small>Free. Thirty minutes. Where your data goes today.</small></div><i>→</i>
+          <div><span>02</span><strong>TAUGHT OR BUILT</strong><small>Set up on your computer, connected to your files, with agents doing real work.</small></div><i>→</i>
+          <div><span>03</span><strong>IT COMPOUNDS</strong><small>Every day it runs, it knows more about your business.</small></div>
+        </div>
+      </div>
+    </section>
+    <section id="contact" class="section-shell contact-section">
+      <div class="contact-inner" data-reveal>
+        <div class="contact-brand"><div class="contact-wordmark"><img src="iconic-wordmark.webp" alt="ICONIC." /></div><p class="contact-tagline">Know more. <em>Move first.</em></p></div>
+        <div class="contact-copy">
+          <div class="principal-lockup">
+            <img class="principal-photo" src="patrick-christell-2026.jpg" alt="Patrick Christell" />
+            <div>
+              <div class="section-kicker card-identity">PATRICK CHRISTELL <em>Principal</em></div>
+              <div class="card-ornament" aria-hidden="true"><span></span><i></i><b></b><i></i><span></span></div>
+              <p class="principal-line">My career began in film, where I learned to find the story inside a mountain of information. I brought that instinct into technical recruiting, spending the next decade finding exceptional people in unexpected places, including talent from gaming, animation, and aerospace for autonomous vehicle development.</p>
+              <p class="principal-line">Today, I apply the same instincts to artificial intelligence. I build and operate private AI systems on my own hardware, combining local language models, autonomous agents, and persistent memory into systems that become more useful over time.</p>
+              <p class="principal-line">ICONIC is the culmination of those experiences: a belief that the most valuable intelligence comes from recognizing connections, preserving what you've learned, and putting that knowledge to work.</p>
+            </div>
+          </div>
+          <h2>Build an advantage<br>your competitors <em>cannot rent off the shelf.</em></h2>
+          <div class="contact-actions">
+            <a class="button button-primary" href="mailto:patrick@iconic.onl?subject=Free%2030-minute%20private%20AI%20check">patrick@iconic.onl</a>
+            <a class="button button-ghost contact-phone" href="tel:+12067738214">206-773-8214</a>
+          </div>
+        </div>
+      </div>
+      <footer><span>© 2026 ICONIC. · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></span><span>PRIVATE AI FOR YOUR BUSINESS</span><a href="#top">BACK TO TOP ↑</a></footer>
+    </section>
+  </main>
+
+  <a class="sticky-cta" id="stickyCta" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking aria-hidden="true" tabindex="-1">BOOK MY FREE 30-MINUTE CHECK →</a>
+  <script src="app.js?v=20261102a" defer></script>
+  <script>
+    // Live demo: load it straight away; the demo says "ready" when it's up. If it never does, offer a direct link.
+    (function () {
+      var sec = document.getElementById('live'); if (!sec) return;
+      var url = (sec.getAttribute('data-demo-url') || '').replace(/\/$/, '');
+      var box = document.getElementById('liveFrame');
+      var book = 'https://calendly.com/patrick-iconic/30min';
+      var settled = false;
+      function fallback() {
+        if (settled) return; settled = true;
+        box.innerHTML = '<div class="live-off"><strong>The live demo isn\'t loading here.</strong><p>It runs on one private computer in Seattle. Try opening it directly, or book the free check and I\'ll show it to you running, on your kind of files.</p><div class="live-off-actions">' +
+          (url ? '<a class="button button-ghost" href="' + url + '/" target="_blank" rel="noopener">OPEN THE DEMO ↗</a>' : '') +
+          '<a class="button button-primary" href="' + book + '" data-calendly-booking>BOOK MY FREE CHECK →</a></div></div>';
+      }
+      if (!url) { fallback(); return; }
+      // Phones: no app squeezed into the page. One card; the demo opens full-screen with a way back.
+      if (window.matchMedia('(max-width: 899px)').matches) {
+        settled = true;
+        box.className = 'live-card-wrap';
+        box.innerHTML = '<a class="live-card" href="' + url + '/?back=1"><span class="live-dot"></span>TRY MY AI</a>';
+        return;
+      }
+      var frame = document.createElement('iframe');
+      frame.src = url + '/?embed=1'; frame.title = 'ICONIC live demo'; frame.setAttribute('allow', 'clipboard-write; local-network; local-network-access');
+      frame.className = 'is-loading';
+      box.appendChild(frame);
+      // The visitor's pick in the demo steers the compounding animation further down, for the rest of the visit.
+      function tellWidget(ws) { var f = document.getElementById('ciFrame'); if (f && f.contentWindow && ws) f.contentWindow.postMessage({ source: 'iconic-site', type: 'setBusiness', ws: ws }, '*'); }
+      var savedWs = null; try { savedWs = sessionStorage.getItem('iconic.ws'); } catch (err) {}
+      var ci = document.getElementById('ciFrame'); if (ci && savedWs) ci.addEventListener('load', function () { tellWidget(savedWs); });
+      if (savedWs) setTimeout(function () { tellWidget(savedWs); }, 1500);
+      window.addEventListener('message', function (e) {
+        if (e.origin === url && e.data && e.data.source === 'iconic-demo' && e.data.type === 'ws') { try { sessionStorage.setItem('iconic.ws', e.data.ws); } catch (err) {} tellWidget(e.data.ws); return; }
+        if (e.origin !== url || !e.data || e.data.source !== 'iconic-demo' || e.data.type !== 'ready' || settled) return;
+        settled = true; frame.className = ''; var w = document.getElementById('liveWait'); if (w) w.remove();
+      });
+      setTimeout(fallback, 40000);
+    })();
+    // Callback in the compounding section: the live demo's real connection count.
+    (function () {
+      var sec = document.getElementById('live'), out = document.getElementById('liveCallback');
+      var url = sec && (sec.getAttribute('data-demo-url') || '').replace(/\/$/, ''); if (!url || !out) return;
+      function poll() {
+        fetch(url + '/api/status', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (s) {
+          var l = s.learned || {}; if (typeof l.connections !== 'number') return;
+          document.getElementById('liveConn').textContent = l.connections.toLocaleString('en-US');
+          document.getElementById('liveConv').textContent = (l.conversations || 0).toLocaleString('en-US');
+          out.hidden = false;
+        }).catch(function () {});
+      }
+      poll(); setInterval(function () { if (!document.hidden) poll(); }, 20000);
+    })();
+  </script>
+  <script>
+    // Keep booking on ICONIC; the href remains a working fallback if the widget is blocked.
+    document.addEventListener('click', function (event) {
+      const link = event.target.closest('a[data-calendly-booking]');
+      if (!link || event.defaultPrevented || event.button !== 0 ||
+          event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (!window.Calendly || typeof window.Calendly.initPopupWidget !== 'function') return;
+      event.preventDefault();
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/patrick-iconic/30min?background_color=ffffff&text_color=070912&primary_color=8d98ff'
+      });
+    });
+  </script>
+</body>
+</html>
