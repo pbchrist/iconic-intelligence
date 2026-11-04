@@ -5,6 +5,7 @@ Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
 
 ## 2026-11-04
+- Removed: "trained on the dealership's own data" (now "built on"), the "Who checks it" line on every business type, and the "Private doesn't mean cut off" note (not every setup needs cloud AI).
 - Free check list: merged "where data goes" and "what is exposed" into one item; new item "Whether a self-hosted AI is right for you"; same added to the check description lower on the page and in llms.txt.
 - Free check list: "where to draw the line" is now optional ("If you also want to use cloud AI"); last item now "What bespoke agents built on your own data could do" (built on, not trained on: no fine-tuning claims).
 - Removed the "Worth knowing first / The plain answers, before you book" box: it talked people out of booking and promised a remote-support setup Patrick never confirmed. Same two claims removed from llms.txt.
