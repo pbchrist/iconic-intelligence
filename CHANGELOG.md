@@ -5,6 +5,7 @@ Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
 
 ## 2026-11-04
+- Added the AI discovery files for AI assistants: a new llms.txt, llms-full.txt and six reference pages under /ai/. Plain text files only; no visible page changed. Fixed the package's section links (#who, #demo, #why didn't exist) and pointed booking at the Calendly link.
 - New bio photo (white jacket, checked shirt) replaces the tuxedo photo.
 - Bio replaced with Patrick's own words (film → technical recruiting → private AI → ICONIC); no dealership, no name-dropping.
 - Removed: "trained on the dealership's own data" (now "built on"), the "Who checks it" line on every business type, and the "Private doesn't mean cut off" note (not every setup needs cloud AI).
