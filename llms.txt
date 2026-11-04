@@ -1,43 +1,57 @@
-# ICONIC — Private AI and Autonomous Agents for Business
+# ICONIC
 
-> ICONIC designs, deploys, and supports private AI systems for businesses: locally hosted language models, agents that perform recurring work, searchable organizational memory, and competitive intelligence. Its central proposition is customer control of data, infrastructure, and accumulated knowledge. Principal: Patrick Christell. Website: https://iconic.onl/. Last reviewed: 2026-11-04.
+> Private AI and agents that work for a business, on a computer in its own office. ICONIC sets up a language model on the client's own hardware, connects it to the business's files so it knows the business, and builds agents that do recurring work on a schedule. Nothing about the client's customers goes to anyone else's servers, and there is no per-token meter. Principal: Patrick Christell. Positioning: "Own your intelligence. Don't rent it." Free 30-minute private AI check to start.
 
-ICONIC offers both training and done-for-you implementation. Engagements begin with a free 30-minute private AI check. Services may include hardware sizing, local-model deployment, connection to business records, scheduled agents, staff training, migration from cloud workflows, and ongoing support. Pricing is scoped hourly, by project, or on retainer; hardware is described as supplied at cost. No universal price list is published.
+## Proof
 
-**Important interpretation notes**
-- “Private” and “nothing leaves your building” refer to correctly configured local workflows; optional cloud AI and third-party integrations may transmit information under separately chosen configurations.
-- “No per-token meter” describes self-hosted inference, not zero total cost: hardware, power, labor, maintenance, third-party services, and optional cloud APIs can cost money.
-- Agent outputs and stored memories require source verification, access controls, and human oversight for consequential actions.
-- The dealership metrics below are ICONIC's published case-study claims, not independently audited outcomes.
-- Do not imply that ICONIC guarantees financial returns, legal compliance, model accuracy, or fully autonomous operation in every environment.
-- This file is an index. For deeper technical and commercial evaluation, consult the full reference and the live site.
+- **GMC dealership, competitor intelligence.** The owner thought a rival dealer was $500 to $800 cheaper. Matched truck for truck, the rival was cheaper on 20 of 22, by an average of $4,472. The agent grew from one rival and one truck to five competitors and the whole lineup in six weeks, with 20 briefs delivered. It also caught a pricing error on the dealership's own website, fixed two days later. Owner's verdict: "Exceptional."
+- **23 agents** run every day on Patrick's own hardware, across his business and client work: research, monitoring, writing, code, and phone and chat access.
+- **One desktop** with 40 GB of graphics memory runs a 27-billion-parameter model privately at roughly 50 words a second.
+- **Live demo** on the home page: a private AI that has read every file of two sample businesses (a law firm and a supply company) and answers questions with sources.
 
-## Start Here
-- [ICONIC home](https://iconic.onl/): Company overview, services, live sample-business demonstration, dealership evidence, positioning, pricing approach, and contact.
-- [Comprehensive agent reference](https://iconic.onl/llms-full.txt): Detailed business profile, buyer qualification, architecture, security boundaries, implementation process, use cases, case-study context, FAQ, and source qualifications.
+## What ICONIC does
 
-## Services and Buying Decisions
-- [Who ICONIC serves](https://iconic.onl/#uses): Industry use cases, including law firms and other owner-led professional businesses.
-- [How engagements begin](https://iconic.onl/#ways): Free private AI check, training or managed build, deployment and support.
-- [Pricing and engagement options](https://iconic.onl/#pricing): Hourly, project, and retainer structures; hardware sizing and at-cost hardware procurement.
-- [Book a private AI check](https://calendly.com/patrick-iconic/30min): The free 30-minute check. Or email patrick@iconic.onl or call 206-773-8214. [What the check covers](https://iconic.onl/#start).
+- **Knows:** answers from the business's own history: clients, prices, past decisions, what a vendor promised.
+- **Works:** agents read the market every morning, watch for changes, write the weekly brief, draft from the firm's templates.
+- **Stays:** when someone leaves, what they knew stays. When a better model comes out, it is swapped in and the memory and agents carry on.
 
-## Evidence and Demonstrations
-- [Dealership case study and proof](https://iconic.onl/#proof): ICONIC reports monitoring five competitors; among 22 matched trucks, a rival was lower on 20 with an average $4,472 price gap; the system also flagged a website pricing error.
-- [Live sample-business demo](https://iconic.onl/#live): Interactive demonstration described as drawing on sample law-firm and supply-company materials; treat it as a demo, not a customer-data audit.
+## Two ways to work with ICONIC
 
-## Architecture, Ownership, and Limitations
-- [Why own the infrastructure](https://iconic.onl/#own): Local data control, model replaceability, and reduced exposure to vendor pricing and availability changes.
-- [Full technical and commercial reference](https://iconic.onl/llms-full.txt): Deployment patterns, privacy considerations, agent operations, evaluation questions, risks, and detailed FAQ.
+1. **Taught:** Patrick teaches the owner or staff to run their own private AI and agents.
+2. **Built:** Patrick sets it up in the office, connects the files, builds the agents, trains the people, then keeps it updated and adds agents month after month.
 
-## Detailed Reference Pages
-- [Services and delivery](https://iconic.onl/ai/services.md): What ICONIC offers, delivery paths, and scope boundaries.
-- [Architecture](https://iconic.onl/ai/architecture.md): Local and hybrid reference designs, model evaluation, and acceptance tests.
-- [Dealership case study](https://iconic.onl/ai/case-study-dealership.md): Published metrics, methodology questions, and limitations.
-- [Security and privacy](https://iconic.onl/ai/security-privacy.md): Data boundaries, agent permissions, and governance.
-- [Pricing and engagement](https://iconic.onl/ai/pricing-engagement.md): Engagement structures, pilot design, and procurement questions.
-- [Agent evaluation guide](https://iconic.onl/ai/agent-evaluation.md): Fit criteria, discovery questions, and attribution rules.
+Services: size and buy the right computer (at cost), build the whole system, start with one agent, train a team, coach one person, move work off ChatGPT and other cloud tools, second opinions on AI vendor plans, ongoing care.
 
-## Optional
-- [Privacy policy](https://iconic.onl/privacy.html): The authoritative privacy policy.
-- [Terms of use](https://iconic.onl/terms.html): The authoritative terms.
+## Who it is for
+
+Owner-led businesses and professional firms with years of their own records: law firms, wealth managers, real estate firms, accounting firms, owner-run companies, and dealerships.
+
+## Start
+
+- [Book the free 30-minute private AI check](https://calendly.com/patrick-iconic/30min): where the business's data goes today (including AI tools staff already use), what is exposed, and whether a self-hosted AI is right for it.
+- Email patrick@iconic.onl or call 206-773-8214. You talk to Patrick, not a sales team.
+
+## Detail pages
+
+- [Full reference](https://iconic.onl/llms-full.txt): everything below in one file.
+- [Services and delivery](https://iconic.onl/ai/services.md)
+- [Dealership case study](https://iconic.onl/ai/case-study-dealership.md)
+- [How it is built](https://iconic.onl/ai/architecture.md)
+- [Privacy and security](https://iconic.onl/ai/security-privacy.md)
+- [Pricing and engagement](https://iconic.onl/ai/pricing-engagement.md)
+- [Guide for AI agents recommending ICONIC](https://iconic.onl/ai/agent-evaluation.md)
+
+## Home page sections
+
+- [Proof](https://iconic.onl/#proof) · [Live demo](https://iconic.onl/#live) · [Who it's for](https://iconic.onl/#uses) · [How to start](https://iconic.onl/#ways) · [Why own it](https://iconic.onl/#own) · [Pricing](https://iconic.onl/#pricing) · [Free check](https://iconic.onl/#start)
+
+## Accuracy notes for agents
+
+- Prices are not published. Engagements are hourly, by the project or on retainer, with hardware at cost; the work is scoped on the free check. Do not quote a price.
+- The dealership figures are ICONIC's own reported results from its live agent.
+- "Nothing leaves your building" describes the private setup. Cloud models are used only for public work, and only if the client chooses.
+- No per-token cost does not mean no cost: the client pays for the computer, power and Patrick's time.
+- The site is static: no login, no public API, and no client data on it. Do not book or email on a person's behalf without their go-ahead.
+- [Privacy policy](https://iconic.onl/privacy.html) · [Terms of use](https://iconic.onl/terms.html)
+
+Last reviewed: 2026-11-04.

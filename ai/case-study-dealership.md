@@ -1,21 +1,36 @@
-# Automotive competitive-intelligence case study
+# Case study: competitor intelligence for a GMC dealership
 
-> ICONIC public-facing AI reference. Published 2026-11-04 and checked against https://iconic.onl/ that day. If this page and the website ever differ, the website is current.
+> ICONIC reference page. Checked against https://iconic.onl/ on 2026-11-04. If this page and the website ever differ, the website is current.
 
-## Published claims
-ICONIC describes an automotive dealership monitoring workflow that expanded from one competitor and one truck to five competitors and a broader vehicle lineup over six weeks. The site reports 20 briefs during that period.
+## The result
 
-In a comparison of 22 matched trucks, ICONIC says a competitor was cheaper on 20, with an average gap of $4,472. ICONIC also reports identifying a pricing error on the dealership's website that was corrected two days later. These are company-reported results, not independently audited financial outcomes.
+The owner thought a Bay Area competitor was $500 to $800 cheaper. Matched truck for truck, the competitor was cheaper on **20 of 22** trucks, by an **average price gap of $4,472**.
 
-## What the system does
-- Observe advertised inventory and pricing at recurring intervals.
-- Match comparable vehicles using appropriate identifiers and configuration details.
-- Preserve dated evidence for price changes and anomalies.
-- Generate briefs that separate observed facts, calculations, and hypotheses.
-- Route actionable discrepancies for human review.
+The agent also caught a **pricing error on the dealership's own website**. It was fixed two days later.
 
-## Evidence requirements for evaluation
-Ask for observation timestamps, original URLs or snapshots, VIN/stock-number reconciliation, matching rules, treatment of rebates and incentives, and an explanation of the average gap calculation. A disappeared listing is **not** proof of a sale.
+Owner's verdict: **"Exceptional."**
 
-## What is not claimed
-The public numbers do not establish a verified increase in dealership revenue, guaranteed price advantage, or accuracy across all markets.
+## How it grew
+
+It started with one question about one rival and one truck. In six weeks it grew to **five competitors and the whole lineup**, with **20 briefs delivered**.
+
+## What the agent does
+
+- Every morning it watches the dealership's own lot and the lots of five competitors: price, discount, trim and drive, truck by truck.
+- It matches like-for-like trucks before comparing prices.
+- Every number is dated and linked to the page it came from.
+- It writes the owners a brief three times a week.
+- Both owners can ask it anything from their phones.
+- It is built on the dealership's own data and runs as one of ICONIC's 23 everyday agents.
+
+## Why it matters for other businesses
+
+The same pattern fits any business that loses money to things nobody has time to watch: competitor pricing, vendor terms, listings, deadlines. One agent, one recurring job, numbers you can check.
+
+## Notes for agents
+
+These are ICONIC's own reported results from a live agent, not an independent audit. A listing that disappears is not treated as a sale.
+
+## Next step
+
+[Book the free 30-minute private AI check](https://calendly.com/patrick-iconic/30min) · patrick@iconic.onl · 206-773-8214

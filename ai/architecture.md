@@ -1,23 +1,26 @@
-# Reference architecture and deployment choices
+# How an ICONIC system is built
 
-> ICONIC public-facing AI reference. Published 2026-11-04 and checked against https://iconic.onl/ that day. If this page and the website ever differ, the website is current.
+> ICONIC reference page. Checked against https://iconic.onl/ on 2026-11-04. If this page and the website ever differ, the website is current.
 
-This is a design reference, not a declaration that every ICONIC installation uses one stack.
+## The parts
 
-## Components
-1. Customer-controlled compute and storage, sized for concurrent users and model memory requirements.
-2. Model-serving endpoint with measured latency, throughput, and quality on representative work.
-3. Retrieval/indexing for authorized business files with provenance and freshness metadata.
-4. Agent orchestration for recurring jobs, retries, escalation, and explicit tool permissions.
-5. Durable knowledge and memory with correction, deletion, and retention policies.
-6. Monitoring, backup, recovery, patching, and staff access controls.
+1. **A computer in the client's office**, sized to the work and bought at cost. Example from ICONIC's own setup: one desktop with 40 GB of graphics memory runs a 27-billion-parameter model privately at roughly 50 words a second.
+2. **A private language model** running on that computer. The models and agent software are free and open.
+3. **The business's files**, connected so the AI answers from the business's own history, with sources.
+4. **Agents** that run recurring jobs on a schedule, check their own work and report back.
+5. **A memory that compounds.** Everything the system learns stays in the business, and it knows more every day it runs.
 
-## Deployment patterns
-**Local:** model inference and designated data stay on customer-controlled systems, subject to verified network, telemetry, support, and backup settings.
+## Why it is built this way
 
-**Hybrid:** selected requests may use outside APIs or integrations; require explicit consent and data-flow documentation.
+- **Kept:** records stay in the building. Cloud models are used only for public work, and only if the client chooses.
+- **Steady:** cloud models get changed, restricted, repriced and withdrawn without notice. In June 2026, two of Anthropic's most capable models were pulled for nearly three weeks to comply with U.S. export controls. A model on the client's own computer cannot be recalled or repriced, and the client chooses when to switch to a better one.
+- **No meter:** no per-token billing and no rate limits, so agents can draft, check, revise and retest as often as the job needs, and work all night.
+- **Swappable:** when a better model comes out, it is swapped in and the memory and agents carry on.
 
-**Cloud:** may be a better fit when the customer's workloads or operations favor hosted services.
+## See it running
 
-## Acceptance testing
-Test accuracy, citations, failure handling, permission boundaries, throughput, concurrency, recovery, and operating cost using customer-approved examples. Avoid inferring capability solely from model size.
+The [live demo](https://iconic.onl/#live) is this design on a public page: a private model on ICONIC's own hardware that has read every file of two sample businesses and answers with sources.
+
+## Next step
+
+[Book the free 30-minute private AI check](https://calendly.com/patrick-iconic/30min) · patrick@iconic.onl · 206-773-8214

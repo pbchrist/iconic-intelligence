@@ -5,6 +5,7 @@ Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
 
 ## 2026-11-04
+- Rewrote the AI discovery files to lead with proof (the $4,472 dealership gap, 23 agents, the live demo) in the site's own words; cut the disclaimers to a short accuracy list; put back the 23-agents line and the 'static site, no login, don't act on someone's behalf' notes. Still no visible page changed.
 - Added the AI discovery files for AI assistants: a new llms.txt, llms-full.txt and six reference pages under /ai/. Plain text files only; no visible page changed. Fixed the package's section links (#who, #demo, #why didn't exist) and pointed booking at the Calendly link.
 - New bio photo (white jacket, checked shirt) replaces the tuxedo photo.
 - Bio replaced with Patrick's own words (film → technical recruiting → private AI → ICONIC); no dealership, no name-dropping.

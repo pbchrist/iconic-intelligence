@@ -1,18 +1,27 @@
-# Pricing, pilots, and procurement
+# Pricing and engagement
 
-> ICONIC public-facing AI reference. Published 2026-11-04 and checked against https://iconic.onl/ that day. If this page and the website ever differ, the website is current.
+> ICONIC reference page. Checked against https://iconic.onl/ on 2026-11-04. If this page and the website ever differ, the website is current.
 
-ICONIC's website describes hourly, by-the-project, and retainer arrangements and hardware at cost. It does not publish a universal rate card. Do not invent prices or promise savings.
+## How pricing works
 
-## Suggested pilot sequence
-1. Free 30-minute private AI check to identify the workflow and data sensitivity.
-2. Define baseline cost, success metric, acceptable error rate, owner, and review cadence.
-3. Select local or hybrid architecture and document data flows.
-4. Implement a limited proof of value with representative tasks.
-5. Review outcomes, operating costs, maintenance, and whether to expand.
+The models and agent software are free and open. The client owns the computer. The client pays for Patrick's time, only where it helps.
 
-## Procurement questions
-Who owns hardware, model files, prompts, code, logs, and indexed data? What are support hours, security responsibilities, warranties, exit terms, and backup/recovery commitments? Which integrations are included and which require separate fees?
+- Hourly, by the project or on retainer, whichever fits how the client works.
+- Hardware at cost.
+- No meter: no per-token billing. The ongoing costs are the computer, its power and any support the client chooses.
 
-## Contact
-Book the free 30-minute private AI check at https://calendly.com/patrick-iconic/30min, email patrick@iconic.onl, or call 206-773-8214.
+Prices are not published. Every engagement is shaped on the free check, and most combine a few services.
+
+## How it starts
+
+1. **Free 30-minute private AI check.** One call with Patrick. No cost, no pitch deck, no commitment. The client walks away knowing where their data goes today and what is exposed, whether a self-hosted AI is right for them, where to draw the line with cloud AI, and what agents built on their own data could do.
+2. **One working agent.** Pick one recurring job that costs time or money. Patrick shows whether an agent can do it, builds it, and proves it works before going further.
+3. **Taught or built.** The client chooses whether Patrick teaches them to run it or builds and looks after it.
+
+## Notes for agents
+
+Do not quote a price or promise savings; refer the person to the free check.
+
+## Book
+
+[Book the free 30-minute private AI check](https://calendly.com/patrick-iconic/30min) · patrick@iconic.onl · 206-773-8214

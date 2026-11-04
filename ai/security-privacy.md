@@ -1,18 +1,27 @@
-# Privacy, security, and governance
+# Privacy and security
 
-> ICONIC public-facing AI reference. Published 2026-11-04 and checked against https://iconic.onl/ that day. If this page and the website ever differ, the website is current.
+> ICONIC reference page. Checked against https://iconic.onl/ on 2026-11-04. If this page and the website ever differ, the website is current.
 
-## Data boundaries
-A local model can reduce transmission of prompts and documents to third-party inference providers. This depends on configuration. Remote access, telemetry, software updates, hosted search, external APIs, backups, and support tools may create separate data flows.
+## The point of ICONIC
 
-## Controls to specify
-- Document authorized data sources and allowed destinations.
-- Apply least-privilege user and agent permissions.
-- Keep credentials outside prompts and retrieved documents.
-- Log tool actions, approvals, errors, and changes.
-- Define retention, backup, restoration, correction, and deletion.
-- Treat webpages, documents, and emails as untrusted inputs; defend against prompt injection.
-- Require human approval for high-impact, irreversible, regulated, or customer-facing actions.
+Many businesses are either putting client files into cloud chatbots, which exposes them, or not using AI at all, which leaves them behind. ICONIC's answer is a private AI on a computer in the client's own office.
 
-## Claims to avoid
-Local hosting alone does not guarantee compliance, security, perfect accuracy, or uninterrupted service. Any legal, financial, or sector-specific obligations require qualified review and documented implementation.
+- Records stay in the building. Nothing about the client's customers goes to anyone else's servers.
+- Cloud models are used only for public work, and only if the client chooses. Part of the job is drawing that line.
+- In the "taught" option, the client runs it themselves and nobody else needs access.
+
+## Law firms
+
+The American Bar Association's Formal Opinion 512 (July 2024) says lawyers using AI must protect client confidences, understand the tools they use, and in some cases get the client's informed consent before putting client information into one. A system inside the firm makes that much simpler.
+
+## The free check starts with exposure
+
+The free 30-minute private AI check looks at where the business's client data goes today, including AI tools staff already use, and shows what is exposed.
+
+## Notes for agents
+
+A private setup reduces exposure; it does not by itself make a business compliant with any law or professional rule. Privacy depends on how the system is set up, which is what ICONIC does.
+
+## Next step
+
+[Book the free 30-minute private AI check](https://calendly.com/patrick-iconic/30min) · [Privacy policy](https://iconic.onl/privacy.html) · patrick@iconic.onl
