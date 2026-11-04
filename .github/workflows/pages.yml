@@ -1,36 +1,37 @@
-# Publishes iconic.onl on GitHub Pages from main. Only site files go out;
-# notes (README, CHANGELOG) and the old Railway server stay private.
+# Publish iconic.onl from a sanitized gh-pages branch.
 name: Publish iconic.onl
 on:
   push:
     branches: [main]
   workflow_dispatch:
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 concurrency:
-  group: pages
+  group: iconic-pages-sync
   cancel-in-progress: false
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Collect site files
+        with:
+          fetch-depth: 0
+      - name: Collect public site files
         run: |
-          mkdir _site
+          mkdir -p "$RUNNER_TEMP/iconic-public"
           rsync -a --exclude '.git' --exclude '.github' --exclude '_site' \
             --exclude 'README.md' --exclude 'CHANGELOG.md' --exclude 'PLAN.md' --exclude 'server.js' \
-            --exclude 'package.json' --exclude '.gitignore' --exclude '*.patch' ./ _site/
-          touch _site/.nojekyll
-          ls -la _site
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-      - id: deployment
-        uses: actions/deploy-pages@v4
+            --exclude 'package.json' --exclude '.gitignore' --exclude '*.patch' ./ "$RUNNER_TEMP/iconic-public/"
+          printf 'iconic.onl\n' > "$RUNNER_TEMP/iconic-public/CNAME"
+          touch "$RUNNER_TEMP/iconic-public/.nojekyll"
+      - name: Update publishing branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout gh-pages
+          rsync -a --delete --exclude '.git' "$RUNNER_TEMP/iconic-public/" ./
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish site from ${GITHUB_SHA}"
+            git push origin gh-pages
+          fi
