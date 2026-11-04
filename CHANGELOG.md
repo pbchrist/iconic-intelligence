@@ -5,7 +5,7 @@ Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
 
 ## 2026-11-03
-- Link previews (texts, LinkedIn, etc.) now show the ICONIC logo card instead of Patrick's photo: added a share image and told previews to use it.
+- Link previews (texts, LinkedIn, etc.) now show the ICONIC star icon (the square logo from the browser tab) instead of Patrick's photo: added a share image and told previews to use it.
 
 ## 2026-11-01
 - (branch compound-tie) Animation follows the business picked in the demo (law firm or supply company), works even without 3D; live counter moved below the picture on phones; demo section headline smaller on phones (rem, capped to the screen).
