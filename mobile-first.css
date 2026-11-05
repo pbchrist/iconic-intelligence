@@ -934,3 +934,9 @@ p, li, .use-case-steps strong { overflow-wrap: break-word; }
 .contact-tagline { margin: .9rem 0 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.25rem, 2vw, 1.75rem); letter-spacing: -.02em; color: var(--pearl, #f3f0e7); }
 .contact-tagline em { color: var(--accent-2); }
 footer a[href$=".html"] { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Hero moat line: same look as the demo's "Pick a business. Watch it think." */
+.hero .hero-buyer strong { color: #f3f0e7; font-weight: 400; }
+.hero h2.hero-moat { margin: 34px 0 10px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.125rem, 3.6vw, 3.625rem); font-weight: 400; line-height: 1.02; letter-spacing: -.02em; text-transform: none; color: #f3f0e7; }
+.hero h2.hero-moat em { color: var(--accent-2); font-style: italic; }
+@media (max-width: 899px) { .hero h2.hero-moat { margin-top: 26px; font-size: 2rem; } }
