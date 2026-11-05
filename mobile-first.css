@@ -873,12 +873,7 @@ p, li, .use-case-steps strong { overflow-wrap: break-word; }
 @media (max-width: 899px) { .live-frame { margin-top: 1rem; } }
 /* ==== Nov 1 cleanup: one set of rules for everything added this week ==== */
 
-/* One size for every intro paragraph on the page */
-:root { --lede: clamp(17px, 1.3vw, 20px); }
-.hero .hero-buyer, .split-heading p, .live-intro, .compound-note, .pricing-terms p {
-  font-family: Georgia, "Times New Roman", serif; font-size: var(--lede); line-height: 1.55; color: #aeb3c7;
-}
-@media (max-width: 899px) { :root { --lede: 17px; } }
+/* Type system: three levels, used everywhere (rules for this live at the end of the file) */
 
 /* Hero */
 .hero .hero-buyer { max-width: 640px; }
@@ -943,3 +938,19 @@ footer a[href$=".html"] { color: inherit; text-decoration: underline; text-under
 /* "COMPOUNDS" is the longest card word: keep it inside its card on mid-size screens */
 @media (min-width: 900px) and (max-width: 1365px) { #memory .capability-card h3 { font-size: clamp(34px, 3.6vw, 54px); } }
 @media (max-width: 420px) { .live-callback a { white-space: normal; } }
+
+/* ==== TYPE SYSTEM: three levels, by position on the page, not by section ====
+   1. Intro   — the paragraph that speaks for a section: Georgia, 17px phone → 20px desktop, one color.
+   2. Body    — card text, lists, details: Inter 15px.
+   3. Fine print — notes and labels: Inter 13px. */
+:root { --lede: clamp(17px, 1.3vw, 20px); --lede-color: #aeb3c7; --body-color: #a3a9bf; }
+@media (max-width: 899px) { :root { --lede: 17px; } }
+html body main :is(.hero .hero-buyer, .section-heading p, .use-case-copy > p:not(.proof-result), .check-copy > p,
+  .offer-copy > p:not(.cta-note), .compound-note, .pricing-terms p, .principal-line, .live-intro) {
+  font-family: Georgia, "Times New Roman", serif; font-size: var(--lede); font-weight: 400; line-height: 1.55; color: var(--lede-color);
+}
+html body main :is(.capability-card p, .deployment-grid article > p, .ladder li, .check-list li, .engage-list p) {
+  font-family: Inter, ui-sans-serif, -apple-system, "Helvetica Neue", Arial, sans-serif; font-size: 15px; line-height: 1.6; color: var(--body-color);
+}
+html body main :is(.cta-note, .proof-result) { font-size: 13px; }
+html body main .section-heading p strong, html body main .moat-lead strong { color: var(--pearl, #f3f0e7); font-weight: 600; }
