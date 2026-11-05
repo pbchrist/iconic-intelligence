@@ -63,3 +63,5 @@ Owner-led businesses and professional firms with years of their own records: law
 - [Privacy policy](https://iconic.onl/privacy.html) · [Terms of use](https://iconic.onl/terms.html)
 
 Last reviewed: 2026-11-04.
+
+**Live interactive agent sandbox (Reserve v0.2.0):** Call `reserve_sandbox_start` on the public MCP, then exercise memory, FTS5 recall, decisions, actions, outcomes and `reserve_sandbox_trace` using fictional data. 1-hour expiry; isolated temporary store; 16 public tools total. This proves use of the real core, not independent real-world verification. No paid checkout or private customer data access is available.
