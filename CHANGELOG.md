@@ -5,6 +5,7 @@ Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
 
 ## 2026-11-04
+- Added ICONIC Intelligence Reserve as a canonical agent-discoverable product under /agents/reserve/, with machine-readable manifest, free public MCP assessment and synthetic demo, tracked in sitemap/llms/AI evaluation and linked from the homepage. The private customer Reserve remains authenticated and isolated; paid tiers are not live.
 - New top of the page: "Own your intelligence. Compound your advantage." Says plainly that everyone rents the same AI and the edge is what your business knows, then "Build your own private intelligence moat" (styled like the demo's "Pick a business. Watch it think.") right above the buttons. Patrick's wording.
 - Made the AI files easy to find: sitemap now lists llms.txt, llms-full.txt and the /ai pages; robots.txt points AI assistants to them; added the Bing IndexNow key file so new pages can be announced right away. No visible change.
 - Rewrote the AI discovery files to lead with proof (the $4,472 dealership gap, 23 agents, the live demo) in the site's own words; cut the disclaimers to a short accuracy list; put back the 23-agents line and the 'static site, no login, don't act on someone's behalf' notes. Still no visible page changed.

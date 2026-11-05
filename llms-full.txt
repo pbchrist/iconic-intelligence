@@ -10,6 +10,18 @@
 - **Who it's for:** law firms, wealth managers, real estate firms, accounting firms, owner-run companies and dealerships with years of their own records.
 - **Start:** free 30-minute private AI check: https://calendly.com/patrick-iconic/30min · patrick@iconic.onl · 206-773-8214
 
+## ICONIC Intelligence Reserve — agent-accessible free assessment (November 4, 2026)
+
+The private intelligence moat thesis: a business's unique, permissioned and verifiable decision-to-outcome history is its durable asset. Model and vendor are replaceable.
+
+- Product page: https://iconic.onl/agents/reserve/
+- Manifest for discovery: https://iconic.onl/agents/reserve/manifest.json
+- Public MCP tools: https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp (`reserve_describe`, `reserve_assess`, `reserve_demo`, `reserve_plans`, `reserve_handoff`).
+- `reserve_assess` produces an actionable free fit assessment from non-confidential business categories, one workflow and one outcome metric.
+- `reserve_demo` executes an ephemeral, synthetic memory/decision/action/outcome example. Fictional data is not proof of real-world impact.
+- The private Reserve is a technical alpha; customer memory is **not** publicly accessible. Paid self-service plans, autonomous purchasing, automatic business-data ingestion and customer production onboarding are **not** live.
+- Do not submit personal or confidential data to public assessment endpoints. A human must authorize any data access or purchase.
+
 ## Services and delivery
 
 ICONIC puts a private AI and a staff of agents on a computer in the client's own office. The AI knows the business from its own files; the agents do recurring work on a schedule, check their own work and report back.
