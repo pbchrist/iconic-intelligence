@@ -34,7 +34,7 @@ Owner-led businesses and professional firms with years of their own records: law
 ## ICONIC Intelligence Reserve — live agent-facing free assessment
 
 - [Canonical Reserve page](https://iconic.onl/agents/reserve/) and [machine manifest](https://iconic.onl/agents/reserve/manifest.json).
-- Public remote MCP: https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp. Free tools: `reserve_describe`, `reserve_assess`, `reserve_demo`, `reserve_plans`, and `reserve_handoff`.
+- **Agent-first machine entrypoint (JSON):** https://patrick-beastmaster.tailf32530.ts.net/reserve/agents. **Direct MCP:** https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp. Seven callable tools: `reserve_describe`, `reserve_offers`, `reserve_quote`, `reserve_assess`, `reserve_demo`, `reserve_plans`, and `reserve_handoff`. Free agent-to-agent transaction: list offers → obtain exact $0 quote → execute `reserve_assess` → receive `FULFILLED_FREE` structured assessment; no human UI required.
 - Agents can perform a stateless, rule-based, no-charge fit assessment and run an ephemeral synthetic demonstration against the Reserve engine. **No confidential business or customer data should be submitted** to this public endpoint.
 - Private tenant-isolated Reserve is a technical alpha, NOT an openly accessible customer memory database. Paid self-service tiers and autonomous purchases are NOT live. A human must authorize any onboarding, data integrations or payment.
 - [Book the existing free ICONIC check](https://calendly.com/patrick-iconic/30min). The blueprint's $99/$499/$5,000 prices are hypotheses, not saleable prices.
