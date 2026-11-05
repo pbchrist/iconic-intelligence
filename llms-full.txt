@@ -16,7 +16,7 @@ The private intelligence moat thesis: a business's unique, permissioned and veri
 
 - Product page: https://iconic.onl/agents/reserve/
 - Manifest for discovery: https://iconic.onl/agents/reserve/manifest.json
-- Public MCP tools: https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp (`reserve_describe`, `reserve_assess`, `reserve_demo`, `reserve_plans`, `reserve_handoff`).
+- Machine entrypoint: https://patrick-beastmaster.tailf32530.ts.net/reserve/agents (JSON, not a marketing page). Direct remote MCP: https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp. Agent tools: `reserve_describe`, `reserve_offers`, `reserve_quote`, `reserve_assess`, `reserve_demo`, `reserve_plans`, `reserve_handoff`. The agent can obtain a $0 quote, execute a free assessment and receive a structured `FULFILLED_FREE` result without a human UI. Paid deployment is not available for self-service.
 - `reserve_assess` produces an actionable free fit assessment from non-confidential business categories, one workflow and one outcome metric.
 - `reserve_demo` executes an ephemeral, synthetic memory/decision/action/outcome example. Fictional data is not proof of real-world impact.
 - The private Reserve is a technical alpha; customer memory is **not** publicly accessible. Paid self-service plans, autonomous purchasing, automatic business-data ingestion and customer production onboarding are **not** live.

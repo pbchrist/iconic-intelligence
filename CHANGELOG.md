@@ -5,6 +5,7 @@ Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
 
 ## 2026-11-04
+- Reserve becomes machine-first: the default agent URL now returns a structured service contract; seven public MCP tools support catalog → $0 quote → free assessment → direct deliverable. The human UI moved to /reserve/agents/ui. Updated the static product page and AI reference manifest.
 - Added ICONIC Intelligence Reserve as a canonical agent-discoverable product under /agents/reserve/, with machine-readable manifest, free public MCP assessment and synthetic demo, tracked in sitemap/llms/AI evaluation and linked from the homepage. The private customer Reserve remains authenticated and isolated; paid tiers are not live.
 - New top of the page: "Own your intelligence. Compound your advantage." Says plainly that everyone rents the same AI and the edge is what your business knows, then "Build your own private intelligence moat" (styled like the demo's "Pick a business. Watch it think.") right above the buttons. Patrick's wording.
 - Made the AI files easy to find: sitemap now lists llms.txt, llms-full.txt and the /ai pages; robots.txt points AI assistants to them; added the Bing IndexNow key file so new pages can be announced right away. No visible change.
