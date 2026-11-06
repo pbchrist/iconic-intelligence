@@ -601,3 +601,6 @@ body.standalone .app { flex: 1; height: auto; min-height: 0; }
 .turn.show-src .srcs { display: grid; }
 .src-toggle { display: inline-block; margin-top: .6rem; padding: .35rem 0; border: 0; background: none; color: var(--accent-2); font-size: .875rem; font-weight: 700; cursor: pointer; }
 .turn.quiet .src-toggle { display: none; }
+
+/* hidden must win over .tab/.panel display rules (Work tab is private) */
+.tab[hidden], .panel[hidden] { display: none !important; }

@@ -49,7 +49,7 @@
     $$('.tab').forEach((b) => b.classList.toggle('active', b.dataset.tab === t));
     $$('.panel').forEach((p) => p.classList.toggle('active', p.id === 'panel-' + t));
     $('#panelTitle').textContent = TITLES[t];
-    if (t === 'work') loadJobs();
+    if (t === 'work' && !isPublic()) loadJobs();
     if (t === 'intel') { loadFeed(); loadGraph(); requestAnimationFrame(() => { if (window.IconicGraph) IconicGraph.resize(); if (S.storyPending || (S.graph && (S.graph.tunnels || []).length && !S.story)) { S.storyPending = false; showStory(0); } }); }
     if (t === 'ask') setTimeout(() => $('#askInput').focus({ preventScroll: true }), 50);
   }
@@ -79,6 +79,9 @@
   async function loadStatus() {
     try {
       const s = await api('/api/status'); S.status = s;
+      // The Work log shows visitor questions, so it's only for Patrick's own network.
+      $$('.tab[data-tab="work"], #panel-work').forEach((el) => { el.hidden = s.public !== false; });
+      if (s.public !== false && S.tab === 'work') setTab('ask');
       // Optional web search add-on: load it only when the server has it switched on.
       if (s.web_search && !window.IconicWeb && !S.webLoading) { S.webLoading = true; const sc = document.createElement('script'); sc.src = 'websearch.js'; document.head.appendChild(sc); }
       if (!S.ws || !s.workspaces.find((w) => w.id === S.ws)) { S.ws = s.workspaces[0] ? s.workspaces[0].id : ''; }
@@ -267,7 +270,9 @@
   }
 
   // ---------- jobs
+  function isPublic() { return !S.status || S.status.public !== false; }
   async function loadJobs() {
+    if (isPublic()) return;
     try { const j = await api('/api/jobs'); S.jobs = j.jobs; S.scan = j.scan_seconds; } catch { return; }
     const running = S.jobs.filter((j) => j.status === 'running'), done = S.jobs.filter((j) => j.status !== 'running');
     $('#cntWork').textContent = running.length || '';

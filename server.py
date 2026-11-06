@@ -1146,7 +1146,9 @@ class Handler(BaseHTTPRequestHandler):
                 except Exception as e:
                     out["learned_error"] = str(e)
                 return self.send_json(out)
-            if u.path == "/api/jobs":
+            if u.path == "/api/jobs":   # visitor questions: Patrick's own network only
+                if self.is_public():
+                    return self.send_json({"error": "not found"}, 404)
                 return self.send_json({"jobs": JOBS.snapshot(), "scan_seconds": SCAN_SECONDS})
             if u.path == "/api/doc":
                 w = self.ws(qs)
@@ -1170,6 +1172,8 @@ class Handler(BaseHTTPRequestHandler):
         if u.path == "/api/ask":
             return self.ask(body)
         if u.path == "/api/refresh-feed":
+            if self.is_public():
+                return self.send_json({"error": "not found"}, 404)
             w = self.ws({"ws": [body.get("ws", "")]})
             if w:
                 threading.Thread(target=build_feed, args=(w, True), daemon=True).start()
