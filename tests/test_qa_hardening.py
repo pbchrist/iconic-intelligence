@@ -49,3 +49,20 @@ class SecurityRegressions(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class BillingRetrievalRegressions(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        server.start_offline(detect_model=False)
+        cls.w = server.WORKSPACES["hollis-reyes"]
+
+    def test_english_billing_question_prioritizes_report(self):
+        sources = server.find_sources(self.w, "How much did the firm bill in Q3?", [])
+        self.assertTrue(sources[0]["rel"].endswith("2026-q3-billing-report.md"))
+
+    def test_spanish_billing_question_prioritizes_same_report(self):
+        sources = server.find_sources(self.w, "¿Cuánto facturó el despacho en el tercer trimestre?", [])
+        self.assertTrue(sources[0]["rel"].endswith("2026-q3-billing-report.md"))
+
+    def test_truthful_instruction_disclosure_refusal(self):
+        self.assertIn("Never claim no instructions exist", server.SYSTEM_PROMPT)

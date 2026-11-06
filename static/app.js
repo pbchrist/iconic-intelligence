@@ -11,6 +11,7 @@
   const fmt = (n) => Number(n || 0).toLocaleString('en-US');
   const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
 
+  const chats = {};
   const S = { ws: store.get('iconic.ws') || '', status: null, workspace: null, feed: null, jobs: [], tab: 'ask', history: [], busy: false, folder: 'all', picked: false, asked: new Set(), revealed: '', graph: null, answers: 0, extras: null, totals: { connections: 0, conversations: 0 } };
   const sess = (() => { let v = null; try { v = sessionStorage.getItem('iconic.sess'); if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); sessionStorage.setItem('iconic.sess', v); } } catch { v = Math.random().toString(36).slice(2); } return v; })();
   const EMBED = /[?&]embed=1/.test(location.search);
@@ -69,9 +70,11 @@
   function switchWs(id) {
     if (EMBED && window.parent !== window) { try { window.parent.postMessage({ source: 'iconic-demo', type: 'ws', ws: id }, '*'); } catch {} }
     if (id === S.ws) { S.picked = true; renderHello(); return; }
-    S.ws = id; store.set('iconic.ws', id); S.history = []; S.feed = null; S.folder = 'all'; S.picked = true; S.revealed = ''; S.asked = new Set(); S.graph = null; S.story = null; S.answers = 0; $('#gDetail').hidden = true; $('#story').hidden = true;
-    $$('.turn', $('#convo')).forEach((t) => t.remove());
-    $('#hello').hidden = false;
+    if (S.busy) return;
+    chats[S.ws] = { history: S.history.slice(), html: $('#convo').innerHTML, answers: S.answers };
+    S.ws = id; store.set('iconic.ws', id); S.history = (chats[id] && chats[id].history) || []; S.feed = null; S.folder = 'all'; S.picked = true; S.revealed = ''; S.asked = new Set(); S.graph = null; S.story = null; S.answers = (chats[id] && chats[id].answers) || 0; $('#gDetail').hidden = true; $('#story').hidden = true;
+    $('#convo').innerHTML = (chats[id] && chats[id].html) || '';
+    $('#hello').hidden = S.history.length > 0;
     loadWorkspace(); loadFeed(); loadGraph();
   }
 
@@ -342,7 +345,7 @@
     S.busy = true; S.picked = true; S.asked.add(q); $('#askBtn').disabled = true; $('#askInput').value = '';
     $('#hello').hidden = S.history.length === 0 ? false : $('#hello').hidden;
     const turn = document.createElement('div'); turn.className = 'turn';
-    turn.innerHTML = `<div class="q"><p>${esc(q)}</p></div><div class="a"><div class="sigil">✦</div><div><div class="a-label">ICONIC · RUNNING ON ${esc((S.status && S.status.host || 'THIS COMPUTER').toUpperCase())}</div><div class="reading"><span class="shimmer">Searching ${fmt(S.workspace ? S.workspace.documents : 0)} documents…</span></div><div class="a-body streaming" hidden></div><div class="srcs"></div><div class="a-meta"></div><div class="nexts"></div></div></div>`;
+    turn.innerHTML = `<div class="q"><p>${esc(q)}</p></div><div class="a"><div class="sigil">✦</div><div><div class="a-label">ICONIC · RUNNING ON ${esc(('A PRIVATE COMPUTER').toUpperCase())}</div><div class="reading"><span class="shimmer">Searching ${fmt(S.workspace ? S.workspace.documents : 0)} documents…</span></div><div class="a-body streaming" hidden></div><div class="srcs"></div><div class="a-meta"></div><div class="nexts"></div></div></div>`;
     $('#convo').appendChild(turn);
     if (S.history.length === 0) $('#hello').hidden = true;
     const convo = $('#convo');
