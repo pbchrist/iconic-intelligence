@@ -1138,6 +1138,8 @@ class Handler(BaseHTTPRequestHandler):
                 if not d:
                     return self.send_json({"error": "not found"}, 404)
                 return self.send_json({k: d[k] for k in ("id", "title", "rel", "folder", "ext", "date", "words", "text")})
+            if u.path.startswith("/api/"):
+                return self.send_json({"error": "not found"}, 404)
             return self.static(u.path)
         except (BrokenPipeError, ConnectionResetError):
             pass
