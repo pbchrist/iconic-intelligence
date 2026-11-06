@@ -1072,17 +1072,11 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def is_public(self):
-        """True for anyone reaching this through the internet (Tailscale Funnel, Cloudflare, a public IP).
-        Public visitors only ever see the sample workspaces."""
-        h = self.headers
-        if h.get("Tailscale-User-Login") and private_addr(self.client_address[0]):
-            return False
-        if h.get("CF-Connecting-IP"):
-            return True
-        host = (h.get("Host") or "").split(":")[0].lower()
-        if host.endswith(".ts.net") and not h.get("Tailscale-User-Login"):
-            return True
-        return not private_addr(self.client_address[0]) or bool(h.get("X-Forwarded-For"))
+        """This public-facing demo has no authenticated admin route.
+        Funnel terminates locally, so peer address and forwarded headers cannot
+        establish whether a request came from the internet.
+        """
+        return True
 
     def visible(self):
         ws = ordered_workspaces()

@@ -22,11 +22,8 @@ class SecurityRegressions(unittest.TestCase):
         self.assertNotIn("endpoint", d["model"])
         self.assertEqual(d["host"], "private machine")
 
-    def test_private_status_keeps_diagnostics(self):
-        h = self.handler()
-        with patch.object(server.MODEL, "status", return_value={"online": True, "private": True, "endpoint": "127.0.0.1:8082"}):
-            d = h.status()
-        self.assertEqual(d["model"]["endpoint"], "127.0.0.1:8082")
+    def test_local_requests_are_public_without_authentication(self):
+        self.assertTrue(self.handler().is_public())
 
     def test_recovery_routes_removed(self):
         import inspect

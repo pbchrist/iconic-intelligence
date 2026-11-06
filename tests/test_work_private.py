@@ -40,11 +40,11 @@ class WorkIsPrivate(unittest.TestCase):
         self.assertEqual(code, 404)
         self.assertNotIn("secret question", body)
 
-    def test_own_tailnet_still_sees_jobs(self):
+    def test_no_unauthenticated_tailnet_jobs(self):
         code, body = self.get("/api/jobs", {"Host": "patrick-beastmaster.tailf32530.ts.net",
                                             "Tailscale-User-Login": "patrick@example"})
-        self.assertEqual(code, 200)
-        self.assertIn("secret question", body)
+        self.assertEqual(code, 404)
+        self.assertNotIn("secret question", body)
 
     def test_public_cannot_trigger_briefing_rewrite(self):
         req = urllib.request.Request(self.base + "/api/refresh-feed", data=b"{}", method="POST",
