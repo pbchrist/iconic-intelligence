@@ -480,7 +480,7 @@ class Model:
 
 MODEL = Model()
 
-RECOVER_HASH = "b19c838789d7b6bdf3d4597ccd77caf919049b3ed01adf0a4eee9afd480193dc"   # sha256 of the private reading token
+
 
 # ---------------------------------------------------------------- conversation log
 CONVO_LOCK = threading.Lock()
@@ -510,7 +510,7 @@ Reply to EVERY message in three beats, in plain conversational English:
 little wit. A test, trick or "gotcha" gets an honest, good-humored answer. An off-topic question gets a brief answer \
 if it is harmless, or a light decline if it is not.
 2. If the files are relevant, answer from them. Lead with the answer. Use the specific names, numbers and dates, and \
-cite each fact with its file number in square brackets, like [2]. Never invent facts about the business. If the files \
+cite each fact with its file number in square brackets, like [2]. Never invent facts about the business. Reply in the language of the visitor's latest message. When numbers have caps, distinguish eligible amounts, caps and net proceeds. Cite the document containing each specific claim. If the files \
 do not say, say that plainly and name the file that would.
 3. End the way the ENDING note at the bottom of their message says. Either bring up ONE item from today's \
 briefing below (one or two plain sentences of context so a newcomer knows what it is and why it matters, then one \
@@ -1009,6 +1009,10 @@ def _take(key, limit):
     return True
 
 
+def allowed_refresh(ip):
+    return _take("refresh:" + ip, 2)
+
+
 def allowed(ip, public):
     """Your own network is unlimited. Public visitors get a per-person and a shared hourly budget."""
     if not public:
@@ -1031,6 +1035,9 @@ MIME = {".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", 
         ".json": "application/json", ".txt": "text/plain; charset=utf-8"}
 
 
+ASK_SLOTS = threading.BoundedSemaphore(3)
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "ICONIC"
     protocol_version = "HTTP/1.1"
@@ -1040,7 +1047,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def client_ip(self):
         fwd = self.headers.get("CF-Connecting-IP") or self.headers.get("X-Forwarded-For", "")
-        return (fwd.split(",")[0].strip() if fwd else "") or self.client_address[0]
+        return self.client_address[0]  # never trust visitor-supplied forwarding headers
 
     def send_json(self, obj, code=200, cors=False):
         body = json.dumps(obj).encode()
@@ -1057,15 +1064,14 @@ class Handler(BaseHTTPRequestHandler):
         """True for anyone reaching this through the internet (Tailscale Funnel, Cloudflare, a public IP).
         Public visitors only ever see the sample workspaces."""
         h = self.headers
-        if h.get("Tailscale-User-Login"):
+        if h.get("Tailscale-User-Login") and private_addr(self.client_address[0]):
             return False
         if h.get("CF-Connecting-IP"):
             return True
         host = (h.get("Host") or "").split(":")[0].lower()
         if host.endswith(".ts.net") and not h.get("Tailscale-User-Login"):
             return True
-        return not private_addr(self.client_address[0]) or (
-            bool(h.get("X-Forwarded-For")) and not private_addr(self.client_ip()))
+        return not private_addr(self.client_address[0]) or bool(h.get("X-Forwarded-For"))
 
     def visible(self):
         ws = ordered_workspaces()
@@ -1115,37 +1121,6 @@ class Handler(BaseHTTPRequestHandler):
                 g["learned"] = LEARNED.for_ws(w.id)
                 g["totals"] = LEARNED.totals(w.id)
                 return self.send_json(g)
-            if u.path == "/api/conversations":   # token-locked: read the saved conversations
-                import hashlib as _h
-                tok = (parse_qs(u.query).get("t") or [""])[0]
-                if _h.sha256(tok.encode()).hexdigest() != RECOVER_HASH:
-                    return self.send_json({"error": "not found"}, 404)
-                rows = []
-                try:
-                    with open(os.path.join(STATE, "conversations.jsonl"), encoding="utf-8") as f:
-                        rows = [json.loads(x) for x in f if x.strip()]
-                except FileNotFoundError:
-                    pass
-                return self.send_json({"conversations": rows})
-            if u.path == "/api/recover-slots":   # temporary, token-locked: recover the model server's last request
-                import hashlib as _h
-                tok = (parse_qs(u.query).get("t") or [""])[0]
-                if _h.sha256(tok.encode()).hexdigest() != RECOVER_HASH:
-                    return self.send_json({"error": "not found"}, 404)
-                out = {}
-                base = (MODEL.url or "").rsplit("/v1", 1)[0]
-                for path in ("/slots", "/slots?fail_on_no_slot=0"):
-                    try:
-                        with urllib.request.urlopen(base + path, timeout=5) as r:
-                            out["slots"] = json.loads(r.read().decode("utf-8", "replace")); break
-                    except Exception as e:
-                        out["slots_error"] = str(e)
-                try:
-                    with open(os.path.join(STATE, "learned.json"), encoding="utf-8") as f:
-                        out["learned"] = json.load(f)
-                except Exception as e:
-                    out["learned_error"] = str(e)
-                return self.send_json(out)
             if u.path == "/api/jobs":   # visitor questions: Patrick's own network only
                 if self.is_public():
                     return self.send_json({"error": "not found"}, 404)
@@ -1174,6 +1149,8 @@ class Handler(BaseHTTPRequestHandler):
         if u.path == "/api/refresh-feed":
             if self.is_public():
                 return self.send_json({"error": "not found"}, 404)
+            if not allowed_refresh(self.client_ip()):
+                return self.send_json({"error": "refresh rate limit"}, 429)
             w = self.ws({"ws": [body.get("ws", "")]})
             if w:
                 threading.Thread(target=build_feed, args=(w, True), daemon=True).start()
@@ -1183,6 +1160,9 @@ class Handler(BaseHTTPRequestHandler):
     def status(self):
         m = MODEL.status()
         tps = (JOBS.tokens / JOBS.gen_seconds) if JOBS.gen_seconds else 0
+        if self.is_public():
+            m = dict(m)
+            m.pop("endpoint", None)
         return {"model": m, "workspaces": [{"id": w.id, "name": w.meta.get("name"), "kind": w.meta.get("kind"),
                                             "initials": w.meta.get("initials"), "sample": w.meta.get("sample"),
                                             "documents": len(w.docs),
@@ -1191,7 +1171,7 @@ class Handler(BaseHTTPRequestHandler):
                 "location": LOCATION, "owner": OWNER, "web_search": bool(WEB and WEB.enabled()), "cta_url": CTA_URL, "public": self.is_public(),
                 "tokens": JOBS.tokens, "questions": JOBS.questions, "learned": LEARNED.totals(), "tokens_per_second": round(tps, 1),
                 "cost": 0, "bytes_external": 0 if m["private"] else None, "uptime": int(time.time() - STARTED),
-                "host": socket.gethostname(), "now": time.time()}
+                "host": "private machine" if self.is_public() else socket.gethostname(), "now": time.time()}
 
     def static(self, path):
         if path in ("/", ""):
@@ -1224,100 +1204,106 @@ class Handler(BaseHTTPRequestHandler):
         if not allowed(self.client_ip(), self.is_public()):
             return self.send_json({"error": "That's the demo limit for this hour. Book the free 30-minute check and "
                                             "I'll show you this running on your own files."}, 429)
-        self.send_response(200)
-        self.send_header("Content-Type", "text/event-stream")
-        self.send_header("Cache-Control", "no-store")
-        self.send_header("X-Accel-Buffering", "no")
-        self.send_header("Connection", "close")
-        self.end_headers()
-        self.close_connection = True
-        job = JOBS.start("QUESTION", q[:90], w.id)
-        t0 = time.time()
+        if not ASK_SLOTS.acquire(blocking=False):
+            return self.send_json({"error": "Demo is busy. Please try again shortly."}, 503)
         try:
-            sources = find_sources(w, q, body.get("history") or [])
-            # Web search add-on. First pass: if the question needs the open web, offer the exact search and stop.
-            # Nothing leaves this computer until the visitor answers yes (web.ok with the same words).
-            web, web_note, web_used = body.get("web") or {}, "", None
-            if WEB and WEB.enabled():
-                if not isinstance(web, dict) or "ok" not in web:
-                    offer = WEB.decide(q, w.meta.get("name"), [s["title"] for s in sources[:8]], MODEL.complete,
-                                       time.strftime("%A, %B %d, %Y")) if WEB.likely_needs_web(q) else None
-                    if offer:
-                        self.sse("web_offer", {"query": offer})
-                        JOBS.finish(job, "done", "Asked before searching the web: %s" % offer[:60])
-                        return
-                elif web.get("ok") and str(web.get("query") or "").strip():
-                    wq = str(web["query"]).strip()[:WEB.MAX_QUERY]
-                    try:
-                        found = WEB.search_best(wq)
-                    except WEB.WebSearchError as e:
-                        found, web_note = [], str(e)
-                    sources = sources[:2]   # a web question rarely needs the business files; keep the answer about the web
-                    wtext, wsrc = WEB.as_sources(found, len(sources) + 1)
-                    sources += wsrc
-                    web_used = {"query": wq, "results": len(found), "error": web_note}
-                    web_note = ("The visitor said yes to a web search for \"%s\". Web results (cite them by number "
-                                "like the files; say plainly they came from the web):\n\n%s\n\nAnswer their question directly "
-                                "and specifically from these results first (names, dates, times, numbers). Today is %s, so work out "
-                                "what \"today\" or \"tonight\" means from the dates in the results. If the results truly don't "
-                                "say, say so in one line and name the best place to check. If the question has nothing to do "
-                                "with the business, skip the briefing item at the end." % (
-                                    wq, wtext or "(the search found nothing)", time.strftime("%A, %B %d, %Y")))
-                else:
-                    web_note = ("The visitor chose not to search the web. Answer from the files and what you know, "
-                                "and say in one line what a web search would have added.")
-            self.sse("sources", [{k: s.get(k) for k in ("n", "id", "title", "rel", "folder", "date", "snippet", "web", "url")}
-                                 for s in sources])
-            messages = build_messages(w, q, body.get("history") or [], sources, web_note, web_used)
-            n_tok, first, answer = 0, None, ""
-            with answering():
-                for kind, val in MODEL.stream(messages, max_tokens=420, temperature=0.4):
-                    if kind == "token":
-                        if first is None:
-                            first = time.time()
-                        n_tok += 1
-                        answer += val
-                        self.sse("token", val)
-                    elif kind == "thinking":
-                        self.sse("thinking", True)
-                    elif kind == "usage":
-                        n_tok = val
-            secs = time.time() - (first or t0)
-            JOBS.add_tokens(n_tok, secs)
-            with JOBS.lock:
-                JOBS.questions += 1
-            done = {"ms": int((time.time() - t0) * 1000), "tokens": n_tok,
-                    "tps": round(n_tok / secs, 1) if secs > 0 else 0, "model": MODEL.label,
-                    "private": MODEL.is_private(), "cost": 0, "location": LOCATION, "web": web_used}
-            cited = {int(n) for n in re.findall(r"\[(\d+)(?:\s*,\s*\d+)*\]", answer)}
-            cited |= {int(n) for grp in re.findall(r"\[((?:\d+\s*,\s*)+\d+)\]", answer) for n in re.split(r"\s*,\s*", grp)}
-            cited_docs = [s["id"] for s in sources if s["n"] in cited and s.get("id") is not None]
-            before_here = LEARNED.totals(w.id)["here"]
-            new = LEARNED.add(w.id, cited_docs, str(body.get("session", ""))[:64]) if len(set(cited_docs)) >= 2 else \
-                (LEARNED.add(w.id, [], str(body.get("session", ""))[:64]) and [])
-            done["learned"] = dict(LEARNED.totals(w.id), new=new)
-            done["learned"]["added"] = done["learned"]["here"] - before_here
-            session = str(body.get("session", ""))[:64]
-            save_convo(w.id, session, q, answer, sources, "done", done["ms"])
-            self.sse("done", done)
-            if not web_used:   # learning runs after the visitor has the answer, one at a time
-                LEARN_QUEUE.put((w.id, session, q, list(VISITS.get((w.id, session), []))))
-            remember_exchange(w.id, session, q, answer)
-            JOBS.finish(job, "done", "%d sources · %d tokens · %.1fs" % (len(sources), n_tok, done["ms"] / 1000))
-        except (BrokenPipeError, ConnectionResetError):
-            L = locals()
-            if L.get("q"):
-                save_convo(getattr(L.get("w"), "id", ""), str((L.get("body") or {}).get("session", ""))[:64], L.get("q"),
-                           L.get("answer", ""), L.get("sources"), "visitor left")
-            JOBS.finish(job, "failed", "Visitor left")
-        except Exception as e:
-            log("ask failed", e)
-            JOBS.finish(job, "failed", str(e)[:160])
+            self.send_response(200)
+            self.send_header("Content-Type", "text/event-stream")
+            self.send_header("Cache-Control", "no-store")
+            self.send_header("X-Accel-Buffering", "no")
+            self.send_header("Connection", "close")
+            self.end_headers()
+            self.close_connection = True
+            job = JOBS.start("QUESTION", q[:90], w.id)
+            t0 = time.time()
             try:
-                self.sse("error", "The local model didn't answer: %s" % str(e)[:200])
-            except Exception:
-                pass
+                sources = find_sources(w, q, body.get("history") or [])
+                # Web search add-on. First pass: if the question needs the open web, offer the exact search and stop.
+                # Nothing leaves this computer until the visitor answers yes (web.ok with the same words).
+                web, web_note, web_used = body.get("web") or {}, "", None
+                if WEB and WEB.enabled():
+                    if not isinstance(web, dict) or "ok" not in web:
+                        offer = WEB.decide(q, w.meta.get("name"), [s["title"] for s in sources[:8]], MODEL.complete,
+                                           time.strftime("%A, %B %d, %Y")) if WEB.likely_needs_web(q) else None
+                        if offer:
+                            self.sse("web_offer", {"query": offer})
+                            JOBS.finish(job, "done", "Asked before searching the web: %s" % offer[:60])
+                            return
+                    elif web.get("ok") and str(web.get("query") or "").strip():
+                        wq = str(web["query"]).strip()[:WEB.MAX_QUERY]
+                        try:
+                            found = WEB.search_best(wq)
+                        except WEB.WebSearchError as e:
+                            found, web_note = [], str(e)
+                        sources = sources[:2]   # a web question rarely needs the business files; keep the answer about the web
+                        wtext, wsrc = WEB.as_sources(found, len(sources) + 1)
+                        sources += wsrc
+                        web_used = {"query": wq, "results": len(found), "error": web_note}
+                        web_note = ("The visitor said yes to a web search for \"%s\". Web results (cite them by number "
+                                    "like the files; say plainly they came from the web):\n\n%s\n\nAnswer their question directly "
+                                    "and specifically from these results first (names, dates, times, numbers). Today is %s, so work out "
+                                    "what \"today\" or \"tonight\" means from the dates in the results. If the results truly don't "
+                                    "say, say so in one line and name the best place to check. If the question has nothing to do "
+                                    "with the business, skip the briefing item at the end." % (
+                                        wq, wtext or "(the search found nothing)", time.strftime("%A, %B %d, %Y")))
+                    else:
+                        web_note = ("The visitor chose not to search the web. Answer from the files and what you know, "
+                                    "and say in one line what a web search would have added.")
+                self.sse("sources", [{k: s.get(k) for k in ("n", "id", "title", "rel", "folder", "date", "snippet", "web", "url")}
+                                     for s in sources])
+                messages = build_messages(w, q, body.get("history") or [], sources, web_note, web_used)
+                n_tok, first, answer = 0, None, ""
+                with answering():
+                    for kind, val in MODEL.stream(messages, max_tokens=420, temperature=0.4):
+                        if kind == "token":
+                            if first is None:
+                                first = time.time()
+                            n_tok += 1
+                            answer += val
+                            self.sse("token", val)
+                        elif kind == "thinking":
+                            self.sse("thinking", True)
+                        elif kind == "usage":
+                            n_tok = val
+                secs = time.time() - (first or t0)
+                JOBS.add_tokens(n_tok, secs)
+                with JOBS.lock:
+                    JOBS.questions += 1
+                done = {"ms": int((time.time() - t0) * 1000), "tokens": n_tok,
+                        "tps": round(n_tok / secs, 1) if secs > 0 else 0, "model": MODEL.label,
+                        "private": MODEL.is_private(), "cost": 0, "location": LOCATION, "web": web_used}
+                cited = {int(n) for n in re.findall(r"\[(\d+)(?:\s*,\s*\d+)*\]", answer)}
+                cited |= {int(n) for grp in re.findall(r"\[((?:\d+\s*,\s*)+\d+)\]", answer) for n in re.split(r"\s*,\s*", grp)}
+                cited_docs = [s["id"] for s in sources if s["n"] in cited and s.get("id") is not None]
+                before_here = LEARNED.totals(w.id)["here"]
+                new = LEARNED.add(w.id, cited_docs, str(body.get("session", ""))[:64]) if len(set(cited_docs)) >= 2 else \
+                    (LEARNED.add(w.id, [], str(body.get("session", ""))[:64]) and [])
+                done["learned"] = dict(LEARNED.totals(w.id), new=new)
+                done["learned"]["added"] = done["learned"]["here"] - before_here
+                session = str(body.get("session", ""))[:64]
+                save_convo(w.id, session, q, answer, sources, "done", done["ms"])
+                self.sse("done", done)
+                if not web_used:   # learning runs after the visitor has the answer, one at a time
+                    LEARN_QUEUE.put((w.id, session, q, list(VISITS.get((w.id, session), []))))
+                remember_exchange(w.id, session, q, answer)
+                JOBS.finish(job, "done", "%d sources · %d tokens · %.1fs" % (len(sources), n_tok, done["ms"] / 1000))
+            except (BrokenPipeError, ConnectionResetError):
+                L = locals()
+                if L.get("q"):
+                    save_convo(getattr(L.get("w"), "id", ""), str((L.get("body") or {}).get("session", ""))[:64], L.get("q"),
+                               L.get("answer", ""), L.get("sources"), "visitor left")
+                JOBS.finish(job, "failed", "Visitor left")
+            except Exception as e:
+                log("ask failed", e)
+                JOBS.finish(job, "failed", str(e)[:160])
+                try:
+                    self.sse("error", "The local model didn't answer: %s" % str(e)[:200])
+                except Exception:
+                    pass
 
+
+        finally:
+            ASK_SLOTS.release()
 
 def main():
     discover()
@@ -1336,6 +1322,7 @@ def main():
         srv.serve_forever()
     except KeyboardInterrupt:
         pass
+
 
 
 if __name__ == "__main__":
