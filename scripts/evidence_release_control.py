@@ -81,7 +81,7 @@ def restart(service,systemctl="systemctl"):
     run([systemctl,"--user","restart",service])
 
 
-def validate(repo,current,target,expected):
+def validate(repo,current,target,expected,state):
     if not re.fullmatch(r"[0-9a-f]{40}", expected) or expected != current:
         raise ValueError("Rollback requires the exact current full 40-digit SHA")
     if not clean(repo):
@@ -94,7 +94,14 @@ def validate(repo,current,target,expected):
     if current==target:
         raise ValueError("No rollback needed")
     if run(["git","-C",str(repo),"merge-base","--is-ancestor",target,current],check=False)!=0:
-        raise ValueError("Rollback target must be ancestor of current deployment")
+        # The existing updater fetches --depth 1, so Git can forget *ancestry*
+        # even while both exact commit objects exist. Only an explicitly
+        # pre-pinned, verified old release may bypass this incomplete graph.
+        pinned=Path(state)/"pre-evidence-release.sha"
+        shallow=run(["git","-C",str(repo),"rev-parse","--is-shallow-repository"])
+        correct_pin=(pinned.is_file() and pinned.read_text().strip()==target)
+        if shallow!="true" or not correct_pin:
+            raise ValueError("Rollback target ancestry cannot be verified and no exact pre-release pin exists")
 
 
 def rollback(repo,state,expected,target,health_url,service,systemctl,apply=False):
@@ -105,7 +112,7 @@ def rollback(repo,state,expected,target,health_url,service,systemctl,apply=False
     if not re.fullmatch(r"[0-9a-f]{40}", target):
         raise ValueError("Rollback target must be an exact full 40-digit SHA")
     wanted=sha(repo,target)
-    validate(repo,current,wanted,expected)
+    validate(repo,current,wanted,expected,state)
     plan={"from_sha":current,"to_sha":wanted,"service":service,
           "model_service_restart":False,"private_state_delete":False,
           "will_block_redeployment_of":current}

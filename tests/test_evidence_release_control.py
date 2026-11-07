@@ -91,6 +91,19 @@ class RollbackReleaseTests(unittest.TestCase):
         self.assertFalse((self.root/"restarts.log").exists())
         self.assertEqual(release.sha(self.repo),self.bad)
 
+    def test_shallow_checkout_only_allows_exact_pinned_rollback(self):
+        # Mirror the real updater's shallow Git fetch behavior.
+        (self.repo/".git/shallow").write_text(self.bad+"\n")
+        (self.state/"pre-evidence-release.sha").write_text(self.good+"\n")
+        self.assertEqual(
+            release.run(["git","-C",str(self.repo),"rev-parse","--is-shallow-repository"]),
+            "true")
+        planned=self.invoke(apply=False)
+        self.assertEqual(planned["to_sha"],self.good)
+        (self.state/"pre-evidence-release.sha").write_text("0"*40+"\n")
+        with self.assertRaises(ValueError):
+            self.invoke(apply=False)
+
     def test_stale_expected_commit_refused(self):
         with self.assertRaises(ValueError):
             self.invoke(expected=self.good,apply=True)

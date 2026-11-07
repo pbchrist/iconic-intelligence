@@ -55,6 +55,8 @@ For each answer: extract discrete claims, identify `[n]` citation numbers, rejec
 
 These checks support **a shadow-observability release**, not a sweeping claim that the demo is perfectly reliable.
 
+**Shallow-checkout safety:** The production updater can fetch only the newest Git commit, hiding ancestry that a manual rollback normally verifies. The rollback command now uses the exact pre-pinned pre-evidence-release.sha only when Git confirms the checkout is shallow; without that pin it refuses to act. A separate simulated shallow-history test confirms the fallback, and the actual production rollback dry-run was verified against the saved old commit. No rollback was executed.
+
 ## Rollback strategy — automatic and explicit
 
 The existing `update.sh` tests a candidate before updating the live lightweight web app. It health-checks the service and automatically restores the previous Git commit on failure. That release process does **not restart the Qwen model service**.
