@@ -1,3 +1,6 @@
+## 2026-11-07
+- Added canonical machine-readable Agent Assurance offer and public seven-tool MCP references. Free preflight and unpaid scoped intake are working; paid checkout stays disabled. Corrected stale Reserve tool-count copy in AI reference files.
+
 # ICONIC website (iconic.onl) — change log
 
 Newest first. One line per change: what changed and why.

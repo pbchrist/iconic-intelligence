@@ -34,10 +34,21 @@ Owner-led businesses and professional firms with years of their own records: law
 ## ICONIC Intelligence Reserve — live agent-facing free assessment
 
 - [Canonical Reserve page](https://iconic.onl/agents/reserve/) and [machine manifest](https://iconic.onl/agents/reserve/manifest.json).
-- **Agent-first machine entrypoint (JSON):** https://patrick-beastmaster.tailf32530.ts.net/reserve/agents. **Direct MCP:** https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp. Seven callable tools: `reserve_describe`, `reserve_offers`, `reserve_quote`, `reserve_assess`, `reserve_demo`, `reserve_plans`, and `reserve_handoff`. Free agent-to-agent transaction: list offers → obtain exact $0 quote → execute `reserve_assess` → receive `FULFILLED_FREE` structured assessment; no human UI required.
+- **Agent-first machine entrypoint (JSON):** https://patrick-beastmaster.tailf32530.ts.net/reserve/agents. **Direct MCP:** https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp. Sixteen callable Reserve tools: seven discovery and nine synthetic sandbox tools. Free agent-to-agent transaction: list offers → obtain exact $0 quote → execute `reserve_assess` → receive `FULFILLED_FREE` structured assessment; no human UI required.
 - Agents can perform a stateless, rule-based, no-charge fit assessment and run an ephemeral synthetic demonstration against the Reserve engine. **No confidential business or customer data should be submitted** to this public endpoint.
 - Private tenant-isolated Reserve is a technical alpha, NOT an openly accessible customer memory database. Paid self-service tiers and autonomous purchases are NOT live. A human must authorize any onboarding, data integrations or payment.
 - [Book the existing free ICONIC check](https://calendly.com/patrick-iconic/30min). The blueprint's $99/$499/$5,000 prices are hypotheses, not saleable prices.
+
+## ICONIC Agent Assurance — live agent-facing service (November 7, 2026)
+
+- Machine-readable canonical offer: https://iconic.onl/agents/assurance/manifest.json
+- Remote MCP: https://patrick-beastmaster.tailf32530.ts.net/assurance/mcp
+- Live machine discovery: https://patrick-beastmaster.tailf32530.ts.net/assurance/agents
+- Seven tools: assurance_describe, assurance_quote, assurance_preflight, assurance_sample_report, assurance_prepare_order, assurance_get_order, assurance_begin_checkout.
+- Agents can perform a free, static MCP/agent contract preflight, view the example report, and prepare an unpaid audit scope request after authorization. The public endpoint does not execute customer agents or accept confidential records.
+- Proposed founding-pilot fee: $1,500 one-time, indicative only, for one authorized workflow and up to 25 test cases. This is NOT a live paid offer.
+- Live Stripe checkout is DISABLED. No confirmed paid order or customer audit exists. Final scope and commercial terms require separate human approvals, and reports require signed-webhook payment confirmation and human review.
+- Reserve provides evidence/outcome history, the adversarial harness performs evaluation, and QLoRA remains optional nonproduction research. No customer data enters training automatically.
 
 ## Detail pages
 

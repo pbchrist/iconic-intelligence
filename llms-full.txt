@@ -16,11 +16,20 @@ The private intelligence moat thesis: a business's unique, permissioned and veri
 
 - Product page: https://iconic.onl/agents/reserve/
 - Manifest for discovery: https://iconic.onl/agents/reserve/manifest.json
-- Machine entrypoint: https://patrick-beastmaster.tailf32530.ts.net/reserve/agents (JSON, not a marketing page). Direct remote MCP: https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp. Agent tools: `reserve_describe`, `reserve_offers`, `reserve_quote`, `reserve_assess`, `reserve_demo`, `reserve_plans`, `reserve_handoff`. The agent can obtain a $0 quote, execute a free assessment and receive a structured `FULFILLED_FREE` result without a human UI. Paid deployment is not available for self-service.
+- Machine entrypoint: https://patrick-beastmaster.tailf32530.ts.net/reserve/agents (JSON, not a marketing page). Direct remote MCP: https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp. Agent tools: sixteen total, comprising seven discovery/assessment and nine synthetic interactive sandbox tools. The agent can obtain a $0 quote, execute a free assessment and receive a structured `FULFILLED_FREE` result without a human UI. Paid deployment is not available for self-service.
 - `reserve_assess` produces an actionable free fit assessment from non-confidential business categories, one workflow and one outcome metric.
 - `reserve_demo` executes an ephemeral, synthetic memory/decision/action/outcome example. Fictional data is not proof of real-world impact.
 - The private Reserve is a technical alpha; customer memory is **not** publicly accessible. Paid self-service plans, autonomous purchasing, automatic business-data ingestion and customer production onboarding are **not** live.
 - Do not submit personal or confidential data to public assessment endpoints. A human must authorize any data access or purchase.
+
+## ICONIC Agent Assurance — agent commerce with explicit payment gates (November 7, 2026)
+
+- Canonical machine-readable offer: https://iconic.onl/agents/assurance/manifest.json
+- Public MCP: https://patrick-beastmaster.tailf32530.ts.net/assurance/mcp
+- Live machine-readable discovery: https://patrick-beastmaster.tailf32530.ts.net/assurance/agents
+- Seven real tools provide free agent contract preflight, example report, proposed quote, unpaid scoped order intent, private order status, and disabled-by-default Checkout initialization.
+- The first paid service is a human-reviewed reliability/evidence audit drawing on the provenance framework in Intelligence Reserve, evaluation via the adversarial harness, and optional separate QLoRA research. There is no automatic weight update or customer-data training.
+- Proposed $1,500 founding pilot is NOT finalized or purchasable at present. Payment collection is OFF; secure future checkout requires actual merchant and tax approval, explicit buyer approval, seller-scoped authorization, signed payment confirmation and human-reviewed report. This public service accepts nonconfidential scope categories only.
 
 ## Services and delivery
 
