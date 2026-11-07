@@ -73,3 +73,18 @@ class BillingRetrievalRegressions(unittest.TestCase):
 
     def test_truthful_instruction_disclosure_refusal(self):
         self.assertIn("Never claim no instructions exist", server.SYSTEM_PROMPT)
+
+class SourceGroundingRegressions(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        server.start_offline(detect_model=False)
+
+    def test_evergreen_renewal_uses_key_accounts_document(self):
+        w=server.WORKSPACES["northline-supply"]
+        docs=server.find_sources(w,"Since we lost the Evergreen contract last month, what now? When does it renew?",[])
+        self.assertTrue(any(s["rel"]=="customers/key-accounts.md" and "January 15, 2027" in s["chunk"] for s in docs))
+
+    def test_buyback_caps_and_credit_are_in_retrieved_source(self):
+        w=server.WORKSPACES["northline-supply"]
+        docs=server.find_sources(w,"How much Pacific Brass stock qualifies for buyback, what is the return cap, and credit?",[])
+        self.assertTrue(any("2026-10-slow-movers.md" in s["rel"] and all(x in s["chunk"] for x in ("$23,100","$15,000","$12,750")) for s in docs))
