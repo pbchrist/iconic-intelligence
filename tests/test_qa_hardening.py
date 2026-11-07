@@ -31,6 +31,16 @@ class SecurityRegressions(unittest.TestCase):
         self.assertNotIn('u.path == "/api/conversations"', src)
         self.assertNotIn('u.path == "/api/recover-slots"', src)
 
+    def test_funnel_sessions_get_separate_rate_limit_buckets(self):
+        server.HITS.pop("session:test-u1", None)
+        server.HITS.pop("session:test-u2", None)
+        server.HITS.pop("ip:127.0.0.1", None)
+        self.assertTrue(server.allowed("127.0.0.1", True, "test-u1"))
+        self.assertTrue(server.allowed("127.0.0.1", True, "test-u2"))
+        self.assertIn("session:test-u1", server.HITS)
+        self.assertIn("session:test-u2", server.HITS)
+        self.assertNotIn("ip:127.0.0.1", server.HITS)
+
     def test_refresh_has_limit(self):
         server.HITS.pop("refresh:test-refresh", None)
         self.assertTrue(server.allowed_refresh("test-refresh"))

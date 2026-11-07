@@ -1024,11 +1024,15 @@ def allowed_refresh(ip):
     return _take("refresh:" + ip, 2)
 
 
-def allowed(ip, public):
-    """Your own network is unlimited. Public visitors get a per-person and a shared hourly budget."""
+def allowed(ip, public, session=""):
+    """Funnel makes all visitor peer IPs loopback: use distinct browser sessions
+    for fair per-visitor limits, but retain a strict shared cap since client
+    session identifiers can be rotated by an attacker.
+    """
     if not public:
         return True
-    return _take("ip:" + ip, RATE_PER_HOUR) and _take("public", PUBLIC_PER_HOUR)
+    key = ("session:" + session[:64]) if private_addr(ip) and session else ("ip:" + ip)
+    return _take(key, RATE_PER_HOUR) and _take("public", PUBLIC_PER_HOUR)
 
 
 def private_addr(ip):
@@ -1208,7 +1212,7 @@ class Handler(BaseHTTPRequestHandler):
         w = self.ws({"ws": [body.get("ws", "")]})
         if not q or not w:
             return self.send_json({"error": "Ask a question."}, 400)
-        if not allowed(self.client_ip(), self.is_public()):
+        if not allowed(self.client_ip(), self.is_public(), str(body.get("session") or "")):
             return self.send_json({"error": "That's the demo limit for this hour. Book the free 30-minute check and "
                                             "I'll show you this running on your own files."}, 429)
         if not ASK_SLOTS.acquire(blocking=False):
