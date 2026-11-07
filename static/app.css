@@ -536,10 +536,14 @@ body.standalone .app { flex: 1; height: auto; min-height: 0; }
   .side, .main { backdrop-filter: none; -webkit-backdrop-filter: none; }
 
   /* after picking: just the business name and Ask | Graph */
-  body.picked .ws-caret { display: none; }
-  body.picked .ws-chip { pointer-events: none; padding: .3rem .4rem; border-color: transparent; background: none; }
+  /* Keep the active business switchable on phones. Previously pointer-events:
+     none and display:none !important made all mobile switching impossible. */
+  body.picked .ws-caret { display: inline; }
+  body.picked .ws-chip { pointer-events: auto; padding: .3rem .4rem; border-color: var(--line); background: rgba(255,255,255,.04); }
   body.picked .ws-avatar { width: 1.7rem; height: 1.7rem; font-size: .9rem; }
-  body.picked .ws-menu { display: none !important; }
+  body.picked .ws-menu { display: block; }
+  body.picked .ws-menu[hidden] { display: none; }
+  body.picked .ws-wrap { position: relative; z-index: 20; }
   .tab[data-tab="work"], .tab[data-tab="knowledge"], .tab[data-tab="control"] { display: none; }
   .tabs { overflow: visible; }
 

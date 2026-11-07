@@ -117,6 +117,11 @@
     S.ws = id; store.set('iconic.ws', id);
     S.feed = null; S.workspace = null; S.folder = 'all'; S.revealed = ''; S.graph = null;
     S.graphSig = ''; S.story = null;
+    // A source drawer belongs to the previous workspace and must not survive
+    // a business switch. Also block stale document fetch completions below.
+    $('#drawer').classList.remove('open'); $('#drawer').setAttribute('aria-hidden', 'true');
+    $('#scrim').classList.remove('on'); $('#dBody').textContent = '';
+    $('#dTitle').textContent = '';
     $('#gDetail').hidden = true; $('#story').hidden = true;
     restoreChat(id);
     S.picked = true; saveChat();
@@ -341,7 +346,11 @@
 
   // ---------- document drawer
   async function openDoc(id, highlight) {
-    const d = await api(`/api/doc?ws=${encodeURIComponent(S.ws)}&id=${id}`);
+    const requested = S.ws;
+    const d = await api(`/api/doc?ws=${encodeURIComponent(requested)}&id=${id}`);
+    // Switching workspaces while an older source is still loading must never
+    // display the prior tenant's document in the newly selected workspace.
+    if (requested !== S.ws) return;
     $('#dTitle').textContent = d.title;
     $('#dMeta').textContent = `${d.rel.toUpperCase()} · ${d.date} · ${fmt(d.words)} WORDS`;
     let body = esc(d.text);

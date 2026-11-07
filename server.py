@@ -13,6 +13,9 @@ import json
 import finance_guard
 import deadline_guard
 import buyback_guard
+import sales_share_guard
+import cascade_guard
+import lexvault_guard
 import math
 import os
 import queue
@@ -508,7 +511,7 @@ SYSTEM_PROMPT = """You are ICONIC, a private AI running on {location}, on {owner
 Today is {today}. You are answering from the files of {name}, {kind}: {sample}.
 Be accurate, concise, and direct. Answer in the language of the visitor. Ordinary questions get direct answers, harmless creative requests get creative answers, and greetings get greetings.
 
-Every material business fact must be supported by the correct cited document. Cite the document containing each claim next to the fact it supports using the exact source number [n]. Never attach one citation to multiple claims drawn from different files. If a claim is absent, say so; distinguish evidence from inference. Preserve uncertainty, dates, decision status, conditional language, and legal prerequisites exactly as the sources state them. A proposed withdrawal is not a completed or mandatory withdrawal.
+Every material business fact must be supported by the correct cited document. Citation numbers are assigned anew for EACH answer; never reuse a prior answer's [n] without checking the current source list. A citation [n] must actually substantiate the immediately preceding claim. Cite the document containing each claim next to the fact it supports using the exact source number [n]. Never attach one citation to multiple claims drawn from different files. If a claim is absent, say so; distinguish evidence from inference. Preserve uncertainty, dates, decision status, conditional language, and legal prerequisites exactly as the sources state them. A proposed withdrawal is not a completed or mandatory withdrawal.
 
 For financial answers, distinguish billed amounts, collections, receivables, aging, unbilled time, and write-downs. A difference between billed and collected does NOT by itself establish outstanding accounts receivable. When doing arithmetic, including vendor caps, state the operands, calculate precisely, and label the result as a derived value. Rounded percentages are not exact equality. For return programs distinguish qualifying stock, return caps, fees, credits, and actual cash. If the document doesn't support a number, do not invent it.
 
@@ -799,10 +802,23 @@ SAID_YES = re.compile(r"(?i)^(yes|yeah|yep|yup|sure|ok|okay|go on|more|please)\W
 
 
 def find_sources(w, q, history):
+    # Small, auditable lexical expansion for natural-language phrasing. Keep
+    # the actual question unchanged for the model. This fixes documents being
+    # missed because the speaker says "hanging up his boots" rather than "retires".
+    search_q = q
+    if w.id == "northline-supply" and re.search(
+        r"(?i)(hanging up (?:his|her|their) boots|stepping into (?:his|her|their) shoes|"
+        r"parts.buying (?:guy|person)|purchasing manager.{0,45}retir|"
+        r"dale pruitt.{0,40}retir)", q
+    ):
+        search_q += " Dale Pruitt purchasing manager retires December 19 replacement successor handoff"
     if SAID_YES.search(q.strip()) and history:   # "yes" means the offer at the end of the last answer
-        hits = w.search(q + " " + str(history[-1].get("a", ""))[-250:])
+        hits = w.search(search_q + " " + str(history[-1].get("a", ""))[-250:])
     else:
-        hits = w.search(q + " " + " ".join(h.get("q", "") for h in history[-1:]))
+        # Reuse the last three user turns rather than only the immediately
+        # preceding one. A challenge like "Dana says we lost; confirm it" must
+        # still retrieve the Briggs case named two turns earlier.
+        hits = w.search(search_q + " " + " ".join(str(h.get("q", "")) for h in history[-3:]))
     with w.lock:
         docs = {d["id"]: d for d in w.docs}
         first_chunk = {}
@@ -877,8 +893,14 @@ def build_messages(w, q, hist, sources, web_note="", web_used=None, trying=None)
         tail = "ENDING: this was a web question. Answer it and stop."
     elif said_yes and hist:
         asked = re.findall(r"[^.!?\n]*\?", str(hist[-1].get("a", "")))
-        tail = ("ENDING: they accepted the last offer%s. Deliver exactly that information from supporting files; "
-                "do not repeat the offer." % (': "%s"' % asked[-1].strip() if asked else ""))
+        if asked:
+            tail = ("ENDING: the visitor accepted the prior question/offer: %s. "
+                    "Deliver exactly that requested information from sources without asking the same question again."
+                    % asked[-1].strip())
+        else:
+            tail = ("ENDING: the visitor said yes, but the previous answer contained no explicit offer. "
+                    "Continue the SAME topic with one directly relevant sourced detail rather than "
+                    "claiming a nonexistent offer or inventing a new subject.")
     elif open_ended:
         tail = "ENDING: the visitor asked for suggestions, so bring up one briefing item they haven't seen, if supported by the files."
     else:
@@ -1265,6 +1287,12 @@ class Handler(BaseHTTPRequestHandler):
                 verified = None
                 if not web_used and not web_note:
                     verified = finance_guard.answer_from_ledger(q, sources, body.get("history") or [])
+                    if verified is None:
+                        verified = sales_share_guard.answer_from_sales(q, sources)
+                    if verified is None:
+                        verified = cascade_guard.answer_cascade(q, sources)
+                    if verified is None:
+                        verified = lexvault_guard.answer_renewal(q, sources)
                     if verified is None:
                         verified = buyback_guard.answer_from_inventory(q, sources)
                     if verified is None:

@@ -12,7 +12,7 @@ COLLECTED = re.compile(r"(?im)^\s*[-*]?\s*Collected:\s*" + AMOUNT + r"\b")
 FINANCIAL = re.compile(r"(?i)\b(billings?|billed|collect\w*|cash|realization|receivables?|a/r|ar balance|outstanding balance)\b")
 RECEIVABLE = re.compile(r"(?i)\b(receivables?|a/r|ar balance|outstanding balance|gap|difference|shortfall)\b")
 PERCENT = re.compile(r"(?i)\b(percentage|percent|share|rate|ratio|of billings)\b|%")
-Q3 = re.compile(r"(?i)\b(q3|third[\\s-]+quarter|tercer trimestre|quarter|q\s*3)\b")
+Q3 = re.compile(r"(?i)\b(q3|third[\s-]+quarter|tercer trimestre|quarter|q\s*3)\b")
 OTHER_ENTITY = re.compile(r"(?i)\b(tidewell|lexvault|kessler|partner|vendor|supplier|evergreen|freight)\b")
 OTHER_PERIOD = re.compile(r"(?i)\b(q[124]|201[0-9]|202[0-5]|last month|january|february|march|april|may|june|july|august|september)\b")
 
@@ -42,12 +42,15 @@ def answer_from_ledger(question, sources, history=None):
     gap = billed - collected
     pct = (collected / billed * 100).quantize(Decimal(".01"), rounding=ROUND_HALF_UP) if billed else None
     if RECEIVABLE.search(q):
+        realization = re.search(r"(?im)^\s*[-*]?\s*Realization:\s*(\d+(?:\.\d+)?)%",str(src.get("chunk") or ""))
+        realized = (" The report separately labels realization at **{}%** {}."
+                    .format(realization.group(1),cite)) if realization and re.search(r"(?i)\brealization\b",q) else ""
         return (
             "The {} records **${:,.0f} billed** and **${:,.0f} collected** {}. "
             "The derived collected/billed ratio is **{:.2f}%**. "
             "The difference is **${:,.0f}**, but that calculation is **not** a documented "
-            "accounts-receivable total. An aged receivables ledger is needed to establish total A/R."
-        ).format(label, billed, collected, cite, pct, gap)
+            "accounts-receivable total. An aged receivables ledger is needed to establish total A/R.{}"
+        ).format(label, billed, collected, cite, pct, gap, realized)
     if PERCENT.search(q):
         if pct is None:
             return None
