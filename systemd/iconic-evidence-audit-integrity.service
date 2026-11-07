@@ -1,0 +1,14 @@
+[Unit]
+Description=Verify ICONIC evidence audit integrity (local CPU only)
+After=iconic-command.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/patrick/iconic-command
+ExecStart=/usr/bin/python3 /home/patrick/iconic-command/scripts/evidence_audit_report.py --state /home/patrick/.local/state/iconic-command --save
+Nice=15
+IOSchedulingClass=idle
+CPUQuota=20%
+MemoryMax=300M
+TimeoutStartSec=60
+UMask=0077

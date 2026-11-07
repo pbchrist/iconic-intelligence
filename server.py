@@ -12,6 +12,9 @@ import ipaddress
 import json
 import finance_guard
 import evidence_core
+import evidence_trace
+import evidence_verifier
+import secrets
 import retrieval_pipeline
 import deadline_guard
 import buyback_guard
@@ -64,9 +67,46 @@ STARTED = time.time()
 ASSET_VERSION = str(int(max((os.path.getmtime(os.path.join(ROOT, "static", f)) for f in os.listdir(os.path.join(ROOT, "static"))), default=STARTED))).encode()
 os.makedirs(STATE, exist_ok=True)
 
+# Explicit evidence audit switch, shadow mode by default (streaming unaffected).
+EVIDENCE_AUDIT_ENABLED = os.environ.get("ICONIC_EVIDENCE_AUDIT", "0").lower() in ("1","true","yes")
+EVIDENCE_MODE = os.environ.get("ICONIC_EVIDENCE_MODE", "shadow").lower()
+if EVIDENCE_MODE not in ("shadow","enforce"):
+    raise ValueError("ICONIC_EVIDENCE_MODE must be shadow or enforce")
+_AUDIT_JOURNAL = None
+_AUDIT_INIT_LOCK = threading.Lock()
+
 
 def log(*a):
     print(time.strftime("%H:%M:%S"), *a, flush=True)
+
+
+def audit_event(stage, **fields):
+    """Append only private structured metadata, never raw prompts or documents."""
+    global _AUDIT_JOURNAL
+    if not EVIDENCE_AUDIT_ENABLED:
+        return None
+    try:
+        if _AUDIT_JOURNAL is None:
+            with _AUDIT_INIT_LOCK:
+                if _AUDIT_JOURNAL is None:
+                    try:
+                        sha = subprocess.check_output(["git","-C",ROOT,"rev-parse","--short=12","HEAD"],
+                                                      text=True, timeout=2).strip()
+                    except Exception:
+                        sha = "unknown"
+                    _AUDIT_JOURNAL = evidence_trace.EvidenceJournal(STATE, release=sha)
+        return _AUDIT_JOURNAL.append(stage, **fields)
+    except Exception as exc:
+        log("AUDIT_ERROR",stage,type(exc).__name__)
+        return None
+
+
+def audit_ref(value):
+    if not EVIDENCE_AUDIT_ENABLED:
+        return None
+    if _AUDIT_JOURNAL is None:
+        audit_event("release.event", result="audit_initialized")
+    return _AUDIT_JOURNAL.ref(value) if _AUDIT_JOURNAL else None
 
 
 # ---------------------------------------------------------------- text extraction
@@ -1240,14 +1280,25 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.flush()
 
     def ask(self, body):
+        request_id = secrets.token_hex(12)
         q = str(body.get("q", "")).strip()[:600]
         w = self.ws({"ws": [body.get("ws", "")]})
+        audit_base = {"request_id": request_id,
+                      "workspace": audit_ref(w.id if w else "unknown"),
+                      "session_ref": audit_ref(str(body.get("session") or "")),
+                      "prompt_ref": audit_ref(q)}
+        audit_event("request.accepted", **audit_base,
+                    status="accepted" if q and w else "rejected",
+                    mode=EVIDENCE_MODE)
         if not q or not w:
+            audit_event("response.failed", **audit_base, result="bad_request", error_class="invalid_input")
             return self.send_json({"error": "Ask a question."}, 400)
         if not allowed(self.client_ip(), self.is_public(), str(body.get("session") or "")):
+            audit_event("response.failed", **audit_base, result="rate_limited", error_class="quota")
             return self.send_json({"error": "That's the demo limit for this hour. Book the free 30-minute check and "
                                             "I'll show you this running on your own files."}, 429)
         if not ASK_SLOTS.acquire(blocking=False):
+            audit_event("response.failed", **audit_base, result="busy", error_class="concurrency")
             return self.send_json({"error": "Demo is busy. Please try again shortly."}, 503)
         try:
             self.send_response(200)
@@ -1261,6 +1312,11 @@ class Handler(BaseHTTPRequestHandler):
             t0 = time.time()
             try:
                 sources = find_sources(w, q, body.get("history") or [])
+                audit_event("evidence.retrieved", **audit_base,
+                            retrieval="hybrid_local" if HYBRID_RETRIEVAL_ENABLED else "bm25",
+                            source_count=len(sources),
+                            sources=[audit_ref(w.id + "/" + str(src.get("rel") or src.get("id")))
+                                     for src in sources[:20]])
                 # Web search add-on. First pass: if the question needs the open web, offer the exact search and stop.
                 # Nothing leaves this computer until the visitor answers yes (web.ok with the same words).
                 web, web_note, web_used = body.get("web") or {}, "", None
@@ -1269,10 +1325,14 @@ class Handler(BaseHTTPRequestHandler):
                         offer = WEB.decide(q, w.meta.get("name"), [s["title"] for s in sources[:8]], MODEL.complete,
                                            time.strftime("%A, %B %d, %Y")) if WEB.likely_needs_web(q) else None
                         if offer:
+                            audit_event("web.consent.offered", **audit_base, web_consent="pending")
                             self.sse("web_offer", {"query": offer})
+                            audit_event("response.completed", **audit_base,
+                                        result="consent_requested", duration_ms=int((time.time()-t0)*1000))
                             JOBS.finish(job, "done", "Asked before searching the web: %s" % offer[:60])
                             return
                     elif web.get("ok") and str(web.get("query") or "").strip():
+                        audit_event("web.consent.decided", **audit_base, web_consent="granted")
                         wq = str(web["query"]).strip()[:WEB.MAX_QUERY]
                         try:
                             found = WEB.search_best(wq)
@@ -1290,12 +1350,14 @@ class Handler(BaseHTTPRequestHandler):
                                     "with the business, skip the briefing item at the end." % (
                                         wq, wtext or "(the search found nothing)", time.strftime("%A, %B %d, %Y")))
                     else:
+                        audit_event("web.consent.decided", **audit_base, web_consent="declined")
                         web_note = ("The visitor chose not to search the web. Answer from the files and what you know, "
                                     "and say in one line what a web search would have added.")
                 self.sse("sources", [{k: s.get(k) for k in ("n", "id", "title", "rel", "folder", "date", "snippet", "web", "url")}
                                      for s in sources])
                 messages = build_messages(w, q, body.get("history") or [], sources, web_note, web_used)
                 verified = None
+                extracted = None
                 if not web_used and not web_note:
                     extracted = evidence_core.documentary_author(q, sources, body.get("history") or [])
                     verified = (extracted.content if extracted is not None and
@@ -1312,7 +1374,13 @@ class Handler(BaseHTTPRequestHandler):
                         verified = buyback_guard.answer_from_inventory(q, sources)
                     if verified is None:
                         verified = deadline_guard.draft_from_deadline(q, sources)
+                intent = evidence_core.classify(q).kind
+                method = ("verified_byline" if extracted is not None and verified == extracted.content
+                          else "rule_based" if verified is not None else "model")
+                audit_event("routing.selected", **audit_base, intent=intent,
+                            method=method, source_count=len(sources))
                 n_tok, first, answer = 0, None, ""
+                buffer_output = EVIDENCE_MODE == "enforce"
                 with answering():
                     generated = [("token", verified)] if verified is not None else MODEL.stream(messages, max_tokens=420, temperature=0.25)
                     for kind, val in generated:
@@ -1324,11 +1392,38 @@ class Handler(BaseHTTPRequestHandler):
                             if verified is None:
                                 n_tok += 1
                             answer += val
-                            self.sse("token", val)
+                            if not buffer_output:
+                                self.sse("token", val)
                         elif kind == "thinking":
                             self.sse("thinking", True)
                         elif kind == "usage":
                             n_tok = val
+                report = evidence_verifier.check_answer(answer, sources, operation=method)
+                audit_event("model.completed", **audit_base, method=method,
+                            duration_ms=int((time.time()-t0)*1000),
+                            answer_ref=audit_ref(answer), response_bytes=len(answer.encode("utf-8")))
+                for item in report["claims"]:
+                    audit_event("verification.claim", **audit_base,
+                                claim_index=item["claim_index"],
+                                claim_ref=audit_ref(item["text"]),
+                                source_numbers=item["source_numbers"],
+                                reason=item["status"],
+                                numeric_warnings=item["numeric_warnings"],
+                                quote_count=item["quote_count"],
+                                quotes_matched=item["quotes_matched"])
+                audit_event("verification.completed", **audit_base,
+                            verifier_status=report["status"],
+                            claim_count=report["claim_count"],
+                            invalid_citations=report["invalid_citations"],
+                            numeric_warnings=report["numeric_warnings"],
+                            needs_review_count=0 if report["fully_fact_verified"] else report["claim_count"],
+                            failed_count=int(report["hard_fail"]))
+                if buffer_output:
+                    if report["hard_fail"]:
+                        answer = ("I can't verify the citations in that response. "
+                                  "Please check the source documents or rephrase your request.")
+                        audit_event("release.event", **audit_base, result="citation_blocked")
+                    self.sse("token", answer)
                 secs = time.time() - (first or t0)
                 JOBS.add_tokens(n_tok, secs)
                 with JOBS.lock:
@@ -1337,7 +1432,9 @@ class Handler(BaseHTTPRequestHandler):
                         "tps": round(n_tok / secs, 1) if secs > 0 else 0, "model": MODEL.label,
                         "private": MODEL.is_private(), "cost": 0, "location": LOCATION, "web": web_used,
                         "answer_method": "verified_evidence" if verified is not None else "model",
-                        "retrieval_method": "hybrid_local" if HYBRID_RETRIEVAL_ENABLED else "bm25"}
+                        "retrieval_method": "hybrid_local" if HYBRID_RETRIEVAL_ENABLED else "bm25",
+                        "evidence_status": report["status"],
+                        "evidence_check": "reference_and_numeric_preflight"}
                 cited = {int(n) for n in re.findall(r"\[(\d+)(?:\s*,\s*\d+)*\]", answer)}
                 cited |= {int(n) for grp in re.findall(r"\[((?:\d+\s*,\s*)+\d+)\]", answer) for n in re.split(r"\s*,\s*", grp)}
                 cited_docs = [s["id"] for s in sources if s["n"] in cited and s.get("id") is not None]
@@ -1349,17 +1446,24 @@ class Handler(BaseHTTPRequestHandler):
                 session = str(body.get("session", ""))[:64]
                 save_convo(w.id, session, q, answer, sources, "done", done["ms"])
                 self.sse("done", done)
+                audit_event("response.completed", **audit_base, result="answered",
+                            duration_ms=done["ms"], answer_ref=audit_ref(answer),
+                            verifier_status=report["status"])
                 if should_auto_learn(session, web_used):   # never from adversarial test sessions
                     LEARN_QUEUE.put((w.id, session, q, list(VISITS.get((w.id, session), []))))
                 remember_exchange(w.id, session, q, answer)
                 JOBS.finish(job, "done", "%d sources · %d tokens · %.1fs" % (len(sources), n_tok, done["ms"] / 1000))
             except (BrokenPipeError, ConnectionResetError):
+                audit_event("response.failed", **audit_base, result="visitor_disconnected",
+                            error_class="disconnect")
                 L = locals()
                 if L.get("q"):
                     save_convo(getattr(L.get("w"), "id", ""), str((L.get("body") or {}).get("session", ""))[:64], L.get("q"),
                                L.get("answer", ""), L.get("sources"), "visitor left")
                 JOBS.finish(job, "failed", "Visitor left")
             except Exception as e:
+                audit_event("response.failed", **audit_base, result="server_error",
+                            error_class=type(e).__name__[:100])
                 log("ask failed", e)
                 JOBS.finish(job, "failed", str(e)[:160])
                 try:

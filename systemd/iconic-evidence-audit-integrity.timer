@@ -1,0 +1,12 @@
+[Unit]
+Description=Hourly integrity and completeness check for ICONIC evidence audit
+
+[Timer]
+OnCalendar=hourly
+RandomizedDelaySec=2m
+AccuracySec=1m
+Persistent=true
+Unit=iconic-evidence-audit-integrity.service
+
+[Install]
+WantedBy=timers.target
