@@ -396,7 +396,7 @@ This section supersedes any earlier in-progress descriptions.
 ### Independently verified
 
 - **Critical private state:** Backup directory critical-state-20261107T215914Z contains **23 separate CMS-encrypted parts**, a SHA-256 checksum list and a recovery manifest. On the Mac, all parts passed hashes, decrypted into a single Zstandard stream, extracted to a private temporary directory, and **all 55 SQLite databases** passed stored SHA-256 comparison and SQLite quick_check. The second complete drill exited code 0 and removed the temporary plaintext.
-- **Code and system:** The encrypted system-rebuild-20261107T220404Z.tar.zst.cms kit was decrypted on the Mac. All **five Git repositories were cloned without GitHub**, with commit hashes verified. The system/package inventory and readable root unit files are included; some root-owned NUT settings require separate reconstruction.
+- **Code and system:** The encrypted system-rebuild-20261107T220404Z.tar.zst.cms kit was decrypted on the Mac. All **five Git repositories were cloned without GitHub**, with commit hashes verified. The system/package inventory and readable root unit files are included; some root-owned NUT settings require separate reconstruction. The reusable **scripts/dr_restore_code.py** bootstrap was subsequently executed on the Mac against the decrypted kit and restored all five repositories with pinned SHA and bundle hash validation, without network access to GitHub.
 - **Locations:** The encrypted snapshots are on the external USB drive and on the separately encrypted Mac. Copies also exist in the Mac OneDrive sync folder and passed local checksum verification. **Actual cloud upload completion remains unverified.**
 - **Key custody:** The RSA private key exists only on the Mac (FileVault, mode 0600). It must be escrowed securely in a second location. Losing both the Mac and key would make encrypted backups unreadable.
 - **Do not use:** The older single-file 2.97 GB CMS artifact critical-state-20261107T214917Z.tar.zst.cms passed checksums but could not be decrypted on the Mac. It is NOT a valid restore point. Use the split archive above.
@@ -420,6 +420,12 @@ On the Mac (substitute the actual timestamped backup ID):
 
 The second command creates a private scratch directory, verifies the backup manifest and SQLite databases, and removes decrypted temporary state. For a true restoration, use the explicit --keep option, inspect file permissions, and transfer selected restored state to a clean replacement host over authenticated SSH. **Never copy the private recovery key to Beastmaster or GitHub.**
 
+The reusable offline code bootstrap is available as \`scripts/dr_restore_code.py\`. After decrypting and extracting the system kit into a clean staging directory, run:
+
+    python3 dr_restore_code.py --bundle-root /protected/path/extracted-system-kit --output /protected/path/new-repos
+
+The bootstrap verifies the encrypted kit's stored Git-bundle checksums and exact pinned commits; it refuses to overwrite an existing nonempty output, and it does not start services or restore credentials. This specific command was executed successfully on the Mac on November 7 and staged all five repositories independently of GitHub.
+
 A replacement host must install the pinned Ubuntu/NVIDIA and service dependencies, restore all five repositories at their recorded SHAs, obtain checksum-verified model weights, restore state and credentials under the correct permissions, reauthorize Tailscale/public routing, and pass model/demo/Reserve/QA tests before serving traffic. The Git-only and SQLite-only drills do not yet establish full service-level recovery.
 
 ### Remaining disaster-recovery work
@@ -427,6 +433,6 @@ A replacement host must install the pinned Ubuntu/NVIDIA and service dependencie
 - **P0:** Escrow a second encrypted copy of the private Mac recovery key, with the passphrase saved outside the Mac and Beastmaster; test decryption.
 - **P0:** Confirm cloud-side OneDrive upload, quota and retention rather than assuming a local sync-folder copy is offsite.
 - **P0:** Finish and checksum the complete external model mirror; keep an independent copy of at least the production Qwen model, embeddings, and failover weights.
-- **P1:** Observe and record the first daily timer-driven backup, Mac-offline retry and 36-hour stale-backup alert.
+- **P1:** Observe and record the first daily timer-driven backup, Mac-offline retry and 36-hour stale-backup alert. The initial manual off-host-sync invocation succeeded on an empty pending queue, and the recovery health service passed; these do not substitute for observing future schedules.
 - **P1:** Execute a whole-platform clean-host restore drill with actual model loading and Tailscale/Funnel, not merely restored files.
 - **P1:** Establish encrypted archival retention, disk capacity alerts, and cross-service point-in-time consistency.
