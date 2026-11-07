@@ -420,7 +420,7 @@ On the Mac (substitute the actual timestamped backup ID):
 
 The second command creates a private scratch directory, verifies the backup manifest and SQLite databases, and removes decrypted temporary state. For a true restoration, use the explicit --keep option, inspect file permissions, and transfer selected restored state to a clean replacement host over authenticated SSH. **Never copy the private recovery key to Beastmaster or GitHub.**
 
-The reusable offline code bootstrap is available as \`scripts/dr_restore_code.py\`. After decrypting and extracting the system kit into a clean staging directory, run:
+The reusable offline code bootstrap is available as `scripts/dr_restore_code.py`. After decrypting and extracting the system kit into a clean staging directory, run:
 
     python3 dr_restore_code.py --bundle-root /protected/path/extracted-system-kit --output /protected/path/new-repos
 
