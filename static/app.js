@@ -12,7 +12,7 @@
   const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
 
   const chats = {};
-  const S = { ws: store.get('iconic.ws') || '', status: null, workspace: null, feed: null, jobs: [], tab: 'ask', history: [], busy: false, folder: 'all', picked: false, asked: new Set(), revealed: '', graph: null, answers: 0, extras: null, totals: { connections: 0, conversations: 0 } };
+  const S = { turnSources: {}, ws: store.get('iconic.ws') || '', status: null, workspace: null, feed: null, jobs: [], tab: 'ask', history: [], busy: false, folder: 'all', picked: false, asked: new Set(), revealed: '', graph: null, answers: 0, extras: null, totals: { connections: 0, conversations: 0 } };
   const sess = (() => { let v = null; try { v = sessionStorage.getItem('iconic.sess'); if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); sessionStorage.setItem('iconic.sess', v); } } catch { v = Math.random().toString(36).slice(2); } return v; })();
   const EMBED = /[?&]embed=1/.test(location.search);
   const PHONE = () => matchMedia('(max-width: 860px)').matches;
@@ -67,15 +67,61 @@
     menu.dataset.html = html; menu.innerHTML = html;
     $$('button', menu).forEach((b) => b.addEventListener('click', () => switchWs(b.dataset.ws)));
   }
-  function switchWs(id) {
-    if (EMBED && window.parent !== window) { try { window.parent.postMessage({ source: 'iconic-demo', type: 'ws', ws: id }, '*'); } catch {} }
-    if (id === S.ws) { S.picked = true; renderHello(); return; }
-    if (S.busy) return;
-    chats[S.ws] = { history: S.history.slice(), html: $('#convo').innerHTML, answers: S.answers };
-    S.ws = id; store.set('iconic.ws', id); S.history = (chats[id] && chats[id].history) || []; S.feed = null; S.folder = 'all'; S.picked = true; S.revealed = ''; S.asked = new Set(); S.graph = null; S.story = null; S.answers = (chats[id] && chats[id].answers) || 0; $('#gDetail').hidden = true; $('#story').hidden = true;
-    $('#convo').innerHTML = (chats[id] && chats[id].html) || '';
+  // Save per-workspace transcript in this tab. The source metadata is needed to
+  // restore clickable citations after a reload, not just the text bubbles.
+  function saveChat() {
+    if (!S.ws) return;
+    const snap = { history: S.history,
+                   html: $$('.turn', $('#convo')).map((el) => el.outerHTML).join(''),
+                   answers: S.answers,
+                   sources: S.turnSources || {}, picked: S.picked };
+    chats[S.ws] = snap;
+    try { if (window.IconicChatState) window.IconicChatState.save(sessionStorage, S.ws, snap); } catch {}
+  }
+  function restoreChat(ws) {
+    let snap = chats[ws];
+    if (!snap) {
+      try { snap = window.IconicChatState && window.IconicChatState.load(sessionStorage, ws); } catch {}
+    }
+    S.history = snap && Array.isArray(snap.history) ? snap.history.slice() : [];
+    S.turnSources = snap && snap.sources ? snap.sources : {};
+    S.answers = snap ? Number(snap.answers) || 0 : 0;
+    S.asked = new Set(S.history.map((h) => h.q));
+    S.picked = !!(snap && snap.picked) || S.history.length > 0;
+    // #hello is a permanent UI node. Never erase it while restoring turns.
+    $$('.turn', $('#convo')).forEach((el) => el.remove());
+    if (snap && snap.html) $('#convo').insertAdjacentHTML('beforeend', snap.html);
     $('#hello').hidden = S.history.length > 0;
-    loadWorkspace(); loadFeed(); loadGraph();
+    // Elements restored via innerHTML have no JavaScript listeners.
+    $$('.turn[data-turn-key]', $('#convo')).forEach((turn) => {
+      const sources = S.turnSources[turn.dataset.turnKey] || [];
+      $$('.cite, .src', turn).forEach((b) => b.addEventListener('click', () => {
+        const src = sources.find((x) => String(x.n) === b.dataset.n);
+        if (!src) return;
+        if (src.web) window.open(src.url, '_blank', 'noopener');
+        else openDoc(src.id, src.snippet);
+      }));
+      const toggle = $('.src-toggle', turn);
+      if (toggle) toggle.addEventListener('click', () => turn.classList.toggle('show-src'));
+      $$('.next[data-q]', turn).forEach((b) => b.addEventListener('click', () => ask(b.dataset.q)));
+      const grow = $('.grow', turn);
+      if (grow) grow.addEventListener('click', () => setTab('intel'));
+    });
+  }
+  function switchWs(id) {
+    if (!id || !((S.status && S.status.workspaces) || []).some((w) => w.id === id)) return false;
+    if (S.busy) return false;
+    if (EMBED && window.parent !== window) { try { window.parent.postMessage({ source: 'iconic-demo', type: 'ws', ws: id }, '*'); } catch {} }
+    if (id === S.ws) { S.picked = true; saveChat(); renderHello(); return true; }
+    saveChat();
+    S.ws = id; store.set('iconic.ws', id);
+    S.feed = null; S.workspace = null; S.folder = 'all'; S.revealed = ''; S.graph = null;
+    S.graphSig = ''; S.story = null;
+    $('#gDetail').hidden = true; $('#story').hidden = true;
+    restoreChat(id);
+    S.picked = true; saveChat();
+    loadWorkspace().catch(() => {}); loadFeed(); loadGraph();
+    return true;
   }
 
   // ---------- status
@@ -112,7 +158,10 @@
   // ---------- workspace + knowledge
   async function loadWorkspace() {
     if (!S.ws) return;
-    const w = await api('/api/workspace?ws=' + encodeURIComponent(S.ws)); S.workspace = w;
+    const requested = S.ws;
+    const w = await api('/api/workspace?ws=' + encodeURIComponent(requested));
+    if (requested !== S.ws) return; // ignore stale previous-workspace responses
+    S.workspace = w;
     $('#wsAvatar').textContent = w.initials || '·';
     $('#wsName').textContent = w.name;
     $('#wsTag').textContent = (w.tagline || (w.sample ? 'SAMPLE' : 'WORKSPACE')).toUpperCase();
@@ -189,7 +238,11 @@
   // ---------- feed
   async function loadFeed() {
     if (!S.ws) return;
-    try { S.feed = await api('/api/feed?ws=' + encodeURIComponent(S.ws)); } catch { return; }
+    const requested = S.ws;
+    let feed;
+    try { feed = await api('/api/feed?ws=' + encodeURIComponent(requested)); } catch { return; }
+    if (requested !== S.ws) return;
+    S.feed = feed;
     renderFeed(); renderHello();
   }
   function ago(ts) { const s = Math.floor(Date.now() / 1000 - ts); return s < 90 ? 'just now' : s < 3600 ? Math.floor(s / 60) + ' min ago' : s < 86400 ? Math.floor(s / 3600) + ' hr ago' : Math.floor(s / 86400) + ' days ago'; }
@@ -334,6 +387,7 @@
     note.innerHTML = `<div class="q"><p>${esc(q)}</p></div><p class="sysnote">${show ? 'Done. Sources and suggestions are back on every answer.' : hide ? 'Done. Clean answers from here. Say “show sources” anytime.' : last ? 'Here’s where that came from. Tap any file to read it.' : 'Ask me something first.'}</p>`;
     $('#convo').appendChild(note); $('#hello').hidden = true; $('#askInput').value = '';
     if (where && last) last.classList.add('show-src');
+    saveChat();
     const target = where && last ? $('.srcs', last) : note; setTimeout(() => scrollWithin($('#convo'), target), 50);
     return true;
   }
@@ -345,6 +399,7 @@
     S.busy = true; S.picked = true; S.asked.add(q); $('#askBtn').disabled = true; $('#askInput').value = '';
     $('#hello').hidden = S.history.length === 0 ? false : $('#hello').hidden;
     const turn = document.createElement('div'); turn.className = 'turn';
+    turn.dataset.turnKey = Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 9);
     turn.innerHTML = `<div class="q"><p>${esc(q)}</p></div><div class="a"><div class="sigil">✦</div><div><div class="a-label">ICONIC · RUNNING ON ${esc(('A PRIVATE COMPUTER').toUpperCase())}</div><div class="reading"><span class="shimmer">Searching ${fmt(S.workspace ? S.workspace.documents : 0)} documents…</span></div><div class="a-body streaming" hidden></div><div class="srcs"></div><div class="a-meta"></div><div class="nexts"></div></div></div>`;
     $('#convo').appendChild(turn);
     if (S.history.length === 0) $('#hello').hidden = true;
@@ -390,6 +445,7 @@
       if (offer) { reading.remove?.(); return; }
       if (!text) throw new Error('The model returned nothing.');
       S.history.push({ q, a: text }); S.answers++;
+      S.turnSources[turn.dataset.turnKey] = sources;
       const showExtras = S.extras === true || (S.extras === null && S.answers <= 2);
       if (!showExtras) turn.classList.add('quiet');
       if (S.extras === null && S.answers === 2) { const n = document.createElement('p'); n.className = 'sysnote'; n.textContent = 'I’ll keep it clean from here. Say “show sources” anytime.'; turn.appendChild(n); }
@@ -415,7 +471,8 @@
       bodyEl.innerHTML = `<p class="a-err">${esc(e.message)}</p>`;
     } finally {
       S.busy = false; $('#askBtn').disabled = false; bodyEl.classList.remove('streaming');
-      S.pinned = false; if (PHONE()) keepAnswer(); else convo.scrollTop = convo.scrollHeight; loadStatus();
+      S.pinned = false; if (PHONE()) keepAnswer(); else convo.scrollTop = convo.scrollHeight;
+      saveChat(); loadStatus();
       if (matchMedia('(pointer: fine)').matches) $('#askInput').focus({ preventScroll: true });
       if (offer) {
         const again = (ok) => { turn.remove(); ask(q, { web: { ok, query: offer } }); };
@@ -431,13 +488,13 @@
     if (!/^https:\/\/(www\.)?iconic\.onl$|^https:\/\/pbchrist\.github\.io$|^http:\/\/localhost(:\d+)?$/.test(e.origin)) return;
     const d = e.data || {}; if (d.source !== 'iconic-site' || d.type !== 'ask' || !d.q) return;
     const go = () => { setTab('ask'); ask(String(d.q).slice(0, 300)); };
-    if (d.ws && d.ws !== S.ws) { switchWs(d.ws); setTimeout(go, 900); } else { S.picked = true; go(); }
+    if (d.ws && d.ws !== S.ws) { if (switchWs(d.ws)) setTimeout(go, 900); } else { S.picked = true; go(); }
   });
 
   // ---------- loops
   (async () => {
     if (window.IconicGraph) IconicGraph.mount($('#graph'), onGraphSelect);
-    await loadStatus(); await loadWorkspace().catch(() => {}); await loadFeed(); loadJobs(); loadGraph();
+    await loadStatus(); restoreChat(S.ws); await loadWorkspace().catch(() => {}); await loadFeed(); loadJobs(); loadGraph();
     if (QS.get('ws') || QS.get('q')) { const w = QS.get('ws'), q = QS.get('q'); if (w) switchWs(w); else S.picked = true; if (q) setTimeout(() => { setTab('ask'); ask(q.slice(0, 300)); }, w ? 900 : 100); }
     if (EMBED && window.parent !== window) { try { window.parent.postMessage({ source: 'iconic-demo', type: 'ready', online: !!(S.status && S.status.model.online) }, '*'); } catch {} }
     setInterval(loadStatus, 5000);

@@ -1,0 +1,51 @@
+"""Evidence-bound vendor buyback reconciliation, with no invented cash payment.
+
+Only answers when the source explicitly supplies all amounts and arithmetic
+checks out. Otherwise leaves question to the normal grounded assistant.
+"""
+import re
+from decimal import Decimal
+
+DOLLARS = r"\$([\d,]+)"
+ELIGIBLE = re.compile(DOLLARS + r"\s+of unopened\s+[^.\n]{0,90}\s+that qualify", re.I)
+CAP = re.compile(r"caps? the buyback at\s*" + DOLLARS, re.I)
+FEE = re.compile(r"(\d{1,2})% restocking fee", re.I)
+NET = re.compile(r"return comes back as a\s*" + DOLLARS + r"\s+credit", re.I)
+EXCESS = re.compile(r"the other\s*" + DOLLARS + r"\s+of eligible stock", re.I)
+INTENT = re.compile(r"(?i)\b(buyback|return\w*|restocking|qualif\w*|eligible|credit|cash)\b")
+
+
+def parse_evidence(text):
+    patterns = (ELIGIBLE, CAP, FEE, NET, EXCESS)
+    matches = [pattern.search(text) for pattern in patterns]
+    if not all(matches):
+        return None
+    eligible, cap, pct, net, excess = [
+        Decimal(match.group(1).replace(",", "")) for match in matches
+    ]
+    if (not 0 <= pct <= 50 or cap > eligible or
+            eligible - cap != excess or cap * (100 - pct) / 100 != net):
+        return None
+    return eligible, cap, pct, net, excess
+
+
+def answer_from_inventory(question, sources):
+    if not INTENT.search(str(question or "")):
+        return None
+    for source in sources:
+        body = str(source.get("chunk") or "")
+        vals = parse_evidence(body)
+        if not vals or source.get("n") is None:
+            continue
+        eligible, cap, pct, net, excess = vals
+        label = source.get("title") or source.get("rel") or "inventory record"
+        n = int(source["n"])
+        deadline = " The request must be made before December 31." if "before December 31" in body else ""
+        return (
+            "The {} documents **${:,.0f}** of eligible unopened stock [{}]. "
+            "The buyback cap is **${:,.0f}** and the restocking fee is **{:,.0f}%**, "
+            "so the permitted return yields a **${:,.0f} vendor credit**, "
+            "not a guaranteed cash payment [{}]. "
+            "**${:,.0f}** of otherwise eligible stock exceeds the return cap [{}].{}"
+        ).format(label, eligible, n, cap, pct, net, n, excess, n, deadline)
+    return None
