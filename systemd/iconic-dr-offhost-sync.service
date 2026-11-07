@@ -1,0 +1,14 @@
+[Unit]
+Description=Verify and copy queued encrypted ICONIC snapshots off Beastmaster
+After=network-online.target
+ConditionPathIsMountPoint=/run/media/patrick/2067738214reward
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/patrick/iconic-command-recovery
+ExecStart=/usr/bin/flock -n /home/patrick/.local/state/iconic-recovery/backup.lock /usr/bin/ionice -c3 /usr/bin/nice -n19 /usr/bin/python3 /home/patrick/iconic-command-recovery/scripts/disaster_recovery_backup_split.py --execute --sync-pending
+Nice=19
+IOSchedulingClass=idle
+CPUQuota=30%
+TimeoutStartSec=2h
+UMask=0077

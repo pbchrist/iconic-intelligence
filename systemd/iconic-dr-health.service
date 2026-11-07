@@ -1,0 +1,12 @@
+[Unit]
+Description=Check age and integrity markers for ICONIC off-host disaster recovery
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/patrick/iconic-command-recovery
+ExecStart=/usr/bin/python3 /home/patrick/iconic-command-recovery/scripts/dr_health.py --max-age-hours 36
+Nice=19
+IOSchedulingClass=idle
+CPUQuota=15%
+TimeoutStartSec=20
+UMask=0077

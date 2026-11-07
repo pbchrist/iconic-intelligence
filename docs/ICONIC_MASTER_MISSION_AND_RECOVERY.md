@@ -1,11 +1,11 @@
 # ICONIC: Master Mission, Engineering Roadmap, and Total-Loss Recovery Plan
 
-**Project:** ICONIC private business intelligence platform  
-**Master record:** 2026-11-07  
-**Status:** Live customer-facing demonstration, audited release in production; broader intelligence engine under development; disaster-recovery work in progress  
-**Source-of-truth code:** [pbchrist/iconic-intelligence](https://github.com/pbchrist/iconic-intelligence)  
-**Release running when this document was prepared:** `784d773f0fb0c14239545185b98b87353915be69` on `dashboard`  
-**Pre-evidence release rollback:** `fda81ac93e0c2c3756e757a0ba0e4801353a08c1`  
+**Project:** ICONIC private business intelligence platform
+**Master record:** 2026-11-07
+**Status:** Demo live; independent Mac private-state and offline code restore tested; full-model mirroring and complete bare-metal restoration remain open
+**Source-of-truth code:** [pbchrist/iconic-intelligence](https://github.com/pbchrist/iconic-intelligence)
+**Release running when this document was prepared:** `784d773f0fb0c14239545185b98b87353915be69` on `dashboard`
+**Pre-evidence release rollback:** `fda81ac93e0c2c3756e757a0ba0e4801353a08c1`
 **Operating principle:** Preserve the live 3090 model and ICONIC demonstration. All significant changes are logged, tested, reversible, and validated before exposure.
 
 ---
@@ -152,7 +152,11 @@ A business asks a natural-language question. The system understands its intent, 
 | Existing QLoRA dealership adapters | Rejected for production promotion |
 | Per-claim private audit and hourly integrity monitor | Deployed |
 | Manual rollback command | Tested and dry-run against production |
-| Full disaster recovery, including off-machine data | See Section 6; must verify archive, offsite copy, model backup, and restoration |
+| Critical private-state disaster recovery | **VERIFIED ON MAC:** 23 CMS parts, 55 SQLite database restores and checksums, plaintext removed |
+| Offline code / system recovery | **VERIFIED ON MAC:** five Git bundles cloned without GitHub |
+| Model file mirror | **IN PROGRESS** on external USB; hash manifest required |
+| Recurring encrypted backups | **ENABLED:** external snapshots, Mac off-host sync retries and health checks |
+| Cloud-offsite and recovery-key escrow | **NOT FULLY VERIFIED / NOT COMPLETE** |
 | Revenue-generating self-serve platform | **Not yet complete** |
 
 **Never substitute HTTP 200, a test fixture pass, or a formatted citation for factual correctness.**
@@ -381,3 +385,48 @@ It is finished as a dependable business platform when:
 - Every deployment and restoration is documented, auditable, reversible, and repeatable by someone other than the builder.
 
 **North star: a trustworthy, private, compounding business intelligence service that earns money and survives the loss of any single machine.**
+
+
+---
+
+## 9. Verified disaster-recovery checkpoint (November 7, 2026)
+
+This section supersedes any earlier in-progress descriptions.
+
+### Independently verified
+
+- **Critical private state:** Backup directory critical-state-20261107T215914Z contains **23 separate CMS-encrypted parts**, a SHA-256 checksum list and a recovery manifest. On the Mac, all parts passed hashes, decrypted into a single Zstandard stream, extracted to a private temporary directory, and **all 55 SQLite databases** passed stored SHA-256 comparison and SQLite quick_check. The second complete drill exited code 0 and removed the temporary plaintext.
+- **Code and system:** The encrypted system-rebuild-20261107T220404Z.tar.zst.cms kit was decrypted on the Mac. All **five Git repositories were cloned without GitHub**, with commit hashes verified. The system/package inventory and readable root unit files are included; some root-owned NUT settings require separate reconstruction.
+- **Locations:** The encrypted snapshots are on the external USB drive and on the separately encrypted Mac. Copies also exist in the Mac OneDrive sync folder and passed local checksum verification. **Actual cloud upload completion remains unverified.**
+- **Key custody:** The RSA private key exists only on the Mac (FileVault, mode 0600). It must be escrowed securely in a second location. Losing both the Mac and key would make encrypted backups unreadable.
+- **Do not use:** The older single-file 2.97 GB CMS artifact critical-state-20261107T214917Z.tar.zst.cms passed checksums but could not be decrypted on the Mac. It is NOT a valid restore point. Use the split archive above.
+
+### Automated backup schedule (installed and enabled)
+
+| Local time, approximate | systemd timer | Purpose |
+| --- | --- | --- |
+| Daily 02:15 plus up to 10 minutes | iconic-dr-snapshot.timer | Create encrypted on-disk SQLite/critical-state snapshot with no need for Mac to be awake |
+| 09:35, 13:35, 17:35, 21:35 plus jitter | iconic-dr-offhost-sync.timer | Send queued ciphertext to Mac; checksum and decrypt-test; place verified ciphertext in OneDrive sync folder |
+| 06:05, 12:05, 18:05, 23:05 | iconic-dr-health.timer | Fail if external disk is absent or latest Mac-verified backup is older than 36 hours |
+
+All jobs use low CPU/IO priority, locks, and never restart Qwen, Reserve, Hermes or the demo. First manual health check passed; first recurring daily snapshot has not yet been observed. A timer's existence does NOT guarantee every future backup will succeed. Failure is reported in the private systemd journal.
+
+### Emergency restore commands and tests
+
+On the Mac (substitute the actual timestamped backup ID):
+
+    ~/.iconic-recovery/verify-recovery-archive.sh critical-state-20261107T215914Z
+    ~/.iconic-recovery/restore-verify.sh critical-state-20261107T215914Z
+
+The second command creates a private scratch directory, verifies the backup manifest and SQLite databases, and removes decrypted temporary state. For a true restoration, use the explicit --keep option, inspect file permissions, and transfer selected restored state to a clean replacement host over authenticated SSH. **Never copy the private recovery key to Beastmaster or GitHub.**
+
+A replacement host must install the pinned Ubuntu/NVIDIA and service dependencies, restore all five repositories at their recorded SHAs, obtain checksum-verified model weights, restore state and credentials under the correct permissions, reauthorize Tailscale/public routing, and pass model/demo/Reserve/QA tests before serving traffic. The Git-only and SQLite-only drills do not yet establish full service-level recovery.
+
+### Remaining disaster-recovery work
+
+- **P0:** Escrow a second encrypted copy of the private Mac recovery key, with the passphrase saved outside the Mac and Beastmaster; test decryption.
+- **P0:** Confirm cloud-side OneDrive upload, quota and retention rather than assuming a local sync-folder copy is offsite.
+- **P0:** Finish and checksum the complete external model mirror; keep an independent copy of at least the production Qwen model, embeddings, and failover weights.
+- **P1:** Observe and record the first daily timer-driven backup, Mac-offline retry and 36-hour stale-backup alert.
+- **P1:** Execute a whole-platform clean-host restore drill with actual model loading and Tailscale/Funnel, not merely restored files.
+- **P1:** Establish encrypted archival retention, disk capacity alerts, and cross-service point-in-time consistency.

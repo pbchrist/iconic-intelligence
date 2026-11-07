@@ -1,0 +1,11 @@
+[Unit]
+Description=Try off-host encrypted snapshot replication several times daily
+
+[Timer]
+OnCalendar=*-*-* 09,13,17,21:35:00
+RandomizedDelaySec=5m
+Persistent=true
+Unit=iconic-dr-offhost-sync.service
+
+[Install]
+WantedBy=timers.target

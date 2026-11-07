@@ -1,0 +1,11 @@
+[Unit]
+Description=Every six hours check ICONIC backup freshness
+
+[Timer]
+OnCalendar=*-*-* 06,12,18,23:05:00
+AccuracySec=2m
+Persistent=false
+Unit=iconic-dr-health.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,15 @@
+[Unit]
+Description=ICONIC encrypted critical-state snapshot to external drive (no model restart)
+Documentation=https://github.com/pbchrist/iconic-intelligence
+ConditionPathIsMountPoint=/run/media/patrick/2067738214reward
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/patrick/iconic-command-recovery
+ExecStart=/usr/bin/flock -n /home/patrick/.local/state/iconic-recovery/backup.lock /usr/bin/ionice -c3 /usr/bin/nice -n19 /usr/bin/python3 /home/patrick/iconic-command-recovery/scripts/disaster_recovery_backup_split.py --execute --external-only
+Nice=19
+IOSchedulingClass=idle
+CPUQuota=30%
+MemoryMax=5G
+TimeoutStartSec=2h
+UMask=0077

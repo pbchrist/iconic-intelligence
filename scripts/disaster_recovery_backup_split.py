@@ -113,6 +113,10 @@ def main():
     import argparse
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument("--execute",action="store_true")
+    p.add_argument("--external-only",action="store_true",
+                   help="Create encrypted USB snapshot without requiring an awake Mac")
+    p.add_argument("--sync-pending",action="store_true",
+                   help="Verify and copy completed encrypted USB backups to Mac")
     args=p.parse_args()
     if not args.execute:
         print("Dry-run: safe split-CMS snapshot to mounted external disk and Mac")
@@ -122,6 +126,18 @@ def main():
         raise RuntimeError("Required cert or external mount missing")
     dr.DEST.mkdir(exist_ok=True)
     dr.WORK.mkdir(exist_ok=True,mode=0o700)
+    if args.sync_pending:
+        pending=sorted(p for p in dr.DEST.glob("critical-state-*")
+                       if p.is_dir() and (p/"SHA256SUMS").is_file()
+                       and not (p/"VERIFIED_ON_MAC").is_file()
+                       and not (p/"INCOMPLETE_DO_NOT_RESTORE").exists())
+        if not pending:
+            print("NO_PENDING_EXTERNAL_SNAPSHOTS")
+            return
+        for p in pending:
+            copy_and_verify_on_mac(p)
+        print("ALL_PENDING_SNAPSHOTS_SYNCHRONIZED",len(pending),flush=True)
+        return
     identifier="critical-state-"+datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     stage=dr.WORK/("staging-"+identifier)
     stage.mkdir(mode=0o700)
@@ -131,7 +147,11 @@ def main():
         dr.manifest(stage,sqlites)
         print("ONLINE_SQLITE_SNAPSHOT_COUNT",len(sqlites),flush=True)
         directory=encrypt_split(stage,identifier)
-        copy_and_verify_on_mac(directory)
+        if args.external_only:
+            print("ENCRYPTED_EXTERNAL_SNAPSHOT_CREATED_OFFHOST_PENDING",
+                  identifier,flush=True)
+        else:
+            copy_and_verify_on_mac(directory)
     finally:
         dr.safely_remove_staging(stage)
 

@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily encrypted ICONIC recovery snapshots
+
+[Timer]
+OnCalendar=*-*-* 02:15:00
+RandomizedDelaySec=10m
+Persistent=false
+Unit=iconic-dr-snapshot.service
+
+[Install]
+WantedBy=timers.target
