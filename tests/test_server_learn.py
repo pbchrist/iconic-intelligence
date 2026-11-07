@@ -77,6 +77,8 @@ class WaitsForVisitors(unittest.TestCase):
 
 class LearnsAfterAnswering(unittest.TestCase):
     def setUp(self):
+        self._was_learning_enabled = server.VISITOR_LEARNING_ENABLED
+        server.VISITOR_LEARNING_ENABLED = True  # explicitly exercise legacy learner in isolated tests
         server.VISITS.clear()
         server.LEARN_TRIED.clear()
         self.got = []
@@ -85,6 +87,7 @@ class LearnsAfterAnswering(unittest.TestCase):
 
     def tearDown(self):
         server.LESSONS.consider = self.real
+        server.VISITOR_LEARNING_ENABLED = self._was_learning_enabled
 
     def test_uses_what_the_server_saved_not_what_the_browser_sends(self):
         server.remember_exchange("n", "s1", "Have we started?", "Not yet [2]. Want to dig in?")

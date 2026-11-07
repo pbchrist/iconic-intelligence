@@ -904,7 +904,19 @@ def build_messages(w, q, hist, sources, web_note="", web_used=None, trying=None)
 
 # ---------------------------------------------------------------- learning from corrections (learn.py)
 
+# Safety rollback 2026-11-06: retained, previously reviewed lessons may be used,
+# but NO live conversation can create a new global instruction by default.
+# This switch may only be re-enabled after adversarial/session isolation and
+# independently verified lesson acceptance have been implemented and tested.
+VISITOR_LEARNING_ENABLED = os.environ.get("ICONIC_VISITOR_LEARNING", "0").lower() in ("1", "true", "yes")
 LESSONS = LEARN.Lessons(STATE) if LEARN else None
+
+def should_auto_learn(session, web_used=False):
+    """Never learn from QA/harness sessions; freeze all visitor learning by default."""
+    sid = str(session or "").lower()
+    is_qa = sid.startswith(("qa-", "test-", "adversarial-", "eval-", "benchmark-"))
+    return VISITOR_LEARNING_ENABLED and not web_used and bool(sid) and not is_qa
+
 VISITS = {}            # (ws, session) -> this visit's exchanges as the server saved them (never the browser's copy)
 LEARN_TRIED = set()    # visits that already produced a lesson: one per visit, so one visitor can't write many
 LEARN_QUEUE = queue.Queue()
@@ -946,7 +958,7 @@ def replay_answer(wid):
 
 def learn_from_visit(wid, session, q, past=None):
     past = list(VISITS.get((wid, session), [])) if past is None else past
-    if not LESSONS or not past or (wid, session) in LEARN_TRIED:
+    if not should_auto_learn(session) or not LESSONS or not past or (wid, session) in LEARN_TRIED:
         return
     case = {"history": past[-4:-1], "prev_q": past[-1]["q"], "prev_a": past[-1]["a"], "q": q}
     try:
@@ -1294,7 +1306,7 @@ class Handler(BaseHTTPRequestHandler):
                 session = str(body.get("session", ""))[:64]
                 save_convo(w.id, session, q, answer, sources, "done", done["ms"])
                 self.sse("done", done)
-                if not web_used:   # learning runs after the visitor has the answer, one at a time
+                if should_auto_learn(session, web_used):   # never from adversarial test sessions
                     LEARN_QUEUE.put((w.id, session, q, list(VISITS.get((w.id, session), []))))
                 remember_exchange(w.id, session, q, answer)
                 JOBS.finish(job, "done", "%d sources · %d tokens · %.1fs" % (len(sources), n_tok, done["ms"] / 1000))
@@ -1325,7 +1337,8 @@ def main():
     MODEL.detect()
     log("model:", MODEL.model if MODEL.online else "not found", MODEL.url)
     threading.Thread(target=watcher, daemon=True).start()
-    threading.Thread(target=learner, daemon=True).start()
+    if VISITOR_LEARNING_ENABLED:
+        threading.Thread(target=learner, daemon=True).start()
     srv = ThreadingHTTPServer((HOST, PORT), Handler)
     srv.daemon_threads = True
     log("ICONIC Command on http://%s:%d  data=%s" % (HOST, PORT, DATA))
