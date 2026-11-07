@@ -19,6 +19,11 @@ OTHER_PERIOD = re.compile(r"(?i)\b(q[124]|201[0-9]|202[0-5]|last month|january|f
 
 def answer_from_ledger(question, sources, history=None):
     q = str(question or "").strip()
+    # Shared intent contract: monetary keywords in a byline question must not
+    # hijack a document-attribution request.
+    import evidence_core
+    if evidence_core.classify(q).kind != "general":
+        return None
     previous = " ".join(str(x.get("q", "")) for x in (history or [])[-2:])
     if not FINANCIAL.search(q) or OTHER_ENTITY.search(q) or OTHER_PERIOD.search(q):
         return None

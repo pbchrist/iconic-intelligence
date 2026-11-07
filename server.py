@@ -11,6 +11,8 @@ import html
 import ipaddress
 import json
 import finance_guard
+import evidence_core
+import retrieval_pipeline
 import deadline_guard
 import buyback_guard
 import sales_share_guard
@@ -801,24 +803,33 @@ LEARNED = Learned()
 SAID_YES = re.compile(r"(?i)^(yes|yeah|yep|yup|sure|ok|okay|go on|more|please)\W*$")
 
 
+# Production default remains BM25; evaluate semantic retrieval only on
+# explicitly opt-in isolated staging instances.
+HYBRID_RETRIEVAL_ENABLED = os.environ.get("ICONIC_HYBRID_RETRIEVAL", "0").lower() in ("1","true","yes")
+
 def find_sources(w, q, history):
+    def search(query):
+        if HYBRID_RETRIEVAL_ENABLED:
+            return retrieval_pipeline.RETRIEVER.search(w, query)
+        return w.search(query)
+
     # Small, auditable lexical expansion for natural-language phrasing. Keep
     # the actual question unchanged for the model. This fixes documents being
     # missed because the speaker says "hanging up his boots" rather than "retires".
     search_q = q
-    if w.id == "northline-supply" and re.search(
+    if not HYBRID_RETRIEVAL_ENABLED and w.id == "northline-supply" and re.search(
         r"(?i)(hanging up (?:his|her|their) boots|stepping into (?:his|her|their) shoes|"
         r"parts.buying (?:guy|person)|purchasing manager.{0,45}retir|"
         r"dale pruitt.{0,40}retir)", q
     ):
         search_q += " Dale Pruitt purchasing manager retires December 19 replacement successor handoff"
     if SAID_YES.search(q.strip()) and history:   # "yes" means the offer at the end of the last answer
-        hits = w.search(search_q + " " + str(history[-1].get("a", ""))[-250:])
+        hits = search(search_q + " " + str(history[-1].get("a", ""))[-250:])
     else:
         # Reuse the last three user turns rather than only the immediately
         # preceding one. A challenge like "Dana says we lost; confirm it" must
         # still retrieve the Briggs case named two turns earlier.
-        hits = w.search(search_q + " " + " ".join(str(h.get("q", "")) for h in history[-3:]))
+        hits = search(search_q + " " + " ".join(str(h.get("q", "")) for h in history[-3:]))
     with w.lock:
         docs = {d["id"]: d for d in w.docs}
         first_chunk = {}
@@ -841,7 +852,7 @@ def find_sources(w, q, history):
                 have.add(d["id"])
     # The Q3 billing report is authoritative for firm-wide billed/collected questions,
     # including Spanish phrasing. Put it in context even when lexical retrieval misses.
-    if w.id == "hollis-reyes" and re.search(
+    if not HYBRID_RETRIEVAL_ENABLED and w.id == "hollis-reyes" and re.search(
         r"(?i)(q3|third[\s-]+quarter|tercer trimestre|factur|billing|billed|collected|cobr|recaud)", q
     ):
         target = next((d for d in docs.values() if d["rel"].endswith("2026-q3-billing-report.md")), None)
@@ -1286,7 +1297,11 @@ class Handler(BaseHTTPRequestHandler):
                 messages = build_messages(w, q, body.get("history") or [], sources, web_note, web_used)
                 verified = None
                 if not web_used and not web_note:
-                    verified = finance_guard.answer_from_ledger(q, sources, body.get("history") or [])
+                    extracted = evidence_core.documentary_author(q, sources, body.get("history") or [])
+                    verified = (extracted.content if extracted is not None and
+                                evidence_core.verify_documentary_answer(extracted,sources) else None)
+                    if verified is None:
+                        verified = finance_guard.answer_from_ledger(q, sources, body.get("history") or [])
                     if verified is None:
                         verified = sales_share_guard.answer_from_sales(q, sources)
                     if verified is None:
@@ -1321,7 +1336,8 @@ class Handler(BaseHTTPRequestHandler):
                 done = {"ms": int((time.time() - t0) * 1000), "tokens": n_tok,
                         "tps": round(n_tok / secs, 1) if secs > 0 else 0, "model": MODEL.label,
                         "private": MODEL.is_private(), "cost": 0, "location": LOCATION, "web": web_used,
-                        "answer_method": "verified_evidence" if verified is not None else "model"}
+                        "answer_method": "verified_evidence" if verified is not None else "model",
+                        "retrieval_method": "hybrid_local" if HYBRID_RETRIEVAL_ENABLED else "bm25"}
                 cited = {int(n) for n in re.findall(r"\[(\d+)(?:\s*,\s*\d+)*\]", answer)}
                 cited |= {int(n) for grp in re.findall(r"\[((?:\d+\s*,\s*)+\d+)\]", answer) for n in re.split(r"\s*,\s*", grp)}
                 cited_docs = [s["id"] for s in sources if s["n"] in cited and s.get("id") is not None]
