@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Run source-grounded adversarial questions against the actual public demo."""
-import json, re, sys, time, urllib.request, urllib.error
+import json, re, sys, time, secrets, urllib.request, urllib.error
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -18,7 +18,7 @@ TESTS = [
 ]
 
 def ask(name, wid, q):
-    req = urllib.request.Request(BASE + "/api/ask", json.dumps({"q":q,"ws":wid,"session":"qa-hardening-20261106-"+name,"history":[]}).encode("utf-8"),
+    req = urllib.request.Request(BASE + "/api/ask", json.dumps({"q":q,"ws":wid,"session":"qa-"+name[:35]+"-"+secrets.token_hex(8),"history":[]}).encode("utf-8"),
                                  headers={"Content-Type":"application/json"}, method="POST")
     sources, answer, finished, errors = [], "", False, []
     with urllib.request.urlopen(req, timeout=120) as resp:

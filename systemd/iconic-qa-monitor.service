@@ -1,0 +1,7 @@
+[Unit]
+Description=ICONIC lightweight live adversarial acceptance monitor
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /home/patrick/iconic-command/scripts/qa_monitor.py --count 3
+TimeoutStartSec=480

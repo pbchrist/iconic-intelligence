@@ -1,0 +1,52 @@
+{
+  "cases": [
+    {
+      "id": "2a5b2ae660c126d2b6",
+      "workspace": "hollis-reyes",
+      "question": "How much did Hollis & Reyes bill and collect in Q3 2026?",
+      "source_rel": "billing/2026-q3-billing-report.md",
+      "evidence": [
+        "$1,284,000",
+        "$1,027,000"
+      ],
+      "require_first": true,
+      "reviewed_at": "2026-11-07T02:58:07+00:00"
+    },
+    {
+      "id": "689e1acdb78d79832a",
+      "workspace": "hollis-reyes",
+      "question": "¿Cuánto facturó el despacho en el tercer trimestre de 2026 y cuánto cobró?",
+      "source_rel": "billing/2026-q3-billing-report.md",
+      "evidence": [
+        "$1,284,000",
+        "$1,027,000"
+      ],
+      "require_first": true,
+      "reviewed_at": "2026-11-07T02:58:07+00:00"
+    },
+    {
+      "id": "64cc5c8f1f8a0cfe56",
+      "workspace": "northline-supply",
+      "question": "How much Pacific Brass stock qualifies for buyback, what is the return cap, and what credit would we receive after fees?",
+      "source_rel": "inventory/2026-10-slow-movers.md",
+      "evidence": [
+        "$23,100",
+        "$15,000",
+        "$12,750"
+      ],
+      "require_first": false,
+      "reviewed_at": "2026-11-07T02:58:07+00:00"
+    },
+    {
+      "id": "116fde21ab847745ac",
+      "workspace": "northline-supply",
+      "question": "Since we lost the Evergreen contract last month, what now? When does its pricing agreement renew?",
+      "source_rel": "customers/key-accounts.md",
+      "evidence": [
+        "January 15, 2027"
+      ],
+      "require_first": false,
+      "reviewed_at": "2026-11-07T02:58:07+00:00"
+    }
+  ]
+}

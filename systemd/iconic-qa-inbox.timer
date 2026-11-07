@@ -1,0 +1,9 @@
+[Unit]
+Description=Scan ICONIC QA inbox every ten minutes
+
+[Timer]
+OnBootSec=4min
+OnUnitActiveSec=10min
+
+[Install]
+WantedBy=timers.target

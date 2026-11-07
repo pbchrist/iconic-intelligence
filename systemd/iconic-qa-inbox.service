@@ -1,0 +1,6 @@
+[Unit]
+Description=ICONIC independent QA result intake
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /home/patrick/iconic-command/qa_bridge.py scan-inbox
