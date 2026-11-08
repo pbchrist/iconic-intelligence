@@ -31,6 +31,19 @@ The private intelligence moat thesis: a business's unique, permissioned and veri
 - The first paid service is a human-reviewed reliability/evidence audit drawing on the provenance framework in Intelligence Reserve, evaluation via the adversarial harness, and optional separate QLoRA research. There is no automatic weight update or customer-data training.
 - Proposed $1,500 founding pilot is NOT finalized or purchasable at present. Payment collection is OFF; secure future checkout requires actual merchant and tax approval, explicit buyer approval, seller-scoped authorization, signed payment confirmation and human-reviewed report. This public service accepts nonconfidential scope categories only.
 
+## Seven-offer ICONIC Agent-Native Marketplace (November 7, 2026)
+
+Public overview: https://iconic.onl/agents/marketplace/
+Canonical machine manifest: https://iconic.onl/agents/marketplace/manifest.json
+Seven product definitions: https://iconic.onl/agents/marketplace/offers.json
+Live MCP: https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp
+
+Existing products exposed under one specialist marketplace interface: Agent Assurance (agent-reliability-evidence-audit), Agent Integration (agent-readiness), Code Assurance (code-risk-review), Data Reconciliation (dataset-diff-report), Private AI Infrastructure (ai-feasibility), Competitive Intelligence (competitor-change-brief), and Talent Mapping (role-talent-map).
+
+Nine real public tools: marketplace_describe, marketplace_list_offers, marketplace_get_offer, marketplace_quote, marketplace_preflight, marketplace_reconcile_synthetic, marketplace_request_order, marketplace_get_order, marketplace_begin_checkout.
+
+The marketplace is public, discoverable and operational for no-charge fit checks, bounded fictional reconciliation and unpaid order requests. **None of the seven products has an approved sale price; live payments are OFF and no paid fulfillment can be presumed.** Separate seller/buyer approvals, signed payment verification, and human-reviewed output apply before a real paid order can proceed. Hypothetical prices are unapproved experiments, not final quotes. Do not submit secrets or customer records to public tools.
+
 ## Services and delivery
 
 ICONIC puts a private AI and a staff of agents on a computer in the client's own office. The AI knows the business from its own files; the agents do recurring work on a schedule, check their own work and report back.
