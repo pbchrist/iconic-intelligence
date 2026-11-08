@@ -1,3 +1,5 @@
+> **NEW CONVERSATION / AGENT? START HERE:** [ICONIC cross-repository architecture and operating rules](https://github.com/pbchrist/agent-native-suite/blob/main/START_HERE.md). This is the canonical map of ownership, current readiness, safety constraints and handoff instructions. Verify live status before acting.
+
 # ICONIC. Managed Intelligence
 
 Production website for ICONIC.
