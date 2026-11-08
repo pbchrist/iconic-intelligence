@@ -8,7 +8,14 @@
     if (!raw || typeof raw !== 'object') return null;
     const history = Array.isArray(raw.history) ? raw.history.slice(-MAX_HISTORY)
       .filter((x) => x && typeof x.q === 'string' && typeof x.a === 'string')
-      .map((x) => ({ q: x.q.slice(0, 600), a: x.a.slice(0, 12000) })) : [];
+      .map((x) => ({
+        q: x.q.slice(0, 600), a: x.a.slice(0, 12000),
+        sources: Array.isArray(x.sources) ? x.sources.slice(0, 12).filter((s) => s &&
+          Number.isInteger(Number(s.n)) && Number.isInteger(Number(s.id)) &&
+          typeof s.rel === 'string')
+          .map((s) => ({ n: Number(s.n), id: Number(s.id), rel: s.rel.slice(0, 300),
+                         title: String(s.title || '').slice(0, 180) })) : []
+      })) : [];
     const html = typeof raw.html === 'string' && raw.html.length <= MAX_HTML_BYTES ? raw.html : '';
     const sources = raw.sources && typeof raw.sources === 'object' && !Array.isArray(raw.sources) ? raw.sources : {};
     return { history, html, sources, answers: Math.max(0, Math.min(10000, Number(raw.answers) || 0)), picked: !!raw.picked };

@@ -69,7 +69,9 @@ def question(base, ws, prompt, history, session):
     except Exception as exc:
         output["error"]=str(exc)
     output["elapsed_s"]=round(time.monotonic()-start,2)
-    output["source_refs"]=[{"n":s.get("n"),"rel":s.get("rel"),"title":s.get("title")} for s in output["sources"]]
+    output["source_refs"]=[{"n":s.get("n"),"id":s.get("id"),
+                            "rel":s.get("rel"),"title":s.get("title")}
+                           for s in output["sources"]]
     output.pop("sources",None)
     return output
 
@@ -100,7 +102,8 @@ def run_case(case,base,now):
         result["mode"]=mode
         outputs.append(result)
         if result["answer"] and not result["error"]:
-            history.append({"q":q,"a":result["answer"]})
+            history.append({"q":q,"a":result["answer"],
+                            "sources":result["source_refs"]})
             history=history[-5:]
         if result["error"] or result["http_status"]>=400:
             break
@@ -144,7 +147,7 @@ def main():
         steps=row.get("steps",[])
         short_answer=(steps[-1]["answer"][:82] if steps else "BROWSER_ONLY").replace("\n"," ")
         errs=[s.get("error") for s in steps if s.get("error")]
-        print(f"CASE {n:02d}/45 {row['original_verdict']:4} -> returned {len(steps)} steps; "
+        print(f"CASE {n:02d}/45 OLD_{row['original_verdict']:4} -> returned {len(steps)} steps; "
               f"error={str(errs)[:60]} elapsed={sum(s.get('elapsed_s',0) for s in steps):.1f}s :: {short_answer}",
               flush=True)
     print("API_REPLAY_COMPLETED",len(prev),"/45","REPORT",args.out,flush=True)

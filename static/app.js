@@ -453,7 +453,11 @@
       }
       if (offer) { reading.remove?.(); return; }
       if (!text) throw new Error('The model returned nothing.');
-      S.history.push({ q, a: text }); S.answers++;
+      // Previous source numbers have meaning only alongside this turn's
+      // original file mapping. Store bounded metadata, scoped to this workspace.
+      S.history.push({ q, a: text, sources: sources.filter((s) => !s.web)
+        .slice(0, 12).map((s) => ({ n: s.n, id: s.id, rel: s.rel, title: s.title })) });
+      S.answers++;
       S.turnSources[turn.dataset.turnKey] = sources;
       const showExtras = S.extras === true || (S.extras === null && S.answers <= 2);
       if (!showExtras) turn.classList.add('quiet');

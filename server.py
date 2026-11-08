@@ -12,6 +12,8 @@ import ipaddress
 import json
 import finance_guard
 import evidence_core
+import dialogue_contract
+import approval_contract
 import evidence_trace
 import evidence_verifier
 import secrets
@@ -848,6 +850,17 @@ SAID_YES = re.compile(r"(?i)^(yes|yeah|yep|yup|sure|ok|okay|go on|more|please)\W
 HYBRID_RETRIEVAL_ENABLED = os.environ.get("ICONIC_HYBRID_RETRIEVAL", "0").lower() in ("1","true","yes")
 
 def find_sources(w, q, history):
+    task = dialogue_contract.intent(q)
+    # Creative content is not evidence-backed business analysis. Do not
+    # attach unrelated business documents or include them in the prompt.
+    if task == "creative":
+        return []
+    if task == "prior_source_challenge" and dialogue_contract.referenced_prior_document(
+            q, history, w) is None:
+        # When the caller lost an earlier source mapping, searching for the
+        # numeral "[2]" only invents a relationship to an unrelated document.
+        # Keep the model honest and ask for the original card.
+        return []
     def search(query):
         if HYBRID_RETRIEVAL_ENABLED:
             return retrieval_pipeline.RETRIEVER.search(w, query)
@@ -870,19 +883,20 @@ def find_sources(w, q, history):
         # preceding one. A challenge like "Dana says we lost; confirm it" must
         # still retrieve the Briggs case named two turns earlier.
         hits = search(search_q + " " + " ".join(str(h.get("q", "")) for h in history[-3:]))
+    referenced_doc = dialogue_contract.referenced_prior_document(q, history, w)
     with w.lock:
         docs = {d["id"]: d for d in w.docs}
         first_chunk = {}
         for c in w.chunks:
             first_chunk.setdefault(c["doc"], c)
-    # Broad questions ("what should I worry about?") match few words; widen to the newest files.
-    broad = re.search(r"(?i)\b(worr|concern|missing|priorit|urgent|attention|overview|summar|happening|"
-                      r"this week|today|going on|should i know|risks?)\b", q)
+    # Widen sources only for company-wide overviews. A focused vendor,
+    # customer, case, or report question must not get unrelated source cards.
+    broad = task == "company_overview"
     off_topic = bool(WEB and WEB.likely_needs_web(q)) and len(hits) < 2
     # Fallback documents are for genuinely broad questions or an empty match
     # only. Appending recent unrelated files to a focused answer produced
     # unsupported side claims and wrong source markers in external QA.
-    if (not hits or broad) and not off_topic:
+    if broad and not off_topic:
         have = {c["doc"] for _, c in hits}
         for d in sorted(docs.values(), key=lambda d: d["date"], reverse=True):
             if len(hits) >= 7:
@@ -900,6 +914,18 @@ def find_sources(w, q, history):
             match = next((c for c in w.chunks if c["doc"] == target["id"]), None)
             if match:
                 hits = [(9999, match)] + [(score, c) for score, c in hits if c["doc"] != target["id"]]
+    # Preserve prior citation provenance, after matching id and relative path
+    # to the currently selected workspace's own indexed documents.
+    if referenced_doc is not None:
+        matching = [c for c in w.chunks if c["doc"] == referenced_doc["id"]]
+        if matching:
+            if task == "prior_source_challenge":
+                # A source challenge must show ONLY the challenged document:
+                # unrelated cards appear to corroborate claims they never made.
+                hits = [(10000-i,c) for i,c in enumerate(matching[:3])]
+            else:
+                hits = ([(10000-i,c) for i,c in enumerate(matching[:3])] +
+                        [(score,c) for score,c in hits if c["doc"] != referenced_doc["id"]])
     # One citation marker per *document*, even when two matching passages of
     # that document are retrieved. Previously the same file appeared as [1]
     # and [2], making evidence tracing ambiguous.
@@ -924,6 +950,10 @@ def build_messages(w, q, hist, sources, web_note="", web_used=None, trying=None)
     ctx = "\n\n".join("[%d] %s (%s, %s)\n%s" % (s["n"], s["title"], s["rel"], s["date"], s["chunk"])
                       for s in sources) or "(no matching documents)"
     meta = w.meta
+    task = dialogue_contract.intent(q)
+    if task == "creative":
+        hist = []
+    reference_note = dialogue_contract.recent_source_mapping(q, hist, w, sources)
     brief = (FEED.get(w.id) or {}).get("items") or []
     brief_txt = "\n".join("- [%s] %s %s" % (b["severity"], b["title"], b["detail"]) for b in brief[:5]) or "(not written yet)"
     lessons = LESSONS.prompt_block(trying) if LESSONS else ""
@@ -957,8 +987,10 @@ def build_messages(w, q, hist, sources, web_note="", web_used=None, trying=None)
     else:
         tail = "ENDING: respond to this question only. No unsolicited briefing, unrelated risk or other business tangent."
     tail = "\n\n(" + tail + ")"
-    messages.append({"role": "user", "content": "Files that may be relevant:\n\n%s\n\n%s---\nVisitor's message: %s%s"
-                     % (ctx, web_note + "\n\n" if web_note else "", q, tail)})
+    messages.append({"role": "user", "content":
+                     "Files that may be relevant:\n\n%s\n\n%s%s---\nVisitor's message: %s%s"
+                     % (ctx, (reference_note + "\n\n") if reference_note else "",
+                        web_note + "\n\n" if web_note else "", q, tail)})
     return messages
 
 
@@ -1358,10 +1390,30 @@ class Handler(BaseHTTPRequestHandler):
                 messages = build_messages(w, q, body.get("history") or [], sources, web_note, web_used)
                 verified = None
                 extracted = None
+                source_proof = None
+                approval_result = None
                 if not web_used and not web_note:
-                    extracted = evidence_core.documentary_author(q, sources, body.get("history") or [])
-                    verified = (extracted.content if extracted is not None and
-                                evidence_core.verify_documentary_answer(extracted,sources) else None)
+                    if approval_contract.is_status_question(q):
+                        approval_result = approval_contract.extract_approval(q,sources)
+                        if approval_result is not None:
+                            verified = approval_result.text
+                            if approval_result.verified and not approval_contract.verify_approval(
+                                    approval_result,sources):
+                                verified = ("I cannot independently verify the "
+                                            "claimed approval against those records.")
+                    source_proof = dialogue_contract.answer_prior_source(
+                        q, body.get("history") or [], w, sources)
+                    if source_proof is not None:
+                        verified = source_proof.text
+                        if source_proof.verified and not dialogue_contract.verify_prior_source_proof(
+                                source_proof,sources,w):
+                            verified = ("I cannot independently verify the earlier source "
+                                        "reference against the current business records.")
+                    if verified is None:
+                        extracted = evidence_core.documentary_author(
+                            q, sources, body.get("history") or [])
+                        verified = (extracted.content if extracted is not None and
+                                    evidence_core.verify_documentary_answer(extracted,sources) else None)
                     if verified is None:
                         verified = finance_guard.answer_from_ledger(q, sources, body.get("history") or [])
                     if verified is None:
@@ -1375,7 +1427,14 @@ class Handler(BaseHTTPRequestHandler):
                     if verified is None:
                         verified = deadline_guard.draft_from_deadline(q, sources)
                 intent = evidence_core.classify(q).kind
-                method = ("verified_byline" if extracted is not None and verified == extracted.content
+                method = ("verified_decision" if approval_result is not None
+                          and approval_result.verified and approval_contract.verify_approval(
+                              approval_result,sources)
+                          else "decision_abstention" if approval_result is not None
+                          else "verified_excerpt" if source_proof is not None and source_proof.verified
+                          and dialogue_contract.verify_prior_source_proof(source_proof,sources,w)
+                          else "prior_source_abstention" if source_proof is not None
+                          else "verified_byline" if extracted is not None and verified == extracted.content
                           else "rule_based" if verified is not None else "model")
                 audit_event("routing.selected", **audit_base, intent=intent,
                             method=method, source_count=len(sources))
