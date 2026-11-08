@@ -31,6 +31,13 @@ Owner-led businesses and professional firms with years of their own records: law
 - [Book the free 30-minute private AI check](https://calendly.com/patrick-iconic/30min): where the business's data goes today (including AI tools staff already use), what is exposed, and whether a self-hosted AI is right for it.
 - Email patrick@iconic.onl or call 206-773-8214. You talk to Patrick, not a sales team.
 
+## Agent discovery hub and problem-specific service pages (November 8, 2026)
+
+- [All ICONIC AI agent tools and MCP services](https://iconic.onl/agents/): human-readable directory with canonical machine manifests and honest availability.
+- [Data reconciliation for AI agents](https://iconic.onl/agents/data-reconciliation/): free synthetic discrepancy demonstration via the marketplace MCP; paid real-data worker and checkout are not yet active.
+- [AI agent reliability audit and MCP preflight](https://iconic.onl/agents/assurance/): free static preflight and sample-report tools; human-reviewed paid audit is not yet active.
+- Directory publication does not automatically connect tools to an AI client. Connection and authorization are client-specific.
+
 ## ICONIC Intelligence Reserve — live agent-facing free assessment
 
 - [Canonical Reserve page](https://iconic.onl/agents/reserve/) and [machine manifest](https://iconic.onl/agents/reserve/manifest.json).

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://iconic.onl/</loc><lastmod>2026-10-31</lastmod></url>
+  <url><loc>https://iconic.onl/</loc><lastmod>2026-11-08</lastmod></url>
+  <url><loc>https://iconic.onl/agents/</loc><lastmod>2026-11-08</lastmod></url>
+  <url><loc>https://iconic.onl/agents/data-reconciliation/</loc><lastmod>2026-11-08</lastmod></url>
+  <url><loc>https://iconic.onl/agents/assurance/</loc><lastmod>2026-11-08</lastmod></url>
   <url><loc>https://iconic.onl/llms.txt</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://iconic.onl/agents/reserve/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://iconic.onl/agents/reserve/manifest.json</loc><lastmod>2026-11-04</lastmod></url>

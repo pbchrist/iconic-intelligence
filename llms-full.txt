@@ -10,6 +10,14 @@
 - **Who it's for:** law firms, wealth managers, real estate firms, accounting firms, owner-run companies and dealerships with years of their own records.
 - **Start:** free 30-minute private AI check: https://calendly.com/patrick-iconic/30min · patrick@iconic.onl · 206-773-8214
 
+## Agent discovery hub and problem-specific pages (November 8, 2026)
+
+- Human and agent entrypoint: https://iconic.onl/agents/
+- Data reconciliation: https://iconic.onl/agents/data-reconciliation/ — free fictional dataset discrepancy test via the marketplace; paid real-data worker and checkout disabled.
+- Agent Assurance: https://iconic.onl/agents/assurance/ — free static MCP contract preflight and example report; paid human-reviewed audit disabled.
+- Official MCP Registry listing: https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.pbchrist/iconic-agent-marketplace
+- Registry publication supports discovery by clients and aggregators, but does not automatically grant an AI assistant access to ICONIC tools.
+
 ## ICONIC Intelligence Reserve — agent-accessible free assessment (November 4, 2026)
 
 The private intelligence moat thesis: a business's unique, permissioned and verifiable decision-to-outcome history is its durable asset. Model and vendor are replaceable.
