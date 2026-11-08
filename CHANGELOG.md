@@ -1,4 +1,5 @@
-## 2026-11-07
+## 2026-11-07 — Agent marketplace
+- Added canonical ICONIC agent-native marketplace: seven existing business product contracts, nine live MCP tools, free bounded preflight/synthetic dataset reconciliation and unpaid order requests. Paid checkout remains disabled and prices are unapproved proposals. Added machine-readable discovery, offers, homepage/AI docs/sitemap references.\n\n## 2026-11-07
 - Added canonical machine-readable Agent Assurance offer and public seven-tool MCP references. Free preflight and unpaid scoped intake are working; paid checkout stays disabled. Corrected stale Reserve tool-count copy in AI reference files.
 
 # ICONIC website (iconic.onl) — change log
