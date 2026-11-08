@@ -4,9 +4,24 @@
 **Master record:** 2026-11-07
 **Status:** Demo live; independent Mac private-state and offline code restore tested; full-model mirroring and complete bare-metal restoration remain open
 **Source-of-truth code:** [pbchrist/iconic-intelligence](https://github.com/pbchrist/iconic-intelligence)
-**Release running when this document was prepared:** `784d773f0fb0c14239545185b98b87353915be69` on `dashboard`
+**Current verified production release (2026-11-07):** `0b7d6f672b38d410e6616ee6c6b998a6c664af97` on `dashboard`
 **Pre-evidence release rollback:** `fda81ac93e0c2c3756e757a0ba0e4801353a08c1`
 **Operating principle:** Preserve the live 3090 model and ICONIC demonstration. All significant changes are logged, tested, reversible, and validated before exposure.
+
+---
+
+## Latest production release verification (November 7, 2026)
+
+This section supersedes earlier snapshots and historical 'latest release' statements. The original encrypted cold-rebuild archive remains pinned to its historical 2026-11-07T220404Z snapshot and was NOT silently modified.
+
+- Production code and remote GitHub branch dashboard: SHA **0b7d6f672b38d410e6616ee6c6b998a6c664af97**, clean and verified against upstream.
+- Previous known-good rollback: **784d773f0fb0c14239545185b98b87353915be69**. The release was fast-forward deployed using the health-checked web updater. A rollback dry-run passed; rollback itself was not applied.
+- Complete engineering and evidence release report: **docs/DEMO_RELIABILITY_ROOTCAUSE_RELEASE_2026_11_07.md**, also present in the production repository at the same relative path.
+- Root causes corrected: save previous-turn citation/file mappings across reloads; validate source ID AND relative path within current workspace; quote exact prior-document lines or abstain; detect unsupported claims about financial amounts in a prior citation; avoid irrelevant source padding for focused questions and creative requests; distinguish proposed/feasible/pending from approved using dated evidence; improve broad financial-risk evidence retrieval.
+- Verified *after* deployment: **154 automated Python tests**, **18/18 live targeted regression cases**, real source-citation challenge tests, cross-business conversation switch/isolation browser tests, and general desktop/mobile UI tests. Public homepage and demo gateway HTTP 200. Private evidence audit integrity passed with no overdue open requests. Qwen3.8-27B remained online under unchanged PID 2717.
+- The original November 6 audit failed 22 of 45 tests. A later API replay covered 45 identifiers (with two browser-only markers) and prompted further fixes. **There has NOT been a new independent 45/45 regrade across all original attempts and exact browser conditions.** Neither operational health nor a targeted test pass proves perfect factual accuracy.
+- A fresh encrypted system-rebuild snapshot still needs to include the new production code and documents. The existing older snapshot remains a valid pinned historical recovery artifact, not evidence that the latest app bytes are included.
+- Further work: independent full 45-question browser grade, novel holdout questions, generalized claim-to-source entailment, secure production-grade tenant authorization, and independently verified cloud/offsite recovery-key escrow.
 
 ---
 
@@ -138,7 +153,7 @@ A business asks a natural-language question. The system understands its intent, 
 | Component | Actual status |
 | --- | --- |
 | Public ICONIC demo / Qwen3.8-27B | **LIVE**, controlled by Beastmaster |
-| Latest deployed application | `784d773`, audited shadow-mode foundation |
+| Latest deployed application | `0b7d6f6`, citation continuity, approval-status verification and focused-retrieval improvements |
 | Desktop/mobile switching and source UI | Tested on demo, not a universal quality certificate |
 | Historical adversarial 45-case result | 23/45 on older build; **full new independent grade still open** |
 | 18 targeted reliability questions | 18/18 on tested release |
@@ -154,7 +169,7 @@ A business asks a natural-language question. The system understands its intent, 
 | Manual rollback command | Tested and dry-run against production |
 | Critical private-state disaster recovery | **VERIFIED ON MAC:** 23 CMS parts, 55 SQLite database restores and checksums, plaintext removed |
 | Offline code / system recovery | **VERIFIED ON MAC:** five Git bundles cloned without GitHub |
-| Model file mirror | **IN PROGRESS** on external USB; hash manifest required |
+| Model file mirror | **VERIFIED:** external USB eight-file hash manifest; 3 essential Mac models compared by SHA-256 |
 | Recurring encrypted backups | **ENABLED:** external snapshots, Mac off-host sync retries and health checks |
 | Cloud-offsite and recovery-key escrow | **NOT FULLY VERIFIED / NOT COMPLETE** |
 | Revenue-generating self-serve platform | **Not yet complete** |
@@ -259,7 +274,7 @@ A business asks a natural-language question. The system understands its intent, 
 
 | Component | Repository | Verified commit at inventory |
 | --- | --- | --- |
-| Live ICONIC demo | `pbchrist/iconic-intelligence` | `784d773f0fb0c14239545185b98b87353915be69` |
+| Live ICONIC demo | `pbchrist/iconic-intelligence` | `0b7d6f672b38d410e6616ee6c6b998a6c664af97` |
 | Intelligence Reserve | `pbchrist/iconic-intelligence-reserve` | `e4ea2af` |
 | Adversarial Harness | `pbchrist/beastmaster-adversarial-harness` | `6627fb2` |
 | Training research | `pbchrist/beastmaster-training` | `976107c` |
