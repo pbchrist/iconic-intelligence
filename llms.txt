@@ -58,6 +58,7 @@ Owner-led businesses and professional firms with years of their own records: law
 - **Live MCP:** https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp
 - Live agent discovery: https://patrick-beastmaster.tailf32530.ts.net/marketplace/agents
 - Live offers catalog: https://patrick-beastmaster.tailf32530.ts.net/marketplace/offers
+- **Official MCP Registry (v0.1.0 confirmed):** https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.pbchrist/iconic-agent-marketplace
 - Seven offerings: Agent Assurance, Talent Mapping, Competitive Intelligence, Data Reconciliation, Code Assurance, AI Infrastructure Audit, and Agent Integration.
 - Nine tools include market/offer discovery, quote, static preflight, a real deterministic fictional dataset reconciliation, and a human-authorized **unpaid** scope request with private order status.
 - **Current commercial status: discovery and no-charge intake are live. All approved prices are null; seven services are NOT yet purchasable.** Hypothetical numeric prices are proposal values, not binding quotes. Paid Stripe checkout is disabled until seller-approved scope, merchant tax/terms/price approval, protected exact-price Payment Links, and separate human buyer authorization. The signed webhook and delivery path are built but not yet live for this marketplace.

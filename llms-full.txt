@@ -37,6 +37,7 @@ Public overview: https://iconic.onl/agents/marketplace/
 Canonical machine manifest: https://iconic.onl/agents/marketplace/manifest.json
 Seven product definitions: https://iconic.onl/agents/marketplace/offers.json
 Live MCP: https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp
+Official MCP Registry: https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.pbchrist/iconic-agent-marketplace (version 0.1.0)
 
 Existing products exposed under one specialist marketplace interface: Agent Assurance (agent-reliability-evidence-audit), Agent Integration (agent-readiness), Code Assurance (code-risk-review), Data Reconciliation (dataset-diff-report), Private AI Infrastructure (ai-feasibility), Competitive Intelligence (competitor-change-brief), and Talent Mapping (role-talent-map).
 
