@@ -1,0 +1,20 @@
+name: Real independent MCP client interoperability
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '43 7 * * *'
+permissions:
+  contents: read
+jobs:
+  real-client:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned official MCP Python client
+        run: python -m pip install 'mcp==2.3.0'
+      - name: Verify both remote MCP endpoints from an unaffiliated network
+        run: python scripts/test-real-mcp-client.py
