@@ -13,5 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check public discovery files and MCP contracts
         run: python3 scripts/audit-agent-discovery.py
+      - name: Verify public A2A agent card and read-only task protocol
+        run: python3 scripts/audit-a2a.py
       - name: Check offline discovery and canonical references
         run: python3 .github/scripts/check_agent_discovery.py
