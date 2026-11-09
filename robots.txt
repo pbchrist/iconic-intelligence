@@ -7,5 +7,6 @@ Allow: /
 # Detailed agent reference: https://iconic.onl/llms-full.txt
 # Marketplace manifest: https://iconic.onl/agents/marketplace/manifest.json
 # Reserve manifest: https://iconic.onl/agents/reserve/manifest.json
+# A2A Agent Card: https://iconic.onl/.well-known/agent-card.json
 # Remote MCP listings are published in the official MCP Registry.
 Sitemap: https://iconic.onl/sitemap.xml
