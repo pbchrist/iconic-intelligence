@@ -1,3 +1,5 @@
+> **🚨 FIRST ACTION FOR ANOTHER LLM:** [Read the current ICONIC handoff and $1 LIVE SPT purchase-to-report plan](https://github.com/pbchrist/agent-native-suite/blob/main/START_HERE.md). **Seven live priced offers and real 402 MPP challenges are verified; one actual settled SPT charge and deliverable is NOT yet proven.** The immediate goal is one authorized $1 Data Discrepancy Report transaction with an existing Hermes buyer if it can obtain an appropriately limited SPT wallet. Do not change prices or spend before that capability/authorization exists.
+
 > **NEW CONVERSATION / AGENT? START HERE:** [ICONIC cross-repository architecture and operating rules](https://github.com/pbchrist/agent-native-suite/blob/main/START_HERE.md). This is the canonical map of ownership, current readiness, safety constraints and handoff instructions. Verify live status before acting.
 
 # ICONIC. Managed Intelligence
