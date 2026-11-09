@@ -104,4 +104,4 @@ Last reviewed: 2026-11-04.
 - Seven-offer HTTPS MPP catalog and purchase status: https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers
 - Purchase terms: https://iconic.onl/agents/marketplace/terms.html
 - Refunds and cancellations: https://iconic.onl/refunds/
-- When purchasable=false, do not attempt payment; this is discovery-only.
+- Seven live offers use MPP SPT: inspect each offer at the HTTPS gateway. A 402 response is only a payment challenge; use an authorized SPT wallet to pay. Seller pays any applicable taxes.
