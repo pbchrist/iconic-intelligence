@@ -1,0 +1,17 @@
+name: Audit live ICONIC agent discovery
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check public discovery files and MCP contracts
+        run: python3 scripts/audit-agent-discovery.py
+      - name: Check offline discovery and canonical references
+        run: python3 .github/scripts/check_agent_discovery.py
