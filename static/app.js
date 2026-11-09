@@ -12,7 +12,7 @@
   const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
 
   const chats = {};
-  const S = { turnSources: {}, ws: store.get('iconic.ws') || '', status: null, workspace: null, feed: null, jobs: [], tab: 'ask', history: [], busy: false, folder: 'all', picked: false, asked: new Set(), revealed: '', graph: null, answers: 0, extras: null, totals: { connections: 0, conversations: 0 } };
+  const S = { cloudUsed: false, turnSources: {}, ws: store.get('iconic.ws') || '', status: null, workspace: null, feed: null, jobs: [], tab: 'ask', history: [], busy: false, folder: 'all', picked: false, asked: new Set(), revealed: '', graph: null, answers: 0, extras: null, totals: { connections: 0, conversations: 0 } };
   const sess = (() => { let v = null; try { v = sessionStorage.getItem('iconic.sess'); if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); sessionStorage.setItem('iconic.sess', v); } } catch { v = Math.random().toString(36).slice(2); } return v; })();
   const EMBED = /[?&]embed=1/.test(location.search);
   const PHONE = () => matchMedia('(max-width: 860px)').matches;
@@ -146,11 +146,11 @@
       $('#meterTokens').textContent = fmt(s.tokens) + ' tokens';
       $('#tpsPill').textContent = s.tokens_per_second ? s.tokens_per_second + ' TOK/S' : '—';
       $('#routePill').textContent = m.private ? 'LOCAL' : 'REMOTE';
-      $('#outPill').textContent = m.private ? '0 BYTES' : 'CHECK ROUTE';
+      $('#outPill').textContent = S.cloudUsed ? 'OPENAI CLOUD USED' : (m.private ? '0 BYTES' : 'CHECK ROUTE');
       $('#cHost').textContent = s.host;
       $('#cModel').textContent = m.online ? m.model : 'Offline';
       $('#cEndpoint').textContent = m.endpoint || '—';
-      $('#cPrivate').textContent = m.private ? 'Private. Nothing leaves this network.' : 'Model is not on a private address';
+      $('#cPrivate').textContent = S.cloudUsed ? 'Emergency OpenAI fallback used for synthetic demo data in this session.' : (m.private ? 'Local inference stays on this network; synthetic demos may fail over to OpenAI during an outage.' : 'Model is not on a private address');
       $('#cTokens').textContent = fmt(s.tokens);
       $('#cQuestions').textContent = fmt(s.questions);
       $('#cTps').textContent = s.tokens_per_second ? s.tokens_per_second + ' tokens/sec' : 'Ask something first';
@@ -438,6 +438,11 @@
             if (sources.length) { const tg = document.createElement('button'); tg.type = 'button'; tg.className = 'src-toggle'; const nWeb = sources.filter((x) => x.web).length, nFile = sources.length - nWeb; const lbl = [nFile ? `${nFile} file${nFile > 1 ? 's' : ''}` : '', nWeb ? `${nWeb} web page${nWeb > 1 ? 's' : ''}` : ''].filter(Boolean).join(' + ') + ' it read ›'; tg.textContent = lbl; tg.onclick = () => { turn.classList.toggle('show-src'); tg.textContent = turn.classList.contains('show-src') ? 'Hide sources ‹' : lbl; }; srcEl.before(tg); }
             srcEl.innerHTML = sources.map((s, k) => `<button class="src" style="animation-delay:${k * 70}ms" data-n="${s.n}"><span>${s.n}</span><span><strong>${esc(s.title)}</strong><small>${esc(s.folder)} · ${esc(s.date)}</small></span></button>`).join('');
             $$('.src', srcEl).forEach((b) => b.addEventListener('click', () => { const s = sources.find((x) => String(x.n) === b.dataset.n); if (s.web) window.open(s.url, '_blank', 'noopener'); else openDoc(s.id, s.snippet); }));
+          } else if (ev === 'route') {
+            $('.a-label', turn).textContent = 'ICONIC · EMERGENCY OPENAI CLOUD FALLBACK · SYNTHETIC DEMO DATA';
+            S.cloudUsed = true;
+            $('#outPill').textContent = 'OPENAI CLOUD USED';
+            reading.innerHTML = '<span class="shimmer">Local inference unavailable; using OpenAI cloud fallback…</span>';
           } else if (ev === 'thinking') {
             reading.innerHTML = '<span class="shimmer">Thinking it through…</span>';
           } else if (ev === 'token') {
@@ -445,7 +450,7 @@
             text += data; paint(); if (!PHONE()) convo.scrollTop = convo.scrollHeight; else if (!S.pinned) { keepAnswer(); S.pinned = true; }
           } else if (ev === 'done') {
             bodyEl.classList.remove('streaming'); paint();
-            metaEl.innerHTML = `<span>ANSWERED ON ${esc(String(data.location || 'THIS COMPUTER').toUpperCase())} IN ${(data.ms / 1000).toFixed(1)}s</span>${data.tps ? `<span>${data.tps} TOK/S</span>` : ''}<span><b>COST $0.00</b></span>${data.private ? '<span><b>SENT TO NO AI COMPANY</b></span>' : ''}${data.learned && data.learned.added > 0 ? `<button type="button" class="grow">+${data.learned.added} NEW LINK${data.learned.added > 1 ? 'S' : ''} ON THE GRAPH ↗</button>` : ''}`;
+            metaEl.innerHTML = `<span>ANSWERED ON ${esc(String(data.location || 'THIS COMPUTER').toUpperCase())} IN ${(data.ms / 1000).toFixed(1)}s</span>${data.tps ? `<span>${data.tps} TOK/S</span>` : ''}${data.cloud_fallback ? '<span><b>OPENAI CLOUD FALLBACK · DEMO DATA SENT</b></span>' : '<span><b>COST $0.00</b></span>'}${data.private ? '<span><b>SENT TO NO AI COMPANY</b></span>' : ''}${data.learned && data.learned.added > 0 ? `<button type="button" class="grow">+${data.learned.added} NEW LINK${data.learned.added > 1 ? 'S' : ''} ON THE GRAPH ↗</button>` : ''}`;
             if (data.web && window.IconicWeb) IconicWeb.label(metaEl, data.web);
             if (data.learned) { S.totals = data.learned; if (window.IconicGraph) IconicGraph.addLearned(data.learned.new); S.graphSig = ''; const gb = $('.grow', metaEl); if (gb) gb.addEventListener('click', () => setTab('intel')); }
           } else if (ev === 'error') { throw new Error(data); }
@@ -476,7 +481,7 @@
         turn.appendChild(card);
       } else if (cta && S.history.length === 3) {
         const card = document.createElement('div'); card.className = 'cta-card';
-        card.innerHTML = `<div><small>${S.workspace && S.workspace.sample ? 'THAT WAS A MADE-UP BUSINESS' : 'LIKE WHAT YOU SEE?'}</small><h3>Now picture it on yours.</h3><p>Your files, on a computer in your office. Nothing goes to an AI company, and there's no meter running.</p></div><a href="${esc(cta)}" target="_blank" rel="noopener">BOOK A FREE 30-MINUTE CALL →</a>`;
+        card.innerHTML = `<div><small>${S.workspace && S.workspace.sample ? 'THAT WAS A MADE-UP BUSINESS' : 'LIKE WHAT YOU SEE?'}</small><h3>Now picture it on yours.</h3><p>Your files, on a private computer. Cloud fallback for real customer files would require explicit permission.</p></div><a href="${esc(cta)}" target="_blank" rel="noopener">BOOK A FREE 30-MINUTE CALL →</a>`;
         turn.appendChild(card);
       }
     } catch (e) {

@@ -374,6 +374,26 @@ class Jobs:
 JOBS = Jobs()
 
 
+# ---------------------------------------------------------------- cloud emergency path
+# Only synthetic/demo workspaces can cross the cloud boundary by default.
+CLOUD_FALLBACK = os.environ.get("ICONIC_CLOUD_FALLBACK", "1").lower() in ("1", "true", "yes")
+CLOUD_MODEL = "gpt-5.6-sol"
+
+def cloud_reply(messages):
+    """Use Hermes's independently tested OpenAI-Codex OAuth session, no tools."""
+    if not CLOUD_FALLBACK:
+        raise RuntimeError("Cloud fallback disabled")
+    prompt = "\n\n".join("[%s]\n%s" % (m["role"].upper(), m["content"]) for m in messages)
+    proc = subprocess.run(["/home/patrick/.local/bin/hermes", "-z", prompt,
+                           "-m", CLOUD_MODEL, "--provider", "openai-codex",
+                           "--safe-mode", "-t", ""], capture_output=True, text=True,
+                          timeout=100, cwd=ROOT)
+    output = proc.stdout.strip()
+    if proc.returncode or not output:
+        raise RuntimeError("Hermes cloud fallback unavailable: " +
+                           (proc.stderr or "empty response")[-180:])
+    return output
+
 # ---------------------------------------------------------------- model client
 
 def pretty_model(m):
@@ -406,7 +426,7 @@ class Model:
     def detect(self):
         """Find a chat model. Skips embedding-only servers. Scans common local ports."""
         ports = list(range(8000, 8101)) + [5000, 1234, 11434, 30000, 9000]
-        candidates = ([LLM_URL] if LLM_URL else []) + ["http://127.0.0.1:%d/v1" % p for p in ports]
+        candidates = [LLM_URL] if LLM_URL else ["http://127.0.0.1:%d/v1" % p for p in ports]
         if self.url and self.url not in candidates[:1]:
             candidates.insert(0, self.url)
         seen, skipped = set(), []
@@ -424,6 +444,10 @@ class Model:
             chat = [i for i in ids if not self.EMBED.search(i)]
             if ids and not chat:
                 skipped.append("%s (embeddings only)" % urlparse(base).netloc)
+                continue
+            # Never claim that a healthy but incompatible model server is ours.
+            if LLM_MODEL and LLM_MODEL not in chat:
+                skipped.append("%s (configured model absent)" % urlparse(base).netloc)
                 continue
             with self.lock:
                 self.url = base
@@ -1204,6 +1228,18 @@ class Handler(BaseHTTPRequestHandler):
         try:
             if u.path == "/api/status":
                 return self.send_json(self.status(), cors=True)
+            if u.path == "/api/health/inference":
+                if self.client_ip() not in ("127.0.0.1", "::1"):
+                    return self.send_json({"error": "not found"}, 404)
+                try:
+                    tokens = [val for kind, val in MODEL.stream(
+                        [{"role": "user", "content": "Respond with OK."}],
+                        max_tokens=12) if kind == "token"]
+                    return self.send_json({"ok": bool("".join(tokens).strip()),
+                                           "endpoint": MODEL.url,
+                                           "model": MODEL.model}, 200 if tokens else 503)
+                except Exception as e:
+                    return self.send_json({"ok": False, "error_class": type(e).__name__}, 503)
             if u.path == "/api/workspace":
                 w = self.ws(qs)
                 if not w:
@@ -1440,9 +1476,24 @@ class Handler(BaseHTTPRequestHandler):
                             method=method, source_count=len(sources))
                 n_tok, first, answer = 0, None, ""
                 buffer_output = EVIDENCE_MODE == "enforce"
+                cloud_used = False
                 with answering():
                     generated = [("token", verified)] if verified is not None else MODEL.stream(messages, max_tokens=420, temperature=0.25)
-                    for kind, val in generated:
+                    try:
+                        output_chunks = iter(generated)
+                        # Force connection before emitting content so a failed primary
+                        # can cleanly switch to the cloud without duplicate output.
+                        first_chunk = next(output_chunks, None)
+                        output_chunks = iter(([first_chunk] if first_chunk else []) + list(output_chunks)) if verified is not None else __import__('itertools').chain(([first_chunk] if first_chunk else []), output_chunks)
+                    except (urllib.error.URLError, OSError, RuntimeError) as local_error:
+                        if verified is not None or not w.meta.get("sample") or not CLOUD_FALLBACK:
+                            raise
+                        cloud_used = True
+                        self.sse("route", {"provider": "OpenAI via Hermes", "private": False,
+                                           "notice": "Synthetic demo data processed by OpenAI cloud fallback"})
+                        log("cloud fallback after local request failure:", type(local_error).__name__)
+                        output_chunks = iter([("token", cloud_reply(messages))])
+                    for kind, val in output_chunks:
                         if kind == "token":
                             if first is None:
                                 first = time.time()
@@ -1483,13 +1534,16 @@ class Handler(BaseHTTPRequestHandler):
                                   "Please check the source documents or rephrase your request.")
                         audit_event("release.event", **audit_base, result="citation_blocked")
                     self.sse("token", answer)
-                secs = time.time() - (first or t0)
+                secs = time.time() - (t0 if cloud_used else (first or t0))
                 JOBS.add_tokens(n_tok, secs)
                 with JOBS.lock:
                     JOBS.questions += 1
                 done = {"ms": int((time.time() - t0) * 1000), "tokens": n_tok,
-                        "tps": round(n_tok / secs, 1) if secs > 0 else 0, "model": MODEL.label,
-                        "private": MODEL.is_private(), "cost": 0, "location": LOCATION, "web": web_used,
+                        "tps": round(n_tok / secs, 1) if secs > 0 and not cloud_used else 0,
+                        "model": CLOUD_MODEL if cloud_used else MODEL.label,
+                        "private": not cloud_used and MODEL.is_private(), "cost": None if cloud_used else 0,
+                        "location": "OpenAI cloud fallback" if cloud_used else LOCATION,
+                        "cloud_fallback": cloud_used, "web": web_used,
                         "answer_method": "verified_evidence" if verified is not None else "model",
                         "retrieval_method": "hybrid_local" if HYBRID_RETRIEVAL_ENABLED else "bm25",
                         "evidence_status": report["status"],

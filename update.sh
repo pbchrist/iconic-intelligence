@@ -25,6 +25,9 @@ try:
         d = json.load(r)
     assert d["model"]["online"] is True
     assert d["model"]["model"]
+    with urllib.request.urlopen("http://127.0.0.1:8771/api/health/inference", timeout=12) as r:
+        check = json.load(r)
+    assert check["ok"] and check["endpoint"] == "http://127.0.0.1:8082/v1"
 except (Exception):
     sys.exit(1)
 PY
