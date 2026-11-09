@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src https://patrick-beastmaster.tailf32530.ts.net; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Your ICONIC order</title>
+<link rel="stylesheet" href="/agents/marketplace/receipt.css">
+</head><body><main>
+<a href="/agents/marketplace/">ICONIC marketplace</a>
+<h1>Your order</h1>
+<p id="state" role="status" aria-live="polite">Checking payment directly with Stripe…</p>
+<div id="result" hidden>
+ <h2>Receipt</h2>
+ <dl><dt>Order ID</dt><dd id="order-id"></dd>
+ <dt>Service</dt><dd id="service"></dd><dt>Total</dt><dd id="price"></dd>
+ <dt>Status</dt><dd id="order-status"></dd></dl>
+ <p><strong>Private order token:</strong> <code id="token"></code></p>
+ <p class="muted">Keep this token private. You can use it to retrieve the completed report and order status. This page does not store it or load analytics.</p>
+ <button type="button" id="copy-token">Copy order token</button>
+ <div id="report-wrap" hidden><h2>Your report</h2><pre id="report"></pre></div>
+</div>
+<p class="muted">For help or refunds: <a href="mailto:patrick@iconic.onl">patrick@iconic.onl</a>. Never email your private order token.</p>
+</main><script src="/agents/marketplace/receipt.js" defer></script></body></html>
