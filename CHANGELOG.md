@@ -5,6 +5,10 @@
 # ICONIC website (iconic.onl) — change log
 
 Newest first. One line per change: what changed and why.
+
+## 2026-11-08
+- Add Google Analytics 4 measurement (G-0G5007D0F7) to public HTML pages, count confirmed Calendly bookings without personal data, and update privacy disclosure; exclude embedded calculator to avoid duplicate page counts.
+
 Live: https://iconic.onl/ · Test version: Railway staging (branch `staging`).
 
 
