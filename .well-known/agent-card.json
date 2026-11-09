@@ -1,0 +1,35 @@
+{
+  "name": "ICONIC Business Services Discovery",
+  "description": "Read-only discovery of seven human-reviewed agent-native business services. No charges or confidential data.",
+  "url": "https://patrick-beastmaster.tailf32530.ts.net/a2a",
+  "version": "0.1.0",
+  "protocolVersion": "0.3.0",
+  "preferredTransport": "JSONRPC",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain"
+  ],
+  "defaultOutputModes": [
+    "text/plain"
+  ],
+  "skills": [
+    {
+      "id": "marketplace-discovery",
+      "name": "Find ICONIC business services",
+      "description": "Describe available specialist services and link to public offers; no purchase or private-data ingestion.",
+      "tags": [
+        "business",
+        "agent-reliability",
+        "data-reconciliation",
+        "intelligence"
+      ],
+      "examples": [
+        "What services can review agent reliability?",
+        "Show the seven ICONIC offers."
+      ]
+    }
+  ]
+}
