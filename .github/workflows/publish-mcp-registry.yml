@@ -1,0 +1,26 @@
+name: Publish ICONIC Marketplace MCP Registry listing
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - registry/marketplace-server.json
+      - .github/workflows/publish-mcp-registry.yml
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install official MCP publisher
+        run: |
+          curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" -o /tmp/mcp-publisher.tar.gz
+          tar -xzf /tmp/mcp-publisher.tar.gz -C /tmp mcp-publisher
+          chmod +x /tmp/mcp-publisher
+      - name: Validate registry metadata
+        run: /tmp/mcp-publisher validate registry/marketplace-server.json
+      - name: Authenticate with GitHub OIDC
+        run: /tmp/mcp-publisher login github-oidc
+      - name: Publish versioned Marketplace listing
+        run: /tmp/mcp-publisher publish registry/marketplace-server.json
