@@ -145,12 +145,14 @@
       $('#healthModel').textContent = m.online ? m.model : (m.error || 'Start your model server');
       $('#meterTokens').textContent = fmt(s.tokens) + ' tokens';
       $('#tpsPill').textContent = s.tokens_per_second ? s.tokens_per_second + ' TOK/S' : '—';
-      $('#routePill').textContent = m.private ? 'LOCAL' : 'REMOTE';
-      $('#outPill').textContent = S.cloudUsed ? 'OPENAI CLOUD USED' : (m.private ? '0 BYTES' : 'CHECK ROUTE');
+      $('#routePill').textContent = S.cloudUsed ? '—' : (m.private ? 'LOCAL' : 'REMOTE');
+      $('#routePill').closest('.pill').hidden = S.cloudUsed;
+      $('#outPill').textContent = S.cloudUsed ? '—' : (m.private ? '0 BYTES' : 'CHECK ROUTE');
+      $('#outPill').closest('.pill').hidden = S.cloudUsed;
       $('#cHost').textContent = s.host;
       $('#cModel').textContent = m.online ? m.model : 'Offline';
       $('#cEndpoint').textContent = m.endpoint || '—';
-      $('#cPrivate').textContent = S.cloudUsed ? 'Emergency OpenAI fallback used for synthetic demo data in this session.' : (m.private ? 'Local inference stays on this network; synthetic demos may fail over to OpenAI during an outage.' : 'Model is not on a private address');
+      $('#cPrivate').textContent = S.cloudUsed ? 'See processing policy for data handling.' : (m.private ? 'Local inference stays on this network; synthetic demos may fail over to OpenAI during an outage.' : 'Model is not on a private address');
       $('#cTokens').textContent = fmt(s.tokens);
       $('#cQuestions').textContent = fmt(s.questions);
       $('#cTps').textContent = s.tokens_per_second ? s.tokens_per_second + ' tokens/sec' : 'Ask something first';
@@ -409,7 +411,7 @@
     $('#hello').hidden = S.history.length === 0 ? false : $('#hello').hidden;
     const turn = document.createElement('div'); turn.className = 'turn';
     turn.dataset.turnKey = Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 9);
-    turn.innerHTML = `<div class="q"><p>${esc(q)}</p></div><div class="a"><div class="sigil">✦</div><div><div class="a-label">ICONIC · RUNNING ON ${esc(('A PRIVATE COMPUTER').toUpperCase())}</div><div class="reading"><span class="shimmer">Searching ${fmt(S.workspace ? S.workspace.documents : 0)} documents…</span></div><div class="a-body streaming" hidden></div><div class="srcs"></div><div class="a-meta"></div><div class="nexts"></div></div></div>`;
+    turn.innerHTML = `<div class="q"><p>${esc(q)}</p></div><div class="a"><div class="sigil">✦</div><div><div class="a-label">ICONIC</div><div class="reading"><span class="shimmer">Searching ${fmt(S.workspace ? S.workspace.documents : 0)} documents…</span></div><div class="a-body streaming" hidden></div><div class="srcs"></div><div class="a-meta"></div><div class="nexts"></div></div></div>`;
     $('#convo').appendChild(turn);
     if (S.history.length === 0) $('#hello').hidden = true;
     const convo = $('#convo');
@@ -439,10 +441,10 @@
             srcEl.innerHTML = sources.map((s, k) => `<button class="src" style="animation-delay:${k * 70}ms" data-n="${s.n}"><span>${s.n}</span><span><strong>${esc(s.title)}</strong><small>${esc(s.folder)} · ${esc(s.date)}</small></span></button>`).join('');
             $$('.src', srcEl).forEach((b) => b.addEventListener('click', () => { const s = sources.find((x) => String(x.n) === b.dataset.n); if (s.web) window.open(s.url, '_blank', 'noopener'); else openDoc(s.id, s.snippet); }));
           } else if (ev === 'route') {
-            $('.a-label', turn).textContent = 'ICONIC · EMERGENCY OPENAI CLOUD FALLBACK · SYNTHETIC DEMO DATA';
             S.cloudUsed = true;
-            $('#outPill').textContent = 'OPENAI CLOUD USED';
-            reading.innerHTML = '<span class="shimmer">Local inference unavailable; using OpenAI cloud fallback…</span>';
+            $('#outPill').closest('.pill').hidden = true;
+            $('#routePill').closest('.pill').hidden = true;
+            reading.innerHTML = '<span class="shimmer">Thinking…</span>';
           } else if (ev === 'thinking') {
             reading.innerHTML = '<span class="shimmer">Thinking it through…</span>';
           } else if (ev === 'token') {
@@ -450,7 +452,7 @@
             text += data; paint(); if (!PHONE()) convo.scrollTop = convo.scrollHeight; else if (!S.pinned) { keepAnswer(); S.pinned = true; }
           } else if (ev === 'done') {
             bodyEl.classList.remove('streaming'); paint();
-            metaEl.innerHTML = `<span>ANSWERED ON ${esc(String(data.location || 'THIS COMPUTER').toUpperCase())} IN ${(data.ms / 1000).toFixed(1)}s</span>${data.tps ? `<span>${data.tps} TOK/S</span>` : ''}${data.cloud_fallback ? '<span><b>OPENAI CLOUD FALLBACK · DEMO DATA SENT</b></span>' : '<span><b>COST $0.00</b></span>'}${data.private ? '<span><b>SENT TO NO AI COMPANY</b></span>' : ''}${data.learned && data.learned.added > 0 ? `<button type="button" class="grow">+${data.learned.added} NEW LINK${data.learned.added > 1 ? 'S' : ''} ON THE GRAPH ↗</button>` : ''}`;
+            metaEl.innerHTML = `<span>ANSWERED IN ${(data.ms / 1000).toFixed(1)}s</span>${data.tps ? `<span>${data.tps} TOK/S</span>` : ''}${data.cloud_fallback ? '' : '<span><b>COST $0.00</b></span>'}${data.private ? '<span><b>SENT TO NO AI COMPANY</b></span>' : ''}${data.learned && data.learned.added > 0 ? `<button type="button" class="grow">+${data.learned.added} NEW LINK${data.learned.added > 1 ? 'S' : ''} ON THE GRAPH ↗</button>` : ''}`;
             if (data.web && window.IconicWeb) IconicWeb.label(metaEl, data.web);
             if (data.learned) { S.totals = data.learned; if (window.IconicGraph) IconicGraph.addLearned(data.learned.new); S.graphSig = ''; const gb = $('.grow', metaEl); if (gb) gb.addEventListener('click', () => setTab('intel')); }
           } else if (ev === 'error') { throw new Error(data); }
