@@ -1,5 +1,11 @@
 User-agent: *
 Allow: /
 
-# For AI assistants: https://iconic.onl/llms.txt (summary) and https://iconic.onl/llms-full.txt (full reference)
+# Canonical human and agent discovery entry points
+# Agent directory: https://iconic.onl/agents/
+# Machine-readable service index: https://iconic.onl/llms.txt
+# Detailed agent reference: https://iconic.onl/llms-full.txt
+# Marketplace manifest: https://iconic.onl/agents/marketplace/manifest.json
+# Reserve manifest: https://iconic.onl/agents/reserve/manifest.json
+# Remote MCP listings are published in the official MCP Registry.
 Sitemap: https://iconic.onl/sitemap.xml
