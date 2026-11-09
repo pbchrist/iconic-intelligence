@@ -66,7 +66,13 @@ def check() -> None:
         assert "not yet" in text or "not currently" in text, f"Missing payment disclaimer: {page}"
     for path in PAGES:
         assert f"https://iconic.onl{path}" in (ROOT / "llms.txt").read_text(encoding="utf-8")
-    assert 'checkout_enabled":false' in (ROOT / "agents/marketplace/manifest.json").read_text(encoding="utf-8")
+    manifest = json.loads((ROOT / "agents/marketplace/manifest.json").read_text(encoding="utf-8"))
+    assert manifest["checkout_enabled"] is True, "Marketplace checkout state unexpectedly changed"
+    assert manifest["tool_count"] == len(manifest["tools"]) == 14, "Marketplace tool count mismatch"
+    llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
+    marketplace_section = llms.split("## ICONIC Agent-Native Marketplace", 1)[1].split("\\n## ", 1)[0]
+    assert "NOT yet purchasable" not in marketplace_section, "Marketplace llms.txt incorrectly says not purchasable"
+    assert "Paid Stripe checkout is disabled" not in marketplace_section, "Marketplace llms.txt incorrectly says checkout disabled"
     print("Agent discovery checks passed: sitemap, canonical, JSON-LD, links, claims, llms.")
 
 if __name__ == "__main__":
