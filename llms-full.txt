@@ -244,6 +244,6 @@ Last reviewed: 2026-11-04.
 
 ## Machine payment endpoint and delivery
 - MPP SPT seven-offer gateway: https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers
-- Machine buyers can discover exact terms and purchase steps from the MCP marketplace_mpp_purchase_instructions tool. A 402 challenge is not a purchase. Verify purchasable=true before payment.
+- Machine buyers can discover exact terms and purchase steps from the MCP marketplace_mpp_purchase_instructions tool. A 402 challenge is not a purchase. Verify purchasable=true before payment. Seven services enabled as of November 8, 2026; six require human review, dataset diff delivers a verified report automatically.
 - Terms: https://iconic.onl/agents/marketplace/terms.html
 - Refunds: https://iconic.onl/refunds/
