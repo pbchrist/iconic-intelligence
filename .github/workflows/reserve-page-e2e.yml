@@ -1,0 +1,39 @@
+name: Reserve page live browser test
+on:
+  workflow_dispatch:
+  push:
+    branches: [staging]
+    paths:
+      - 'agents/reserve/**'
+      - 'scripts/test-reserve-page.cjs'
+      - '.github/workflows/reserve-page-e2e.yml'
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Browser CORS behavior of the live public gateway
+        run: |
+          B=https://patrick-beastmaster.tailf32530.ts.net/reserve
+          echo "== preflight POST /agents/evaluate from https://iconic.onl"
+          curl -s -o /dev/null -D - -X OPTIONS "$B/agents/evaluate" -H 'Origin: https://iconic.onl' -H 'Access-Control-Request-Method: POST' -H 'Access-Control-Request-Headers: content-type' | grep -i -E '^HTTP|access-control' || true
+          echo "== GET /agents/schemas.json from https://iconic.onl"
+          curl -s -o /dev/null -D - "$B/agents/schemas.json" -H 'Origin: https://iconic.onl' | grep -i -E '^HTTP|access-control' || true
+      - name: Install Playwright
+        run: npm install --no-save playwright@1.56.1 && npx playwright install --with-deps chromium
+      - name: Serve the site like GitHub Pages and test the page against the live server
+        run: |
+          python3 -m http.server 3000 --bind 127.0.0.1 >/dev/null 2>&1 &
+          sleep 2
+          node scripts/test-reserve-page.cjs http://localhost:3000/agents/reserve/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reserve-page-screenshots
+          path: reserve-*.png

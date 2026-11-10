@@ -96,7 +96,7 @@
     (function () { try { var d = document.createElement('div'); d.style.cssText = 'position:absolute;visibility:hidden;font-size:100px;line-height:1'; d.textContent = 'x'; document.documentElement.appendChild(d); var z = parseFloat(getComputedStyle(d).fontSize) / 100; d.remove(); if (z > 1.04 && z < 3) document.documentElement.style.setProperty('--tz', z.toFixed(2)); } catch (e) {} })();
   </script>
   <link rel="stylesheet" href="styles.css?v=20261101" />
-  <link rel="stylesheet" href="mobile-first.css?v=20261105a" />
+  <link rel="stylesheet" href="mobile-first.css?v=20261110r" />
   <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
   <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 </head>
@@ -113,11 +113,12 @@
       <a href="#ways">How to start</a>
       <a href="#own">Why own it</a>
       <a href="#pricing">Pricing</a>
+      <a href="/agents/reserve/">For agents</a>
     </nav>
     <a class="header-cta" href="#check">FREE PRIVATE AI CHECK</a>
     <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav">MENU</button>
     <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
-      <a href="#proof">Proof</a><a href="#uses">Who it's for</a><a href="#ways">How to start</a><a href="#own">Why own it</a><a href="#pricing">Pricing</a><a href="#check">FREE PRIVATE AI CHECK</a>
+      <a href="#proof">Proof</a><a href="#uses">Who it's for</a><a href="#ways">How to start</a><a href="#own">Why own it</a><a href="#pricing">Pricing</a><a href="/agents/reserve/">For agents · MCP</a><a href="#check">FREE PRIVATE AI CHECK</a>
     </nav>
   </header>
 
@@ -324,6 +325,20 @@
         </div>
       </div>
     </section>
+    <section id="agents" class="section-shell agents-strip">
+      <div class="agents-card" data-reveal>
+        <div class="agents-copy">
+          <div class="section-kicker">FOR YOUR AI AGENTS</div>
+          <h2>Your agents can plug in<br><em>right now.</em></h2>
+          <p><strong>MCP is the standard plug that lets assistants like Claude and Cursor use outside tools.</strong> Give yours this one address and it gets ICONIC Reserve: a memory of what your business decided and what actually happened. Free, no sign-in, two minutes.</p>
+        </div>
+        <div class="agents-connect">
+          <small>MCP ENDPOINT</small>
+          <div class="agents-endpoint"><code>https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp</code><button type="button" class="agents-copy-btn" data-copy="https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp" aria-label="Copy the MCP endpoint">COPY</button></div>
+          <a class="button button-ghost agents-go" href="/agents/reserve/">CONNECT YOUR AGENT →</a>
+        </div>
+      </div>
+    </section>
     <section id="contact" class="section-shell contact-section">
       <div class="contact-inner" data-reveal>
         <div class="contact-brand"><div class="contact-wordmark"><img src="iconic-wordmark.webp" alt="ICONIC." /></div><p class="contact-tagline">Know more. <em>Move first.</em></p></div>
@@ -345,7 +360,7 @@
           </div>
         </div>
       </div>
-      <footer><span>© 2026 ICONIC. · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a> · <a href="llms.txt">AI Reference</a> · <a href="/agents/">Agent Tools &amp; MCP Services</a> · <a href="/agents/reserve/">Intelligence Reserve</a> · <a href="/agents/assurance/">Agent Assurance</a> · <a href="/agents/marketplace/">Agent Marketplace</a></span><span>PRIVATE AI FOR YOUR BUSINESS</span><a href="#top">BACK TO TOP ↑</a></footer>
+      <footer><span>© 2026 ICONIC. · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a> · <a href="llms.txt">AI Reference</a> · <a href="/agents/">Agent Tools &amp; MCP Services</a> · <a href="/agents/reserve/">ICONIC Reserve · Connect via MCP</a> · <a href="/agents/assurance/">Agent Assurance</a> · <a href="/agents/marketplace/">Agent Marketplace</a></span><span>PRIVATE AI FOR YOUR BUSINESS</span><a href="#top">BACK TO TOP ↑</a></footer>
     </section>
   </main>
 
@@ -415,6 +430,15 @@
       window.Calendly.initPopupWidget({
         url: 'https://calendly.com/patrick-iconic/30min?background_color=ffffff&text_color=070912&primary_color=8d98ff'
       });
+    });
+  </script>
+  <script>
+    // Agents section: copy the MCP endpoint.
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('.agents-copy-btn'); if (!b) return;
+      var t = b.getAttribute('data-copy'), done = function (ok) { b.textContent = ok ? 'COPIED' : 'SELECT & COPY'; setTimeout(function () { b.textContent = 'COPY'; }, 1800); };
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(function () { done(true); }, function () { done(false); }); else done(false);
+      if (typeof gtag === 'function') gtag('event', 'reserve_copy', { item: 'homepage endpoint' });
     });
   </script>
 </body>
