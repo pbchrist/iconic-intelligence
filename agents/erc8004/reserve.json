@@ -1,0 +1,20 @@
+{
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
+  "image": "https://iconic.onl/iconic-share.png",
+  "active": true,
+  "registrations": [],
+  "supportedTrust": [],
+  "name": "ICONIC Intelligence Reserve",
+  "description": "ICONIC-operated public MCP sandbox for fictional-data evidence, decision tracking and verified-outcome methodology, with free fit assessment. Private production memory and tenant data remain inaccessible to anonymous callers. This public MCP is not a live paid escrow or an automated customer-record service.",
+  "services": [
+    {
+      "name": "web",
+      "endpoint": "https://iconic.onl/agents/reserve/"
+    },
+    {
+      "name": "MCP",
+      "endpoint": "https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp"
+    }
+  ],
+  "x402Support": false
+}

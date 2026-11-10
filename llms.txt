@@ -38,6 +38,12 @@ Owner-led businesses and professional firms with years of their own records: law
 - [AI agent reliability audit and MCP preflight](https://iconic.onl/agents/assurance/): free static preflight and sample-report tools; the human-reviewed audit is purchasable via the live ICONIC Marketplace Stripe checkout ($1,500), with manual fulfillment.
 - Directory publication does not automatically connect tools to an AI client. Connection and authorization are client-specific.
 
+## ERC-8004 registration files (prepared, unsigned, not registered)
+
+- Marketplace: https://iconic.onl/agents/erc8004/marketplace.json ; Reserve: https://iconic.onl/agents/erc8004/reserve.json .
+- These are published preparatory metadata documents for the Base ERC-8004 Identity Registry. Both have registrations: [] and supportedTrust: [] until an owner-authorized, gas-paid mint is confirmed and the actual agent ID is linked. They are not proofs of on-chain identity or reputation.
+- The code in agent-commerce-lab can produce exact unsigned register(string) calldata for the official Base registry. No chain write or payment is initiated by viewing the files.
+
 ## ICONIC local curated agent directory
 
 - The Marketplace MCP provides read-only marketplace_find_agents (search by capability, chain, maximum advertised price) and marketplace_agent_profile (operator-published public metadata and explicitly unverified feedback summary). Only offline operator-published records appear. Registration alone is never public, and no public tool edits records.
