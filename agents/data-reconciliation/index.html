@@ -9,25 +9,25 @@
   gtag('js', new Date());
   gtag('config', 'G-0G5007D0F7');
 </script>
-<title>Data Reconciliation for AI Agents | Compare Inventory Reports | ICONIC</title>
-<meta name="description" content="Compare inventory and business-data snapshots with ICONIC's MCP data reconciliation tools. Try a free synthetic discrepancy check; identify duplicates, missing records, and changed values.">
+<title>Inventory Price Pattern Analysis MCP | Data Reconciliation for Agents | ICONIC</title>
+<meta name="description" content="Analyze changes in publicly advertised vehicle inventory prices with a no-charge MCP tool. Find repeated repricing, duplicates and missing listings with verified evidence, not guessed sales.">
 <link rel="canonical" href="https://iconic.onl/agents/data-reconciliation/">
 <link rel="stylesheet" href="/agents/discovery.css">
 <link rel="alternate" type="application/json" href="/agents/marketplace/offers.json" title="Machine-readable ICONIC service offers">
 <meta property="og:title" content="Data Reconciliation for AI Agents | ICONIC">
-<meta property="og:description" content="Spot missing rows, duplicate IDs, changed prices, and conflicting totals. Free synthetic MCP demo and human-authorized scope requests.">
+<meta property="og:description" content="Try free MCP public inventory price-change analysis with evidence checks, duplicate detection and exact stock-ID reconciliation.">
 <meta property="og:url" content="https://iconic.onl/agents/data-reconciliation/"><meta property="og:type" content="website">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","@id":"https://iconic.onl/agents/data-reconciliation/#service","name":"ICONIC Data Reconciliation","serviceType":"Data discrepancy analysis and synthetic MCP demonstration","provider":{"@id":"https://iconic.onl/#org"},"url":"https://iconic.onl/agents/data-reconciliation/","description":"Free synthetic discrepancy checks through a public MCP tool, with unpaid scope requests for a separately approved real-data reconciliation engagement.","audience":{"@type":"BusinessAudience","name":"Businesses comparing inventory, operational reports, or other tabular data"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","@id":"https://iconic.onl/agents/data-reconciliation/#service","name":"ICONIC Public Inventory Pricing Pattern Analysis","serviceType":"Public inventory pricing change analysis and agent-facing MCP data reconciliation","provider":{"@id":"https://iconic.onl/#org"},"url":"https://iconic.onl/agents/data-reconciliation/","description":"Read-only, no-charge MCP preview for two explicitly authorized snapshots of publicly advertised vehicle stock IDs and prices. Detect repeated identical changes, duplicates, missing listings, and explain unsupported sales and algorithm claims. No customer data.","audience":{"@type":"BusinessAudience","name":"Dealers and operators monitoring public inventory price changes"}}</script>
 </head><body><div class="wrap">
 <nav><a href="/">ICONIC</a><a href="/agents/">ALL AGENT SERVICES</a></nav>
 <main>
 <header>
-<div class="eyebrow">Data reconciliation · MCP tools · Free synthetic demonstration</div>
+<div class="eyebrow">Inventory pricing analysis · MCP tools · Free public-data preview</div>
 <h1>When two reports disagree, find out why.</h1>
-<p class="lead">Compare records, spot duplicate identifiers, track changed values, and explain conflicting totals. ICONIC gives AI agents a machine-readable way to test synthetic reconciliation cases before a human authorizes any work with real business data.</p>
+<p class="lead">Compare two expressly authorized snapshots of publicly advertised vehicle stock IDs and prices. An AI agent can find repeated price cuts, missing listings, duplicate stock numbers and conflicting values, with independently verified arithmetic and explicit uncertainty. No customer records or private systems are accessed.</p>
 <a class="button primary" href="/agents/marketplace/">Explore the live marketplace</a>
 <a class="button" href="/agents/marketplace/offers.json">Read the machine-readable offers</a>
-<p class="note">The free synthetic reconciliation tool is live. The paid real-data worker and checkout are not yet enabled. Do not submit confidential files to the public demo.</p>
+<p class="note">Two no-charge tools are available: a fictional-data reconciliation and an explicitly authorized public inventory pricing preview (100 rows per snapshot). Seven separately priced Marketplace offers have buyer-authorized payment entry points; a settled live agent purchase-to-report delivery has not yet been proven. No confidential files, customer data or private dealer records on public tools.</p>
 </header>
 <section>
 <div class="eyebrow">Problems worth solving</div>
@@ -44,16 +44,16 @@
 <h2>Two inventory exports. Three different counts.</h2>
 <p>Suppose a dealership export reports 71 vehicles, a previous snapshot had 84, and a search page displays 79. A useful reconciliation checks duplicated identifiers, changed filters, missing rows, stale caches, and timing differences before calling any disappearance a sale.</p>
 <p>Ask an agent: <strong>“Compare these two fictional inventory snapshots by VIN, flag duplicate keys and price changes, reconcile the totals, and separate observations from hypotheses.”</strong></p>
-<p class="note">This is an example of the business question. The free tool supports bounded synthetic reconciliation, not a full production investigation of live dealership systems.</p>
+<p class="note">The public preview performs deterministic price-change analysis on supplied published stock IDs and prices. It does not crawl websites, infer a confirmed sale, predict a future price, or query VIN/DMS records. A separate, human-authorized engagement is needed for private dealer investigations.</p>
 </section>
 <section>
 <div class="eyebrow">For AI agents and developers</div>
 <h2>Discover the MCP interface</h2>
 <p class="endpoint">Remote MCP: <code>https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp</code></p>
-<p>The marketplace exposes <code>marketplace_reconcile_synthetic</code> for fictional sample data, plus <code>marketplace_list_offers</code>, <code>marketplace_get_offer</code>, and <code>marketplace_preflight</code> for discovery and fit checks. Use the tool's published input schema rather than assuming a file-upload interface.</p>
+<p>Call <code>marketplace_analyze_public_inventory</code> with <code>public_request</code> containing <code>authorized_public_data: true</code>, and <code>snapshot_before</code>/<code>snapshot_after</code>, each with a source <code>label</code> and rows of <code>stock_id</code> and integer <code>price_cents</code>. A maximum of 100 publicly advertised rows per snapshot is supported in the free preview. The result has exact deltas, repeated adjustment groups, ambiguities, source labels, and independent verification. <code>marketplace_reconcile_synthetic</code> remains available for fictional test inputs. Read the MCP tool schemas for complete validation rules.</p>
 <a class="button" href="/agents/marketplace/manifest.json">Marketplace manifest</a>
 <a class="button" href="https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.pbchrist/iconic-agent-marketplace">Official MCP Registry</a>
-<p>For an authorized real-data project, <a href="mailto:patrick@iconic.onl?subject=Data%20reconciliation%20scope">request a human-reviewed scope</a>. No production data, paid processing, or autonomous purchasing is enabled through the public demo.</p>
+<p>For private datasets or higher-volume commercial work, <a href="mailto:patrick@iconic.onl?subject=Data%20reconciliation%20scope">request an authorized scope</a> or review the buyer-authorized <a href="/agents/marketplace/">Marketplace offers</a>. The standalone free public-data preview neither initiates purchases nor retains input data.</p>
 </section>
 </main><footer>© 2026 ICONIC · <a href="/agents/">All agent services</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
 </div></body></html>
