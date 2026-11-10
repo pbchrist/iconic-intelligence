@@ -44,7 +44,15 @@
    for(const button of buttons){button.disabled=true;button.textContent='Card checkout temporarily unavailable'}
   }
  };
- moneyReady();
+ // An offer deep link may open a *blank* checkout form, never submit payment.
+ // Server validates the price and human spending authorization after submission.
+ moneyReady().then(()=>{
+  const id=new URLSearchParams(location.search).get('offer');
+  if(!id)return;
+  const card=products.find(c=>c.querySelector('code')?.textContent.trim()===id);
+  const button=card?.querySelector('.buy-action');
+  if(button&&!button.disabled)button.click();
+ });
  if(new URLSearchParams(location.search).has('cancelled')){
   const note=document.createElement('p');note.className='note';
   note.textContent='Checkout was cancelled or left unfinished. No purchase is confirmed on this page.';
