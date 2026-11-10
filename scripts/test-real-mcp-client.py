@@ -11,7 +11,7 @@ from mcp.client import Client
 SERVICES = {
     "marketplace": {
         "url": "https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp",
-        "expected_count": 15,
+        "expected_count": 17,
         "describe": "marketplace_describe",
     },
     "reserve": {
@@ -65,6 +65,21 @@ async def verify(name, config):
             assert verdict["pricing_signals"]["signals"][0]["delta_cents"]==-100000
             assert verdict["independent_checks"]["pricing"]["checks_passed"]==5
             print("PASS marketplace: no-charge evidence-based pricing signals; 3 identical changes independently checked",flush=True)
+            matches=await client.call_tool("marketplace_find_agents",{
+                "capability":"public-inventory-pricing","limit":10})
+            assert not matches.is_error,matches
+            found=json.loads(matches.content[0].text)
+            assert found.get("status") in (
+                "CURATED_DIRECTORY_EMPTY","OPERATOR_CURATED_LOCAL_DIRECTORY"), found
+            if found.get("count",0)>0:
+                ident=found["agents"][0]["agent_id"]
+                record=await client.call_tool("marketplace_agent_profile",{"agent_id":ident})
+                assert not record.is_error,record
+                doc=json.loads(record.content[0].text)
+                assert doc["agent"]["agent_id"]==ident
+                assert doc["reputation_claim"]=="UNVERIFIED_OFFCHAIN_EVALUATOR_SIGNALS_NOT_ERC8004"
+            print("PASS marketplace: operator-published read-only agent directory, zero payment",flush=True)
+
 
         if name == "reserve":
             fictional = {

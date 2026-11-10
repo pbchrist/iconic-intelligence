@@ -8,8 +8,8 @@
 | --- | --- | --- |
 | Agent directory | https://iconic.onl/agents/ | Published; Marketplace checkout text corrected |
 | Marketplace page | https://iconic.onl/agents/marketplace/ | Seven fixed-price specialist offers; buyer-authorized checkout and human-reviewed fulfillment |
-| Marketplace manifest | https://iconic.onl/agents/marketplace/manifest.json | Reports checkout enabled and 15 tools (externally verified November 10) |
-| Marketplace remote MCP | https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp | Public Streamable HTTP, 15 tools verified via independent SDK |
+| Marketplace manifest | https://iconic.onl/agents/marketplace/manifest.json | Reports checkout enabled and 17 tools (directory integration; new external recheck required) |
+| Marketplace remote MCP | https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp | Public Streamable HTTP, target 17 tools; 15 previously SDK-verified |
 | Reserve page/manifest | https://iconic.onl/agents/reserve/ · https://iconic.onl/agents/reserve/manifest.json | Free public assessment and synthetic sandbox, paid Reserve plans disabled, 16 tools |
 | Reserve remote MCP | https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp | Public Streamable HTTP, 16 tools |
 | A2A discovery card | https://iconic.onl/.well-known/agent-card.json | Published and parity checked against live server card |
@@ -96,3 +96,10 @@ The standalone Assurance service remains a distinct intake/ledger and must expli
 ## 2026-11-10 live checkout handoff — separate legacy processor remains off
 
 Agent Assurance is payable through the existing live Marketplace Stripe-hosted Checkout or Stripe MPP SPT, at the Marketplace's approved $1,500 buyer total. Its separate legacy Stripe processor is deliberately not activated because it has no configured live payment link/API key and would create a competing order ledger. The public Assurance MCP reports live Marketplace payment availability and its authorized checkout tool redirects the human buyer to https://iconic.onl/agents/marketplace/?offer=agent-reliability-evidence-audit#offers . The Marketplace webpage opens that product's existing secure Stripe-buy form without automatically submitting or charging anything. The buyer explicitly enters nonconfidential scope/contact, authorizes spending, then the central Marketplace gateway creates the actual Stripe Checkout session and subsequently verifies payment. Agents can instead use the published Marketplace MCP SPT purchase instructions and tools. Assurance scope-intake access tokens must never be treated as Marketplace payment receipts, and the buyer must retain the newly issued Marketplace order capability for fulfillment. An unattended paid audit is not claimed.
+
+
+## 2026-11-10 operator-curated agent directory extension
+
+The existing Marketplace MCP adds read-only tools marketplace_find_agents and marketplace_agent_profile. Two owned, public ICONIC MCP service endpoints will be explicitly operator-published into an offline SQLite directory. The source registry is local only; public agent metadata are NOT cryptographically tied to ERC-8004 identities, marketplace rankings are off-chain heuristics, and evaluator feedback is NOT independently certified. Anonymous MCP clients cannot create public agent records, alter feedback, execute remote agents, start escrow or fund jobs. The private operator CLI and its SQLite registry are intentionally separate from the payment order ledger and private Reserve.
+
+After Marketplace deployment, update the public manifest to exactly 17 tools and rerun real GitHub-hosted MCP SDK plus discovery audits. Historical 15/16-tool result links remain valid for their original versions. Publicizing this module is an incremental step toward the attached permissionless-agent marketplace blueprint, NOT proof of global open registry synchronization or ERC-8183 settlement.
