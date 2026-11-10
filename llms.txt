@@ -53,6 +53,7 @@ Owner-led businesses and professional firms with years of their own records: law
 ## ICONIC Intelligence Reserve — live agent-facing free assessment
 
 - [Canonical Reserve page](https://iconic.onl/agents/reserve/) and [machine manifest](https://iconic.onl/agents/reserve/manifest.json).
+- Human setup guide: https://iconic.onl/agents/reserve/#quickstart (Claude custom connector with "No sign in", `claude mcp add --transport http iconic-reserve https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp`, Cursor and VS Code mcp.json). The same page also lists the seven Marketplace services.
 - **Agent-first machine entrypoint (JSON):** https://patrick-beastmaster.tailf32530.ts.net/reserve/agents. **Direct MCP:** https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp. Sixteen callable Reserve tools: seven discovery and nine synthetic sandbox tools. Free agent-to-agent transaction: list offers → obtain exact $0 quote → execute `reserve_assess` → receive `FULFILLED_FREE` structured assessment; no human UI required.
 - Agents can perform a stateless, rule-based, no-charge fit assessment and run an ephemeral synthetic demonstration against the Reserve engine. **No confidential business or customer data should be submitted** to this public endpoint.
 - Private tenant-isolated Reserve is a technical alpha, NOT an openly accessible customer memory database. Paid self-service tiers and autonomous purchases are NOT live. A human must authorize any onboarding, data integrations or payment.

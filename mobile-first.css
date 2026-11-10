@@ -954,3 +954,21 @@ html body main :is(.capability-card p, .deployment-grid article > p, .ladder li,
 }
 html body main :is(.cta-note, .proof-result) { font-size: 13px; }
 html body main .section-heading p strong, html body main .moat-lead strong { color: var(--pearl, #f3f0e7); font-weight: 600; }
+
+/* ==== For your AI agents: short homepage section linking to /agents/reserve/ ==== */
+.agents-strip { padding-top: 40px; }
+.agents-card { display: grid; grid-template-columns: minmax(0,1fr); gap: 26px; padding: clamp(24px, 4vw, 44px); border: 1px solid var(--line); border-radius: 24px; background: linear-gradient(135deg, rgba(48,52,95,.28), rgba(255,255,255,.015)); }
+.agents-card > * { min-width: 0; }
+.agents-copy h2 { margin: 16px 0 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(36px, 4.4vw, 64px); font-weight: 400; letter-spacing: -.045em; line-height: .98; }
+.agents-copy h2 em { color: var(--accent-2); font-weight: 400; }
+.agents-copy p { max-width: 640px; margin: 18px 0 0; color: var(--lede-color, #aeb3c7); font-family: Georgia, "Times New Roman", serif; font-size: var(--lede, 17px); line-height: 1.55; }
+.agents-copy p strong { color: var(--pearl); font-weight: 400; }
+.agents-connect { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; align-content: center; }
+.agents-connect small { color: var(--accent-2); font-size: 10px; font-weight: 800; letter-spacing: .2em; }
+.agents-endpoint { display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 16px; border: 1px solid var(--line-strong); border-radius: 14px; background: rgba(4,5,12,.6); }
+.agents-endpoint code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; color: var(--pearl); font: 500 13px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; scrollbar-width: none; }
+.agents-copy-btn { flex: none; min-height: 36px; padding: 0 13px; border: 1px solid var(--line-strong); border-radius: 10px; background: rgba(255,255,255,.04); color: var(--pearl); font-size: 10px; font-weight: 800; letter-spacing: .14em; cursor: pointer; }
+.agents-copy-btn:hover { background: rgba(255,255,255,.09); }
+.agents-copy-btn:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+.agents-go { justify-self: start; }
+@media (min-width: 900px) { .agents-card { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 56px; align-items: center; } }
