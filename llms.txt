@@ -35,7 +35,7 @@ Owner-led businesses and professional firms with years of their own records: law
 
 - [All ICONIC AI agent tools and MCP services](https://iconic.onl/agents/): human-readable directory with canonical machine manifests and honest availability.
 - [Data reconciliation for AI agents](https://iconic.onl/agents/data-reconciliation/): free synthetic discrepancy demonstration and authorized-public-inventory pricing-pattern preview via the Marketplace MCP (100 rows per snapshot); seven separately priced Marketplace offers support buyer-authorized checkout. No client-private data on public tools.
-- [AI agent reliability audit and MCP preflight](https://iconic.onl/agents/assurance/): free static preflight and sample-report tools; human-reviewed paid audit is not yet active.
+- [AI agent reliability audit and MCP preflight](https://iconic.onl/agents/assurance/): free static preflight and sample-report tools; the human-reviewed audit is purchasable via the live ICONIC Marketplace Stripe checkout ($1,500), with manual fulfillment.
 - Directory publication does not automatically connect tools to an AI client. Connection and authorization are client-specific.
 
 ## ICONIC Intelligence Reserve — live agent-facing free assessment
@@ -54,7 +54,7 @@ Owner-led businesses and professional firms with years of their own records: law
 - Seven tools: assurance_describe, assurance_quote, assurance_preflight, assurance_sample_report, assurance_prepare_order, assurance_get_order, assurance_begin_checkout. The Marketplace offer uses a separate order/payment channel.
 - Agents can perform a free, static MCP/agent contract preflight, view the example report, and prepare an unpaid audit scope request after authorization. The public endpoint does not execute customer agents or accept confidential records.
 - Dedicated Assurance MCP checkout remains separately gated; its price is indicative for standalone Assurance intake. The separate ICONIC Marketplace currently lists the equivalent human-reviewed audit at a merchant-approved $1,500 through MPP/hosted Checkout. Never reuse order tokens across these independent channels.
-- Standalone Assurance Stripe checkout is disabled. No confirmed paid customer audit is established. Final scope and commercial terms require separate human approvals, and reports require signed-webhook payment confirmation and human review.
+- Live payment for the audit uses the Marketplace's merchant-approved $1,500 Stripe Checkout/MPP SPT, not the duplicate standalone Assurance payment processor. assurance_begin_checkout provides a live handoff to the Marketplace after validating the Assurance order capability; Marketplace orders get NEW buyer tokens. No settled paid audit has been independently confirmed. Human spending authorization and human-reviewed fulfillment remain mandatory.
 - Reserve provides evidence/outcome history, the adversarial harness performs evaluation, and QLoRA remains optional nonproduction research. No customer data enters training automatically.
 
 ## ICONIC Agent-Native Marketplace — seven discoverable specialist offers (November 7, 2026)

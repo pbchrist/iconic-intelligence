@@ -14,7 +14,7 @@
 
 - Human and agent entrypoint: https://iconic.onl/agents/
 - Data reconciliation: https://iconic.onl/agents/data-reconciliation/ — free fictional dataset discrepancy test via the marketplace; paid real-data worker and checkout disabled.
-- Agent Assurance: https://iconic.onl/agents/assurance/ — free static MCP contract preflight and example report; paid human-reviewed audit disabled.
+- Agent Assurance: https://iconic.onl/agents/assurance/ — free static MCP preflight; the $1,500 human-reviewed audit can be purchased through the existing live Stripe Marketplace checkout.
 - Official MCP Registry listing: https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.pbchrist/iconic-agent-marketplace
 - Registry publication supports discovery by clients and aggregators, but does not automatically grant an AI assistant access to ICONIC tools.
 
@@ -51,7 +51,7 @@ Existing products exposed under one specialist marketplace interface: Agent Assu
 
 Fifteen Marketplace MCP tools are exposed. In addition to discovery, quote, checkout preparation, guarded order/checkout and synthetic tests, marketplace_analyze_public_inventory performs a no-charge, stateless, independently verified comparison of up to 100 publicly advertised stock IDs and prices per supplied snapshot after explicit authorization. It reports repeated identical price shifts and missing listings without claiming sales, algorithms or forecasts. Use the live tools/list response as the authoritative tool schema.
 
-The Marketplace publishes seven merchant-approved prices and agent-facing Stripe MPP SPT payment challenges, plus buyer-authorized hosted checkout. A live settled SPT charge and buyer-retrieved paid deliverable have **not been independently proven end to end**. Data Discrepancy Report has deterministic fulfillment; six other offers require human review. Standalone Agent Assurance checkout is independently gated and its price proposal must not be confused with the Marketplace price. Public free tools accept synthetic data or expressly authorized nonconfidential public stock IDs/prices only, never customer records or secrets.
+The Marketplace publishes seven merchant-approved prices and agent-facing Stripe MPP SPT payment challenges, plus buyer-authorized hosted checkout. A live settled SPT charge and buyer-retrieved paid deliverable have **not been independently proven end to end**. Data Discrepancy Report has deterministic fulfillment; six other offers require human review. Agent Assurance checkout directs buyers to the already-live Marketplace Stripe route; its separate legacy payment processor stays disabled to prevent competing order ledgers. Public free tools accept synthetic data or expressly authorized nonconfidential public stock IDs/prices only, never customer records or secrets.
 
 ## Services and delivery
 
