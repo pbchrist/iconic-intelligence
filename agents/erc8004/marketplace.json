@@ -1,0 +1,25 @@
+{
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
+  "image": "https://iconic.onl/iconic-share.png",
+  "active": true,
+  "registrations": [],
+  "supportedTrust": [],
+  "name": "ICONIC Agent Marketplace",
+  "description": "An ICONIC-operated public MCP server for discovering seven priced specialist B2B AI services, free public-data reconciliation, evidence-based pricing patterns and curated agent profiles. Stripe MPP SPT, optional x402 Base USDC for atomic report offers and hosted Stripe checkout are separately available. Buyer payment authority required; human-reviewed services are not instant.",
+  "services": [
+    {
+      "name": "web",
+      "endpoint": "https://iconic.onl/agents/marketplace/"
+    },
+    {
+      "name": "MCP",
+      "endpoint": "https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp"
+    },
+    {
+      "name": "A2A",
+      "endpoint": "https://iconic.onl/.well-known/agent-card.json",
+      "version": "0.3.0"
+    }
+  ],
+  "x402Support": true
+}
