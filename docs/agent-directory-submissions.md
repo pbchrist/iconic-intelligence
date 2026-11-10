@@ -8,8 +8,8 @@
 | --- | --- | --- |
 | Agent directory | https://iconic.onl/agents/ | Published; Marketplace checkout text corrected |
 | Marketplace page | https://iconic.onl/agents/marketplace/ | Seven fixed-price specialist offers; buyer-authorized checkout and human-reviewed fulfillment |
-| Marketplace manifest | https://iconic.onl/agents/marketplace/manifest.json | Reports checkout enabled and 15 tools (new public pricing preview added November 10) |
-| Marketplace remote MCP | https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp | Public Streamable HTTP, target 15 tools after deployment |
+| Marketplace manifest | https://iconic.onl/agents/marketplace/manifest.json | Reports checkout enabled and 15 tools (externally verified November 10) |
+| Marketplace remote MCP | https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp | Public Streamable HTTP, 15 tools verified via independent SDK |
 | Reserve page/manifest | https://iconic.onl/agents/reserve/ · https://iconic.onl/agents/reserve/manifest.json | Free public assessment and synthetic sandbox, paid Reserve plans disabled, 16 tools |
 | Reserve remote MCP | https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp | Public Streamable HTTP, 16 tools |
 | A2A discovery card | https://iconic.onl/.well-known/agent-card.json | Published and parity checked against live server card |
@@ -78,6 +78,14 @@
 
 **Bottom line:** the correct order is external real-client proof → useful synthetic product proof → genuine model-driven tool selection and safety/commerce proof → independent discovery → additional directory submissions. The first two and a narrow 3/3 genuine model-selection baseline are now verified within tested scope. Broad model reliability, organic discovery, full safety/commerce, and third-party acceptance gates remain open.
 
+
+## 2026-11-10 live deployment and independent evidence
+
+- Source: [commerce implementation d64a0f8](https://github.com/pbchrist/agent-commerce-lab/commit/d64a0f8) and [public discovery 87c781e](https://github.com/pbchrist/iconic-intelligence/commit/87c781e).
+- GitHub-hosted external official MCP SDK passed 15 Marketplace and 16 Reserve tools, actual read-only synthetic reconciliation, new fictional public-priced-stock pattern analysis, and $0 Reserve fit assessment: [run 42885988608](https://github.com/pbchrist/iconic-intelligence/actions/runs/42885988608).
+- Public manifests, live tool-list parity, Registry listings, A2A and offline site references passed: [run 42885993830](https://github.com/pbchrist/iconic-intelligence/actions/runs/42885993830).
+- Site GitHub Pages publishing passed [run 42885779888](https://github.com/pbchrist/iconic-intelligence/actions/runs/42885779888). External Mac connected to both updated MCP endpoints, exercised public pricing pattern detection on three fictional stock IDs, checked 13 reconciliation and five pricing checks, and verified Assurance's standalone/live Marketplace price distinctions.
+- No paid Stripe SPT settlement/delivery, real-customer improvement, cross-system production Reserve integration, or organic AI discovery has been established. Search-only baseline: 0 of 3 unbranded Bing queries returned ICONIC in top ten; [reproducible sample](organic-discovery-sample-2026-11-10.json).
 
 ## 2026-11-10 additive pricing-pattern release
 
