@@ -70,7 +70,7 @@ def check() -> None:
         assert f"https://iconic.onl{path}" in (ROOT / "llms.txt").read_text(encoding="utf-8")
     manifest = json.loads((ROOT / "agents/marketplace/manifest.json").read_text(encoding="utf-8"))
     assert manifest["checkout_enabled"] is True, "Marketplace checkout state unexpectedly changed"
-    assert manifest["tool_count"] == len(manifest["tools"]) == 14, "Marketplace tool count mismatch"
+    assert manifest["tool_count"] == len(manifest["tools"]) == 15, "Marketplace tool count mismatch"
     llms = (ROOT / "llms.txt").read_text(encoding="utf-8")
     marketplace_section = llms.split("## ICONIC Agent-Native Marketplace", 1)[1].split("\\n## ", 1)[0]
     assert "NOT yet purchasable" not in marketplace_section, "Marketplace llms.txt incorrectly says not purchasable"

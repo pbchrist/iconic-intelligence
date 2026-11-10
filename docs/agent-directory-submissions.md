@@ -8,8 +8,8 @@
 | --- | --- | --- |
 | Agent directory | https://iconic.onl/agents/ | Published; Marketplace checkout text corrected |
 | Marketplace page | https://iconic.onl/agents/marketplace/ | Seven fixed-price specialist offers; buyer-authorized checkout and human-reviewed fulfillment |
-| Marketplace manifest | https://iconic.onl/agents/marketplace/manifest.json | Reports checkout enabled and 14 tools |
-| Marketplace remote MCP | https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp | Public Streamable HTTP, 14 tools |
+| Marketplace manifest | https://iconic.onl/agents/marketplace/manifest.json | Reports checkout enabled and 15 tools (new public pricing preview added November 10) |
+| Marketplace remote MCP | https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp | Public Streamable HTTP, target 15 tools after deployment |
 | Reserve page/manifest | https://iconic.onl/agents/reserve/ · https://iconic.onl/agents/reserve/manifest.json | Free public assessment and synthetic sandbox, paid Reserve plans disabled, 16 tools |
 | Reserve remote MCP | https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp | Public Streamable HTTP, 16 tools |
 | A2A discovery card | https://iconic.onl/.well-known/agent-card.json | Published and parity checked against live server card |
@@ -77,3 +77,10 @@
 - Run current tests manually under **Actions**; verify the logs before marking work complete. A passing CI run is evidence of *its exact assertions*, not blanket agent interoperability or product-market fit.
 
 **Bottom line:** the correct order is external real-client proof → useful synthetic product proof → genuine model-driven tool selection and safety/commerce proof → independent discovery → additional directory submissions. The first two and a narrow 3/3 genuine model-selection baseline are now verified within tested scope. Broad model reliability, organic discovery, full safety/commerce, and third-party acceptance gates remain open.
+
+
+## 2026-11-10 additive pricing-pattern release
+
+marketplace_analyze_public_inventory is a read-only, bounded MCP preview taking explicitly authorized **nonconfidential publicly advertised** stock IDs and prices in two supplied snapshots (up to 100 rows each). It does not query private VIN/DMS systems, retain inputs, claim that missing vehicles sold, or infer competitors' algorithms. Arithmetic, fleet-wide identical-delta groups, duplicates and ambiguity are independently rederived. The paid dataset-diff-report public-inventory test worker now includes a separate independently verified pricing-pattern finding after a signed test-mode payment event.
+
+The standalone Assurance service remains a distinct intake/ledger and must explicitly point to the canonical Marketplace MPP offer when available; do not imply that standalone checkout being disabled makes the Marketplace offer unavailable. No real Stripe charge is authorized by this release. Historical 14-tool SDK results above remain historically accurate; obtain a new third-party 15-tool SDK result before claiming the upgraded endpoint is independently proven. Organic discovery from problem-only prompts remains unproven until separately measured.

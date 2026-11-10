@@ -34,7 +34,7 @@ Owner-led businesses and professional firms with years of their own records: law
 ## Agent discovery hub and problem-specific service pages (November 8, 2026)
 
 - [All ICONIC AI agent tools and MCP services](https://iconic.onl/agents/): human-readable directory with canonical machine manifests and honest availability.
-- [Data reconciliation for AI agents](https://iconic.onl/agents/data-reconciliation/): free synthetic discrepancy demonstration via the marketplace MCP; paid real-data worker and checkout are not yet active.
+- [Data reconciliation for AI agents](https://iconic.onl/agents/data-reconciliation/): free synthetic discrepancy demonstration and authorized-public-inventory pricing-pattern preview via the Marketplace MCP (100 rows per snapshot); seven separately priced Marketplace offers support buyer-authorized checkout. No client-private data on public tools.
 - [AI agent reliability audit and MCP preflight](https://iconic.onl/agents/assurance/): free static preflight and sample-report tools; human-reviewed paid audit is not yet active.
 - Directory publication does not automatically connect tools to an AI client. Connection and authorization are client-specific.
 
@@ -51,10 +51,10 @@ Owner-led businesses and professional firms with years of their own records: law
 - Machine-readable canonical offer: https://iconic.onl/agents/assurance/manifest.json
 - Remote MCP: https://patrick-beastmaster.tailf32530.ts.net/assurance/mcp
 - Live machine discovery: https://patrick-beastmaster.tailf32530.ts.net/assurance/agents
-- Seven tools: assurance_describe, assurance_quote, assurance_preflight, assurance_sample_report, assurance_prepare_order, assurance_get_order, assurance_begin_checkout.
+- Seven tools: assurance_describe, assurance_quote, assurance_preflight, assurance_sample_report, assurance_prepare_order, assurance_get_order, assurance_begin_checkout. The Marketplace offer uses a separate order/payment channel.
 - Agents can perform a free, static MCP/agent contract preflight, view the example report, and prepare an unpaid audit scope request after authorization. The public endpoint does not execute customer agents or accept confidential records.
-- Proposed founding-pilot fee: $1,500 one-time, indicative only, for one authorized workflow and up to 25 test cases. This is NOT a live paid offer.
-- Live Stripe checkout is DISABLED. No confirmed paid order or customer audit exists. Final scope and commercial terms require separate human approvals, and reports require signed-webhook payment confirmation and human review.
+- Dedicated Assurance MCP checkout remains separately gated; its price is indicative for standalone Assurance intake. The separate ICONIC Marketplace currently lists the equivalent human-reviewed audit at a merchant-approved $1,500 through MPP/hosted Checkout. Never reuse order tokens across these independent channels.
+- Standalone Assurance Stripe checkout is disabled. No confirmed paid customer audit is established. Final scope and commercial terms require separate human approvals, and reports require signed-webhook payment confirmation and human review.
 - Reserve provides evidence/outcome history, the adversarial harness performs evaluation, and QLoRA remains optional nonproduction research. No customer data enters training automatically.
 
 ## ICONIC Agent-Native Marketplace — seven discoverable specialist offers (November 7, 2026)

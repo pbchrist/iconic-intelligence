@@ -1,0 +1,71 @@
+{
+  "timestamp_utc": "2026-11-10T19:25:57.063962+00:00",
+  "method": "Bing RSS, first ten results per exact problem-only query",
+  "query_treatment": "Unbranded except a separately labeled branded control",
+  "scored_queries": 3,
+  "unbranded_queries_with_iconic_in_top_ten": 0,
+  "probes": [
+    {
+      "query": "MCP agent service reconcile two inventory snapshots detect price changes",
+      "control": false,
+      "status": "SEARCH_RESULTS_RETURNED",
+      "result_count": 10,
+      "iconic_rank": null,
+      "top_domains": [
+        "modelcontextprotocol.io",
+        "en.wikipedia.org",
+        "www.geeksforgeeks.org",
+        "www.databricks.com",
+        "phase2online.com"
+      ]
+    },
+    {
+      "query": "AI agent tool public vehicle inventory pricing pattern evidence report",
+      "control": false,
+      "status": "SEARCH_RESULTS_RETURNED",
+      "result_count": 10,
+      "iconic_rank": null,
+      "top_domains": [
+        "openai.com",
+        "gemini.google.com",
+        "ai-bot.cn",
+        "ai.google",
+        "deepai.org"
+      ]
+    },
+    {
+      "query": "MCP service private verified business decision outcome memory",
+      "control": false,
+      "status": "SEARCH_RESULTS_RETURNED",
+      "result_count": 10,
+      "iconic_rank": null,
+      "top_domains": [
+        "modelcontextprotocol.io",
+        "en.wikipedia.org",
+        "www.geeksforgeeks.org",
+        "www.databricks.com",
+        "phase2online.com"
+      ]
+    },
+    {
+      "query": "ICONIC agent marketplace MCP data reconciliation",
+      "control": true,
+      "status": "SEARCH_RESULTS_RETURNED",
+      "result_count": 10,
+      "iconic_rank": null,
+      "top_domains": [
+        "www.merriam-webster.com",
+        "www.dictionary.net",
+        "dictionary.cambridge.org",
+        "www.youtube.com",
+        "iconic.co"
+      ]
+    }
+  ],
+  "limitations": [
+    "One search provider and a small set of queries, not a ranking benchmark",
+    "Search listing does not prove an LLM autonomously discovered or selected the service",
+    "A missing result does not prove the service is unindexed everywhere",
+    "No payment, MCP installation, or customer-data submission was attempted"
+  ]
+}

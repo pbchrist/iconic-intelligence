@@ -37,7 +37,7 @@ The private intelligence moat thesis: a business's unique, permissioned and veri
 - Live machine-readable discovery: https://patrick-beastmaster.tailf32530.ts.net/assurance/agents
 - Seven real tools provide free agent contract preflight, example report, proposed quote, unpaid scoped order intent, private order status, and disabled-by-default Checkout initialization.
 - The first paid service is a human-reviewed reliability/evidence audit drawing on the provenance framework in Intelligence Reserve, evaluation via the adversarial harness, and optional separate QLoRA research. There is no automatic weight update or customer-data training.
-- Proposed $1,500 founding pilot is NOT finalized or purchasable at present. Payment collection is OFF; secure future checkout requires actual merchant and tax approval, explicit buyer approval, seller-scoped authorization, signed payment confirmation and human-reviewed report. This public service accepts nonconfidential scope categories only.
+- Standalone Assurance MCP checkout is gated and may accept only nonconfidential scope categories. A separately deployed Marketplace offer advertises the same human-reviewed audit at a merchant-approved $1,500 and provides buyer-authorized Stripe MPP/hosted checkout; it is a separate order ledger. No live paid customer fulfillment has been independently confirmed.
 
 ## Seven-offer ICONIC Agent-Native Marketplace (November 7, 2026)
 
@@ -49,9 +49,9 @@ Official MCP Registry: https://registry.modelcontextprotocol.io/v0.1/servers?sea
 
 Existing products exposed under one specialist marketplace interface: Agent Assurance (agent-reliability-evidence-audit), Agent Integration (agent-readiness), Code Assurance (code-risk-review), Data Reconciliation (dataset-diff-report), Private AI Infrastructure (ai-feasibility), Competitive Intelligence (competitor-change-brief), and Talent Mapping (role-talent-map).
 
-Nine real public tools: marketplace_describe, marketplace_list_offers, marketplace_get_offer, marketplace_quote, marketplace_preflight, marketplace_reconcile_synthetic, marketplace_request_order, marketplace_get_order, marketplace_begin_checkout.
+Fifteen Marketplace MCP tools are exposed. In addition to discovery, quote, checkout preparation, guarded order/checkout and synthetic tests, marketplace_analyze_public_inventory performs a no-charge, stateless, independently verified comparison of up to 100 publicly advertised stock IDs and prices per supplied snapshot after explicit authorization. It reports repeated identical price shifts and missing listings without claiming sales, algorithms or forecasts. Use the live tools/list response as the authoritative tool schema.
 
-The marketplace is public, discoverable and operational for no-charge fit checks, bounded fictional reconciliation and unpaid order requests. **None of the seven products has an approved sale price; live payments are OFF and no paid fulfillment can be presumed.** Separate seller/buyer approvals, signed payment verification, and human-reviewed output apply before a real paid order can proceed. Hypothetical prices are unapproved experiments, not final quotes. Do not submit secrets or customer records to public tools.
+The Marketplace publishes seven merchant-approved prices and agent-facing Stripe MPP SPT payment challenges, plus buyer-authorized hosted checkout. A live settled SPT charge and buyer-retrieved paid deliverable have **not been independently proven end to end**. Data Discrepancy Report has deterministic fulfillment; six other offers require human review. Standalone Agent Assurance checkout is independently gated and its price proposal must not be confused with the Marketplace price. Public free tools accept synthetic data or expressly authorized nonconfidential public stock IDs/prices only, never customer records or secrets.
 
 ## Services and delivery
 

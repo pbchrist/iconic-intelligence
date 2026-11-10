@@ -11,7 +11,7 @@ from mcp.client import Client
 SERVICES = {
     "marketplace": {
         "url": "https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp",
-        "expected_count": 14,
+        "expected_count": 15,
         "describe": "marketplace_describe",
     },
     "reserve": {
@@ -51,6 +51,21 @@ async def verify(name, config):
             assert report["changes"] == [{"id": "alpha", "from": 100, "to": 80, "delta": -20}], report
             assert any("not evidence of sale" in text.lower() for text in report["limitations"])
             print("PASS marketplace: correct added/missing/delta reconciliation and no-sale-inference guard", flush=True)
+            public={"public_request":{"authorized_public_data":True,
+                    "snapshot_before":{"label":"PUBLIC_TEST_DAY1","rows":[
+                        {"stock_id":f"STK-{i}","price_cents":3000000+i*10000}
+                        for i in range(3)]},
+                    "snapshot_after":{"label":"PUBLIC_TEST_DAY2","rows":[
+                        {"stock_id":f"STK-{i}","price_cents":2900000+i*10000}
+                        for i in range(3)]}}}
+            tested=await client.call_tool("marketplace_analyze_public_inventory",public)
+            assert not tested.is_error,tested
+            verdict=json.loads(tested.content[0].text)
+            assert verdict["amount_charged_cents"]==0
+            assert verdict["pricing_signals"]["signals"][0]["delta_cents"]==-100000
+            assert verdict["independent_checks"]["pricing"]["checks_passed"]==5
+            print("PASS marketplace: no-charge evidence-based pricing signals; 3 identical changes independently checked",flush=True)
+
         if name == "reserve":
             fictional = {
                 "business_type": "Fictional auto dealership",
