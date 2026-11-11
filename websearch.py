@@ -25,7 +25,8 @@ WEB_CUES = re.compile(r"(?i)\b(today|tonight|tomorrow|yesterday|this (week|weeke
                       r"latest|news|score|game|playing|schedule|weather|forecast|price of|stock|market|rate|rates|"
                       r"interest|inflation|election|law|laws|regulation|ruling|court ruled|who (is|won|was)|when (is|does|did)|"
                       r"where (is|can)|how much (is|does)|movie|movies|restaurant|open now|traffic|seahawks|mariners|"
-                      r"kraken|sounders|nfl|nba|mlb|20[2-3][0-9])\b")
+                      r"kraken|sounders|nfl|nba|mlb|20[2-3][0-9]|who (has|sells|makes|serves)|near me|nearby|"
+                      r"seattle|tacoma|bellevue|redmond|everett|spokane|portland)\b")
 
 
 JUNK = re.compile(r"(?i)promo code|bonus code|sportsbook|betting|bet \$|odds boost|coupon|casino")

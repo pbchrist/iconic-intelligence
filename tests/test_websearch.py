@@ -104,3 +104,19 @@ class Switch(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class LocalQuestionCues(unittest.TestCase):
+    def test_local_place_questions_get_considered(self):
+        for q in ("who has the best naachoes in seattle", "best tacos near me", "coffee nearby",
+                  "who sells copper pipe in Tacoma"):
+            self.assertTrue(websearch.likely_needs_web(q), q)
+
+    def test_file_questions_still_skip(self):
+        for q in ("What happens if we miss the November 12 Kessler deadline?",
+                  "Summarize the Hollis engagement letter"):
+            self.assertFalse(websearch.likely_needs_web(q), q)
+
+
+if __name__ == "__main__":
+    unittest.main()
