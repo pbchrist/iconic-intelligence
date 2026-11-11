@@ -145,23 +145,35 @@ def _page_text(url, terms, timeout=5, limit=1400):
     return text[best:best + limit]
 
 
+FRESH = re.compile(r"(?i)\b(today|tonight|yesterday|this week|right now|latest|news|breaking|score|election|ruling)\b")
+
+
+def _relevance(r, terms):
+    hay = (r["title"] + " " + r["snippet"]).lower()
+    return sum(1 for t in terms if t in hay)
+
+
 def search_best(query, url=None, n=5):
-    """General results plus fresh news, then read the top pages so the model sees real content, not just blurbs."""
+    """General results first (fresh news only for time-sensitive questions), ranked by how well they match
+    the search words, then read the top pages so the model sees real content, not just blurbs."""
     out, seen = [], set()
-    for extra in ({"categories": "news", "time_range": "week"}, {}):
+    passes = [{}] + ([{"categories": "news", "time_range": "week"}] if FRESH.search(query or "") else [])
+    for extra in passes:
         try:
-            got = search(query, url, n, extra=extra)
+            got = search(query, url, n * 2, extra=extra)
         except WebSearchError:
             if extra:
                 continue
-            if not out:
-                raise
             got = []
         for r in got:
             if r["url"] not in seen:
                 seen.add(r["url"]); out.append(r)
+    if not out:
+        raise WebSearchError("The web search didn't return any results.")
+    terms = [w.lower() for w in re.findall(r"[A-Za-z0-9]{4,}", query)][:6]
+    # Stable sort: keeps the search engine's own order among equally relevant results.
+    out.sort(key=lambda r: -_relevance(r, terms))
     out = out[:n]
-    terms = [w.lower() for w in re.findall(r"[A-Za-z0-9]{4,}", query)][:4]
     with ThreadPoolExecutor(3) as ex:
         texts = list(ex.map(lambda r: _page_text(r["url"], terms), out[:3]))
     for r, t in zip(out, texts):

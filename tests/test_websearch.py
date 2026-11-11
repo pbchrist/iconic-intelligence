@@ -102,6 +102,35 @@ class Switch(unittest.TestCase):
         self.assertTrue(websearch.enabled())
 
 
+class SearchBestRanking(unittest.TestCase):
+    def setUp(self):
+        self.calls = []
+        self._search, self._page = websearch.search, websearch._page_text
+        websearch._page_text = lambda url, terms, **k: ""
+
+        def fake(query, url=None, n=5, timeout=8, extra=None):
+            self.calls.append(extra or {})
+            if extra:  # news pass: off-topic fresh stories
+                return [{"title": "Spokane pho shop opens", "url": "https://n/%d" % i, "snippet": "pho"} for i in range(5)]
+            return [{"title": "Dictionary: nacho", "url": "https://d", "snippet": "noun"},
+                    {"title": "Best nachos in Seattle", "url": "https://g1", "snippet": "Seattle's top nachos"},
+                    {"title": "Seattle nachos guide", "url": "https://g2", "snippet": "best nachos spots"}]
+        websearch.search = fake
+
+    def tearDown(self):
+        websearch.search, websearch._page_text = self._search, self._page
+
+    def test_evergreen_question_skips_news_and_ranks_matches_first(self):
+        res = websearch.search_best("best nachos in Seattle")
+        self.assertEqual(self.calls, [{}])
+        self.assertEqual(res[0]["url"], "https://g1")
+        self.assertNotIn("pho", " ".join(r["title"] for r in res).lower())
+
+    def test_time_sensitive_question_also_gets_news(self):
+        websearch.search_best("Seattle news today")
+        self.assertEqual(len(self.calls), 2)
+
+
 if __name__ == "__main__":
     unittest.main()
 
