@@ -27,9 +27,11 @@
    $('order-id').textContent=data.order_id;
    $('service').textContent=data.offer_id;
    $('price').textContent=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(data.price_cents/100);
-   $('order-status').textContent=data.status==='DELIVERED'?'Report delivered':'Paid; awaiting human review';
+   const automated=data.offer_id==='selection-test';
+   $('order-status').textContent=data.status==='DELIVERED'?'Report delivered':automated?'Paid; your test is running (usually under 30 minutes). This page checks again every 30 seconds.':'Paid; awaiting human review';
    $('token').textContent=token;
-   if(data.report){$('report-wrap').hidden=false;$('report').textContent=JSON.stringify(data.report,null,2)}
+   if(data.report){$('report-wrap').hidden=false;$('report').textContent=data.report.report_markdown||JSON.stringify(data.report,null,2)}
+   else if(automated)setTimeout(check,30000);
   }catch{$('state').textContent='We could not verify this receipt right now. Keep your Stripe receipt and contact patrick@iconic.onl for assistance.'}
  }
  $('copy-token').addEventListener('click',async()=>{
