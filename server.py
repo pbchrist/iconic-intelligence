@@ -971,7 +971,9 @@ def find_sources(w, q, history):
 
 def build_messages(w, q, hist, sources, web_note="", web_used=None, trying=None):
     """Everything the model sees for one answer. `trying` = a new lesson being tested, not yet kept."""
-    ctx = "\n\n".join("[%d] %s (%s, %s)\n%s" % (s["n"], s["title"], s["rel"], s["date"], s["chunk"])
+    # Web results (websearch.as_sources) carry a snippet, not a file chunk.
+    ctx = "\n\n".join("[%d] %s (%s, %s)\n%s" % (s["n"], s["title"], s["rel"], s["date"],
+                                                s.get("chunk") or s.get("snippet") or "")
                       for s in sources) or "(no matching documents)"
     meta = w.meta
     task = dialogue_contract.intent(q)
