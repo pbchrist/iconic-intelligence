@@ -19,7 +19,7 @@
   const id=card.querySelector('code')?.textContent.trim();
   if(!id)continue;
   const button=document.createElement('button');
-  button.type='button';button.className='buy-action';button.disabled=true;
+  button.type='button';button.className='buy-action';button.disabled=true;button.dataset.offer=id;
   button.textContent='Checking checkout…';
   button.addEventListener('click',()=>{
    if(waiting)return;chosen=id;form.reset();message.textContent='';
@@ -39,7 +39,15 @@
    if(!response.ok)throw Error('checkout offline');
    const state=await response.json();
    const ready=state.hosted_checkout_ready===true;
-   for(const button of buttons){button.disabled=!ready;button.textContent=ready?'Buy securely with Stripe':'Card checkout coming online'}
+   // Only offers this site's catalog marks purchasable get a buy button; the server refuses the rest anyway.
+   let onSale=new Set();
+   try{const cat=await (await fetch('/agents/marketplace/offers.json',{cache:'no-store'})).json();
+    onSale=new Set((cat.offers||[]).filter(o=>o.purchasable===true).map(o=>o.offer_id))}catch{}
+   buttons.forEach(button=>{
+    const sale=onSale.has(button.dataset.offer);
+    button.disabled=!ready||!sale;
+    button.textContent=!sale?'Not on sale yet':ready?'Buy securely with Stripe':'Card checkout coming online';
+   });
   }catch{
    for(const button of buttons){button.disabled=true;button.textContent='Card checkout temporarily unavailable'}
   }
