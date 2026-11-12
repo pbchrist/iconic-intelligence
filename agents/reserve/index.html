@@ -13,7 +13,7 @@
 </script>
   <meta name="theme-color" content="#080912" />
   <title>ICONIC Reserve | Connect your AI agent over MCP</title>
-  <meta name="description" content="ICONIC Reserve gives AI agents a memory your business owns: what it knew, decided, did and what actually happened. Connect Claude, Claude Code, Cursor or any remote MCP client in two minutes, see all 17 tools, and run a free assessment live on this page." />
+  <meta name="description" content="ICONIC Reserve gives AI agents a memory your business owns: what it knew, decided, did and what actually happened. Connect Claude, Claude Code, Cursor or any remote MCP client in two minutes, see every tool, and run a free assessment live on this page." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://iconic.onl/agents/reserve/" />
   <meta property="og:title" content="ICONIC Reserve. Agents forget. Your business remembers." />
@@ -60,7 +60,7 @@
   </script>
   <link rel="stylesheet" href="/styles.css?v=20261101" />
   <link rel="stylesheet" href="/mobile-first.css?v=20261110r" />
-  <link rel="stylesheet" href="/agents/reserve/reserve.css?v=20261110a" />
+  <link rel="stylesheet" href="/agents/reserve/reserve.css?v=20261112a" />
 </head>
 <body class="rv-page">
   <canvas id="field" aria-hidden="true"></canvas>
@@ -74,12 +74,13 @@
       <a href="#quickstart">Connect</a>
       <a href="#tools">Tools</a>
       <a href="#try">Try it live</a>
+      <a href="#pass">Reserve Pass</a>
       <a href="#services">Services</a>
     </nav>
     <a class="header-cta" href="#quickstart">CONNECT YOUR AGENT</a>
     <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav">MENU</button>
     <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
-      <a href="#overview">Reserve</a><a href="#quickstart">Connect</a><a href="#tools">Tools</a><a href="#try">Try it live</a><a href="#services">Services</a><a href="#faq">FAQ</a><a href="/">ICONIC home</a>
+      <a href="#overview">Reserve</a><a href="#quickstart">Connect</a><a href="#tools">Tools</a><a href="#try">Try it live</a><a href="#pass">Reserve Pass</a><a href="#services">Services</a><a href="#faq">FAQ</a><a href="/">ICONIC home</a>
     </nav>
   </header>
 
@@ -92,6 +93,7 @@
         <div class="hero-actions">
           <a class="button button-primary" href="#quickstart">CONNECT YOUR AGENT</a>
           <a class="button button-ghost" href="#try">TRY IT LIVE</a>
+          <a class="button button-ghost" href="#pass">GET YOUR OWN · $19</a>
         </div>
         <div class="rv-endpoint">
           <div class="rv-endpoint-label"><span>MCP ENDPOINT</span><span>STREAMABLE HTTP · NO SIGN-IN</span></div>
@@ -100,7 +102,7 @@
             <button class="rv-copy" type="button" data-copy="https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp" aria-label="Copy the MCP endpoint">Copy</button>
           </div>
         </div>
-        <p class="rv-disclose"><b>Free to connect and try.</b> The public server runs a fit assessment and a one-hour sandbox on fictional data. It cannot see any customer's records. A private Reserve on your own systems is a separate engagement, set up with you, never sold by an agent.</p>
+        <p class="rv-disclose"><b>Free to connect and try.</b> The public server runs a fit assessment and a one-hour sandbox on fictional data. <b>Want one that keeps what it learns?</b> A <a href="#pass">Reserve Pass</a> gives you or your agent a private Reserve for 30 days at $19, no account. No pass can see another's records.</p>
       </div>
       <aside class="rv-status" aria-label="Live server status" data-reveal>
         <div class="rv-status-top"><span>RESERVE · PUBLIC SERVER</span><span class="rv-pill" id="statusPill" data-state="wait" role="status"><i></i><span id="statusText">CHECKING</span></span></div>
@@ -108,7 +110,7 @@
           <div><dt>TOOLS PUBLISHED</dt><dd id="statTools">…</dd></div>
           <div><dt>TRANSPORT</dt><dd>MCP · HTTP</dd></div>
           <div><dt>SIGN-IN</dt><dd>NONE</dd></div>
-          <div><dt>COST</dt><dd>$0</dd></div>
+          <div><dt>COST</dt><dd>$0 TO TRY · $19 TO KEEP</dd></div>
           <div><dt>CUSTOMER DATA REACHABLE</dt><dd>NONE</dd></div>
         </dl>
         <p class="rv-status-note" id="statusNote">Asking the live server for its tool list…</p>
@@ -123,6 +125,7 @@
           <a href="#quickstart">Quickstart</a>
           <a href="#tools">MCP tools</a>
           <a href="#try">Try it live</a>
+          <a href="#pass">Reserve Pass · $19</a>
           <a href="#services">Services</a>
           <a href="#privacy">Permissions &amp; privacy</a>
           <a href="#faq">FAQ</a>
@@ -135,7 +138,7 @@
 
       <div class="rv-content">
         <nav class="rv-chipnav" aria-label="Sections">
-          <a href="#overview">Overview</a><a href="#quickstart">Quickstart</a><a href="#tools">Tools</a><a href="#try">Try it live</a><a href="#services">Services</a><a href="#privacy">Privacy</a><a href="#faq">FAQ</a>
+          <a href="#overview">Overview</a><a href="#quickstart">Quickstart</a><a href="#tools">Tools</a><a href="#try">Try it live</a><a href="#pass">Reserve Pass</a><a href="#services">Services</a><a href="#privacy">Privacy</a><a href="#faq">FAQ</a>
         </nav>
 
         <!-- OVERVIEW -->
@@ -231,7 +234,7 @@
               <h3>Ask your agent</h3>
               <p>Paste this into a chat with the connector on. Your agent calls the tools itself and shows you what came back.</p>
               <div class="rv-code"><pre class="rv-wrap"><code>Use ICONIC Reserve. Describe what it does, then run a free assessment for a 14-person accounting firm that wants to know which client advice actually saved clients money.</code></pre><button class="rv-copy" type="button" data-copy-from="prev" aria-label="Copy the example prompt">Copy</button></div>
-              <p class="rv-small">Connected correctly, your client lists 17 tools that start with <code>reserve_</code>.</p>
+              <p class="rv-small">Connected correctly, your client lists the tools that start with <code>reserve_</code>.</p>
             </li>
           </ol>
         </section>
@@ -239,7 +242,7 @@
         <!-- TOOLS -->
         <section id="tools" class="rv-sec" aria-labelledby="toolsTitle">
           <div class="section-kicker" data-reveal>03 · MCP TOOLS</div>
-          <h2 id="toolsTitle" data-reveal>Seventeen tools.<br><em>Read live.</em></h2>
+          <h2 id="toolsTitle" data-reveal>Every tool.<br><em>Read live.</em></h2>
           <p class="rv-lead" data-reveal>This list isn't typed by hand. It's loaded from the server's own published schema each time you open the page, so what you read is what your agent gets.</p>
           <div class="rv-tool-meta" id="toolMeta" role="status" aria-live="polite">Loading the live tool list…</div>
           <div class="rv-tool-groups" id="toolGroups"></div>
@@ -318,9 +321,51 @@
           <p class="rv-small" style="margin-top:16px">Your agent gets more than this page can show: <code>reserve_sandbox_start</code> opens a private one-hour Reserve where it can write, recall, trace and evaluate its own fictional records.</p>
         </section>
 
+        <!-- RESERVE PASS (paid, self-serve) -->
+        <section id="pass" class="rv-sec" aria-labelledby="passTitle">
+          <div class="section-kicker" data-reveal>05 · RESERVE PASS</div>
+          <h2 id="passTitle" data-reveal>Keep what it learns.<br><em>$19 for 30 days.</em></h2>
+          <p class="rv-lead" data-reveal>The sandbox forgets after an hour. A Reserve Pass doesn't. Pay once and you get a private Reserve and its key: your agent remembers facts with their sources, records what it decided and what was done, and can show you later whether it worked. <strong>No account. No subscription. An agent can buy it for you.</strong></p>
+
+          <div class="rv-pass" data-reveal>
+            <div class="rv-pass-what">
+              <h3>What you get</h3>
+              <ul>
+                <li><b>A private Reserve.</b> Only your key reads or writes it. It works from Claude, Claude Code, Cursor or any MCP client, and survives every new chat and model.</li>
+                <li><b>Ten tools.</b> Remember, recall, record a decision, the action and the outcome, verify, trace, evaluate, export, status.</li>
+                <li><b>A second key for checking.</b> The agent that reports a result can't mark it verified. A reviewer key does that.</li>
+                <li><b>Your records leave with you.</b> Export everything at any time. Never shared, pooled, sold or used for training.</li>
+              </ul>
+              <p class="rv-small">30 days from purchase. Nothing renews or charges by itself. After 30 days it is read-only for 30 more, then erased; buy again with your Reserve ID to add 30 days. Hosted on ICONIC's own machine in Seattle. Don't store health records, card numbers, government IDs or passwords.</p>
+            </div>
+
+            <form class="rv-pass-buy" id="passForm" novalidate>
+              <div class="rv-pass-price"><strong>$19</strong><span>ONE-TIME · 30 DAYS · DELIVERED IN MINUTES</span></div>
+              <div class="rv-field">
+                <label for="passEmail">Your email</label>
+                <input type="email" id="passEmail" maxlength="200" required autocomplete="email" placeholder="you@company.com" />
+                <small>For your Stripe receipt. Your keys appear on the next page.</small>
+              </div>
+              <div class="rv-field">
+                <label for="passRenew">Renewing? Your Reserve ID</label>
+                <input type="text" id="passRenew" maxlength="19" autocomplete="off" placeholder="rp_… (leave empty for a new Reserve)" pattern="rp_[0-9a-f]{16}" />
+              </div>
+              <div class="rv-checks"><label><input type="checkbox" id="passConsent" required /> <span>I authorize this one-time $19 purchase and agree to the <a href="/agents/marketplace/terms.html" target="_blank" rel="noopener">purchase terms</a> and <a href="/refunds/" target="_blank" rel="noopener">refund policy</a>.</span></label></div>
+              <button class="button button-primary" type="submit" id="passGo" disabled>CHECKING CHECKOUT…</button>
+              <p class="rv-pass-msg" id="passMsg" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+
+          <div class="rv-pass-agent" data-reveal>
+            <small>FOR AGENTS</small>
+            <p>Call <code>reserve_quote</code> with <code>reserve-pass</code> on this server for the exact price and steps. Buy it through the Marketplace server with a wallet your human approved, then poll the order: the delivered report holds <code>reserve_key</code> and <code>reviewer_key</code>.</p>
+            <div class="rv-code"><pre><code>https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers/reserve-pass</code></pre><button class="rv-copy" type="button" data-copy="https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers/reserve-pass" aria-label="Copy the Reserve Pass offer address">Copy</button></div>
+          </div>
+        </section>
+
         <!-- SERVICES (Marketplace) -->
         <section id="services" class="rv-sec" aria-labelledby="svcTitle">
-          <div class="section-kicker" data-reveal>05 · SERVICES</div>
+          <div class="section-kicker" data-reveal>06 · SERVICES</div>
           <h2 id="svcTitle" data-reveal>Eight jobs.<br><em>Fixed prices.</em></h2>
           <p class="rv-lead" data-reveal>When you need the work done, not just the memory. <strong>People pay by card through Stripe. Agents buy over MCP with a wallet you approve.</strong> Either way: one price, one order, one deliverable.</p>
           <div class="rv-svc-grid">
@@ -341,13 +386,14 @@
 
         <!-- PERMISSIONS & PRIVACY -->
         <section id="privacy" class="rv-sec" aria-labelledby="privTitle">
-          <div class="section-kicker" data-reveal>06 · PERMISSIONS &amp; PRIVACY</div>
+          <div class="section-kicker" data-reveal>07 · PERMISSIONS &amp; PRIVACY</div>
           <h2 id="privTitle" data-reveal>What it can touch.<br><em>What it can't.</em></h2>
           <div class="rv-perm">
             <article data-reveal>
               <h3>The public server can</h3>
               <ul>
-                <li><b>Describe itself</b> and quote its one offer: a $0 assessment.</li>
+                <li><b>Describe itself</b> and quote its two offers: a $0 assessment and the $19 Reserve Pass.</li>
+                <li><b>Serve a paid Reserve Pass</b> to whoever holds its key, and to nobody else.</li>
                 <li><b>Assess fit</b> from what you type, answer once and keep nothing.</li>
                 <li><b>Run a sandbox</b> of fictional records for one hour, then erase it.</li>
                 <li><b>Point you to a person</b> for anything real. It never sends a message for you.</li>
@@ -357,7 +403,7 @@
               <h3>It cannot</h3>
               <ul>
                 <li><b>Reach any customer's Reserve.</b> Private Reserves run as a separate service that isn't on the internet.</li>
-                <li><b>Charge you.</b> Reserve has no checkout. The paid services above go through Stripe, never through Reserve.</li>
+                <li><b>Charge you.</b> The Reserve server never takes payment. The Reserve Pass and the services go through Stripe checkout, and an agent can only pay with a wallet you approved.</li>
                 <li><b>Sign you in or hold keys.</b> No accounts, OAuth or API keys exist on this endpoint.</li>
                 <li><b>Run unlimited.</b> Each visitor gets 50 assessments and 12 demos a minute, with a global cap on top.</li>
               </ul>
@@ -368,12 +414,12 @@
 
         <!-- FAQ -->
         <section id="faq" class="rv-sec" aria-labelledby="faqTitle">
-          <div class="section-kicker" data-reveal>07 · FAQ</div>
+          <div class="section-kicker" data-reveal>08 · FAQ</div>
           <h2 id="faqTitle" data-reveal>Straight<br><em>answers.</em></h2>
           <div class="rv-faq" data-reveal>
             <details><summary>What is MCP, in plain English?</summary><p>The Model Context Protocol is the open standard that lets AI assistants like Claude, Claude Code and Cursor use outside tools. Think of it as a universal plug: you give your assistant one web address, it sees the tools behind it, and it decides when to use them. You don't write code.</p></details>
             <details><summary>Do I need an account or an API key?</summary><p>No. The public endpoint has no sign-in. In Claude, choose <b>No sign in</b> when you add the connector. If a client asks for OAuth details, leave them empty.</p></details>
-            <details><summary>What does it cost?</summary><p>Connecting, the assessment, the synthetic demo and the sandbox are free. A private Reserve on your own records is a scoped engagement that starts with the <a href="https://calendly.com/patrick-iconic/30min">free 30-minute check</a>. It isn't sold self-service and an agent can't buy it.</p></details>
+            <details><summary>What does it cost?</summary><p>Connecting, the assessment, the synthetic demo and the sandbox are free. A <a href="#pass">Reserve Pass</a>, your own private Reserve for 30 days, is $19 one-time, bought here by card or by your agent. A Reserve wired into your own systems is a scoped engagement that starts with the <a href="https://calendly.com/patrick-iconic/30min">free 30-minute check</a>.</p></details>
             <details><summary>Does it keep what I type?</summary><p>The assessment answers once and stores nothing; its receipt says <code>record_retention: NONE_PUBLIC_SERVICE</code>. Sandbox records are fictional and erased after an hour. The server keeps only anonymous counts of which tools were used.</p></details>
             <details><summary>Why does the address end in ts.net?</summary><p>The server runs on ICONIC's own hardware in Seattle and is published to the internet through Tailscale. Same machine-first idea as the product: your intelligence on hardware you control.</p></details>
             <details><summary>Is it a real listing or just a page?</summary><p>It's in the official MCP Registry as <a href="https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.pbchrist/iconic-intelligence-reserve"><code>io.github.pbchrist/iconic-intelligence-reserve</code></a>, and an independent test client connects to it and calls its tools every day.</p></details>
@@ -411,6 +457,7 @@
   </main>
 
   <script src="/app.js?v=20261102a" defer></script>
+  <script src="/agents/reserve/pass.js?v=20261112a" defer></script>
   <script src="/agents/reserve/reserve.js?v=20261110a" data-gateway="https://patrick-beastmaster.tailf32530.ts.net/reserve" defer></script>
 </body>
 </html>

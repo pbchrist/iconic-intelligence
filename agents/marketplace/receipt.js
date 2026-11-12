@@ -27,11 +27,31 @@
    $('order-id').textContent=data.order_id;
    $('service').textContent=data.offer_id;
    $('price').textContent=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(data.price_cents/100);
-   const automated=data.offer_id==='selection-test';
-   $('order-status').textContent=data.status==='DELIVERED'?'Report delivered':automated?'Paid; your test is running (usually under 30 minutes). This page checks again every 30 seconds.':'Paid; awaiting human review';
+   const pass=data.offer_id==='reserve-pass';
+   const automated=pass||data.offer_id==='selection-test';
+   $('order-status').textContent=data.status==='DELIVERED'?(pass?'Your Reserve is ready':'Report delivered')
+    :pass?'Paid; your private Reserve is being created (usually a few minutes). This page checks again every 15 seconds.'
+    :automated?'Paid; your test is running (usually under 30 minutes). This page checks again every 30 seconds.':'Paid; awaiting human review';
    $('token').textContent=token;
-   if(data.report){$('report-wrap').hidden=false;$('report').textContent=data.report.report_markdown||JSON.stringify(data.report,null,2)}
-   else if(automated)setTimeout(check,30000);
+   if(data.report){
+    $('report-wrap').hidden=false;
+    const r=data.report;
+    if(pass){
+     $('report-title').textContent=r.renewed?'Your Reserve was renewed':'Your Reserve keys';
+     $('report').textContent=(r.renewed
+      ?['Reserve ID:    '+r.reserve_id,'Now valid to:  '+r.expires_at,'','30 days were added. Your keys are unchanged.']
+      :['Reserve ID:    '+r.reserve_id,'Reserve key:   '+r.reserve_key,'Reviewer key:  '+r.reviewer_key,'Valid to:      '+r.expires_at,'',
+        'SAVE THESE NOW. Anyone holding the Reserve key can read and write this Reserve.','',
+        '1. Add this MCP server to Claude, Claude Code, Cursor or another client (no sign-in):',
+        '   '+r.mcp_endpoint,
+        '2. Tell your agent:',
+        '   "Use ICONIC Reserve. My reserve_key is '+r.reserve_key+'. Call reserve_pass_status, then remember what we decide and record what happens."',
+        '3. Give the reviewer key only to whoever checks results.','',
+        'Setup steps for each client: https://iconic.onl/agents/reserve/#quickstart',
+        'To add 30 days later, buy again and enter the Reserve ID.']).join('\n');
+    }else $('report').textContent=r.report_markdown||JSON.stringify(r,null,2);
+   }
+   else if(automated)setTimeout(check,pass?15000:30000);
   }catch{$('state').textContent='We could not verify this receipt right now. Keep your Stripe receipt and contact patrick@iconic.onl for assistance.'}
  }
  $('copy-token').addEventListener('click',async()=>{

@@ -311,3 +311,36 @@
 @media (min-width: 560px) { .rv-svc-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
 @media (min-width: 1280px) { .rv-svc-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
 @media (prefers-reduced-motion: reduce) { .rv-svc, .rv-svc:hover { transition: none; transform: none; } }
+
+/* Reserve Pass (paid) */
+.rv-field input[type="email"] {
+  width: 100%; padding: 13px 14px;
+  border: 1px solid rgba(255,255,255,.14); border-radius: 12px;
+  background: rgba(4,5,12,.6); color: var(--pearl);
+  font: 15px/1.45 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  transition: border-color .2s, background .2s;
+}
+.rv-field input[type="email"]:focus { outline: none; border-color: var(--accent-2); background: rgba(4,5,12,.85); box-shadow: 0 0 0 3px rgba(146,156,255,.18); }
+.rv-pass { display: grid; grid-template-columns: minmax(0,1fr); gap: 18px; margin-top: 26px; }
+.rv-pass-what, .rv-pass-buy, .rv-pass-agent { padding: 24px; border: 1px solid var(--line); border-radius: 22px; background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)); }
+.rv-pass-what h3 { margin: 0 0 14px; color: var(--pearl); font-size: 18px; font-weight: 600; }
+.rv-pass-what ul { margin: 0 0 16px; padding-left: 18px; display: grid; gap: 10px; }
+.rv-pass-what li { color: #c9ccda; font-size: 15px; line-height: 1.55; }
+.rv-pass-what li b { color: var(--pearl); font-weight: 600; }
+.rv-pass-buy { display: grid; gap: 16px; align-content: start; border-color: var(--line-strong); }
+.rv-pass-price { display: grid; gap: 4px; }
+.rv-pass-price strong { color: var(--pearl); font-family: Georgia, serif; font-size: 52px; font-weight: 400; line-height: 1; }
+.rv-pass-price span { color: var(--accent-2); font-size: 10px; font-weight: 800; letter-spacing: .18em; }
+.rv-pass-buy .rv-checks label { align-items: flex-start; font-size: 13px; line-height: 1.5; }
+.rv-pass-buy .rv-checks input { flex: none; margin-top: 2px; }
+.rv-pass-buy .rv-checks a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; }
+.rv-pass-buy .button { width: 100%; justify-content: center; }
+.rv-pass-buy .button[disabled] { opacity: .55; cursor: not-allowed; }
+.rv-pass-msg { margin: 0; min-height: 1.4em; color: #aeb3c7; font-size: 13px; line-height: 1.5; }
+.rv-pass-agent { margin-top: 18px; display: grid; gap: 12px; }
+.rv-pass-agent small { color: var(--accent-2); font-size: 10px; font-weight: 800; letter-spacing: .2em; }
+.rv-pass-agent p { margin: 0; color: #c9ccda; font-size: 14px; line-height: 1.6; }
+.rv-pass-agent code { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: 12.5px; color: #dfe2f5; overflow-wrap: anywhere; }
+@media (min-width: 900px) { .rv-pass { grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); align-items: start; } }
+.rv-pass > *, .rv-pass-agent, .rv-pass-agent > * { min-width: 0; }
+.rv-pass-agent .rv-code pre { overflow-x: auto; }
