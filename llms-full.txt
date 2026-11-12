@@ -24,7 +24,7 @@ The private intelligence moat thesis: a business's unique, permissioned and veri
 
 - Product page: https://iconic.onl/agents/reserve/
 - Manifest for discovery: https://iconic.onl/agents/reserve/manifest.json
-- Machine entrypoint: https://patrick-beastmaster.tailf32530.ts.net/reserve/agents (JSON, not a marketing page). Direct remote MCP: https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp. Agent tools: sixteen total, comprising seven discovery/assessment and nine synthetic interactive sandbox tools. The agent can obtain a $0 quote, execute a free assessment and receive a structured `FULFILLED_FREE` result without a human UI. Paid deployment is not available for self-service.
+- Machine entrypoint: https://patrick-beastmaster.tailf32530.ts.net/reserve/agents (JSON, not a marketing page). Direct remote MCP: https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp. Agent tools: seventeen total, comprising seven discovery/assessment and ten synthetic interactive sandbox tools. The agent can obtain a $0 quote, execute a free assessment and receive a structured `FULFILLED_FREE` result without a human UI. Paid deployment is not available for self-service.
 - `reserve_assess` produces an actionable free fit assessment from non-confidential business categories, one workflow and one outcome metric.
 - `reserve_demo` executes an ephemeral, synthetic memory/decision/action/outcome example. Fictional data is not proof of real-world impact.
 - The private Reserve is a technical alpha; customer memory is **not** publicly accessible. Paid self-service plans, autonomous purchasing, automatic business-data ingestion and customer production onboarding are **not** live.
@@ -242,7 +242,7 @@ One recurring job that costs time or money, and a list of the tools their staff 
 
 Last reviewed: 2026-11-04.
 
-**Live interactive agent sandbox (Reserve v0.2.0):** Call `reserve_sandbox_start` on the public MCP, then exercise memory, FTS5 recall, decisions, actions, outcomes and `reserve_sandbox_trace` using fictional data. 1-hour expiry; isolated temporary store; 16 public tools total. This proves use of the real core, not independent real-world verification. No paid checkout or private customer data access is available.
+**Live interactive agent sandbox (Reserve v0.2.0):** Call `reserve_sandbox_start` on the public MCP, then exercise memory, FTS5 recall, decisions, actions, outcomes and `reserve_sandbox_trace` using fictional data. 1-hour expiry; isolated temporary store; 17 public tools total. This proves use of the real core, not independent real-world verification. No paid checkout or private customer data access is available.
 
 ## Machine payment endpoint and delivery
 - MPP SPT seven-offer gateway: https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers

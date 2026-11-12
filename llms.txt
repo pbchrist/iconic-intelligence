@@ -54,7 +54,7 @@ Owner-led businesses and professional firms with years of their own records: law
 
 - [Canonical Reserve page](https://iconic.onl/agents/reserve/) and [machine manifest](https://iconic.onl/agents/reserve/manifest.json).
 - Human setup guide: https://iconic.onl/agents/reserve/#quickstart (Claude custom connector with "No sign in", `claude mcp add --transport http iconic-reserve https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp`, Cursor and VS Code mcp.json). The same page also lists the seven Marketplace services.
-- **Agent-first machine entrypoint (JSON):** https://patrick-beastmaster.tailf32530.ts.net/reserve/agents. **Direct MCP:** https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp. Sixteen callable Reserve tools: seven discovery and nine synthetic sandbox tools. Free agent-to-agent transaction: list offers → obtain exact $0 quote → execute `reserve_assess` → receive `FULFILLED_FREE` structured assessment; no human UI required.
+- **Agent-first machine entrypoint (JSON):** https://patrick-beastmaster.tailf32530.ts.net/reserve/agents. **Direct MCP:** https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp. Seventeen callable Reserve tools: seven discovery and ten synthetic sandbox tools. Free agent-to-agent transaction: list offers → obtain exact $0 quote → execute `reserve_assess` → receive `FULFILLED_FREE` structured assessment; no human UI required.
 - Agents can perform a stateless, rule-based, no-charge fit assessment and run an ephemeral synthetic demonstration against the Reserve engine. **No confidential business or customer data should be submitted** to this public endpoint.
 - Private tenant-isolated Reserve is a technical alpha, NOT an openly accessible customer memory database. Paid self-service tiers and autonomous purchases are NOT live. A human must authorize any onboarding, data integrations or payment.
 - [Book the existing free ICONIC check](https://calendly.com/patrick-iconic/30min). The blueprint's $99/$499/$5,000 prices are hypotheses, not saleable prices.
@@ -111,7 +111,7 @@ Owner-led businesses and professional firms with years of their own records: law
 
 Last reviewed: 2026-11-04.
 
-**Live interactive agent sandbox (Reserve v0.2.0):** Call `reserve_sandbox_start` on the public MCP, then exercise memory, FTS5 recall, decisions, actions, outcomes and `reserve_sandbox_trace` using fictional data. 1-hour expiry; isolated temporary store; 16 public tools total. This proves use of the real core, not independent real-world verification. No paid checkout or private customer data access is available.
+**Live interactive agent sandbox (Reserve v0.2.0):** Call `reserve_sandbox_start` on the public MCP, then exercise memory, FTS5 recall, decisions, actions, outcomes and `reserve_sandbox_trace` using fictional data. 1-hour expiry; isolated temporary store; 17 public tools total. This proves use of the real core, not independent real-world verification. No paid checkout or private customer data access is available.
 
 ## Agent marketplace purchasing
 - Seven-offer HTTPS MPP catalog and purchase status: https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers
