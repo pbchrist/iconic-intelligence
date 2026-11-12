@@ -7,8 +7,11 @@
   const form = $('passForm'), go = $('passGo'), msg = $('passMsg');
   if (!form || !go) return;
   let busy = false;
-  const json = (path) => fetch(API + path, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : Promise.reject(new Error('offline'))));
-  Promise.all([json('/healthz'), json('/offers/reserve-pass')]).then(([health, offer]) => {
+  const json = (url) => fetch(url, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : Promise.reject(new Error('offline'))));
+  // The checkout server's health check is readable from this site; the offer itself is read from this site's own catalog copy.
+  // The server checks the offer and the price again before any payment starts.
+  Promise.all([json(API + '/healthz'), json('/agents/marketplace/offers.json')]).then(([health, catalog]) => {
+    const offer = (catalog.offers || []).find((o) => o.offer_id === 'reserve-pass') || {};
     const ready = health.hosted_checkout_ready === true && offer.purchasable === true && offer.approved_price_cents === 1900;
     go.disabled = !ready;
     go.textContent = ready ? 'PAY $19 WITH STRIPE' : 'OPENING SOON';
