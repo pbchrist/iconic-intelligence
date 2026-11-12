@@ -303,18 +303,17 @@
    "proposed_unapproved_price_cents": 1900,
    "approved_price_cents": 1900,
    "lifecycle": "active",
-   "purchasable": false,
-   "availability": "LAUNCHING_CONFIRM_AT_LIVE_CATALOG",
-   "fulfillment_available": false,
+   "purchasable": true,
+   "availability": "MPP_SPT_PURCHASABLE",
+   "fulfillment_available": true,
    "human_approval_required": true,
-   "checkout_status": "LAUNCHING",
+   "checkout_status": "LIVE_MPP_SPT",
    "human_buyer_approval_required": true,
    "fulfillment_mode": "AUTOMATED_RUN_AFTER_PAYMENT",
    "mpp_endpoint": "https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers/reserve-pass/purchase",
    "price_includes_seller_paid_tax": true,
    "human_checkout_url": "https://iconic.onl/agents/reserve/#pass",
    "payment_methods": [],
-   "note": "Opening shortly. The live catalog entry decides: buy only when it reports purchasable=true.",
    "live_offer_url": "https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers/reserve-pass"
   }
  ],
@@ -327,6 +326,6 @@
  "billing_location": "OPTIONAL_ACCOUNTING_HINT",
  "human_checkout_enabled": true,
  "agent_checkout_helper": "marketplace_prepare_mpp_checkout",
- "active_offer_count": 2,
+ "active_offer_count": 3,
  "source_of_truth": "The live catalog at mpp_catalog_url decides what can be bought. Check purchasable=true there before paying."
 }
