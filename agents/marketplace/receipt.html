@@ -4,20 +4,31 @@
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src https://patrick-beastmaster.tailf32530.ts.net; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
 <title>Your ICONIC order</title>
-<link rel="stylesheet" href="/agents/marketplace/receipt.css">
+<link rel="stylesheet" href="/agents/marketplace/receipt.css?v=20261112c">
 </head><body><main>
 <a href="/agents/marketplace/">ICONIC marketplace</a>
 <h1>Your order</h1>
 <p id="state" role="status" aria-live="polite">Checking payment directly with Stripe…</p>
 <div id="result" hidden>
- <h2>Receipt</h2>
+ <section id="pass-ready" class="pass-ready" hidden>
+  <h2>Your Reserve is ready. Two steps:</h2>
+  <p><strong>1.</strong> In Claude: Settings, Connectors, Add custom connector. Name it ICONIC Reserve, paste this address, no sign-in:</p>
+  <p><code id="pass-endpoint"></code> <button type="button" id="copy-endpoint">Copy address</button></p>
+  <p><strong>2.</strong> Paste this message into a new Claude chat. Your key is already in it:</p>
+  <pre id="pass-prompt"></pre>
+  <button type="button" id="copy-prompt" class="primary">Copy message</button>
+  <p class="muted">Save this page's message somewhere private, such as your password manager. Anyone with it can read and write your Reserve.</p>
+ </section>
+ <h2 id="receipt-title">Receipt</h2>
  <dl><dt>Order ID</dt><dd id="order-id"></dd>
  <dt>Service</dt><dd id="service"></dd><dt>Total</dt><dd id="price"></dd>
  <dt>Status</dt><dd id="order-status"></dd></dl>
- <p><strong>Private order token:</strong> <code id="token"></code></p>
+ <div id="token-wrap">
+ <p><strong>Private order token (for order lookups, not a Reserve key):</strong> <code id="token"></code></p>
  <p class="muted">Keep this token private. You can use it to retrieve the completed report and order status. This page does not store it or load analytics.</p>
  <button type="button" id="copy-token">Copy order token</button>
+ </div>
  <div id="report-wrap" hidden><h2 id="report-title">Your report</h2><pre id="report"></pre></div>
 </div>
 <p class="muted">For help or refunds: <a href="mailto:patrick@iconic.onl">patrick@iconic.onl</a>. Never email your private order token.</p>
-</main><script src="/agents/marketplace/receipt.js?v=20261112" defer></script></body></html>
+</main><script src="/agents/marketplace/receipt.js?v=20261112c" defer></script></body></html>
