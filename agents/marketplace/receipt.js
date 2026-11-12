@@ -36,6 +36,17 @@
    if(data.report){
     $('report-wrap').hidden=false;
     const r=data.report;
+    if(pass&&!r.renewed&&r.reserve_key){
+     const prompt='Use the ICONIC Reserve connector. My reserve_key is '+r.reserve_key+
+      ' . Call reserve_pass_status with it now, then for the rest of our work remember what we decide and record what happens in my Reserve.';
+     $('pass-endpoint').textContent=r.mcp_endpoint;$('pass-prompt').textContent=prompt;
+     $('pass-ready').hidden=false;$('receipt-title').textContent='Receipt and full key details';
+     $('token-wrap').hidden=true;
+     const copy=(btn,text,label)=>$(btn).addEventListener('click',async()=>{
+      try{await navigator.clipboard.writeText(text);$(btn).textContent='Copied'}catch{$(btn).textContent='Select the text above and copy it'}
+      setTimeout(()=>{$(btn).textContent=label},2500)});
+     copy('copy-endpoint',r.mcp_endpoint,'Copy address');copy('copy-prompt',prompt,'Copy message');
+    }
     if(pass){
      $('report-title').textContent=r.renewed?'Your Reserve was renewed':'Your Reserve keys';
      $('report').textContent=(r.renewed
