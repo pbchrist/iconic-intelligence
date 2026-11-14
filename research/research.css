@@ -117,3 +117,67 @@
 .rs-hat::before { content: "^"; top: -.38em; }
 .rs-bar { text-decoration: overline; text-decoration-thickness: 1px; }
 .rs-bar::before { content: none; }
+
+/* Print: dark-on-white paper layout, used for the downloadable PDF. */
+@media print {
+  html, body { background: #fff !important; color: #111 !important; }
+  #field, .noise, .cursor-glow, .site-header, .rv-rail, .rv-chipnav, .rs-cta, .rs-foot, .hero-actions, .sticky-cta { display: none !important; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .section-shell { width: 100% !important; margin: 0 !important; }
+  .rv-docs { display: block !important; padding: 0 !important; }
+  .rs-hero { padding: 0 0 8px !important; }
+  .rs-hero h1, .rs-paper h1 { margin-top: 10px; color: #111; font-size: 27px; line-height: 1.12; letter-spacing: -.02em; }
+  .rs-hero h1 em, .rs-sec h2 em { color: #111; }
+  .eyebrow, .section-kicker { color: #555 !important; font-size: 8px; }
+  .live-dot { display: none; }
+  .rs-hero .rv-deck { max-width: none; margin-top: 10px; color: #333; font-size: 13px; line-height: 1.5; }
+  .rs-meta { margin-top: 10px; color: #444; font-size: 9.5px; }
+  .rs-meta strong { color: #111; }
+  .rs-answer { max-width: none; margin-top: 14px; padding: 12px 14px; border-color: #ccc; background: #f4f4f1; backdrop-filter: none; }
+  .rs-answer .rs-label { color: #111; }
+  .rs-answer p { color: #222; font-size: 10px; line-height: 1.6; }
+  .rv-sec { padding-top: 22px !important; }
+  .rs-sec h2 { margin-top: 6px; max-width: none; color: #111; font-size: 19px; line-height: 1.2; letter-spacing: -.01em; break-after: avoid; }
+  .rs-sec .section-kicker { display: none; }
+  .rs-prose, .rs-wide > p, .rs-wide > ul, .rs-wide > ol, .rs-wide > h3, .rs-wide > dl, .rs-sec .rv-faq { max-width: none !important; }
+  .rs-prose { margin-top: 10px; }
+  .rs-prose > p, .rs-prose > ul li, .rs-prose > ol li { margin-bottom: 8px; color: #1a1a1a; font-size: 10.5px; line-height: 1.6; }
+  .rs-prose > p strong, .rs-prose > p em, .rs-prose > ol li strong, .rs-prose > ul li strong, .rs-refs em { color: #000; }
+  .rs-prose h3 { margin: 16px 0 6px; color: #111; font-size: 13.5px; break-after: avoid; }
+  .rs-prose a, .rs-meta a, .rs-fig figcaption a, .rs-hero .rv-deck a { color: #1a1a1a !important; text-decoration-color: #999 !important; }
+  .rs-ev { padding: 2px 5px; border-color: #999 !important; background: #f1f1ee !important; color: #111 !important; font-size: 6.5px; }
+  .rs-callout { padding: 9px 12px; border-left-color: #555; background: #f4f4f1; }
+  .rs-cap { color: #333 !important; font-size: 9.5px !important; break-after: avoid; }
+  .rs-cap strong, .rs-fig figcaption strong { color: #000; }
+  .rs-table { margin-bottom: 14px; border-color: #ccc; border-radius: 6px; background: none; overflow: visible; }
+  .rs-table table { min-width: 0; }
+  .rs-table th, .rs-table td { padding: 6px 9px; border-bottom-color: #ddd; }
+  .rs-table th { color: #333; font-size: 7.5px; letter-spacing: .1em; border-bottom-color: #bbb; }
+  .rs-table td, .rs-table td:first-child, .rs-table td.num:first-child { color: #111; font-size: 9.5px; line-height: 1.45; }
+  .rs-table tr, .rs-fig, .rs-math, .rs-gloss dd, .rv-faq details { break-inside: avoid; }
+  .rs-evs .rs-ev { margin-bottom: 3px; }
+  .rs-notation td:first-child { font-size: 11px; }
+  .rs-fig { margin-bottom: 14px; padding: 12px; border-color: #ccc; border-radius: 6px; background: none; }
+  .rs-fig svg { min-width: 0; }
+  .rs-fig svg text { fill: #222 !important; }
+  .rs-fig svg line { stroke: #d2d2d2 !important; }
+  .rs-fig svg path { stroke: #222 !important; }
+  .rs-fig svg rect[fill^="rgba"] { fill: #b8b8b8 !important; }
+  .rs-fig svg rect[rx="5"] { fill: #ececec !important; }
+  .rs-fig svg circle { stroke: #fff !important; }
+  .rs-fig svg [fill="#8d98ff"] { fill: #2a78d6 !important; }
+  .rs-fig svg [fill="#ff9fba"] { fill: #e34948 !important; }
+  .rs-fig svg [fill="#ffd9a1"] { fill: #eb6834 !important; }
+  .rs-fig figcaption { margin-top: 8px; color: #333; font-size: 9.5px; line-height: 1.5; }
+  .rs-math { margin-bottom: 10px; padding: 9px 12px; border-color: #ccc; border-radius: 6px; background: #f4f4f1; color: #111; font-size: 11.5px; overflow: visible; }
+  .rs-plain { border-left-color: #999; color: #444 !important; font-size: 9.5px !important; }
+  .rs-gloss dt { margin-top: 10px; color: #111; font-size: 11.5px; }
+  .rs-gloss dd { margin-top: 2px; color: #222; font-size: 10px; }
+  .rv-faq { margin-top: 10px; border-top-color: #ccc; }
+  .rv-faq details { border-bottom-color: #ddd; }
+  .rv-faq summary { padding: 9px 0 4px; color: #111; font-size: 12px; }
+  .rv-faq summary::after { content: none; }
+  .rv-faq details p { margin: 0 0 9px; max-width: none; color: #1a1a1a; font-size: 10.5px; line-height: 1.6; }
+  .rs-refs li { font-size: 9.5px !important; }
+  .rs-prose .rs-note { color: #444; font-size: 9px; }
+}

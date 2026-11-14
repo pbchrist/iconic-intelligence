@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080912">
 <title>Detecting Synchronized Repricing in Dealer Inventory | ICONIC Research</title>
-<meta name="description" content="What 46 days of daily, vehicle-by-vehicle listing histories from six competing new-vehicle dealers reveal about coordinated price moves, price position and listing accuracy, and what they cannot reveal.">
+<meta name="description" content="What 46 days of daily, vehicle-by-vehicle listing histories from six competing new-vehicle dealers reveal about synchronized price moves, price position and listing accuracy, and what they cannot reveal.">
 <link rel="canonical" href="https://iconic.onl/research/dealership-pricing-intelligence/">
 <meta name="author" content="Patrick Christell">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ICONIC">
 <meta property="og:title" content="Detecting Synchronized Repricing in Dealer Inventory: A VIN-Level Framework for Competitive Pricing Intelligence">
-<meta property="og:description" content="What 46 days of daily, vehicle-by-vehicle listing histories from six competing new-vehicle dealers reveal about coordinated price moves, price position and listing accuracy, and what they cannot reveal.">
+<meta property="og:description" content="What 46 days of daily, vehicle-by-vehicle listing histories from six competing new-vehicle dealers reveal about synchronized price moves, price position and listing accuracy, and what they cannot reveal.">
 <meta property="og:url" content="https://iconic.onl/research/dealership-pricing-intelligence/">
 <meta property="og:image" content="https://iconic.onl/iconic-share.png">
 <link rel="alternate" type="application/pdf" href="synchronized-repricing-dealer-inventory.pdf" title="White paper (PDF)">
@@ -37,7 +37,7 @@
    "@type": "ScholarlyArticle",
    "@id": "https://iconic.onl/research/dealership-pricing-intelligence/#article",
    "headline": "Detecting Synchronized Repricing in Dealer Inventory: A VIN-Level Framework for Competitive Pricing Intelligence",
-   "description": "What 46 days of daily, vehicle-by-vehicle listing histories from six competing new-vehicle dealers reveal about coordinated price moves, price position and listing accuracy, and what they cannot reveal.",
+   "description": "What 46 days of daily, vehicle-by-vehicle listing histories from six competing new-vehicle dealers reveal about synchronized price moves, price position and listing accuracy, and what they cannot reveal.",
    "datePublished": "2026-11-13",
    "dateModified": "2026-11-14",
    "version": "1.0",
@@ -156,7 +156,7 @@
 <link rel="stylesheet" href="/styles.css?v=20261101">
 <link rel="stylesheet" href="/mobile-first.css?v=20261110r">
 <link rel="stylesheet" href="/agents/reserve/reserve.css?v=20261112a">
-<link rel="stylesheet" href="/research/research.css?v=20261114b">
+<link rel="stylesheet" href="/research/research.css?v=20261114c">
 </head>
 <body class="rs-page">
 <canvas id="field" aria-hidden="true"></canvas>
@@ -177,10 +177,10 @@
 <div data-reveal>
 <div class="eyebrow"><span class="live-dot"></span> ICONIC Research · Automotive pricing intelligence</div>
 <h1 id="rsTitle">Detecting Synchronized Repricing in Dealer Inventory: <em>A VIN-Level Framework for Competitive Pricing Intelligence</em></h1>
-<p class="rv-deck">What 46 days of daily, vehicle-by-vehicle listing histories from six competing new-vehicle dealers reveal about coordinated price moves, price position and listing accuracy, and what they cannot reveal.</p>
+<p class="rv-deck">What 46 days of daily, vehicle-by-vehicle listing histories from six competing new-vehicle dealers reveal about synchronized price moves, price position and listing accuracy, and what they cannot reveal.</p>
 <p class="rs-meta"><strong>Patrick Christell</strong>, ICONIC · Publisher: <strong>ICONIC</strong> (<a href="https://iconic.onl/">iconic.onl</a>) · Version 1.0, pre-publication draft dated 13 November 2026 · Observation window: 46 consecutive days in 2026</p>
 <div class="hero-actions"><a class="button button-ghost" href="synchronized-repricing-dealer-inventory.pdf" download>DOWNLOAD THE PDF</a></div>
-<div class="rs-answer" id="abstract"><div class="rs-label">Abstract</div><p>Dealers usually see competitors' prices as a snapshot: what a comparable vehicle is listed at today. ICONIC recorded every listed unit of one full-size pickup nameplate at six competing franchised dealers in one U.S. metropolitan market, once a day for 46 days, and joined the records by Vehicle Identification Number (VIN): 469 listing histories, 9,490 vehicle-days and 1,470 individual price changes. The central finding is that competitor repricing is not a stream of independent decisions. On one day all six dealers moved their whole listed inventory at once, and on another, five did. If each dealer's move days had been timed independently, the chance of all six coinciding on any day was about 0.08%, and of two days with five or more, about 0.005%. These two days carried 33% of all observed price changes. Second, vehicles listed more than $3,000 below the like-for-like market price left the listings at roughly three times the rate of vehicles at or above market. The evidence that a higher premium above market slows exits further is weak, and an out-of-sample test shows modest predictive power (AUC 0.58 to 0.61). Third, naive tracking misreads disappearing listings: 24% of one-day disappearances reversed, and a one-day rule would have overcounted exits by 14%. We publish the full framework, its formulas and its limitations so other analysts can test it.</p></div>
+<div class="rs-answer" id="abstract"><div class="rs-label">Abstract</div><p>Dealers usually see competitors' prices as a snapshot: what a comparable vehicle is listed at today. ICONIC recorded every listed unit of one full-size pickup nameplate at six competing franchised dealers in one U.S. metropolitan market, once a day for 46 days, and joined the records by Vehicle Identification Number (VIN): 469 listing histories, 9,490 vehicle-days and 1,470 individual price changes. The central finding is that competitor repricing is not a stream of independent decisions. On one day all six dealers moved their whole listed inventory at once, and on another, five did. If each dealer's move days had been timed independently, the chance of all six coinciding on any day was about 0.08%, and of two days with five or more, about 0.005%. These two days carried 33% of all observed price changes. Timing this tight across every dealer of one brand points to a common cause that reached them all at once, most plausibly a manufacturer program or incentive change. It is not evidence that dealers coordinated with each other, and this paper makes no such claim. Second, vehicles listed more than $3,000 below the like-for-like market price left the listings at roughly three times the rate of vehicles at or above market. The evidence that a higher premium above market slows exits further is weak, and an out-of-sample test shows modest predictive power (AUC 0.58 to 0.61). Third, naive tracking misreads disappearing listings: 24% of one-day disappearances reversed, and a one-day rule would have overcounted exits by 14%. We publish the full framework, its formulas and its limitations so other analysts can test it.</p></div>
 </div>
 </section>
 
@@ -230,6 +230,7 @@
 <tr><td>7</td><td>Naive "disappeared today" tracking misreads inventory.</td><td>44 of 180 one-day disappearances (24%) reversed; a one-day rule counts 136 exits against 119 under a three-snapshot rule (+14%).</td><td class="rs-evs"><span class="rs-ev rs-ev-obs">Observed</span></td></tr>
 <tr><td>8</td><td>Trim mix can dominate dealer-to-dealer comparisons.</td><td>The off-road trim exited at 88.2 per 100 per 30 days against 18.7 for the most-stocked mid trim; in one two-dealer comparison, 13 vs 2 off-road exits explained the whole difference in volume.</td><td class="rs-evs"><span class="rs-ev rs-ev-obs">Observed</span> <span class="rs-ev rs-ev-inf">Inference</span></td></tr>
 </tbody></table></div>
+<p class="rs-callout" id="reading-sync"><strong>How to read "synchronized".</strong> The word describes timing, not conduct. Six dealers of one brand moving on the same day, most of them in the same direction and with no dealer leading, is what a manufacturer program or incentive change produces, and that is the most likely explanation here. This paper does not claim that dealers coordinated with each other. The practical point for a dealer is speed: recognize a market-wide move the day it happens, and do not mistake it for a competitor targeting you. See <a href="#s5-1">Section 5.1</a>.</p>
 <p class="rs-callout">A vehicle leaving a dealer's website is a <strong>listing exit</strong>, not a confirmed sale. All prices are <strong>advertised prices</strong>, not transaction prices. See <a href="#limits">limitations</a>.</p>
 </div>
 </section>
@@ -376,6 +377,7 @@
 </figure>
 <p>Under the null hypothesis that each dealer times its moves independently, a coincidence of all six dealers on one of the 15 fully observed days occurred in 0.08% of 20,000 permutations, and two days with five or more dealers in 0.005%. H1 is supported. The count of days with three or more dealers moving is not itself unusual (<i>p</i> = 0.52), because one dealer's feed produced frequent single-dealer moves; the evidence lies in the size of the two coincidences, not their number.</p>
 <p><span class="rs-ev rs-ev-inf">Inference</span> The test shows that the timing was shared, not why. The pattern (near-simultaneous moves by every dealer of one brand, mostly in the same direction, with no sign of one dealer leading and others following) is what a manufacturer-level program or incentive change would produce. Tacit coordination or a shared pricing vendor would also produce it. Public listing data cannot distinguish these, and we do not claim it can. Moves outside those two days were too few (zero to five per dealer over the study) to estimate who reacts to whom.</p>
+<p><strong>What this finding does and does not say.</strong> A common cause is the most likely explanation, and nothing in the data suggests dealers acting in concert. Three features of the two days point that way. The moves landed on the same day at every dealer, with no dealer moving first and the others following. On day 42, the five cuts were nearly the same size, three of them exactly 1.0% (Table 1), which is what one program amount applied across similar inventory would look like. And every dealer in the study sells the same brand, so each receives the same manufacturer programs on the same date. We do not name the program, because naming it would identify the brand and with it the dealers, which this paper withholds (see <a href="#notes">data notes</a>). For a dealer, the useful reading is practical: when the whole market moves on one day, it is a market event to recognize and respond to quickly, not a rival singling you out.</p>
 <p class="rs-cap" id="t-moves"><strong>Table 1.</strong> Dealer-wide moves on the two synchronized days (change in average listed price of continuing vehicles).</p>
 <div class="rs-table"><table>
 <thead><tr><th>Day</th><th class="num">A</th><th class="num">B</th><th class="num">C</th><th class="num">D</th><th class="num">E</th><th class="num">F</th></tr></thead>
@@ -619,7 +621,7 @@
 <dt>Odds ratio</dt><dd>The multiplicative change in the odds of an event associated with a one-unit change in a predictor.</dd>
 <dt>Permutation test</dt><dd>A test that compares an observed statistic with its distribution when the data are randomly reshuffled under the null hypothesis.</dd>
 <dt>Price gap</dt><dd>A vehicle's smoothed advertised price minus its fitted like-for-like market price that day.</dd>
-<dt>Synchronized repricing</dt><dd>Dealer-wide price moves by several competing dealers on the same day, beyond what independent timing would produce.</dd>
+<dt>Synchronized repricing</dt><dd>Dealer-wide price moves by several competing dealers on the same day, beyond what independent timing would produce. The term describes timing only; it does not imply that dealers coordinated with each other.</dd>
 <dt>VIN (Vehicle Identification Number)</dt><dd>The 17-character identifier unique to each vehicle, used here to join daily snapshots into histories.</dd>
 <dt>30-day exit rate</dt><dd>Exits per 100 vehicles in stock per 30 days.</dd>
 </dl>
