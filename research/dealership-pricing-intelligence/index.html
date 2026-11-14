@@ -4,38 +4,148 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080912">
-<title>VIN-Level Dealership Pricing Intelligence: Methods | ICONIC</title>
-<meta name="description" content="How to detect dealership competitor repricing, calculate like-for-like price gaps, reconcile disappearing VINs, and validate inventory predictions. An ICONIC technical framework.">
+<title>Detecting Synchronized Repricing in Dealer Inventory | ICONIC Research</title>
+<meta name="description" content="What 46 days of daily, vehicle-by-vehicle listing histories from six competing new-vehicle dealers reveal about coordinated price moves, price position and listing accuracy, and what they cannot reveal.">
 <link rel="canonical" href="https://iconic.onl/research/dealership-pricing-intelligence/">
 <meta name="author" content="Patrick Christell">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ICONIC">
-<meta property="og:title" content="A VIN-Level Framework for Dealership Pricing Intelligence">
-<meta property="og:description" content="Original methodology for tracking competitor vehicle prices through time, identifying market-wide repricing and separating listing exits from confirmed sales.">
+<meta property="og:title" content="Detecting Synchronized Repricing in Dealer Inventory: A VIN-Level Framework for Competitive Pricing Intelligence">
+<meta property="og:description" content="What 46 days of daily, vehicle-by-vehicle listing histories from six competing new-vehicle dealers reveal about coordinated price moves, price position and listing accuracy, and what they cannot reveal.">
 <meta property="og:url" content="https://iconic.onl/research/dealership-pricing-intelligence/">
+<meta property="og:image" content="https://iconic.onl/iconic-share.png">
+<link rel="alternate" type="application/pdf" href="synchronized-repricing-dealer-inventory.pdf" title="White paper (PDF)">
 <script type="application/ld+json">
 {
- "@context":"https://schema.org",
- "@graph":[
-  {"@type":"Organization","@id":"https://iconic.onl/#org","name":"ICONIC","url":"https://iconic.onl/"},
-  {"@type":"Person","@id":"https://iconic.onl/#patrick-christell","name":"Patrick Christell","worksFor":{"@id":"https://iconic.onl/#org"}},
-  {"@type":"TechArticle","@id":"https://iconic.onl/research/dealership-pricing-intelligence/#article",
-   "headline":"A VIN-Level Framework for Detecting Dealership Repricing and Inventory Exits",
-   "description":"Methods for longitudinal automotive competitor price monitoring, listing reconciliation, synchronization tests and out-of-sample validation. All worked examples are synthetic.",
-   "datePublished":"2026-11-13","dateModified":"2026-11-13","inLanguage":"en","isAccessibleForFree":true,
-   "author":{"@id":"https://iconic.onl/#patrick-christell"},"publisher":{"@id":"https://iconic.onl/#org"},
-   "mainEntityOfPage":"https://iconic.onl/research/dealership-pricing-intelligence/",
-   "keywords":["VIN-level pricing intelligence","dealership competitor monitoring","inventory disappearance","vehicle repricing detection","automotive AI","market-wide repricing","price history"],
-   "about":[{"@type":"Thing","name":"Automotive dealer competitive intelligence"},{"@type":"Thing","name":"Longitudinal vehicle inventory analysis"}]
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://iconic.onl/#org",
+   "name": "ICONIC",
+   "url": "https://iconic.onl/"
   },
-  {"@type":"FAQPage","@id":"https://iconic.onl/research/dealership-pricing-intelligence/#faq","mainEntity":[
-   {"@type":"Question","name":"How do you monitor competitor vehicle pricing by VIN?","acceptedAnswer":{"@type":"Answer","text":"Capture timestamped public inventory snapshots, normalize advertised price and MSRP, match each vehicle by dealer and VIN, and preserve every valid observation. Compare price changes only between complete snapshots and distinguish model mix changes from repricing of existing units."}},
-   {"@type":"Question","name":"How can you detect synchronized dealer price changes?","acceptedAnswer":{"@type":"Answer","text":"Define a consistent dealer-wide repricing event using the share of matched vehicles whose advertised prices changed and the average change. Compare dealer event dates, then use a permutation test that preserves each dealer's observed event frequency and valid observation dates to assess whether overlap is unusual."}},
-   {"@type":"Question","name":"Does a VIN disappearing from inventory mean it sold?","acceptedAnswer":{"@type":"Answer","text":"No. A vehicle can disappear because of feed errors, website changes, dealer transfers, temporary listing gaps or a sale. Flag the absence as provisional until repeated complete subsequent snapshots confirm it remains absent. A confirmed listing exit still is not a verified retail transaction."}},
-   {"@type":"Question","name":"How do you compare vehicle prices fairly across dealerships?","acceptedAnswer":{"@type":"Answer","text":"Compare advertised prices for like-for-like vehicles, adjusting for MSRP, trim, engine and other reliably observed attributes. Use each vehicle's residual from an estimated market price as a comparable gap, with careful disclosure of inconsistent manufacturer incentives."}},
-   {"@type":"Question","name":"Can AI predict which cars or trucks will leave a dealer's website?","acceptedAnswer":{"@type":"Answer","text":"A statistical model can estimate the probability of a listing exit from price position, trim, engine and other features, but prediction must be checked on later observations not used for training. A listing exit is not a confirmed sale and correlation is not proof that a price cut causes an exit."}},
-   {"@type":"Question","name":"What is the difference between a current-price dashboard and longitudinal intelligence?","acceptedAnswer":{"@type":"Answer","text":"A current-price snapshot describes relative advertised prices now. Longitudinal analysis adds timing, price-change histories, repeated listing gaps, sustained departures and hypotheses about common repricing events. Whether a particular vendor provides these functions requires checking that vendor's current product."}}
-  ]}
+  {
+   "@type": "Person",
+   "@id": "https://iconic.onl/#patrick-christell",
+   "name": "Patrick Christell",
+   "worksFor": {
+    "@id": "https://iconic.onl/#org"
+   }
+  },
+  {
+   "@type": "ScholarlyArticle",
+   "@id": "https://iconic.onl/research/dealership-pricing-intelligence/#article",
+   "headline": "Detecting Synchronized Repricing in Dealer Inventory: A VIN-Level Framework for Competitive Pricing Intelligence",
+   "description": "What 46 days of daily, vehicle-by-vehicle listing histories from six competing new-vehicle dealers reveal about coordinated price moves, price position and listing accuracy, and what they cannot reveal.",
+   "datePublished": "2026-11-13",
+   "dateModified": "2026-11-14",
+   "version": "1.0",
+   "inLanguage": "en",
+   "isAccessibleForFree": true,
+   "author": {
+    "@id": "https://iconic.onl/#patrick-christell"
+   },
+   "publisher": {
+    "@id": "https://iconic.onl/#org"
+   },
+   "mainEntityOfPage": "https://iconic.onl/research/dealership-pricing-intelligence/",
+   "encoding": {
+    "@type": "MediaObject",
+    "encodingFormat": "application/pdf",
+    "contentUrl": "https://iconic.onl/research/dealership-pricing-intelligence/synchronized-repricing-dealer-inventory.pdf"
+   },
+   "keywords": [
+    "synchronized repricing",
+    "VIN-level pricing intelligence",
+    "dealership competitor monitoring",
+    "listing exits",
+    "permutation test",
+    "hedonic regression",
+    "discrete-time hazard model",
+    "automotive pricing intelligence"
+   ],
+   "about": [
+    {
+     "@type": "Thing",
+     "name": "Automotive dealer competitive intelligence"
+    },
+    {
+     "@type": "Thing",
+     "name": "Longitudinal vehicle inventory analysis"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "@id": "https://iconic.onl/research/dealership-pricing-intelligence/#faq-list",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "How can AI identify dealership competitor repricing patterns?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "By observing every competitor vehicle by VIN every day and testing the timing of price changes statistically. An automated system reads each dealer's public listings daily, joins the snapshots by VIN, and flags dealer-wide moves: days when at least 20% of a dealer's vehicles change price and its average price moves more than 0.5%. A permutation test then asks whether those moves coincide across dealers more often than independent timing would produce. In ICONIC's 46-day study of six competing dealers, all six moved on the same day once and five moved together on another, coincidences with probabilities of about 0.08% and 0.005% under independent timing. The statistics do the detecting; the AI's role is reliable daily collection, reconciliation and alerting."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can competitor vehicle price changes be predicted?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Partly, and mostly at the market level. In ICONIC's study, a third of all 1,470 price changes fell on two days when nearly every dealer of the brand moved at once, a pattern consistent with manufacturer program changes, which are scheduled. Moves outside those two days were too few (zero to five per dealer over the study) to model reliably. What longitudinal data does predict, modestly, is which vehicles leave the listings: price position relative to the like-for-like market improved out-of-sample ranking from an AUC of 0.551 to 0.607."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How can dealers track historical VIN-level pricing?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Capture each competitor's public new-inventory listings at the same time every day, store the VIN, advertised price, MSRP, trim and engine for every vehicle in a dated snapshot, and join the snapshots by dealer and VIN. Each vehicle then has a history: first and last day listed and its price on every day. Validate every snapshot against the vehicle count the site displays, and discard incomplete reads rather than letting them look like sales."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How can an AI system detect disappearing inventory or inaccurate listings?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "By treating a disappearance as provisional until it persists. In ICONIC's study, 24% of vehicles that vanished from a dealer's site reappeared later, so counting every disappearance as a sale overstated exits by 14% (136 against 119). The study used a guard rule: a vehicle counts as exited only after it is missing from three consecutive valid snapshots. The same histories expose other listing errors: price flips that revert the next day, displayed vehicle counts that do not match the listings served, and VINs that move between dealers."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What insights can longitudinal market intelligence provide beyond vAuto?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Snapshot-oriented pricing tools such as vAuto describe ranking a vehicle's current price against comparable vehicles in the live market and applying incentives automatically. Repeated observation of the same VINs adds questions a single snapshot cannot answer: whether competitors moved together and whether that exceeds chance, how quickly competitors' vehicles actually leave by trim and price position, whether a missing listing is a sale or a glitch, and each competitor vehicle's full price path. ICONIC reviewed public product descriptions only; capabilities not publicly documented may exist."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How can dealers distinguish coordinated pricing changes from random market fluctuations?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Use a permutation test. For the days on which every competitor was observed, record whether each dealer made a dealer-wide move. Shuffle each dealer's move days randomly many times, which keeps how often each dealer moves but removes any shared timing, and count how often the shuffled data produce a coincidence as large as the real one. If that happens in fewer than 5% of shuffles, the timing is shared. Shared timing does not show the cause: a manufacturer incentive change, a common pricing vendor or tacit coordination all produce it."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Does pricing a new vehicle below market make it leave the lot faster?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "In ICONIC's study, yes, strongly: vehicles more than $3,000 below the like-for-like market price left listings at 82.9 per 100 per 30 days against about 24 to 28 for vehicles at or above market. Each additional $1,000 below market multiplied daily exit odds by about 1.3. A premium above market showed no clear additional slowing. This is a correlation, and dealers may discount the vehicles they already expect to sell."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Is a vehicle disappearing from a dealer's website the same as a sale?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No. A listing exit can be a retail sale, a dealer trade, a wholesale disposal, a delisting or a collection error. Public listing data cannot tell these apart, which is why ICONIC's research reports listing exits rather than sales and requires a vehicle to stay missing for three snapshots before counting it."
+     }
+    }
+   ]
+  }
  ]
 }
 </script>
@@ -46,7 +156,7 @@
 <link rel="stylesheet" href="/styles.css?v=20261101">
 <link rel="stylesheet" href="/mobile-first.css?v=20261110r">
 <link rel="stylesheet" href="/agents/reserve/reserve.css?v=20261112a">
-<link rel="stylesheet" href="/research/research.css?v=20261114a">
+<link rel="stylesheet" href="/research/research.css?v=20261114b">
 </head>
 <body class="rs-page">
 <canvas id="field" aria-hidden="true"></canvas>
@@ -63,155 +173,589 @@
 
 <main id="top">
 <article>
-<section class="section-shell rv-hero rs-hero" aria-labelledby="rsTitle">
+<section class="section-shell rv-hero rs-hero rs-paper" aria-labelledby="rsTitle">
 <div data-reveal>
-<div class="eyebrow"><span class="live-dot"></span> ICONIC research methods / automotive intelligence</div>
-<h1 id="rsTitle">A VIN-Level Framework for <em>Detecting Dealership Repricing and Inventory Exits</em></h1>
-<p class="rv-deck">Competitor prices are not just a list of numbers. Time-stamped vehicle histories reveal when dealers change prices, whether multiple lots move together, how far a unit sits from its like-for-like market, and when an apparent inventory exit is only a website artifact.</p>
-<div class="rs-tags"><span>Technical methodology</span><span>Synthetic worked examples</span><span>No client data</span></div>
-<p class="rs-meta">Patrick Christell · ICONIC · Published November 13, 2026 · <a href="https://iconic.onl/">iconic.onl</a></p>
-<div class="rs-answer" id="summary"><div class="rs-label">Direct answer</div><strong>To detect pricing patterns, record complete public inventory snapshots at consistent intervals, match vehicles by VIN, distinguish dealer-wide changes from isolated edits, and test whether price moves overlap across dealers more often than chance.</strong><p>Listing exits need confirmation over subsequent valid snapshots. Price-position models need out-of-sample validation. None of these signals, alone, proves a retail sale, causal effect or coordinated conduct.</p></div>
+<div class="eyebrow"><span class="live-dot"></span> ICONIC Research · Automotive pricing intelligence</div>
+<h1 id="rsTitle">Detecting Synchronized Repricing in Dealer Inventory: <em>A VIN-Level Framework for Competitive Pricing Intelligence</em></h1>
+<p class="rv-deck">What 46 days of daily, vehicle-by-vehicle listing histories from six competing new-vehicle dealers reveal about coordinated price moves, price position and listing accuracy, and what they cannot reveal.</p>
+<p class="rs-meta"><strong>Patrick Christell</strong>, ICONIC · Publisher: <strong>ICONIC</strong> (<a href="https://iconic.onl/">iconic.onl</a>) · Version 1.0, pre-publication draft dated 13 November 2026 · Observation window: 46 consecutive days in 2026</p>
+<div class="hero-actions"><a class="button button-ghost" href="synchronized-repricing-dealer-inventory.pdf" download>DOWNLOAD THE PDF</a></div>
+<div class="rs-answer" id="abstract"><div class="rs-label">Abstract</div><p>Dealers usually see competitors' prices as a snapshot: what a comparable vehicle is listed at today. ICONIC recorded every listed unit of one full-size pickup nameplate at six competing franchised dealers in one U.S. metropolitan market, once a day for 46 days, and joined the records by Vehicle Identification Number (VIN): 469 listing histories, 9,490 vehicle-days and 1,470 individual price changes. The central finding is that competitor repricing is not a stream of independent decisions. On one day all six dealers moved their whole listed inventory at once, and on another, five did. If each dealer's move days had been timed independently, the chance of all six coinciding on any day was about 0.08%, and of two days with five or more, about 0.005%. These two days carried 33% of all observed price changes. Second, vehicles listed more than $3,000 below the like-for-like market price left the listings at roughly three times the rate of vehicles at or above market. The evidence that a higher premium above market slows exits further is weak, and an out-of-sample test shows modest predictive power (AUC 0.58 to 0.61). Third, naive tracking misreads disappearing listings: 24% of one-day disappearances reversed, and a one-day rule would have overcounted exits by 14%. We publish the full framework, its formulas and its limitations so other analysts can test it.</p></div>
 </div>
 </section>
 
 <div class="section-shell rv-docs">
-<aside class="rv-rail" aria-label="On this page">
+<aside class="rv-rail rs-rail-long" aria-label="On this page">
 <nav>
 <small>ON THIS PAGE</small>
-<a href="#snapshots">1. Build a valid VIN history</a>
-<a href="#movement">2. Detect market-wide repricing</a>
-<a href="#market-price">3. Estimate like-for-like market price</a>
-<a href="#exits">4. Classify exits, not sales</a>
-<a href="#forecast">5. Test predictive models</a>
-<a href="#example">6. Synthetic worked example</a>
-<a href="#comparison">7. Snapshot tools vs. longitudinal intelligence</a>
-<a href="#faq">8. Common questions</a>
+<a href="#findings">Key findings</a>
+<a href="#problem">1 · The problem</a>
+<a href="#questions">2 · Hypotheses</a>
+<a href="#data">3 · Data</a>
+<a href="#method">4 · Methodology</a>
+<a href="#results">5 · Findings</a>
+<a href="#examples">6 · Worked examples</a>
+<a href="#limits">7 · Limitations</a>
+<a href="#comparison">8 · Comparison</a>
+<a href="#implications">9 · Implications</a>
+<a href="#conclusions">10 · Conclusions</a>
+<a href="#faq">FAQ</a>
+<a href="#glossary">Glossary</a>
+<a href="#appendix-a">Appendix A · Math</a>
+<a href="#appendix-b">Appendix B · Protocol</a>
+<a href="#notes">Data notes</a>
+<a href="#references">References</a>
+<small class="rv-rail-gap">DOWNLOAD</small>
+<a class="rv-ext" href="synchronized-repricing-dealer-inventory.pdf" download>White paper (PDF) ↓</a>
 </nav>
 </aside>
 
 <div class="rv-content">
-<nav class="rv-chipnav" aria-label="Sections"><a href="#snapshots">1. Build a valid VIN history</a><a href="#movement">2. Detect market-wide repricing</a><a href="#market-price">3. Estimate like-for-like market price</a><a href="#exits">4. Classify exits, not sales</a><a href="#forecast">5. Test predictive models</a><a href="#example">6. Synthetic worked example</a><a href="#comparison">7. Snapshot tools vs. longitudinal intelligence</a><a href="#faq">8. Common questions</a></nav>
-<section id="snapshots" class="rv-sec rs-sec" aria-labelledby="snapshots-title">
-<div class="section-kicker">01 · Build a valid VIN history</div>
-<h2 id="snapshots-title">Build a VIN-level history before drawing conclusions</h2>
-<div class="rs-prose">
-<p>The basic data record is one vehicle, at one dealer, on one date. Store the VIN, timestamp, advertised price, MSRP, trim, drivetrain or engine where reliably available, source URL and whether that snapshot was complete. Keep the raw observation and the normalized fields separately.</p>
-<div class="rv-code"><pre><code>observation = (dealer, VIN, observed_date, price, MSRP, trim, engine, snapshot_complete, source_url)
-discount(v,t) = 1 − advertised_price(v,t) / MSRP(v,t)</code></pre></div>
-<p>A vehicle's listing history links consecutive observations by <strong>(dealer, VIN)</strong>. Do not treat a VIN with incomplete site data as an actual arrival or exit. If a listing returns after a brief disappearance, preserve the gap instead of inventing a sale and a new acquisition.</p>
-<p>Advertised prices are not transaction prices. Manufacturer rebates, conditional discounts and site-specific price definitions may differ. Record those differences rather than assuming all dealers quote the same net price.</p>
-</div>
-</section>
+<nav class="rv-chipnav" aria-label="Sections"><a href="#findings">Key findings</a><a href="#problem">1 · The problem</a><a href="#questions">2 · Hypotheses</a><a href="#data">3 · Data</a><a href="#method">4 · Methodology</a><a href="#results">5 · Findings</a><a href="#examples">6 · Worked examples</a><a href="#limits">7 · Limitations</a><a href="#comparison">8 · Comparison</a><a href="#implications">9 · Implications</a><a href="#conclusions">10 · Conclusions</a><a href="#faq">FAQ</a><a href="#glossary">Glossary</a><a href="#appendix-a">Appendix A · Math</a><a href="#appendix-b">Appendix B · Protocol</a><a href="#notes">Data notes</a><a href="#references">References</a></nav>
 
-<section id="movement" class="rv-sec rs-sec" aria-labelledby="movement-title">
-<div class="section-kicker">02 · Detect market-wide repricing</div>
-<h2 id="movement-title">Detect synchronized competitor repricing</h2>
-<div class="rs-prose">
-<p>Measure price changes only on vehicles present in consecutive valid snapshots. An illustrative dealer-wide rule combines the percentage of matched listings that moved with the mean or median percentage change. Thresholds are analyst-defined and must be tested for the target market.</p>
-<div class="rv-code"><pre><code>changed_share(d,t) = count(|Δprice| &gt; ε) / count(matched VINs)
-price_index(d,t) = mean((price(v,t) − price(v,t−1)) / price(v,t−1))
-dealer_move(d,t) = [changed_share(d,t) ≥ threshold_share] AND [|price_index(d,t)| ≥ threshold_size]</code></pre></div>
-<p>Next, test whether multiple dealers move on the same day more often than expected under independent event timing. A permutation test should preserve each dealer's number of move days and the dates on which the dealer had valid observations, then randomize the event placements thousands of times.</p>
-<div class="rv-code"><pre><code>permutation_p = (1 + number of randomized calendars as extreme as observed) / (1 + number of randomizations)</code></pre></div>
-<p>An unusually synchronized day is a <strong>lead for investigation</strong>, not proof of collusion or dealer-to-dealer imitation. A manufacturer incentive program, a shared feed provider, month-end repricing or a collection artifact may produce the same signature.</p>
-</div>
-</section>
-
-<section id="market-price" class="rv-sec rs-sec" aria-labelledby="market-price-title">
-<div class="section-kicker">03 · Estimate like-for-like market price</div>
-<h2 id="market-price-title">Compare like-for-like prices instead of mixing trims</h2>
-<div class="rs-prose">
-<p>Comparing average lot prices mixes vehicle configurations. Fit a market-price estimate from observed attributes such as MSRP, trim and engine; evaluate each vehicle's residual from that expected price. This separates a genuinely lower advertised price from a lot containing cheaper configurations.</p>
-<div class="rv-code"><pre><code>expected_price(v,t) = α + β · MSRP(v,t) + trim_effect(v) + engine_effect(v)
-market_gap(v,t) = observed_advertised_price(v,t) − expected_price(v,t)</code></pre></div>
-<p>A negative gap means a vehicle is advertised below the fitted market expectation; a positive gap means above. The estimate depends on the quality of matching attributes, sample size and how each site represents incentives.</p>
-<h3>Same-lot comparison when advertised prices are inconsistent</h3>
-<p>For a robustness check, compare a unit's advertised discount with the median discount across its own dealer's lot on the same day. This eliminates some between-site price-definition differences, but does not remove all selection effects.</p>
-<div class="rv-code"><pre><code>relative_discount(v,t) = discount(v,t) − median_discount(dealer(v),t)</code></pre></div>
-</div>
-</section>
-
-<section id="exits" class="rv-sec rs-sec" aria-labelledby="exits-title">
-<div class="section-kicker">04 · Classify exits, not sales</div>
-<h2 id="exits-title">Inventory disappearance is not a retail sale</h2>
-<div class="rs-prose">
-<p>A unit may vanish because of a data feed outage, pagination error, dealer transfer, sold transaction, or an edited listing. Flag the first absence provisionally; confirm a listing exit only after a defined sequence of complete subsequent captures.</p>
-<div class="rv-code"><pre><code>exit_status(v) =
-  listed: present in latest complete snapshot
-  provisional: absent for 1–2 valid later snapshots
-  confirmed_listing_exit: absent for ≥3 valid later snapshots</code></pre></div>
-<p>The three-snapshot rule is one conservative design choice, not a universal law. Vary the confirmation window and report how sensitive your exit totals are to it. Even a confirmed listing exit is <strong>not a verified sale</strong>.</p>
-<p>For rates, use the number of VIN-days at risk, not just the number of vehicles observed once. Compare exit counts and exposure across dealer, trim or price-position groups while disclosing uncertainty and sparse samples.</p>
-<div class="rv-code"><pre><code>listing_exits_per_100_per_30_days = confirmed_listing_exits / vehicle_days_at_risk × 3,000</code></pre></div>
-</div>
-</section>
-
-<section id="forecast" class="rv-sec rs-sec" aria-labelledby="forecast-title">
-<div class="section-kicker">05 · Test predictive models</div>
-<h2 id="forecast-title">Predict cautiously and measure out-of-sample performance</h2>
-<div class="rs-prose">
-<p>A discrete-time logistic model can estimate the daily probability of a listing exit from relative price position, trim, engine, dealer and MSRP. It is a predictive model of a website event, not a causal model of whether a discount creates a sale.</p>
-<div class="rv-code"><pre><code>logit(P(listing_exit(v,t))) =
-  intercept + dealer_effect + trim_effect + engine_effect
-  + β1 · (market_gap(v,t) / 1,000) + β2 · (MSRP(v,t) / 10,000)</code></pre></div>
-<p>Bootstrap by whole VIN histories, not individual vehicle-days: repeated days for the same VIN are correlated. Train on an earlier time window and assess AUC and calibration on later dates. If performance is modest, say so. Do not turn an unstable model coefficient into a promised price cut or return on investment.</p>
-<p>A stronger causal claim requires a design that addresses confounding: discounts are not randomly assigned, and the vehicles discounted may differ systematically from other inventory.</p>
-</div>
-</section>
-
-<section id="example" class="rv-sec rs-sec" aria-labelledby="example-title">
-<div class="section-kicker">06 · Synthetic worked example</div>
-<h2 id="example-title">Worked example — synthetic data</h2>
+<section id="findings" class="rv-sec rs-sec" aria-labelledby="findings-title">
+<div class="section-kicker">Key findings</div>
+<h2 id="findings-title">Key findings</h2>
 <div class="rs-prose rs-wide">
-<p><strong>Every number in this example is invented to illustrate the calculations.</strong> It is not a case study, measurement, dealer result or estimate of ICONIC's accuracy.</p>
-<div class="rs-table"><table><thead><tr><th>Synthetic item</th><th>Input</th><th>Interpretation</th></tr></thead><tbody>
-<tr><td>Vehicle A MSRP</td><td>$55,000</td><td>Vehicle's listed manufacturer's suggested price</td></tr>
-<tr><td>Vehicle A advertised price</td><td>$50,000</td><td>Advertised discount = 9.09%</td></tr>
-<tr><td>Fitted like-for-like expected price</td><td>$51,500</td><td>Vehicle A is $1,500 below the model's benchmark</td></tr>
-<tr><td>Dealer B matching VINs</td><td>60</td><td>Comparable consecutive snapshot observations</td></tr>
-<tr><td>Dealer B changed VINs</td><td>40</td><td>Changed share = 66.7%, potentially dealer-wide</td></tr>
-<tr><td>Vehicle A briefly disappears</td><td>2 valid snapshots</td><td>Still provisional, not a confirmed exit</td></tr>
+<p>Each claim is labeled by evidence type. <span class="rs-ev rs-ev-obs">Observed</span> means counted directly from the listing records. <span class="rs-ev rs-ev-inf">Inference</span> means a statistical test or interval. <span class="rs-ev rs-ev-mod">Model</span> means an estimate that depends on a fitted model. <span class="rs-ev rs-ev-syn">Synthetic</span> means an illustrative example with invented inputs, not a measured result.</p>
+<div class="rs-table"><table>
+<thead><tr><th>#</th><th>Finding</th><th>Evidence</th><th>Type</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Competitor repricing clustered on two days: all six dealers made dealer-wide moves on day 37 and five did on day 42.</td><td>Permutation test against independent timing: all six on one day <i>p</i> ≈ 0.0008; two days with five or more <i>p</i> ≈ 0.00005 (20,000 permutations).</td><td class="rs-evs"><span class="rs-ev rs-ev-obs">Observed</span> <span class="rs-ev rs-ev-inf">Inference</span></td></tr>
+<tr><td>2</td><td>Those two days carried a third of all price changes.</td><td>482 of 1,470 changes (32.8%) on 2 of 46 days.</td><td class="rs-evs"><span class="rs-ev rs-ev-obs">Observed</span></td></tr>
+<tr><td>3</td><td>Vehicles listed well below the like-for-like market left listings much faster.</td><td>More than $3,000 under market: 82.9 exits per 100 per 30 days (95% CI 53.3 to 112.6); within $1,000 of market: 27.6 (17.2 to 38.1).</td><td class="rs-evs"><span class="rs-ev rs-ev-obs">Observed</span> <span class="rs-ev rs-ev-inf">Inference</span></td></tr>
+<tr><td>4</td><td>The response to price position looks asymmetric: each extra $1,000 below market raises the daily odds of exit by about 30%; a premium above market shows no clear further effect.</td><td>Odds ratio 1.30 (1.16 to 1.49) below market; 0.93 (0.76 to 1.11) above market.</td><td class="rs-evs"><span class="rs-ev rs-ev-mod">Model</span></td></tr>
+<tr><td>5</td><td>A vehicle discounted 2 or more points deeper than its own lot-mates left at 2.2 times the rate of the rest of the lot.</td><td>72.1 vs 32.1 exits per 100 per 30 days (34 and 72 exits).</td><td class="rs-evs"><span class="rs-ev rs-ev-obs">Observed</span> <span class="rs-ev rs-ev-inf">Inference</span></td></tr>
+<tr><td>6</td><td>Price position adds modest out-of-sample predictive power.</td><td>AUC 0.607 vs 0.551 without price position (fit on days 1 to 27, tested on days 28 to 43); weaker on a later split.</td><td class="rs-evs"><span class="rs-ev rs-ev-mod">Model</span></td></tr>
+<tr><td>7</td><td>Naive "disappeared today" tracking misreads inventory.</td><td>44 of 180 one-day disappearances (24%) reversed; a one-day rule counts 136 exits against 119 under a three-snapshot rule (+14%).</td><td class="rs-evs"><span class="rs-ev rs-ev-obs">Observed</span></td></tr>
+<tr><td>8</td><td>Trim mix can dominate dealer-to-dealer comparisons.</td><td>The off-road trim exited at 88.2 per 100 per 30 days against 18.7 for the most-stocked mid trim; in one two-dealer comparison, 13 vs 2 off-road exits explained the whole difference in volume.</td><td class="rs-evs"><span class="rs-ev rs-ev-obs">Observed</span> <span class="rs-ev rs-ev-inf">Inference</span></td></tr>
 </tbody></table></div>
-<p>A pricing director should investigate whether Dealer B's move coincides with changes across rival lots or new incentive terms. The analyst should not automatically copy the cut or infer a sale from a disappearing VIN.</p>
+<p class="rs-callout">A vehicle leaving a dealer's website is a <strong>listing exit</strong>, not a confirmed sale. All prices are <strong>advertised prices</strong>, not transaction prices. See <a href="#limits">limitations</a>.</p>
+</div>
+</section>
+
+<section id="problem" class="rv-sec rs-sec" aria-labelledby="problem-title">
+<div class="section-kicker">Section 01</div>
+<h2 id="problem-title">1. The dealership competitive-intelligence problem</h2>
+<div class="rs-prose rs-wide">
+<p>A new-vehicle dealer's pricing decision depends on three things it cannot see directly: what nearby competitors are charging for an equivalent vehicle, how quickly those vehicles are actually selling, and whether competitor price moves are reactions to each other or to a common cause such as a manufacturer program change.</p>
+<p>Most dealer pricing tools answer the first question well. They compare a vehicle's current price with comparable units listed in the market today. A snapshot cannot answer the other two. It cannot tell a price cut that happened this morning from one that has stood for a month, a vehicle that sold from one that was briefly unlisted, or a market-wide program change from a competitor targeting you.</p>
+<p>Those questions need longitudinal data: the same vehicles, identified by VIN, observed repeatedly over time. This paper sets out a framework for building that data from public dealer listings, the statistics needed to read it without being fooled by noise, and what six weeks of it showed in one market.</p>
+</div>
+</section>
+
+<section id="questions" class="rv-sec rs-sec" aria-labelledby="questions-title">
+<div class="section-kicker">Section 02</div>
+<h2 id="questions-title">2. Research questions and testable hypotheses</h2>
+<div class="rs-prose rs-wide">
+<div class="rs-table"><table>
+<thead><tr><th>Question</th><th>Hypothesis tested</th><th>How it could be falsified</th></tr></thead>
+<tbody>
+<tr><td>RQ1. Are competitor price moves independent, or do they cluster in time?</td><td>H1: dealer-wide moves coincide across dealers more often than independent timing would produce.</td><td>Permuting each dealer's move days within its own observed days produces coincidences as large as those observed in more than 5% of permutations.</td></tr>
+<tr><td>RQ2. Does a vehicle's price relative to the like-for-like market predict when it leaves the listings?</td><td>H2: daily exit probability falls as a vehicle's price rises relative to market.</td><td>The price-position coefficient's 95% interval includes no effect, or the effect reverses out of sample.</td></tr>
+<tr><td>RQ2b. Is the response symmetric?</td><td>H2b: the effect per $1,000 is the same above and below market.</td><td>Separate slopes differ by more than their uncertainty allows.</td></tr>
+<tr><td>RQ3. Does discounting relative to the same lot predict exits, independently of how each website states prices?</td><td>H3: vehicles discounted more deeply than their lot-mates exit faster.</td><td>Exit rates are equal across within-lot discount bands.</td></tr>
+<tr><td>RQ4. How reliable is "disappeared from the website" as a signal?</td><td>H4: a material share of disappearances reverse, so single-day rules overcount exits.</td><td>Fewer than 5% of disappearances reverse.</td></tr>
+</tbody></table></div>
+</div>
+</section>
+
+<section id="data" class="rv-sec rs-sec" aria-labelledby="data-title">
+<div class="section-kicker">Section 03</div>
+<h2 id="data-title">3. Data</h2>
+<div class="rs-prose rs-wide">
+<h3 id="s3-1">3.1 Source and collection</h3>
+<p>Each day, an automated collector read the public new-inventory search pages (or the public data endpoints those pages load) of six franchised dealers of the same brand in one U.S. metropolitan market, restricted to one full-size pickup nameplate. For every listed vehicle it stored the VIN, advertised price, manufacturer's suggested retail price (MSRP), trim, engine and drivetrain, as one dated JSON snapshot per dealer per day. No login, private feed, dealer management system or non-public data was used.</p>
+<div class="rs-table"><table>
+<thead><tr><th>Item</th><th class="num">Value</th></tr></thead>
+<tbody>
+<tr><td>Observation window</td><td class="num">46 consecutive days (days 1 to 46) in 2026</td></tr>
+<tr><td>Dealers</td><td class="num">6 (labeled A to F)</td></tr>
+<tr><td>Coverage</td><td class="num">B and E from day 1; A, C and F from day 21 (every other day until day 29, then daily); D from day 31</td></tr>
+<tr><td>Dealer-day snapshots attempted / valid</td><td class="num">178 / 175 (one day failed at three dealers)</td></tr>
+<tr><td>Listing histories (dealer × VIN)</td><td class="num">469 (468 distinct VINs; one VIN appeared at two dealers in sequence)</td></tr>
+<tr><td>Vehicle-days used in exit models</td><td class="num">9,490</td></tr>
+<tr><td>Confirmed listing exits</td><td class="num">119</td></tr>
+<tr><td>Individual price changes over 0.1%</td><td class="num">1,470</td></tr>
+</tbody></table></div>
+<h3 id="s3-2">3.2 What the data measures</h3>
+<p>The <strong>advertised price</strong> is the price displayed on the dealer's own website. Sites differ in which manufacturer incentives they fold in, so dollar comparisons across dealers compare advertised prices, not what buyers paid. A <strong>listing exit</strong> is a VIN that stops appearing and does not return within three valid snapshots. It includes retail sales, dealer trades, wholesale disposals and delistings, which public data cannot tell apart.</p>
+</div>
+</section>
+
+<section id="method" class="rv-sec rs-sec" aria-labelledby="method-title">
+<div class="section-kicker">Section 04</div>
+<h2 id="method-title">4. Methodology and mathematical framework</h2>
+<div class="rs-prose rs-wide">
+<p>The full derivations, assumptions and worked calculations are in <a href="#appendix-a">Appendix A</a>. This section summarizes each step and what it is for.</p>
+<h3 id="s4-1">4.1 VIN histories and inventory reconciliation</h3>
+<p>Snapshots are joined by dealer and VIN into a history for each vehicle: first and last day listed, and its price on each day. Snapshots that read no vehicles or were flagged incomplete are discarded whole rather than read as "everything sold". A vehicle is classified as <strong>exited</strong> only when it is absent from <i>G</i> = 3 consecutive valid snapshots after its last appearance; it is <strong>pending</strong> if absent for one or two. This guard rule is what keeps collection glitches and temporary delistings from being counted as sales (Finding 7).</p>
+<h3 id="s4-2">4.2 Price-change detection</h3>
+<p>Each vehicle's advertised price is smoothed with a three-snapshot rolling median, which removes one-day price flips (47 flips of more than $3,000 that reverted the next day, 36 of them at one dealer). A <strong>dealer-wide move</strong> is a day on which at least 20% of a dealer's continuing vehicles changed price and the dealer's average listed price moved by more than 0.5%.</p>
+<h3 id="s4-3">4.3 Synchronization test</h3>
+<p>Over the 15 days on which all six dealers were observed, each dealer's sequence of move and no-move days is randomly shuffled within itself 20,000 times, preserving how often each dealer moves but destroying any shared timing. The <i>p</i>-value is the share of shuffles that produce a coincidence at least as large as the one observed.</p>
+<h3 id="s4-4">4.4 Like-for-like market price and price position</h3>
+<p>Each day, one hedonic regression over every dealer's vehicles estimates the market price of a vehicle from its MSRP, trim and engine, with no dealer terms. A vehicle's <strong>price gap</strong> is its smoothed price minus that fitted market price: positive means listed above the like-for-like market.</p>
+<h3 id="s4-5">4.5 Exit rates and the discrete-time exit model</h3>
+<p>Exit rates are expressed as exits per 100 vehicles in stock per 30 days, with Poisson 95% intervals. The relationship between price position and exit is estimated with a discrete-time logistic hazard model (Allison, 1982) on vehicle-days, controlling for dealer, trim, engine and MSRP. Intervals come from a bootstrap that resamples whole vehicles, not vehicle-days, so repeated days of the same vehicle are not treated as independent evidence (Efron, 1979; Cameron, Gelbach and Miller, 2008).</p>
+<h3 id="s4-6">4.6 Validation</h3>
+<p>The exit model was refitted on early days only and scored on later days it had not seen, using the area under the ROC curve (AUC; Hanley and McNeil, 1982) and a comparison of predicted and actual exits by price-position third. Each headline estimate was also refitted with each dealer left out in turn, without the month-end week, and on six-dealer days only.</p>
+</div>
+</section>
+
+<section id="results" class="rv-sec rs-sec" aria-labelledby="results-title">
+<div class="section-kicker">Section 05</div>
+<h2 id="results-title">5. Empirical findings</h2>
+<div class="rs-prose rs-wide">
+<h3 id="s5-1">5.1 Competitor repricing is synchronized, not independent</h3>
+<p>Dealer-wide price moves were rare on most days and scattered across dealers. Twice, they were not. On day 37, all six dealers moved their inventory at once: five cut their average listed price by 4.4% to 7.2%, and one raised it by 4.0%. On day 42, five dealers cut by 0.6% to 1.2%. Those two days held 482 of the 1,470 individual price changes in the study (32.8%), although they are 4% of the days observed.</p>
+<figure class="rs-fig" id="fig-1">
+<div class="rs-fig-scroll">
+<svg viewBox="0 0 760 300" role="img" aria-labelledby="f1t f1d" xmlns="http://www.w3.org/2000/svg" font-family="Inter, ui-sans-serif, Arial, sans-serif">
+<title id="f1t">Dealer-wide price moves by dealer and day</title>
+<desc id="f1d">Six dealers, A to F, over 46 days. All six made a dealer-wide move on day 37 and five did on day 42. Other moves are scattered: A on days 35, 38, 39 and 40; B on days 5, 17, 19, 27 and 38; C on day 34; E on days 19, 26, 39 and 40.</desc>
+<rect x="580.0" y="44" width="16" height="196" rx="5" fill="rgba(244,241,232,.08)"/>
+<text x="582.0" y="32" fill="#c9ccda" font-size="12" text-anchor="end">Day 37: all six</text>
+<rect x="653.3" y="44" width="16" height="196" rx="5" fill="rgba(244,241,232,.08)"/>
+<text x="667.3" y="32" fill="#c9ccda" font-size="12" text-anchor="start">Day 42: five</text>
+<text x="24" y="66" fill="#c9ccda" font-size="13">A</text>
+<line x1="60.0" x2="720.0" y1="62" y2="62" stroke="rgba(244,241,232,.14)"/>
+<rect x="352.3" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="367.0" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="396.3" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="425.7" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="440.3" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="469.7" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="484.3" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="499.0" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="513.7" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="528.3" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="543.0" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="557.7" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="572.3" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="587.0" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="601.7" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="616.3" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="631.0" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="645.7" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="660.3" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="675.0" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="689.7" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="704.3" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="719.0" y="59" width="2" height="6" fill="rgba(244,241,232,.3)"/>
+<circle cx="558.7" cy="62" r="6" fill="#ff9fba" stroke="#070912" stroke-width="1.5"><title>Dealer A, day 35: dealer-wide increase</title></circle>
+<circle cx="588.0" cy="62" r="6" fill="#ff9fba" stroke="#070912" stroke-width="1.5"><title>Dealer A, day 37: dealer-wide increase (+4.0%)</title></circle>
+<circle cx="602.7" cy="62" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer A, day 38: dealer-wide cut</title></circle>
+<circle cx="617.3" cy="62" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer A, day 39: dealer-wide cut</title></circle>
+<circle cx="632.0" cy="62" r="6" fill="#ff9fba" stroke="#070912" stroke-width="1.5"><title>Dealer A, day 40: dealer-wide increase</title></circle>
+<circle cx="661.3" cy="62" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer A, day 42: dealer-wide cut (−1.0%)</title></circle>
+<text x="24" y="98" fill="#c9ccda" font-size="13">B</text>
+<line x1="60.0" x2="720.0" y1="94" y2="94" stroke="rgba(244,241,232,.14)"/>
+<rect x="59.0" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="73.7" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="88.3" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="103.0" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="117.7" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="132.3" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="147.0" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="161.7" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="176.3" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="191.0" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="205.7" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="220.3" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="235.0" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="249.7" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="264.3" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="279.0" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="293.7" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="308.3" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="323.0" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="337.7" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="352.3" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="367.0" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="381.7" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="396.3" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="411.0" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="425.7" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="440.3" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="469.7" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="484.3" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="499.0" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="513.7" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="528.3" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="543.0" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="557.7" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="572.3" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="587.0" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="601.7" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="616.3" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="631.0" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="645.7" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="660.3" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="675.0" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="689.7" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="704.3" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="719.0" y="91" width="2" height="6" fill="rgba(244,241,232,.3)"/>
+<circle cx="118.7" cy="94" r="6" fill="#ff9fba" stroke="#070912" stroke-width="1.5"><title>Dealer B, day 5: dealer-wide increase</title></circle>
+<circle cx="294.7" cy="94" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer B, day 17: dealer-wide cut</title></circle>
+<circle cx="324.0" cy="94" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer B, day 19: dealer-wide cut</title></circle>
+<circle cx="441.3" cy="94" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer B, day 27: dealer-wide cut</title></circle>
+<circle cx="588.0" cy="94" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer B, day 37: dealer-wide cut (−7.1%)</title></circle>
+<circle cx="602.7" cy="94" r="6" fill="#ff9fba" stroke="#070912" stroke-width="1.5"><title>Dealer B, day 38: dealer-wide increase</title></circle>
+<text x="24" y="130" fill="#c9ccda" font-size="13">C</text>
+<line x1="60.0" x2="720.0" y1="126" y2="126" stroke="rgba(244,241,232,.14)"/>
+<rect x="352.3" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="367.0" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="396.3" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="425.7" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="440.3" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="469.7" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="484.3" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="499.0" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="513.7" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="528.3" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="543.0" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="557.7" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="572.3" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="587.0" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="601.7" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="616.3" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="631.0" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="645.7" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="660.3" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="675.0" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="689.7" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="704.3" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="719.0" y="123" width="2" height="6" fill="rgba(244,241,232,.3)"/>
+<circle cx="544.0" cy="126" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer C, day 34: dealer-wide cut</title></circle>
+<circle cx="588.0" cy="126" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer C, day 37: dealer-wide cut (−4.4%)</title></circle>
+<circle cx="661.3" cy="126" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer C, day 42: dealer-wide cut (−1.0%)</title></circle>
+<text x="24" y="162" fill="#c9ccda" font-size="13">D</text>
+<line x1="60.0" x2="720.0" y1="158" y2="158" stroke="rgba(244,241,232,.14)"/>
+<rect x="499.0" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="513.7" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="528.3" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="543.0" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="557.7" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="572.3" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="587.0" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="601.7" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="616.3" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="631.0" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="645.7" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="660.3" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="675.0" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="689.7" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="704.3" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="719.0" y="155" width="2" height="6" fill="rgba(244,241,232,.3)"/>
+<circle cx="588.0" cy="158" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer D, day 37: dealer-wide cut (−5.6%)</title></circle>
+<circle cx="661.3" cy="158" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer D, day 42: dealer-wide cut (−1.0%)</title></circle>
+<text x="24" y="194" fill="#c9ccda" font-size="13">E</text>
+<line x1="60.0" x2="720.0" y1="190" y2="190" stroke="rgba(244,241,232,.14)"/>
+<rect x="59.0" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="73.7" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="88.3" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="103.0" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="117.7" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="132.3" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="147.0" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="161.7" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="176.3" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="191.0" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="205.7" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="220.3" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="235.0" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="249.7" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="264.3" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="279.0" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="293.7" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="308.3" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="323.0" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="337.7" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="352.3" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="367.0" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="381.7" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="396.3" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="411.0" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="425.7" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="440.3" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="469.7" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="484.3" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="499.0" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="513.7" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="528.3" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="543.0" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="557.7" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="572.3" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="587.0" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="601.7" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="616.3" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="631.0" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="645.7" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="660.3" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="675.0" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="689.7" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="704.3" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="719.0" y="187" width="2" height="6" fill="rgba(244,241,232,.3)"/>
+<circle cx="324.0" cy="190" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer E, day 19: dealer-wide cut</title></circle>
+<circle cx="426.7" cy="190" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer E, day 26: dealer-wide cut</title></circle>
+<circle cx="588.0" cy="190" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer E, day 37: dealer-wide cut (−4.9%)</title></circle>
+<circle cx="617.3" cy="190" r="6" fill="#ff9fba" stroke="#070912" stroke-width="1.5"><title>Dealer E, day 39: dealer-wide increase</title></circle>
+<circle cx="632.0" cy="190" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer E, day 40: dealer-wide cut</title></circle>
+<circle cx="661.3" cy="190" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer E, day 42: dealer-wide cut (−1.2%)</title></circle>
+<text x="24" y="226" fill="#c9ccda" font-size="13">F</text>
+<line x1="60.0" x2="720.0" y1="222" y2="222" stroke="rgba(244,241,232,.14)"/>
+<rect x="352.3" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="367.0" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="396.3" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="425.7" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="440.3" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="469.7" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="484.3" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="499.0" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="513.7" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="528.3" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="543.0" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="557.7" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="572.3" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="587.0" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="601.7" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="616.3" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="631.0" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="645.7" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="660.3" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="675.0" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="689.7" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="704.3" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/><rect x="719.0" y="219" width="2" height="6" fill="rgba(244,241,232,.3)"/>
+<circle cx="588.0" cy="222" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer F, day 37: dealer-wide cut (−7.2%)</title></circle>
+<circle cx="661.3" cy="222" r="6" fill="#8d98ff" stroke="#070912" stroke-width="1.5"><title>Dealer F, day 42: dealer-wide cut (−0.6%)</title></circle>
+<text x="60.0" y="262" fill="#8d94a9" font-size="12" text-anchor="start">Day 1</text>
+<text x="192.0" y="262" fill="#8d94a9" font-size="12" text-anchor="middle">Day 10</text>
+<text x="338.7" y="262" fill="#8d94a9" font-size="12" text-anchor="middle">Day 20</text>
+<text x="485.3" y="262" fill="#8d94a9" font-size="12" text-anchor="middle">Day 30</text>
+<text x="632.0" y="262" fill="#8d94a9" font-size="12" text-anchor="middle">Day 40</text>
+<text x="720.0" y="262" fill="#8d94a9" font-size="12" text-anchor="end">Day 46</text>
+<circle cx="66" cy="286" r="6" fill="#8d98ff"/><text x="78" y="290" fill="#c9ccda" font-size="12">Dealer-wide cut</text>
+<circle cx="206" cy="286" r="6" fill="#ff9fba"/><text x="218" y="290" fill="#c9ccda" font-size="12">Dealer-wide increase</text>
+<rect x="375" y="283" width="2" height="6" fill="rgba(244,241,232,.45)"/><text x="384" y="290" fill="#c9ccda" font-size="12">Day the dealer was observed</text>
+</svg>
+</div>
+<figcaption><strong>Figure 1.</strong> Dealer-wide price moves by dealer and day. Gray ticks mark the days each dealer was observed; dealers A, C, F and D joined later and were read every other day at first, so moves before their coverage cannot appear. Hover a dot for the size of the move. Data: <a href="#t-moves">table view</a>.</figcaption>
+</figure>
+<p>Under the null hypothesis that each dealer times its moves independently, a coincidence of all six dealers on one of the 15 fully observed days occurred in 0.08% of 20,000 permutations, and two days with five or more dealers in 0.005%. H1 is supported. The count of days with three or more dealers moving is not itself unusual (<i>p</i> = 0.52), because one dealer's feed produced frequent single-dealer moves; the evidence lies in the size of the two coincidences, not their number.</p>
+<p><span class="rs-ev rs-ev-inf">Inference</span> The test shows that the timing was shared, not why. The pattern (near-simultaneous moves by every dealer of one brand, mostly in the same direction, with no sign of one dealer leading and others following) is what a manufacturer-level program or incentive change would produce. Tacit coordination or a shared pricing vendor would also produce it. Public listing data cannot distinguish these, and we do not claim it can. Moves outside those two days were too few (zero to five per dealer over the study) to estimate who reacts to whom.</p>
+<p class="rs-cap" id="t-moves"><strong>Table 1.</strong> Dealer-wide moves on the two synchronized days (change in average listed price of continuing vehicles).</p>
+<div class="rs-table"><table>
+<thead><tr><th>Day</th><th class="num">A</th><th class="num">B</th><th class="num">C</th><th class="num">D</th><th class="num">E</th><th class="num">F</th></tr></thead>
+<tbody>
+<tr><td>Day 37</td><td class="num">+4.0%</td><td class="num">−7.1%</td><td class="num">−4.4%</td><td class="num">−5.6%</td><td class="num">−4.9%</td><td class="num">−7.2%</td></tr>
+<tr><td>Day 42</td><td class="num">−1.0%</td><td class="num">no move</td><td class="num">−1.0%</td><td class="num">−1.0%</td><td class="num">−1.2%</td><td class="num">−0.6%</td></tr>
+</tbody></table></div>
+
+<h3 id="s5-2">5.2 Below-market vehicles leave faster; the penalty above market is unclear</h3>
+<p>Across all dealers, vehicles listed more than $3,000 below their like-for-like market price left the listings at 82.9 per 100 per 30 days, roughly three times the 24 to 28 seen for vehicles within $1,000 of market or above it.</p>
+<figure class="rs-fig" id="fig-2">
+<div class="rs-fig-scroll">
+<svg viewBox="0 0 760 270" role="img" aria-labelledby="f2t f2d" xmlns="http://www.w3.org/2000/svg" font-family="Inter, ui-sans-serif, Arial, sans-serif">
+<title id="f2t">Listing-exit rate by price gap to the like-for-like market</title>
+<desc id="f2d">Exits per 100 vehicles per 30 days with 95% Poisson intervals: more than $3,000 under market 82.9 (53.3 to 112.6); $1,000 to $3,000 under 46.3 (30.9 to 61.6); within $1,000 27.6 (17.2 to 38.1); $1,000 to $3,000 over 26.2 (14.1 to 38.2); more than $3,000 over 23.7 (8.2 to 39.2).</desc>
+<line x1="130.0" x2="130.0" y1="10" y2="212" stroke="rgba(244,241,232,.14)"/>
+<text x="130.0" y="232" fill="#8d94a9" font-size="12" text-anchor="middle">0</text>
+<line x1="228.3" x2="228.3" y1="10" y2="212" stroke="rgba(244,241,232,.14)"/>
+<text x="228.3" y="232" fill="#8d94a9" font-size="12" text-anchor="middle">20</text>
+<line x1="326.7" x2="326.7" y1="10" y2="212" stroke="rgba(244,241,232,.14)"/>
+<text x="326.7" y="232" fill="#8d94a9" font-size="12" text-anchor="middle">40</text>
+<line x1="425.0" x2="425.0" y1="10" y2="212" stroke="rgba(244,241,232,.14)"/>
+<text x="425.0" y="232" fill="#8d94a9" font-size="12" text-anchor="middle">60</text>
+<line x1="523.3" x2="523.3" y1="10" y2="212" stroke="rgba(244,241,232,.14)"/>
+<text x="523.3" y="232" fill="#8d94a9" font-size="12" text-anchor="middle">80</text>
+<line x1="621.7" x2="621.7" y1="10" y2="212" stroke="rgba(244,241,232,.14)"/>
+<text x="621.7" y="232" fill="#8d94a9" font-size="12" text-anchor="middle">100</text>
+<line x1="720.0" x2="720.0" y1="10" y2="212" stroke="rgba(244,241,232,.14)"/>
+<text x="720.0" y="232" fill="#8d94a9" font-size="12" text-anchor="middle">120</text>
+<text x="118" y="36" fill="#c9ccda" font-size="13" text-anchor="end">&gt;$3k under</text>
+<rect x="130.0" y="20" width="407.6" height="24" rx="3" fill="#8d98ff"><title>&gt;$3k under: 82.9 exits per 100 per 30 days (95% CI 53.3 to 112.6)</title></rect>
+<path d="M392.1 32H683.6M392.1 26v12M683.6 26v12" stroke="#f3f0e7" stroke-width="1.3" fill="none"/>
+<text x="691.6" y="36" fill="#f3f0e7" font-size="13">82.9</text>
+<text x="118" y="76" fill="#c9ccda" font-size="13" text-anchor="end">$1-3k under</text>
+<rect x="130.0" y="60" width="227.6" height="24" rx="3" fill="#8d98ff"><title>$1-3k under: 46.3 exits per 100 per 30 days (95% CI 30.9 to 61.6)</title></rect>
+<path d="M281.9 72H432.9M281.9 66v12M432.9 66v12" stroke="#f3f0e7" stroke-width="1.3" fill="none"/>
+<text x="440.9" y="76" fill="#f3f0e7" font-size="13">46.3</text>
+<text x="118" y="116" fill="#c9ccda" font-size="13" text-anchor="end">within $1k</text>
+<rect x="130.0" y="100" width="135.7" height="24" rx="3" fill="#8d98ff"><title>within $1k: 27.6 exits per 100 per 30 days (95% CI 17.2 to 38.1)</title></rect>
+<path d="M214.6 112H317.3M214.6 106v12M317.3 106v12" stroke="#f3f0e7" stroke-width="1.3" fill="none"/>
+<text x="325.3" y="116" fill="#f3f0e7" font-size="13">27.6</text>
+<text x="118" y="156" fill="#c9ccda" font-size="13" text-anchor="end">$1-3k over</text>
+<rect x="130.0" y="140" width="128.8" height="24" rx="3" fill="#8d98ff"><title>$1-3k over: 26.2 exits per 100 per 30 days (95% CI 14.1 to 38.2)</title></rect>
+<path d="M199.3 152H317.8M199.3 146v12M317.8 146v12" stroke="#f3f0e7" stroke-width="1.3" fill="none"/>
+<text x="325.8" y="156" fill="#f3f0e7" font-size="13">26.2</text>
+<text x="118" y="196" fill="#c9ccda" font-size="13" text-anchor="end">&gt;$3k over</text>
+<rect x="130.0" y="180" width="116.5" height="24" rx="3" fill="#8d98ff"><title>&gt;$3k over: 23.7 exits per 100 per 30 days (95% CI 8.2 to 39.2)</title></rect>
+<path d="M170.3 192H322.7M170.3 186v12M322.7 186v12" stroke="#f3f0e7" stroke-width="1.3" fill="none"/>
+<text x="330.7" y="196" fill="#f3f0e7" font-size="13">23.7</text>
+<text x="130.0" y="258" fill="#8d94a9" font-size="12">Exits per 100 vehicles per 30 days; whiskers are 95% Poisson intervals</text>
+</svg>
+</div>
+<figcaption><strong>Figure 2.</strong> Listing-exit rate by price gap to the like-for-like market, all six dealers, vehicle-days on which an exit could be confirmed. Bars are point estimates; whiskers are 95% Poisson intervals.</figcaption>
+</figure>
+<p class="rs-cap" id="t-gap"><strong>Table 2.</strong> Exit rate by price position (data behind Figure 2).</p>
+<div class="rs-table"><table>
+<thead><tr><th>Price gap to market</th><th class="num">Vehicle-days</th><th class="num">Exits</th><th class="num">Exits per 100 per 30 days (95% CI)</th></tr></thead>
+<tbody>
+<tr><td>&gt;$3k under market</td><td class="num">1,085</td><td class="num">30</td><td class="num">82.9 (53.3 to 112.6)</td></tr>
+<tr><td>$1-3k under</td><td class="num">2,269</td><td class="num">35</td><td class="num">46.3 (30.9 to 61.6)</td></tr>
+<tr><td>within $1k</td><td class="num">2,931</td><td class="num">27</td><td class="num">27.6 (17.2 to 38.1)</td></tr>
+<tr><td>$1-3k over</td><td class="num">2,065</td><td class="num">18</td><td class="num">26.2 (14.1 to 38.2)</td></tr>
+<tr><td>&gt;$3k over market</td><td class="num">1,140</td><td class="num">9</td><td class="num">23.7 (8.2 to 39.2)</td></tr>
+</tbody></table></div>
+<p><span class="rs-ev rs-ev-mod">Model</span> A single log-linear slope fitted to all vehicle-days gives an odds ratio of 0.818 per $1,000 above market (95% CI 0.74 to 0.90), stable between 0.76 and 0.88 whichever dealer, week or price measure is dropped. Figure 2 shows why one slope oversimplifies: the curve is steep below market and nearly flat above it. Fitting separate slopes, each extra $1,000 below market multiplies the daily odds of exit by 1.30 (1.16 to 1.49), while each $1,000 above market multiplies them by 0.93 (0.76 to 1.11), an interval that includes no effect. The difference between the slopes is suggestive rather than conclusive: 92% of bootstrap replicates put the below-market slope steeper. H2 is supported below market; H2b (symmetry) is not rejected at 95%, and the data lean against it.</p>
+
+<h3 id="s5-3">5.3 Discounting relative to the same lot predicts exits</h3>
+<p>Because sites state prices differently, a within-lot comparison is the cleanest test: each vehicle's discount off MSRP is compared with the median discount on the same lot that day. Vehicles discounted two or more points deeper than their lot-mates left at 72.1 per 100 per 30 days (95% CI 47.9 to 96.3; 34 exits), against 32.1 (24.7 to 39.5; 72 exits) for vehicles within two points of the lot median and 29.2 (13.3 to 45.0; 13 exits) for those two or more points shallower. H3 is supported. Absolute discount bands tell the same story: from 23.1 per 100 per 30 days below 6% off MSRP to 52.7 above 14% off.</p>
+<p>This is correlation. Dealers may deepen discounts on the vehicles they already expect to sell, or on units promised to a buyer, so the gradient sets an upper bound on what a discount alone would achieve.</p>
+
+<h3 id="s5-4">5.4 Out-of-sample prediction is modest</h3>
+<p>Fitted on days 1 to 27 and tested on days 28 to 43, the exit model ranked vehicles that later exited above those that did not with an AUC of 0.607, against 0.551 for the same model without price position. It predicted 64.6 exits in the test period against 61 observed. A later split (fit to day 31) gave 0.581 against 0.559, and over-predicted (58.5 against 46).</p>
+<figure class="rs-fig" id="fig-3">
+<div class="rs-fig-scroll">
+<svg viewBox="0 0 760 300" role="img" aria-labelledby="f3t f3d" xmlns="http://www.w3.org/2000/svg" font-family="Inter, ui-sans-serif, Arial, sans-serif">
+<title id="f3t">Out-of-sample check: predicted and actual exits by thirds of price position</title>
+<desc id="f3d">Exits in days 28 to 43. Most under market: 36.8 predicted, 31 actual. Middle third: 18.6 predicted, 15 actual. Most over market: 9.2 predicted, 15 actual.</desc>
+<line x1="60" x2="740" y1="220.0" y2="220.0" stroke="rgba(244,241,232,.14)"/>
+<text x="48" y="224.0" fill="#8d94a9" font-size="12" text-anchor="end">0</text>
+<line x1="60" x2="740" y1="172.5" y2="172.5" stroke="rgba(244,241,232,.14)"/>
+<text x="48" y="176.5" fill="#8d94a9" font-size="12" text-anchor="end">10</text>
+<line x1="60" x2="740" y1="125.0" y2="125.0" stroke="rgba(244,241,232,.14)"/>
+<text x="48" y="129.0" fill="#8d94a9" font-size="12" text-anchor="end">20</text>
+<line x1="60" x2="740" y1="77.5" y2="77.5" stroke="rgba(244,241,232,.14)"/>
+<text x="48" y="81.5" fill="#8d94a9" font-size="12" text-anchor="end">30</text>
+<line x1="60" x2="740" y1="30.0" y2="30.0" stroke="rgba(244,241,232,.14)"/>
+<text x="48" y="34.0" fill="#8d94a9" font-size="12" text-anchor="end">40</text>
+<rect x="143" y="45.2" width="26" height="174.8" rx="3" fill="#ffd9a1"><title>Most under market: predicted exits 36.8</title></rect>
+<text x="156" y="38.2" fill="#f3f0e7" font-size="12" text-anchor="middle">36.8</text>
+<rect x="177" y="72.8" width="26" height="147.2" rx="3" fill="#8d98ff"><title>Most under market: actual exits 31</title></rect>
+<text x="190" y="65.8" fill="#f3f0e7" font-size="12" text-anchor="middle">31</text>
+<text x="173" y="242" fill="#c9ccda" font-size="13" text-anchor="middle">Most under market</text>
+<rect x="370" y="131.6" width="26" height="88.4" rx="3" fill="#ffd9a1"><title>Middle third: predicted exits 18.6</title></rect>
+<text x="383" y="124.6" fill="#f3f0e7" font-size="12" text-anchor="middle">18.6</text>
+<rect x="404" y="148.8" width="26" height="71.2" rx="3" fill="#8d98ff"><title>Middle third: actual exits 15</title></rect>
+<text x="417" y="141.8" fill="#f3f0e7" font-size="12" text-anchor="middle">15</text>
+<text x="400" y="242" fill="#c9ccda" font-size="13" text-anchor="middle">Middle third</text>
+<rect x="597" y="176.3" width="26" height="43.7" rx="3" fill="#ffd9a1"><title>Most over market: predicted exits 9.2</title></rect>
+<text x="610" y="169.3" fill="#f3f0e7" font-size="12" text-anchor="middle">9.2</text>
+<rect x="631" y="148.8" width="26" height="71.2" rx="3" fill="#8d98ff"><title>Most over market: actual exits 15</title></rect>
+<text x="644" y="141.8" fill="#f3f0e7" font-size="12" text-anchor="middle">15</text>
+<text x="627" y="242" fill="#c9ccda" font-size="13" text-anchor="middle">Most over market</text>
+<rect x="60" y="270" width="12" height="12" rx="2" fill="#ffd9a1"/><text x="80" y="281" fill="#c9ccda" font-size="12">Predicted exits</text>
+<rect x="200" y="270" width="12" height="12" rx="2" fill="#8d98ff"/><text x="220" y="281" fill="#c9ccda" font-size="12">Actual exits</text>
+<text x="740" y="281" fill="#8d94a9" font-size="12" text-anchor="end">Exits in days 28 to 43, after the fitting window</text>
+</svg>
+</div>
+<figcaption><strong>Figure 3.</strong> Out-of-sample check, single-slope model fitted on days 1 to 27: predicted and actual exits in days 28 to 43, by thirds of price position. The model gets the ordering of the lowest third right but under-predicts exits among the highest-priced third, consistent with the flat above-market response in Section 5.2.</figcaption>
+</figure>
+<p>Price position is a real signal, not a precise forecast. A dealer should not read any single vehicle's predicted days-on-lot as a commitment.</p>
+
+<h3 id="s5-5">5.5 Disappearing listings are an unreliable signal on their own</h3>
+<p>Of 180 occasions on which a vehicle vanished from a dealer's site from one valid snapshot to the next, 44 (24%) were followed by the same VIN reappearing. Short gaps of one or two snapshots accounted for 18 of the 43 affected listing histories. Most long gaps (16 to 20 snapshots) traced to one dealer's site, where a pagination limit in our collector missed 11 to 17 vehicles a day until it was fixed. We report it because the same fault is easy to make and hard to notice.</p>
+<p>Counting every disappearance as an exit would have produced 136 exits; requiring two absent snapshots, 125; requiring three, 119. Other integrity issues seen: price flips of more than $3,000 that reverted the next day (47, concentrated at one dealer), one dealer's results page showing a vehicle count 15 higher than the listings it served, one VIN that moved between two dealers in the study (a dealer trade, not a sale), and one day on which three of six collections failed.</p>
+
+<h3 id="s5-6">5.6 Product mix can explain dealer-level differences</h3>
+<p>Exit rates differed sharply by trim. Pooled across five dealers from day 21, the off-road trim exited at 88.2 per 100 per 30 days (95% CI 43.6 to 132.9; 15 exits) and the most-stocked mid-level trim at 18.7 (9.5 to 27.8; 16 exits). Controlling for dealer, price position and MSRP, the off-road trim's daily odds of exit were 3.72 times the reference trim's (1.99 to 6.38).</p>
+<p>In the one two-dealer comparison long enough to test (days 5 to 42), Dealer E recorded 34 exits to Dealer B's 25. The off-road trim accounted for all of the difference: 13 exits at E against 2 at B, while all other trims combined were 21 at E and 23 at B. A volume comparison that ignores mix would have attributed the gap to price or sales performance.</p>
+</div>
+</section>
+
+<section id="examples" class="rv-sec rs-sec" aria-labelledby="examples-title">
+<div class="section-kicker">Section 06</div>
+<h2 id="examples-title">6. Worked examples: what each formula reveals</h2>
+<div class="rs-prose rs-wide">
+<p>Each example below uses either the study's actual pooled figures (<span class="rs-ev rs-ev-obs">Observed</span>) or invented inputs (<span class="rs-ev rs-ev-syn">Synthetic</span>). Full working is in <a href="#appendix-a">Appendix A</a>.</p>
+<h3 id="s6-1">6.1 How fast is the market turning? <span class="rs-ev rs-ev-obs">Observed</span></h3>
+<p>Over the window in which all six dealers were observed (days 31 to 44), 48 vehicles exited from an average stock that summed to 4,675 vehicle-days. The 30-day exit rate is 48 ÷ 4,675 × 3,000 = <strong>30.8 per 100</strong>, about 97 days of supply at that pace. Unlike a days-supply figure built from registrations, this is measured directly from the competitors' own lots.</p>
+<h3 id="s6-2">6.2 Is a cluster of competitor cuts a coordinated move or noise? <span class="rs-ev rs-ev-obs">Observed</span></h3>
+<p>Nineteen dealer-wide moves occurred on 15 fully observed days. Shuffling each dealer's move days independently, the largest single-day coincidence reached six dealers in 16 of 20,000 shuffles (<i>p</i> = 0.0008). An analyst who saw one competitor cut on day 37 and matched it would have been reacting to a market-wide event, not a targeted one.</p>
+<h3 id="s6-3">6.3 What does $1,000 below market buy? <span class="rs-ev rs-ev-mod">Model</span></h3>
+<p>Under the separate-slope model, moving a vehicle from at-market to $1,000 below multiplies its daily odds of exit by 1.30. For a vehicle with a 1% daily exit probability, that is about 1.3%, which shortens its expected time on the lot from roughly 100 to roughly 77 days. Raising a vehicle from at-market to $1,000 above it has no effect distinguishable from zero in this sample.</p>
+<h3 id="s6-4">6.4 What is a day on the lot worth to a dealer? <span class="rs-ev rs-ev-syn">Synthetic</span></h3>
+<p>A framework, not a finding. If a dealer sets price to maximize price minus <i>k</i> dollars for every day a vehicle sits, and each dollar of price cut raises the exit hazard by a factor e<sup><i>β</i></sup>, then at its best price, <i>β</i>·<i>k</i>·<i>T</i> = 1, where <i>T</i> is expected days to exit. Suppose <i>β</i> = 0.0002 per dollar and a vehicle is expected to take 120 days. That price is only optimal if a day costs the dealer <i>k</i> = 1 ÷ (0.0002 × 120) = <strong>$41.67</strong>. If the dealer's true cost of a lot day is $60, the best expected time falls to 83 days, achieved by a cut of $1,823, for a net gain of $377 per vehicle. For scale, Cox Automotive reported an average daily holding cost per new car of about $7.70 in 2024 (vAuto, 2024); at that cost alone, the same arithmetic recommends no cut. Section 5.2 shows the slope above market is not well identified in this sample, so we do not report dealer-level implied costs.</p>
+</div>
+</section>
+
+<section id="limits" class="rv-sec rs-sec" aria-labelledby="limits-title">
+<div class="section-kicker">Section 07</div>
+<h2 id="limits-title">7. Alternative explanations, limitations and falsification</h2>
+<div class="rs-prose rs-wide">
+<h3 id="s7-1">7.1 Alternative explanations</h3>
+<ul>
+<li>Synchronized repricing may reflect a manufacturer incentive change, a shared third-party pricing provider, scheduled month-start updates, or tacit coordination. The data show shared timing; they do not show cause.</li>
+<li>The price-position gradient may run partly in reverse: dealers cut prices on vehicles a buyer has already agreed to buy, or delist vehicles once a deal is struck at a lower price.</li>
+<li>Exits include dealer trades, wholesale moves and data errors, not only retail sales.</li>
+<li>Cross-dealer price gaps partly reflect different incentive presentation on each website, not different transaction prices. The within-lot measure in Section 5.3 is designed to remove this.</li>
+</ul>
+<h3 id="s7-2">7.2 Limitations</h3>
+<ul>
+<li>One nameplate, one brand, one metropolitan market, 46 days including a single month-end. The results are not general until replicated.</li>
+<li>119 exits. Rates for individual dealers, trims and price bands carry wide intervals, and only the pooled estimates are reported as findings.</li>
+<li>Staggered coverage: three dealers were read every other day for their first eight days and one dealer has 16 days of data. Exit dates in those periods are accurate to about two days.</li>
+<li>The hedonic market price uses trim, engine and MSRP; options not reflected in MSRP, color, and in-transit status are not modelled.</li>
+<li>Out-of-sample discrimination is modest (AUC 0.58 to 0.61), and calibration drifted between splits.</li>
+</ul>
+<h3 id="s7-3">7.3 How to falsify these results</h3>
+<p>Each finding names its test: rerun the permutation test in another market or brand (H1 fails if no coincidence exceeds the 5% threshold); refit the exit model on a longer window and check whether the below-market slope survives out of sample (H2); test the above-market slope with more exits (H2b). If repricing coincidences in another brand show no relationship to manufacturer program dates, the incentive explanation weakens. ICONIC will update this paper with replications as they are run.</p>
 </div>
 </section>
 
 <section id="comparison" class="rv-sec rs-sec" aria-labelledby="comparison-title">
-<div class="section-kicker">07 · Snapshot tools vs. longitudinal intelligence</div>
-<h2 id="comparison-title">Current-price dashboards and longitudinal intelligence answer different questions</h2>
+<div class="section-kicker">Section 08</div>
+<h2 id="comparison-title">8. Beyond the snapshot: comparison with conventional pricing tools</h2>
 <div class="rs-prose rs-wide">
-<div class="rs-table"><table><thead><tr><th>Business question</th><th>Single current-price snapshot</th><th>Longitudinal VIN history</th></tr></thead><tbody>
-<tr><td>Who is advertised cheaper today?</td><td>Potentially answerable</td><td>Answerable with matching</td></tr>
-<tr><td>When did that specific VIN's price change?</td><td>No historical observation</td><td>Timestamped price history</td></tr>
-<tr><td>Did rival dealers reprice on the same day?</td><td>Not observable from one date</td><td>Event calendars and permutation testing</td></tr>
-<tr><td>Did a disappearing VIN return?</td><td>Not observable</td><td>Repeat-observation reconciliation</td></tr>
-<tr><td>Which price positions predict later listing exits?</td><td>Cannot validate future events from one snapshot</td><td>Time-split statistical evaluation</td></tr>
+<p>Commercial dealer tools already use live market data. vAuto's Conquest, its new-vehicle product, describes using live market data to automate pricing, apply rebates and incentives, and keep new-car listings current (vAuto, n.d.-a). vAuto's used-vehicle Provision suite ranks each vehicle's price against similar vehicles in the live market (Trader, n.d.). Cox Automotive publishes market-level days' supply and holding-cost figures (vAuto, 2024). VIN-level listing data at scale is also not new: LotLinx describes indexing more than 35,000 websites at the VIN level (AutoSuccess, n.d.).</p>
+<p>The contribution here is not the data source but the analyses run on repeated observations of the same vehicles. The table below compares what is publicly described for snapshot-oriented tools with what a longitudinal VIN history adds. We reviewed public product descriptions only; capabilities not publicly documented may exist.</p>
+<div class="rs-table"><table>
+<thead><tr><th>Question</th><th>Current-price snapshot</th><th>Longitudinal VIN history (this framework)</th></tr></thead>
+<tbody>
+<tr><td>Where does my price rank against comparable vehicles today?</td><td>Yes; the core function of market-based pricing tools.</td><td>Yes, plus how that rank changed day by day.</td></tr>
+<tr><td>Did competitors move together, and is that more than chance?</td><td>Not answerable from one snapshot.</td><td>Permutation test on move timing (Section 5.1).</td></tr>
+<tr><td>How fast do competitors' vehicles actually leave, by trim and price position?</td><td>Market days' supply at aggregate level.</td><td>Exit rates and hazard by vehicle, with intervals (Sections 5.2 to 5.6).</td></tr>
+<tr><td>Is a disappeared listing a sale, a transfer or a glitch?</td><td>Not answerable from one snapshot.</td><td>Guard-rule reconciliation and reappearance tracking (Section 5.5).</td></tr>
+<tr><td>What is a competitor's pricing path on a specific vehicle?</td><td>Current price only.</td><td>Full per-VIN price history, including reversals.</td></tr>
+<tr><td>What does a pricing policy imply about the value of a lot day?</td><td>Not addressed in the descriptions reviewed.</td><td>Revealed-cost framework (Section 6.4), once the slope is well identified.</td></tr>
 </tbody></table></div>
-<p>This compares <em>data architectures</em>, not vendor capabilities. Modern products may provide longitudinal analysis; assess each vendor's actual current features before declaring a gap.</p>
-<p>ICONIC applies this framework to recurring competitive-intelligence workflows. See the <a href="/ai/case-study-dealership.md">existing dealership case-study reference</a> for separately described operational work, and <a href="/ai/services.md">services</a> for how an engagement begins.</p>
+</div>
+</section>
+
+<section id="implications" class="rv-sec rs-sec" aria-labelledby="implications-title">
+<div class="section-kicker">Section 09</div>
+<h2 id="implications-title">9. Practical implications</h2>
+<div class="rs-prose rs-wide">
+<h3 id="s9-gm">For general managers</h3>
+<ul>
+<li>Before matching a competitor's cut, check whether the rest of the market moved the same day. A synchronized move is a market event; a solo move is a competitive one.</li>
+<li>Compare dealers' volume by trim before drawing conclusions about price or sales performance.</li>
+</ul>
+<h3 id="s9-pd">For pricing directors</h3>
+<ul>
+<li>In this market, the evidence favored being clearly below market on the vehicles that need to move, over trimming premiums on many vehicles that stay above market.</li>
+<li>Measure a vehicle's discount against its own lot as well as against the market; the within-lot measure is immune to incentive-presentation differences between sites.</li>
+<li>Track exits with a multi-snapshot guard rule. A one-day rule overstated exits by 14% here.</li>
+</ul>
+<h3 id="s9-dg">For dealer groups and analysts</h3>
+<ul>
+<li>Longitudinal listing data lets a group test whether its stores price in step with the market or with each other, and audit the accuracy of its own listings.</li>
+<li>Pool data across markets: the per-dealer estimates here are too wide to act on, and several hypotheses need more exits to settle.</li>
+</ul>
+</div>
+</section>
+
+<section id="conclusions" class="rv-sec rs-sec" aria-labelledby="conclusions-title">
+<div class="section-kicker">Section 10</div>
+<h2 id="conclusions-title">10. Conclusions and further research</h2>
+<div class="rs-prose rs-wide">
+<p>Six weeks of daily VIN-level observation turned a set of price snapshots into a record of behavior. The clearest result is that competitor repricing in this market was dominated by two synchronized events, with coincidences far beyond what independent timing would produce. Price position predicted exits, mostly through the advantage of being below market rather than a penalty for being above it. Naive tracking of disappearing listings overstated exits by 14%.</p>
+<p>Further work: replicate across brands and markets; link synchronized days to published manufacturer program calendars; extend the window past several month-ends to test calendar effects; estimate time-on-lot survival curves once enough vehicles have known arrival dates; and test whether the revealed day-cost framework produces stable estimates when the price slope is well identified.</p>
 </div>
 </section>
 
 <section id="faq" class="rv-sec rs-sec" aria-labelledby="faq-title">
-<div class="section-kicker">08 · Common questions</div>
+<div class="section-kicker">Common questions</div>
 <h2 id="faq-title">Frequently asked questions</h2>
 <div class="rv-faq">
-<details open><summary>How do you monitor competitor vehicle pricing by VIN?</summary><p>Capture timestamped public inventory snapshots, normalize advertised price and MSRP, match each vehicle by dealer and VIN, and preserve every valid observation. Compare price changes only between complete snapshots and distinguish model mix changes from repricing of existing units.</p></details>
-<details><summary>How can you detect synchronized dealer price changes?</summary><p>Define a consistent dealer-wide repricing event using the share of matched vehicles whose advertised prices changed and the average change. Compare dealer event dates, then use a permutation test that preserves each dealer's observed event frequency and valid observation dates to assess whether overlap is unusual.</p></details>
-<details><summary>Does a VIN disappearing from inventory mean it sold?</summary><p>No. A vehicle can disappear because of feed errors, website changes, dealer transfers, temporary listing gaps or a sale. Flag the absence as provisional until repeated complete subsequent snapshots confirm it remains absent. A confirmed listing exit still is not a verified retail transaction.</p></details>
-<details><summary>How do you compare vehicle prices fairly across dealerships?</summary><p>Compare advertised prices for like-for-like vehicles, adjusting for MSRP, trim, engine and other reliably observed attributes. Use each vehicle's residual from an estimated market price as a comparable gap, with careful disclosure of inconsistent manufacturer incentives.</p></details>
-<details><summary>Can AI predict which cars or trucks will leave a dealer's website?</summary><p>A statistical model can estimate the probability of a listing exit from price position, trim, engine and other features, but prediction must be checked on later observations not used for training. A listing exit is not a confirmed sale and correlation is not proof that a price cut causes an exit.</p></details>
-<details><summary>What is the difference between a current-price dashboard and longitudinal intelligence?</summary><p>A current-price snapshot describes relative advertised prices now. Longitudinal analysis adds timing, price-change histories, repeated listing gaps, sustained departures and hypotheses about common repricing events. Whether a particular vendor provides these functions requires checking that vendor's current product.</p></details>
+<details open><summary>How can AI identify dealership competitor repricing patterns?</summary><p>By observing every competitor vehicle by VIN every day and testing the timing of price changes statistically. An automated system reads each dealer's public listings daily, joins the snapshots by VIN, and flags dealer-wide moves: days when at least 20% of a dealer's vehicles change price and its average price moves more than 0.5%. A permutation test then asks whether those moves coincide across dealers more often than independent timing would produce. In ICONIC's 46-day study of six competing dealers, all six moved on the same day once and five moved together on another, coincidences with probabilities of about 0.08% and 0.005% under independent timing. The statistics do the detecting; the AI's role is reliable daily collection, reconciliation and alerting.</p></details>
+<details><summary>Can competitor vehicle price changes be predicted?</summary><p>Partly, and mostly at the market level. In ICONIC's study, a third of all 1,470 price changes fell on two days when nearly every dealer of the brand moved at once, a pattern consistent with manufacturer program changes, which are scheduled. Moves outside those two days were too few (zero to five per dealer over the study) to model reliably. What longitudinal data does predict, modestly, is which vehicles leave the listings: price position relative to the like-for-like market improved out-of-sample ranking from an AUC of 0.551 to 0.607.</p></details>
+<details><summary>How can dealers track historical VIN-level pricing?</summary><p>Capture each competitor's public new-inventory listings at the same time every day, store the VIN, advertised price, MSRP, trim and engine for every vehicle in a dated snapshot, and join the snapshots by dealer and VIN. Each vehicle then has a history: first and last day listed and its price on every day. Validate every snapshot against the vehicle count the site displays, and discard incomplete reads rather than letting them look like sales.</p></details>
+<details><summary>How can an AI system detect disappearing inventory or inaccurate listings?</summary><p>By treating a disappearance as provisional until it persists. In ICONIC's study, 24% of vehicles that vanished from a dealer's site reappeared later, so counting every disappearance as a sale overstated exits by 14% (136 against 119). The study used a guard rule: a vehicle counts as exited only after it is missing from three consecutive valid snapshots. The same histories expose other listing errors: price flips that revert the next day, displayed vehicle counts that do not match the listings served, and VINs that move between dealers.</p></details>
+<details><summary>What insights can longitudinal market intelligence provide beyond vAuto?</summary><p>Snapshot-oriented pricing tools such as vAuto describe ranking a vehicle's current price against comparable vehicles in the live market and applying incentives automatically. Repeated observation of the same VINs adds questions a single snapshot cannot answer: whether competitors moved together and whether that exceeds chance, how quickly competitors' vehicles actually leave by trim and price position, whether a missing listing is a sale or a glitch, and each competitor vehicle's full price path. ICONIC reviewed public product descriptions only; capabilities not publicly documented may exist.</p></details>
+<details><summary>How can dealers distinguish coordinated pricing changes from random market fluctuations?</summary><p>Use a permutation test. For the days on which every competitor was observed, record whether each dealer made a dealer-wide move. Shuffle each dealer's move days randomly many times, which keeps how often each dealer moves but removes any shared timing, and count how often the shuffled data produce a coincidence as large as the real one. If that happens in fewer than 5% of shuffles, the timing is shared. Shared timing does not show the cause: a manufacturer incentive change, a common pricing vendor or tacit coordination all produce it.</p></details>
+<details><summary>Does pricing a new vehicle below market make it leave the lot faster?</summary><p>In ICONIC's study, yes, strongly: vehicles more than $3,000 below the like-for-like market price left listings at 82.9 per 100 per 30 days against about 24 to 28 for vehicles at or above market. Each additional $1,000 below market multiplied daily exit odds by about 1.3. A premium above market showed no clear additional slowing. This is a correlation, and dealers may discount the vehicles they already expect to sell.</p></details>
+<details><summary>Is a vehicle disappearing from a dealer's website the same as a sale?</summary><p>No. A listing exit can be a retail sale, a dealer trade, a wholesale disposal, a delisting or a collection error. Public listing data cannot tell these apart, which is why ICONIC's research reports listing exits rather than sales and requires a vehicle to stay missing for three snapshots before counting it.</p></details>
 </div>
 </section>
 
-<section id="limitations" class="rv-sec rs-sec" aria-labelledby="limitations-title">
-<div class="section-kicker">Scope and disclosure</div>
-<h2 id="limitations-title">Methodology, scope and disclosure</h2>
-<div class="rs-prose">
-<p>This publication explains a reproducible analytical framework, not a released customer dataset or an empirical performance claim. All worked numbers above are synthetic. The methods should be tested on each market's observation cadence, listing completeness and advertised-price definitions before any operational decisions.</p>
-<p>Data collection must comply with applicable permissions, website terms, data protection obligations and contractual restrictions. No private dealer data, employee information, individual VINs or client engagement statistics are disclosed here.</p>
-<p class="rs-note">Cite as: Christell, Patrick (2026). “A VIN-Level Framework for Detecting Dealership Repricing and Inventory Exits.” ICONIC Research Methods. https://iconic.onl/research/dealership-pricing-intelligence/</p>
+<section id="glossary" class="rv-sec rs-sec" aria-labelledby="glossary-title">
+<div class="section-kicker">Terms</div>
+<h2 id="glossary-title">Glossary</h2>
+<div class="rs-prose rs-wide">
+<dl class="rs-gloss">
+<dt>Advertised price</dt><dd>The price a dealer displays for a vehicle on its own website; may include some, all or none of the available manufacturer incentives.</dd>
+<dt>AUC (area under the ROC curve)</dt><dd>The probability that a model ranks a randomly chosen vehicle that exited above one that did not; 0.5 is chance, 1.0 is perfect.</dd>
+<dt>Bootstrap (cluster)</dt><dd>Re-estimating a statistic on many resampled datasets to measure its uncertainty; here whole vehicles are resampled so their repeated days stay together.</dd>
+<dt>Dealer-wide move</dt><dd>A day on which at least 20% of a dealer's continuing vehicles change price and its average listed price moves by more than 0.5%.</dd>
+<dt>Discrete-time hazard</dt><dd>The probability that a vehicle exits on a given day, given it was listed the day before.</dd>
+<dt>Guard rule</dt><dd>Requiring a vehicle to be absent from <i>G</i> consecutive valid snapshots before classifying it as exited; <i>G</i> = 3 here.</dd>
+<dt>Hedonic regression</dt><dd>A regression that prices a product from its characteristics (Rosen, 1974); used here to estimate a like-for-like market price.</dd>
+<dt>Listing exit</dt><dd>A VIN that stops appearing on a dealer's site and does not return within the guard window. Not necessarily a sale.</dd>
+<dt>Odds ratio</dt><dd>The multiplicative change in the odds of an event associated with a one-unit change in a predictor.</dd>
+<dt>Permutation test</dt><dd>A test that compares an observed statistic with its distribution when the data are randomly reshuffled under the null hypothesis.</dd>
+<dt>Price gap</dt><dd>A vehicle's smoothed advertised price minus its fitted like-for-like market price that day.</dd>
+<dt>Synchronized repricing</dt><dd>Dealer-wide price moves by several competing dealers on the same day, beyond what independent timing would produce.</dd>
+<dt>VIN (Vehicle Identification Number)</dt><dd>The 17-character identifier unique to each vehicle, used here to join daily snapshots into histories.</dd>
+<dt>30-day exit rate</dt><dd>Exits per 100 vehicles in stock per 30 days.</dd>
+</dl>
+</div>
+</section>
+
+<section id="appendix-a" class="rv-sec rs-sec" aria-labelledby="appendix-a-title">
+<div class="section-kicker">Appendix A</div>
+<h2 id="appendix-a-title">Appendix A: Mathematical appendix</h2>
+<div class="rs-prose rs-wide">
+<h3 id="a1">A.1 Notation</h3>
+<div class="rs-table rs-notation"><table>
+<thead><tr><th>Symbol</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td><i>d</i></td><td>Dealer, <i>d</i> ∈ {A, …, F}</td></tr>
+<tr><td><i>v</i></td><td>Vehicle, identified by VIN</td></tr>
+<tr><td><i>t</i></td><td>Observation day; 𝒟<sub><i>d</i></sub> is the ordered set of valid snapshot days for dealer <i>d</i></td></tr>
+<tr><td><i>p</i><sub><i>vt</i></sub>, <i>m</i><sub><i>v</i></sub></td><td>Advertised price of vehicle <i>v</i> on day <i>t</i>; its MSRP</td></tr>
+<tr><td><i class="rs-acc rs-til">p</i><sub><i>vt</i></sub></td><td>Smoothed price: median of <i>p</i> over <i>v</i>'s last three valid snapshots</td></tr>
+<tr><td><i>δ</i><sub><i>vt</i></sub></td><td>Discount off MSRP, 1 − <i>p</i><sub><i>vt</i></sub> / <i>m</i><sub><i>v</i></sub></td></tr>
+<tr><td><i>g</i><sub><i>vt</i></sub></td><td>Price gap to the like-for-like market, in dollars</td></tr>
+<tr><td><i>y</i><sub><i>vt</i></sub></td><td>1 if day <i>t</i> is the last day <i>v</i> was listed before a confirmed exit, otherwise 0</td></tr>
+<tr><td><i>G</i></td><td>Guard length, 3 snapshots</td></tr>
+</tbody></table></div>
+
+<h3 id="a2">A.2 Exit classification and the 30-day exit rate</h3>
+<p>Let <i>ℓ</i><sub><i>v</i></sub> be the last valid day vehicle <i>v</i> was listed at dealer <i>d</i>, and <i>a</i><sub><i>v</i></sub> = |{<i>t</i> ∈ 𝒟<sub><i>d</i></sub> : <i>t</i> &gt; <i>ℓ</i><sub><i>v</i></sub>}| the number of valid snapshots after it.</p>
+<div class="rs-math"><span>status(<i>v</i>) = exited if <i>a</i><sub><i>v</i></sub> ≥ <i>G</i>; pending if 1 ≤ <i>a</i><sub><i>v</i></sub> &lt; <i>G</i>; listed if <i>a</i><sub><i>v</i></sub> = 0</span></div>
+<p>For a set of vehicles over a window of valid days <i>t</i><sub>0</sub> … <i>t</i><sub><i>k</i></sub>, with <i class="rs-acc rs-bar">N</i> the average daily stock and <i>E</i> the exits confirmed in (<i>t</i><sub>0</sub>, <i>t</i><sub><i>k</i></sub>]:</p>
+<div class="rs-math"><span><i>U</i> = <i class="rs-acc rs-bar">N</i> · (<i>t</i><sub><i>k</i></sub> − <i>t</i><sub>0</sub>) &nbsp; (vehicle-days)</span> <span><i>r</i><sub>30</sub> = 3000 · <i>E</i> / <i>U</i></span> <span>95% CI: 3000 · (<i>E</i> ± 1.96√<i>E</i>) / <i>U</i></span></div>
+<p class="rs-plain">Plain English: exits per 100 vehicles in stock per 30 days, treating exits as a Poisson count. Days of supply is <i>U</i> / <i>E</i>. Assumes exits are roughly independent across vehicles; the interval is a normal approximation and is floored at zero.</p>
+<p><strong>Worked (observed).</strong> Vehicles more than $3,000 below market: <i>E</i> = 30, <i>U</i> = 1,085. <i>r</i><sub>30</sub> = 3000 × 30 / 1085 = 82.9. Interval: 30 ± 1.96 × √30 = 30 ± 10.7 = 19.3 to 40.7 exits, so 53.3 to 112.6 per 100 per 30 days.</p>
+
+<h3 id="a3">A.3 Price smoothing and dealer-wide moves</h3>
+<p>For vehicles listed on consecutive valid snapshots <i>t′</i> &lt; <i>t</i>, the change is <i>c</i><sub><i>vt</i></sub> = <i>p</i><sub><i>vt</i></sub> / <i>p</i><sub><i>vt′</i></sub> − 1. For dealer <i>d</i> on day <i>t</i>, over its continuing vehicles <i>V</i><sub><i>dt</i></sub>:</p>
+<div class="rs-math"><span><i>I</i><sub><i>dt</i></sub> = mean<sub><i>v</i>∈<i>V</i><sub><i>dt</i></sub></sub> <i>c</i><sub><i>vt</i></sub></span> <span><i>M</i><sub><i>dt</i></sub> = share of <i>v</i> ∈ <i>V</i><sub><i>dt</i></sub> with |<i>c</i><sub><i>vt</i></sub>| &gt; 0.001</span> <span>move<sub><i>dt</i></sub> = 1[<i>M</i><sub><i>dt</i></sub> ≥ 0.2 and |<i>I</i><sub><i>dt</i></sub>| &gt; 0.005]</span></div>
+<p class="rs-plain">Plain English: a dealer "moved" on a day if at least a fifth of its vehicles changed price and its average price shifted by more than half a percent. The thresholds are choices; Appendix B recommends reporting results at alternative thresholds.</p>
+
+<h3 id="a4">A.4 Synchronization permutation test</h3>
+<p>Let 𝒯 be the days on which all six dealers have valid snapshots (|𝒯| = 15), and <i>S</i><sub><i>t</i></sub> = Σ<sub><i>d</i></sub> move<sub><i>dt</i></sub> the number of dealers moving on day <i>t</i>. Two test statistics: <i>S</i><sub>max</sub> = max<sub><i>t</i>∈𝒯</sub> <i>S</i><sub><i>t</i></sub>, and <i>K</i><sub>5</sub> = |{<i>t</i> : <i>S</i><sub><i>t</i></sub> ≥ 5}|. For <i>b</i> = 1 … <i>B</i>, permute each dealer's sequence (move<sub><i>dt</i></sub>)<sub><i>t</i>∈𝒯</sub> independently and recompute the statistic:</p>
+<div class="rs-math"><span><i class="rs-acc rs-hat">p</i> = (1/<i>B</i>) Σ<sub><i>b</i></sub> 1[ statistic<sup>(<i>b</i>)</sup> ≥ statistic<sup>obs</sup> ]</span> <span><i>B</i> = 20,000</span></div>
+<p class="rs-plain">Plain English: keep how often each dealer moves, scramble when, and count how often chance alone produces a coincidence as large as the real one (Good, 2005). The null hypothesis is exchangeable timing within each dealer; it ignores day-of-week effects.</p>
+<p><strong>Worked (observed).</strong> 19 dealer-wide moves on 15 days; observed <i>S</i><sub>max</sub> = 6 and <i>K</i><sub>5</sub> = 2. Shuffles reaching <i>S</i><sub>max</sub> = 6: 16 of 20,000, <i class="rs-acc rs-hat">p</i> = 0.0008. Shuffles reaching <i>K</i><sub>5</sub> ≥ 2: 1 of 20,000, <i class="rs-acc rs-hat">p</i> = 0.00005. A third statistic, the count of days with three or more dealers moving, was 2 observed against 1.58 expected (<i class="rs-acc rs-hat">p</i> = 0.52), and is not evidence of synchronization.</p>
+
+<h3 id="a5">A.5 Like-for-like market price and price gap</h3>
+<p>For each day <i>t</i>, ordinary least squares over every dealer's listed vehicles:</p>
+<div class="rs-math"><span><i class="rs-acc rs-til">p</i><sub><i>vt</i></sub> = <i>α</i><sub><i>t</i></sub> + <i>θ</i><sub><i>t</i></sub> <i>m</i><sub><i>v</i></sub> + Σ<sub><i>j</i></sub> <i>τ</i><sub><i>jt</i></sub> 1[trim<sub><i>v</i></sub> = <i>j</i>] + Σ<sub><i>e</i></sub> <i>η</i><sub><i>et</i></sub> 1[engine<sub><i>v</i></sub> = <i>e</i>] + <i>ε</i><sub><i>vt</i></sub></span> <span><i>g</i><sub><i>vt</i></sub> = <i class="rs-acc rs-til">p</i><sub><i>vt</i></sub> − <i class="rs-acc rs-hat">p</i><sub><i>vt</i></sub></span></div>
+<p class="rs-plain">Plain English: estimate what the market lists a vehicle with this sticker price, trim and engine at today, and measure how far each vehicle sits above or below that (Rosen, 1974). The model deliberately has no dealer terms, so a dealer that prices high shows positive gaps. Heteroskedasticity-robust (White, 1980) standard errors are used where dealer gaps are reported.</p>
+
+<h3 id="a6">A.6 Discrete-time exit model</h3>
+<p>On vehicle-days up to the last day on which an exit can be confirmed (three snapshots before the end of data):</p>
+<div class="rs-math"><span>logit Pr(<i>y</i><sub><i>vt</i></sub> = 1) = <i>β</i><sub>0</sub> + <i>γ</i><sub><i>d</i></sub> + <i>τ</i><sub>trim</sub> + <i>η</i><sub>engine</sub> + <i>λ</i> (<i>m</i><sub><i>v</i></sub> / 10,000) + <i>β</i><sub>g</sub> (<i>g</i><sub><i>vt</i></sub> / 1,000)</span></div>
+<p>Separate-slope (kinked) version, replacing the last term:</p>
+<div class="rs-math"><span><i>β</i><sub>−</sub> · min(<i>g</i><sub><i>vt</i></sub>, 0) / 1,000 &nbsp;+&nbsp; <i>β</i><sub>+</sub> · max(<i>g</i><sub><i>vt</i></sub>, 0) / 1,000</span></div>
+<p class="rs-plain">Plain English: the daily odds that a listed vehicle exits, as a function of its dealer, trim, engine, sticker price and price gap (Allison, 1982). exp(<i>β</i><sub>g</sub>) is the odds ratio per $1,000 above market. Fitted with a ridge penalty of 1.0 (intercept unpenalized) by Newton's method; 95% intervals from 300 bootstrap resamples of whole vehicles (Cameron, Gelbach and Miller, 2008).</p>
+<p><strong>Estimates (model).</strong> Single slope: exp(<i>β</i><sub>g</sub>) = 0.818 (0.74 to 0.90); 9,490 vehicle-days, 119 exits. Kinked: per extra $1,000 below market, exp(−<i>β</i><sub>−</sub>) = 1.30 (1.16 to 1.49); per $1,000 above market, exp(<i>β</i><sub>+</sub>) = 0.93 (0.76 to 1.11). Off-road trim against the reference trim: 3.72 (1.99 to 6.38). Per 10 points of discount off MSRP, in a companion model with discount in place of gap: 2.88 (1.79 to 4.41).</p>
+<p><strong>Worked (model).</strong> Under the single slope, a vehicle $2,145 above market has daily exit odds 0.818<sup>2.145</sup> = 0.65 times those of an identical vehicle at market, which is about 54% longer expected time on the lot. Under the kinked model, the same comparison is 0.93<sup>2.145</sup> = 0.86, with an interval that includes 1. The choice of model matters for any pricing recommendation, which is why the kinked estimate is reported.</p>
+
+<h3 id="a7">A.7 Out-of-sample validation</h3>
+<p>Fit on vehicle-days with <i>t</i> ≤ <i>t</i><sub>split</sub>; predict <i class="rs-acc rs-hat">q</i><sub><i>vt</i></sub> on later days. Discrimination is the Mann–Whitney form of the AUC (Hanley and McNeil, 1982):</p>
+<div class="rs-math"><span>AUC = [ Σ<sub><i>i</i>: <i>y</i>=1</sub> rank(<i class="rs-acc rs-hat">q</i><sub><i>i</i></sub>) − <i>n</i><sub>1</sub>(<i>n</i><sub>1</sub>+1)/2 ] / (<i>n</i><sub>1</sub> <i>n</i><sub>0</sub>)</span></div>
+<p>Calibration compares Σ <i class="rs-acc rs-hat">q</i> with Σ <i>y</i> within thirds of <i>g</i>.</p>
+<div class="rs-table"><table>
+<thead><tr><th>Split</th><th class="num">Train vehicle-days / exits</th><th class="num">Test vehicle-days / exits</th><th class="num">AUC with gap</th><th class="num">AUC without gap</th><th class="num">Predicted / actual exits</th></tr></thead>
+<tbody>
+<tr><td>Fit days 1–27, test 28–43</td><td class="num">4,204 / 58</td><td class="num">5,286 / 61</td><td class="num">0.607</td><td class="num">0.551</td><td class="num">64.6 / 61</td></tr>
+<tr><td>Fit days 1–31, test 32–43</td><td class="num">5,173 / 73</td><td class="num">4,317 / 46</td><td class="num">0.581</td><td class="num">0.559</td><td class="num">58.5 / 46</td></tr>
+</tbody></table></div>
+<p class="rs-plain">Robustness of the single-slope odds ratio (refit once each): drop dealer A 0.78; drop dealer B 0.84; drop dealer E 0.82; days before 37 only 0.78; without the month-end week 0.85; six-dealer days only 0.88; gap measured against the dealer's own lot median 0.76.</p>
+
+<h3 id="a8">A.8 Revealed day cost and best-response price</h3>
+<p>Assume the daily exit hazard is approximately log-linear in price over the relevant range, <i>h</i>(<i>p</i>) = <i>h</i><sub>0</sub> e<sup>−<i>βp</i></sup> with <i>β</i> &gt; 0 per dollar, so expected days to exit are <i>T</i>(<i>p</i>) = 1/<i>h</i>(<i>p</i>) = e<sup><i>βp</i></sup>/<i>h</i><sub>0</sub>. A dealer that values each day a vehicle sits at <i>k</i> dollars chooses <i>p</i> to maximize</p>
+<div class="rs-math"><span>Π(<i>p</i>) = <i>p</i> − <i>k</i> · <i>T</i>(<i>p</i>)</span> <span>⇒ &nbsp; dΠ/d<i>p</i> = 1 − <i>kβT</i>(<i>p</i>) = 0</span> <span>⇒ &nbsp; <i>k</i>* = 1 / (<i>β T</i>)</span></div>
+<p>The second derivative, −<i>kβ</i><sup>2</sup><i>T</i>, is negative, so this is a maximum. Rearranged for a dealer with a known <i>k</i>:</p>
+<div class="rs-math"><span><i>T</i>* = 1 / (<i>βk</i>)</span> <span>cut Δ = max(0, ln(<i>T</i> / <i>T</i>*) / <i>β</i>)</span> <span>net gain = <i>k</i> · (<i>T</i> − min(<i>T</i>, <i>T</i>*)) − Δ</span></div>
+<p class="rs-plain">Plain English: at its best price, a dealer's price on a vehicle reveals how much it implicitly believes a day on the lot costs. If its true cost is higher, a cut pays; if lower, it does not. <i>k</i> should include floorplan interest, the risk of missing manufacturer volume targets, model-year ageing and the opportunity cost of the space. Assumptions: the hazard slope is known and constant; the cut does not change other margin (incentives, add-ons); competitors do not respond, so this is a unilateral best response, not a market equilibrium. If every dealer cuts together, relative price positions, and therefore the hazard gains, largely cancel.</p>
+<p><strong>Worked (synthetic).</strong> <i>β</i> = 0.0002 per dollar, <i>T</i> = 120 days. Implied <i>k</i>* = 1/(0.0002 × 120) = $41.67 per day. With a true <i>k</i> = $60: <i>T</i>* = 1/(0.0002 × 60) = 83.3 days; Δ = ln(120/83.3)/0.0002 = $1,823; net gain = 60 × (120 − 83.3) − 1,823 = $377 per vehicle. With <i>k</i> = $7.71 (a reported national average daily holding cost per new car, 2024): <i>T</i>* = 648 days &gt; 120, so Δ = 0. These inputs are invented for illustration and are not estimates for any dealer in the study.</p>
+
+<h3 id="a9">A.9 Within-lot relative discount</h3>
+<div class="rs-math"><span><i>ρ</i><sub><i>vt</i></sub> = <i class="rs-acc rs-til">δ</i><sub><i>vt</i></sub> − median<sub><i>u</i>∈<i>d</i>(<i>v</i>), <i>t</i></sub> <i class="rs-acc rs-til">δ</i><sub><i>ut</i></sub></span></div>
+<p class="rs-plain">Plain English: how much deeper (positive) or shallower a vehicle's smoothed discount is than the typical vehicle on the same lot that day. Because it compares a dealer only with itself, it is unaffected by how that dealer's website presents incentives. Exit rates by band use A.2 with <i>U</i> = vehicle-days.</p>
+</div>
+</section>
+
+<section id="appendix-b" class="rv-sec rs-sec" aria-labelledby="appendix-b-title">
+<div class="section-kicker">Appendix B</div>
+<h2 id="appendix-b-title">Appendix B: Reproducibility protocol</h2>
+<div class="rs-prose rs-wide">
+<ol>
+<li><strong>Define the competitive set.</strong> Choose dealers and a model line. Record each dealer's public new-inventory URL.</li>
+<li><strong>Collect daily.</strong> At a fixed time each day, read every page of each dealer's results, follow pagination to the end, and store one dated file per dealer with VIN, advertised price, MSRP, trim, engine and drivetrain. Check each site's terms of use and robots.txt, and read at a rate that does not burden the site.</li>
+<li><strong>Validate each snapshot.</strong> Compare the number of vehicles read with the count the site displays. Mark the snapshot invalid if it read nothing or fewer than expected; never let an invalid snapshot imply exits.</li>
+<li><strong>Build VIN histories</strong> per Section 4.1, and classify exits with a guard rule of at least three snapshots.</li>
+<li><strong>Smooth prices</strong> with a three-snapshot median and detect dealer-wide moves (Appendix A.3).</li>
+<li><strong>Run the synchronization test</strong> on days when every dealer was observed (A.4).</li>
+<li><strong>Fit the daily hedonic market price</strong> and compute price gaps (A.5).</li>
+<li><strong>Estimate exit rates and the exit model</strong> with vehicle-level bootstrap intervals (A.2, A.6).</li>
+<li><strong>Validate out of sample</strong> on a time split, and refit with each dealer left out (A.7).</li>
+<li><strong>Report</strong> each claim with its evidence type, sample size and interval, using the wording rules in Section 7.</li>
+</ol>
+</div>
+</section>
+
+<section id="notes" class="rv-sec rs-sec" aria-labelledby="notes-title">
+<div class="section-kicker">Disclosure</div>
+<h2 id="notes-title">Data, confidentiality and methodology notes</h2>
+<div class="rs-prose rs-wide">
+<p><strong>Data.</strong> All inputs were public dealer web pages. The raw snapshots are not published, to protect the identities of the dealers studied. Aggregated tables in this paper are the complete basis for its claims.</p>
+<p><strong>Confidentiality.</strong> Dealers are labeled A to F in an order unrelated to their names. The market, brand, exact dates, VINs and dealer-level inventory counts are withheld so that dealers cannot be identified from combinations of details. Day numbers are counted from the first day of observation.</p>
+<p><strong>Software.</strong> Analyses were run in Python with pandas and NumPy. Logistic models use a ridge penalty of 1.0 on all coefficients except the intercept, fitted by Newton's method. Bootstrap intervals use 300 vehicle-level resamples; permutation tests use 20,000 shuffles.</p>
+<p><strong>Competing interests.</strong> ICONIC offers competitive-intelligence and AI services to automotive dealers, and the underlying data were collected in the course of that commercial work. No dealer reviewed or endorsed this paper.</p>
+<p><strong>Cite as.</strong> Christell, P. (2026). <em>Detecting Synchronized Repricing in Dealer Inventory: A VIN-Level Framework for Competitive Pricing Intelligence</em>. ICONIC Research. https://iconic.onl/research/synchronized-repricing-dealer-inventory/</p>
+</div>
+</section>
+
+<section id="references" class="rv-sec rs-sec" aria-labelledby="references-title">
+<div class="section-kicker">Sources</div>
+<h2 id="references-title">References</h2>
+<div class="rs-prose rs-wide">
+<ol class="rs-refs">
+<li>Allison, P. D. (1982). Discrete-time methods for the analysis of event histories. <em>Sociological Methodology</em>, 13, 61–98.</li>
+<li>AutoSuccess. (n.d.). LotLinx guides automotive industry on how to maximize used car inventory profits. <a href="https://www.autosuccessonline.com/lotlinx-guides-automotive-industry-on-how-to-maximize-used-car-inventory-profits/" rel="noopener">autosuccessonline.com</a></li>
+<li>Busse, M., Silva-Risso, J., &amp; Zettelmeyer, F. (2006). $1,000 cash back: The pass-through of auto manufacturer promotions. <em>American Economic Review</em>, 96(4), 1253–1270.</li>
+<li>Cachon, G. P., &amp; Olivares, M. (2010). Drivers of finished-goods inventory in the U.S. automobile industry. <em>Management Science</em>, 56(1), 202–216.</li>
+<li>Cameron, A. C., Gelbach, J. B., &amp; Miller, D. L. (2008). Bootstrap-based improvements for inference with clustered errors. <em>Review of Economics and Statistics</em>, 90(3), 414–427.</li>
+<li>Efron, B. (1979). Bootstrap methods: Another look at the jackknife. <em>Annals of Statistics</em>, 7(1), 1–26.</li>
+<li>Good, P. (2005). <em>Permutation, Parametric, and Bootstrap Tests of Hypotheses</em> (3rd ed.). Springer.</li>
+<li>Hanley, J. A., &amp; McNeil, B. J. (1982). The meaning and use of the area under a receiver operating characteristic (ROC) curve. <em>Radiology</em>, 143(1), 29–36.</li>
+<li>Rosen, S. (1974). Hedonic prices and implicit markets: Product differentiation in pure competition. <em>Journal of Political Economy</em>, 82(1), 34–55.</li>
+<li>Trader. (n.d.). vAuto Provision: Market-based pricing. <a href="https://go.trader.ca/?p=245" rel="noopener">go.trader.ca</a></li>
+<li>vAuto. (n.d.-a). Conquest: New car inventory management. <a href="https://www.vauto.com/products/conquest/" rel="noopener">vauto.com/products/conquest</a></li>
+<li>vAuto. (2024). New car industry insights (daily holding cost per new car). <a href="https://www.vauto.com/industry-insights/april-new-car-insights" rel="noopener">vauto.com/industry-insights</a></li>
+<li>White, H. (1980). A heteroskedasticity-consistent covariance matrix estimator and a direct test for heteroskedasticity. <em>Econometrica</em>, 48(4), 817–838.</li>
+</ol>
+<p class="rs-plain">Busse et al. (2006) document how manufacturer promotions pass through to transaction prices, relevant to the incentive explanation in Section 5.1; Cachon and Olivares (2010) analyze dealer inventory levels, relevant to the days-of-supply measures.</p>
+<p class="rs-note">© 2026 ICONIC. Research by Patrick Christell. This paper reports advertised listing data; it is not financial or legal advice.</p>
 </div>
 </section>
 

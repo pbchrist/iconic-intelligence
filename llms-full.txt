@@ -251,9 +251,10 @@ Last reviewed: 2026-11-04.
 - Refunds: https://iconic.onl/refunds/
 
 
-## Technical research methods (2026-11-13)
+## Research white paper (2026-11-13)
 
-ICONIC published a reproducible, answer-first technical framework for monitoring dealer vehicle prices by VIN, testing market-wide repricing, evaluating like-for-like price position, reconciling inventory disappearance and validating predictions. This publication is methodology with explicitly synthetic examples; it does not publish confidential engagement results.
+ICONIC published the white paper "Detecting Synchronized Repricing in Dealer Inventory: A VIN-Level Framework for Competitive Pricing Intelligence" (version 1.0, 13 November 2026). It reports aggregated results from 46 days of daily public listing data for one pickup nameplate at six competing franchised dealers in one U.S. metropolitan market, anonymized as A to F: 469 listing histories, 9,490 vehicle-days, 1,470 price changes and 119 confirmed listing exits. It covers a permutation test for synchronized repricing, like-for-like price position, a discrete-time exit model, out-of-sample validation, limitations and a reproducibility protocol. Each claim is labeled observed, inference, model or synthetic. Listing exits are not confirmed sales, and prices are advertised prices. Raw snapshots, dealer identities, the market, brand, exact dates and VINs are withheld.
 
-- Main research article: https://iconic.onl/research/dealership-pricing-intelligence/
+- White paper: https://iconic.onl/research/dealership-pricing-intelligence/
+- PDF: https://iconic.onl/research/dealership-pricing-intelligence/synchronized-repricing-dealer-inventory.pdf
 - Research index: https://iconic.onl/research/
