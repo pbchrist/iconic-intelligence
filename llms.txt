@@ -119,7 +119,7 @@ Last reviewed: 2026-11-04.
 - Refunds and cancellations: https://iconic.onl/refunds/
 - Seven live offers use MPP SPT: inspect each offer at the HTTPS gateway. A 402 response is only a payment challenge; use an authorized SPT wallet to pay. Seller pays any applicable taxes.
 
-## Research methods (public, synthetic examples)
+## Research (public)
 
-- [VIN-level dealership pricing intelligence: synchronized repricing, like-for-like gaps, inventory reconciliation and statistical validation](https://iconic.onl/research/dealership-pricing-intelligence/). Formula-driven technical explanation. All numeric worked examples are synthetic; no customer data is published in this methods article.
+- [Detecting Synchronized Repricing in Dealer Inventory: A VIN-Level Framework for Competitive Pricing Intelligence](https://iconic.onl/research/dealership-pricing-intelligence/). White paper (version 1.0, 13 November 2026): 46 days of daily public listing data from six competing new-vehicle dealers, anonymized as A to F. Reports aggregated findings on synchronized repricing, price position and listing exits, with formulas, limitations and a reproducibility protocol. Each claim is labeled observed, inference, model or synthetic. Raw snapshots, dealer identities, market, brand and VINs are withheld. [PDF](https://iconic.onl/research/dealership-pricing-intelligence/synchronized-repricing-dealer-inventory.pdf).
 - [ICONIC research index](https://iconic.onl/research/).

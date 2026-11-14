@@ -35,4 +35,4 @@ Pick one recurring job that costs time or money. Patrick shows whether an agent 
 
 ## Research methods
 
-- [VIN-level dealership pricing and competitor intelligence: reproducible technical framework](https://iconic.onl/research/dealership-pricing-intelligence/). This methods article uses synthetic examples and contains no client-specific dataset.
+- [Detecting Synchronized Repricing in Dealer Inventory: A VIN-Level Framework for Competitive Pricing Intelligence](https://iconic.onl/research/dealership-pricing-intelligence/). White paper reporting aggregated findings from 46 days of public listing data at six anonymized dealers, with formulas, limitations and a reproducibility protocol. Raw data and dealer identities are withheld.
