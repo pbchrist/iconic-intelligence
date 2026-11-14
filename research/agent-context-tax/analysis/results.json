@@ -1,0 +1,222 @@
+{
+  "coverage": {
+    "client_bot_1": {
+      "jobs": 345,
+      "helper_calls": 2,
+      "from": "2026-09-11",
+      "to": "2026-11-06",
+      "steps": 2978
+    },
+    "client_bot_2": {
+      "jobs": 83,
+      "helper_calls": 0,
+      "from": "2026-10-02",
+      "to": "2026-11-09",
+      "steps": 975
+    },
+    "operator": {
+      "jobs": 4294,
+      "helper_calls": 3017,
+      "from": "2026-05-16",
+      "to": "2026-11-11",
+      "steps": 25576
+    }
+  },
+  "rows": 8282,
+  "jobs_total": 4722,
+  "helper_calls_excluded": 3019,
+  "work": {
+    "steps": 23447,
+    "fresh": 126842254,
+    "cached": 1235378256,
+    "cwrite": 0,
+    "out": 9708658,
+    "read": 1362220510,
+    "jobs": 1703,
+    "read_per_written": 140.3,
+    "fresh_per_written": 13.1,
+    "cached_share_of_read_pct": 90.7,
+    "written_share_of_all_pct": 0.71
+  },
+  "helpers": {
+    "steps": 6082,
+    "fresh": 17112038,
+    "cached": 15959168,
+    "cwrite": 0,
+    "out": 2817615,
+    "read": 33071206,
+    "jobs": 3019,
+    "read_per_written": 11.7,
+    "fresh_per_written": 6.1,
+    "cached_share_of_read_pct": 48.3,
+    "written_share_of_all_pct": 7.85
+  },
+  "all_including_helpers": {
+    "steps": 29529,
+    "fresh": 143954292,
+    "cached": 1251337424,
+    "cwrite": 0,
+    "out": 12526273,
+    "read": 1395291716,
+    "jobs": 4722,
+    "read_per_written": 111.4,
+    "fresh_per_written": 11.5,
+    "cached_share_of_read_pct": 89.7,
+    "written_share_of_all_pct": 0.89
+  },
+  "bins": [
+    {
+      "label": "1-3",
+      "jobs": 212,
+      "jobs_pct": 12.4,
+      "median_read_per_step": 10971,
+      "read_per_written": 45.7,
+      "read_share_pct": 0.5,
+      "median_read_per_job": 19590
+    },
+    {
+      "label": "4-7",
+      "jobs": 340,
+      "jobs_pct": 20.0,
+      "median_read_per_step": 29269,
+      "read_per_written": 68.6,
+      "read_share_pct": 4.2,
+      "median_read_per_job": 159314
+    },
+    {
+      "label": "8-15",
+      "jobs": 650,
+      "jobs_pct": 38.2,
+      "median_read_per_step": 49419,
+      "read_per_written": 99.9,
+      "read_share_pct": 27.0,
+      "median_read_per_job": 539810
+    },
+    {
+      "label": "16-31",
+      "jobs": 390,
+      "jobs_pct": 22.9,
+      "median_read_per_step": 60026,
+      "read_per_written": 149.9,
+      "read_share_pct": 36.2,
+      "median_read_per_job": 1178968
+    },
+    {
+      "label": "32-63",
+      "jobs": 92,
+      "jobs_pct": 5.4,
+      "median_read_per_step": 66954,
+      "read_per_written": 207.8,
+      "read_share_pct": 20.8,
+      "median_read_per_job": 2561920
+    },
+    {
+      "label": "64+",
+      "jobs": 19,
+      "jobs_pct": 1.1,
+      "median_read_per_step": 66404,
+      "read_per_written": 393.2,
+      "read_share_pct": 11.3,
+      "median_read_per_job": 6032758
+    }
+  ],
+  "long_jobs_16plus": {
+    "jobs": 501,
+    "jobs_pct": 29.4,
+    "read_share_pct": 68.3,
+    "written_share_pct": 52.0
+  },
+  "top10pct_jobs_read_share_pct": 41.8,
+  "median_read_per_job_short_vs_32plus": {
+    "short_1_3": 19590,
+    "long_32plus": 2752260
+  },
+  "slopes": {
+    "all_work_jobs": {
+      "slope": 1.61,
+      "r2": 0.86,
+      "n": 1703
+    },
+    "work_jobs_1_to_15_steps": {
+      "slope": 1.75,
+      "r2": 0.8,
+      "n": 1202
+    },
+    "work_jobs_16plus_steps": {
+      "slope": 1.2,
+      "r2": 0.7,
+      "n": 501
+    },
+    "by_source": {
+      "api_server": {
+        "slope": 1.48,
+        "r2": 0.9,
+        "n": 24
+      },
+      "cli": {
+        "slope": 2.02,
+        "r2": 0.92,
+        "n": 185
+      },
+      "cron": {
+        "slope": 1.49,
+        "r2": 0.88,
+        "n": 243
+      },
+      "kanban": null,
+      "local": null,
+      "oneshot": {
+        "slope": 2.06,
+        "r2": 0.92,
+        "n": 208
+      },
+      "subagent": {
+        "slope": 1.33,
+        "r2": 0.9,
+        "n": 1003
+      },
+      "telegram": {
+        "slope": 1.73,
+        "r2": 0.91,
+        "n": 33
+      },
+      "tui": null
+    },
+    "by_bot": {
+      "client_bot_1": {
+        "slope": 1.71,
+        "r2": 0.89,
+        "n": 343
+      },
+      "client_bot_2": {
+        "slope": 1.82,
+        "r2": 0.87,
+        "n": 83
+      },
+      "operator": {
+        "slope": 1.44,
+        "r2": 0.85,
+        "n": 1277
+      }
+    }
+  },
+  "derived": {
+    "reading_multiplier_when_steps_double": 3.1,
+    "median_job_read_32plus_over_1_3": 140.0,
+    "read_per_step_16_31_over_1_3": 5.5,
+    "read_per_written_64plus_over_1_3": 8.6
+  },
+  "compression_threshold_tokens": 100000,
+  "codex_double_count_check": {
+    "before_fix": {
+      "rows": 298,
+      "rows_fresh_ge_cached": 16,
+      "fresh_to_cached": 0.137
+    },
+    "after_fix": {
+      "rows": 2503,
+      "rows_fresh_ge_cached": 997,
+      "fresh_to_cached": 0.132
+    }
+  }
+}
