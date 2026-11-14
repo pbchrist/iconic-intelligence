@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080912">
+<title>VIN-Level Dealership Pricing Intelligence: Methods | ICONIC</title>
+<meta name="description" content="How to detect dealership competitor repricing, calculate like-for-like price gaps, reconcile disappearing VINs, and validate inventory predictions. An ICONIC technical framework.">
+<link rel="canonical" href="https://iconic.onl/research/dealership-pricing-intelligence/">
+<meta name="author" content="Patrick Christell">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ICONIC">
+<meta property="og:title" content="A VIN-Level Framework for Dealership Pricing Intelligence">
+<meta property="og:description" content="Original methodology for tracking competitor vehicle prices through time, identifying market-wide repricing and separating listing exits from confirmed sales.">
+<meta property="og:url" content="https://iconic.onl/research/dealership-pricing-intelligence/">
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@graph":[
+  {"@type":"Organization","@id":"https://iconic.onl/#org","name":"ICONIC","url":"https://iconic.onl/"},
+  {"@type":"Person","@id":"https://iconic.onl/#patrick-christell","name":"Patrick Christell","worksFor":{"@id":"https://iconic.onl/#org"}},
+  {"@type":"TechArticle","@id":"https://iconic.onl/research/dealership-pricing-intelligence/#article",
+   "headline":"A VIN-Level Framework for Detecting Dealership Repricing and Inventory Exits",
+   "description":"Methods for longitudinal automotive competitor price monitoring, listing reconciliation, synchronization tests and out-of-sample validation. All worked examples are synthetic.",
+   "datePublished":"2026-11-13","dateModified":"2026-11-13","inLanguage":"en","isAccessibleForFree":true,
+   "author":{"@id":"https://iconic.onl/#patrick-christell"},"publisher":{"@id":"https://iconic.onl/#org"},
+   "mainEntityOfPage":"https://iconic.onl/research/dealership-pricing-intelligence/",
+   "keywords":["VIN-level pricing intelligence","dealership competitor monitoring","inventory disappearance","vehicle repricing detection","automotive AI","market-wide repricing","price history"],
+   "about":[{"@type":"Thing","name":"Automotive dealer competitive intelligence"},{"@type":"Thing","name":"Longitudinal vehicle inventory analysis"}]
+  },
+  {"@type":"FAQPage","@id":"https://iconic.onl/research/dealership-pricing-intelligence/#faq","mainEntity":[
+   {"@type":"Question","name":"How do you monitor competitor vehicle pricing by VIN?","acceptedAnswer":{"@type":"Answer","text":"Capture timestamped public inventory snapshots, normalize advertised price and MSRP, match each vehicle by dealer and VIN, and preserve every valid observation. Compare price changes only between complete snapshots and distinguish model mix changes from repricing of existing units."}},
+   {"@type":"Question","name":"How can you detect synchronized dealer price changes?","acceptedAnswer":{"@type":"Answer","text":"Define a consistent dealer-wide repricing event using the share of matched vehicles whose advertised prices changed and the average change. Compare dealer event dates, then use a permutation test that preserves each dealer's observed event frequency and valid observation dates to assess whether overlap is unusual."}},
+   {"@type":"Question","name":"Does a VIN disappearing from inventory mean it sold?","acceptedAnswer":{"@type":"Answer","text":"No. A vehicle can disappear because of feed errors, website changes, dealer transfers, temporary listing gaps or a sale. Flag the absence as provisional until repeated complete subsequent snapshots confirm it remains absent. A confirmed listing exit still is not a verified retail transaction."}},
+   {"@type":"Question","name":"How do you compare vehicle prices fairly across dealerships?","acceptedAnswer":{"@type":"Answer","text":"Compare advertised prices for like-for-like vehicles, adjusting for MSRP, trim, engine and other reliably observed attributes. Use each vehicle's residual from an estimated market price as a comparable gap, with careful disclosure of inconsistent manufacturer incentives."}},
+   {"@type":"Question","name":"Can AI predict which cars or trucks will leave a dealer's website?","acceptedAnswer":{"@type":"Answer","text":"A statistical model can estimate the probability of a listing exit from price position, trim, engine and other features, but prediction must be checked on later observations not used for training. A listing exit is not a confirmed sale and correlation is not proof that a price cut causes an exit."}},
+   {"@type":"Question","name":"What is the difference between a current-price dashboard and longitudinal intelligence?","acceptedAnswer":{"@type":"Answer","text":"A current-price snapshot describes relative advertised prices now. Longitudinal analysis adds timing, price-change histories, repeated listing gaps, sustained departures and hypotheses about common repricing events. Whether a particular vendor provides these functions requires checking that vendor's current product."}}
+  ]}
+ ]
+}
+</script>
+<style>
+:root{color-scheme:dark;--bg:#080912;--panel:#111525;--panel2:#151a2b;--text:#f2f5fc;--muted:#abb5cc;--line:#30364a;--a:#a7d0ff;--hot:#7e89ff;--green:#9ee0c2}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:17px/1.66 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+a{color:var(--a);text-underline-offset:3px}a:hover{color:#fff}a:focus-visible{outline:2px solid var(--hot);outline-offset:4px}
+nav{max-width:1080px;margin:auto;padding:22px 24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line)}
+nav .brand{color:#fff;letter-spacing:.13em;font-weight:800;text-decoration:none}nav .paths{display:flex;gap:22px;font-size:14px}
+main{max-width:920px;padding:46px 24px 110px;margin:auto}.eyebrow{font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:var(--green);font-weight:700}h1,h2,h3{line-height:1.18;letter-spacing:-.032em}h1{font-size:clamp(2.3rem,5vw,4.2rem);max-width:830px;margin:14px 0 20px}h2{font-size:clamp(1.55rem,3vw,2.05rem);margin:0 0 16px}h3{font-size:1.1rem;margin:18px 0 8px}p{margin:0 0 18px}p.lead{font-size:1.23rem;color:#d4dcf2;max-width:790px}.meta{color:var(--muted);font-size:14px;margin-top:22px}.toc{margin-top:35px;padding:22px;border:1px solid var(--line);border-radius:16px;background:var(--panel);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 20px;font-size:14px}
+section{border-top:1px solid var(--line);padding-top:42px;margin-top:48px}section p,section li{color:#d2d8e7}.box{background:var(--panel);border:1px solid var(--line);padding:24px;border-radius:16px;margin:26px 0}.box strong{color:#fff}.label{color:var(--green);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-bottom:9px}
+.formula{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#0b0e19;border:1px solid #32394e;padding:15px 18px;border-radius:10px;overflow:auto;font-size:14px;color:#e3e6ff;margin:13px 0 16px;white-space:pre-wrap}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:18px 0 22px}th,td{text-align:left;border-bottom:1px solid var(--line);padding:13px 10px;vertical-align:top}th{color:#fff;background:#151b2c}td{color:#d2d8e7}.table-scroll{overflow-x:auto}
+ol,ul{padding-left:23px}li{margin-bottom:10px}details{border-bottom:1px solid var(--line);padding:12px 0}summary{font-weight:750;cursor:pointer;padding:6px 0}details p{margin:13px 0}.cta{display:block;padding:28px;background:linear-gradient(110deg,#19244b,#181632);border:1px solid #485393;border-radius:16px;text-decoration:none;color:#fff;margin-top:50px}.cta strong{display:block;font-size:1.4rem}.cta span{color:#c7d2f5;font-size:14px}.note{color:var(--muted);font-size:14px}.pill{display:inline-block;padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--green);font-size:12px;margin-right:7px}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;padding:22px 24px;max-width:1080px;margin:auto}
+@media(max-width:600px){main{padding-top:28px}.toc{grid-template-columns:1fr}nav .paths{gap:12px}h1{font-size:2.35rem}th,td{min-width:125px;padding:10px}}
+</style>
+</head>
+<body>
+<nav aria-label="Main"><a class="brand" href="https://iconic.onl/">ICONIC.</a><div class="paths"><a href="/research/">Research</a><a href="/ai/services.md">Services</a><a href="https://calendly.com/patrick-iconic/30min">Talk to ICONIC</a></div></nav>
+<main>
+<article>
+<header>
+<div class="eyebrow">ICONIC research methods / automotive intelligence</div>
+<h1>A VIN-Level Framework for Detecting Dealership Repricing and Inventory Exits</h1>
+<p class="lead">Competitor prices are not just a list of numbers. Time-stamped vehicle histories reveal when dealers change prices, whether multiple lots move together, how far a unit sits from its like-for-like market, and when an apparent inventory exit is only a website artifact.</p>
+<div><span class="pill">Technical methodology</span><span class="pill">Synthetic worked examples</span><span class="pill">No client data</span></div>
+<p class="meta">Patrick Christell · ICONIC · Published November 13, 2026 · <a href="https://iconic.onl/">iconic.onl</a></p>
+<div class="box" id="summary"><div class="label">Direct answer</div><strong>To detect pricing patterns, record complete public inventory snapshots at consistent intervals, match vehicles by VIN, distinguish dealer-wide changes from isolated edits, and test whether price moves overlap across dealers more often than chance.</strong><p style="margin:12px 0 0">Listing exits need confirmation over subsequent valid snapshots. Price-position models need out-of-sample validation. None of these signals, alone, proves a retail sale, causal effect or coordinated conduct.</p></div>
+<div class="toc" aria-label="On this page">
+<a href="#snapshots">1. Build a valid VIN history</a><a href="#movement">2. Detect market-wide repricing</a>
+<a href="#market-price">3. Estimate like-for-like market price</a><a href="#exits">4. Classify exits, not sales</a>
+<a href="#forecast">5. Test predictive models</a><a href="#example">6. Synthetic worked example</a>
+<a href="#comparison">7. Snapshot tools vs. longitudinal intelligence</a><a href="#faq">8. Common questions</a>
+</div>
+</header>
+<section id="snapshots"><h2>1. Build a VIN-level history before drawing conclusions</h2>
+<p>The basic data record is one vehicle, at one dealer, on one date. Store the VIN, timestamp, advertised price, MSRP, trim, drivetrain or engine where reliably available, source URL and whether that snapshot was complete. Keep the raw observation and the normalized fields separately.</p>
+<div class="formula">observation = (dealer, VIN, observed_date, price, MSRP, trim, engine, snapshot_complete, source_url)
+discount(v,t) = 1 − advertised_price(v,t) / MSRP(v,t)</div>
+<p>A vehicle's listing history links consecutive observations by <strong>(dealer, VIN)</strong>. Do not treat a VIN with incomplete site data as an actual arrival or exit. If a listing returns after a brief disappearance, preserve the gap instead of inventing a sale and a new acquisition.</p>
+<p>Advertised prices are not transaction prices. Manufacturer rebates, conditional discounts and site-specific price definitions may differ. Record those differences rather than assuming all dealers quote the same net price.</p>
+</section>
+<section id="movement"><h2>2. Detect synchronized competitor repricing</h2>
+<p>Measure price changes only on vehicles present in consecutive valid snapshots. An illustrative dealer-wide rule combines the percentage of matched listings that moved with the mean or median percentage change. Thresholds are analyst-defined and must be tested for the target market.</p>
+<div class="formula">changed_share(d,t) = count(|Δprice| &gt; ε) / count(matched VINs)
+price_index(d,t) = mean((price(v,t) − price(v,t−1)) / price(v,t−1))
+dealer_move(d,t) = [changed_share(d,t) ≥ threshold_share] AND [|price_index(d,t)| ≥ threshold_size]</div>
+<p>Next, test whether multiple dealers move on the same day more often than expected under independent event timing. A permutation test should preserve each dealer's number of move days and the dates on which the dealer had valid observations, then randomize the event placements thousands of times.</p>
+<div class="formula">permutation_p = (1 + number of randomized calendars as extreme as observed) / (1 + number of randomizations)</div>
+<p>An unusually synchronized day is a <strong>lead for investigation</strong>, not proof of collusion or dealer-to-dealer imitation. A manufacturer incentive program, a shared feed provider, month-end repricing or a collection artifact may produce the same signature.</p>
+</section>
+<section id="market-price"><h2>3. Compare like-for-like prices instead of mixing trims</h2>
+<p>Comparing average lot prices mixes vehicle configurations. Fit a market-price estimate from observed attributes such as MSRP, trim and engine; evaluate each vehicle's residual from that expected price. This separates a genuinely lower advertised price from a lot containing cheaper configurations.</p>
+<div class="formula">expected_price(v,t) = α + β · MSRP(v,t) + trim_effect(v) + engine_effect(v)
+market_gap(v,t) = observed_advertised_price(v,t) − expected_price(v,t)</div>
+<p>A negative gap means a vehicle is advertised below the fitted market expectation; a positive gap means above. The estimate depends on the quality of matching attributes, sample size and how each site represents incentives.</p>
+<h3>Same-lot comparison when advertised prices are inconsistent</h3>
+<p>For a robustness check, compare a unit's advertised discount with the median discount across its own dealer's lot on the same day. This eliminates some between-site price-definition differences, but does not remove all selection effects.</p>
+<div class="formula">relative_discount(v,t) = discount(v,t) − median_discount(dealer(v),t)</div>
+</section>
+<section id="exits"><h2>4. Inventory disappearance is not a retail sale</h2>
+<p>A unit may vanish because of a data feed outage, pagination error, dealer transfer, sold transaction, or an edited listing. Flag the first absence provisionally; confirm a listing exit only after a defined sequence of complete subsequent captures.</p>
+<div class="formula">exit_status(v) =
+  listed: present in latest complete snapshot
+  provisional: absent for 1–2 valid later snapshots
+  confirmed_listing_exit: absent for ≥3 valid later snapshots</div>
+<p>The three-snapshot rule is one conservative design choice, not a universal law. Vary the confirmation window and report how sensitive your exit totals are to it. Even a confirmed listing exit is <strong>not a verified sale</strong>.</p>
+<p>For rates, use the number of VIN-days at risk, not just the number of vehicles observed once. Compare exit counts and exposure across dealer, trim or price-position groups while disclosing uncertainty and sparse samples.</p>
+<div class="formula">listing_exits_per_100_per_30_days = confirmed_listing_exits / vehicle_days_at_risk × 3,000</div>
+</section>
+<section id="forecast"><h2>5. Predict cautiously and measure out-of-sample performance</h2>
+<p>A discrete-time logistic model can estimate the daily probability of a listing exit from relative price position, trim, engine, dealer and MSRP. It is a predictive model of a website event, not a causal model of whether a discount creates a sale.</p>
+<div class="formula">logit(P(listing_exit(v,t))) =
+  intercept + dealer_effect + trim_effect + engine_effect
+  + β1 · (market_gap(v,t) / 1,000) + β2 · (MSRP(v,t) / 10,000)</div>
+<p>Bootstrap by whole VIN histories, not individual vehicle-days: repeated days for the same VIN are correlated. Train on an earlier time window and assess AUC and calibration on later dates. If performance is modest, say so. Do not turn an unstable model coefficient into a promised price cut or return on investment.</p>
+<p>A stronger causal claim requires a design that addresses confounding: discounts are not randomly assigned, and the vehicles discounted may differ systematically from other inventory.</p>
+</section>
+<section id="example"><h2>6. Worked example — synthetic data</h2>
+<p><strong>Every number in this example is invented to illustrate the calculations.</strong> It is not a case study, measurement, dealer result or estimate of ICONIC's accuracy.</p>
+<div class="table-scroll"><table><thead><tr><th>Synthetic item</th><th>Input</th><th>Interpretation</th></tr></thead><tbody>
+<tr><td>Vehicle A MSRP</td><td>$55,000</td><td>Vehicle's listed manufacturer's suggested price</td></tr>
+<tr><td>Vehicle A advertised price</td><td>$50,000</td><td>Advertised discount = 9.09%</td></tr>
+<tr><td>Fitted like-for-like expected price</td><td>$51,500</td><td>Vehicle A is $1,500 below the model's benchmark</td></tr>
+<tr><td>Dealer B matching VINs</td><td>60</td><td>Comparable consecutive snapshot observations</td></tr>
+<tr><td>Dealer B changed VINs</td><td>40</td><td>Changed share = 66.7%, potentially dealer-wide</td></tr>
+<tr><td>Vehicle A briefly disappears</td><td>2 valid snapshots</td><td>Still provisional, not a confirmed exit</td></tr>
+</tbody></table></div>
+<p>A pricing director should investigate whether Dealer B's move coincides with changes across rival lots or new incentive terms. The analyst should not automatically copy the cut or infer a sale from a disappearing VIN.</p>
+</section>
+<section id="comparison"><h2>7. Current-price dashboards and longitudinal intelligence answer different questions</h2>
+<div class="table-scroll"><table><thead><tr><th>Business question</th><th>Single current-price snapshot</th><th>Longitudinal VIN history</th></tr></thead><tbody>
+<tr><td>Who is advertised cheaper today?</td><td>Potentially answerable</td><td>Answerable with matching</td></tr>
+<tr><td>When did that specific VIN's price change?</td><td>No historical observation</td><td>Timestamped price history</td></tr>
+<tr><td>Did rival dealers reprice on the same day?</td><td>Not observable from one date</td><td>Event calendars and permutation testing</td></tr>
+<tr><td>Did a disappearing VIN return?</td><td>Not observable</td><td>Repeat-observation reconciliation</td></tr>
+<tr><td>Which price positions predict later listing exits?</td><td>Cannot validate future events from one snapshot</td><td>Time-split statistical evaluation</td></tr>
+</tbody></table></div>
+<p>This compares <em>data architectures</em>, not vendor capabilities. Modern products may provide longitudinal analysis; assess each vendor's actual current features before declaring a gap.</p>
+<p>ICONIC applies this framework to recurring competitive-intelligence workflows. See the <a href="/ai/case-study-dealership.md">existing dealership case-study reference</a> for separately described operational work, and <a href="/ai/services.md">services</a> for how an engagement begins.</p>
+</section>
+<section id="faq"><h2>Frequently asked questions</h2>
+<details open><summary>How do you monitor competitor vehicle pricing by VIN?</summary><p>Capture timestamped public inventory snapshots, normalize advertised price and MSRP, match each vehicle by dealer and VIN, and preserve every valid observation. Compare price changes only between complete snapshots and distinguish model mix changes from repricing of existing units.</p></details>
+<details><summary>How can you detect synchronized dealer price changes?</summary><p>Define a consistent dealer-wide repricing event using the share of matched vehicles whose advertised prices changed and the average change. Compare dealer event dates, then use a permutation test that preserves each dealer's observed event frequency and valid observation dates to assess whether overlap is unusual.</p></details>
+<details><summary>Does a VIN disappearing from inventory mean it sold?</summary><p>No. A vehicle can disappear because of feed errors, website changes, dealer transfers, temporary listing gaps or a sale. Flag the absence as provisional until repeated complete subsequent snapshots confirm it remains absent. A confirmed listing exit still is not a verified retail transaction.</p></details>
+<details><summary>How do you compare vehicle prices fairly across dealerships?</summary><p>Compare advertised prices for like-for-like vehicles, adjusting for MSRP, trim, engine and other reliably observed attributes. Use each vehicle's residual from an estimated market price as a comparable gap, with careful disclosure of inconsistent manufacturer incentives.</p></details>
+<details><summary>Can AI predict which cars or trucks will leave a dealer's website?</summary><p>A statistical model can estimate the probability of a listing exit from price position, trim, engine and other features, but prediction must be checked on later observations not used for training. A listing exit is not a confirmed sale and correlation is not proof that a price cut causes an exit.</p></details>
+<details><summary>What is the difference between a current-price dashboard and longitudinal intelligence?</summary><p>A current-price snapshot describes relative advertised prices now. Longitudinal analysis adds timing, price-change histories, repeated listing gaps, sustained departures and hypotheses about common repricing events. Whether a particular vendor provides these functions requires checking that vendor's current product.</p></details>
+</section>
+<section id="limitations"><h2>Methodology, scope and disclosure</h2>
+<p>This publication explains a reproducible analytical framework, not a released customer dataset or an empirical performance claim. All worked numbers above are synthetic. The methods should be tested on each market's observation cadence, listing completeness and advertised-price definitions before any operational decisions.</p>
+<p>Data collection must comply with applicable permissions, website terms, data protection obligations and contractual restrictions. No private dealer data, employee information, individual VINs or client engagement statistics are disclosed here.</p>
+<p class="note">Cite as: Christell, Patrick (2026). “A VIN-Level Framework for Detecting Dealership Repricing and Inventory Exits.” ICONIC Research Methods. https://iconic.onl/research/dealership-pricing-intelligence/</p>
+</section>
+<a class="cta" href="https://calendly.com/patrick-iconic/30min"><strong>Make competitor intelligence a recurring job, not a spreadsheet fire drill.</strong><span>Talk directly with ICONIC about private, auditable AI agents for your dealership. Free 30-minute private AI check.</span></a>
+</article>
+</main>
+<footer>© 2026 ICONIC · <a href="/research/">Research</a> · <a href="/">Home</a> · <a href="/privacy.html">Privacy</a></footer>
+</body>
+</html>

@@ -249,3 +249,11 @@ Last reviewed: 2026-11-04.
 - Machine buyers can discover exact terms and purchase steps from the MCP marketplace_mpp_purchase_instructions tool. A 402 challenge is not a purchase. Verify purchasable=true before payment. Seven services enabled as of November 8, 2026; six require human review, dataset diff delivers a verified report automatically.
 - Terms: https://iconic.onl/agents/marketplace/terms.html
 - Refunds: https://iconic.onl/refunds/
+
+
+## Technical research methods (2026-11-13)
+
+ICONIC published a reproducible, answer-first technical framework for monitoring dealer vehicle prices by VIN, testing market-wide repricing, evaluating like-for-like price position, reconciling inventory disappearance and validating predictions. This publication is methodology with explicitly synthetic examples; it does not publish confidential engagement results.
+
+- Main research article: https://iconic.onl/research/dealership-pricing-intelligence/
+- Research index: https://iconic.onl/research/

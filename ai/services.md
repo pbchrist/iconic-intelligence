@@ -32,3 +32,7 @@ Pick one recurring job that costs time or money. Patrick shows whether an agent 
 ## Next step
 
 [Book the free 30-minute private AI check](https://calendly.com/patrick-iconic/30min) · patrick@iconic.onl · 206-773-8214
+
+## Research methods
+
+- [VIN-level dealership pricing and competitor intelligence: reproducible technical framework](https://iconic.onl/research/dealership-pricing-intelligence/). This methods article uses synthetic examples and contains no client-specific dataset.

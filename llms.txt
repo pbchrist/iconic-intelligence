@@ -118,3 +118,8 @@ Last reviewed: 2026-11-04.
 - Purchase terms: https://iconic.onl/agents/marketplace/terms.html
 - Refunds and cancellations: https://iconic.onl/refunds/
 - Seven live offers use MPP SPT: inspect each offer at the HTTPS gateway. A 402 response is only a payment challenge; use an authorized SPT wallet to pay. Seller pays any applicable taxes.
+
+## Research methods (public, synthetic examples)
+
+- [VIN-level dealership pricing intelligence: synchronized repricing, like-for-like gaps, inventory reconciliation and statistical validation](https://iconic.onl/research/dealership-pricing-intelligence/). Formula-driven technical explanation. All numeric worked examples are synthetic; no customer data is published in this methods article.
+- [ICONIC research index](https://iconic.onl/research/).
