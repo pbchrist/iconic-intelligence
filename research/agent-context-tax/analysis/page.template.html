@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080912">
+<title>AI Agents Read ${ratio_round}× More Than They Write | ICONIC</title>
+<meta name="description" content="Original analysis of ${jobs} production AI agent jobs: agents read ${ratio} tokens for every token they write, ${cached_pct}% of it re-reading their own context, and reading grows faster than the work.">
+<link rel="canonical" href="https://iconic.onl/research/agent-context-tax/">
+<meta name="author" content="Patrick Christell">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ICONIC">
+<meta property="og:title" content="The Context Tax: AI Agents Read ${ratio_round}× More Than They Write">
+<meta property="og:description" content="${jobs} real agent jobs, ${read_b} billion tokens read. Long jobs are ${long_jobs_pct}% of the work and ${long_read_pct}% of the reading.">
+<meta property="og:url" content="https://iconic.onl/research/agent-context-tax/">
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@graph":[
+  {"@type":"Organization","@id":"https://iconic.onl/#org","name":"ICONIC","url":"https://iconic.onl/"},
+  {"@type":"Person","@id":"https://iconic.onl/#patrick-christell","name":"Patrick Christell","worksFor":{"@id":"https://iconic.onl/#org"}},
+  {"@type":"TechArticle","@id":"https://iconic.onl/research/agent-context-tax/#article",
+   "headline":"The Context Tax: AI Agents Read ${ratio_round} Times More Than They Write",
+   "description":"Measured token usage across ${jobs} production AI agent jobs (${date_from} to ${date_to}). Reading outweighs writing ${ratio} to 1, ${cached_pct}% of reading is re-read context, and doubling a job's steps multiplies its reading by ${double}.",
+   "datePublished":"2026-11-13","dateModified":"2026-11-13","inLanguage":"en","isAccessibleForFree":true,
+   "author":{"@id":"https://iconic.onl/#patrick-christell"},"publisher":{"@id":"https://iconic.onl/#org"},
+   "mainEntityOfPage":"https://iconic.onl/research/agent-context-tax/",
+   "keywords":["AI agent cost","LLM token usage","context window","prompt caching","agent economics","AI operations","context compression"],
+   "about":[{"@type":"Thing","name":"AI agent operating cost"},{"@type":"Thing","name":"Large language model context re-reading"}]
+  },
+  {"@type":"FAQPage","@id":"https://iconic.onl/research/agent-context-tax/#faq","mainEntity":[
+   {"@type":"Question","name":"What does an AI agent spend most of its tokens on?","acceptedAnswer":{"@type":"Answer","text":"Re-reading. Across ${jobs} production jobs the agents read ${ratio} tokens for every token they wrote, and ${cached_pct}% of the reading was context the agent had already seen earlier in the same job."}},
+   {"@type":"Question","name":"Why do long AI agent jobs cost so much more?","acceptedAnswer":{"@type":"Answer","text":"Every step re-sends the whole conversation so far. Jobs of 16 or more steps were ${long_jobs_pct}% of jobs and ${long_read_pct}% of all reading. Doubling a job's steps multiplied its reading by ${double} on average."}},
+   {"@type":"Question","name":"How do you keep AI agent costs under control?","acceptedAnswer":{"@type":"Answer","text":"Use a provider and setup that caches repeated context, split long jobs into short ones, cap the context with compression, and read the agent's own usage counters before scaling it."}}
+  ]}
+ ]
+}
+</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>
+(function () { try { var d = document.createElement('div'); d.style.cssText = 'position:absolute;visibility:hidden;font-size:100px;line-height:1'; d.textContent = 'x'; document.documentElement.appendChild(d); var z = parseFloat(getComputedStyle(d).fontSize) / 100; d.remove(); if (z > 1.04 && z < 3) document.documentElement.style.setProperty('--tz', z.toFixed(2)); } catch (e) {} })();
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261101">
+<link rel="stylesheet" href="/mobile-first.css?v=20261110r">
+<link rel="stylesheet" href="/agents/reserve/reserve.css?v=20261112a">
+<link rel="stylesheet" href="/research/research.css?v=20261114a">
+<style>
+/* Figures for this article only: stat row and bar charts (colors validated for the dark surface). */
+.ct-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 6px 0 26px; }
+.ct-stat { padding: 20px 20px 18px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,.02); }
+.ct-stat b { display: block; color: var(--pearl); font-family: Georgia, "Times New Roman", serif; font-size: clamp(34px, 4vw, 46px); font-weight: 400; letter-spacing: -.03em; line-height: 1; }
+.ct-stat span { display: block; margin-top: 10px; color: #aeb3c7; font-size: 13px; line-height: 1.5; }
+.ct-fig { margin: 6px 0 26px; padding: 22px 20px 18px; border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,.02); }
+.ct-fig figcaption { margin: 0 0 16px; color: var(--pearl); font-family: Georgia, "Times New Roman", serif; font-size: 19px; line-height: 1.3; }
+.ct-fig figcaption small { display: block; margin-top: 6px; color: #8d94a9; font-family: inherit; font-size: 12px; letter-spacing: .02em; }
+.ct-legend { display: flex; flex-wrap: wrap; gap: 16px; margin: 0 0 14px; color: #c9ccda; font-size: 12px; }
+.ct-legend i { display: inline-block; width: 12px; height: 12px; margin-right: 7px; border-radius: 3px; vertical-align: -1px; }
+.ct-group { padding: 8px 0 10px; border-top: 1px solid rgba(255,255,255,.06); }
+.ct-group:first-of-type { border-top: 0; }
+.ct-cat { margin-bottom: 6px; color: var(--pearl); font-size: 13px; font-weight: 600; }
+.ct-bar { display: grid; grid-template-columns: 62px minmax(0,1fr) 62px; align-items: center; gap: 10px; margin: 3px 0; }
+.ct-single .ct-bar { grid-template-columns: minmax(0,1fr) 62px; }
+.ct-single .ct-key { display: none; }
+.ct-key { color: #8d94a9; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.ct-track { position: relative; height: 14px; }
+.ct-fill { display: block; height: 100%; min-width: 2px; border-radius: 0 4px 4px 0; transition: filter .2s ease; }
+.ct-bar:hover .ct-fill { filter: brightness(1.25); }
+.ct-val { color: #c9ccda; font-size: 13px; font-variant-numeric: tabular-nums; text-align: right; }
+.ct-ref { position: relative; margin: 10px 62px 0 0; padding-top: 8px; border-top: 1px dashed rgba(244,241,232,.35); color: #8d94a9; font-size: 12px; text-align: right; }
+.ct-axis { display: flex; justify-content: space-between; margin: 8px 72px 0 72px; color: #6f7690; font-size: 11px; }
+.ct-single + .ct-axis, .ct-fig .ct-axis-single { margin-left: 0; }
+@media (max-width: 560px) {
+  .ct-bar { grid-template-columns: 54px minmax(0,1fr) 52px; gap: 8px; }
+  .ct-single .ct-bar { grid-template-columns: minmax(0,1fr) 52px; }
+  .ct-axis { margin: 8px 60px 0 62px; }
+  .ct-fig { padding: 18px 14px 14px; }
+}
+</style>
+</head>
+<body class="rs-page">
+<canvas id="field" aria-hidden="true"></canvas>
+<div class="noise" aria-hidden="true"></div>
+<div class="cursor-glow" aria-hidden="true"></div>
+
+<header class="site-header">
+<a class="brand" href="/" aria-label="ICONIC home"><img src="/iconic-wordmark.webp" alt="ICONIC."></a>
+<nav class="nav" aria-label="Primary navigation"><a href="/research/">Research</a><a href="/ai/services.md">Services</a></nav>
+<a class="header-cta" href="https://calendly.com/patrick-iconic/30min">TALK TO ICONIC</a>
+<button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav">MENU</button>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden><a href="/research/">Research</a><a href="/ai/services.md">Services</a><a href="https://calendly.com/patrick-iconic/30min">Talk to ICONIC</a><a href="/">ICONIC home</a></nav>
+</header>
+
+<main id="top">
+<article>
+<section class="section-shell rv-hero rs-hero" aria-labelledby="rsTitle">
+<div data-reveal>
+<div class="eyebrow"><span class="live-dot"></span> ICONIC research / AI operations</div>
+<h1 id="rsTitle">The Context Tax: <em>AI agents read ${ratio_round} times more than they write</em></h1>
+<p class="rv-deck">Six months of production logs from three working AI agents. The answers they produce are under 1% of what they process. The rest is the agent re-reading its own conversation, and that re-reading grows faster than the work.</p>
+<div class="rs-tags"><span>Original analysis</span><span>${jobs} real agent jobs</span><span>${read_b} billion tokens</span></div>
+<p class="rs-meta">Patrick Christell · ICONIC · Published November 13, 2026 · <a href="https://iconic.onl/">iconic.onl</a></p>
+<div class="rs-answer" id="summary"><div class="rs-label">Headline finding</div><strong>Across ${jobs} jobs and ${steps} model calls, the agents read ${ratio} tokens for every token they wrote. ${cached_pct}% of that reading was context they had already seen. Double a job's steps and its reading multiplies by ${double}.</strong><p>An AI agent's bill is driven by how long its jobs run, not by how much it says. Jobs of 16 steps or more were ${long_jobs_pct}% of the work and ${long_read_pct}% of the reading.</p></div>
+</div>
+</section>
+
+<div class="section-shell rv-docs">
+<aside class="rv-rail" aria-label="On this page">
+<nav>
+<small>ON THIS PAGE</small>
+<a href="#finding">1. The finding</a>
+<a href="#method">2. Method</a>
+<a href="#data">3. Data</a>
+<a href="#long-jobs">4. Long jobs carry the load</a>
+<a href="#per-step">5. Every step reads more</a>
+<a href="#growth">6. Reading outgrows the work</a>
+<a href="#meaning">7. What it means for a firm</a>
+<a href="#faq">8. Common questions</a>
+<a href="#limitations">9. Limits</a>
+</nav>
+</aside>
+
+<div class="rv-content">
+<nav class="rv-chipnav" aria-label="Sections"><a href="#finding">1. The finding</a><a href="#method">2. Method</a><a href="#data">3. Data</a><a href="#long-jobs">4. Long jobs carry the load</a><a href="#per-step">5. Every step reads more</a><a href="#growth">6. Reading outgrows the work</a><a href="#meaning">7. What it means for a firm</a><a href="#faq">8. Common questions</a><a href="#limitations">9. Limits</a></nav>
+
+<section id="finding" class="rv-sec rs-sec" aria-labelledby="finding-title">
+<div class="section-kicker">01 · The finding</div>
+<h2 id="finding-title">Writing is under 1% of an agent's work</h2>
+<div class="rs-prose rs-wide">
+<div class="ct-stats">
+<div class="ct-stat"><b>${ratio} : 1</b><span>tokens read for every token written</span></div>
+<div class="ct-stat"><b>${cached_pct}%</b><span>of reading was context already seen in the same job</span></div>
+<div class="ct-stat"><b>${double}×</b><span>more reading when a job's steps double</span></div>
+<div class="ct-stat"><b>${long_read_pct}%</b><span>of all reading came from the ${long_jobs_pct}% of jobs with 16+ steps</span></div>
+</div>
+<p>The agents read ${read_m} tokens and wrote ${out_m}. Writing was ${written_pct}% of everything the models processed. Of the reading, ${cached_m} tokens were context re-sent from earlier steps and served from the provider's cache. Only ${fresh_m} were new. Even counting new material alone, the agents took in ${fresh_ratio} tokens for every token they produced.</p>
+<p>Every step of an agent job sends the model the whole job so far: the instructions, the tools, every file it opened and every answer it got back. The model writes an average of ${out_per_step} tokens per step, then the next step sends all of it again, plus the new part. That re-reading is the context tax, and it is the largest line in these agents' workload.</p>
+</div>
+</section>
+
+<section id="method" class="rv-sec rs-sec" aria-labelledby="method-title">
+<div class="section-kicker">02 · Method</div>
+<h2 id="method-title">Counted from the agents' own usage ledgers</h2>
+<div class="rs-prose">
+<p>The agents run on Hermes Agent, which records the provider's token counts after every model call. The counts land in each agent's local database as four counters per job and model: fresh input, cached input, cache writes and output. Hermes stores fresh input with cached tokens already subtracted. That makes the counters additive.</p>
+<div class="rv-code"><pre><code>read(job)    = fresh_input + cached_input + cache_write
+written(job) = output
+steps(job)   = number of model calls in the job
+growth       = slope of log(read) on log(steps), least squares across jobs</code></pre></div>
+<p>A <strong>job</strong> is one agent session: a scheduled report, a chat request, a hands-on working session or a sub-agent sent to do one piece of a larger task. A <strong>step</strong> is one call to the model. Single internal helper calls (title writing, memory lookups) are not jobs. The ${helpers} of them are excluded from every job figure. Including them moves the overall ratio to ${all_ratio} : 1.</p>
+<p>Three scripts produce every number on this page: <a href="/research/agent-context-tax/analysis/extract.py">extract.py</a> reads the databases read-only and writes <a href="/research/agent-context-tax/analysis/jobs.csv">jobs.csv</a> (counts only, no message text). <a href="/research/agent-context-tax/analysis/analyze.py">analyze.py</a> computes <a href="/research/agent-context-tax/analysis/results.json">results.json</a>. <a href="/research/agent-context-tax/analysis/build.py">build.py</a> writes the figures into this page.</p>
+</div>
+</section>
+
+<section id="data" class="rv-sec rs-sec" aria-labelledby="data-title">
+<div class="section-kicker">03 · Data</div>
+<h2 id="data-title">Three agents, six months, real business work</h2>
+<div class="rs-prose rs-wide">
+<div class="rs-table"><table><thead><tr><th>Agent</th><th>Period</th><th>Jobs</th><th>Helper calls (excluded)</th><th>Model calls</th></tr></thead><tbody>
+${coverage_rows}
+</tbody></table></div>
+<p>The agents ran on hosted frontier models and on a 27-billion-parameter model on local hardware. They did the work of a small consultancy: research, writing, scheduled client reports, code and site changes, and sub-agents doing pieces of each. The study covers ${rows} usage records grouped into ${jobs_total} sessions, from ${date_from} to ${date_to}.</p>
+</div>
+</section>
+
+<section id="long-jobs" class="rv-sec rs-sec" aria-labelledby="long-jobs-title">
+<div class="section-kicker">04 · Long jobs carry the load</div>
+<h2 id="long-jobs-title">A third of the jobs do two thirds of the reading</h2>
+<div class="rs-prose rs-wide">
+<figure class="ct-fig" aria-label="Share of jobs and share of reading by job length">
+<figcaption>Share of jobs vs. share of all reading, by job length<small>Percent of ${jobs} jobs · percent of ${read_m} tokens read · bars scaled to 40%</small></figcaption>
+<div class="ct-legend"><span><i style="background:${jobs_color}"></i>Share of jobs</span><span><i style="background:${read_color}"></i>Share of reading</span></div>
+${chart_share}
+</figure>
+<p>Jobs of 16 steps or more were ${long_jobs} of ${jobs} jobs (${long_jobs_pct}%). They did ${long_read_pct}% of all reading and ${long_written_pct}% of all writing. The heaviest 10% of jobs alone did ${top10_pct}% of the reading. Jobs of one to three steps were ${short_jobs_pct}% of the work and ${short_read_pct}% of the reading.</p>
+<p>The typical job of 32 steps or more read ${job_long} tokens. The typical job of one to three steps read ${job_short}. That is ${job_climb} times as much reading.</p>
+<div class="rs-table"><table><thead><tr><th>Steps per job</th><th>Jobs</th><th>Median read per job</th><th>Median read per step</th><th>Read per token written</th><th>Share of all reading</th></tr></thead><tbody>
+${bin_rows}
+</tbody></table></div>
+</div>
+</section>
+
+<section id="per-step" class="rv-sec rs-sec" aria-labelledby="per-step-title">
+<div class="section-kicker">05 · Every step reads more</div>
+<h2 id="per-step-title">Each step costs more than the one before, until the ceiling</h2>
+<div class="rs-prose rs-wide">
+<figure class="ct-fig" aria-label="Median tokens read per model call by job length">
+<figcaption>Median tokens read per model call, by job length<small>Scale 0 to ${compress} tokens, the agents' compression limit</small></figcaption>
+${chart_per_step}
+<div class="ct-ref" style="margin-right:62px">${compress} tokens: compression limit set in the agent's config</div>
+</figure>
+<p>In a short job the model reads a median ${ps_short} tokens per step. In a 16-to-31-step job it reads ${ps_16}, ${ps_climb} times as much for every single call. Past 32 steps the figure holds flat at ${ps_32} and ${ps_64}, below the ${compress}-token compression limit configured for these agents.</p>
+<p>The ratio of reading to writing climbs with it: ${rw_short} : 1 in short jobs, ${rw_64} : 1 in jobs of 64 steps or more, a ${rw_climb}-fold rise. A long job produces more, but it re-reads far more to do it.</p>
+</div>
+</section>
+
+<section id="growth" class="rv-sec rs-sec" aria-labelledby="growth-title">
+<div class="section-kicker">06 · Reading outgrows the work</div>
+<h2 id="growth-title">Double the steps, multiply the reading by ${double}</h2>
+<div class="rs-prose rs-wide">
+<p>Across all ${jobs} jobs, total reading rises with steps to the power ${slope} (R² ${r2}). Work that grew in step with its steps would sit at 1.0. Doubling a job's length multiplies its reading by ${double}.</p>
+<p>The pattern holds in every agent and in every kind of job. Among jobs up to 15 steps, where context is still filling, the exponent is ${slope_short}. Among jobs of 16 steps or more, where context sits near the compression limit, it falls to ${slope_long}: reading per step stays high and stops climbing.</p>
+<div class="rs-table"><table><thead><tr><th>Group</th><th>Jobs</th><th>Growth exponent</th><th>R²</th></tr></thead><tbody>
+${slope_rows}
+</tbody></table></div>
+</div>
+</section>
+
+<section id="meaning" class="rv-sec rs-sec" aria-labelledby="meaning-title">
+<div class="section-kicker">07 · What it means for a firm</div>
+<h2 id="meaning-title">Budget for the steps, not the answers</h2>
+<div class="rs-prose">
+<p><strong>Price agent work by how long it runs.</strong> The answer an agent hands back is ${written_pct}% of what it processed. A quote, budget or vendor comparison built on "how much will it write" misses the line that dominates.</p>
+<p><strong>Caching is a requirement, not an option.</strong> ${cached_pct}% of all reading here was context the provider had already seen and served from cache. A setup without caching processes every one of those tokens again as new input. Ask any AI vendor whether repeated context is cached, and at what rate it is charged.</p>
+<p><strong>Split long jobs.</strong> Jobs of 16+ steps were ${long_jobs_pct}% of the work and ${long_read_pct}% of the reading. Every step added to a long job re-sends everything before it, so the long tail is where the reading piles up.</p>
+<p><strong>Cap the context.</strong> These agents compress their working history at ${compress} tokens, and per-step reading levels off below it. An agent with no ceiling keeps climbing.</p>
+<p><strong>Read the meter before scaling.</strong> Hermes records these four counters for every job. One query on them shows where the reading goes, which jobs run long, and what a tenfold rollout does to the bill.</p>
+</div>
+</section>
+
+<section id="faq" class="rv-sec rs-sec" aria-labelledby="faq-title">
+<div class="section-kicker">08 · Common questions</div>
+<h2 id="faq-title">Frequently asked questions</h2>
+<div class="rv-faq">
+<details open><summary>What does an AI agent spend most of its tokens on?</summary><p>Re-reading. Across ${jobs} production jobs the agents read ${ratio} tokens for every token they wrote, and ${cached_pct}% of the reading was context the agent had already seen earlier in the same job.</p></details>
+<details><summary>Why do long AI agent jobs cost so much more?</summary><p>Every step re-sends the whole conversation so far. Jobs of 16 or more steps were ${long_jobs_pct}% of jobs and ${long_read_pct}% of all reading. Doubling a job's steps multiplied its reading by ${double} on average.</p></details>
+<details><summary>How do you keep AI agent costs under control?</summary><p>Use a provider and setup that caches repeated context, split long jobs into short ones, cap the context with compression, and read the agent's own usage counters before scaling it.</p></details>
+</div>
+</section>
+
+<section id="limitations" class="rv-sec rs-sec" aria-labelledby="limitations-title">
+<div class="section-kicker">Scope and disclosure</div>
+<h2 id="limitations-title">Limits</h2>
+<div class="rs-prose">
+<p>This is one operator's three agents, on one agent framework, over six months. The figures are tokens, not dollars: the agents ran on subscription plans and local hardware, so the ledgers carry no per-token charges, and this page converts none. The growth exponent compares different jobs, not the same job run at different lengths. Jobs that run long also tend to be different kinds of work. The per-step plateau sits below the configured compression limit; this study does not isolate compression as its cause. A provider accounting fix on 2026-09-18 was checked: the fresh-to-cached ratio is ${pre_fix} before it and ${post_fix} after. No message text, prompts, client names or client data appear in the published files.</p>
+<p class="rs-note">Cite as: Christell, Patrick (2026). “The Context Tax: AI Agents Read ${ratio_round} Times More Than They Write.” ICONIC Research. https://iconic.onl/research/agent-context-tax/</p>
+</div>
+</section>
+
+<a class="rs-cta" href="https://calendly.com/patrick-iconic/30min"><strong>Know what your AI agents actually spend their time reading.</strong><span>Talk directly with ICONIC about private, auditable AI agents for your business. Free 30-minute private AI check.</span></a>
+</div>
+</div>
+</article>
+<div class="section-shell rs-foot"><footer><span>© 2026 ICONIC. · <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a> · <a href="/llms.txt">AI Reference</a> · <a href="/research/">Research</a> · <a href="/agents/">Agent Tools &amp; MCP Services</a> · <a href="/agents/reserve/">ICONIC Reserve · Connect via MCP</a> · <a href="/agents/assurance/">Agent Assurance</a> · <a href="/agents/marketplace/">Agent Marketplace</a></span><span>PRIVATE AI FOR YOUR BUSINESS</span><a href="#top">BACK TO TOP ↑</a></footer></div>
+</main>
+
+<script src="/app.js?v=20261102a" defer></script>
+<script src="/research/research.js?v=20261114a" defer></script>
+</body>
+</html>
