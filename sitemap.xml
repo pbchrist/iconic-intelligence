@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://iconic.onl/</loc><lastmod>2026-11-08</lastmod></url>
+  <url><loc>https://iconic.onl/commerce/</loc><lastmod>2026-11-16</lastmod></url>
+  <url><loc>https://iconic.onl/commerce/catalog.json</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://iconic.onl/agents/</loc><lastmod>2026-11-08</lastmod></url>
   <url><loc>https://iconic.onl/agents/data-reconciliation/</loc><lastmod>2026-11-08</lastmod></url>
   <url><loc>https://iconic.onl/agents/assurance/</loc><lastmod>2026-11-08</lastmod></url>
