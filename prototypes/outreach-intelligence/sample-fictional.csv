@@ -1,0 +1,6 @@
+company,contact_name,title,email,industry,event_name,evidence_url,evidence_date,do_not_contact,prior_contact,context
+"Harbor Arts Foundation","Jasmine Cole","Development Director",jasmine@example.org,arts,"Annual Benefit Gala","https://example.org/fictional-gala",2026-10-22,no,no,"Fictional example; event details not independently verified"
+"Crestline Systems","Martin Diaz","VP of Experiential Marketing",martin@example.net,technology,"Customer Summit","https://example.net/fictional-summit",2026-09-30,no,no,"Fictional example; not verified"
+"Bayview Civic Society","Avery Chen","Executive Director",avery@example.com,nonprofit,,,,no,no,"No documented current trigger; generic outreach only"
+"Orchard Conference Group","Elliot Gray","Conference Producer",elliot@example.org,association,"Spring Conference","https://example.org/demo",2026-10-15,yes,no,"Suppressed: do not contact"
+"Harbor Arts Foundation","Someone Else","Development Director",JASMINE@example.org,arts,"Annual Benefit Gala","https://example.org/fictional-gala",2026-10-22,no,no,"Duplicate email"
