@@ -32,7 +32,7 @@ Actual lead discovery, web research, verified mailbox deliverability, third-part
 
 ## Tests / next build
 
-The extracted deterministic evaluation engine passed **8/8 Node tests locally on November 16, 2026**: CSV parsing, DNC suppression, duplicate blocking, syntax-label honesty, source-backed draft gating, URL safety, CSV formula escaping, and malformed input handling. Browser smoke testing was restricted by the isolated runner; verify the interface in an ordinary browser before deployment.
+Run `node --test tests/engine.test.mjs` from this directory. The exact self-contained published HTML passed **9/9 Node regression tests on November 16, 2026** covering CSV parsing, suppression, duplicate blocking, honest syntax-only status, source-backed draft gating, URL safety, CSV formula escaping, and style rules. A headless Chrome smoke test on the authorized Mac also passed: five fictional records evaluated, three eligible/two blocked, selection and approval worked, editing after approval revoked approval, and no JS exceptions were observed. This does not prove full production readiness.
 
 Next step: add authorized lead-data connectors, verified-source retrieval, independent email verification, opt-out synchronization, strict tenant isolation, real model-assisted drafts, permissioned send workflow, and outcome measurement. Keep private customer data out of the public website.
 
