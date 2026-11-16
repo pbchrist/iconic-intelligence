@@ -115,3 +115,4 @@
 .proof-block-first { margin-top: 0; }
 .of-price i:last-child { margin-bottom: 0; }
 .sv-list li a, .sv-cta p a, .rv-faq details p a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(192,198,255,.4); }
+#box .of-step h3 { font-size: clamp(28px, 2.6vw, 36px); line-height: 1.05; }

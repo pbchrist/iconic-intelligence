@@ -1,6 +1,6 @@
 # ICONIC
 
-> Private AI and agents that work for a business, on a computer in its own office. ICONIC sets up a language model on the client's own hardware, connects it to the business's files so it knows the business, and builds agents that do recurring work on a schedule. Nothing about the client's customers goes to anyone else's servers, and there is no per-token meter. Principal: Patrick Christell. Three ways in: specialized AI training, a $2,000 business and AI evaluation, and custom AI builds starting at $20,000. Positioning: "Find the opportunity. Prove the value. Build the advantage."
+> Private AI and agents that work for a business, on a computer in its own office. ICONIC sets up a language model on the client's own hardware, connects it to the business's files so it knows the business, and builds agents that do recurring work on a schedule. Nothing about the client's customers goes to anyone else's servers, and there is no per-token meter. Principal: Patrick Christell. Three ways in: specialized AI training, a $2,000 business and AI evaluation, and custom AI builds starting at $20,000. Positioning: a private AI in a box in the client's own office: private because it is a physical machine the client owns, not because a vendor promises it.
 
 ## Proof
 
