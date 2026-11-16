@@ -1,0 +1,122 @@
+/* ICONIC offers: the homepage's commercial sections and the /services/ pages.
+   Sits on top of styles.css + mobile-first.css and the docs components in /agents/reserve/reserve.css. */
+
+/* Hero: a sentence-length headline needs a smaller scale than the old two-word one. */
+.hero h1.h1-long { max-width: 1180px; font-size: clamp(38px, 9.4vw, 60px); line-height: 1; letter-spacing: -.045em; text-wrap: balance; }
+.hero h1.h1-long em { display: inline; }
+.hero .hero-buyer { max-width: 720px; }
+.hero-third { margin: 16px 0 0; font-size: 13px; color: #9ca3b8; }
+.hero-third a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(192,198,255,.4); }
+.offer-line { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0; padding: 0; list-style: none; }
+.offer-line li a { display: block; padding: 9px 13px; border: 1px solid var(--line); border-radius: 999px; color: #c4c8d8; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; transition: border-color .25s, color .25s; }
+.offer-line li a:hover { color: var(--pearl); border-color: rgba(164,174,255,.45); }
+.offer-line li a b { color: var(--pearl); font-weight: 800; }
+@media (min-width: 768px) { .hero h1.h1-long { font-size: clamp(60px, 7.4vw, 84px); } }
+@media (min-width: 1180px) { .hero h1.h1-long { font-size: clamp(76px, 6.3vw, 104px); line-height: .96; } .hero.hero-offers { min-height: 0; padding-top: 170px; padding-bottom: 96px; } }
+
+/* "What's your business missing?": the customer's words, each pointing at an offer. */
+.missing-list { display: grid; grid-template-columns: minmax(0,1fr); gap: 0; margin: 40px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.missing-list li { border-bottom: 1px solid var(--line); }
+.missing-list a { display: grid; grid-template-columns: minmax(0,1fr); gap: 10px; align-items: center; padding: 20px 4px; transition: background .25s, padding .25s; }
+.missing-list a:hover { background: linear-gradient(90deg, rgba(146,156,255,.08), transparent); padding-left: 14px; }
+.missing-list q { quotes: "\201C" "\201D"; color: var(--pearl); font-family: Georgia, "Times New Roman", serif; font-size: clamp(20px, 2.3vw, 30px); letter-spacing: -.02em; line-height: 1.2; }
+.missing-list span { color: var(--accent-2); font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
+@media (min-width: 768px) { .missing-list a { grid-template-columns: minmax(0,1fr) auto; gap: 28px; padding: 22px 6px; } }
+
+/* Offer cards and step cards share the Reserve tile look. */
+.of-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: 14px; margin-top: 40px; }
+.of-card { display: flex; flex-direction: column; gap: 12px; padding: 26px; border: 1px solid var(--line); border-radius: 22px; background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)); transition: transform .35s ease, border-color .35s ease, background .35s ease; }
+.of-card:hover { transform: translateY(-4px); border-color: rgba(164,174,255,.3); background: linear-gradient(180deg, rgba(77,85,168,.13), rgba(255,255,255,.018)); }
+.of-card.of-lead { border-color: rgba(174,183,255,.34); background: linear-gradient(145deg, rgba(70,77,158,.28), rgba(255,255,255,.018)); }
+.of-card small { color: var(--accent-2); font-size: 9px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+.of-card h3 { margin: 4px 0 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(32px, 3.2vw, 44px); font-weight: 400; letter-spacing: -.035em; line-height: 1.02; }
+.of-card h3 a:hover { color: var(--accent-2); }
+.of-card p { margin: 0; color: #a7adc1; font-size: 15px; line-height: 1.6; }
+.of-card p strong { color: var(--pearl); font-weight: 600; }
+.of-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+.of-card ul li { position: relative; padding-left: 16px; color: #a7adc1; font-size: 14px; line-height: 1.5; }
+.of-card ul li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 1px; background: var(--accent-2); }
+.of-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: auto; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.07); }
+.of-price { font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif; font-size: 26px; font-weight: 900; letter-spacing: -.05em; line-height: 1; color: var(--pearl); }
+.of-price i { display: block; margin-bottom: 6px; color: #8d94a9; font-family: Inter, ui-sans-serif, Arial, sans-serif; font-size: 9px; font-style: normal; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.of-foot .button { min-height: 42px; }
+@media (min-width: 900px) { .of-grid.of-3 { grid-template-columns: repeat(3, minmax(0,1fr)); } .of-grid.of-2 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (min-width: 620px) { .of-grid.of-4 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (min-width: 1180px) { .of-grid.of-4 { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+
+.of-step { padding: 24px; border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,.02); }
+.of-step > span { color: var(--accent-2); font-size: 10px; font-weight: 800; letter-spacing: .2em; }
+.of-step h3 { margin: 30px 0 0; font-family: Georgia, "Times New Roman", serif; font-size: 34px; font-weight: 400; letter-spacing: -.03em; line-height: 1; }
+.of-step p { margin: 12px 0 0; color: #a7adc1; font-size: 14px; line-height: 1.6; }
+.of-note { max-width: 820px; margin: 22px 0 0; color: #8d94a9; font-size: 13px; line-height: 1.6; }
+.of-note a, .of-inline a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(192,198,255,.4); }
+
+/* Proof: every piece of evidence says what kind of evidence it is. */
+.ev-tag { display: inline-block; padding: 5px 9px; border: 1px solid var(--line-strong); border-radius: 999px; color: #c9ccda; font-family: Inter, ui-sans-serif, Arial, sans-serif; font-size: 9px; font-style: normal; font-weight: 800; letter-spacing: .14em; line-height: 1.2; text-transform: uppercase; white-space: nowrap; }
+.ev-tag.ev-client { color: var(--success); border-color: rgba(185,255,210,.35); background: rgba(185,255,210,.07); }
+.ev-tag.ev-research { color: var(--accent-2); border-color: rgba(185,192,255,.4); background: rgba(146,156,255,.1); }
+.ev-tag.ev-demo { color: var(--warning); border-color: rgba(255,217,161,.35); background: rgba(255,217,161,.07); }
+.ev-tag.ev-proposed { color: var(--warning); border-color: rgba(255,217,161,.5); background: rgba(255,217,161,.1); }
+.proof-block { margin-top: 64px; }
+.proof-block > .ev-tag { margin-bottom: 6px; }
+.proof-block .use-case-wrap { margin-top: 14px; }
+.proof-block .section-heading { margin-top: 12px; }
+.proof-block .of-grid { margin-top: 22px; }
+
+/* Big paid-evaluation block on the homepage. */
+.check-card .of-price-big { display: block; margin: 14px 0 8px; color: var(--pearl); font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif; font-size: clamp(54px, 7vw, 92px); font-weight: 900; letter-spacing: -.07em; line-height: .9; }
+.check-card.eval-card .check-copy h2 { font-size: clamp(30px, 3.5vw, 46px); line-height: 1.04; letter-spacing: -.035em; }
+.offer-copy h2.h2-long { font-size: clamp(40px, 6vw, 86px); line-height: .96; letter-spacing: -.05em; }
+.offer-copy .hero-actions { margin-top: 24px; }
+
+/* Service pages */
+.sv-hero { padding-top: 120px; padding-bottom: 20px; }
+.sv-hero > div { max-width: 1080px; }
+.sv-hero h1 { margin: 18px 0 0; font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: clamp(40px, 9vw, 68px); line-height: .98; letter-spacing: -.05em; text-wrap: balance; }
+.sv-hero h1 em { color: var(--accent-2); font-weight: 400; }
+.sv-hero .rv-deck { max-width: 800px; }
+.sv-hero .hero-actions { margin-top: 30px; }
+.sv-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; margin: 30px 0 0; }
+.sv-price strong { font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif; font-size: clamp(48px, 8vw, 84px); font-weight: 900; letter-spacing: -.07em; line-height: .9; color: var(--pearl); }
+.sv-price span { color: #9ca3b8; font-size: 13px; letter-spacing: .02em; }
+.sv-crumb { color: #8d94a9; font-size: 10px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+.sv-crumb a { color: var(--accent-2); }
+.sv-body { padding-bottom: 20px; }
+.sv-sec h2 { max-width: 940px; font-size: clamp(32px, 6.4vw, 54px); line-height: 1.02; letter-spacing: -.04em; text-wrap: balance; }
+.sv-list { max-width: 900px; margin: 30px 0 0; padding: 0; list-style: none; counter-reset: sv; border-top: 1px solid var(--line); }
+.sv-list li { counter-increment: sv; position: relative; padding: 18px 0 18px 46px; border-bottom: 1px solid var(--line); color: #a7adc1; font-size: 15px; line-height: 1.6; }
+.sv-list li::before { content: "0" counter(sv); position: absolute; left: 0; top: 22px; color: var(--accent-2); font-size: 10px; font-weight: 800; letter-spacing: .2em; }
+.sv-list li b { display: block; color: var(--pearl); font-family: Georgia, "Times New Roman", serif; font-size: 21px; font-weight: 400; letter-spacing: -.02em; line-height: 1.25; }
+.sv-list.sv-plain li { padding-left: 0; }
+.sv-list.sv-plain li::before { content: none; }
+.sv-cols { display: grid; grid-template-columns: minmax(0,1fr); gap: 0 44px; max-width: 1040px; margin: 30px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.sv-cols li { padding: 15px 0; border-bottom: 1px solid var(--line); color: #d7dae5; font-family: Georgia, "Times New Roman", serif; font-size: 18px; line-height: 1.35; }
+@media (min-width: 768px) { .sv-cols { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.sv-cta { display: grid; gap: 22px; margin-top: 84px; padding: clamp(24px, 4vw, 44px); border: 1px solid rgba(185,188,255,.28); border-radius: 24px; background: linear-gradient(135deg, rgba(48,53,111,.4), rgba(10,13,27,.6) 60%, rgba(74,52,129,.18)); }
+.sv-cta h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(30px, 4vw, 52px); font-weight: 400; letter-spacing: -.04em; line-height: 1; text-wrap: balance; }
+.sv-cta h2 em { color: var(--accent-2); }
+.sv-cta p { max-width: 760px; margin: 0; color: #c3c7d8; font-family: Georgia, serif; font-size: 18px; line-height: 1.5; }
+.sv-cta p.cta-note { font-family: inherit; font-size: 13px; color: #9ca3b8; }
+.sv-cta .hero-actions { margin-top: 0; }
+.sv-next { display: grid; grid-template-columns: minmax(0,1fr); gap: 14px; margin-top: 30px; }
+@media (min-width: 768px) { .sv-next { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+.sv-next a { display: block; padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255,255,255,.02); transition: border-color .3s, transform .3s; }
+.sv-next a:hover { border-color: rgba(164,174,255,.4); transform: translateY(-3px); }
+.sv-next small { color: var(--accent-2); font-size: 9px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+.sv-next strong { display: block; margin-top: 10px; font-family: Georgia, "Times New Roman", serif; font-size: 23px; font-weight: 400; letter-spacing: -.02em; line-height: 1.15; }
+.sv-next span { display: block; margin-top: 8px; color: #9ea4b9; font-size: 13px; line-height: 1.5; }
+.sv-foot footer { margin-top: 90px; }
+
+/* Preview-only marker for prices that are not approved yet. Remove with the banner before publishing. */
+.preview-flag { margin: 26px 0 0; padding: 14px 16px; border: 1px dashed rgba(255,217,161,.55); border-radius: 14px; background: rgba(255,217,161,.06); color: var(--warning); font-size: 13px; line-height: 1.5; }
+.preview-flag b { letter-spacing: .12em; font-size: 10px; text-transform: uppercase; }
+
+@media (prefers-reduced-motion: reduce) { .of-card, .of-card:hover, .sv-next a, .sv-next a:hover { transition: none; transform: none; } }
+.proof-block-first { margin-top: 0; }
+.of-price i:last-child { margin-bottom: 0; }
+.sv-list li a, .sv-cta p a, .rv-faq details p a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(192,198,255,.4); }
+#box .of-step h3 { font-size: clamp(28px, 2.6vw, 36px); line-height: 1.05; }
+.of-card ul.src-list { gap: 14px; margin-top: 6px; }
+.of-card ul.src-list li { font-size: 15px; line-height: 1.55; color: #b5bacb; }
+.of-card ul.src-list li b { color: var(--pearl); font-weight: 600; }
+.of-card ul.src-list a { color: var(--accent-2); font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(192,198,255,.4); white-space: nowrap; }
