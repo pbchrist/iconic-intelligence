@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0.0",
+  "last_reviewed": "2026-11-16",
+  "merchant": {
+    "name": "ICONIC",
+    "website": "https://iconic.onl/",
+    "contact": "patrick@iconic.onl",
+    "business_hub_verification": "not_verified_by_this_catalog"
+  },
+  "payment": {
+    "currency": "USD",
+    "provider": "Stripe",
+    "chatgpt_wallet": "Eligible ChatGPT Wallet agents can potentially use existing Stripe-hosted card checkout, subject to agent access, authorization and successful merchant checkout; not independently end-to-end verified.",
+    "separate_protocol": "ICONIC MPP SPT is not the same as ChatGPT Wallet",
+    "live_offer_source": "https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers"
+  },
+  "offerings": [
+    {
+      "id": "ai-evaluation",
+      "name": "Business AI Evaluation",
+      "price_usd": 2000,
+      "availability": "scope_and_purchase_arranged_with_merchant",
+      "type": "professional_service",
+      "description": "Evaluate where the business is losing time or revenue, identify viable AI and agent workflows, and deliver a prioritized plan with evidence and feasibility.",
+      "url": "https://iconic.onl/commerce/#evaluation",
+      "next_step": "https://calendly.com/patrick-iconic/30min"
+    },
+    {
+      "id": "ai-build",
+      "name": "Private AI and Agent Build",
+      "price_usd": 20000,
+      "availability": "scope_and_purchase_arranged_with_merchant",
+      "type": "professional_service",
+      "description": "Implement a scoped private AI and working agents on client-controlled infrastructure. Scope, hardware and ongoing support terms agreed before purchase.",
+      "url": "https://iconic.onl/commerce/#build",
+      "next_step": "https://calendly.com/patrick-iconic/30min"
+    },
+    {
+      "id": "reserve-pass",
+      "name": "ICONIC Reserve Pass — 30 days",
+      "price_usd": 19,
+      "availability": "reported_purchasable_at_review",
+      "type": "digital_service",
+      "url": "https://iconic.onl/agents/reserve/#pass",
+      "verify_live_url": "https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers/reserve-pass"
+    },
+    {
+      "id": "dataset-diff-report",
+      "name": "Data Discrepancy Report",
+      "price_usd": 29,
+      "availability": "reported_purchasable_at_review",
+      "type": "digital_service",
+      "url": "https://iconic.onl/agents/marketplace/#offers",
+      "verify_live_url": "https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers/dataset-diff-report"
+    },
+    {
+      "id": "selection-test",
+      "name": "MCP Selection Test",
+      "price_usd": 49,
+      "availability": "reported_purchasable_at_review",
+      "type": "digital_service",
+      "url": "https://iconic.onl/agents/selection-test/",
+      "verify_live_url": "https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers/selection-test"
+    }
+  ],
+  "other_agent_offers": "Six specialist offers are currently draft/unavailable; inspect live offer catalog before payment.",
+  "seller_policies": {
+    "terms": "https://iconic.onl/agents/marketplace/terms.html",
+    "refunds": "https://iconic.onl/refunds/",
+    "privacy": "https://iconic.onl/privacy.html"
+  }
+}
