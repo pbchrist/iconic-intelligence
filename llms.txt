@@ -1,6 +1,6 @@
 # ICONIC
 
-> Private AI and agents that work for a business, on a computer in its own office. ICONIC sets up a language model on the client's own hardware, connects it to the business's files so it knows the business, and builds agents that do recurring work on a schedule. Nothing about the client's customers goes to anyone else's servers, and there is no per-token meter. Principal: Patrick Christell. Positioning: "Own your intelligence. Don't rent it." Free 30-minute private AI check to start.
+> Private AI and agents that work for a business, on a computer in its own office. ICONIC sets up a language model on the client's own hardware, connects it to the business's files so it knows the business, and builds agents that do recurring work on a schedule. Nothing about the client's customers goes to anyone else's servers, and there is no per-token meter. Principal: Patrick Christell. Three ways in: specialized AI training, a $2,000 business and AI evaluation, and custom AI builds starting at $20,000. Positioning: a private AI in a box in the client's own office: private because it is a physical machine the client owns, not because a vendor promises it.
 
 ## Proof
 
@@ -28,7 +28,10 @@ Owner-led businesses and professional firms with years of their own records: law
 
 ## Start
 
-- [Book the free 30-minute private AI check](https://calendly.com/patrick-iconic/30min): where the business's data goes today (including AI tools staff already use), what is exposed, and whether a self-hosted AI is right for it.
+- [Specialized AI training](https://iconic.onl/services/ai-training/): practical, industry-specific training for attorneys, recruiters, automotive dealerships, and business owners and executives.
+- [ICONIC Evaluation, $2,000](https://iconic.onl/services/evaluation/): a paid business and AI opportunity assessment with prioritized recommendations, feasibility analysis and an implementation roadmap.
+- [ICONIC Build, starting at $20,000](https://iconic.onl/services/build/): custom AI systems designed, built and deployed, scoped individually.
+- [Ongoing intelligence and optimization](https://iconic.onl/services/ongoing-intelligence/): monitoring, maintenance and improvement after a build, priced to scope.
 - Email patrick@iconic.onl or call 206-773-8214. You talk to Patrick, not a sales team.
 
 ## Agent discovery hub and problem-specific service pages (November 8, 2026)
@@ -57,7 +60,7 @@ Owner-led businesses and professional firms with years of their own records: law
 - **Agent-first machine entrypoint (JSON):** https://patrick-beastmaster.tailf32530.ts.net/reserve/agents. **Direct MCP:** https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp. Twenty-seven callable Reserve tools: seven discovery, ten synthetic sandbox and ten paid Reserve Pass tools. **Paid, self-serve: Reserve Pass**, a private persistent Reserve for 30 days at $19 one time, no account and no auto-renewal. Buy offer `reserve-pass` at https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers/reserve-pass (confirm `purchasable=true` there first; the buyer's human must authorize the payment), receive `reserve_id`, `reserve_key` and `reviewer_key` automatically, then use the ten `reserve_pass_*` tools on the same MCP endpoint. People can pay by card at https://iconic.onl/agents/reserve/#pass. Free agent-to-agent transaction: list offers → obtain exact $0 quote → execute `reserve_assess` → receive `FULFILLED_FREE` structured assessment; no human UI required.
 - Agents can perform a stateless, rule-based, no-charge fit assessment and run an ephemeral synthetic demonstration against the Reserve engine. **No confidential business or customer data should be submitted** to this public endpoint.
 - Private tenant-isolated Reserve is a technical alpha, NOT an openly accessible customer memory database. Paid self-service tiers and autonomous purchases are NOT live. A human must authorize any onboarding, data integrations or payment.
-- [Book the existing free ICONIC check](https://calendly.com/patrick-iconic/30min). The blueprint's $99/$499/$5,000 prices are hypotheses, not saleable prices.
+- For a human-led engagement, see the [ICONIC Evaluation](https://iconic.onl/services/evaluation/). The blueprint's $99/$499/$5,000 prices are hypotheses, not saleable prices.
 
 ## ICONIC Agent Assurance — live agent-facing service (November 7, 2026)
 
@@ -98,11 +101,11 @@ Owner-led businesses and professional firms with years of their own records: law
 
 ## Home page sections
 
-- [Proof](https://iconic.onl/#proof) · [Live demo](https://iconic.onl/#live) · [Who it's for](https://iconic.onl/#uses) · [How to start](https://iconic.onl/#ways) · [Why own it](https://iconic.onl/#own) · [Pricing](https://iconic.onl/#pricing) · [Free check](https://iconic.onl/#check)
+- [Proof](https://iconic.onl/#proof) · [Live demo](https://iconic.onl/#live) · [What's missing](https://iconic.onl/#missing) · [Services](https://iconic.onl/#offers) · [How it works](https://iconic.onl/#how) · [Training](https://iconic.onl/#training) · [Evaluation](https://iconic.onl/#evaluation)
 
 ## Accuracy notes for agents
 
-- Prices are not published. Engagements are hourly, by the project or on retainer, with hardware at cost; the work is scoped on the free check. Do not quote a price.
+- Published prices: the ICONIC Evaluation is $2,000; builds start at $20,000 and are scoped individually. Quote nothing else and do not promise savings.
 - The dealership figures are ICONIC's own reported results from its live agent.
 - "Nothing leaves your building" describes the private setup. Cloud models are used only for public work, and only if the client chooses.
 - No per-token cost does not mean no cost: the client pays for the computer, power and Patrick's time.

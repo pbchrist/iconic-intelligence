@@ -1,37 +1,32 @@
 # Services and delivery
 
-> ICONIC reference page. Checked against https://iconic.onl/ on 2026-11-04. If this page and the website ever differ, the website is current.
+> ICONIC reference page. Checked against https://iconic.onl/ on 2026-11-16. If this page and the website ever differ, the website is current.
 
-ICONIC puts a private AI and a staff of agents on a computer in the client's own office. The AI knows the business from its own files; the agents do recurring work on a schedule, check their own work and report back.
+ICONIC finds hidden opportunities to increase revenue, eliminate wasted effort and outperform the competition, then builds the systems to capture them. AI is the mechanism; business performance is the product.
 
-## Two ways in
+## Three ways to work with ICONIC
 
-**Taught.** Patrick teaches the owner or staff to run their own private AI and agents, starting wherever they are:
-1. Run a model privately on their own computer.
-2. Connect it to their files, so it knows the business.
-3. Build agents that do recurring work on a schedule.
-4. Know where to draw the line between private and frontier cloud models.
+**Learn AI: specialized AI training.** Practical training for professionals and teams, specific to the customer's industry, responsibilities and workflows. Audiences: attorneys and law firms, recruiters and staffing firms, automotive dealerships, business owners and executives. Formats: specialized workshop, private professional training, team training. Details: https://iconic.onl/services/ai-training/
 
-**Built.** Patrick sets it up on a computer in the office, connects it to the files, builds the agents the business needs and trains the people. Then he keeps it updated, adds agents as new jobs come up and makes it sharper about the business month after month.
+**Evaluate: the ICONIC Evaluation, $2,000.** A paid business and AI opportunity assessment. ICONIC investigates operations, challenges, competitive position and existing systems. Deliverables: business opportunity assessment, identification of high-value opportunities, prioritized recommendations, estimated financial impact where evidence supports it, technical and operational feasibility analysis, recommended implementation roadmap. Details: https://iconic.onl/services/evaluation/
 
-## Services
+**Build: custom AI implementation, starting at $20,000.** ICONIC designs, develops and deploys specialized AI systems: AI agents, competitive intelligence, revenue and pricing intelligence, workflow automation, business research and monitoring, customer acquisition systems, custom integrations, internal knowledge and decision-support systems, and secure private AI deployments. Each build is scoped individually under a separate agreement. Details: https://iconic.onl/services/build/
 
-- **Pick the right computer:** sized to the actual work, ordered at cost and set up.
-- **Build the whole system:** private AI connected to the files, with agents doing real work from the first week.
-- **Start with one agent:** one time-eating job, such as watching competitors, sorting intake or writing the weekly report.
-- **Train your team:** from running a first private model to building their own agents.
-- **Coach one person:** one-on-one for the owner or whoever will run it day to day.
-- **Move off rented AI:** bring work done in ChatGPT and other cloud tools onto the business's own computer, without losing what works.
-- **Get a second opinion:** before signing with an AI vendor, a plain answer on what it does, what it costs and what should stay in-house.
-- **Keep it growing:** updates, new agents and ongoing improvement.
+**Ongoing intelligence and optimization.** After implementation: monitoring, maintenance, optimization, competitive intelligence and system improvements. Priced to scope. Details: https://iconic.onl/services/ongoing-intelligence/
 
-## How engagements start
+## How customers start
 
-Pick one recurring job that costs time or money. Patrick shows whether an agent can do it, builds it, and proves it works before going further. Then the client chooses: taught or built.
+- Someone who wants to understand AI starts with training.
+- Someone with a business problem starts with the $2,000 evaluation.
+- Someone who already knows what needs building goes straight to a build conversation. Nobody is required to take training or an evaluation first.
+
+## Private AI
+
+ICONIC builds and runs private AI systems on its own hardware, and can deploy a system on a computer in the client's office so the client's files are not sent to an AI company. See [architecture](https://iconic.onl/ai/architecture.md) and [security and privacy](https://iconic.onl/ai/security-privacy.md).
 
 ## Next step
 
-[Book the free 30-minute private AI check](https://calendly.com/patrick-iconic/30min) · patrick@iconic.onl · 206-773-8214
+[The $2,000 ICONIC Evaluation](https://iconic.onl/services/evaluation/) · [AI training](https://iconic.onl/services/ai-training/) · [Discuss a build](https://iconic.onl/services/build/) · patrick@iconic.onl · 206-773-8214
 
 ## Research methods
 

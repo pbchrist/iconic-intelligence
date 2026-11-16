@@ -23,4 +23,4 @@ The [live demo](https://iconic.onl/#live) is this design on a public page: a pri
 
 ## Next step
 
-[Book the free 30-minute private AI check](https://calendly.com/patrick-iconic/30min) · patrick@iconic.onl · 206-773-8214
+[The $2,000 ICONIC Evaluation](https://iconic.onl/services/evaluation/) · [AI training](https://iconic.onl/services/ai-training/) · [Discuss a build](https://iconic.onl/services/build/) · patrick@iconic.onl · 206-773-8214
