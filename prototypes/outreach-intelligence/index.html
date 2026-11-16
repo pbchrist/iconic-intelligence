@@ -44,9 +44,9 @@
           <div class="panel-top"><span class="step">01</span><h2>Audience definition</h2></div>
           <p class="panel-desc">Tell the evaluator what a qualified buyer looks like. Scoring is deterministic, explainable, and never claims to predict purchase probability.</p>
           <label for="roles">Buyer role keywords</label>
-          <textarea id="roles" rows="2" spellcheck="false">event,marketing,development,executive,partnership,conference,experiential</textarea>
+          <textarea id="roles" rows="2" spellcheck="false">owner,founder,chief executive,managing partner,principal,operations,practice administrator,marketing,director,executive</textarea>
           <label for="industries">Target industry keywords</label>
-          <textarea id="industries" rows="2" spellcheck="false">nonprofit,arts,finance,technology,association,hospitality</textarea>
+          <textarea id="industries" rows="2" spellcheck="false">legal,law firm,wealth,financial,accounting,dealership,automotive,healthcare,nonprofit,faith-based,services</textarea>
           <label for="exclusions">Hard exclusions</label>
           <input id="exclusions" value="" placeholder="e.g. staffing agency, student" />
         </section>
@@ -244,11 +244,11 @@ const $ = id => document.getElementById(id);
 const esc = x => String(x ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let rows = [], selected = null, edits = new Map(), decisions = new Map(), decisionsLog=[];
 const fictional = `company,contact_name,title,email,industry,event_name,evidence_url,evidence_date,do_not_contact,prior_contact,context
-"Harbor Arts Foundation","Jasmine Cole","Development Director",jasmine@example.org,arts,"Annual Benefit Gala","https://example.org/fictional-gala",2026-10-22,no,no,"Fictional example; event details are not independently verified"
-"Crestline Systems","Martin Diaz","VP of Experiential Marketing",martin@example.net,technology,"Customer Summit","https://example.net/fictional-summit",2026-09-30,no,no,"Fictional example; not verified"
-"Bayview Civic Society","Avery Chen","Executive Director",avery@example.com,nonprofit,,,,no,no,"No documented current trigger; generic outreach only"
-"Orchard Conference Group","Elliot Gray","Conference Producer",elliot@example.org,association,"Spring Conference","https://example.org/demo",2026-10-15,yes,no,"Suppressed: do not contact"
-"Harbor Arts Foundation","Someone Else","Development Director",JASMINE@example.org,arts,"Annual Benefit Gala","https://example.org/fictional-gala",2026-10-22,no,no,"Duplicate email"`;
+"Cedar Point Law","Jordan Blake","Managing Partner",jordan@example.org,legal,"New Practice Announcement","https://example.org/fictional-practice",2026-10-22,no,no,"Fictional example; announcement not independently verified"
+"Harbor Wealth Advisors","Morgan Diaz","Chief Operating Officer",morgan@example.net,wealth,"Regional Office Opening","https://example.net/fictional-office",2026-09-30,no,no,"Fictional example; not verified"
+"Northline Supply Co","Avery Chen","Owner",avery@example.com,services,,,,no,no,"No documented trigger; generic outreach only"
+"Orchard Legal Group","Elliot Gray","Practice Administrator",elliot@example.org,legal,"New Partner Announcement","https://example.org/demo",2026-10-15,yes,no,"Suppressed: do not contact"
+"Cedar Point Law","Someone Else","Managing Partner",JORDAN@example.org,legal,"New Practice Announcement","https://example.org/fictional-practice",2026-10-22,no,no,"Duplicate email"`;
 function updateMetrics(){
  $('metric-total').textContent=rows.length;
  $('metric-eligible').textContent=rows.filter(r=>r.status==='review').length;
