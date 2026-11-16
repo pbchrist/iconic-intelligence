@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>ICONIC — Outreach Intelligence Workbench</title>
+  <style>
+:root{font-family:Inter,'Helvetica Neue',Arial,sans-serif;color:#e8e9e8;background:#0b0e11;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-width:320px;background:radial-gradient(ellipse at 52% -12%,#1b2f30 0%,transparent 39%),#0b0e11}button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible, .prospect-row:focus-visible{outline:2px solid #9fdecf;outline-offset:2px}.site-shell{max-width:1600px;margin:auto;padding:0 34px}.topbar{height:80px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #2c3436}.wordmark{font-size:27px;font-weight:850;letter-spacing:-1.5px}.period{color:#a8ebd5}.topmeta,.topright,.overline{font-size:10px;letter-spacing:2.15px;color:#94a5a2;font-weight:750}.topmeta{display:flex;align-items:center;gap:9px}.live-dot{width:7px;height:7px;display:inline-block;background:#a6e9d1;border-radius:50%;box-shadow:0 0 10px #a6e9d1}.separator{width:18px;height:1px;background:#3a4647;margin:0 10px}.topright{color:#dee9e2}.topright span{color:#647974;margin-left:14px}.hero{padding:74px 0 48px}.overline{color:#9fcbbe}h1{font-size:clamp(53px,5.5vw,92px);letter-spacing:-5px;font-weight:650;line-height:.96;margin:19px 0 23px}h1 em{font-style:normal;color:#a5e2cf}.hero p{max-width:660px;color:#9caaa9;font-size:16px;line-height:1.65}.pipeline{margin-top:47px;display:flex;align-items:stretch;gap:12px;flex-wrap:wrap}.pipeline>div{flex:1 1 150px;min-width:115px;border-top:1px solid #506b64;padding:14px 5px 0;display:flex;flex-direction:column;gap:7px}.pipeline>div span{font-size:10px;letter-spacing:1px;color:#82b8a7}.pipeline b{font-size:14px;font-weight:600}.pipeline small{color:#859997;font-size:11px}.pipeline i{font-size:19px;color:#698e83;font-style:normal;margin-top:14px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #2a3637;border-radius:4px;background:linear-gradient(180deg,#152022,#11181b);margin-bottom:27px}.metric{padding:25px 28px;border-right:1px solid #2e3b3b;display:flex;flex-direction:column;gap:7px}.metric:last-child{border-right:0}.metric span{font-size:10px;letter-spacing:1.4px;font-weight:700;color:#8da29d}.metric strong{font-size:41px;line-height:1.1;letter-spacing:-2px;font-weight:600;color:#e4f6ee}.metric small{font-size:11px;color:#6e8881}.workspace{display:grid;grid-template-columns:minmax(310px,370px) minmax(550px,1fr);gap:20px;align-items:start}.controls,.results{display:flex;flex-direction:column;gap:20px}.panel{background:#11171a;border:1px solid #2c393b;border-radius:5px;padding:25px}.panel-top{display:flex;gap:12px;align-items:center}.step{color:#a0e0cd;background:#22352f;border-radius:3px;font-size:10px;letter-spacing:1px;font-weight:800;padding:8px}h2{font-size:22px;letter-spacing:-.6px;font-weight:600;margin:0}.panel-desc{color:#8fa09d;line-height:1.6;font-size:12px;margin:16px 0 25px}.panel label{font-size:10px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#94aaa3;display:block;margin:19px 0 9px}input,textarea{background:#0c1114;color:#d9e4df;border:1px solid #354245;width:100%;padding:11px 13px;border-radius:3px;font-size:13px;line-height:1.55;resize:vertical}input::placeholder,textarea::placeholder{color:#63726f}.filebox{display:flex!important;justify-content:center;align-items:center;gap:10px;border:1px dashed #5d7f73;border-radius:4px;padding:16px!important;color:#c0e5d5!important;cursor:pointer;margin-bottom:15px!important}.filebox span{font-size:22px}.filebox small{color:#6a8a81;font-size:10px;text-transform:none;letter-spacing:0}.buttonrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.buttonrow button{padding:12px 17px;border-radius:3px;font-size:11px;font-weight:750;letter-spacing:.3px;border:1px solid #49665b;flex:1;white-space:nowrap}.primary{background:#a4e5d0;color:#11201b;border:1px solid #a4e5d0!important}.primary:hover{background:#d2ffe8}.secondary{background:#15211f;color:#bcddd1}.secondary:hover{background:#263a35}.error{margin-top:14px;color:#ffb6a5;background:#311e1b;padding:12px;font-size:12px}.style-feedback{font-size:11px;color:#9ecbbd;margin-top:12px}.results-heading{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}.results-heading .overline{margin-bottom:9px}.legend{display:flex;align-items:center;gap:13px;font-size:10px}.leg-review{color:#b3ead6}.leg-block{color:#d19d8f}.table-wrap{overflow:auto;max-height:620px}table{border-collapse:collapse;width:100%;font-size:12px;text-align:left;min-width:610px}thead{position:sticky;top:0;z-index:1;background:#141c1e}th{font-size:9px;letter-spacing:1.05px;color:#859891;font-weight:800;padding:12px 10px;border-bottom:1px solid #364645}td{padding:17px 10px;border-bottom:1px solid #273336;color:#b0c0ba;vertical-align:middle}.prospect-row{cursor:pointer;transition:background .15s}.prospect-row:hover,.prospect-row.selected{background:#1c302c}.person{display:block;color:#e2eee7;font-weight:700;margin-bottom:6px}.organization{color:#91a8a0;font-size:11px}.score{display:inline-block;padding:6px 8px;border:1px solid #566e65;border-radius:2px;font-weight:750;color:#b0e3d0;font-variant-numeric:tabular-nums}.pill{display:inline-block;font-size:9px;font-weight:750;text-transform:uppercase;letter-spacing:.4px;padding:5px 7px;border:1px solid #527367;border-radius:2px;color:#b4e3d2}.pill.blocked{border-color:#6c5148;color:#dba89a}.evidence-link{color:#a8d5c7;text-decoration:underline;text-underline-offset:3px}.no-proof{color:#6f827c}.empty{padding:50px 12px;text-align:center;color:#819690}.table-footer{display:flex;align-items:center;justify-content:space-between;gap:15px;color:#748882;font-size:10px;margin-top:20px}.not-sent{font-size:10px;color:#c7c99b;letter-spacing:1.2px;font-weight:700}.draft-placeholder{text-align:center;padding:75px 20px}.draft-icon{display:inline-flex;border:1px solid #48665a;color:#ade3d0;border-radius:100%;height:62px;width:62px;align-items:center;justify-content:center;font-size:30px}.draft-placeholder h3{font-size:20px;font-weight:550}.draft-placeholder p{font-size:12px;max-width:330px;margin:0 auto;color:#8fa39d;line-height:1.7}.draft-context{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:#cae2d9;margin:16px 0}.score-explainer{display:flex;gap:5px;flex-wrap:wrap}.score-explainer span{font-size:10px;border:1px solid #39544a;padding:5px 7px;color:#a2d4be;border-radius:2px}.disclaimer{font-size:11px;color:#82988f;line-height:1.5}.review-state{min-height:22px;color:#b6decf;font-size:12px;margin-top:12px}.export-bar{padding:23px;border:1px solid #395348;background:#14211f;border-radius:4px;display:flex;align-items:center;justify-content:space-between;gap:20px}.export-bar strong{font-size:13px}.export-bar p{font-size:11px;line-height:1.55;color:#91a59d;max-width:420px}.export-bar .buttonrow{margin:0}.export-bar .buttonrow button{flex:none}footer{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:56px 0 32px;padding-top:20px;border-top:1px solid #2a3d38;font-size:12px;font-weight:800}footer span{color:#79928a;font-size:9px;letter-spacing:1.5px;margin-left:14px}footer p{font-size:10px;font-weight:400;color:#799089;line-height:1.6}@media(max-width:1080px){.workspace{grid-template-columns:1fr}.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.controls .panel:last-child{grid-column:span 2}}@media(max-width:740px){.site-shell{padding:0 17px}.topbar{height:67px}.topmeta{display:none}.topright{font-size:8px}.hero{padding:52px 0 30px}h1{letter-spacing:-3px}.pipeline{gap:6px;margin-top:30px}.pipeline>div{flex:1 1 130px}.pipeline i{display:none}.metrics{grid-template-columns:repeat(2,1fr)}.metric{padding:19px}.metric:nth-child(2){border-right:0}.metric:nth-child(-n+2){border-bottom:1px solid #2e3b3b}.controls{display:flex}.panel{padding:19px}.results-heading,.export-bar{align-items:start;flex-direction:column}.export-bar .buttonrow{width:100%}.export-bar .buttonrow button{flex:1}.table-footer{flex-direction:column;align-items:start}footer{flex-direction:column;align-items:start}footer span{margin-left:8px}}
+
+</style>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="wordmark">ICONIC<span class="period">.</span></div>
+      <div class="topmeta"><span class="live-dot"></span> PRIVATE WORKBENCH <span class="separator"></span> LOCAL-ONLY PROTOTYPE</div>
+      <div class="topright">OUTREACH INTELLIGENCE <span>01 / 03</span></div>
+    </header>
+
+    <section class="hero">
+      <div class="overline">A BETTER WAY TO FIND THE RIGHT BUYER</div>
+      <h1>Know who to reach.<br><em>Know why.</em></h1>
+      <p>Turn a prospect list into ranked opportunities, evidence-linked outreach, and a reviewable decision trail. Every claim has a source. Every send needs a human.</p>
+      <div class="pipeline" aria-label="Processing stages">
+        <div><span>01</span><b>Import</b><small>Authorized contacts</small></div>
+        <i>→</i><div><span>02</span><b>Evaluate</b><small>Fit + source evidence</small></div>
+        <i>→</i><div><span>03</span><b>Draft</b><small>Writing-style profile</small></div>
+        <i>→</i><div><span>04</span><b>Review</b><small>Approve or reject</small></div>
+        <i>→</i><div><span>05</span><b>Export</b><small>No automatic sending</small></div>
+      </div>
+    </section>
+
+    <section class="metrics" aria-label="Pipeline metrics">
+      <div class="metric"><span>RECORDS EVALUATED</span><strong id="metric-total">0</strong><small>source rows</small></div>
+      <div class="metric"><span>ELIGIBLE FOR REVIEW</span><strong id="metric-eligible">0</strong><small>passed hard gates</small></div>
+      <div class="metric"><span>BLOCKED / HELD</span><strong id="metric-blocked">0</strong><small>do not send</small></div>
+      <div class="metric"><span>APPROVED TO EXPORT</span><strong id="metric-approved">0</strong><small>still unsent</small></div>
+    </section>
+
+    <main class="workspace">
+      <aside class="controls">
+        <section class="panel">
+          <div class="panel-top"><span class="step">01</span><h2>Audience definition</h2></div>
+          <p class="panel-desc">Tell the evaluator what a qualified buyer looks like. Scoring is deterministic, explainable, and never claims to predict purchase probability.</p>
+          <label for="roles">Buyer role keywords</label>
+          <textarea id="roles" rows="2" spellcheck="false">event,marketing,development,executive,partnership,conference,experiential</textarea>
+          <label for="industries">Target industry keywords</label>
+          <textarea id="industries" rows="2" spellcheck="false">nonprofit,arts,finance,technology,association,hospitality</textarea>
+          <label for="exclusions">Hard exclusions</label>
+          <input id="exclusions" value="" placeholder="e.g. staffing agency, student" />
+        </section>
+
+        <section class="panel">
+          <div class="panel-top"><span class="step">02</span><h2>Source records</h2></div>
+          <p class="panel-desc">Import a CSV you are authorized to use. Contact data never leaves this browser. Evidence URLs are supplied by you, not fetched or independently validated.</p>
+          <label class="filebox" for="csvfile"><span>↑</span> Choose a .csv file <small>or paste below</small></label>
+          <input id="csvfile" type="file" accept=".csv,text/csv" hidden />
+          <textarea id="csv" rows="6" placeholder="company,contact_name,title,email,industry,event_name,evidence_url,evidence_date,do_not_contact,prior_contact" spellcheck="false"></textarea>
+          <div class="buttonrow"><button id="loadsample" class="secondary" type="button">Load fictional example</button><button id="evaluate" class="primary" type="button">Evaluate records →</button></div>
+          <div id="import-error" role="alert" class="error" hidden></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-top"><span class="step">03</span><h2>Writing voice</h2></div>
+          <p class="panel-desc">Paste your own writing. This prototype derives simple style preferences (greeting, signoff, length). It does not train or call an LLM.</p>
+          <textarea id="voice" rows="5" placeholder="Paste a few emails you've written, with confidential details removed.">Hi there,
+
+I saw what your team was building and wanted to make a connection. It may be useful to talk through where things stand and see if there's an opportunity to help.
+
+Best,</textarea>
+          <label for="offer">What ICONIC can help them accomplish</label>
+          <textarea id="offer" rows="3">identify overlooked revenue opportunities and build the AI workflows that act on them</textarea>
+          <div class="style-feedback" id="style-feedback">Style: waiting for input</div>
+        </section>
+      </aside>
+
+      <section class="results">
+        <section class="panel results-panel">
+          <div class="results-heading"><div><div class="overline">EVIDENCE-LED PRIORITIZATION</div><h2>Prospect queue</h2></div><div class="legend"><span class="leg-review">● Ready for review</span><span class="leg-block">● Blocked</span></div></div>
+          <div class="table-wrap"><table><thead><tr><th>CONTACT / COMPANY</th><th>ROLE</th><th>FIT SCORE</th><th>EVIDENCE</th><th>STATUS</th></tr></thead><tbody id="prospects"><tr><td colspan="5" class="empty">Load the fictional example or import a CSV to begin.</td></tr></tbody></table></div>
+          <div class="table-footer"><span id="queue-foot">No records loaded.</span><span>Scoring explains fit and evidence, not buying intent.</span></div>
+        </section>
+
+        <section class="panel draft-panel">
+          <div class="results-heading"><div><div class="overline">HUMAN-IN-THE-LOOP</div><h2>Outreach draft</h2></div><span class="not-sent">● NOTHING IS SENT</span></div>
+          <div id="draft-empty" class="draft-placeholder"><span class="draft-icon">↗</span><h3>Select a qualified contact</h3><p>You'll see the score rationale, source-linked context, and a draft you can approve, edit, or reject.</p></div>
+          <div id="draft-view" hidden>
+            <div class="draft-context" id="draft-context"></div>
+            <div class="score-explainer" id="score-explainer"></div>
+            <label for="subject">Subject</label><input id="subject" />
+            <label for="body">Message</label><textarea id="body" rows="10"></textarea>
+            <p class="disclaimer" id="draft-confidence"></p>
+            <div class="buttonrow"><button id="reject" type="button" class="secondary">Reject draft</button><button id="approve" type="button" class="primary">Approve for CSV export</button></div>
+            <div id="review-state" role="status" class="review-state"></div>
+          </div>
+        </section>
+        <section class="export-bar"><div><strong>Review ledger</strong><p>Export approved drafts or an audit of evaluations and decisions. Both downloads stay on your device.</p></div><div class="buttonrow"><button type="button" class="secondary" id="export-audit">Export audit JSON</button><button type="button" class="primary" id="export-csv">Export approved CSV</button></div></section>
+      </section>
+    </main>
+
+    <footer><div>ICONIC<span class="period">.</span> <span>INTELLIGENCE THAT COMPOUNDS.</span></div><p>Prototype v0.1 · No external API · No enrichment · No email verification · No sending · No cross-client data reuse</p></footer>
+  </div>
+  <script type="module">
+// ICONIC Outreach Workbench: deterministic, local-only lead evaluation and drafting.
+// No network calls, deliverability claims, or automatic sending.
+export const requiredFields = ['company', 'contact_name', 'title', 'email'];
+const aliases = {
+  company: ['company', 'organization', 'account', 'company_name'],
+  contact_name: ['contact_name', 'name', 'full_name', 'person'],
+  title: ['title', 'job_title', 'role'],
+  email: ['email', 'work_email', 'email_address'],
+  website: ['website', 'company_website'],
+  industry: ['industry', 'vertical', 'category'],
+  event_name: ['event_name', 'signal', 'opportunity', 'event'],
+  evidence_url: ['evidence_url', 'source_url', 'proof_url', 'source'],
+  evidence_date: ['evidence_date', 'observed_date', 'source_date', 'event_date'],
+  context: ['context', 'source_notes', 'notes', 'why_now'],
+  do_not_contact: ['do_not_contact', 'dnc', 'opt_out', 'unsubscribed'],
+  prior_contact: ['prior_contact', 'contacted', 'already_contacted'],
+};
+
+export function parseCSV(raw) {
+  const text = String(raw ?? '').replace(/^\uFEFF/, '');
+  const rows = [];
+  let row = [], field = '', quote = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (quote) {
+      if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
+      else if (c === '"') quote = false;
+      else field += c;
+    } else if (c === '"' && field === '') quote = true;
+    else if (c === ',') { row.push(field); field = ''; }
+    else if (c === '\n' || c === '\r') {
+      if (c === '\r' && text[i + 1] === '\n') i++;
+      row.push(field); field = '';
+      if (row.some(x => x.trim())) rows.push(row);
+      row = [];
+    } else field += c;
+  }
+  if (quote) throw new Error('Malformed CSV: unclosed quoted field.');
+  row.push(field);
+  if (row.some(x => x.trim())) rows.push(row);
+  if (!rows.length) return [];
+  const headers = rows.shift().map(x => x.trim().toLowerCase().replace(/[\s-]+/g, '_'));
+  const result = [];
+  for (let j = 0; j < rows.length; j++) {
+    const rawObj = Object.fromEntries(headers.map((h,i) => [h, (rows[j][i] || '').trim()]));
+    const item = {};
+    for (const [dest, names] of Object.entries(aliases)) item[dest] = names.map(n => rawObj[n] || '').find(Boolean) || '';
+    item.row_number = j + 2;
+    result.push(item);
+  }
+  return result;
+}
+const yes = x => /^(1|yes|true|y|opted.?out|unsubscribe|do.not.contact)$/i.test(String(x).trim());
+const emailSyntax = email => /^[^\s@,;<>]+@[^\s@,;<>]+\.[a-z]{2,}$/i.test(email || '');
+const safeUrl = url => { try { const u = new URL(url); return ['http:','https:'].includes(u.protocol) && !!u.hostname && !u.username && !u.password ? u.href : ''; } catch { return ''; } };
+const terms = str => String(str || '').toLowerCase().split(/[\n,;|]/).map(x => x.trim()).filter(Boolean);
+const matchAny = (str, words) => words.some(w => str.toLowerCase().includes(w));
+
+export function analyze(rows, opts = {}) {
+  const roles = terms(opts.roles || 'event,marketing,development,executive,partnership,conference,experiential');
+  const industries = terms(opts.industries || 'nonprofit,arts,finance,technology,association,hospitality');
+  const excluded = terms(opts.exclusions || '');
+  const now = opts.today ? new Date(opts.today) : new Date();
+  const seen = new Set();
+  return rows.map((r, index) => {
+    const reasons = [];
+    const email = String(r.email || '').trim().toLowerCase();
+    if (yes(r.do_not_contact)) reasons.push('Do-not-contact / opt-out');
+    if (yes(r.prior_contact)) reasons.push('Previously contacted');
+    if (!emailSyntax(email)) reasons.push('Invalid email syntax (not a deliverability test)');
+    if (email && seen.has(email)) reasons.push('Duplicate email in this import');
+    if (email) seen.add(email);
+    if (requiredFields.some(key => !String(r[key] || '').trim())) reasons.push('Missing required identity field');
+    const haystack = [r.company, r.title, r.industry, r.event_name, r.context].join(' ').toLowerCase();
+    if (excluded.length && matchAny(haystack, excluded)) reasons.push('Excluded by ICP rule');
+    const url = safeUrl(r.evidence_url);
+    let score = 0;
+    const breakdown = [];
+    const add = (n, label) => { score += n; breakdown.push({points:n, label}); };
+    if (matchAny(r.title || '', roles)) add(35, 'Buyer-role match');
+    if (matchAny(r.industry || '', industries)) add(20, 'Target vertical match');
+    if (url) add(20, 'Evidence URL supplied (not independently checked)');
+    if (url && r.event_name) add(10, 'Named opportunity with linked source');
+    let ageDays = null;
+    if (r.evidence_date) {
+      const date = new Date(r.evidence_date);
+      if (!Number.isNaN(date.getTime()) && date <= now) {
+        ageDays = Math.round((now-date) / 86400000);
+        if (ageDays <= 90) add(15, 'Source dated within 90 days');
+      }
+    }
+    return {
+      ...r, id: `${index+1}-${email}`, email, evidence_url: url,
+      score: Math.min(100, score), breakdown, age_days: ageDays,
+      status: reasons.length ? 'blocked' : 'review', reasons,
+      email_check: emailSyntax(email) ? 'syntax only — unverified' : 'invalid',
+      score_type: 'heuristic fit + evidence, NOT purchase probability'
+    };
+  }).sort((a,b) => (a.status === 'blocked') - (b.status === 'blocked') || b.score - a.score);
+}
+
+export function styleFromSamples(samples) {
+  const text = String(samples || '').trim();
+  const words = text.split(/\s+/).filter(Boolean);
+  const sentences = text.split(/[.!?]+/).map(x=>x.trim()).filter(Boolean);
+  const avg = words.length / Math.max(1, sentences.length);
+  const greeting = /^\s*(hey|hello|hi|good morning|good afternoon)\b/im.exec(text)?.[1] || 'Hi';
+  const closings = ['Best', 'Thanks', 'Regards', 'Cheers', 'Sincerely'];
+  const closing = closings.find(w => new RegExp('^'+w+'[,!]?\\s*$', 'im').test(text)) || 'Best';
+  return {greeting: greeting[0].toUpperCase()+greeting.slice(1), closing,
+    length: avg <= 12 ? 'concise' : avg >= 25 ? 'detailed' : 'balanced',
+    sample_words: words.length, training: false};
+}
+
+const first = text => String(text || '').trim().split(/\s+/)[0] || 'there';
+export function draft(p, style = styleFromSamples(''), offer = 'help your team identify and act on valuable opportunities') {
+  if (p.status === 'blocked') throw new Error('Blocked prospect: draft prohibited.');
+  const cleanOffer = String(offer).replace(/[\r\n]+/g,' ').trim() || 'improve your workflow';
+  const cited = p.evidence_url && p.event_name;
+  const subject = cited ? `${p.company} — ${p.event_name}` : `A thought for ${p.company}`;
+  const observation = cited
+    ? `I came across ${p.event_name} on a page associated with ${p.company}: ${p.evidence_url}.`
+    : `I work with teams exploring ways to improve how they find and act on opportunities.`;
+  // Deliberately avoids assertions about intent, budgets, events without a source URL, or email verification.
+  const body = `${style.greeting} ${first(p.contact_name)},\n\n${observation}\n\nI wanted to reach out because ICONIC can ${cleanOffer}. Would it be useful to compare notes briefly?\n\n${style.closing},\nPatrick`;
+  return {subject, body, confidence: cited ? 'source supplied, not independently verified' : 'generic; no verified company-specific claim',
+    sender_approval_required: true, sent: false, model_used: false};
+}
+
+export function toCSV(rows, fields) {
+  const cell = x => {
+    let v = String(x ?? '');
+    if (/^[\s]*[=+\-@]/.test(v)) v = "'" + v; // spreadsheet formula injection protection
+    return `"${v.replace(/"/g, '""')}"`;
+  };
+  return [fields.map(cell).join(','),...rows.map(row=>fields.map(f=>cell(row[f])).join(','))].join('\r\n');
+}
+
+const $ = id => document.getElementById(id);
+const esc = x => String(x ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let rows = [], selected = null, edits = new Map(), decisions = new Map(), decisionsLog=[];
+const fictional = `company,contact_name,title,email,industry,event_name,evidence_url,evidence_date,do_not_contact,prior_contact,context
+"Harbor Arts Foundation","Jasmine Cole","Development Director",jasmine@example.org,arts,"Annual Benefit Gala","https://example.org/fictional-gala",2026-10-22,no,no,"Fictional example; event details are not independently verified"
+"Crestline Systems","Martin Diaz","VP of Experiential Marketing",martin@example.net,technology,"Customer Summit","https://example.net/fictional-summit",2026-09-30,no,no,"Fictional example; not verified"
+"Bayview Civic Society","Avery Chen","Executive Director",avery@example.com,nonprofit,,,,no,no,"No documented current trigger; generic outreach only"
+"Orchard Conference Group","Elliot Gray","Conference Producer",elliot@example.org,association,"Spring Conference","https://example.org/demo",2026-10-15,yes,no,"Suppressed: do not contact"
+"Harbor Arts Foundation","Someone Else","Development Director",JASMINE@example.org,arts,"Annual Benefit Gala","https://example.org/fictional-gala",2026-10-22,no,no,"Duplicate email"`;
+function updateMetrics(){
+ $('metric-total').textContent=rows.length;
+ $('metric-eligible').textContent=rows.filter(r=>r.status==='review').length;
+ $('metric-blocked').textContent=rows.filter(r=>r.status==='blocked').length;
+ $('metric-approved').textContent=[...decisions.values()].filter(v=>v==='approved').length;
+ $('queue-foot').textContent=`${rows.length} rows · ${rows.filter(r=>r.status==='review').length} available for review · no emails sent`;
+}
+function render(){
+ updateMetrics();
+ if(!rows.length){$('prospects').innerHTML='<tr><td colspan="5" class="empty">Load the fictional example or import a CSV to begin.</td></tr>';return;}
+ $('prospects').innerHTML=rows.map((r,i)=>`<tr class="prospect-row ${i===selected?'selected':''}" data-index="${i}" tabindex="0" role="button" aria-label="Select ${esc(r.contact_name)} at ${esc(r.company)}">
+ <td><span class="person">${esc(r.contact_name)}</span><span class="organization">${esc(r.company)}</span></td>
+ <td>${esc(r.title)}</td><td><span class="score">${r.score}/100</span></td>
+ <td>${r.evidence_url?`<a class="evidence-link" href="${esc(r.evidence_url)}" target="_blank" rel="noopener noreferrer" data-evidence="1">Supplied source ↗</a>`:'<span class="no-proof">Unlinked</span>'}</td>
+ <td><span class="pill ${r.status==='blocked'?'blocked':''}">${r.status==='blocked'?'Blocked':esc(decisions.get(r.id)||'Review')}</span></td></tr>`).join('');
+}
+function selectRow(i){
+ selected=i;render();
+ const r=rows[i];if(!r){$('draft-view').hidden=true;$('draft-empty').hidden=false;return;}
+ $('draft-empty').hidden=true;$('draft-view').hidden=false;
+ $('draft-context').innerHTML=`<strong>${esc(r.contact_name)} · ${esc(r.company)}</strong><span>Score ${r.score}/100</span>`;
+ const tags=r.breakdown.map(p=>`<span>+${p.points} ${esc(p.label)}</span>`);
+ if(r.reasons.length)tags.push(...r.reasons.map(v=>`<span>BLOCK: ${esc(v)}</span>`));
+ $('score-explainer').innerHTML=tags.join('')||'<span>No fit evidence supplied</span>';
+ if(r.status==='blocked'){
+  $('subject').value='';$('body').value='This record is blocked: '+r.reasons.join('; ');
+  $('subject').disabled=true;$('body').disabled=true;$('approve').disabled=true;
+  $('reject').disabled=true;$('draft-confidence').textContent='No draft generated for blocked records.';
+  $('review-state').textContent='Do not contact.';return;
+ }
+ $('subject').disabled=false;$('body').disabled=false;$('approve').disabled=false;$('reject').disabled=false;
+ const sty=styleFromSamples($('voice').value);
+ const result=edits.get(r.id)||draft(r,sty,$('offer').value);
+ $('subject').value=result.subject;$('body').value=result.body;
+ $('draft-confidence').textContent=`Evidence status: ${result.confidence}. Email: ${r.email_check}. No LLM or external verification used.`;
+ $('review-state').textContent=decisions.get(r.id)==='approved'?'Approved for export only. Not sent.':decisions.get(r.id)==='rejected'?'Rejected. Nothing sent.':'Unreviewed. Editing is allowed; sending is disabled.';
+}
+function evaluate(){
+ try{
+  const csv=$('csv').value;const parsed=parseCSV(csv);
+  if(!parsed.length)throw new Error('Enter CSV data or load the fictional example.');
+  if(parsed.length>5000)throw new Error('Limit: 5,000 rows per run.');
+  rows=analyze(parsed,{roles:$('roles').value,industries:$('industries').value,exclusions:$('exclusions').value});
+  selected=null;edits.clear();decisions.clear();decisionsLog=[];
+  $('import-error').hidden=true;
+  $('draft-view').hidden=true;$('draft-empty').hidden=false;
+  const sty=styleFromSamples($('voice').value);
+  $('style-feedback').textContent=`Writing preferences: ${sty.greeting} · ${sty.closing} · ${sty.length}; ${sty.sample_words} sample words. No model training.`;
+  render();
+ }catch(e){$('import-error').hidden=false;$('import-error').textContent=e.message;}
+}
+function recordDecision(status){
+ if(selected==null)return;const r=rows[selected];if(r.status==='blocked')return;
+ const edited={subject:$('subject').value.trim(),body:$('body').value.trim()};
+ if(status==='approved'&&(!edited.subject||!edited.body)){ $('review-state').textContent='Subject and message required before approval.';return; }
+ edits.set(r.id,{...edited,confidence:'Human-edited draft; evidence unverified'});
+ decisions.set(r.id,status);
+ decisionsLog.push({event_id:crypto.randomUUID(),at:new Date().toISOString(),record_id:r.id,decision:status,source_url:r.evidence_url||null,score:r.score,identity:r.email,verification:'email syntax only'});
+ $('review-state').textContent=status==='approved'?'Approved for export. Still not sent.':'Rejected. Nothing sent.';
+ render();
+}
+function download(filename,text,type){const blob=new Blob([text],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);}
+$('loadsample').addEventListener('click',()=>{$('csv').value=fictional;evaluate()});
+$('evaluate').addEventListener('click',evaluate);
+$('csvfile').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;if(f.size>5_000_000){$('import-error').hidden=false;$('import-error').textContent='Maximum file size: 5 MB';return;}$('csv').value=await f.text();evaluate();});
+$('prospects').addEventListener('click',e=>{if(e.target.closest('a'))return;const row=e.target.closest('[data-index]');if(row)selectRow(Number(row.dataset.index));});
+$('prospects').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const row=e.target.closest('[data-index]');if(row){e.preventDefault();selectRow(Number(row.dataset.index));}}});
+$('approve').addEventListener('click',()=>recordDecision('approved'));
+$('reject').addEventListener('click',()=>recordDecision('rejected'));
+for(const id of ['subject','body'])$(id).addEventListener('input',()=>{if(selected==null)return;const r=rows[selected];if(r.status==='blocked')return;edits.set(r.id,{subject:$('subject').value,body:$('body').value,confidence:'Human-edited'});if(decisions.get(r.id)==='approved'){decisions.delete(r.id);$('review-state').textContent='Edited after approval. Review again before export.';render();}});
+$('voice').addEventListener('input',()=>{const s=styleFromSamples($('voice').value);$('style-feedback').textContent=`Writing preferences: ${s.greeting} · ${s.closing} · ${s.length}; ${s.sample_words} sample words. No model training.`;});
+$('export-csv').addEventListener('click',()=>{
+ const approved=rows.filter(r=>r.status!=='blocked'&&decisions.get(r.id)==='approved').map(r=>({...r,subject:edits.get(r.id)?.subject||'',body:edits.get(r.id)?.body||'',sending_status:'NOT SENT; HUMAN APPROVAL FOR EXPORT ONLY',email_verification:r.email_check}));
+ if(!approved.length){alert('No approved drafts. Review at least one eligible contact first.');return;}
+ download('iconic-approved-unsent-drafts.csv',toCSV(approved,['contact_name','company','title','email','score','evidence_url','subject','body','email_verification','sending_status']),'text/csv;charset=utf-8');
+});
+$('export-audit').addEventListener('click',()=>{
+ if(!rows.length){alert('Evaluate records first.');return;}
+ const report={product:'ICONIC Outreach Workbench',version:'0.1',generated_at:new Date().toISOString(),data_source:'user-supplied CSV; not checked against source websites',limitations:['No contact enrichment','No inbox verification','No autonomous sending','Heuristic fit scores, not purchase probabilities','No LLM invoked'],config:{roles:$('roles').value,industries:$('industries').value,exclusions:$('exclusions').value},records:rows.map(r=>({id:r.id,company:r.company,contact_name:r.contact_name,email:r.email,source_url:r.evidence_url,status:r.status,reasons:r.reasons,score:r.score,breakdown:r.breakdown,decision:decisions.get(r.id)||'unreviewed'})),decisions:decisionsLog};
+ download('iconic-outreach-audit.json',JSON.stringify(report,null,2),'application/json');
+});
+const sty=styleFromSamples($('voice').value);$('style-feedback').textContent=`Writing preferences: ${sty.greeting} · ${sty.closing} · ${sty.length}; ${sty.sample_words} sample words. No model training.`;
+
+</script>
+</body>
+</html>
