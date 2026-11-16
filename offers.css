@@ -116,3 +116,7 @@
 .of-price i:last-child { margin-bottom: 0; }
 .sv-list li a, .sv-cta p a, .rv-faq details p a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(192,198,255,.4); }
 #box .of-step h3 { font-size: clamp(28px, 2.6vw, 36px); line-height: 1.05; }
+.of-card ul.src-list { gap: 14px; margin-top: 6px; }
+.of-card ul.src-list li { font-size: 15px; line-height: 1.55; color: #b5bacb; }
+.of-card ul.src-list li b { color: var(--pearl); font-weight: 600; }
+.of-card ul.src-list a { color: var(--accent-2); font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(192,198,255,.4); white-space: nowrap; }

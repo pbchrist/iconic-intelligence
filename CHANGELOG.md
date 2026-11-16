@@ -1,6 +1,7 @@
 ## 2026-11-16 — Repositioned around paid offers (branch reposition-paid-offers, not live)
 - Homepage rebuilt around "Your business has problems you can't see. Your competitors are counting on it.": recognizable problems, three offers (Learn AI, Evaluate for $2,000, Build from $20,000), how it works, labeled proof (client work, research, live demo), training, the paid evaluation and a final call to action. The live demo, the compounding 3D story, the agent strip and the bio stay. The free 30-minute check is gone from the site.
 - Pitch reworked the same day around the private box (Patrick's correction): hero "It works like magic. And it never leaves your office.", a new "Private because it's a box" section, and the live demo moved up to third. The three offers and prices stay as the ways to get one.
+- New "Rent it from them, and it's their box" section names Microsoft and Amazon with five dated, linked facts (outages and data use). It does not say the Microsoft outage caused the FAA ground stop of 2026-11-13; officials said the two were unrelated.
 - New pages: /services/, /services/ai-training/, /services/evaluation/, /services/build/, /services/ongoing-intelligence/, each with FAQ and structured data. Booking uses the existing Calendly link; no card checkout was added. Training prices are shown as proposed and must be approved before this goes live.
 - AI reference files (llms.txt, llms-full.txt, /ai/), sitemap, research hub and Reserve page now point to the new offers instead of the free check.
 
