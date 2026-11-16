@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 
 # Canonical human and agent discovery entry points
+# Merchant service and agent checkout catalog: https://iconic.onl/commerce/catalog.json
 # Agent directory: https://iconic.onl/agents/
 # Machine-readable service index: https://iconic.onl/llms.txt
 # Detailed agent reference: https://iconic.onl/llms-full.txt
