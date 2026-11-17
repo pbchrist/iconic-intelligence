@@ -37,6 +37,7 @@
 <link rel="stylesheet" href="/mobile-first.css?v=20261110r">
 <link rel="stylesheet" href="/agents/reserve/reserve.css?v=20261112a">
 <link rel="stylesheet" href="/preview/offers.css?v=20261116clarity">
+<link rel="stylesheet" href="/preview/learning-paths.css?v=20261116b">
 <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
 <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 </head>
@@ -59,7 +60,7 @@
 <p class="sv-crumb"><a href="/preview/">ICONIC</a> · <a href="/preview/services/">Services</a> · AI Training</p>
 <h1 id="svTitle">Know what you need. <em>Learn to make it work.</em></h1>
 <p class="rv-deck">First get clear on the job. Then learn to use AI for it, including a private model on your own computer if that makes sense. Model comparisons, benchmarks, agents and custom systems come when you need them.</p>
-<div class="hero-actions"><a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking data-offer="training">BOOK YOUR AI TRAINING</a><a class="button button-ghost" href="#curriculum">EXPLORE THE TOPICS</a></div>
+<div class="hero-actions"><a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking data-offer="training">BOOK YOUR AI TRAINING</a><a class="button button-ghost" href="#curriculum">FIND MY PATH</a></div>
 <p class="cta-note">No discovery call required. Pick a time and the session is arranged directly.</p>
 </div>
 </section>
@@ -73,57 +74,596 @@
 </section>
 
 
-<section id="curriculum" class="rv-sec sv-sec curriculum-section" aria-labelledby="curriculum-title">
-<div class="section-kicker">CHOOSE THE WORK, THEN THE TOOLS</div>
-<h2 id="curriculum-title">Know what you need. <em>Then make it work.</em></h2>
-<p class="rv-lead">You can start by putting private AI on your own computer. That part doesn't need to be complicated. The decisions come after: what work should it handle, how intelligent does it need to be, and how do you know it's good enough?</p>
-<p class="curriculum-context"><strong>Five practical starting points. 29 subject areas.</strong> Pick the one that describes what you're trying to accomplish. These are tailored training topics, not a requirement to take five courses in order.</p>
-<div class="curriculum-tracks"><details class="curriculum-track" open>
-  <summary><span class="curriculum-level">01</span><strong>Get clear on the job</strong><span class="curriculum-toggle" aria-hidden="true"></span></summary>
-  <div class="curriculum-track-body">
-    <p class="curriculum-track-label">START HERE</p>
-    <p>Identify where AI can genuinely help. Match the task to the risks, privacy needs and level of human review. You don't need a model name to start.</p>
-    <ul class="curriculum-topics"><li><span>01</span>Understanding AI and its limits</li><li><span>02</span>Giving AI instructions and context</li><li><span>03</span>Using AI for everyday work</li><li><span>04</span>Research and checking sources</li><li><span>22</span>Spreadsheets and data analysis</li><li><span>27</span>Business AI discovery and evaluation</li><li><span>28</span>Voice and transcription workflows</li></ul>
-    <p class="curriculum-lab"><b>Example lab:</b> Leave with three ranked opportunities, a privacy decision and one useful workflow.</p>
+<section id="curriculum" class="rv-sec sv-sec curriculum-section pathfinder" aria-labelledby="curriculum-title">
+<div class="section-kicker">FIND YOUR WAY IN</div>
+<h2 id="curriculum-title">What do you want <em>AI to do?</em></h2>
+<p class="rv-lead">Pick what sounds like you. Each choice leads to another, then a practical starting point. You can change your mind, go back, or explore the whole inventory at any time.</p>
+<div class="path-view-tabs" role="group" aria-label="Choose how to explore AI training">
+  <button type="button" class="path-view-tab is-active" data-path-view="story" aria-pressed="true">FIND MY PATH</button>
+  <button type="button" class="path-view-tab" data-path-view="inventory" aria-pressed="false">BROWSE ALL 439 SKILLS</button>
+</div>
+<div id="path-story-view" class="path-story-view">
+  <div class="path-progress"><span id="path-trail">START</span><span id="path-step-count">YOUR NEXT MOVE</span></div>
+  <div id="path-stage" class="path-stage" aria-live="polite" aria-atomic="false"><h3>What do you want AI to do?</h3><p>Choose the direction that sounds most useful to you.</p></div>
+  <div class="path-navigation">
+    <button type="button" id="path-back" disabled>← BACK</button>
+    <button type="button" id="path-restart">START OVER ↺</button>
   </div>
+  <noscript><p>This guided path uses JavaScript. You can still <a href="/preview/skill-inventory.csv">download the complete skill list (CSV)</a>.</p></noscript>
+</div>
+<div id="inventory" class="path-inventory-view" hidden>
+  <div class="inventory-intro"><h3>Every skill, in one place.</h3><p>The complete 439-competency inventory, sorted into 29 subjects. Browse or search without taking the guided route. Difficulty describes an individual skill, not the order in which you must learn.</p></div>
+  <div class="inventory-controls">
+    <label for="inventory-search">SEARCH SKILLS <input id="inventory-search" type="search" placeholder="Search 439 skills…"></label>
+    <label for="inventory-module">SUBJECT <select id="inventory-module"><option value="all">All 29 subjects</option><option value="1">01 · AI literacy and mental models (12)</option>
+<option value="2">02 · Prompting and context engineering (15)</option>
+<option value="3">03 · Everyday AI work (13)</option>
+<option value="4">04 · Research / sources / verification (15)</option>
+<option value="5">05 · Model ecosystem / selection / routing (15)</option>
+<option value="6">06 · Agent architecture and behavior (16)</option>
+<option value="7">07 · Hermes agent operations (17)</option>
+<option value="8">08 · Persistent memory across models and agents (15)</option>
+<option value="9">09 · RAG / document intelligence / knowledge graphs (16)</option>
+<option value="10">10 · Local model acquisition / inference (21)</option>
+<option value="11">11 · GPUs / CUDA / Linux server administration (18)</option>
+<option value="12">12 · Private networking / remote endpoints / operations (13)</option>
+<option value="13">13 · APIs / MCP / tools / discovery (18)</option>
+<option value="14">14 · Browser automation / computer use (13)</option>
+<option value="15">15 · Cross-app workflows / scheduling (16)</option>
+<option value="16">16 · AI-assisted coding / GitHub / CI-CD (18)</option>
+<option value="17">17 · Evaluations / benchmarking / observability (15)</option>
+<option value="18">18 · Security / privacy / data handling (16)</option>
+<option value="19">19 · Building AI-facing web products (16)</option>
+<option value="20">20 · AEO / crawler access / machine discovery (14)</option>
+<option value="21">21 · Payments / agent-native transactions (17)</option>
+<option value="22">22 · Spreadsheets / data reconciliation / analytics (14)</option>
+<option value="23">23 · Dealership / pricing / CRM intelligence (14)</option>
+<option value="24">24 · OSINT / research / lead sourcing (15)</option>
+<option value="25">25 · Outreach / content / social systems (15)</option>
+<option value="26">26 · Writing / editorial systems / narrative consistency (14)</option>
+<option value="27">27 · AI discovery / evaluations / training delivery (16)</option>
+<option value="28">28 · Voice / transcripts / content intake (9)</option>
+<option value="29">29 · Experimental / complex system design (13)</option></select></label>
+    <label for="inventory-level">DIFFICULTY <select id="inventory-level">
+      <option value="all">All levels</option>
+      <option value="L1">L1 · Foundational</option>
+      <option value="L2">L2 · Practitioner</option>
+      <option value="L3">L3 · Advanced practitioner</option>
+      <option value="L4">L4 · Technical builder</option>
+      <option value="L5">L5 · Systems engineer</option>
+      <option value="L6">L6 · Architect / specialist</option>
+    </select></label>
+  </div>
+  <div class="inventory-tools"><p id="inventory-results" role="status">Showing 439 of 439 skills</p><div><button type="button" id="inventory-expand">EXPAND ALL</button><button type="button" id="inventory-collapse">COLLAPSE ALL</button><a href="/preview/skill-inventory.csv" download>DOWNLOAD CSV</a></div></div>
+  <div id="inventory-list" class="inventory-list"><details class="inventory-module" data-module="1" data-name="ai literacy and mental models">
+<summary><span class="inventory-module-code">01</span><strong>AI literacy and mental models</strong><span class="inventory-count">12 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">01.01</span><span class="inventory-skill-name">AI vs rules-based automation</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">01.02</span><span class="inventory-skill-name">Generative AI vs predictive AI</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">01.03</span><span class="inventory-skill-name">LLMs and language-model use cases</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">01.04</span><span class="inventory-skill-name">Tokens / context windows / output limits</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">01.05</span><span class="inventory-skill-name">Hallucinations and their business consequences</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">01.06</span><span class="inventory-skill-name">Capabilities and limitations of chatbots</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">01.07</span><span class="inventory-skill-name">Cloud vs local inference</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">01.08</span><span class="inventory-skill-name">Proprietary vs open-weight models</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">01.09</span><span class="inventory-skill-name">Chat / assistants / agents / automations distinctions</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">01.10</span><span class="inventory-skill-name">When NOT to use AI</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">01.11</span><span class="inventory-skill-name">How to turn a business problem into an AI task</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">01.12</span><span class="inventory-skill-name">How to evaluate AI output before acting</span><span class="inventory-skill-level">L2</span></li></ul>
 </details>
-<details class="curriculum-track">
-  <summary><span class="curriculum-level">02</span><strong>Get your own AI running</strong><span class="curriculum-toggle" aria-hidden="true"></span></summary>
-  <div class="curriculum-track-body">
-    <p class="curriculum-track-label">PRIVATE AI · INTRODUCTORY</p>
-    <p>Install a suitable local model, open a chat interface, and try it on tasks you care about. A basic private-AI quickstart is a beginner exercise; customized GPU drivers, uptime and server deployment are separate technical topics.</p>
-    <ul class="curriculum-topics"><li><span>10</span>Local model basics, downloading models and running inference</li><li><span>18</span>Privacy, data boundaries and safe handling</li></ul>
-    <p class="curriculum-lab"><b>Example lab:</b> Run a local model, confirm where requests and data go, and complete a first real task.</p>
-  </div>
+<details class="inventory-module" data-module="2" data-name="prompting and context engineering">
+<summary><span class="inventory-module-code">02</span><strong>Prompting and context engineering</strong><span class="inventory-count">15 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">02.01</span><span class="inventory-skill-name">Clear instructions and explicit success criteria</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">02.02</span><span class="inventory-skill-name">Providing useful context and source documents</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">02.03</span><span class="inventory-skill-name">Example-driven prompting</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">02.04</span><span class="inventory-skill-name">Iterative drafting and correction</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">02.05</span><span class="inventory-skill-name">Specifying format / audience / tone / constraints</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">02.06</span><span class="inventory-skill-name">Structured outputs / tables / schemas</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">02.07</span><span class="inventory-skill-name">Prompt templates and reusable instructions</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">02.08</span><span class="inventory-skill-name">Role instructions and system behavior</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">02.09</span><span class="inventory-skill-name">Breaking complex work into subtasks</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">02.10</span><span class="inventory-skill-name">Avoiding fabricated facts and unsupported claims</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">02.11</span><span class="inventory-skill-name">Context-window allocation and condensation</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">02.12</span><span class="inventory-skill-name">Prompt chaining across stages</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">02.13</span><span class="inventory-skill-name">Tool-aware prompt design</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">02.14</span><span class="inventory-skill-name">Instruction hierarchies and conflicting constraints</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">02.15</span><span class="inventory-skill-name">Reusable brand voice and writing rules</span><span class="inventory-skill-level">L3</span></li></ul>
 </details>
-<details class="curriculum-track">
-  <summary><span class="curriculum-level">03</span><strong>Find out how smart it needs to be</strong><span class="curriculum-toggle" aria-hidden="true"></span></summary>
-  <div class="curriculum-track-body">
-    <p class="curriculum-track-label">MODEL FIT · MORE ADVANCED</p>
-    <p>A model can answer quickly and still reason poorly. Compare candidates on your actual tasks using correctness, consistency, instruction-following, time to first answer, tokens per second, context requirements, hardware use and operating cost.</p>
-    <ul class="curriculum-topics"><li><span>05</span>Choosing and routing local and frontier models</li><li><span>17</span>Intelligence benchmarks, task evaluations and reliability tests</li></ul>
-    <p class="curriculum-lab"><b>Example lab:</b> Build a small task-specific test set, compare at least two models, and explain the speed-versus-quality tradeoff.</p>
-  </div>
+<details class="inventory-module" data-module="3" data-name="everyday ai work">
+<summary><span class="inventory-module-code">03</span><strong>Everyday AI work</strong><span class="inventory-count">13 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">03.01</span><span class="inventory-skill-name">Drafting and revising emails</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">03.02</span><span class="inventory-skill-name">Summarizing long documents</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">03.03</span><span class="inventory-skill-name">Extracting actionable tasks from text</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">03.04</span><span class="inventory-skill-name">Building outlines / briefs / proposals</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">03.05</span><span class="inventory-skill-name">Translating jargon for nontechnical audiences</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">03.06</span><span class="inventory-skill-name">Comparing options and decisions</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">03.07</span><span class="inventory-skill-name">Converting messy notes into structured records</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">03.08</span><span class="inventory-skill-name">Generating checklists and standard operating procedures</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">03.09</span><span class="inventory-skill-name">Building meeting preparation and follow-ups</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">03.10</span><span class="inventory-skill-name">Producing client-ready deliverables</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">03.11</span><span class="inventory-skill-name">Rewriting for precise voice and constraints</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">03.12</span><span class="inventory-skill-name">Turning one source into multiple communication formats</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">03.13</span><span class="inventory-skill-name">Measuring actual time saved and quality maintained</span><span class="inventory-skill-level">L3</span></li></ul>
 </details>
-<details class="curriculum-track">
-  <summary><span class="curriculum-level">04</span><strong>Give your AI useful work</strong><span class="curriculum-toggle" aria-hidden="true"></span></summary>
-  <div class="curriculum-track-body">
-    <p class="curriculum-track-label">WORKFLOWS · AGENTS</p>
-    <p>Make your AI more useful by connecting the right information, building repeatable tasks, and, where appropriate, assigning bounded work to agents.</p>
-    <ul class="curriculum-topics"><li><span>06</span>Agent architecture and behavior</li><li><span>07</span>Hermes installation and operations</li><li><span>08</span>Shared persistent memory across agents and models</li><li><span>09</span>Document retrieval, RAG and knowledge graphs</li><li><span>14</span>Computer use and browser automation</li><li><span>15</span>Cross-app workflows and scheduling</li><li><span>23</span>Dealership and inventory intelligence</li><li><span>24</span>OSINT and prospect research</li><li><span>25</span>Marketing and outreach systems</li><li><span>26</span>Writing and creative consistency systems</li></ul>
-    <p class="curriculum-lab"><b>Example lab:</b> Turn one manual process into an auditable workflow with a useful output.</p>
-  </div>
+<details class="inventory-module" data-module="4" data-name="research / sources / verification">
+<summary><span class="inventory-module-code">04</span><strong>Research / sources / verification</strong><span class="inventory-count">15 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">04.01</span><span class="inventory-skill-name">Finding relevant public sources</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">04.02</span><span class="inventory-skill-name">Selecting primary vs secondary sources</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">04.03</span><span class="inventory-skill-name">Formulating targeted search queries</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">04.04</span><span class="inventory-skill-name">Synthesizing multiple documents</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">04.05</span><span class="inventory-skill-name">Extracting numbers / quotations / dates</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">04.06</span><span class="inventory-skill-name">Checking recency of changing facts</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">04.07</span><span class="inventory-skill-name">Separating observations / evidence / interpretation</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">04.08</span><span class="inventory-skill-name">Creating auditable source trails</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">04.09</span><span class="inventory-skill-name">Handling conflicting evidence</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">04.10</span><span class="inventory-skill-name">Triangulating public and private data</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">04.11</span><span class="inventory-skill-name">Building research dossiers</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">04.12</span><span class="inventory-skill-name">Writing defensible white papers</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">04.13</span><span class="inventory-skill-name">Anonymizing sensitive case-study data</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">04.14</span><span class="inventory-skill-name">Fact-checking claims before publication</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">04.15</span><span class="inventory-skill-name">Producing competitor and market intelligence matrices</span><span class="inventory-skill-level">L3</span></li></ul>
 </details>
-<details class="curriculum-track">
-  <summary><span class="curriculum-level">05</span><strong>Engineer what needs engineering</strong><span class="curriculum-toggle" aria-hidden="true"></span></summary>
-  <div class="curriculum-track-body">
-    <p class="curriculum-track-label">ADVANCED · OPTIONAL</p>
-    <p>Only some problems justify custom infrastructure. Learn how to connect tools, maintain servers, evaluate deployments and build production systems when the work calls for it.</p>
-    <ul class="curriculum-topics"><li><span>11</span>GPUs, NVIDIA drivers, CUDA and Linux administration</li><li><span>12</span>Private networking and service operations</li><li><span>13</span>APIs, MCP servers and tool discovery</li><li><span>16</span>AI coding, GitHub and CI/CD</li><li><span>19</span>AI products, websites and live demos</li><li><span>20</span>AI search and agent discoverability</li><li><span>21</span>Payments and agent commerce</li><li><span>29</span>Complex AI systems architecture</li></ul>
-    <p class="curriculum-lab"><b>Example lab:</b> Design and test a dependable implementation with security and recovery plans.</p>
-  </div>
+<details class="inventory-module" data-module="5" data-name="model ecosystem / selection / routing">
+<summary><span class="inventory-module-code">05</span><strong>Model ecosystem / selection / routing</strong><span class="inventory-count">15 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">05.01</span><span class="inventory-skill-name">Comparing major AI tool categories</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">05.02</span><span class="inventory-skill-name">Choosing models for writing vs coding vs analysis</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">05.03</span><span class="inventory-skill-name">Choosing local versus frontier execution</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">05.04</span><span class="inventory-skill-name">Identifying data that should stay local</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">05.05</span><span class="inventory-skill-name">Understanding model licenses and deployment constraints</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">05.06</span><span class="inventory-skill-name">Recognizing rate limits and usage caps</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">05.07</span><span class="inventory-skill-name">Estimating API cost from tokens</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">05.08</span><span class="inventory-skill-name">Routing requests by task difficulty</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">05.09</span><span class="inventory-skill-name">Routing requests by sensitivity and privacy</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">05.10</span><span class="inventory-skill-name">Routing requests by latency and availability</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">05.11</span><span class="inventory-skill-name">Fallback strategies when an API fails</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">05.12</span><span class="inventory-skill-name">OpenRouter and multi-provider abstraction</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">05.13</span><span class="inventory-skill-name">Selecting Qwen / dense / MoE models for hardware</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">05.14</span><span class="inventory-skill-name">Benchmarking quality / latency / cost tradeoffs</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">05.15</span><span class="inventory-skill-name">Model-regression evaluation before switching versions</span><span class="inventory-skill-level">L4</span></li></ul>
+</details>
+<details class="inventory-module" data-module="6" data-name="agent architecture and behavior">
+<summary><span class="inventory-module-code">06</span><strong>Agent architecture and behavior</strong><span class="inventory-count">16 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">06.01</span><span class="inventory-skill-name">What an AI agent is</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">06.02</span><span class="inventory-skill-name">Single-step assistant vs multi-step agent</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">06.03</span><span class="inventory-skill-name">Defining agent goals and authority</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">06.04</span><span class="inventory-skill-name">Specifying tools an agent may use</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">06.05</span><span class="inventory-skill-name">Human-in-the-loop checkpoints</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">06.06</span><span class="inventory-skill-name">Agent task decomposition and planning</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">06.07</span><span class="inventory-skill-name">Separating planner / researcher / executor</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">06.08</span><span class="inventory-skill-name">Agent handoffs across models</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">06.09</span><span class="inventory-skill-name">Designing tool-calling loops</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">06.10</span><span class="inventory-skill-name">Managing context and task state</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">06.11</span><span class="inventory-skill-name">Guardrails against runaway loops</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">06.12</span><span class="inventory-skill-name">Defining completion and stopping criteria</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">06.13</span><span class="inventory-skill-name">Multi-agent orchestration</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">06.14</span><span class="inventory-skill-name">Agent scheduling and recurring jobs</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">06.15</span><span class="inventory-skill-name">Separating privileges across agents</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">06.16</span><span class="inventory-skill-name">Designing reliable autonomous workflows</span><span class="inventory-skill-level">L5</span></li></ul>
+</details>
+<details class="inventory-module" data-module="7" data-name="hermes agent operations">
+<summary><span class="inventory-module-code">07</span><strong>Hermes agent operations</strong><span class="inventory-count">17 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">07.01</span><span class="inventory-skill-name">What Hermes is and where it fits</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">07.02</span><span class="inventory-skill-name">Installing and configuring Hermes instances</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">07.03</span><span class="inventory-skill-name">Configuring local Qwen as an agent backend</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">07.04</span><span class="inventory-skill-name">Configuring frontier models for Hermes</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">07.05</span><span class="inventory-skill-name">Maintaining separate Hermes identities</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">07.06</span><span class="inventory-skill-name">Customizing SOUL and persistent instructions</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">07.07</span><span class="inventory-skill-name">Configuring agent tools and skills</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">07.08</span><span class="inventory-skill-name">Connecting EXA web search</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">07.09</span><span class="inventory-skill-name">Designing a search-provider fallback</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">07.10</span><span class="inventory-skill-name">Telegram bot integration</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">07.11</span><span class="inventory-skill-name">User and channel permissions</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">07.12</span><span class="inventory-skill-name">Cron / scheduled research and alerts</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">07.13</span><span class="inventory-skill-name">Preventing duplicate recurring jobs</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">07.14</span><span class="inventory-skill-name">Enforcing turn limits and loop stops</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">07.15</span><span class="inventory-skill-name">Diagnosing tool failures and bad agent outputs</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">07.16</span><span class="inventory-skill-name">Moving an agent between local and frontier models</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">07.17</span><span class="inventory-skill-name">Running multiple agents without state collision</span><span class="inventory-skill-level">L4</span></li></ul>
+</details>
+<details class="inventory-module" data-module="8" data-name="persistent memory across models and agents">
+<summary><span class="inventory-module-code">08</span><strong>Persistent memory across models and agents</strong><span class="inventory-count">15 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">08.01</span><span class="inventory-skill-name">Chat history vs persistent memory</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">08.02</span><span class="inventory-skill-name">What belongs in long-term memory</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">08.03</span><span class="inventory-skill-name">Facts / preferences / state / procedures</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">08.04</span><span class="inventory-skill-name">Memory quality and stale facts</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">08.05</span><span class="inventory-skill-name">Cross-session identity and continuity</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">08.06</span><span class="inventory-skill-name">Cross-agent shared memory</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">08.07</span><span class="inventory-skill-name">Memory ingestion from conversations</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">08.08</span><span class="inventory-skill-name">Updating / correcting conflicting memory</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">08.09</span><span class="inventory-skill-name">Memory retrieval and relevance</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">08.10</span><span class="inventory-skill-name">Separating personal / project / organizational memory</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">08.11</span><span class="inventory-skill-name">Configuring a shared memory service</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">08.12</span><span class="inventory-skill-name">Integrating memory with agent tools</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">08.13</span><span class="inventory-skill-name">Adding source provenance to remembered facts</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">08.14</span><span class="inventory-skill-name">Designing memory lifecycle and retention</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">08.15</span><span class="inventory-skill-name">Designing persistent institutional memory architecture</span><span class="inventory-skill-level">L5</span></li></ul>
+</details>
+<details class="inventory-module" data-module="9" data-name="rag / document intelligence / knowledge graphs">
+<summary><span class="inventory-module-code">09</span><strong>RAG / document intelligence / knowledge graphs</strong><span class="inventory-count">16 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">09.01</span><span class="inventory-skill-name">Document-based question answering</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">09.02</span><span class="inventory-skill-name">Preparing files for retrieval</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">09.03</span><span class="inventory-skill-name">Chunking / document structure tradeoffs</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">09.04</span><span class="inventory-skill-name">Retrieval-augmented generation concept</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">09.05</span><span class="inventory-skill-name">Embeddings and semantic search</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">09.06</span><span class="inventory-skill-name">Source attribution in answers</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">09.07</span><span class="inventory-skill-name">Handling questions the corpus cannot answer</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">09.08</span><span class="inventory-skill-name">Document provenance and freshness</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">09.09</span><span class="inventory-skill-name">Organizing organizational facts into entities</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">09.10</span><span class="inventory-skill-name">Knowledge graph relationships</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">09.11</span><span class="inventory-skill-name">Grounded briefing generation</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">09.12</span><span class="inventory-skill-name">Operating an embeddings service</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">09.13</span><span class="inventory-skill-name">Connecting retrieval tools to a local model</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">09.14</span><span class="inventory-skill-name">Building a domain-specific knowledge assistant</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">09.15</span><span class="inventory-skill-name">Diagnosing missing / false citations</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">09.16</span><span class="inventory-skill-name">Architecture for a private firm knowledge system</span><span class="inventory-skill-level">L5</span></li></ul>
+</details>
+<details class="inventory-module" data-module="10" data-name="local model acquisition / inference">
+<summary><span class="inventory-module-code">10</span><strong>Local model acquisition / inference</strong><span class="inventory-count">21 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">10.01</span><span class="inventory-skill-name">Why businesses run models locally</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">10.02</span><span class="inventory-skill-name">Finding open models and model cards</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">10.03</span><span class="inventory-skill-name">Understanding model sizes and architecture</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">10.04</span><span class="inventory-skill-name">What GGUF files are</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">10.05</span><span class="inventory-skill-name">Quantization levels and quality tradeoffs</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">10.06</span><span class="inventory-skill-name">Estimating model disk space and memory needs</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">10.07</span><span class="inventory-skill-name">Downloading / organizing model weights</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">10.08</span><span class="inventory-skill-name">Selecting models for a specific GPU</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">10.09</span><span class="inventory-skill-name">Choosing context length / batch size</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">10.10</span><span class="inventory-skill-name">Deploying models with llama.cpp</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">10.11</span><span class="inventory-skill-name">Launching and using Open WebUI</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">10.12</span><span class="inventory-skill-name">Serving an OpenAI-compatible API</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">10.13</span><span class="inventory-skill-name">Configuring flash attention and KV cache</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">10.14</span><span class="inventory-skill-name">Understanding prompt processing vs generation speed</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">10.15</span><span class="inventory-skill-name">Choosing dense vs MoE deployment settings</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">10.16</span><span class="inventory-skill-name">Speculative decoding and MTP options</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">10.17</span><span class="inventory-skill-name">Streaming vs non-streaming responses</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">10.18</span><span class="inventory-skill-name">Handling GPU out-of-memory errors</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">10.19</span><span class="inventory-skill-name">Comparing local server builds and regressions</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">10.20</span><span class="inventory-skill-name">Benchmarking llama.cpp upgrades without disrupting service</span><span class="inventory-skill-level">L5</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">10.21</span><span class="inventory-skill-name">Maintaining multiple local model endpoints</span><span class="inventory-skill-level">L5</span></li></ul>
+</details>
+<details class="inventory-module" data-module="11" data-name="gpus / cuda / linux server administration">
+<summary><span class="inventory-module-code">11</span><strong>GPUs / CUDA / Linux server administration</strong><span class="inventory-count">18 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">11.01</span><span class="inventory-skill-name">CPU vs GPU inference basics</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">11.02</span><span class="inventory-skill-name">VRAM vs RAM vs storage bottlenecks</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">11.03</span><span class="inventory-skill-name">Using NVIDIA-SMI for GPU inspection</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">11.04</span><span class="inventory-skill-name">Understanding CUDA compatibility</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">11.05</span><span class="inventory-skill-name">Installing / troubleshooting NVIDIA drivers</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">11.06</span><span class="inventory-skill-name">Building software against CUDA</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">11.07</span><span class="inventory-skill-name">GPU isolation with CUDA_VISIBLE_DEVICES</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">11.08</span><span class="inventory-skill-name">Linux terminals / processes / permissions</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">11.09</span><span class="inventory-skill-name">Inspecting listening ports and processes</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">11.10</span><span class="inventory-skill-name">Reading service logs with journalctl</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">11.11</span><span class="inventory-skill-name">Writing and repairing systemd units</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">11.12</span><span class="inventory-skill-name">Restart policies / boot-enabled services</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">11.13</span><span class="inventory-skill-name">Running mixed GPU workloads</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">11.14</span><span class="inventory-skill-name">Estimating VRAM budget across models</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">11.15</span><span class="inventory-skill-name">Diagnosing GPU offload vs CPU fallback</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">11.16</span><span class="inventory-skill-name">Preventing production outages during experiments</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">11.17</span><span class="inventory-skill-name">Multi-service GPU resource scheduling</span><span class="inventory-skill-level">L5</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">11.18</span><span class="inventory-skill-name">Planning hardware upgrades by workload</span><span class="inventory-skill-level">L5</span></li></ul>
+</details>
+<details class="inventory-module" data-module="12" data-name="private networking / remote endpoints / operations">
+<summary><span class="inventory-module-code">12</span><strong>Private networking / remote endpoints / operations</strong><span class="inventory-count">13 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">12.01</span><span class="inventory-skill-name">Localhost vs LAN vs public endpoint</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">12.02</span><span class="inventory-skill-name">HTTP / ports / basic API requests</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">12.03</span><span class="inventory-skill-name">Private overlay networking with Tailscale</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">12.04</span><span class="inventory-skill-name">Secure remote model access</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">12.05</span><span class="inventory-skill-name">Tunneling services through Cloudflare</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">12.06</span><span class="inventory-skill-name">Public vs private gateway decisions</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">12.07</span><span class="inventory-skill-name">Diagnosing DNS and connection failures</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">12.08</span><span class="inventory-skill-name">Health endpoints and smoke tests</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">12.09</span><span class="inventory-skill-name">Routing traffic to inference services</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">12.10</span><span class="inventory-skill-name">Service availability and restart strategies</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">12.11</span><span class="inventory-skill-name">Network / firewall / packet filter diagnosis</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">12.12</span><span class="inventory-skill-name">Uptime monitoring and alerts</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">12.13</span><span class="inventory-skill-name">Production rollout / rollback for AI services</span><span class="inventory-skill-level">L5</span></li></ul>
+</details>
+<details class="inventory-module" data-module="13" data-name="apis / mcp / tools / discovery">
+<summary><span class="inventory-module-code">13</span><strong>APIs / MCP / tools / discovery</strong><span class="inventory-count">18 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">13.01</span><span class="inventory-skill-name">What an API is</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">13.02</span><span class="inventory-skill-name">REST requests / responses / status codes</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">13.03</span><span class="inventory-skill-name">JSON and structured arguments</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">13.04</span><span class="inventory-skill-name">OpenAI-compatible API shapes</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">13.05</span><span class="inventory-skill-name">Tool calling in LLM applications</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">13.06</span><span class="inventory-skill-name">MCP concept and client-server roles</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">13.07</span><span class="inventory-skill-name">Connecting agents to existing MCP servers</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">13.08</span><span class="inventory-skill-name">Creating and exposing an MCP server</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">13.09</span><span class="inventory-skill-name">Writing tool names / descriptions / schemas</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">13.10</span><span class="inventory-skill-name">Designing useful tool boundaries</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">13.11</span><span class="inventory-skill-name">Public manifests and discovery metadata</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">13.12</span><span class="inventory-skill-name">Gateway and endpoint architecture</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">13.13</span><span class="inventory-skill-name">Authentication / permissions for tools</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">13.14</span><span class="inventory-skill-name">Sandbox / test tool environments</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">13.15</span><span class="inventory-skill-name">Tool versioning and compatibility tests</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">13.16</span><span class="inventory-skill-name">Handling failed tool calls and retries</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">13.17</span><span class="inventory-skill-name">Agent-native API and service architecture</span><span class="inventory-skill-level">L5</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">13.18</span><span class="inventory-skill-name">Registry synchronization / public discovery</span><span class="inventory-skill-level">L5</span></li></ul>
+</details>
+<details class="inventory-module" data-module="14" data-name="browser automation / computer use">
+<summary><span class="inventory-module-code">14</span><strong>Browser automation / computer use</strong><span class="inventory-count">13 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">14.01</span><span class="inventory-skill-name">Distinguishing search from acting in a browser</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">14.02</span><span class="inventory-skill-name">Page reading / extraction / navigation</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">14.03</span><span class="inventory-skill-name">Automated form entry</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">14.04</span><span class="inventory-skill-name">Working in authenticated browser sessions</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">14.05</span><span class="inventory-skill-name">Screenshots / visual page verification</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">14.06</span><span class="inventory-skill-name">Multi-step browser workflows</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">14.07</span><span class="inventory-skill-name">Browser-based research and data capture</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">14.08</span><span class="inventory-skill-name">Automating repetitive admin workflows</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">14.09</span><span class="inventory-skill-name">Handling page changes / selectors / failures</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">14.10</span><span class="inventory-skill-name">Computer-use agent control patterns</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">14.11</span><span class="inventory-skill-name">Guarding irreversible UI actions</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">14.12</span><span class="inventory-skill-name">Browser / desktop tool authorization boundaries</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">14.13</span><span class="inventory-skill-name">Recovering from browser-automation failure</span><span class="inventory-skill-level">L4</span></li></ul>
+</details>
+<details class="inventory-module" data-module="15" data-name="cross-app workflows / scheduling">
+<summary><span class="inventory-module-code">15</span><strong>Cross-app workflows / scheduling</strong><span class="inventory-count">16 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">15.01</span><span class="inventory-skill-name">Identifying automation opportunities</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">15.02</span><span class="inventory-skill-name">Triggers / actions / conditions</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">15.03</span><span class="inventory-skill-name">Scheduling repetitive AI tasks</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">15.04</span><span class="inventory-skill-name">Calendar and meeting workflow design</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">15.05</span><span class="inventory-skill-name">Gmail search / categorization / drafting</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">15.06</span><span class="inventory-skill-name">Google Drive / Docs / Sheets integration</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">15.07</span><span class="inventory-skill-name">Turning meeting notes into action items</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">15.08</span><span class="inventory-skill-name">Telegram notification and command flows</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">15.09</span><span class="inventory-skill-name">Cross-application data handoff</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">15.10</span><span class="inventory-skill-name">Data extraction and record synchronization</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">15.11</span><span class="inventory-skill-name">Email-to-action intake patterns</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">15.12</span><span class="inventory-skill-name">Deduplication / idempotency in jobs</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">15.13</span><span class="inventory-skill-name">Webhook-based integrations</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">15.14</span><span class="inventory-skill-name">Scheduled enrichment and reporting jobs</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">15.15</span><span class="inventory-skill-name">Human approvals for outbound actions</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">15.16</span><span class="inventory-skill-name">Resilient multi-step business automation</span><span class="inventory-skill-level">L5</span></li></ul>
+</details>
+<details class="inventory-module" data-module="16" data-name="ai-assisted coding / github / ci-cd">
+<summary><span class="inventory-module-code">16</span><strong>AI-assisted coding / GitHub / CI-CD</strong><span class="inventory-count">18 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">16.01</span><span class="inventory-skill-name">What repositories and version control solve</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">16.02</span><span class="inventory-skill-name">Using AI to understand an unfamiliar codebase</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">16.03</span><span class="inventory-skill-name">Generating and reviewing code changes</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">16.04</span><span class="inventory-skill-name">Reading errors and debugging with AI</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">16.05</span><span class="inventory-skill-name">Git clone / commit / push / pull workflow</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">16.06</span><span class="inventory-skill-name">Branching and pull requests</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">16.07</span><span class="inventory-skill-name">Code review / diffs / merge conflicts</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">16.08</span><span class="inventory-skill-name">GitHub Issues and task tracking</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">16.09</span><span class="inventory-skill-name">Using Claude Code for software tasks</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">16.10</span><span class="inventory-skill-name">Using Codex / multiple coding agents</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">16.11</span><span class="inventory-skill-name">Structuring agent instructions in repositories</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">16.12</span><span class="inventory-skill-name">GitHub Actions and automated tests</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">16.13</span><span class="inventory-skill-name">Static websites through GitHub Pages</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">16.14</span><span class="inventory-skill-name">Automated deployment from repository changes</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">16.15</span><span class="inventory-skill-name">Coordinating work across multiple repositories</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">16.16</span><span class="inventory-skill-name">Secrets / environment variables in deployments</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">16.17</span><span class="inventory-skill-name">Pre-merge verification and regression gates</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">16.18</span><span class="inventory-skill-name">Production promotion and safe rollback</span><span class="inventory-skill-level">L5</span></li></ul>
+</details>
+<details class="inventory-module" data-module="17" data-name="evaluations / benchmarking / observability">
+<summary><span class="inventory-module-code">17</span><strong>Evaluations / benchmarking / observability</strong><span class="inventory-count">15 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">17.01</span><span class="inventory-skill-name">Defining what good output looks like</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">17.02</span><span class="inventory-skill-name">Manual review rubrics</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">17.03</span><span class="inventory-skill-name">Side-by-side model comparisons</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">17.04</span><span class="inventory-skill-name">Creating task-specific evaluation cases</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">17.05</span><span class="inventory-skill-name">Measuring factuality and evidence grounding</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">17.06</span><span class="inventory-skill-name">Tool-choice / tool-call correctness tests</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">17.07</span><span class="inventory-skill-name">Regression tests after prompt / model changes</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">17.08</span><span class="inventory-skill-name">Latency / throughput / tokens-per-second measures</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">17.09</span><span class="inventory-skill-name">Prompt processing vs generation benchmarks</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">17.10</span><span class="inventory-skill-name">API-level smoke and end-to-end tests</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">17.11</span><span class="inventory-skill-name">Testing unauthorized actions and permissions</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">17.12</span><span class="inventory-skill-name">Tracing tool failures and agent loops</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">17.13</span><span class="inventory-skill-name">Operational dashboards / health metrics</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">17.14</span><span class="inventory-skill-name">Quality gates for autonomous web output</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">17.15</span><span class="inventory-skill-name">Evaluation harness for agents in production</span><span class="inventory-skill-level">L5</span></li></ul>
+</details>
+<details class="inventory-module" data-module="18" data-name="security / privacy / data handling">
+<summary><span class="inventory-module-code">18</span><strong>Security / privacy / data handling</strong><span class="inventory-count">16 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">18.01</span><span class="inventory-skill-name">Business confidentiality and AI tools</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">18.02</span><span class="inventory-skill-name">Public / internal / sensitive data categories</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">18.03</span><span class="inventory-skill-name">Risks of uploading client data to cloud models</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">18.04</span><span class="inventory-skill-name">Data minimization and redaction</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">18.05</span><span class="inventory-skill-name">Human review of sensitive outputs</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">18.06</span><span class="inventory-skill-name">Secrets / tokens / environment isolation</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">18.07</span><span class="inventory-skill-name">Least-privilege agent permissions</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">18.08</span><span class="inventory-skill-name">Prompt injection and untrusted inputs</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">18.09</span><span class="inventory-skill-name">Tenant data separation principles</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">18.10</span><span class="inventory-skill-name">Auditing actions taken by agents</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">18.11</span><span class="inventory-skill-name">Secure handling of CRM and contact data</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">18.12</span><span class="inventory-skill-name">API authentication / authorization</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">18.13</span><span class="inventory-skill-name">Webhook signature verification</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">18.14</span><span class="inventory-skill-name">Threat-modeling autonomous agents</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">18.15</span><span class="inventory-skill-name">Multi-tenant isolation validation</span><span class="inventory-skill-level">L5</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">18.16</span><span class="inventory-skill-name">Incident recovery and privilege rollback</span><span class="inventory-skill-level">L5</span></li></ul>
+</details>
+<details class="inventory-module" data-module="19" data-name="building ai-facing web products">
+<summary><span class="inventory-module-code">19</span><strong>Building AI-facing web products</strong><span class="inventory-count">16 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">19.01</span><span class="inventory-skill-name">Turning a workflow into a software product idea</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">19.02</span><span class="inventory-skill-name">Sketching workflows and user journeys</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">19.03</span><span class="inventory-skill-name">Landing pages and simple marketing sites</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">19.04</span><span class="inventory-skill-name">Creating prototypes using coding agents</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">19.05</span><span class="inventory-skill-name">Building frontends backed by AI services</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">19.06</span><span class="inventory-skill-name">Connecting a web UI to a local model API</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">19.07</span><span class="inventory-skill-name">Chat streaming and UX responsiveness</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">19.08</span><span class="inventory-skill-name">Building evaluation / intake flows</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">19.09</span><span class="inventory-skill-name">Adding document uploads and retrieval</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">19.10</span><span class="inventory-skill-name">Building business-specific demo environments</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">19.11</span><span class="inventory-skill-name">End-to-end application flow diagrams</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">19.12</span><span class="inventory-skill-name">Integrating service and payment backends</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">19.13</span><span class="inventory-skill-name">Multi-repo application architecture</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">19.14</span><span class="inventory-skill-name">Generating websites from public business evidence</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">19.15</span><span class="inventory-skill-name">Site quality gates / screenshot validation</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">19.16</span><span class="inventory-skill-name">Production hardening and customer isolation</span><span class="inventory-skill-level">L5</span></li></ul>
+</details>
+<details class="inventory-module" data-module="20" data-name="aeo / crawler access / machine discovery">
+<summary><span class="inventory-module-code">20</span><strong>AEO / crawler access / machine discovery</strong><span class="inventory-count">14 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">20.01</span><span class="inventory-skill-name">Traditional SEO vs AI discovery</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">20.02</span><span class="inventory-skill-name">Writing direct-answer pages for customer questions</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">20.03</span><span class="inventory-skill-name">Search intent / question mapping</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">20.04</span><span class="inventory-skill-name">Building useful research and case-study pages</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">20.05</span><span class="inventory-skill-name">Internal linking and navigation structures</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">20.06</span><span class="inventory-skill-name">Robots.txt and crawler permissions</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">20.07</span><span class="inventory-skill-name">Sitemaps and canonical URLs</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">20.08</span><span class="inventory-skill-name">Search engine indexing submissions</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">20.09</span><span class="inventory-skill-name">IndexNow concept / implementation</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">20.10</span><span class="inventory-skill-name">Machine-readable page metadata</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">20.11</span><span class="inventory-skill-name">Public MCP documentation and agent manifests</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">20.12</span><span class="inventory-skill-name">Testing what an external agent can actually discover</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">20.13</span><span class="inventory-skill-name">AEO / agent-discoverability audit process</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">20.14</span><span class="inventory-skill-name">End-to-end agent discovery and conversion measurement</span><span class="inventory-skill-level">L5</span></li></ul>
+</details>
+<details class="inventory-module" data-module="21" data-name="payments / agent-native transactions">
+<summary><span class="inventory-module-code">21</span><strong>Payments / agent-native transactions</strong><span class="inventory-count">17 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">21.01</span><span class="inventory-skill-name">Human checkout vs agent-initiated purchasing</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">21.02</span><span class="inventory-skill-name">Products / prices / payment links</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">21.03</span><span class="inventory-skill-name">Stripe Checkout basics</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">21.04</span><span class="inventory-skill-name">Order lifecycle and receipts</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">21.05</span><span class="inventory-skill-name">Restricted API keys and payment permissions</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">21.06</span><span class="inventory-skill-name">Checkout session creation</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">21.07</span><span class="inventory-skill-name">Payment webhooks and verification</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">21.08</span><span class="inventory-skill-name">Automated post-payment delivery</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">21.09</span><span class="inventory-skill-name">Quotes / orders / purchase approvals</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">21.10</span><span class="inventory-skill-name">Permissioned agent access to purchased output</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">21.11</span><span class="inventory-skill-name">MCP tools for quoting and ordering</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">21.12</span><span class="inventory-skill-name">Agent identity and authorization concepts</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">21.13</span><span class="inventory-skill-name">Outcome records and transaction evidence</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">21.14</span><span class="inventory-skill-name">Payment sandbox vs live mode verification</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">21.15</span><span class="inventory-skill-name">HTTP 402 / x402 evaluation</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">21.16</span><span class="inventory-skill-name">Agent-to-agent service marketplace architecture</span><span class="inventory-skill-level">L5</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">21.17</span><span class="inventory-skill-name">Disputes / anti-fraud / privacy hardening</span><span class="inventory-skill-level">L5</span></li></ul>
+</details>
+<details class="inventory-module" data-module="22" data-name="spreadsheets / data reconciliation / analytics">
+<summary><span class="inventory-module-code">22</span><strong>Spreadsheets / data reconciliation / analytics</strong><span class="inventory-count">14 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">22.01</span><span class="inventory-skill-name">Reading spreadsheets with AI assistance</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">22.02</span><span class="inventory-skill-name">Converting unstructured information to tabular data</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">22.03</span><span class="inventory-skill-name">Filtering / sorting / joining records</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">22.04</span><span class="inventory-skill-name">Detecting duplicates and inconsistent identifiers</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">22.05</span><span class="inventory-skill-name">Comparing actual versus expected values</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">22.06</span><span class="inventory-skill-name">Basic charts and dashboards</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">22.07</span><span class="inventory-skill-name">Cross-sheet exclusion / do-not-contact checks</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">22.08</span><span class="inventory-skill-name">Data cleaning / normalization</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">22.09</span><span class="inventory-skill-name">Record matching with uncertain data</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">22.10</span><span class="inventory-skill-name">Finding anomalies and commercial opportunities</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">22.11</span><span class="inventory-skill-name">Automated report generation</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">22.12</span><span class="inventory-skill-name">Building repeatable reconciliation pipelines</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">22.13</span><span class="inventory-skill-name">Separating source data from calculated analysis</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">22.14</span><span class="inventory-skill-name">Evidence and audit trail for recommended actions</span><span class="inventory-skill-level">L4</span></li></ul>
+</details>
+<details class="inventory-module" data-module="23" data-name="dealership / pricing / crm intelligence">
+<summary><span class="inventory-module-code">23</span><strong>Dealership / pricing / CRM intelligence</strong><span class="inventory-count">14 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">23.01</span><span class="inventory-skill-name">Framing an industry-specific AI use case</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">23.02</span><span class="inventory-skill-name">Analyzing vehicle listings and offer pages</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">23.03</span><span class="inventory-skill-name">Competitive dealer price comparison</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">23.04</span><span class="inventory-skill-name">Reading CRM performance metrics</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">23.05</span><span class="inventory-skill-name">Interpreting lead / appointment / sales funnels</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">23.06</span><span class="inventory-skill-name">VIN-based inventory record analysis</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">23.07</span><span class="inventory-skill-name">Comparing market price to book values</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">23.08</span><span class="inventory-skill-name">Aging inventory and margin tradeoffs</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">23.09</span><span class="inventory-skill-name">Repricing opportunity prioritization</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">23.10</span><span class="inventory-skill-name">Turning CRM reports into operational recommendations</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">23.11</span><span class="inventory-skill-name">Cross-system evidence checking</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">23.12</span><span class="inventory-skill-name">Anonymized business case-study publication</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">23.13</span><span class="inventory-skill-name">Automated dealership intelligence agents</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">23.14</span><span class="inventory-skill-name">Outcome ledgers tracking realized value</span><span class="inventory-skill-level">L4</span></li></ul>
+</details>
+<details class="inventory-module" data-module="24" data-name="osint / research / lead sourcing">
+<summary><span class="inventory-module-code">24</span><strong>OSINT / research / lead sourcing</strong><span class="inventory-count">15 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">24.01</span><span class="inventory-skill-name">Ideal customer profiles and buyer categories</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">24.02</span><span class="inventory-skill-name">Boolean search operators</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">24.03</span><span class="inventory-skill-name">Search-engine X-ray sourcing</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">24.04</span><span class="inventory-skill-name">Finding decision makers vs influencers</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">24.05</span><span class="inventory-skill-name">Researching companies and event-buying signals</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">24.06</span><span class="inventory-skill-name">Locating publicly listed business email addresses</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">24.07</span><span class="inventory-skill-name">Domain and email pattern inference</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">24.08</span><span class="inventory-skill-name">Separating verified from inferred contact data</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">24.09</span><span class="inventory-skill-name">Evidence and confidence for contact records</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">24.10</span><span class="inventory-skill-name">De-duplicating people across organizations</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">24.11</span><span class="inventory-skill-name">Excluding existing contacts and DNC records</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">24.12</span><span class="inventory-skill-name">Segmented target-account research</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">24.13</span><span class="inventory-skill-name">Building outreach-ready CSV / Sheets trackers</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">24.14</span><span class="inventory-skill-name">Contact data quality assurance</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">24.15</span><span class="inventory-skill-name">Scaling AI-assisted sourcing with QA gates</span><span class="inventory-skill-level">L4</span></li></ul>
+</details>
+<details class="inventory-module" data-module="25" data-name="outreach / content / social systems">
+<summary><span class="inventory-module-code">25</span><strong>Outreach / content / social systems</strong><span class="inventory-count">15 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">25.01</span><span class="inventory-skill-name">Voice and tone for a target audience</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">25.02</span><span class="inventory-skill-name">Problem-led vs technology-led messaging</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">25.03</span><span class="inventory-skill-name">Writing personalized outreach drafts</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">25.04</span><span class="inventory-skill-name">Segmenting offers by buyer pain</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">25.05</span><span class="inventory-skill-name">Creating useful FAQs and landing-page copy</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">25.06</span><span class="inventory-skill-name">LinkedIn thought leadership content</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">25.07</span><span class="inventory-skill-name">Long-form educational articles</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">25.08</span><span class="inventory-skill-name">Turning research into business content</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">25.09</span><span class="inventory-skill-name">Content calendars and publishing workflows</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">25.10</span><span class="inventory-skill-name">Multi-channel repurposing</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">25.11</span><span class="inventory-skill-name">Quiz / assessment funnel architecture</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">25.12</span><span class="inventory-skill-name">Social automation with schedules and guardrails</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">25.13</span><span class="inventory-skill-name">Building lead-to-consultation pathways</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">25.14</span><span class="inventory-skill-name">Agent-assisted audience and controversy monitoring</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">25.15</span><span class="inventory-skill-name">Measuring outreach outcomes and refining targets</span><span class="inventory-skill-level">L4</span></li></ul>
+</details>
+<details class="inventory-module" data-module="26" data-name="writing / editorial systems / narrative consistency">
+<summary><span class="inventory-module-code">26</span><strong>Writing / editorial systems / narrative consistency</strong><span class="inventory-count">14 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">26.01</span><span class="inventory-skill-name">Brainstorming and outlining stories</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">26.02</span><span class="inventory-skill-name">Using AI without surrendering authorial voice</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">26.03</span><span class="inventory-skill-name">Character / setting / chronology tracking</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">26.04</span><span class="inventory-skill-name">Worldbuilding and story bible organization</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">26.05</span><span class="inventory-skill-name">Style guides and hard editorial constraints</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">26.06</span><span class="inventory-skill-name">Developmental feedback vs line editing</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">26.07</span><span class="inventory-skill-name">Generating revision options rather than replacing prose</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">26.08</span><span class="inventory-skill-name">Preserving continuity across multiple manuscripts</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">26.09</span><span class="inventory-skill-name">Canon-grounded character dialogue checks</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">26.10</span><span class="inventory-skill-name">Maintaining alternate timelines and branching logic</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">26.11</span><span class="inventory-skill-name">Integrating revisions without collateral text changes</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">26.12</span><span class="inventory-skill-name">Managing book descriptions and publishing metadata</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">26.13</span><span class="inventory-skill-name">EPUB / print production workflow with AI support</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">26.14</span><span class="inventory-skill-name">AI-powered creative knowledge base / dossier site</span><span class="inventory-skill-level">L4</span></li></ul>
+</details>
+<details class="inventory-module" data-module="27" data-name="ai discovery / evaluations / training delivery">
+<summary><span class="inventory-module-code">27</span><strong>AI discovery / evaluations / training delivery</strong><span class="inventory-count">16 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">27.01</span><span class="inventory-skill-name">Explain business AI in nontechnical language</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">27.02</span><span class="inventory-skill-name">Translate capabilities into business outcomes</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">27.03</span><span class="inventory-skill-name">Interview stakeholders about operational pain</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">27.04</span><span class="inventory-skill-name">Map repetitive tasks / bottlenecks / handoffs</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">27.05</span><span class="inventory-skill-name">Identify quick wins and high-risk uses</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">27.06</span><span class="inventory-skill-name">Teach staff to use AI on their real work</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">27.07</span><span class="inventory-skill-name">Create role-specific exercises</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">27.08</span><span class="inventory-skill-name">Evaluate model and vendor fit</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">27.09</span><span class="inventory-skill-name">Estimate ROI / time / revenue impacts</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">27.10</span><span class="inventory-skill-name">Rank use cases by value / effort / risk</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">27.11</span><span class="inventory-skill-name">Design a privacy-aware adoption plan</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">27.12</span><span class="inventory-skill-name">Define evaluation scope and success metrics</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">27.13</span><span class="inventory-skill-name">Propose build vs buy vs local deployment</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">27.14</span><span class="inventory-skill-name">Plan a proof of concept and pilot</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">27.15</span><span class="inventory-skill-name">Develop training-to-evaluation-to-build progression</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">27.16</span><span class="inventory-skill-name">Translate business requirements into system architecture</span><span class="inventory-skill-level">L5</span></li></ul>
+</details>
+<details class="inventory-module" data-module="28" data-name="voice / transcripts / content intake">
+<summary><span class="inventory-module-code">28</span><strong>Voice / transcripts / content intake</strong><span class="inventory-count">9 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">28.01</span><span class="inventory-skill-name">Voice dictation vs live conversational AI</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L1"><span class="inventory-skill-id">28.02</span><span class="inventory-skill-name">Speech-to-text for drafting</span><span class="inventory-skill-level">L1</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">28.03</span><span class="inventory-skill-name">Cleaning transcription errors</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">28.04</span><span class="inventory-skill-name">Summarizing meetings into decisions</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">28.05</span><span class="inventory-skill-name">Extracting owner / deadline / next step</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L2"><span class="inventory-skill-id">28.06</span><span class="inventory-skill-name">Turning spoken instructions into agent tasks</span><span class="inventory-skill-level">L2</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">28.07</span><span class="inventory-skill-name">Linking transcripts to project knowledge</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">28.08</span><span class="inventory-skill-name">Voice-to-content production workflows</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">28.09</span><span class="inventory-skill-name">Choosing transcription tooling for privacy</span><span class="inventory-skill-level">L3</span></li></ul>
+</details>
+<details class="inventory-module" data-module="29" data-name="experimental / complex system design">
+<summary><span class="inventory-module-code">29</span><strong>Experimental / complex system design</strong><span class="inventory-count">13 skills</span></summary>
+<ul class="inventory-skill-list"><li class="inventory-skill" data-level="L3"><span class="inventory-skill-id">29.01</span><span class="inventory-skill-name">Building YAML / machine-executable agent plans</span><span class="inventory-skill-level">L3</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">29.02</span><span class="inventory-skill-name">Cross-repository product orchestration</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">29.03</span><span class="inventory-skill-name">AI-powered website reconstruction pipeline</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">29.04</span><span class="inventory-skill-name">Evidence gating / hallucination checks in generated sites</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">29.05</span><span class="inventory-skill-name">Service catalog / capability matchmaking basics</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L4"><span class="inventory-skill-id">29.06</span><span class="inventory-skill-name">Agent outcome ledger design</span><span class="inventory-skill-level">L4</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">29.07</span><span class="inventory-skill-name">Tenant boundaries and customer-owned deployment design</span><span class="inventory-skill-level">L5</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">29.08</span><span class="inventory-skill-name">Reproducible installs and disaster recovery harness</span><span class="inventory-skill-level">L5</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">29.09</span><span class="inventory-skill-name">ERC agent identity / reputation interoperability</span><span class="inventory-skill-level">L5</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">29.10</span><span class="inventory-skill-name">End-to-end autonomous purchasing and settlement</span><span class="inventory-skill-level">L5</span></li>
+<li class="inventory-skill" data-level="L5"><span class="inventory-skill-id">29.11</span><span class="inventory-skill-name">Real-world evaluation of AI discoverability</span><span class="inventory-skill-level">L5</span></li>
+<li class="inventory-skill" data-level="L6"><span class="inventory-skill-id">29.12</span><span class="inventory-skill-name">Designing a secure multi-tenant agent marketplace</span><span class="inventory-skill-level">L6</span></li>
+<li class="inventory-skill" data-level="L6"><span class="inventory-skill-id">29.13</span><span class="inventory-skill-name">Designing production BYOC sovereign AI platform</span><span class="inventory-skill-level">L6</span></li></ul>
 </details></div>
-<p class="of-note">Behind these topics is a 439-competency teaching inventory. A basic private model quickstart is introductory; benchmarking reasoning against speed and maintaining production infrastructure take more testing and technical judgment.</p>
+  <p id="inventory-empty" class="inventory-empty" hidden>No skills match those filters. Try a different term or level.</p>
+</div>
+<p class="of-note">The pathfinder suggests what to learn, not what you must buy. Technical topics may need suitable hardware or accounts. Training can be arranged around the route you choose, while the full inventory remains open for exploration.</p>
 <div class="curriculum-actions"><a class="button button-primary" href="#formats">SEE TRAINING FORMATS AND PRICING</a><a class="button button-ghost" href="mailto:patrick@iconic.onl?subject=AI%20training%20topic">ASK ABOUT A TOPIC</a></div>
 </section>
 
@@ -172,6 +712,7 @@
 </main>
 
 <script src="/preview/app.js?v=20261116a" defer></script>
+<script src="/preview/learning-paths.js?v=20261116b" defer></script>
 <script>
 // Keep booking on ICONIC; the href remains a working fallback if the widget is blocked.
 document.addEventListener('click', function (event) {

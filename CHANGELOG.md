@@ -1,3 +1,11 @@
+## 2026-11-16 — Branching AI training navigator and complete skill browser
+
+- Replaced homepage training ladder with outcome-led choices that open a branching, keyboard-operable navigator on the AI training page.
+- The navigator asks what the visitor needs, then a second question, then offers an actionable route, lab, and links to relevant skills. Back and Start Over work without collecting user data.
+- Added the complete 439-competency, 29-module inventory, with keyword search, module and difficulty filters, expand/collapse and downloadable public CSV (skill names only, no private client proof notes).
+- Changed the hero demo button from "WATCH ONE THINK" to "TRY MINE", and its small demo label from "RUNNING ON ONE BOX" to "RUNNING ON MY LOCAL AI".
+- Training, evaluation, build pricing, existing booking links and live inference endpoints unchanged.
+
 ## 2026-11-16 — Reframe preview training around clarity and model fit
 
 - Homepage heading now asks what the customer's AI should actually do, replacing the intimidating "how deep" framing.
