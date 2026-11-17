@@ -72,10 +72,21 @@ if llms and market:
     else:
         print("INFO", "Marketplace section not present in llms.txt; no state claim made")
 if reserve:
-    check("Reserve free-only boundaries",
-          lambda: assert_true(reserve.get("paid_plans_live") is False
-                              and reserve.get("agent_initiated_charges_enabled") is False,
-                              "Reserve public manifest unexpectedly advertises paid charges"))
+    live_pass = check(
+        "Live Reserve Pass merchant catalog",
+        lambda: json.loads(get("https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers/reserve-pass"))
+    )
+    if live_pass:
+        check("Reserve Pass published paid boundaries",
+              lambda: assert_true(
+                  reserve.get("paid_plans_live") is True
+                  and (reserve.get("paid_offer") or {}).get("offer_id") == "reserve-pass"
+                  and (reserve.get("paid_offer") or {}).get("price_cents") == live_pass.get("approved_price_cents")
+                  and live_pass.get("purchasable") is True
+                  and live_pass.get("human_approval_required") is True
+                  and not any("checkout" in n or "purchase" in n for n in reserve.get("public_tools", [])),
+                  "Reserve manifest, live pass price/availability, human approval, or safe MCP boundary disagree"
+              ))
 registry = check("Official MCP Registry search", lambda: json.loads(get(REGISTRY)))
 if registry:
     names = sorted({entry.get("server", {}).get("name", "") for entry in registry.get("servers", [])})
