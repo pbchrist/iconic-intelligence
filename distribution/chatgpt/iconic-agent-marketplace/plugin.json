@@ -39,7 +39,13 @@
           "Which ICONIC agent services are actually available to purchase now?",
           "How much does the MCP Selection Test cost, and what does it include?"
         ],
-        "supportURL": "https://iconic.onl/agents/marketplace/#connect"
+        "supportURL": "https://iconic.onl/agents/marketplace/#connect",
+        "brandColor": "#30356F",
+        "brandColorDark": "#F4F1E8",
+        "composerIcon": "./assets/icon.png",
+        "composerIconDark": "./assets/icon.png",
+        "logo": "./assets/icon.png",
+        "logoDark": "./assets/icon.png"
       },
       "review": {
         "test_cases": {
