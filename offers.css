@@ -131,3 +131,13 @@
 
 
 .curriculum-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+
+/* Homepage headers, one system (2026-11-17, preview first: body.home-v2).
+   Hero h1 keeps its own large size. Every other homepage section h2 uses the
+   "Try it on a sample business" size. Side text in a split heading lines up with the top of its h2. */
+.home-v2 { --section-h2: min(clamp(2rem, 9.5vw, 2.9rem), calc((100vw - 32px) / 4.6 / var(--tz, 1))); }
+@media (min-width: 900px) { .home-v2 { --section-h2: clamp(54px, 7.5vw, 78px); } }
+body.home-v2 main#top > section:not(.hero) h2 { font-size: var(--section-h2); line-height: .97; }
+body.home-v2 .split-heading h2 { margin-top: 0; }
+body.home-v2 .split-heading { margin-top: 22px; align-items: start; }
+body.home-v2 .split-heading > p, body.home-v2 .split-heading > div > p:first-child { margin-top: 0; }
