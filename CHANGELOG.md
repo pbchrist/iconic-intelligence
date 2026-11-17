@@ -1,8 +1,8 @@
+## 2026-11-16 — Restore original sales pages after off-topic change
+- Undo the unrelated offer-funnel edits from the previous conversation turn; preserve the standalone x402 pay-per-crawl adapter and site discovery.
+
 ## 2026-11-16 — x402 pay-per-crawl edge adapter (code only; not active)
 - Add ops/pay-per-crawl Cloudflare Worker and 13 passing tests: opt-in 402 for training crawlers on research pages; preserve visitors, AI search and discovery endpoints. Current GitHub Pages/Namecheap hosting has no edge proxy, so the adapter is not deployed; no wallet, API credentials, or DNS changed.
-
-## 2026-11-16 — Revenue path (staged)
-- Put the $2,000 evaluation and $20,000 scoped build in the homepage pricing journey; give buyers direct proposal-request email or call actions on /commerce/; track offer intent without sending visitor-entered content; no checkout, tax policy or existing agent tools changed.
 
 ## 2026-11-10 — ICONIC Reserve connect page (staging, not live)
 - One page at /agents/reserve/ in the homepage design: hero with copyable MCP endpoint and live server status, quickstart for Claude (No sign in), Claude Code, Cursor, VS Code and other clients, all 16 tools loaded live from the server's schemas.json, an in-page free assessment and synthetic demo against the real public API, the seven Marketplace services as tiles (buying through the existing checkout), permissions, FAQ. Homepage gets a short "For your AI agents" section near the bottom plus a nav and footer link; the agent directory card and llms.txt point to it; the Marketplace page is restyled in the site design with its checkout code unchanged. The in-page live test needs the allowlisted-CORS change on the public Reserve gateway (pending approval).
