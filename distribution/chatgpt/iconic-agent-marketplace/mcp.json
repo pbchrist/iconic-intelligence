@@ -3,14 +3,7 @@
   "mcpServers": {
     "iconic_marketplace": {
       "type": "streamable-http",
-      "url": "https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp",
-      "extensions": {
-        "com.openai": {
-          "auth": {
-            "type": "none"
-          }
-        }
-      }
+      "url": "https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp"
     }
   }
 }
