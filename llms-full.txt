@@ -258,3 +258,11 @@ ICONIC published the white paper "Detecting Synchronized Repricing in Dealer Inv
 - White paper: https://iconic.onl/research/dealership-pricing-intelligence/
 - PDF: https://iconic.onl/research/dealership-pricing-intelligence/synchronized-repricing-dealer-inventory.pdf
 - Research index: https://iconic.onl/research/
+
+
+## Local model specialist training and evaluation (November 16, 2026)
+
+- Research article: https://iconic.onl/research/local-model-specialist-training/
+- Original LinkedIn source: https://www.linkedin.com/posts/becomeiconic_running-a-27-billion-parameter-model-on-my-share-7528228112904556544-UOhJ/
+- Experiment report and code: https://github.com/pbchrist/beastmaster-training/blob/feat/iconic-teacher-distillation-2026-11-10/ICONIC_SPECIALIST_TRAINING_RESULTS_2026-11-15.md
+- A Qwen3 4B candidate was fine-tuned with 60 QLoRA steps on an RTX 4060 Ti 16GB, passing 39/48 same-family synthetic probes versus 4/48 without the adapter, then 4/12 differently worded independent challenges; it regressed one protected case and was NOT deployed. The separate production 27B model remained running. No real customer data or paid API completions used. These scores do not establish production accuracy.

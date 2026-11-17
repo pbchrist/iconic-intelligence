@@ -10,7 +10,7 @@ The models and agent software are free and open. The client owns the computer. T
 - Hardware at cost.
 - No meter: no per-token billing. The ongoing costs are the computer, its power and any support the client chooses.
 
-Two core engagements are now advertised at $2,000 for a Business AI Evaluation and $20,000 for a scoped Private AI and Agent Build. Project scope, deliverables, hardware and support are agreed before any purchase. Other engagements remain custom-scoped. See https://iconic.onl/commerce/.
+Two core engagements are now advertised at $2,000 for a Business AI Evaluation and $18,000 for a scoped Private AI and Agent Build. Project scope, deliverables, hardware and support are agreed before any purchase. Other engagements remain custom-scoped. See https://iconic.onl/commerce/.
 
 ## How it starts
 
@@ -20,7 +20,7 @@ Two core engagements are now advertised at $2,000 for a Business AI Evaluation a
 
 ## Notes for agents
 
-Quote only the two published headline prices ($2,000 evaluation; $20,000 build), and explain that the work and purchase terms are scoped with ICONIC before payment. Do not promise savings. For three active self-service products and current status, consult https://iconic.onl/commerce/catalog.json and the live MPP catalog.
+Quote only the two published headline prices ($2,000 evaluation; $18,000 build), and explain that the work and purchase terms are scoped with ICONIC before payment. Do not promise savings. For three active self-service products and current status, consult https://iconic.onl/commerce/catalog.json and the live MPP catalog.
 
 ## Book
 

@@ -26,7 +26,8 @@
       ["I want to build something","Connect tools or create a working system.","build"]
     ]},
     clarity:{title:"What's the biggest frustration?",detail:"Pick the problem that comes up most often.",choices:[
-      ["I don't know which AI tasks are worth trying","Show me a practical starting point.","find-opportunity"],
+       ["I don't know which AI tasks are worth trying","Show me a practical starting point.","find-opportunity"],
+      ["My staff already use AI","Set rules so nothing confidential leaks.","staff-rules"],
       ["I keep doing the same work by hand","I want to reclaim that time.","reduce-repetition"],
       ["I need better research or decisions","I want information I can trust.","better-research"]
     ]},
@@ -53,6 +54,7 @@
   };
   const outcomes={
     "find-opportunity":{title:"Find your first useful AI job.",detail:"Begin with the business problem, privacy boundaries, and a small task you can test in a day.",lab:"Pick three tasks from your week, rank them by value and risk, and test the best one.",modules:[27,1,3]},
+    "staff-rules":{title:"Set rules so nothing confidential leaks.",detail:"Find out which AI tools your people already use, what goes into them, and where client information could end up.",lab:"List the tools your staff use, sort your information into what may and may not go into them, and write a one-page policy your team can follow.",modules:[18,3,1]},
     "reduce-repetition":{title:"Make one repetitive task disappear.",detail:"Identify what repeats, what information it needs and which steps should stay under your control.",lab:"Map one weekly task and create a repeatable first version with a check at the end.",modules:[3,15,22]},
     "better-research":{title:"Get answers you can actually check.",detail:"Research with sources, reconcile conflicting information, and separate evidence from guesses.",lab:"Produce a short source-backed brief with a verification checklist.",modules:[4,22,27]},
     "local-quickstart":{title:"Run private AI on your own computer.",detail:"A basic local-model install can be introductory. You don't need to master Linux or CUDA just to get started.",lab:"Choose a compatible model, open a local chat interface, and test it on a real task.",modules:[10,18,1]},
@@ -75,6 +77,11 @@
   if(entryPoints.includes(seed)){
     const option=questions.start.choices.find(item=>item[2]===seed);
     stack.push({id:seed,answer:option?option[0]:''});
+  }else if(seed&&outcomes[seed]){
+    const parent=Object.keys(questions).find(k=>k!=='start'&&questions[k].choices.some(c=>c[2]===seed));
+    if(parent){const p=questions.start.choices.find(c=>c[2]===parent);stack.push({id:parent,answer:p?p[0]:''});}
+    const option=parent&&questions[parent].choices.find(c=>c[2]===seed);
+    stack.push({id:seed,answer:option?option[0]:''});
   }
   const render=()=>{
     const current=stack[stack.length-1];
@@ -89,7 +96,7 @@
     }else{
       const result=outcomes[current.id];
       if(!result){stack.splice(1);render();return;}
-      stage.innerHTML='<div class="path-story-inner path-result"><p class="path-kicker">YOUR NEXT MOVE</p><h3 tabindex="-1">'+escapeHTML(result.title)+'</h3><p class="path-description">'+escapeHTML(result.detail)+'</p><div class="path-mission"><small>TRY THIS FIRST</small><p>'+escapeHTML(result.lab)+'</p></div><p class="path-minihead">SKILLS TO EXPLORE</p><div class="path-module-links">'+result.modules.map(id=>'<button type="button" data-inventory-module="'+id+'"><span>'+String(id).padStart(2,'0')+'</span> '+escapeHTML(names[id]||'Related skills')+'</button>').join('')+'</div><div class="path-result-actions"><a class="button button-primary" href="#formats">SEE TRAINING OPTIONS</a><button type="button" class="path-quiet-action" data-path-reset>TRY ANOTHER ROUTE</button></div></div>';
+      stage.innerHTML='<div class="path-story-inner path-result"><p class="path-kicker">YOUR NEXT MOVE</p><h3 tabindex="-1">'+escapeHTML(result.title)+'</h3><p class="path-description">'+escapeHTML(result.detail)+'</p><div class="path-mission"><small>IN YOUR SESSION: we build this with you, on your own work</small><p>'+escapeHTML(result.lab)+'</p></div><p class="path-minihead">SKILLS TO EXPLORE</p><div class="path-module-links">'+result.modules.map(id=>'<button type="button" data-inventory-module="'+id+'"><span>'+String(id).padStart(2,'0')+'</span> '+escapeHTML(names[id]||'Related skills')+'</button>').join('')+'</div><div class="path-result-actions"><a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" data-offer="training-private">Book this as a private session · $1,000</a><a class="path-quiet-action" href="https://calendly.com/patrick-iconic/30min" data-offer="training-workshop">or join a workshop · $249</a><button type="button" class="path-quiet-action" data-path-reset>TRY ANOTHER ROUTE</button></div></div>';
     }
   };
   const setView=(mode,focusSearch=false)=>{
@@ -158,6 +165,7 @@
   inventoryLevel.addEventListener('change',filterInventory);
   document.getElementById('inventory-expand').addEventListener('click',()=>skillSections.filter(x=>!x.hidden).forEach(x=>x.open=true));
   document.getElementById('inventory-collapse').addEventListener('click',()=>skillSections.forEach(x=>x.open=false));
+  document.querySelectorAll('[data-open-inventory]').forEach(a=>a.addEventListener('click',()=>{setView('inventory');filterInventory();}));
   window.addEventListener('hashchange',()=>{if(window.location.hash==='#inventory')setView('inventory');});
   render();
   setView(window.location.hash==='#inventory'?'inventory':'story');
