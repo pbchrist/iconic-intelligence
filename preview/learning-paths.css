@@ -65,3 +65,9 @@
 @media(min-width:850px){.inventory-controls{grid-template-columns:minmax(0,2fr) minmax(0,1.3fr) minmax(0,1fr);}}
 @media(max-width:530px){.path-choice{padding:16px 12px;grid-template-columns:23px minmax(0,1fr) 17px;gap:7px;}.inventory-skill{grid-template-columns:50px minmax(0,1fr) 24px;}.inventory-skill-list{padding-left:3px;}.path-story-view,.path-inventory-view{border-radius:14px;}.inventory-module summary{grid-template-columns:22px minmax(0,1fr) auto;gap:6px;}}
 @media(prefers-reduced-motion:reduce){.path-choice,.story-home-options a{transition:none;}}
+.path-result-actions a.path-quiet-action{text-decoration:none;}
+.inventory-skill-dev{display:inline-block;margin-left:8px;padding:1px 7px;border:1px solid rgba(255,217,161,.45);border-radius:999px;color:var(--warning,#ffd9a1);font-size:10px;font-weight:700;letter-spacing:.06em;vertical-align:1px;white-space:nowrap;}
+.inventory-credential{margin-top:10px;color:var(--pearl);font-size:14px;}
+.inventory-status-note{margin-top:6px;color:#9ba6bf;font-size:13px;}
+.sv-catalog-link{margin-top:8px;margin-bottom:8px;color:#9ba6bf;font-size:13px;}
+.sv-catalog-link a{color:var(--accent-2);text-decoration:underline;text-underline-offset:3px;}
