@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080912">
+<title>QLoRA on a 16GB GPU: 4B Qwen Fine-Tuning Results | ICONIC</title>
+<meta name="description" content="A real RTX 4060 Ti QLoRA experiment: a Qwen 4B model improved from 4/48 to 39/48, then passed only 4/12 independently written tests. Full setup, test results, failures and code.">
+<link rel="canonical" href="https://iconic.onl/research/local-model-specialist-training/">
+<meta name="author" content="Patrick Christell">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ICONIC">
+<meta property="og:title" content="39 Out of 48 Was the Easy Part: Fine-Tuning a Local 4B Model">
+<meta property="og:description" content="60 QLoRA steps on a 16GB RTX 4060 Ti. A dramatic gain on familiar tests, weak transfer on new ones. The actual numbers, failure cases and code.">
+<meta property="og:url" content="https://iconic.onl/research/local-model-specialist-training/">
+<meta property="og:image" content="https://iconic.onl/iconic-share.png">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"Organization","@id":"https://iconic.onl/#org","name":"ICONIC","url":"https://iconic.onl/"},
+    {"@type":"Person","@id":"https://iconic.onl/#patrick","name":"Patrick Christell","worksFor":{"@id":"https://iconic.onl/#org"},"sameAs":["https://www.linkedin.com/in/becomeiconic/"]},
+    {"@type":"TechArticle","@id":"https://iconic.onl/research/local-model-specialist-training/#article",
+     "headline":"39 Out of 48 Was the Easy Part: What Fine-Tuning a 4B Model on a 16GB GPU Actually Proved",
+     "description":"Measured local QLoRA fine-tuning of Qwen3-4B-Base on an RTX 4060 Ti, contrasting within-family evaluation gains with independent out-of-template challenges and a regression suite.",
+     "datePublished":"2026-11-16","dateModified":"2026-11-16","inLanguage":"en","isAccessibleForFree":true,
+     "author":{"@id":"https://iconic.onl/#patrick"},"publisher":{"@id":"https://iconic.onl/#org"},
+     "mainEntityOfPage":"https://iconic.onl/research/local-model-specialist-training/",
+     "keywords":["QLoRA","RTX 4060 Ti 16GB","Qwen3 4B","local LLM fine tuning","specialist AI models","evaluation generalization","small language models","private AI"],
+     "isBasedOn":[
+      "https://www.linkedin.com/posts/becomeiconic_running-a-27-billion-parameter-model-on-my-share-7528228112904556544-UOhJ/",
+      "https://github.com/pbchrist/beastmaster-training/blob/feat/iconic-teacher-distillation-2026-11-10/ICONIC_SPECIALIST_TRAINING_RESULTS_2026-11-15.md"
+     ],
+     "citation":[
+      "https://github.com/pbchrist/beastmaster-training/blob/feat/iconic-teacher-distillation-2026-11-10/ICONIC_SPECIALIST_TRAINING_RESULTS_2026-11-15.md",
+      "https://github.com/pbchrist/beastmaster-training/blob/feat/iconic-teacher-distillation-2026-11-10/train_iconic_distilled.py",
+      "https://github.com/pbchrist/beastmaster-training/blob/feat/iconic-teacher-distillation-2026-11-10/eval_iconic_distilled_ab.py"
+     ]
+    }
+  ]
+}
+</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>
+(function(){try{var d=document.createElement('div');d.style.cssText='position:absolute;visibility:hidden;font-size:100px;line-height:1';d.textContent='x';document.documentElement.appendChild(d);var z=parseFloat(getComputedStyle(d).fontSize)/100;d.remove();if(z>1.04&&z<3)document.documentElement.style.setProperty('--tz',z.toFixed(2));}catch(e){}})();
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261101">
+<link rel="stylesheet" href="/mobile-first.css?v=20261110r">
+<link rel="stylesheet" href="/agents/reserve/reserve.css?v=20261112a">
+<link rel="stylesheet" href="/research/research.css?v=20261114c">
+<style>
+/* Experiment-specific data presentation; built on the site's existing research design. */
+.sl-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:8px 0 25px}
+.sl-metric{border:1px solid var(--line);border-radius:18px;padding:22px 18px;background:rgba(255,255,255,.02)}
+.sl-metric b{display:block;color:var(--pearl);font:400 clamp(33px,4.4vw,49px)/1.1 Georgia,serif;letter-spacing:-.035em}
+.sl-metric span{display:block;color:#afb4c5;font-size:13px;line-height:1.5;margin-top:10px}
+.sl-chart{border:1px solid var(--line);border-radius:19px;padding:24px;background:rgba(255,255,255,.025);margin:18px 0 25px}
+.sl-chart figcaption{color:var(--pearl);font:400 21px/1.35 Georgia,serif;margin-bottom:12px}
+.sl-chart .sl-sub{color:#9da6bc;font-size:13px;line-height:1.5;margin-bottom:22px}
+.sl-row{margin-bottom:22px}
+.sl-row>strong{display:block;color:var(--pearl);font-size:14px;margin-bottom:9px}
+.sl-pair{display:grid;grid-template-columns:70px minmax(0,1fr) 86px;align-items:center;gap:10px;margin:7px 0;color:#bbc3d7;font-size:12px}
+.sl-track{width:100%;background:rgba(255,255,255,.07);height:15px;border-radius:3px;overflow:hidden}
+.sl-fill{height:100%;border-radius:3px;display:block;background:#7281f0}
+.sl-fill.base{background:#a26e58}
+.sl-val{text-align:right;font-variant-numeric:tabular-nums;color:#e2e6f5}
+.sl-note{font-size:13px!important;color:#aab2c4!important;line-height:1.6}
+.sl-code-link{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.sl-code-link a{padding:12px 16px;border:1px solid var(--line-strong);border-radius:10px;color:var(--pearl);text-decoration:none;font-size:13px}
+.sl-code-link a:hover{border-color:var(--accent-2);color:var(--accent-2)}
+.sl-list{margin:22px 0;padding-left:25px}
+.sl-list li{margin:0 0 13px;color:#c9ccda;line-height:1.7;font-size:16px}
+.sl-list li strong{color:var(--pearl)}
+.sl-outline{border-left:2px solid #8b98ed;padding:16px 20px;background:rgba(125,137,247,.07);margin:18px 0 25px;color:#d6def1}
+.sl-outline strong{color:var(--pearl)}
+.sl-eval{font-variant-numeric:tabular-nums;white-space:nowrap}
+.sl-faq{margin-top:25px}
+.sl-faq details{padding:17px 0;border-bottom:1px solid var(--line)}
+.sl-faq summary{color:var(--pearl);font-size:17px;font-weight:600;cursor:pointer}
+.sl-faq p{color:#c9ccda;line-height:1.65;margin:12px 0 0}
+@media(max-width:700px){.sl-metrics{grid-template-columns:1fr}.sl-metric{padding:16px}.sl-pair{grid-template-columns:53px minmax(0,1fr) 60px;gap:8px}.sl-chart{padding:17px 13px}.sl-code-link a{width:100%}}
+@media print{.sl-metric,.sl-chart,.sl-outline{background:white;border-color:#bbb}.sl-metric b,.sl-chart figcaption,.sl-outline strong,.sl-faq summary{color:#111}.sl-row>strong,.sl-val{color:#222}.sl-pair{color:#333}.sl-note,.sl-metric span,.sl-faq p{color:#333!important}.sl-track{background:#ddd}}
+</style>
+</head>
+<body class="rs-page">
+<canvas id="field" aria-hidden="true"></canvas>
+<div class="noise" aria-hidden="true"></div>
+<div class="cursor-glow" aria-hidden="true"></div>
+
+<header class="site-header">
+<a class="brand" href="/" aria-label="ICONIC home"><img src="/iconic-wordmark.webp" alt="ICONIC."></a>
+<nav class="nav" aria-label="Primary navigation"><a href="/research/">Research</a><a href="/ai/services.md">Services</a></nav>
+<a class="header-cta" href="https://calendly.com/patrick-iconic/30min">TALK TO ICONIC</a>
+<button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav">MENU</button>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden><a href="/research/">Research</a><a href="/ai/services.md">Services</a><a href="https://calendly.com/patrick-iconic/30min">Talk to ICONIC</a><a href="/">ICONIC home</a></nav>
+</header>
+
+<main id="top">
+<article>
+<section class="section-shell rv-hero rs-hero" aria-labelledby="rsTitle">
+<div data-reveal>
+<div class="eyebrow"><span class="live-dot"></span> ICONIC research / specialist model training</div>
+<h1 id="rsTitle">39 out of 48 was <em>the easy part.</em></h1>
+<p class="rv-deck">I fine-tuned a 4-billion-parameter Qwen model on a 16GB graphics card. It went from four correct answers to 39 on familiar test families. Then I changed the way the questions were written, and the number fell apart. Here's the full experiment.</p>
+<div class="rs-tags"><span>RTX 4060 Ti · 16GB</span><span>Qwen3 4B · QLoRA</span><span>Real model-weight updates</span><span>Not production-ready</span></div>
+<p class="rs-meta">Patrick Christell · ICONIC · November 16, 2026 · <a href="https://www.linkedin.com/posts/becomeiconic_running-a-27-billion-parameter-model-on-my-share-7528228112904556544-UOhJ/" target="_blank" rel="noopener noreferrer">Original LinkedIn post ↗</a></p>
+<div class="rs-answer" id="summary"><div class="rs-label">The result, without the spin</div>
+<strong>The trained model passed 39 of 48 fresh, template-family questions, up from four for the untuned base. On 12 separately written questions it passed only four. It also lost a previously passing behavior in a protected 22-case regression suite.</strong>
+<p>The training worked for a narrow, recognizable pattern. The more important question—whether that skill survives unfamiliar wording and evidence—remains open. This adapter was <strong>not promoted to production</strong>.</p>
+</div>
+</div>
+</section>
+
+<div class="section-shell rv-docs">
+<aside class="rv-rail" aria-label="On this page"><nav>
+<small>ON THIS PAGE</small>
+<a href="#why">1. The business problem</a>
+<a href="#hardware">2. Hardware &amp; model</a>
+<a href="#training">3. Training details</a>
+<a href="#results">4. A/B results</a>
+<a href="#failure">5. What failed</a>
+<a href="#cost">6. What it cost</a>
+<a href="#next">7. The actual next step</a>
+<a href="#faq">8. Questions</a>
+<a href="#sources">9. Code &amp; sources</a>
+</nav></aside>
+<div class="rv-content">
+<nav class="rv-chipnav" aria-label="Article sections"><a href="#why">Problem</a><a href="#hardware">Hardware</a><a href="#training">Training</a><a href="#results">Results</a><a href="#failure">Failures</a><a href="#cost">Cost</a><a href="#next">Next</a><a href="#faq">FAQ</a><a href="#sources">Sources</a></nav>
+
+<section id="why" class="rv-sec rs-sec" aria-labelledby="why-title">
+<div class="section-kicker">01 · Why train it at all?</div>
+<h2 id="why-title">The mistake I wanted it to stop making</h2>
+<div class="rs-prose">
+<p>Consider an inventory report. A dealership website lists 108 vehicles. The inventory export lists 96. The difference is twelve. That is the entire finding until someone checks what produced it.</p>
+<p>Those twelve might be listing-feed errors, units omitted from one system, duplicate records, stale data, or vehicles in different statuses. They are <strong>not twelve confirmed sales</strong>. A model that computes the difference correctly and then confidently announces twelve sales has failed the business task.</p>
+<p>Most of these jobs don't require grand philosophical reasoning. They require reliable arithmetic, discipline about sources, and the ability to say precisely what the available records do—and don't—prove. The question was whether a small local model could learn those habits well enough to handle routine cases without spending the time and compute required by a larger one.</p>
+<p>At ICONIC I also run a separate 27-billion-parameter model on my own hardware. This experiment was not about retraining that larger model. It was about testing whether a <strong>much smaller specialist</strong> could take a narrow class of work off its hands.</p>
+</div>
+</section>
+
+<section id="hardware" class="rv-sec rs-sec" aria-labelledby="hardware-title">
+<div class="section-kicker">02 · The machine</div>
+<h2 id="hardware-title">One desktop, two different jobs</h2>
+<div class="rs-prose rs-wide">
+<p>My setup has an RTX 3090 with 24GB of video memory and an RTX 4060 Ti with 16GB. The 3090 runs the larger production inference workload. I isolated the experiment on the 4060 Ti. The two cards do different jobs; <strong>40GB total VRAM does not mean a single 40GB pool</strong>.</p>
+<div class="rs-table"><table><thead><tr><th>Component</th><th>What ran</th><th>Role</th></tr></thead><tbody>
+<tr><td>RTX 3090 · 24GB</td><td>Qwen3.8-27B, local inference</td><td>Existing production service; left running throughout</td></tr>
+<tr><td>RTX 4060 Ti · 16GB</td><td><code>unsloth/Qwen3-4B-Base-bnb-4bit</code></td><td>Isolated fine-tuning and A/B evaluation</td></tr>
+<tr><td>Adapter</td><td>QLoRA / LoRA rank 8, alpha 16</td><td>Trainable low-rank parameters on a frozen, 4-bit base</td></tr>
+<tr><td>Decode</td><td>160-token greedy output</td><td>Same generation conditions for both evaluation variants</td></tr>
+</tbody></table></div>
+<p>This distinction matters: the trained 4B adapter is <em>not</em> an update to the 27B model. It cannot be loaded into the larger model's GGUF as if it were a general upgrade. Nothing was switched, restarted, or routed into production to run this test.</p>
+</div>
+</section>
+
+<section id="training" class="rv-sec rs-sec" aria-labelledby="training-title">
+<div class="section-kicker">03 · How it was trained</div>
+<h2 id="training-title">1,800 fictional examples. Only 240 actually trained.</h2>
+<div class="rs-prose rs-wide">
+<p>I generated 1,800 deterministic fictional cases with independently checked target answers. The generator produced six kinds of business evidence tasks: contact rates, contradictory sources, net supplier credits, inventory differences, advertised markdowns, and claims about personnel that the records do not support.</p>
+<p>The split was 1,639 training examples and 161 validation examples. But this was a short calibration run, not a full training pass: <strong>60 optimizer steps × four examples per effective step = about 240 training examples</strong>. That is roughly 0.146 of one epoch through the training pool. The split and the amount actually consumed are different numbers; conflating them would make the experiment sound far larger than it was.</p>
+<div class="rs-table"><table><thead><tr><th>Training parameter</th><th>Recorded value</th></tr></thead><tbody>
+<tr><td>Starting model</td><td>Qwen3-4B-Base, 4-bit Unsloth build</td></tr>
+<tr><td>Method</td><td>Answer-only prompt-completion QLoRA</td></tr>
+<tr><td>LoRA configuration</td><td>Rank 8 · alpha 16</td></tr>
+<tr><td>Updates</td><td>60 optimizer steps</td></tr>
+<tr><td>Effective batch</td><td>4 examples per step</td></tr>
+<tr><td>Learning rate</td><td>0.00006 (6 × 10⁻⁵)</td></tr>
+<tr><td>Sequence limit</td><td>768 tokens</td></tr>
+<tr><td>Approximate training tokens</td><td>33,000, plus validation and testing</td></tr>
+<tr><td>Optimizer runtime</td><td>76.33 seconds; approximately 109 seconds for the full process</td></tr>
+<tr><td>Reported losses</td><td>Training 0.5242 · validation 0.02081</td></tr>
+</tbody></table></div>
+<p>QLoRA updates small adapter parameters while keeping the quantized base weights fixed. In other words, this changed learned parameters, not merely a system prompt. The very low validation loss is much less impressive once you know the training and validation examples came from the same generator families. A model can be extremely good at a template and still fail the next person who phrases the question differently.</p>
+<p>No customer records, live dealership data, paid teacher-model outputs, or private production logs went into the training examples. The checkpoints and raw predictions remained local and were not uploaded to GitHub.</p>
+</div>
+</section>
+
+<section id="results" class="rv-sec rs-sec" aria-labelledby="results-title">
+<div class="section-kicker">04 · The results</div>
+<h2 id="results-title">The first test looked extraordinary. The second was the point.</h2>
+<div class="rs-prose rs-wide">
+<div class="sl-metrics" aria-label="Evaluation results">
+<div class="sl-metric"><b>4 → 39</b><span>passes out of 48 new examples from familiar generator families</span></div>
+<div class="sl-metric"><b>4 / 12</b><span>trained model passes on separately authored, differently formatted questions</span></div>
+<div class="sl-metric"><b>2 / 22</b><span>passes on the protected transfer suite; one previously correct answer was lost</span></div>
+</div>
+<p>The A/B comparison was controlled: identical 4-bit base weights, tokenizer, input prompts and 160-token greedy decoding. One variant had the adapter disabled; the other used the trained adapter. Both were evaluated in the same isolated GPU process.</p>
+<div class="rs-table"><table><thead><tr><th>Evaluation suite</th><th>Untuned base</th><th>Trained adapter</th><th>Interpretation</th></tr></thead><tbody>
+<tr><td>48 fictional examples, new seed, same six families</td><td class="sl-eval">4 / 48 (8.3%)</td><td class="sl-eval">39 / 48 (81.3%)</td><td>Strong improvement <strong>within the generator's patterns</strong></td></tr>
+<tr><td>12 separately written challenges with different phrasing and source labels</td><td class="sl-eval">0 / 12</td><td class="sl-eval">4 / 12 (33.3%)</td><td>Limited transfer; exploratory test</td></tr>
+<tr><td>22-case protected transfer/regression suite</td><td class="sl-eval">2 / 22</td><td class="sl-eval">2 / 22</td><td>No net increase and one prior passing case regressed</td></tr>
+</tbody></table></div>
+<figure class="sl-chart" aria-label="Pass rates across three different suites">
+<figcaption>Same model, different questions</figcaption>
+<div class="sl-sub">Pass rates. Brown = base, violet = trained adapter. The three suites are different populations; their scores should not be combined.</div>
+<div class="sl-row"><strong>48 new examples from the training generator's task families</strong>
+<div class="sl-pair"><span>Base</span><div class="sl-track"><span class="sl-fill base" style="width:8.333%"></span></div><span class="sl-val">8.3%</span></div>
+<div class="sl-pair"><span>Adapter</span><div class="sl-track"><span class="sl-fill" style="width:81.25%"></span></div><span class="sl-val">81.3%</span></div></div>
+<div class="sl-row"><strong>12 separately written out-of-template challenges</strong>
+<div class="sl-pair"><span>Base</span><div class="sl-track"><span class="sl-fill base" style="width:0%"></span></div><span class="sl-val">0%</span></div>
+<div class="sl-pair"><span>Adapter</span><div class="sl-track"><span class="sl-fill" style="width:33.333%"></span></div><span class="sl-val">33.3%</span></div></div>
+<div class="sl-row"><strong>22 original protected transfer tests</strong>
+<div class="sl-pair"><span>Base</span><div class="sl-track"><span class="sl-fill base" style="width:9.091%"></span></div><span class="sl-val">9.1%</span></div>
+<div class="sl-pair"><span>Adapter</span><div class="sl-track"><span class="sl-fill" style="width:9.091%"></span></div><span class="sl-val">9.1%</span></div></div>
+</figure>
+<h3>Where the 39 passes came from</h3>
+<div class="rs-table"><table><thead><tr><th>Problem family</th><th>Base / 8</th><th>Trained / 8</th></tr></thead><tbody>
+<tr><td>Contact-rate calculations</td><td>4</td><td>6</td></tr>
+<tr><td>Contradictory evidence</td><td>0</td><td>8</td></tr>
+<tr><td>Net supplier credit</td><td>0</td><td>7</td></tr>
+<tr><td>Inventory differences</td><td>0</td><td>5</td></tr>
+<tr><td>Advertised markdowns</td><td>0</td><td>5</td></tr>
+<tr><td>Unsupported personnel claims</td><td>0</td><td>8</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>4 / 48</strong></td><td><strong>39 / 48</strong></td></tr>
+</tbody></table></div>
+<p class="sl-note">The 48-case test used a fresh random seed but the same task generator families. The 12 hand-authored cases were created after the first test and are exploratory, not a pre-registered benchmark. Neither is a measure of general real-world accuracy.</p>
+</div>
+</section>
+
+<section id="failure" class="rv-sec rs-sec" aria-labelledby="failure-title">
+<div class="section-kicker">05 · What failed</div>
+<h2 id="failure-title">New wording is a different kind of difficulty</h2>
+<div class="rs-prose">
+<p>The separately written questions changed source labels, evidence formatting, and the way requests were phrased. They covered the same six underlying skills, but broke some of the surface patterns the training examples had made familiar. The trained model passed just four of twelve.</p>
+<p>The more serious result came from the original 22-case regression suite. Both versions passed only two cases, but they were <em>not the same two</em>. The new adapter lost an earlier passing untrusted-source test. Instead of returning a supported, source-linked JSON answer, it generated nothing.</p>
+<p>That was a regression in reliability, <strong>not an observed prompt-injection leak</strong>. The model did not reveal the malicious content. But an empty answer still fails a workflow that depends on a valid response. A specialist that becomes excellent at the new task and silently loses an old guarantee is not ready to take over production work.</p>
+<p>That is why the headline improvement is useful but insufficient. A model has to handle unfamiliar examples, retain required behavior, and fail in ways the surrounding system can detect. We do not have those guarantees yet.</p>
+<div class="sl-outline"><strong>Deployment decision:</strong> Keep the existing 27B service untouched. The 4B adapter stays experimental. No production routing, model promotion, or live client workflow was changed.</div>
+</div>
+</section>
+
+<section id="cost" class="rv-sec rs-sec" aria-labelledby="cost-title">
+<div class="section-kicker">06 · Economics and privacy</div>
+<h2 id="cost-title">Zero cloud rental is not zero cost</h2>
+<div class="rs-prose">
+<p>The optimizer completed in 76.33 seconds and the overall process took about 109 seconds. The training updates processed roughly 33,000 tokens, in addition to validation and testing. It ran on a graphics card I already owned.</p>
+<p>Incremental cloud GPU rental: <strong>$0</strong>. API fees: <strong>$0</strong>. That does not make the experiment free. The workstation, electricity, setup, data generation, evaluator design, and time spent investigating failures all have costs.</p>
+<p>Local training also made it possible to keep the adapter, predictions and examples on my own machine. In this run the training examples were fictional anyway. Keeping the workflow local matters much more when an organization is working with genuinely sensitive records, where data handling and permission need to be designed before any training begins.</p>
+</div>
+</section>
+
+<section id="next" class="rv-sec rs-sec" aria-labelledby="next-title">
+<div class="section-kicker">07 · What comes next</div>
+<h2 id="next-title">Route tasks by demonstrated competence, not model size</h2>
+<div class="rs-prose">
+<p>The architecture I am working toward is straightforward: let a small specialist do the well-defined work it has proved it can handle, and route exceptions to a more capable model. But <strong>that is the intended operating model, not a claim that this 4B candidate is already routing live work</strong>.</p>
+<ol class="sl-list">
+<li><strong>Start with the actual business failure.</strong> Define which calculations, source citations and boundaries between evidence and inference must be correct.</li>
+<li><strong>Train on verified, varied cases.</strong> Expand beyond a single generator's sentence structures and source-marker conventions. Keep the existing holdouts sealed.</li>
+<li><strong>Test on different-looking problems.</strong> Freeze independently authored cases before the next training attempt. Include missing records, contradictory documents, source poisoning and changed output formats.</li>
+<li><strong>Require regression safety.</strong> Block promotion if a previously correct protected behavior breaks, even if the headline score improves.</li>
+<li><strong>Compare routing economics.</strong> Evaluate the same frozen cases with the candidate, the larger local model and a frontier model, including latency, power, failure cost and operational availability. That comparison has not yet been completed.</li>
+</ol>
+<div class="rv-code"><pre><code>business problem
+    ↓
+verified examples
+    ↓
+small-model specialist training
+    ↓
+independent evaluation + regression checks
+    ↓
+route only the jobs it has actually earned
+    ↓
+send exceptions to the stronger model</code></pre></div>
+<p>A 4B model that gets the answer right reliably can be the right tool for a repetitive job. A 4B model that answers 81% of familiar synthetic tests but 33% of changed ones is still an experiment. The work is in finding, testing and maintaining that boundary.</p>
+</div>
+</section>
+
+<section id="faq" class="rv-sec rs-sec" aria-labelledby="faq-title">
+<div class="section-kicker">08 · Questions</div>
+<h2 id="faq-title">What these numbers do and don't say</h2>
+<div class="rs-prose sl-faq">
+<details open><summary>Did you fine-tune the 27-billion-parameter model?</summary><p>No. The production 27B model continued running on the RTX 3090. The fine-tuned candidate was a separate Qwen3 4B model trained and evaluated on the RTX 4060 Ti.</p></details>
+<details><summary>Does 39 out of 48 mean 81% real-world accuracy?</summary><p>No. Those 48 questions came from the same six synthetic generator families used to build the training pool. The independently written 12-case suite yielded 4/12. Neither score is a representative estimate of performance across real business tasks.</p></details>
+<details><summary>Was this prompt engineering or actual training?</summary><p>It was QLoRA fine-tuning. Trainable adapter weights changed across 60 optimization steps. The quantized base model weights stayed fixed. The comparison enabled and disabled the adapter against the same base.</p></details>
+<details><summary>Was it cheap to run because it was local?</summary><p>Incremental cloud GPU and API charges were zero because the training ran on already-owned hardware. Acquisition, electricity, engineering time, and the cost of evaluating failures were not zero.</p></details>
+<details><summary>Can the trained model handle production client data now?</summary><p>It was not deployed. The independent generalization check was weak and one previously passing protected test regressed. It needs substantially broader training and evaluation before unrestricted work could be justified.</p></details>
+</div>
+</section>
+
+<section id="sources" class="rv-sec rs-sec" aria-labelledby="sources-title">
+<div class="section-kicker">09 · Reproducibility and sources</div>
+<h2 id="sources-title">The post, the numbers, and the code</h2>
+<div class="rs-prose rs-wide">
+<p>This article expands my <a href="https://www.linkedin.com/posts/becomeiconic_running-a-27-billion-parameter-model-on-my-share-7528228112904556544-UOhJ/" target="_blank" rel="noopener noreferrer">November 16 LinkedIn post</a>. The experimental parameters, evaluation counts, failure notes and promotion decision come from the versioned <a href="https://github.com/pbchrist/beastmaster-training/blob/feat/iconic-teacher-distillation-2026-11-10/ICONIC_SPECIALIST_TRAINING_RESULTS_2026-11-15.md">November 15 experiment report</a>. That report and the supporting scripts are public; adapters, private manifests, synthetic example files and raw predictions remained local.</p>
+<div class="sl-code-link">
+<a href="https://www.linkedin.com/posts/becomeiconic_running-a-27-billion-parameter-model-on-my-share-7528228112904556544-UOhJ/" target="_blank" rel="noopener noreferrer">Original LinkedIn post ↗</a>
+<a href="https://github.com/pbchrist/beastmaster-training/blob/feat/iconic-teacher-distillation-2026-11-10/ICONIC_SPECIALIST_TRAINING_RESULTS_2026-11-15.md" target="_blank" rel="noopener noreferrer">Full results &amp; caveats ↗</a>
+<a href="https://github.com/pbchrist/beastmaster-training/blob/feat/iconic-teacher-distillation-2026-11-10/distill_iconic.py" target="_blank" rel="noopener noreferrer">Synthetic data generator ↗</a>
+<a href="https://github.com/pbchrist/beastmaster-training/blob/feat/iconic-teacher-distillation-2026-11-10/train_iconic_distilled.py" target="_blank" rel="noopener noreferrer">QLoRA trainer ↗</a>
+<a href="https://github.com/pbchrist/beastmaster-training/blob/feat/iconic-teacher-distillation-2026-11-10/eval_iconic_distilled_ab.py" target="_blank" rel="noopener noreferrer">A/B evaluator ↗</a>
+</div>
+<p style="margin-top:26px">Related ICONIC research: <a href="/research/agent-context-tax/">The Context Tax: how production agents consume tokens</a> and <a href="/research/dealership-pricing-intelligence/">Detecting Synchronized Repricing in Dealer Inventory</a>.</p>
+<p class="sl-note">Citation: Patrick Christell (2026), “39 Out of 48 Was the Easy Part: What Fine-Tuning a 4B Model on a 16GB GPU Actually Proved,” ICONIC Research, https://iconic.onl/research/local-model-specialist-training/. Experiment completed November 15; article published November 16.</p>
+</div>
+</section>
+
+<a class="rs-cta" href="https://calendly.com/patrick-iconic/30min"><strong>Want to know what private AI can actually do on your hardware?</strong><span>Start with a real workload and a testable definition of success. Talk directly with ICONIC. Free 30-minute check.</span></a>
+</div>
+</div>
+</article>
+</main>
+<div class="section-shell rs-foot"><footer><span>© 2026 ICONIC. · <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a> · <a href="/llms.txt">AI Reference</a> · <a href="/research/">Research</a> · <a href="https://www.linkedin.com/in/becomeiconic/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></span><span>PRIVATE AI FOR YOUR BUSINESS</span><a href="#top">BACK TO TOP ↑</a></footer></div>
+<script src="/app.js?v=20261102a" defer></script>
+<script src="/research/research.js" defer></script>
+</body>
+</html>
