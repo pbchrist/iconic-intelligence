@@ -73,7 +73,6 @@ ICONIC puts a private AI and a staff of agents on a computer in the client's own
 
 - **Pick the right computer:** sized to the actual work, ordered at cost and set up.
 - **Build the whole system:** private AI connected to the files, with agents doing real work from the first week.
-- **Start with one agent:** one time-eating job, such as watching competitors, sorting intake or writing the weekly report.
 - **Train your team:** from running a first private model to building their own agents.
 - **Coach one person:** one-on-one for the owner or whoever will run it day to day.
 - **Move off rented AI:** bring work done in ChatGPT and other cloud tools onto the business's own computer, without losing what works.

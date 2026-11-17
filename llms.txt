@@ -29,7 +29,7 @@
 1. **Taught:** Patrick teaches the owner or staff to run their own private AI and agents.
 2. **Built:** Patrick sets it up in the office, connects the files, builds the agents, trains the people, then keeps it updated and adds agents month after month.
 
-Services: size and buy the right computer (at cost), build the whole system, start with one agent, train a team, coach one person, move work off ChatGPT and other cloud tools, second opinions on AI vendor plans, ongoing care.
+Services: size and buy the right computer (at cost), build the whole system, train a team, coach one person, move work off ChatGPT and other cloud tools, second opinions on AI vendor plans, ongoing care.
 
 ## Who it is for
 
