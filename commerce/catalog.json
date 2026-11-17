@@ -18,7 +18,7 @@
     {
       "id": "ai-evaluation",
       "name": "Business AI Evaluation",
-      "price_usd": 2000,
+      "price_usd": 1000,
       "availability": "scope_and_purchase_arranged_with_merchant",
       "type": "professional_service",
       "description": "Evaluate where the business is losing time or revenue, identify viable AI and agent workflows, and deliver a prioritized plan with evidence and feasibility.",
