@@ -141,3 +141,4 @@ body.home-v2 main#top > section:not(.hero) h2 { font-size: var(--section-h2); li
 body.home-v2 .split-heading h2 { margin-top: 0; }
 body.home-v2 .split-heading { margin-top: 22px; align-items: start; }
 body.home-v2 .split-heading > p, body.home-v2 .split-heading > div > p:first-child { margin-top: 0; }
+body.home-v2 .of-steps-kicker { margin-top: 72px; }
