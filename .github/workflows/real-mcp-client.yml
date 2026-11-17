@@ -1,12 +1,19 @@
 name: Real independent MCP client interoperability
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/test-real-mcp-client.py'
+      - 'scripts/organic_discovery_probe.py'
+      - '.github/workflows/real-mcp-client.yml'
   schedule:
     - cron: '43 7 * * *'
 permissions:
   contents: read
 jobs:
   real-client:
+    name: External MCP client, execution and no-charge purchase preparation
     runs-on: ubuntu-latest
     timeout-minutes: 7
     steps:
@@ -16,5 +23,22 @@ jobs:
           python-version: '3.12'
       - name: Install pinned official MCP Python client
         run: python -m pip install 'mcp==2.3.0'
-      - name: Verify both remote MCP endpoints from an unaffiliated network
+      - name: Verify remote MCP contracts, outcomes and safe checkout preparation
         run: python scripts/test-real-mcp-client.py
+
+  organic-discovery:
+    name: Unbranded independent public-search discovery
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Search real problem-first queries without the brand or URL
+        run: python3 scripts/organic_discovery_probe.py --output organic-discovery.json --require-hit
+      - name: Keep evidence even when not discoverable
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: organic-discovery-evidence
+          path: organic-discovery.json
+          if-no-files-found: warn
+          retention-days: 30
