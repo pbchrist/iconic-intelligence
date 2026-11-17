@@ -1,0 +1,16 @@
+# Example only. This domain is NOT on Cloudflare today. Do not deploy until zone/DNS is migrated.
+name = "iconic-pay-per-crawl"
+main = "worker.mjs"
+compatibility_date = "2026-11-16"
+workers_dev = false
+routes = [
+  { pattern = "iconic.onl/research/*", zone_name = "iconic.onl" },
+  { pattern = "www.iconic.onl/research/*", zone_name = "iconic.onl" }
+]
+
+[vars]
+AIPAYGEN_MODE = "observe"   # observe -> charge only after validation
+AIPAYGEN_GATEWAY_ID = ""   # ID returned by /v1/gateway, not an API key
+
+# Set AIPAYGEN_SECRET using wrangler secret put AIPAYGEN_SECRET.
+# Never commit keys, gateway_secret, private wallet keys or mnemonic phrases.
