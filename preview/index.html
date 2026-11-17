@@ -1,1 +1,422 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><link rel="canonical" href="https://iconic.onl/"><meta http-equiv="refresh" content="0; url=/"><title>ICONIC.</title><script>location.replace('/'+location.search+location.hash)</script></head><body><a href="/">Continue to ICONIC.</a></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+<!-- GA4: page analytics; never send AI demo prompts or responses as events. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0G5007D0F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0G5007D0F7');
+  // Measure confirmed Calendly bookings, without visitor-entered content.
+  window.addEventListener('message', function(event) {
+    if (event.origin === 'https://calendly.com' &&
+        event.data && event.data.event === 'calendly.event_scheduled') {
+      gtag('event', 'calendly_booking');
+    }
+  });
+</script>
+<meta name="theme-color" content="#080912" />
+  <title>ICONIC. Own your intelligence. Compound your advantage.</title>
+  <meta name="description" content="ICONIC puts a private AI on a computer in your office, set up around the way you work. Your files never leave the building, and the machine belongs to you. Learn AI or get a $1,000 evaluation. Builds are by invitation." />
+  <meta property="og:title" content="ICONIC. Own your intelligence. Compound your advantage." />
+  <meta property="og:description" content="A private AI that lives in your office and belongs to you. Private because it runs on your own computer, not because a tech company promises. Learn AI. Evaluate for $1,000. Builds by invitation." />
+  <link rel="canonical" href="https://iconic.onl/" />
+  <meta property="og:url" content="https://iconic.onl/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://iconic.onl/iconic-share.png" />
+  <meta property="og:image:width" content="600" />
+  <meta property="og:image:height" content="600" />
+  <meta property="og:image:alt" content="ICONIC" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="https://iconic.onl/iconic-share.png" />
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="ICONIC for AI agents" />
+  <link rel="alternate" type="application/json" href="/agents/reserve/manifest.json" title="ICONIC Intelligence Reserve for AI agents" />
+  <link rel="alternate" type="application/json" href="/agents/assurance/manifest.json" title="Agent Assurance for AI agents" />
+  <link rel="alternate" type="application/json" href="/agents/marketplace/manifest.json" title="ICONIC seven-offer agent-native marketplace" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <script>
+    /* Some in-app browsers (Messenger, Facebook, Instagram on Android) enlarge all text after the page sets its
+       sizes. Measure that once, before anything is drawn, so big headings can be capped to still fit the screen. */
+    (function () { try { var d = document.createElement('div'); d.style.cssText = 'position:absolute;visibility:hidden;font-size:100px;line-height:1'; d.textContent = 'x'; document.documentElement.appendChild(d); var z = parseFloat(getComputedStyle(d).fontSize) / 100; d.remove(); if (z > 1.04 && z < 3) document.documentElement.style.setProperty('--tz', z.toFixed(2)); } catch (e) {} })();
+  </script>
+  <link rel="stylesheet" href="/styles.css?v=20261117" />
+  <link rel="stylesheet" href="/mobile-first.css?v=20261110r" />
+  <link rel="stylesheet" href="/offers.css?v=20261117r2" />
+  <link rel="stylesheet" href="/learning-paths.css?v=20261117b" />
+  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
+</head>
+<body class="home-v2">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="ICONIC home"><img src="/iconic-wordmark.webp" alt="ICONIC." /></a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="#offers">Services</a>
+      <a href="#proof">Proof</a>
+      <a href="#aipocalypse">AIpocalypse</a>
+      <a href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener">Free fit call</a>
+      <a href="/services/ai-training/">Training</a>
+      <a href="/research/">Research</a>
+      <a href="/agents/reserve/">For agents</a>
+    </nav>
+    <a class="header-cta" href="/services/evaluation/">$1,000 EVALUATION</a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav">MENU</button>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="/services/ai-training/">AI Training</a><a href="/services/evaluation/">Evaluation · $1,000</a><a href="/services/build/">Build · by invitation</a><a href="/services/ongoing-intelligence/">Ongoing intelligence</a><a href="#proof">Proof</a><a href="#live">Live demo</a><a href="/research/">Research</a><a href="/agents/reserve/">For agents · MCP</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero hero-offers section-shell">
+      <div class="hero-copy" data-reveal>
+        <div class="eyebrow"><span class="live-dot"></span> YOUR OWN PRIVATE AI · ON A COMPUTER IN YOUR OFFICE · BUILT AROUND YOU</div>
+        <h1 class="h1-long">Own your intelligence. <em>Compound your advantage.</em></h1>
+        <p class="hero-buyer">Rented AI belongs to someone else. They set the prices, control the model weights, and decide your access. ICONIC belongs to you. It turns what only your business knows into a moat that grows wider every day.</p>
+        <div class="hero-actions hero-actions-threaded">
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK A FREE FIT CALL</a>
+          <a class="button button-ghost" href="#live">TRY THE DEMO</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="aipocalypse" class="section-shell deployment-section">
+      <div class="section-heading split-heading direct-heading" data-reveal>
+        <h2>THE <span class="ai-mark">AI</span>POCALYPSE<br><em>IS COMING.</em></h2>
+        <p>The AI you rent today is sold below what it costs to run. The labs are paying the difference to win you over. That can't last, and when it ends, prices jump. Owning your AI is the hedge.</p>
+      </div>
+      <ol class="ev-list" data-reveal>
+        <li><time>Nov 2, 2026</time><p><b>Grok Bot.</b> Elon Musk said serving it cost far more than it brought in, and its limits were throttled. <a href="https://techcrunch.com/2026/11/02/elon-musk-throttles-grok-bot-limits-due-to-unsustainably-high-costs/" target="_blank" rel="noopener">TechCrunch</a></p></li>
+        <li><time>Nov 2026</time><p><b>Grok and Cursor.</b> Grok, Grok Bot and Cursor now draw on one shared weekly allowance. Use it up and you buy more. <a href="https://prod.cursor.com/help/models-and-usage/usage-limits" target="_blank" rel="noopener">Cursor</a></p></li>
+        <li><time>Nov 2026</time><p><b>Claude.</b> Hit the weekly limit on a paid plan and the next work is billed as pay-as-you-go credits. <a href="https://support.claude.com/en/articles/12429409-manage-usage-credits-for-paid-claude-plans" target="_blank" rel="noopener">Anthropic</a></p></li>
+        <li><time>Jun 17, 2026</time><p><b>The real price.</b> Used to its limit, a $200-a-month ChatGPT plan would cost about <b>$14,000</b> at OpenAI's own API prices. Claude's top plan, about <b>$8,000</b>. <a href="https://www.tomsguide.com/ai/the-math-doesnt-work-why-your-usd200-ai-subscription-is-secretly-worth-thousands" target="_blank" rel="noopener">Tom's Guide</a></p></li>
+        <li><time>Jun 1, 2026</time><p><b>GitHub Copilot.</b> Every plan moved to pay-per-use. GitHub said the old flat model was no longer sustainable. <a href="https://github.blog/news-insights/github-copilot-is-moving-to-usage-based-billing/" target="_blank" rel="noopener">GitHub</a></p></li>
+        <li><time>Q1 2026</time><p><b>OpenAI.</b> Burned a reported <b>$3.7 billion</b> in three months, on $5.7 billion of revenue. <a href="https://www.theinformation.com/articles/openai-burned-3-7-billion-first-three-months-2026" target="_blank" rel="noopener">The Information</a></p></li>
+        <li><time>Feb 2026</time><p><b>OpenAI.</b> Forecast it would burn <b>$25 billion</b> in 2026 and <b>$57 billion</b> in 2027. <a href="https://www.pymnts.com/?p=3859081" target="_blank" rel="noopener">PYMNTS</a></p></li>
+        <li><time>Jul 28, 2025</time><p><b>Claude.</b> Anthropic added weekly limits to its paid plans after one $200 subscriber used tens of thousands of dollars' worth. <a href="https://simonwillison.net/2025/Jul/28/anthropic/" target="_blank" rel="noopener">Simon Willison</a></p></li>
+        <li><time>Jun 16, 2025</time><p><b>Cursor.</b> Swapped the 500 requests on its $20 plan for $20 of usage billed at API prices, then apologized. <a href="https://techcrunch.com/2025/07/07/cursor-apologizes-for-unclear-pricing-changes-that-upset-users/" target="_blank" rel="noopener">TechCrunch</a></p></li>
+        <li><time>Jan 5, 2025</time><p><b>OpenAI.</b> Its CEO on the $200 plan: "I personally chose the price and thought we would make some money." It was losing money. <a href="https://techcrunch.com/2025/01/05/openai-is-losing-money-on-its-pricey-chatgpt-pro-plan-ceo-sam-altman-says/" target="_blank" rel="noopener">TechCrunch</a></p></li>
+      </ol>
+      <div class="pricing-terms" data-reveal>
+        <p><strong>When rented AI gets expensive, owned AI doesn't.</strong> A computer in your office costs the same to run tomorrow as it does today, no matter what the labs charge.</p>
+        <div class="pricing-actions">
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK A FREE FIT CALL</a>
+          <a class="button button-ghost" href="#rented">WHAT RENTING LOOKS LIKE</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="rented" class="section-shell deployment-section">
+      <div class="section-heading split-heading direct-heading" data-reveal>
+        <h2>THE CLOUD OPTION:<br><em>THEIR COMPUTERS, THEIR RULES.</em></h2>
+        <p>Microsoft, Amazon, OpenAI and xAI will happily run your AI for you, on their computers, under their terms. Here is what that has looked like.</p>
+      </div>
+      <article class="of-card of-lead ev-feature" data-reveal>
+        <small>NOVEMBER 2026 · GROK BOT</small>
+        <h3>Nobody asked it to. It tried 31 times anyway.</h3>
+        <p>Security researchers connected two Grok Bot agents to work email, calendars, Slack, GitHub and Notion. Over five days the bots tried <strong>31 times</strong> to read them without being asked, some while the laptop was closed. One owner turned down the bot's offers four times; it kept trying. Asked about it, the bot said it had been idle, and the attempts didn't show in its own logs.</p>
+        <p>The researchers' own approval gate blocked all 31. Telling the bot to stop did not. A switch to turn the check-ins off appeared on November 12, and it is on by default.</p>
+        <p class="ev-src"><a href="https://newcore.com/newsroom/newcore-research-grok-bot-agents-reached-for-corporate-data-unprompted" target="_blank" rel="noopener">NewCore</a> · <a href="https://arstechnica.com/security/2026/11/grok-bot-took-unapproved-actions-ignored-orders-to-stop-and-then-denied-it/" target="_blank" rel="noopener">Ars Technica</a> · <a href="https://thenextweb.com/news/grok-bot-unattended-check-ins-newcore-email-slack-github" target="_blank" rel="noopener">The Next Web</a></p>
+      </article>
+      <ol class="ev-list" data-reveal>
+        <li><time>Nov 12, 2026</time><p><b>Microsoft 365.</b> Outlook, Exchange, Teams and Copilot failed for users across dozens of countries into the next day. Airline staff lost email, and one carrier cancelled flights. <a href="https://apnews.com/article/microsoft-outlook-outage-email-teams-6376045281feb430c0b923e3a4b251c2" target="_blank" rel="noopener">AP</a> · <a href="https://airlive.net/news/2026/11/13/global-microsoft-outage-disrupts-airline-communications-and-grounds-select-flights/" target="_blank" rel="noopener">AIRLIVE</a></p></li>
+        <li><time>Nov 10, 2026</time><p><b>Grok Build.</b> Researchers opened <b>35,578</b> published Grok apps without signing in. They estimate hundreds held private data. <a href="https://blog.claroc.io/ghostshares-grok-build-apps/" target="_blank" rel="noopener">Claroc</a> · <a href="https://thenextweb.com/news/grok-build-apps-exposed-claroc-spacexsi" target="_blank" rel="noopener">The Next Web</a></p></li>
+        <li><time>Sep 29, 2026</time><p><b>Claude.</b> Claude and Claude Code went down. <a href="https://www.reuters.com/business/spotify-down-thousands-users-us-downdetector-shows-2026-09-29/" target="_blank" rel="noopener">Reuters</a></p></li>
+        <li><time>Sep 11, 2026</time><p><b>Gemini.</b> Errors for more than seven hours for some users of the Gemini app. <a href="https://www.google.com/appsstatus/dashboard/incidents/fJ4691Pe2g9KsTbP8g5F" target="_blank" rel="noopener">Google</a></p></li>
+        <li><time>Sep 3, 2026</time><p><b>ChatGPT, Claude and Grok.</b> All three went down on the same day. <a href="https://www.wired.com/story/nobody-is-saying-why-openai-and-anthropic-had-outages-today/" target="_blank" rel="noopener">WIRED</a></p></li>
+        <li><time>Jun 12, 2026</time><p><b>Anthropic.</b> Two of its models were switched off for every customer, with immediate effect, on a government order. They came back 18 days later. <a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noopener">Anthropic</a></p></li>
+        <li><time>Feb 20, 2026</time><p><b>Cloudflare.</b> A routing fault cut some customers' own addresses off the internet. <a href="https://blog.cloudflare.com/cloudflare-outage-february-20-2026/" target="_blank" rel="noopener">Cloudflare</a></p></li>
+        <li><time>Dec 5, 2025</time><p><b>Cloudflare.</b> About 28% of the apps on its network failed for 25 minutes. <a href="https://blog.cloudflare.com/5-december-2025-outage" target="_blank" rel="noopener">Cloudflare</a></p></li>
+        <li><time>Nov 18, 2025</time><p><b>Cloudflare.</b> One oversized settings file broke traffic across its network worldwide. It was not an attack. <a href="https://blog.cloudflare.com/18-november-2025-outage/" target="_blank" rel="noopener">Cloudflare</a></p></li>
+        <li><time>Nov 3, 2025</time><p><b>LinkedIn.</b> Microsoft's LinkedIn began training AI on members' data by default in more countries. You have to find the setting and switch it off. <a href="https://www.linkedin.com/help/linkedin/answer/a8059228/" target="_blank" rel="noopener">LinkedIn</a></p></li>
+        <li><time>Oct 29, 2025</time><p><b>Microsoft Azure.</b> Sites behind Azure Front Door timed out for more than eight hours. <a href="https://azure.status.microsoft/status/history/?trackingId=YKYN-BWZ" target="_blank" rel="noopener">Microsoft</a></p></li>
+        <li><time>Oct 20, 2025</time><p><b>Amazon.</b> A fault in Amazon's cloud knocked out services for up to 15 hours. Delta and United customers couldn't check in. <a href="https://www.altexsoft.com/travel-industry-news/delta-and-united-airlines-flights-impacted-by-aws-outage/" target="_blank" rel="noopener">AltexSoft</a> · <a href="https://www.infoq.com/news/2025/11/aws-dynamodb-outage-postmortem" target="_blank" rel="noopener">Cause</a></p></li>
+        <li><time>Jun 10, 2025</time><p><b>OpenAI.</b> ChatGPT and its API were disrupted for 15 and a half hours after a routine server update. <a href="https://status.openai.com/incidents/01JXCAW3K3JAE0EP56AEZ7CBG3/write-up" target="_blank" rel="noopener">OpenAI</a></p></li>
+        <li><time>Dec 26, 2024</time><p><b>OpenAI.</b> A power failure at its cloud provider's data center took ChatGPT down. <a href="https://status.openai.com/incidents/6bwlxnvdncnm/write-up" target="_blank" rel="noopener">OpenAI</a></p></li>
+      </ol>
+      <div class="pricing-terms" data-reveal>
+        <p>Your own computer doesn't go down when their cloud does, and it doesn't send them anything. It runs in your office, on your power, whether or not they are having a good day.</p>
+        <div class="pricing-actions">
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK A FREE FIT CALL</a>
+          <a class="button button-ghost" href="#box">SEE THE ALTERNATIVE</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="box" class="section-shell deployment-section">
+      <div class="section-heading split-heading direct-heading" data-reveal>
+        <h2>AI YOU OWN.</h2>
+        <p>Everyone else's AI is rented. Someone else holds it, someone else prices it, and someone else can take it back. Yours is a thing you own. You can put your hand on it, and it gets more useful the longer it runs.</p>
+      </div>
+      <div class="of-grid of-3" data-reveal>
+        <article class="of-step"><span>01 · IT LEARNS</span><h3>It knows you.</h3><p>It knows where your business has been and where it is now, and it charts a path to how good it could be. This one starts with you.</p></article>
+        <article class="of-step"><span>02 · IT WORKS</span><h3>It works for you.</h3><p>You already have the knowledge and all the pieces. What you don't have is the time to pull them together. It reads the files you give it, keeps a record of the decisions you make and can keep working overnight, a second brain and the project manager you always wanted. The judgment stays yours.</p></article>
+        <article class="of-step"><span>03 · IT'S YOURS</span><h3>It lives with you and it belongs to you.</h3><p>A physical computer in your building. Your files, your clients and your numbers are read there and stay there. It isn't private because a tech company promises. It's private because it runs on your own computer, and you own it and everything it learns.</p></article>
+      </div>
+      <div class="section-heading split-heading direct-heading compound-heading" data-reveal>
+        <h2>COMPOUNDING<br><em>INTELLIGENCE.</em></h2>
+        <p>Every file it reads and every decision you record makes the next answer better, and all of it stays on your own computer.</p>
+      </div>
+      <div class="ci-shell" data-reveal>
+        <iframe id="ciFrame" class="ci-frame" src="/compounding-widget.html?v=20261116a" title="Compounding intelligence interactive story" loading="eager" scrolling="no"></iframe>
+      </div>
+      <p class="compound-note live-callback" id="liveCallback" data-reveal hidden><strong>This is happening on this page right now.</strong> Every question someone asks the live demo teaches it new links between the files it has read, and it keeps them for the next visitor. So far it has learned <b id="liveConn">0</b> connections from <b id="liveConv">0</b> conversations. <a href="#live">Ask it something and watch the number move ↓</a></p>
+      <p class="of-note" data-reveal>Set up by Patrick Christell, who runs 23 of these agents every day on his own hardware. The one below is running on a single computer in Seattle right now.</p>
+      <div class="pricing-terms" data-reveal>
+        <div class="pricing-actions">
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK A FREE FIT CALL</a>
+          <a class="button button-ghost" href="#live">TRY THE DEMO</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="live" class="section-shell live-section" data-demo-url="https://patrick-beastmaster.tailf32530.ts.net">
+      <div class="section-kicker" data-reveal>LIVE DEMONSTRATION · TWO FICTIONAL COMPANIES · RUNNING ON MY LOCAL AI</div>
+      <div class="section-heading split-heading direct-heading" data-reveal>
+        <h2>TRY IT ON A<br><em>SAMPLE BUSINESS.</em></h2>
+        <p>Two made-up businesses, a law firm and a supply company, with realistic files. My local AI has read all of them. Ask it anything an owner would, and watch it find what needs attention.</p>
+      </div>
+      <div class="live-frame" id="liveFrame" data-reveal>
+        <div class="live-wait" id="liveWait"><span class="live-dot"></span> Waking up the demo…</div>
+      </div>
+      <div class="capability-grid compact-capabilities proof-stats">
+        <article class="capability-card" data-reveal><span class="card-index">23</span><h3>AGENTS</h3><p>Running every day on ICONIC's own hardware, across its own business and its clients' work: research, monitoring, writing, code, and phone and chat access.</p><div class="micro-line"><span></span></div></article>
+        <article class="capability-card" data-reveal><span class="card-index">1</span><h3>DESKTOP</h3><p>The demo above runs on one computer in Seattle: a 27-billion-parameter model, privately, writing roughly 50 words a second. Your questions are answered on that computer, not sent to an AI company.</p><div class="micro-line"><span></span></div></article>
+        <article class="capability-card" data-reveal><span class="card-index">$0</span><h3>PER TOKEN</h3><p>The agents can draft, check, revise and retest as many times as the job needs. More work doesn't mean a bigger bill.</p><div class="micro-line"><span></span></div></article>
+      </div>
+      <div class="pricing-terms" data-reveal>
+        <div class="pricing-actions">
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK A FREE FIT CALL</a>
+          <a class="button button-ghost" href="#proof">SEE A CLIENT RESULT</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="proof" class="section-shell proof-section proof-feature use-case-section">
+      <div class="section-heading split-heading direct-heading" data-reveal>
+        <h2>INTELLIGENCE YOU<br><em>CAN ACTUALLY USE.</em></h2>
+        <p>An auto dealership asked its AI one question. Here is what it found, and what it has done every morning since.</p>
+      </div>
+      <div class="case" data-reveal>
+        <div class="case-story">
+          <p class="case-label"><span class="live-dot"></span> Client work · An auto dealership · Running now</p>
+          <h3>The owner figured a rival was $500 to $800 cheaper. Truck for truck, the gap was $4,472.</h3>
+          <p>It started with one question from the owners: why are rivals selling more pickups than we are? The owner's hunch was that one rival was $500 to $800 cheaper. So the AI read both lots and paired every truck with its exact twin: same year, same trim, same engine, same drive. The rival was cheaper on 20 of the 22 pairs, by <strong>$4,472 a truck</strong> on average. That is the price gap a shopper sees online, not lost revenue. It was more than five times what the owner thought.</p>
+          <p>Now it runs every day. Every morning it reads every pickup on the owner's lot and his rivals' lots, and three times a week it writes him a brief. He can text it a question from his phone any time. He never has to take its word for anything: every price in a brief links to the rival's own web page, so he can tap it and see it for himself before he acts.</p>
+          <p class="case-verdict"><span>The owner's verdict</span>“Exceptional.”</p>
+        </div>
+        <div class="case-list">
+          <p class="case-label">What the agent does for him</p>
+          <ol class="sv-list">
+            <li><b>Reads every lot before the store opens.</b>Every pickup at the owner's store and at each rival: price, discount, trim and drive.</li>
+            <li><b>Compares twins, not guesses.</b>A truck is only compared with its exact match at a rival. No twin, no comparison.</li>
+            <li><b>Caught what people missed.</b>A pricing error on the dealership's own website. Fixed two days later.</li>
+            <li><b>Tells a market move from a rival's move.</b>One day all six dealers repriced at once. That is a factory program, not a rival coming after you, and not worth chasing.</li>
+            <li><b>Found what moves trucks.</b>In this market, trucks listed more than $3,000 under the going price left the lots about three times as fast as trucks at it.</li>
+            <li><b>Keeps the comparison honest.</b>The dealership's listed prices included a $1,499 protection package the rivals' didn't. It reports the gap with it and without it.</li>
+            <li><b>Watches every rival's specials.</b>Lease and finance offers, rebates and their end dates, and it flags the ones that have expired.</li>
+            <li><b>Watches reputations.</b>Google, DealerRater, BBB and CarEdge reviews for the owner's store and every rival.</li>
+            <li><b>Ends every brief with one decision.</b>Not a dashboard to dig through: the one call the owner should make this week.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="pricing-terms" data-reveal>
+        <div class="pricing-actions">
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK A FREE FIT CALL</a>
+          <a class="button button-ghost" href="/research/dealership-pricing-intelligence/">READ THE WHITE PAPER</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="offers" class="section-shell deployment-section">
+            <div class="section-heading split-heading direct-heading" data-reveal>
+        <h2>START WITH TRAINING<br><em>OR AN EVALUATION.</em></h2>
+        <p>All three lead to the same place: a private AI on a computer in your office that belongs to you. Training teaches you to use AI well today. An Evaluation finds out what your own private AI should do. A Build sets it up.</p>
+      </div>
+      <div class="of-grid of-3" data-reveal>
+        <article class="of-card">
+          <small>01 · LEARN AI</small>
+          <h3><a href="/services/ai-training/">Learn AI</a></h3>
+          <p>Everyone knows they need AI. Training shows you and your team what to do with it.</p>
+          <p>Learn to use AI safely, productively, and profitably in your actual work, and see what changes when the AI runs on your own computer.</p>
+          <div class="of-foot"><span class="of-price"><i>Workshops from</i>$249</span><a class="button button-ghost" href="/services/ai-training/">SEE TRAINING OPTIONS</a></div>
+        </article>
+        <article class="of-card of-lead">
+          <small>02 · EVALUATE</small>
+          <h3><a href="/services/evaluation/">Evaluate</a></h3>
+          <p>Before you spend $18,000 on a private AI of your own, spend $1,000 finding out exactly what it should do for your business.</p>
+          <p>You get a ranked list of the jobs it could take on, what each would take, and a roadmap you can act on with or without ICONIC.</p>
+          <div class="of-foot"><span class="of-price"><i>Fixed price</i>$1,000</span><a class="button button-primary" href="/services/evaluation/">GET EVALUATED</a></div>
+        </article>
+        <article class="of-card">
+          <small>03 · BUILD · AFTER AN EVALUATION</small>
+          <h3><a href="/services/build/">Build</a></h3>
+          <p>Your own private AI, on a computer in your office, set up around your files, your clients and your numbers.</p>
+          <p>Every build starts with an Evaluation. If yours shows a system worth building, ICONIC invites you to go ahead.</p>
+          <div class="of-foot"><span class="of-price"><i>Starts at</i>$18,000</span><a class="button button-ghost" href="/services/build/">HOW A BUILD WORKS</a></div>
+        </article>
+      </div>
+      <div class="section-kicker of-steps-kicker" data-reveal>HOW A PROJECT RUNS</div>
+      <div class="of-grid of-4" data-reveal>
+        <article class="of-step"><span>01</span><h3>Investigate</h3><p>Examine the business, its workflows, systems, and competitive environment.</p></article>
+        <article class="of-step"><span>02</span><h3>Identify</h3><p>Find the highest-value opportunities and determine which interventions are worth pursuing.</p></article>
+        <article class="of-step"><span>03</span><h3>Build</h3><p>Design and implement practical solutions.</p></article>
+        <article class="of-step"><span>04</span><h3>Improve</h3><p>Measure performance, refine systems, and identify additional opportunities.</p></article>
+      </div>
+      <p class="of-note" data-reveal>Not every customer needs every step. Some come for training and stop there. After a build, ICONIC can keep the system monitored, maintained and improving. <a href="/services/ongoing-intelligence/">Ongoing intelligence and optimization →</a></p>
+      <div class="pricing-terms" data-reveal>
+        <div class="pricing-actions">
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK A FREE FIT CALL</a>
+          <a class="button button-ghost" href="/services/evaluation/">GET THE $1,000 EVALUATION</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="research" class="section-shell deployment-section">
+      <div class="section-heading split-heading direct-heading" data-reveal>
+        <h2>OUR OWN<br><em>RESEARCH.</em></h2>
+        <p>Studies from systems ICONIC runs every day, with the numbers, the methods and the limits published.</p>
+      </div>
+      <ol class="sv-list research-list" data-reveal>
+        <li><b><a href="/research/dealership-pricing-intelligence/">Detecting synchronized repricing in dealer inventory</a></b>46 days of daily, truck-by-truck listings from six competing dealers: when they all move at once, which trucks leave fastest, and how often a vanished listing comes back.</li>
+        <li><b><a href="/research/agent-context-tax/">The context tax: AI agents read 140 times more than they write</a></b>Six months of real logs from three working agents, 1,703 jobs and 1.36 billion tokens: where the cost of running agents actually goes.</li>
+        <li><b><a href="/research/local-model-specialist-training/">39 out of 48 was the easy part</a></b>Fine-tuning a small model on a 16GB graphics card: what 60 training steps fixed, and what independent tests showed it didn't.</li>
+      </ol>
+      <div class="pricing-terms" data-reveal>
+        <div class="pricing-actions">
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK A FREE FIT CALL</a>
+          <a class="button button-ghost" href="/research/">SEE ALL RESEARCH</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="agents" class="section-shell agents-strip">
+      <div class="agents-card" data-reveal>
+        <div class="agents-copy">
+          <h2>Already running an agent swarm?<br><em>Your agents can plug in right now.</em></h2>
+          <p>Give them this one MCP address and they get ICONIC Reserve: a memory of what your business decided and what actually happened. Free, no sign-in, two minutes. <a class="agents-mcp-link" href="/agents/reserve/#what-is-mcp">New to MCP? Here's what it is →</a></p>
+        </div>
+        <div class="agents-connect">
+          <small>MCP ENDPOINT</small>
+          <div class="agents-endpoint"><code>https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp</code><button type="button" class="agents-copy-btn" data-copy="https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp" aria-label="Copy the MCP endpoint">COPY</button></div>
+        </div>
+      </div>
+      <div class="pricing-terms" data-reveal>
+        <div class="pricing-actions">
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK A FREE FIT CALL</a>
+          <a class="button button-ghost" href="/agents/reserve/">CONNECT YOUR AGENT</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section-shell contact-section">
+      <div class="contact-inner" data-reveal>
+        <div class="contact-brand"><div class="contact-wordmark"><img src="/iconic-wordmark.webp" alt="ICONIC." /></div><p class="contact-tagline">Know more. <em>Move first.</em></p></div>
+        <div class="contact-copy">
+          <div class="principal-lockup">
+            <img class="principal-photo" src="/patrick-christell-2026.jpg" alt="Patrick Christell" />
+            <div>
+              <div class="section-kicker card-identity">PATRICK CHRISTELL <em>Principal</em></div>
+              <div class="card-ornament" aria-hidden="true"><span></span><i></i><b></b><i></i><span></span></div>
+              <p class="principal-line">My career began in film, where I learned to find the story inside a mountain of information. I brought that instinct into technical recruiting, spending the next decade finding exceptional people in unexpected places, including talent from gaming, animation, and aerospace for autonomous vehicle development.</p>
+              <p class="principal-line">Today, I apply the same instincts to artificial intelligence. I build and operate private AI systems on my own hardware, combining local language models, autonomous agents, and persistent memory into systems that become more useful over time.</p>
+              <p class="principal-line">ICONIC is the culmination of those experiences: a belief that the most valuable intelligence comes from recognizing connections, preserving what you've learned, and putting that knowledge to work.</p>
+            </div>
+          </div>
+          <h2>Find the opportunity. Prove the value. <em>Build the advantage.</em></h2>
+          <div class="contact-actions">
+            <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK A FREE FIT CALL</a>
+            <a class="button button-ghost" href="mailto:patrick@iconic.onl?subject=ICONIC%20inquiry">patrick@iconic.onl</a>
+          </div>
+          <p class="cta-note">Or call <a href="tel:+12067738214">206-773-8214</a>.</p>
+        </div>
+      </div>
+      <footer><span>© 2026 ICONIC. · <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a> · <a href="/llms.txt">AI Reference</a> · <a href="/services/ai-training/">AI Training</a> · <a href="/services/ai-training/#inventory">Skills catalog</a> · <a href="/services/evaluation/">Evaluation</a> · <a href="/services/build/">Build</a> · <a href="/services/ongoing-intelligence/">Ongoing Intelligence</a> · <a href="/research/">Research</a> · <a href="/agents/">Agent Tools &amp; MCP Services</a> · <a href="/agents/reserve/">ICONIC Reserve · Connect via MCP</a> · <a href="/agents/assurance/">Agent Assurance</a> · <a href="/agents/marketplace/">Agent Marketplace</a></span><span>LEARN AI · EVALUATE FOR $1,000 · BUILD BY INVITATION</span><a href="#top">BACK TO TOP ↑</a></footer>
+    </section>
+  </main>
+
+  <a class="sticky-cta" id="stickyCta" href="/services/evaluation/" aria-hidden="true" tabindex="-1">START YOUR $1,000 EVALUATION →</a>
+  <script src="/app.js?v=20261116a" defer></script>
+  <script>
+    // Live demo: load it straight away; the demo says "ready" when it's up. If it never does, offer a direct link.
+    (function () {
+      var sec = document.getElementById('live'); if (!sec) return;
+      var url = (sec.getAttribute('data-demo-url') || '').replace(/\/$/, '');
+      var box = document.getElementById('liveFrame');
+      var book = 'https://calendly.com/patrick-iconic/30min';
+      var settled = false;
+      function fallback() {
+        if (settled) return; settled = true;
+        box.innerHTML = '<div class="live-off"><strong>The live demo isn\'t loading here.</strong><p>It runs on one private computer in Seattle. Try opening it directly, or see how the evaluation works.</p><div class="live-off-actions">' +
+          (url ? '<a class="button button-ghost" href="' + url + '/" target="_blank" rel="noopener">OPEN THE DEMO ↗</a>' : '') +
+          '<a class="button button-primary" href="/services/evaluation/">THE $1,000 EVALUATION →</a></div></div>';
+      }
+      if (!url) { fallback(); return; }
+      // Phones: no app squeezed into the page. One card; the demo opens full-screen with a way back.
+      if (window.matchMedia('(max-width: 899px)').matches) {
+        settled = true;
+        box.className = 'live-card-wrap';
+        box.innerHTML = '<a class="live-card" href="' + url + '/?back=1"><span class="live-dot"></span>TRY MY AI</a>';
+        return;
+      }
+      var frame = document.createElement('iframe');
+      frame.src = url + '/?embed=1'; frame.title = 'ICONIC live demo'; frame.setAttribute('allow', 'clipboard-write; local-network; local-network-access');
+      frame.className = 'is-loading';
+      box.appendChild(frame);
+      // The visitor's pick in the demo steers the compounding animation further down, for the rest of the visit.
+      function tellWidget(ws) { var f = document.getElementById('ciFrame'); if (f && f.contentWindow && ws) f.contentWindow.postMessage({ source: 'iconic-site', type: 'setBusiness', ws: ws }, '*'); }
+      var savedWs = null; try { savedWs = sessionStorage.getItem('iconic.ws'); } catch (err) {}
+      var ci = document.getElementById('ciFrame'); if (ci && savedWs) ci.addEventListener('load', function () { tellWidget(savedWs); });
+      if (savedWs) setTimeout(function () { tellWidget(savedWs); }, 1500);
+      window.addEventListener('message', function (e) {
+        if (e.origin === url && e.data && e.data.source === 'iconic-demo' && e.data.type === 'ws') { try { sessionStorage.setItem('iconic.ws', e.data.ws); } catch (err) {} tellWidget(e.data.ws); return; }
+        if (e.origin !== url || !e.data || e.data.source !== 'iconic-demo' || e.data.type !== 'ready' || settled) return;
+        settled = true; frame.className = ''; var w = document.getElementById('liveWait'); if (w) w.remove();
+      });
+      setTimeout(fallback, 40000);
+    })();
+    // Callback in the compounding section: the live demo's real connection count.
+    (function () {
+      var sec = document.getElementById('live'), out = document.getElementById('liveCallback');
+      var url = sec && (sec.getAttribute('data-demo-url') || '').replace(/\/$/, ''); if (!url || !out) return;
+      function poll() {
+        fetch(url + '/api/status', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (s) {
+          var l = s.learned || {}; if (typeof l.connections !== 'number') return;
+          document.getElementById('liveConn').textContent = l.connections.toLocaleString('en-US');
+          document.getElementById('liveConv').textContent = (l.conversations || 0).toLocaleString('en-US');
+          out.hidden = false;
+        }).catch(function () {});
+      }
+      poll(); setInterval(function () { if (!document.hidden) poll(); }, 20000);
+    })();
+  </script>
+  <script>
+    // Keep booking on ICONIC; the href remains a working fallback if the widget is blocked.
+    document.addEventListener('click', function (event) {
+      const link = event.target.closest('a[data-calendly-booking]');
+      if (!link || event.defaultPrevented || event.button !== 0 ||
+          event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (!window.Calendly || typeof window.Calendly.initPopupWidget !== 'function') return;
+      event.preventDefault();
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/patrick-iconic/30min?background_color=ffffff&text_color=070912&primary_color=8d98ff'
+      });
+    });
+  </script>
+  <script>
+    // Agents section: copy the MCP endpoint.
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('.agents-copy-btn'); if (!b) return;
+      var t = b.getAttribute('data-copy'), done = function (ok) { b.textContent = ok ? 'COPIED' : 'SELECT & COPY'; setTimeout(function () { b.textContent = 'COPY'; }, 1800); };
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(function () { done(true); }, function () { done(false); }); else done(false);
+      if (typeof gtag === 'function') gtag('event', 'reserve_copy', { item: 'homepage endpoint' });
+    });
+  </script>
+</body>
+</html>

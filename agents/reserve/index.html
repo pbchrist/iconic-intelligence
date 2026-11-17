@@ -422,7 +422,7 @@
           <div class="section-kicker" data-reveal>08 · FAQ</div>
           <h2 id="faqTitle" data-reveal>Straight<br><em>answers.</em></h2>
           <div class="rv-faq" data-reveal>
-            <details><summary>What is MCP, in plain English?</summary><p>The Model Context Protocol is the open standard that lets AI assistants like Claude, Claude Code and Cursor use outside tools. Think of it as a universal plug: you give your assistant one web address, it sees the tools behind it, and it decides when to use them. You don't write code.</p></details>
+            <details id="what-is-mcp"><summary>What is MCP, in plain English?</summary><p>The Model Context Protocol is the open standard that lets AI assistants like Claude, Claude Code and Cursor use outside tools. Think of it as a universal plug: you give your assistant one web address, it sees the tools behind it, and it decides when to use them. You don't write code.</p></details>
             <details><summary>Do I need an account or an API key?</summary><p>No. The public endpoint has no sign-in. In Claude, choose <b>No sign in</b> when you add the connector. If a client asks for OAuth details, leave them empty.</p></details>
             <details><summary>What does it cost?</summary><p>Connecting, the assessment, the synthetic demo and the sandbox are free. A <a href="#pass">Reserve Pass</a>, your own private Reserve for 30 days, is $19 one-time, bought here by card or by your agent. A Reserve wired into your own systems is a scoped engagement that starts with the <a href="https://calendly.com/patrick-iconic/30min">free 30-minute check</a>.</p></details>
             <details><summary>Does it keep what I type?</summary><p>The assessment answers once and stores nothing; its receipt says <code>record_retention: NONE_PUBLIC_SERVICE</code>. Sandbox records are fictional and erased after an hour. The server keeps only anonymous counts of which tools were used.</p></details>
@@ -461,6 +461,7 @@
     </section>
   </main>
 
+  <script>/* Links to #what-is-mcp open that answer. */(function(){function o(){if(location.hash==="#what-is-mcp"){var d=document.getElementById("what-is-mcp");if(d){d.open=true;d.scrollIntoView();}}}window.addEventListener("hashchange",o);document.addEventListener("DOMContentLoaded",o);})();</script>
   <script src="/app.js?v=20261102a" defer></script>
   <script src="/agents/reserve/pass.js?v=20261112b" defer></script>
   <script src="/agents/reserve/reserve.js?v=20261110a" data-gateway="https://patrick-beastmaster.tailf32530.ts.net/reserve" defer></script>

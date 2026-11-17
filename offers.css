@@ -142,3 +142,29 @@ body.home-v2 .split-heading h2 { margin-top: 0; }
 body.home-v2 .split-heading { margin-top: 22px; align-items: start; }
 body.home-v2 .split-heading > p, body.home-v2 .split-heading > div > p:first-child { margin-top: 0; }
 body.home-v2 .of-steps-kicker { margin-top: 72px; }
+
+/* Homepage v2 (2026-11-17 round 2): compact evidence list, dealership case, research list. Sizes reuse existing values. */
+.ev-list { max-width: 1040px; margin: 40px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.ev-list li { display: grid; grid-template-columns: minmax(0,1fr); gap: 4px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.ev-list time { color: var(--accent-2); font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; padding-top: 4px; }
+.ev-list p { margin: 0; color: #b5bacb; font-size: 15px; line-height: 1.55; }
+.ev-list p b { color: var(--pearl); font-weight: 600; }
+.ev-list a, .ev-src a { color: var(--accent-2); font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(192,198,255,.4); white-space: nowrap; }
+@media (min-width: 768px) { .ev-list li { grid-template-columns: 130px minmax(0,1fr); gap: 20px; } }
+.ev-feature { max-width: 1040px; margin-top: 40px; }
+.ev-feature p.ev-src { margin-top: 2px; }
+.case { display: grid; grid-template-columns: minmax(0,1fr); gap: 34px; margin-top: 40px; }
+@media (min-width: 900px) { .case { grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); gap: 56px; } }
+.case > * { min-width: 0; }
+.case-label { display: flex; align-items: center; gap: 10px; margin: 0; color: var(--accent-2); font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.case-story h3 { margin: 16px 0 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(32px, 3.2vw, 44px); font-weight: 400; letter-spacing: -.035em; line-height: 1.04; }
+.case-story > p:not(.case-label):not(.case-verdict) { margin: 18px 0 0; color: #aeb4c7; font-family: Georgia, "Times New Roman", serif; font-size: 17px; line-height: 1.58; }
+.case-story strong { color: var(--pearl); font-weight: 400; }
+.case-verdict { margin: 24px 0 0; padding: 14px 18px; border-left: 2px solid var(--accent-2); background: rgba(146,156,255,.06); color: var(--pearl); font-family: Georgia, "Times New Roman", serif; font-size: 30px; line-height: 1.2; }
+.case-verdict span { display: block; margin-bottom: 6px; color: var(--accent-2); font-family: Inter, ui-sans-serif, Arial, sans-serif; font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.case-list .sv-list { margin-top: 16px; }
+.case-list .sv-list li b, .research-list li b { margin-bottom: 4px; }
+.research-list { max-width: 1040px; margin-top: 40px; }
+.research-list li b a:hover { color: var(--accent-2); }
+.agents-copy p a.agents-mcp-link { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(192,198,255,.4); white-space: nowrap; }
+body.home-v2 .compound-heading { margin-top: 72px; }
