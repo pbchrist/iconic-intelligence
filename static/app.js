@@ -187,14 +187,15 @@
   }
   function renderHello() {
     const st = S.status, w = S.workspace; if (!st || !w) return;
-    $('#helloKicker').textContent = `LIVE · RUNNING ON ${String(st.location || 'this computer').toUpperCase()}`;
+    const city = String(st.location || '').replace(/^.*\bin\s+/i, '');
+    $('#helloKicker').textContent = ('LIVE • RUNNING ON MY LOCAL AI SERVER' + (city ? ' IN ' + city : '')).toUpperCase();
     const list = st.workspaces || [];
     $('#hello').classList.toggle('picking', !S.picked && list.length > 1);
     document.body.classList.toggle('picked', !!S.picked || list.length <= 1);
     $('#askInput').placeholder = 'Ask about ' + w.name + '…';
     if (!S.picked && list.length > 1) {
-      $('#helloTitle').innerHTML = 'Pick a business.<br><em>Watch it think.</em>';
-      $('#helloSub').innerHTML = 'Each one is a sample business with realistic files. A private AI on this machine has read every page. Choose one and see what it found.';
+      $('#helloTitle').innerHTML = 'Pick a business.<br>Query it.<br><em>Watch it work.</em>';
+      $('#helloSub').innerHTML = '';
       $('#pick').innerHTML = list.map((x) => `<button type="button" class="pick-card" data-ws="${esc(x.id)}"><span class="ws-avatar">${esc(x.initials || '·')}</span><span><strong>${esc(x.name)}</strong><small>${esc(x.kind || '')}</small><em>${fmt(x.documents)} files${x.developments ? ` · ${x.developments} things need attention` : ''}</em></span><b>→</b></button>`).join('');
       $$('#pick .pick-card').forEach((b) => b.addEventListener('click', () => switchWs(b.dataset.ws)));
       $('#brief').innerHTML = ''; $('#suggest').innerHTML = ''; $('#dare').hidden = true;
