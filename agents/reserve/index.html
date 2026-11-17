@@ -61,6 +61,7 @@
   <link rel="stylesheet" href="/styles.css?v=20261101" />
   <link rel="stylesheet" href="/mobile-first.css?v=20261110r" />
   <link rel="stylesheet" href="/agents/reserve/reserve.css?v=20261112a" />
+<style>.rv-agent-toggle>summary{cursor:pointer;list-style:none;display:inline-flex;margin:8px 0 18px}.rv-agent-toggle>summary::-webkit-details-marker{display:none}.rv-agent-toggle[open]>summary{margin-bottom:22px}</style>
 </head>
 <body class="rv-page">
   <canvas id="field" aria-hidden="true"></canvas>
@@ -251,10 +252,13 @@
         <!-- TRY IT LIVE -->
         <section id="try" class="rv-sec" aria-labelledby="tryTitle">
           <div class="section-kicker" data-reveal>04 · TRY IT LIVE</div>
-          <h2 id="tryTitle" data-reveal>Run it here.<br><em>On the real server.</em></h2>
+          <h2 id="tryTitle" data-reveal>What your agent sees.<br><em>On the real server.</em></h2>
           <p class="rv-lead" data-reveal>The same calls your agent makes, sent from this page to the live Reserve server. Nothing below is canned: every result is the server's actual response.</p>
 
-          <div class="rv-console" data-reveal>
+          <p class="rv-lead" data-reveal><b>This is the free check AI agents run on your behalf; the answer is written for the agent.</b></p>
+          <details class="rv-agent-toggle" data-reveal>
+            <summary class="button button-ghost">SEE WHAT AN AGENT GETS</summary>
+          <div class="rv-console">
             <div class="rv-console-top">
               <div class="rv-tabs" role="tablist" aria-label="Live tests">
                 <button class="rv-tab" role="tab" type="button" id="tab-assess" aria-controls="panel-assess" aria-selected="true">Free assessment</button>
@@ -318,6 +322,7 @@
               </div>
             </div>
           </div>
+          </details>
           <p class="rv-small" style="margin-top:16px">Your agent gets more than this page can show: <code>reserve_sandbox_start</code> opens a private one-hour Reserve where it can write, recall, trace and evaluate its own fictional records.</p>
         </section>
 
