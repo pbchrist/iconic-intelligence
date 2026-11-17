@@ -51,7 +51,7 @@
   onScroll();
 
   // Deterministic primary-nav state: nothing is active at the top.
-  const navTargets = ['own', 'uses', 'proof', 'ways'];
+  const navTargets = ['offers', 'how', 'proof'];
   const navLinks = $$('.nav a[href^="#"]');
   const updateNavState = () => {
     if (window.scrollY < 180) {
@@ -132,7 +132,7 @@
   // hidden while either free-check offer block is on screen.
   const sticky = $('#stickyCta');
   if (sticky && 'IntersectionObserver' in window) {
-    const watched = ['.hero', '#live', '#check', '#start', '#contact'].map((sel) => $(sel)).filter(Boolean);
+    const watched = ['.hero', '#live', '#evaluation', '#start', '#contact'].map((sel) => $(sel)).filter(Boolean);
     const visible = new Set();
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
