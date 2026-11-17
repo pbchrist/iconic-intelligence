@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Problem-first public search discoverability probe. Read-only; no payment.
+"""Read-only, problem-first independent discovery probe.
 
-The queries intentionally do not include ICONIC, its URL or its repository.
-A search result is not proof that an unaffiliated agent would install/use an MCP.
+Searches do NOT contain the target brand/URL/repository; branded queries are
+separate controls. This tests discoverability in public search and the official
+MCP Registry, not actual autonomous LLM selection or a completed purchase.
 """
 from __future__ import annotations
-
 import argparse
 from datetime import datetime, timezone
 import json
@@ -19,74 +19,94 @@ QUERIES = [
     "AI agent tool public vehicle inventory pricing pattern evidence report",
     "MCP service private verified business decision outcome memory",
 ]
-CONTROL = "ICONIC agent marketplace MCP data reconciliation"
-TARGET_DOMAINS = {"iconic.onl", "www.iconic.onl",
-                  "patrick-beastmaster.tailf32530.ts.net"}
-HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; ICONIC-independent-discovery-audit/1.0)"}
+BING_CONTROL = "ICONIC agent marketplace MCP data reconciliation"
+REGISTRY_TERMS = ["inventory", "reconciliation", "verified outcomes", "business decisions"]
+REGISTRY_CONTROL = "io.github.pbchrist"
+REGISTRY_API = "https://registry.modelcontextprotocol.io/v0.1/servers"
+TARGET_DOMAINS = {"iconic.onl", "www.iconic.onl", "patrick-beastmaster.tailf32530.ts.net"}
+TARGET_SERVERS = {
+    "io.github.pbchrist/iconic-agent-marketplace",
+    "io.github.pbchrist/iconic-intelligence-reserve",
+}
+HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; ICONIC-independent-discovery-audit/2.0)"}
 
-
-def search(query, maximum=10):
-    url = "https://www.bing.com/search?" + urlencode({"q": query, "format": "rss"})
+def retrieve(url):
     with urlopen(Request(url, headers=HEADERS), timeout=12) as response:
-        payload = response.read(200000)
-    root = ET.fromstring(payload)
-    items = []
-    for i, el in enumerate(root.findall("./channel/item")[:maximum], 1):
+        return response.read(250000)
+
+def bing_search(query, maximum=10):
+    url = "https://www.bing.com/search?" + urlencode({"q": query, "format": "rss"})
+    root = ET.fromstring(retrieve(url))
+    results = []
+    for rank, el in enumerate(root.findall("./channel/item")[:maximum], 1):
         link = (el.findtext("link") or "").strip()
         domain = (urlsplit(link).hostname or "").lower()
-        items.append({
-            "rank": i,
-            "title": (el.findtext("title") or "")[:140],
-            "domain": domain,
-            "url": link,
-            "iconic_match": domain in TARGET_DOMAINS,
-        })
-    if not items:
-        raise RuntimeError("Search provider returned zero RSS items; cannot score as absent")
-    return items
+        results.append({"rank": rank, "domain": domain, "iconic_match": domain in TARGET_DOMAINS})
+    if not results:
+        raise RuntimeError("Bing returned no RSS results; cannot score as absent")
+    return results
 
+def registry_search(term, maximum=10):
+    url = REGISTRY_API + "?" + urlencode({"search": term, "limit": maximum})
+    response = json.loads(retrieve(url))
+    if not isinstance(response.get("servers"), list):
+        raise ValueError("Registry response lacked servers array")
+    return [
+        {"rank": rank, "name": item.get("server", {}).get("name", ""),
+         "iconic_match": item.get("server", {}).get("name", "") in TARGET_SERVERS}
+        for rank, item in enumerate(response["servers"][:maximum], 1)
+    ]
 
-def audit():
-    probes = []
-    for query in QUERIES + [CONTROL]:
-        try:
-            items = search(query)
-            matches = [r["rank"] for r in items if r["iconic_match"]]
-            probes.append({
-                "query": query,
-                "control": query == CONTROL,
-                "status": "SEARCH_RESULTS_RETURNED",
-                "result_count": len(items),
-                "iconic_rank": min(matches) if matches else None,
-                "top_domains": [x["domain"] for x in items[:5]],
-            })
-        except Exception as exc:
-            probes.append({"query": query, "control": query == CONTROL,
-                           "status": "UNSCORED_PROVIDER_ERROR",
-                           "error": str(exc)[:180]})
-    unbranded = [r for r in probes if not r["control"]]
-    scored = [r for r in unbranded if r["status"] == "SEARCH_RESULTS_RETURNED"]
-    hits = sum(r["iconic_rank"] is not None for r in scored)
+def probe(source, query, control):
+    try:
+        matches = (bing_search if source == "bing" else registry_search)(query)
+        ranks = [item["rank"] for item in matches if item["iconic_match"]]
+        return {
+            "query": query, "control": control, "status": "SEARCH_RESULTS_RETURNED",
+            "result_count": len(matches), "iconic_rank": min(ranks) if ranks else None,
+            "top_domains" if source == "bing" else "top_server_names":
+                [item.get("domain", item.get("name", "")) for item in matches[:5]],
+        }
+    except Exception as exc:
+        return {"query": query, "control": control, "status": "UNSCORED_PROVIDER_ERROR",
+                "error": str(exc)[:200]}
+
+def summarize(probes):
+    unbranded = [p for p in probes if not p["control"]]
+    scored = [p for p in unbranded if p["status"] == "SEARCH_RESULTS_RETURNED"]
     return {
-        "timestamp_utc": datetime.now(timezone.utc).isoformat(),
-        "method": "Bing RSS, first ten results per exact problem-only query",
-        "query_treatment": "Unbranded except a separately labeled branded control",
         "scored_queries": len(scored),
-        "unbranded_queries_with_iconic_in_top_ten": hits,
+        "unbranded_top_ten_hits": sum(p["iconic_rank"] is not None for p in scored),
+        "branded_control_found": any(
+            p["control"] and p.get("iconic_rank") is not None for p in probes),
         "probes": probes,
-        "limitations": [
-            "One search provider and a small set of queries, not a ranking benchmark",
-            "Search listing does not prove an LLM autonomously discovered or selected the service",
-            "A missing result does not prove the service is unindexed everywhere",
-            "No payment, MCP installation, or customer-data submission was attempted",
-        ],
     }
 
+def audit():
+    bing = summarize([probe("bing", q, False) for q in QUERIES]
+                     + [probe("bing", BING_CONTROL, True)])
+    registry = summarize([probe("registry", q, False) for q in REGISTRY_TERMS]
+                         + [probe("registry", REGISTRY_CONTROL, True)])
+    return {
+        "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+        "method": "First 10 unbranded results, Bing RSS and official MCP Registry search",
+        "query_treatment": "Problem-first searches unbranded; separate labeled controls",
+        "scored_queries": bing["scored_queries"],
+        "unbranded_queries_with_iconic_in_top_ten": bing["unbranded_top_ten_hits"],
+        "bing": bing, "official_mcp_registry": registry,
+        "limitations": [
+            "Search-provider results depend on exact query and date",
+            "Registry search is not a guarantee of LLM attention or selection",
+            "A missing result does not mean the server is unregistered or unusable",
+            "No payment, agent wallet, customer information or paid fulfillment involved",
+        ],
+    }
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", help="Write machine-readable results to this path")
-    parser.add_argument("--require-hit", action="store_true", help="Fail the job unless an unbranded search finds ICONIC in the top 10")
+    parser.add_argument("--require-hit", action="store_true",
+                        help="Fail unless an unbranded query finds ICONIC in either search channel")
     options = parser.parse_args()
     report = audit()
     raw = json.dumps(report, indent=2, ensure_ascii=False)
@@ -95,10 +115,14 @@ if __name__ == "__main__":
         Path(options.output).write_text(raw + "\n")
     print(raw)
     if options.require_hit:
-        if report["scored_queries"] == 0:
-            print("RESULT FAIL: search provider returned no scoreable problem-first results", file=sys.stderr)
+        bing = report["bing"]
+        registry = report["official_mcp_registry"]
+        total_scored = bing["scored_queries"] + registry["scored_queries"]
+        total_hits = bing["unbranded_top_ten_hits"] + registry["unbranded_top_ten_hits"]
+        if total_scored == 0:
+            print("RESULT FAIL: neither search channel could score a query", file=sys.stderr)
             sys.exit(1)
-        if report["unbranded_queries_with_iconic_in_top_ten"] == 0:
-            print("RESULT FAIL: no ICONIC result in the top 10 for any scoreable unbranded query", file=sys.stderr)
+        if total_hits == 0:
+            print("RESULT FAIL: zero unbranded top-ten ICONIC hits in Bing or official MCP Registry", file=sys.stderr)
             sys.exit(1)
-        print("RESULT PASS: problem-first organic search returned ICONIC for at least one unbranded query")
+        print("RESULT PASS: at least one unbranded top-ten result; still not proof of LLM selection")
