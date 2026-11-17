@@ -1,0 +1,43 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "iconic-agent-marketplace",
+  "version": "0.1.0",
+  "description": "Inspect live ICONIC agent services, evaluate MCP tool-selection readiness, and safely reconcile fictional or authorized public inventory data.",
+  "author": {
+    "name": "ICONIC",
+    "email": "patrick@iconic.onl",
+    "url": "https://iconic.onl/"
+  },
+  "homepage": "https://iconic.onl/agents/marketplace/",
+  "repository": "https://github.com/pbchrist/iconic-intelligence",
+  "keywords": [
+    "MCP",
+    "AI agents",
+    "MCP selection test",
+    "data reconciliation",
+    "private AI"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "ICONIC Agent Services",
+        "shortDescription": "Evaluate MCP tools and reconcile data.",
+        "longDescription": "Explore ICONIC's agent-facing services. Inspect available offers and pricing, compare fictional inventories and run bounded public-data previews. The MCP Selection Test is a separate paid service. Payment requires explicit buyer authorization; inspecting or preparing a quote does not charge anyone.",
+        "developerName": "ICONIC",
+        "category": "Productivity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://iconic.onl/",
+        "privacyPolicyURL": "https://iconic.onl/privacy.html",
+        "termsOfServiceURL": "https://iconic.onl/agents/marketplace/terms.html",
+        "defaultPrompt": [
+          "Compare two fictional inventory snapshots and tell me what changed without assuming missing items were sold.",
+          "What does ICONIC's MCP Selection Test measure, what does it cost, and can it be purchased now?",
+          "Show available ICONIC agent services and separate those currently purchasable from drafts."
+        ]
+      }
+    }
+  }
+}
