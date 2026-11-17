@@ -20,7 +20,7 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/iconic-public"
           rsync -a --exclude '.git' --exclude '.github' --exclude '_site' \
-            --exclude 'README.md' --exclude 'CHANGELOG.md' --exclude 'PLAN.md' --exclude 'server.js' \
+            --exclude 'ops/pay-per-crawl/' --exclude 'README.md' --exclude 'CHANGELOG.md' --exclude 'PLAN.md' --exclude 'server.js' \
             --exclude 'package.json' --exclude '.gitignore' --exclude '*.patch' ./ "$RUNNER_TEMP/iconic-public/"
           printf 'iconic.onl\n' > "$RUNNER_TEMP/iconic-public/CNAME"
           touch "$RUNNER_TEMP/iconic-public/.nojekyll"
