@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import json
+import sys
 from urllib.parse import urlencode, urlsplit
 from urllib.request import Request, urlopen
 import xml.etree.ElementTree as ET
@@ -85,6 +86,7 @@ def audit():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", help="Write machine-readable results to this path")
+    parser.add_argument("--require-hit", action="store_true", help="Fail the job unless an unbranded search finds ICONIC in the top 10")
     options = parser.parse_args()
     report = audit()
     raw = json.dumps(report, indent=2, ensure_ascii=False)
@@ -92,3 +94,11 @@ if __name__ == "__main__":
         from pathlib import Path
         Path(options.output).write_text(raw + "\n")
     print(raw)
+    if options.require_hit:
+        if report["scored_queries"] == 0:
+            print("RESULT FAIL: search provider returned no scoreable problem-first results", file=sys.stderr)
+            sys.exit(1)
+        if report["unbranded_queries_with_iconic_in_top_ten"] == 0:
+            print("RESULT FAIL: no ICONIC result in the top 10 for any scoreable unbranded query", file=sys.stderr)
+            sys.exit(1)
+        print("RESULT PASS: problem-first organic search returned ICONIC for at least one unbranded query")
