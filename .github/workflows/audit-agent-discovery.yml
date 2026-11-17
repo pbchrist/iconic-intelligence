@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'scripts/audit-agent-discovery.py'
+      - 'scripts/audit-a2a.py'
       - '.github/workflows/audit-agent-discovery.yml'
   schedule:
     - cron: '17 */6 * * *'
