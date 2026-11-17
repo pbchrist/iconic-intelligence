@@ -24,4 +24,4 @@ A private setup reduces exposure; it does not by itself make a business complian
 
 ## Next step
 
-[The $2,000 ICONIC Evaluation](https://iconic.onl/services/evaluation/) · [Privacy policy](https://iconic.onl/privacy.html) · patrick@iconic.onl
+[The $1,000 ICONIC Evaluation](https://iconic.onl/services/evaluation/) · [Privacy policy](https://iconic.onl/privacy.html) · patrick@iconic.onl

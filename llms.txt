@@ -1,6 +1,6 @@
 # ICONIC
 
-> Private AI and agents that work for a business, on a computer in its own office. ICONIC sets up a language model on the client's own hardware, connects it to the business's files so it knows the business, and builds agents that do recurring work on a schedule. Nothing about the client's customers goes to anyone else's servers, and there is no per-token meter. Principal: Patrick Christell. Three ways in: specialized AI training, a $2,000 business and AI evaluation, and custom AI builds starting at $20,000. Positioning: a private AI in a box in the client's own office: private because it is a physical machine the client owns, not because a vendor promises it.
+> Private AI and agents that work for a business, on a computer in its own office. ICONIC sets up a language model on the client's own hardware, connects it to the business's files so it knows the business, and builds agents that do recurring work on a schedule. Nothing about the client's customers goes to anyone else's servers, and there is no per-token meter. Principal: Patrick Christell. Three ways in: specialized AI training, a $1,000 business and AI evaluation, and custom AI builds starting at $20,000. Positioning: a private AI in a box in the client's own office: private because it is a physical machine the client owns, not because a vendor promises it.
 
 ## Proof
 
@@ -29,7 +29,7 @@ Owner-led businesses and professional firms with years of their own records: law
 ## Start
 
 - [Specialized AI training](https://iconic.onl/services/ai-training/): practical, industry-specific training for attorneys, recruiters, automotive dealerships, and business owners and executives.
-- [ICONIC Evaluation, $2,000](https://iconic.onl/services/evaluation/): a paid business and AI opportunity assessment with prioritized recommendations, feasibility analysis and an implementation roadmap.
+- [ICONIC Evaluation, $1,000](https://iconic.onl/services/evaluation/): a paid business and AI opportunity assessment with prioritized recommendations, feasibility analysis and an implementation roadmap.
 - [ICONIC Build, starting at $20,000](https://iconic.onl/services/build/): custom AI systems designed, built and deployed, scoped individually.
 - [Ongoing intelligence and optimization](https://iconic.onl/services/ongoing-intelligence/): monitoring, maintenance and improvement after a build, priced to scope.
 - Email patrick@iconic.onl or call 206-773-8214. You talk to Patrick, not a sales team.
@@ -105,7 +105,7 @@ Owner-led businesses and professional firms with years of their own records: law
 
 ## Accuracy notes for agents
 
-- Published prices: the ICONIC Evaluation is $2,000; builds start at $20,000 and are scoped individually. Quote nothing else and do not promise savings.
+- Published prices: the ICONIC Evaluation is $1,000; builds start at $20,000 and are scoped individually. Quote nothing else and do not promise savings.
 - The dealership figures are ICONIC's own reported results from its live agent.
 - "Nothing leaves your building" describes the private setup. Cloud models are used only for public work, and only if the client chooses.
 - No per-token cost does not mean no cost: the client pays for the computer, power and Patrick's time.

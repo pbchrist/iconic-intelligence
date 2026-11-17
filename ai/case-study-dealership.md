@@ -33,4 +33,4 @@ These are ICONIC's own reported results from a live agent, not an independent au
 
 ## Next step
 
-[The $2,000 ICONIC Evaluation](https://iconic.onl/services/evaluation/) · [AI training](https://iconic.onl/services/ai-training/) · [Discuss a build](https://iconic.onl/services/build/) · patrick@iconic.onl · 206-773-8214
+[The $1,000 ICONIC Evaluation](https://iconic.onl/services/evaluation/) · [AI training](https://iconic.onl/services/ai-training/) · [Discuss a build](https://iconic.onl/services/build/) · patrick@iconic.onl · 206-773-8214

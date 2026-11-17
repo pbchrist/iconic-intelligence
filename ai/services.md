@@ -6,9 +6,9 @@ ICONIC finds hidden opportunities to increase revenue, eliminate wasted effort a
 
 ## Three ways to work with ICONIC
 
-**Learn AI: specialized AI training.** Practical training for professionals and teams, specific to the customer's industry, responsibilities and workflows. Audiences: attorneys and law firms, recruiters and staffing firms, automotive dealerships, business owners and executives. Formats: specialized workshop, private professional training, team training. Details: https://iconic.onl/services/ai-training/
+**Learn AI: specialized AI training.** Practical training for professionals and teams, specific to the customer's industry, responsibilities and workflows. Audiences: attorneys and law firms, recruiters and staffing firms, automotive dealerships, business owners and executives. Formats and prices: specialized workshop $249 per person, private professional training $1,000 per session, team training $3,000 per team. Details: https://iconic.onl/services/ai-training/
 
-**Evaluate: the ICONIC Evaluation, $2,000.** A paid business and AI opportunity assessment. ICONIC investigates operations, challenges, competitive position and existing systems. Deliverables: business opportunity assessment, identification of high-value opportunities, prioritized recommendations, estimated financial impact where evidence supports it, technical and operational feasibility analysis, recommended implementation roadmap. Details: https://iconic.onl/services/evaluation/
+**Evaluate: the ICONIC Evaluation, $1,000.** A paid business and AI opportunity assessment. ICONIC investigates operations, challenges, competitive position and existing systems. Deliverables: business opportunity assessment, identification of high-value opportunities, prioritized recommendations, estimated financial impact where evidence supports it, technical and operational feasibility analysis, recommended implementation roadmap. Details: https://iconic.onl/services/evaluation/
 
 **Build: custom AI implementation, starting at $20,000.** ICONIC designs, develops and deploys specialized AI systems: AI agents, competitive intelligence, revenue and pricing intelligence, workflow automation, business research and monitoring, customer acquisition systems, custom integrations, internal knowledge and decision-support systems, and secure private AI deployments. Each build is scoped individually under a separate agreement. Details: https://iconic.onl/services/build/
 
@@ -17,8 +17,8 @@ ICONIC finds hidden opportunities to increase revenue, eliminate wasted effort a
 ## How customers start
 
 - Someone who wants to understand AI starts with training.
-- Someone with a business problem starts with the $2,000 evaluation.
-- Someone who already knows what needs building goes straight to a build conversation. Nobody is required to take training or an evaluation first.
+- Someone with a business problem starts with the $1,000 evaluation.
+- Builds are by invitation and begin with an evaluation. Training is not required first.
 
 ## Private AI
 
@@ -26,7 +26,7 @@ ICONIC builds and runs private AI systems on its own hardware, and can deploy a 
 
 ## Next step
 
-[The $2,000 ICONIC Evaluation](https://iconic.onl/services/evaluation/) · [AI training](https://iconic.onl/services/ai-training/) · [Discuss a build](https://iconic.onl/services/build/) · patrick@iconic.onl · 206-773-8214
+[The $1,000 ICONIC Evaluation](https://iconic.onl/services/evaluation/) · [AI training](https://iconic.onl/services/ai-training/) · [Discuss a build](https://iconic.onl/services/build/) · patrick@iconic.onl · 206-773-8214
 
 ## Research methods
 

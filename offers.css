@@ -120,3 +120,16 @@
 .of-card ul.src-list li { font-size: 15px; line-height: 1.55; color: #b5bacb; }
 .of-card ul.src-list li b { color: var(--pearl); font-weight: 600; }
 .of-card ul.src-list a { color: var(--accent-2); font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(192,198,255,.4); white-space: nowrap; }
+
+/* Build, behind the rope */
+.rope { max-width: 760px; margin: 46px auto 0; text-align: center; }
+.rope-line { display: flex; align-items: flex-start; justify-content: center; margin-bottom: 22px; }
+.rope-line i { width: 9px; height: 34px; border-radius: 5px 5px 2px 2px; background: linear-gradient(180deg, #f1d28a, #8a6a2a); }
+.rope-line b { flex: 1; max-width: 520px; height: 24px; margin-top: 4px; border-bottom: 5px solid #8f1f2c; border-radius: 0 0 50% 50% / 0 0 100% 100%; }
+.rope-body small { color: #d9bd7a; font-size: 10px; font-weight: 800; letter-spacing: .2em; }
+.rope-body h3 { margin: 12px 0 10px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(30px, 4vw, 44px); font-weight: 400; font-style: italic; letter-spacing: -.02em; color: var(--pearl); }
+.rope-body p { margin: 0 auto; max-width: 600px; color: #a3a9bd; font-size: 15px; line-height: 1.65; }
+.rope-body .rope-price { margin-top: 16px; color: #7c8399; font-size: 12.5px; letter-spacing: .02em; }
+.rope-body .rope-price a { color: #d9bd7a; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(217,189,122,.4); }
+.sv-price.sv-invite strong { color: #d9bd7a; }
+.sv-price.sv-invite strong { font-family: Georgia, "Times New Roman", serif; font-size: clamp(26px, 3.4vw, 38px); font-weight: 400; font-style: italic; letter-spacing: -.01em; }
