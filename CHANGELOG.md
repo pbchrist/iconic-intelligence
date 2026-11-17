@@ -1,3 +1,10 @@
+## 2026-11-16 — Added competency-based AI training to /preview/
+
+- Preview homepage now shows six learner levels, from everyday AI use through private AI infrastructure and system architecture.
+- AI training service page now maps 29 training areas to expandable learning levels and example labs, using the 439-competency master in pbchrist/agent-native-suite/docs/curriculum/.
+- Training copy includes Hermes, memory, RAG, MCP, GitHub, local inference, NVIDIA/CUDA and Linux rather than only general chatbot skills.
+- All prices, Calendly links, evaluation offer and build positioning retained.
+
 ## 2026-11-16 — Restore original sales pages after off-topic change
 - Undo the unrelated offer-funnel edits from the previous conversation turn; preserve the standalone x402 pay-per-crawl adapter and site discovery.
 
