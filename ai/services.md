@@ -10,7 +10,7 @@ ICONIC finds hidden opportunities to increase revenue, eliminate wasted effort a
 
 **Evaluate: the ICONIC Evaluation, $1,000.** A paid business and AI opportunity assessment. ICONIC investigates operations, challenges, competitive position and existing systems. Deliverables: business opportunity assessment, identification of high-value opportunities, prioritized recommendations, estimated financial impact where evidence supports it, technical and operational feasibility analysis, recommended implementation roadmap. Details: https://iconic.onl/services/evaluation/
 
-**Build: custom AI implementation, starting at $20,000.** ICONIC designs, develops and deploys specialized AI systems: AI agents, competitive intelligence, revenue and pricing intelligence, workflow automation, business research and monitoring, customer acquisition systems, custom integrations, internal knowledge and decision-support systems, and secure private AI deployments. Each build is scoped individually under a separate agreement. Details: https://iconic.onl/services/build/
+**Build: custom AI implementation, starting at $18,000.** ICONIC designs, develops and deploys specialized AI systems: AI agents, competitive intelligence, revenue and pricing intelligence, workflow automation, business research and monitoring, customer acquisition systems, custom integrations, internal knowledge and decision-support systems, and secure private AI deployments. Each build is scoped individually under a separate agreement. Details: https://iconic.onl/services/build/
 
 **Ongoing intelligence and optimization.** After implementation: monitoring, maintenance, optimization, competitive intelligence and system improvements. Priced to scope. Details: https://iconic.onl/services/ongoing-intelligence/
 

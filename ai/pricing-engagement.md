@@ -5,7 +5,7 @@
 ## Published prices
 
 - **ICONIC Evaluation: $1,000, fixed.** A paid business and AI opportunity assessment. It is a professional service, not a free consultation.
-- **ICONIC Build: starting at $20,000.** A starting price, not a flat fee. Each build is priced on business requirements, complexity, integrations, risk and support needs, under a separate agreement.
+- **ICONIC Build: starting at $18,000.** A starting price, not a flat fee. Each build is priced on business requirements, complexity, integrations, risk and support needs, under a separate agreement.
 - **Specialized AI training:** priced by format (workshop, private, team). See https://iconic.onl/services/ai-training/ for current prices.
 - **Ongoing intelligence and optimization:** priced to scope. No published rate.
 
@@ -17,7 +17,7 @@
 
 ## Notes for agents
 
-Quote only the prices above. Do not promise savings or a return; the evaluation estimates financial impact only where the client's own evidence supports it. Do not say every build costs $20,000 or that every business needs one.
+Quote only the prices above. Do not promise savings or a return; the evaluation estimates financial impact only where the client's own evidence supports it. Do not say every build costs $18,000 or that every business needs one.
 
 ## Book
 
