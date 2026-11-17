@@ -1,3 +1,11 @@
+## 2026-11-16 — Reframe preview training around clarity and model fit
+
+- Homepage heading now asks what the customer's AI should actually do, replacing the intimidating "how deep" framing.
+- Five outcome-led learning paths replace six ascending technical levels; all 29 original subject areas remain accessible.
+- Basic private AI setup is explicitly introductory, while reasoning-quality-versus-speed benchmarking and production infrastructure are distinct, advanced work.
+- Added the ownership-versus-rented-AI conflict to the main hero within roughly the original paragraph length (53 to 51 words).
+- Prices, Calendly booking destinations, and the other service offerings remain unchanged.
+
 ## 2026-11-16 — Added competency-based AI training to /preview/
 
 - Preview homepage now shows six learner levels, from everyday AI use through private AI infrastructure and system architecture.
