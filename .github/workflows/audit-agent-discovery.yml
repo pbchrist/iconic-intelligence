@@ -1,6 +1,11 @@
 name: Audit live ICONIC agent discovery
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/audit-agent-discovery.py'
+      - '.github/workflows/audit-agent-discovery.yml'
   schedule:
     - cron: '17 */6 * * *'
 permissions:
