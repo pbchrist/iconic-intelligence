@@ -56,7 +56,7 @@ def verify(label, config):
     fetch(homepage)
     manifest = json.loads(fetch(config["manifest"]))
     assert (manifest["remote_mcp_url"] if label == "marketplace"
-            else manifest["interfaces"]["mcp"]) == config["mcp_url"], (
+            else manifest["interfaces"]["remote_mcp"]) == config["mcp_url"], (
                 f"{label}: live advertised remote differs from registered remote"
             )
     return {
