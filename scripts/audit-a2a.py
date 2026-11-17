@@ -27,7 +27,13 @@ def main():
     answer = rpc("message/send", request)
     task = answer["result"]
     assert task["kind"] == "task" and task["status"]["state"] == "completed"
-    assert "7 specialist offers" in task["artifacts"][0]["parts"][0]["text"]
+    catalog = get("https://iconic.onl/agents/marketplace/offers.json")
+    expected = catalog["offer_count"]
+    assert expected == len(catalog["offers"]), "Published offer count is inconsistent"
+    message = task["artifacts"][0]["parts"][0]["text"]
+    assert f"{expected} specialist offers" in message, (
+        f"A2A catalog count drift: expected {expected}, got {message[:300]}"
+    )
     followup = rpc("tasks/get", {"id": task["id"]}, 2)
     assert followup["result"]["id"] == task["id"]
     assert rpc("purchase", {}, 3)["error"]["code"] == -32601
