@@ -166,3 +166,7 @@
   .curriculum-topics { grid-template-columns: minmax(0,1fr); gap: 0; }
   .curriculum-teaser { min-height: 0; }
 }
+
+/* Clear goal-first course organization, preserving the site's established visual language. */
+.curriculum-track-label { color: var(--accent-2) !important; font-size: 10px !important; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.curriculum-teasers .curriculum-teaser { min-height: 170px; }
