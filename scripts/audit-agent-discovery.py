@@ -72,10 +72,21 @@ if llms and market:
     else:
         print("INFO", "Marketplace section not present in llms.txt; no state claim made")
 if reserve:
-    check("Reserve free-only boundaries",
-          lambda: assert_true(reserve.get("paid_plans_live") is False
-                              and reserve.get("agent_initiated_charges_enabled") is False,
-                              "Reserve public manifest unexpectedly advertises paid charges"))
+    # The $19 Reserve Pass has been on sale since 2026-11-12. The manifest may
+    # advertise that one paid offer, and nothing else; the Reserve server itself
+    # must never be advertised as charging an agent directly.
+    def reserve_paid_boundaries():
+        offer = reserve.get("paid_offer") or {}
+        if reserve.get("paid_plans_live") is not False:
+            assert_true(reserve.get("paid_plans_live") is True
+                        and offer.get("offer_id") == "reserve-pass"
+                        and offer.get("price_cents") == 1900
+                        and offer.get("currency") == "USD",
+                        "Reserve manifest advertises a paid plan other than the $19 Reserve Pass")
+        assert_true(reserve.get("agent_initiated_charges_enabled") is not True,
+                    "Reserve manifest says agents can be charged without human approval")
+        return True
+    check("Reserve paid-offer boundaries", reserve_paid_boundaries)
 registry = check("Official MCP Registry search", lambda: json.loads(get(REGISTRY)))
 if registry:
     names = sorted({entry.get("server", {}).get("name", "") for entry in registry.get("servers", [])})
