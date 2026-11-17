@@ -1,11 +1,11 @@
-name: Real independent MCP client interoperability
+name: ICONIC external MCP interoperability and registry publication
 on:
   workflow_dispatch:
   push:
     branches: [main]
     paths:
       - 'scripts/test-real-mcp-client.py'
-      - 'scripts/organic_discovery_probe.py'
+      - 'scripts/check-agent-distribution.py'
       - '.github/workflows/real-mcp-client.yml'
   schedule:
     - cron: '43 7 * * *'
@@ -13,7 +13,7 @@ permissions:
   contents: read
 jobs:
   real-client:
-    name: External MCP client, execution and no-charge purchase preparation
+    name: External MCP client, execution and safe checkout preparation
     runs-on: ubuntu-latest
     timeout-minutes: 7
     steps:
@@ -23,22 +23,22 @@ jobs:
           python-version: '3.12'
       - name: Install pinned official MCP Python client
         run: python -m pip install 'mcp==2.3.0'
-      - name: Verify remote MCP contracts, outcomes and safe checkout preparation
+      - name: Exercise independent MCP client and real non-chargeable capabilities
         run: python scripts/test-real-mcp-client.py
 
-  organic-discovery:
-    name: Unbranded independent public-search discovery
+  registry-publication:
+    name: Official MCP Registry exact listings and endpoint parity
     runs-on: ubuntu-latest
     timeout-minutes: 4
     steps:
       - uses: actions/checkout@v4
-      - name: Search real problem-first queries without the brand or URL
-        run: python3 scripts/organic_discovery_probe.py --output organic-discovery.json --require-hit
-      - name: Keep evidence even when not discoverable
+      - name: Verify both published server identities, latest status, and remote URLs
+        run: python3 scripts/check-agent-distribution.py --output distribution-evidence.json
+      - name: Preserve audit evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: organic-discovery-evidence
-          path: organic-discovery.json
+          name: distribution-evidence
+          path: distribution-evidence.json
           if-no-files-found: warn
           retention-days: 30
