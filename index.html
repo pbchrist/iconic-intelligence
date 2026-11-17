@@ -42,7 +42,7 @@
        sizes. Measure that once, before anything is drawn, so big headings can be capped to still fit the screen. */
     (function () { try { var d = document.createElement('div'); d.style.cssText = 'position:absolute;visibility:hidden;font-size:100px;line-height:1'; d.textContent = 'x'; document.documentElement.appendChild(d); var z = parseFloat(getComputedStyle(d).fontSize) / 100; d.remove(); if (z > 1.04 && z < 3) document.documentElement.style.setProperty('--tz', z.toFixed(2)); } catch (e) {} })();
   </script>
-  <link rel="stylesheet" href="/styles.css?v=20261101" />
+  <link rel="stylesheet" href="/styles.css?v=20261117" />
   <link rel="stylesheet" href="/mobile-first.css?v=20261110r" />
   <link rel="stylesheet" href="/offers.css?v=20261117b" />
   <link rel="stylesheet" href="/learning-paths.css?v=20261117b" />
@@ -147,7 +147,7 @@
     <section id="aipocalypse" class="section-shell deployment-section">
       <div class="section-kicker" data-reveal>WHY OWN IT · WHY NOW</div>
       <div class="section-heading split-heading direct-heading" data-reveal>
-        <h2 style="font-size:clamp(3.2rem,10vw,8rem);line-height:.92">THE AIPOCALYPSE<br><em>IS COMING.</em></h2>
+        <h2>THE <span class="ai-mark">AI</span>POCALYPSE<br><em>IS COMING.</em></h2>
         <p>The AI you rent today is sold below what it costs to run. The labs are paying the difference to win you over. That can't last, and when it ends, prices jump. Owning your AI is the hedge.</p>
       </div>
       <div class="of-grid of-2" data-reveal>

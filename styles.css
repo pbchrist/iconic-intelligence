@@ -187,6 +187,7 @@ button { color: inherit; }
   color: var(--accent-2);
   font-weight: 400;
 }
+.ai-mark { color: var(--accent-2); }
 
 .hero-deck {
   max-width: 720px;
