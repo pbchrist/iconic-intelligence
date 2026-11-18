@@ -12,11 +12,11 @@ Owner's verdict: **"Exceptional."**
 
 ## How it grew
 
-It started with one question about one rival and one truck. In six weeks it grew to **five competitors and the whole lineup**, with **20 briefs delivered**.
+It started with one question about one rival and one truck. In six weeks it grew to **its competitors and the whole lineup**, with **20 briefs delivered**.
 
 ## What the agent does
 
-- Every morning it watches the dealership's own lot and the lots of five competitors: price, discount, trim and drive, truck by truck.
+- Every morning it watches the dealership's own lot and the lots of its competitors: price, discount, trim and drive, truck by truck.
 - It matches like-for-like trucks before comparing prices.
 - Every number is dated and linked to the page it came from.
 - It writes the owners a brief three times a week.
