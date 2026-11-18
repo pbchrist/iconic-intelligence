@@ -28,7 +28,7 @@
     {
       "id": "ai-build",
       "name": "Private AI and Agent Build",
-      "price_usd": 18000,
+      "price_usd": 10000,
       "availability": "scope_and_purchase_arranged_with_merchant",
       "type": "professional_service",
       "description": "Implement a scoped private AI and working agents on client-controlled infrastructure. Scope, hardware and ongoing support terms agreed before purchase.",
