@@ -162,8 +162,8 @@ body.embed .stage{border:0;border-radius:0;height:820px;min-height:0}
           <div class="stamp"><i></i>ICONIC // Compounding engine</div>
           <div class="counter" id="counter" aria-live="polite">
             <div class="stat"><b id="statCycle">01</b><span>Cycle</span></div>
-            <div class="stat"><b id="statIns">4</b><span>Insights retained</span></div>
-            <div class="stat gold"><b id="statSpeed">×1.0</b><span>Cycle speed</span></div>
+            <div class="stat"><b id="statIns">4</b><span>Things it has learned</span></div>
+            <div class="stat gold"><b id="statSpeed">×1.0</b><span>Speed</span></div>
           </div>
         </div>
         <button class="skip" id="skip" type="button">Skip to compounding →</button>
@@ -193,13 +193,13 @@ body.embed .stage{border:0;border-radius:0;height:820px;min-height:0}
     </div>
 
     <aside class="ledger" aria-label="What stays in the system">
-      <div class="livestat" id="liveStat" hidden><i></i><b id="liveN">0</b><span>links the live demo has learned so far</span></div>
+      <div class="livestat" id="liveStat" hidden><i></i><b id="liveN">0</b><span>connections nobody told it about</span></div>
       <h2>What stays in the system</h2>
       <ol class="cards">
         <li class="card" style="--c:#AEB4FF"><div class="row"><span class="dot"></span>01 · Signal</div><div class="t">A competitor drops lease pricing by $2,000.</div><div class="s">ICONIC was already watching their offer pages. Nobody had to remember to check.</div></li>
         <li class="card" style="--c:#7F86FF"><div class="row"><span class="dot"></span>02 · Context</div><div class="t">It meets what the business already knows.</div><div class="s">Inventory, margins, and the last three times this competitor tried the same move.</div></li>
         <li class="card" style="--c:#F4EFE4"><div class="row"><span class="dot"></span>03 · Procedure</div><div class="t">The analysis becomes repeatable.</div><div class="s">A one-off answer turns into a capability that runs itself next time.</div></li>
-        <li class="card" style="--c:#E8CF8E"><div class="row"><span class="dot"></span>04 · Advantage</div><div class="t">You move Monday morning.</div><div class="s">They find out in two weeks. Everything learned goes back into the nucleus.</div></li>
+        <li class="card" style="--c:#E8CF8E"><div class="row"><span class="dot"></span>04 · Advantage</div><div class="t">You move Monday morning.</div><div class="s">They find out in two weeks. Everything learned goes back into the business.</div></li>
         <li class="card" style="--c:#E8CF8E"><div class="row"><span class="dot"></span>05 · Compound</div><div class="t">Then it runs again, faster.</div><div class="s">Each cycle leaves more behind, so the next one starts further ahead.</div></li>
       </ol>
       <p class="note">Real numbers from Northline Supply, the company in the live demo above. Pick a different signal to follow a different story.</p>
@@ -207,8 +207,8 @@ body.embed .stage{border:0;border-radius:0;height:820px;min-height:0}
   </div>
 </section>
 
-<script src="./gsap.min.js"></script>
-<script type="importmap">{"imports":{"three":"./three.module.min.js","three/addons/":"./three-addons/"}}</script>
+<script src="/gsap.min.js"></script>
+<script type="importmap">{"imports":{"three":"/three.module.min.js","three/addons/":"/three-addons/"}}</script>
 <script type="module">
 import * as THREE from 'three';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
@@ -241,12 +241,12 @@ const NORTHLINE = [
       'Sound Mechanical cuts contractor prices on <em>11 items</em>, by up to 9%. ICONIC catches it.',
       'It checks the cuts against Northline’s own prices, margins, and <em>water heater sales already down 12%.</em>',
       'Matching only the two PEX coils becomes the playbook. <em>Next time, the price check runs itself.</em>',
-      'Ray decides before the week starts. <em>No price war, no surprise.</em>'],
+      'The owner decides before the week starts. <em>No price war, no surprise.</em>'],
     cards:[
       ['Sound Mechanical cuts prices on 11 items.','PEX coils and water heaters, 6 to 9% below Northline. Nobody had to remember to check.'],
       ['It meets what the business already knows.','Northline’s prices, its margin, and water heater volume already down 12%.'],
       ['The response becomes a playbook.','Match the two PEX coils, hold the rest, and watch the price list every week.'],
-      ['Ray moves first.','No price war. Everything learned goes back into the business.']] },
+      ['The owner moves first.','No price war. Everything learned goes back into the business.']] },
   { id:'reviews', chip:'Reviews turn on you', ask:'What are customers complaining about, and why?',
     mission:'Analyze customer complaints', quote:'We have hundreds of reviews and nobody is synthesizing them.',
     steps:[
@@ -325,7 +325,7 @@ const HOLLIS = [
     mission:'Find a hidden conflict', quote:'We represent both sides of the market. Something will slip.',
     steps:[
       'Meridian Dental, a client, wants help <em>recruiting dentists from Summit</em>, the firm’s opponent. ICONIC connects it.',
-      'No single file says “conflict.” It links the engagement, the Kessler matter and <em>the conflict-check rule.</em>',
+      'No single file says “conflict.” It connects the engagement, the Kessler matter and <em>the conflict-check rule.</em>',
       'Cross-checking clients against opponents becomes automatic. <em>Every new request gets the check.</em>',
       'The partners see it before anyone signs. <em>Not after a bar complaint.</em>'],
     cards:[
