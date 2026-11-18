@@ -13,7 +13,7 @@ HOME = Path.home()
 SOURCES = {
     # label used in the paper -> Hermes state database
     "operator": HOME / ".hermes/state.db",
-    "client_bot_1": HOME / "hermes-instance2/client-bots/egbgmc/home/state.db",
+    "client_bot_1": HOME / "hermes-instance2/client-bots/dealership/home/state.db",
     "client_bot_2": HOME / "hermes-instance2/client-bots/ubc/home/state.db",
 }
 OUT = Path(__file__).with_name("jobs.csv")

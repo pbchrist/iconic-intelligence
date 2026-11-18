@@ -1,4 +1,4 @@
-# Case study: competitor intelligence for a GMC dealership
+# Case study: competitor intelligence for an auto dealership
 
 > ICONIC reference page. Checked against https://iconic.onl/ on 2026-11-04. If this page and the website ever differ, the website is current.
 
