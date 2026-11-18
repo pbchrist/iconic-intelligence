@@ -14,7 +14,7 @@ These are Patrick's standing instructions. **His newest instruction wins.** When
 - Do only what Patrick asked. A question or complaint is not a request for work.
 - The site is live: pushing to `main` publishes iconic.onl. Design or layout changes go to a preview first (e.g. /preview/) and reach the root only after Patrick approves. Factual fixes he asked for (prices, copy) may go straight to main.
 - Pushing to main rebuilds gh-pages with rsync --delete: port any gh-pages-only commits first.
-- Rollback: branch `rollback/pre-launch-2026-11-17`; old homepage at /classic/.
+- Rollback: branch `rollback/pre-golive-2026-11-18` (site before the 2026-11-18 preview went live); older: `rollback/pre-launch-2026-11-17`; old homepage at /classic/.
 
 ## Copy and offers (as of 2026-11-17)
 - Hero: "Own your intelligence. Compound your advantage." Keep the "AIpocalypse is coming" section.
