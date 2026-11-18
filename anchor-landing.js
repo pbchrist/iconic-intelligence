@@ -22,7 +22,7 @@
     land(id, false);
     // Late content above the target (fonts, the live counter, the browser's own jump) can move it; hold it in place
     // for a few seconds unless the visitor starts scrolling.
-    var until = Date.now() + 5000;
+    var until = Date.now() + 8000;
     (function hold() { if (userMoved || Date.now() > until) return; land(id, false); setTimeout(hold, 120); })();
   }
   if (location.hash) {

@@ -13,7 +13,7 @@
 
 ## Proof
 
-- **Auto dealership, competitor intelligence.** The owner thought a rival dealer was $500 to $800 cheaper. Matched truck for truck, the rival was cheaper on 20 of 22, by an average of $4,472. The agent grew from one rival and one truck to five competitors and the whole lineup in six weeks, with 20 briefs delivered. It also caught a pricing error on the dealership's own website, fixed two days later. Owner's verdict: "Exceptional."
+- **Auto dealership, competitor intelligence.** The owner thought a rival dealer was $500 to $800 cheaper. Matched truck for truck, the rival was cheaper on 20 of 22, by an average of $4,472. The agent grew from one rival and one truck to its competitors and the whole lineup in six weeks, with 20 briefs delivered. It also caught a pricing error on the dealership's own website, fixed two days later. Owner's verdict: "Exceptional."
 - **23 agents** run every day on Patrick's own hardware, across his business and client work: research, monitoring, writing, code, and phone and chat access.
 - **One desktop** with 40 GB of graphics memory runs a 27-billion-parameter model privately at roughly 50 words a second.
 - **Live demo** on the home page: a private AI that has read every file of two sample businesses (a law firm and a supply company) and answers questions with sources.
