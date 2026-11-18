@@ -168,3 +168,18 @@ body.home-v2 .of-steps-kicker { margin-top: 72px; }
 .research-list li b a:hover { color: var(--accent-2); }
 .agents-copy p a.agents-mcp-link { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(192,198,255,.4); white-space: nowrap; }
 body.home-v2 .compound-heading { margin-top: 72px; }
+
+/* Rented-AI news strip: scrolls on its own, pauses on hover or focus (2026-11-18). */
+.ev-trap { margin-top: 72px; }
+.ev-strip { display: flex; gap: 14px; margin-top: 40px; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
+.ev-track { display: flex; flex: none; gap: 14px; align-items: stretch; animation: ev-scroll 240s linear infinite; }
+.ev-strip:hover .ev-track, .ev-strip:focus-within .ev-track { animation-play-state: paused; }
+@keyframes ev-scroll { from { transform: translateX(0); } to { transform: translateX(calc(-100% - 14px)); } }
+.ev-item { flex: none; width: 300px; display: flex; flex-direction: column; gap: 10px; padding: 22px; border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)); }
+.ev-item.ev-wide { width: 560px; border-color: rgba(174,183,255,.34); background: linear-gradient(145deg, rgba(70,77,158,.28), rgba(255,255,255,.018)); }
+.ev-item small { color: var(--accent-2); font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.ev-item h3 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 23px; font-weight: 400; letter-spacing: -.02em; line-height: 1.15; }
+.ev-item p { margin: 0; color: #b5bacb; font-size: 14px; line-height: 1.5; }
+.ev-item p.ev-src { margin-top: auto; padding-top: 6px; }
+@media (max-width: 620px) { .ev-item { width: 260px; } .ev-item.ev-wide { width: 320px; } }
+@media (prefers-reduced-motion: reduce) { .ev-strip { overflow-x: auto; mask-image: none; -webkit-mask-image: none; } .ev-track { animation: none; } .ev-track[aria-hidden="true"] { display: none; } }
