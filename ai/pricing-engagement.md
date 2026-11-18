@@ -14,7 +14,7 @@ Two core engagements are now advertised at $1,000 for a Business AI Evaluation a
 
 ## How it starts
 
-1. **Free 30-minute private AI check.** One call with Patrick. No cost, no pitch deck, no commitment. The client walks away knowing where their data goes today and what is exposed, whether a self-hosted AI is right for them, where to draw the line with cloud AI, and what agents built on their own data could do.
+1. **Free 30-minute assessment.** One call with Patrick. No cost, no pitch deck, no commitment. The client walks away knowing where their data goes today and what is exposed, whether a self-hosted AI is right for them, where to draw the line with cloud AI, and what agents built on their own data could do.
 2. **One working agent.** Pick one recurring job that costs time or money. Patrick shows whether an agent can do it, builds it, and proves it works before going further.
 3. **Taught or built.** The client chooses whether Patrick teaches them to run it or builds and looks after it.
 
@@ -24,4 +24,4 @@ Quote only the two published headline prices ($1,000 evaluation; $10,000 build),
 
 ## Book
 
-[Book the free 30-minute private AI check](https://calendly.com/patrick-iconic/30min) · patrick@iconic.onl · 206-773-8214
+[Book the free 30-minute assessment](https://calendly.com/patrick-iconic/30min) · patrick@iconic.onl · 206-773-8214
