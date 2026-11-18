@@ -58,7 +58,7 @@ Last updated: 2026-11-01.
   - A plain-English rule with "More →" for each vertical: ABA Formal Opinion 512 for law, SEC Reg S-P for wealth, IRC §7216 for accounting. Real estate and owner-run say there is no rule; it's about leverage.
 - **What it does:** KNOWS / WORKS / STAYS.
 - **New Proof section:**
-  - GMC dealership case study: 20 reports, 20 of 22 trucks cheaper by an average of $4,472, the pricing error caught, the check down from 30 minutes to 3, "Exceptional."
+  - Auto dealership case study: 20 reports, 20 of 22 trucks cheaper by an average of $4,472, the pricing error caught, the check down from 30 minutes to 3, "Exceptional."
   - 23 agents; one desktop with 40 GB of graphics memory running Qwen 27B (~71 tokens a second, 131k context); $0 per token.
   - Patrick confirmed the case study figures and the quote are fine to publish.
 - **Two ways in:** the Learn-it ladder, plus a note on private vs cloud.
@@ -104,7 +104,7 @@ It runs on port 8770, and files go in `~/iconic-command-data/<workspace>/`. Patr
 - **Plan:**
   1. Put the dashboard code in a GitHub repo (it currently lives only on beastmaster).
   2. Connect Ask to local Qwen through llama.cpp's OpenAI-compatible server.
-  3. Fill the Intelligence feed from real EGBGMC report output.
+  3. Fill the Intelligence feed from real the dealership agent's report output.
   4. Load Knowledge with a synthetic law-firm folder of about 20 documents. Never real client files.
   5. Use it live on free-check calls.
   6. Decide whether to make it public, for example behind a Cloudflare tunnel with per-visitor limits and nothing private reachable.
