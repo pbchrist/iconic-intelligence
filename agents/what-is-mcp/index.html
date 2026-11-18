@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- GA4: page analytics only. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0G5007D0F7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0G5007D0F7');
+  // Measure confirmed Calendly bookings, without visitor-entered content.
+  window.addEventListener('message', function(event) {
+    if (event.origin === 'https://calendly.com' &&
+        event.data && event.data.event === 'calendly.event_scheduled') {
+      gtag('event', 'calendly_booking', { page: location.pathname });
+    }
+  });
+</script>
+<meta name="theme-color" content="#080912">
+<title>What is MCP? A plain-English explanation | ICONIC</title>
+<meta name="description" content="MCP, the Model Context Protocol, is the open standard that lets AI assistants like Claude and Cursor use outside tools. What it is, how you connect one, and what ICONIC Reserve gives your agents.">
+<meta property="og:title" content="What is MCP? A plain-English explanation">
+<meta property="og:description" content="MCP is the open standard that lets AI assistants use outside tools. Paste one address, and your assistant can use what's behind it.">
+<link rel="canonical" href="https://iconic.onl/agents/what-is-mcp/" />
+<meta property="og:url" content="https://iconic.onl/agents/what-is-mcp/">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://iconic.onl/iconic-share.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>
+(function () { try { var d = document.createElement('div'); d.style.cssText = 'position:absolute;visibility:hidden;font-size:100px;line-height:1'; d.textContent = 'x'; document.documentElement.appendChild(d); var z = parseFloat(getComputedStyle(d).fontSize) / 100; d.remove(); if (z > 1.04 && z < 3) document.documentElement.style.setProperty('--tz', z.toFixed(2)); } catch (e) {} })();
+</script>
+<link rel="stylesheet" href="/styles.css?v=20261101">
+<link rel="stylesheet" href="/mobile-first.css?v=20261110r">
+<link rel="stylesheet" href="/agents/reserve/reserve.css?v=20261112a">
+<link rel="stylesheet" href="/offers.css?v=20261118a">
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+<script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
+</head>
+<body class="sv-page">
+<canvas id="field" aria-hidden="true"></canvas>
+<div class="noise" aria-hidden="true"></div>
+<div class="cursor-glow" aria-hidden="true"></div>
+
+<header class="site-header">
+<a class="brand" href="/" aria-label="ICONIC home"><img src="/iconic-wordmark.webp" alt="ICONIC."></a>
+<nav class="nav" aria-label="Primary navigation"><a href="/">Home</a><a href="/agents/reserve/">ICONIC Reserve</a><a href="/research/">Research</a><a href="/#live">Live demo</a></nav>
+<a class="header-cta" href="/agents/reserve/">CONNECT YOUR AGENT</a>
+<button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav">MENU</button>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden><a href="/">ICONIC home</a><a href="/agents/reserve/">ICONIC Reserve · connect</a><a href="/research/">Research</a><a href="/#live">Live demo</a></nav>
+</header>
+
+<main id="top">
+<section class="section-shell sv-hero" aria-labelledby="svTitle">
+<div data-reveal>
+<p class="sv-crumb"><a href="/">ICONIC</a> · <a href="/agents/reserve/">For agents</a> · What is MCP?</p>
+<h1 id="svTitle">What is MCP? <em>The plug that lets AI use tools.</em></h1>
+<p class="rv-deck">MCP, short for <strong>Model Context Protocol</strong>, is an open standard that lets AI assistants like Claude and Cursor use outside tools and information. You give your assistant one web address. It sees the tools behind that address and uses them when they help with what you asked.</p>
+</div>
+</section>
+
+<div class="section-shell sv-body">
+<section class="rv-sec sv-sec" aria-labelledby="how-title">
+<div class="section-kicker">IN PLAIN ENGLISH</div>
+<h2 id="how-title">One standard plug, <em>instead of a custom cable for every tool.</em></h2>
+<ul class="sv-list sv-plain">
+<li><b>Before MCP</b>Every AI app needed its own custom connection to every tool, and most tools never got one.</li>
+<li><b>With MCP</b>A tool is built once as an MCP server. Any assistant that speaks MCP can plug into it, the way any lamp fits any wall socket.</li>
+<li><b>You don't write code</b>In your assistant's settings you add a connector and paste the address. That's the whole setup.</li>
+<li><b>Your assistant decides when to use it</b>Once connected, it reads what each tool does and calls the right one when your question needs it.</li>
+<li><b>Who's behind it</b>Anthropic released MCP as an open standard in November 2024. Anyone can build or use it. <a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">The official site</a> has the details.</li>
+</ul>
+</section>
+
+<section class="rv-sec sv-sec" aria-labelledby="reserve-title">
+<div class="section-kicker">WHAT ICONIC GIVES YOUR AGENTS</div>
+<h2 id="reserve-title">ICONIC Reserve: <em>a memory of what your business decided and what happened.</em></h2>
+<ul class="sv-list sv-plain">
+<li><b>One address</b><code>https://patrick-beastmaster.tailf32530.ts.net/reserve/mcp</code></li>
+<li><b>Free to try</b>No sign-in. Connecting takes about two minutes.</li>
+<li><b>Step-by-step setup</b>For Claude, Claude Code, Cursor and other assistants on the <a href="/agents/reserve/">ICONIC Reserve page</a>.</li>
+</ul>
+</section>
+
+<div class="sv-cta" data-reveal>
+<h2>Already running agents? <em>Plug them in.</em></h2>
+<div class="hero-actions"><a class="button button-primary" href="/agents/reserve/">CONNECT YOUR AGENT</a><a class="button button-ghost" href="https://calendly.com/patrick-iconic/30min" data-calendly-booking data-offer="mcp">BOOK A FREE FIT CALL</a></div>
+</div>
+</div>
+<div class="section-shell sv-foot"><footer><span>© 2026 ICONIC. · <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a> · <a href="/llms.txt">AI Reference</a> · <a href="/services/ai-training/">AI Training</a> · <a href="/services/evaluation/">Evaluation</a> · <a href="/services/build/">Build</a> · <a href="/services/ongoing-intelligence/">Ongoing Intelligence</a> · <a href="/research/">Research</a> · <a href="/agents/">Agent Tools &amp; MCP Services</a> · <a href="/agents/reserve/">ICONIC Reserve · Connect via MCP</a> · <a href="/agents/assurance/">Agent Assurance</a> · <a href="/agents/marketplace/">Agent Marketplace</a></span><span>LEARN AI · EVALUATE FOR $1,000 · BUILD BY INVITATION</span><a href="#top">BACK TO TOP ↑</a></footer></div>
+</main>
+
+<script src="/app.js?v=20261116a" defer></script>
+<script>
+// Keep booking on ICONIC; the href remains a working fallback if the widget is blocked.
+document.addEventListener('click', function (event) {
+  var link = event.target.closest('a[data-calendly-booking]');
+  if (!link) return;
+  if (typeof gtag === 'function') gtag('event', 'offer_cta', { offer: link.getAttribute('data-offer') || '', page: location.pathname });
+  if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  if (!window.Calendly || typeof window.Calendly.initPopupWidget !== 'function') return;
+  event.preventDefault();
+  window.Calendly.initPopupWidget({ url: 'https://calendly.com/patrick-iconic/30min?background_color=ffffff&text_color=070912&primary_color=8d98ff' });
+});
+</script>
+</body>
+</html>
