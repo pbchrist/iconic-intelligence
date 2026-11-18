@@ -194,7 +194,7 @@
     document.body.classList.toggle('picked', !!S.picked || list.length <= 1);
     $('#askInput').placeholder = 'Ask about ' + w.name + '…';
     if (!S.picked && list.length > 1) {
-      $('#helloTitle').innerHTML = 'Pick a business.<br>Query it.<br><em>Watch it work.</em>';
+      $('#helloTitle').innerHTML = 'Pick a business.<br><em>Ask it anything.</em>';
       $('#helloSub').innerHTML = '';
       $('#pick').innerHTML = list.map((x) => `<button type="button" class="pick-card" data-ws="${esc(x.id)}"><span class="ws-avatar">${esc(x.initials || '·')}</span><span><strong>${esc(x.name)}</strong><small>${esc(x.kind || '')}</small><em>${fmt(x.documents)} files${x.developments ? ` · ${x.developments} things need attention` : ''}</em></span><b>→</b></button>`).join('');
       $$('#pick .pick-card').forEach((b) => b.addEventListener('click', () => switchWs(b.dataset.ws)));
