@@ -185,3 +185,5 @@ body.home-v2 .ev-trap { margin-top: 72px; }
 @media (prefers-reduced-motion: reduce) { .ev-strip { overflow-x: auto; mask-image: none; -webkit-mask-image: none; } .ev-track { animation: none; } .ev-track[aria-hidden="true"] { display: none; } }
 /* Each news strip sits in its own box (Patrick, 2026-11-18). */
 .ev-strip { padding: 18px; border: 1px solid var(--line); border-radius: 22px; background: rgba(255,255,255,.02); mask-image: none; -webkit-mask-image: none; }
+.answer-lead h3 { margin: 0 0 12px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(32px, 3.2vw, 44px); font-weight: 400; letter-spacing: -.035em; line-height: 1.04; }
+.answer-lead h3 em { color: var(--accent-2); }
