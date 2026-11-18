@@ -6,7 +6,7 @@
 
 - Canonical merchant services page: https://iconic.onl/commerce/
 - Machine-readable merchant catalog: https://iconic.onl/commerce/catalog.json
-- Flagship engagements: Business AI Evaluation, $1,000; Private AI and Agent Build, $18,000. The scope and exact purchase are arranged with ICONIC after a free initial call, not an instant online charge.
+- Flagship engagements: Business AI Evaluation, $1,000; Private AI and Agent Build, $10,000. The scope and exact purchase are arranged with ICONIC after a free initial call, not an instant online charge.
 - Three smaller agent services were reported purchasable on November 16: ICONIC Reserve Pass ($19), Data Discrepancy Report ($29), and MCP Selection Test ($49). Six other specialist offers were draft/unavailable at this review. Always check https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers for current purchasability.
 - Payments where enabled use Stripe-hosted Checkout or a separate MPP SPT protocol. MPP SPT is not ChatGPT Wallet. ChatGPT Wallet may use ordinary card checkout with an eligible dot, but ICONIC has not verified a successful end-to-end Wallet charge. Buyers approve charges.
 - OpenAI Business Hub ownership and identity verification are managed separately; no verified business profile is claimed here.
@@ -111,7 +111,7 @@ Owner-led businesses and professional firms with years of their own records: law
 
 ## Accuracy notes for agents
 
-- Two flagship engagement prices are published ($1,000 evaluation and $18,000 build); exact project scope, hardware and support are confirmed with the client. Other services are scoped separately.
+- Two flagship engagement prices are published ($1,000 evaluation and $10,000 build); exact project scope, hardware and support are confirmed with the client. Other services are scoped separately.
 - The dealership figures are ICONIC's own reported results from its live agent.
 - "Nothing leaves your building" describes the private setup. Cloud models are used only for public work, and only if the client chooses.
 - No per-token cost does not mean no cost: the client pays for the computer, power and Patrick's time.
