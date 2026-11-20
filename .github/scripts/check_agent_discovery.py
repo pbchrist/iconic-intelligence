@@ -64,7 +64,7 @@ def check() -> None:
     assert '<section id="reserve"' in hub and '<section id="offers"' in hub and '<section id="custom"' in hub, "Reserve and Marketplace must share one public page"
     assert 'id="unified-demo-btn"' in hub and '/agents/unified.js' in hub, "Unified Reserve demo missing"
     assert hub.count('class="product custom-product"') == 6, "Six custom engagement cards required"
-    assert hub.count('class="product"') + hub.count('class="product" ') == 0 or hub.count('class="product custom-product"') == 6, "Unified storefront card count mismatch"
+    assert hub.count('class="product"') == 3, "Three live product cards required"
     for path in PAGES:
         assert f'href="{path}"' in hub or path == "/agents/", f"Hub missing {path}"
     for page in ("agents/data-reconciliation/index.html", "agents/assurance/index.html"):
