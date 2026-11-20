@@ -27,6 +27,11 @@
 .mk code { color: #c9ccda; font: 500 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow-wrap: anywhere; }
 .mk .buy-action { align-self: flex-start; margin-top: auto; min-height: 44px; padding: 0 18px; border: 0; border-radius: 12px; color: #090b14; background: linear-gradient(135deg, #f5f2e9, #d9deff); font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
 .mk .buy-action:disabled { opacity: .45; cursor: default; }
+.mk .product a.buy-action { display: inline-flex; align-items: center; justify-content: center; color: #090b14; text-decoration: none; }
+.mk .product a.buy-action:hover { filter: brightness(1.08); }
+.mk .custom-product { border-style: dashed; }
+.mk .inquiry-action { display: inline-flex; align-items: center; align-self: flex-start; margin-top: auto; padding: 10px 0; font-size: 12px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+.mk .product a.buy-action:focus-visible, .mk .inquiry-action:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; }
 .mk .buy-action:focus-visible, .mk .form-controls input:focus-visible, .mk .form-controls textarea:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
 .mk .flow { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; margin-top: 36px; }
 .mk .step { padding: 22px; border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,.02); color: #9ea4b9; font-size: 14px; line-height: 1.6; }

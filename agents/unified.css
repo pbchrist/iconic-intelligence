@@ -1,0 +1,70 @@
+/* ICONIC unified Agent Services: customer-facing narrative first, technical detail second. */
+.mk .sales-hero { padding: 76px 0 64px; }
+.mk .sales-hero h1 { max-width: 980px; font-size: clamp(52px, 8.1vw, 106px); line-height: 1.02; letter-spacing: -.058em; }
+.mk .sales-hero h1 em { font-weight: 400; color: var(--accent-2); }
+.mk .sales-hero .intro { max-width: 790px; font-size: clamp(19px, 1.65vw, 24px); line-height: 1.55; }
+.mk .sales-hero .actions { margin-top: 35px; }
+.mk .hero-under { margin: 19px 0 0; color: #abb3c7; font-size: 13px; }
+.mk .unified-reserve { padding-top: 86px; }
+.mk .unified-reserve h2 { max-width: 920px; }
+.mk .unified-reserve h2 em { font-weight: 400; color: var(--accent-2); }
+.mk .unified-deck { max-width: 835px; margin: 24px 0 0; color: #c9ccda; font: 400 clamp(18px, 1.45vw, 22px)/1.6 Georgia, "Times New Roman", serif; }
+.mk .reserve-example { max-width: 790px; margin: 18px 0 0; color: #aeb8cc; font-size: 15px; line-height: 1.65; }\n.mk .reserve-example strong { color: var(--pearl); font-weight: 700; }\n.mk .memory-principles { margin-top: 36px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+.mk .memory-principles article { min-width: 0; padding: 26px; border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(180deg,rgba(255,255,255,.044),rgba(255,255,255,.012)); }
+.mk .memory-principles article small { display: block; color: #9ea6cf; font-size: 10px; font-weight: 800; letter-spacing: .14em; }
+.mk .memory-principles h3 { margin: 19px 0 0; font-family: "Arial Black","Helvetica Neue",Arial,sans-serif; font-size: clamp(25px,2.3vw,36px); font-weight: 900; letter-spacing: -.035em; line-height: 1.16; overflow-wrap: normal; }
+.mk .memory-principles p { margin: 13px 0 0; color: #b7bdd0; font-size: 14px; line-height: 1.7; }
+.mk .reserve-bottom { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 22px; margin-top: 22px; padding: 27px; border: 1px solid var(--line); border-radius: 18px; background: rgba(131,141,214,.055); }
+.mk .reserve-bottom p { flex: 1 1 100%; max-width: 830px; margin: 0; color: #c9ccda; font-size: 16px; line-height: 1.65; }
+.mk .reserve-bottom p strong { color: var(--pearl); }
+.mk .reserve-bottom .text-link { font-size: 13px; text-decoration: underline; text-underline-offset: 4px; }
+.mk .section-intro { max-width: 790px; margin: 22px 0 0; color: #b6bed0; font: 400 clamp(17px,1.35vw,20px)/1.6 Georgia,"Times New Roman",serif; }
+.mk #offers .grid { margin-top: 37px; }
+.mk #offers .product { gap: 14px; }
+.mk #offers .product h3 { font-size: clamp(28px, 2.4vw, 35px); line-height: 1.12; }
+.mk #offers .product p:not(.offer-price) { color: #bbc1d0; line-height: 1.7; font-size: 15px; }
+.mk #offers .product .label { color: #979fb7; font-size: 12px; }
+.mk .offer-id[hidden] { display: none !important; }
+.mk .product .offer-price { margin: auto 0 0; padding-top: 15px; display: flex; align-items: baseline; gap: 9px; }
+.mk .product .offer-price strong { color: var(--pearl); font: 800 36px/1.2 "Arial Black",Arial,sans-serif; letter-spacing: -.05em; }
+.mk .product .offer-price span { color: #9ba5bb; font-size: 13px; }
+.mk #offers .product a.buy-action { display: inline-flex; justify-content: center; align-items: center; align-self: stretch; margin-top: 8px; color: #090b14; text-align: center; text-decoration: none; }
+.mk #offers .product .buy-action { align-self: stretch; text-align: center; }
+.mk .after-offers { margin: 22px 0 0; max-width: 880px; color: #8e98ad; font-size: 13px; line-height: 1.6; }
+.mk .after-offers a { text-decoration: underline; text-underline-offset: 3px; }
+.mk .custom-panel { margin-top: 25px; padding: 0 22px; border: 1px solid var(--line-strong); border-radius: 18px; background: rgba(255,255,255,.018); }
+.mk .custom-panel > summary { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 23px 0; cursor: pointer; color: var(--pearl); font-size: 16px; font-weight: 750; }
+.mk .custom-panel > summary span { color: #9faac4; font-size: 12px; font-weight: 500; }
+.mk .custom-panel[open] > summary { border-bottom: 1px solid var(--line); }
+.mk .custom-panel .grid { margin: 23px 0; }
+.mk .custom-panel .product { border-style: solid; background: rgba(255,255,255,.02); }
+.mk .custom-panel .product h3 { font-size: 26px; }
+.mk .custom-panel .product p { color: #adb7ca; }
+.mk .custom-panel .product .label { margin-top: auto; }
+.mk .custom-panel .inquiry-action { margin-top: 5px; }
+.mk .custom-contact { margin: 24px 0 0; color: #adb7ca; font-size: 15px; }
+.mk .custom-contact a { text-decoration: underline; text-underline-offset: 3px; }
+.mk .endpoint-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; margin-top: 26px; }
+.mk .endpoint-card { min-width: 0; padding: 23px; background: rgba(4,5,12,.45); border: 1px solid var(--line); border-radius: 18px; }
+.mk .endpoint-card h3 { margin: 0 0 8px; font-size: 26px; }
+.mk .endpoint-card p { margin: 0 0 16px; color: #aeb7c9; font-size: 14px; }
+.mk .endpoint-card code { display: block; color: #bbc6ea; font: 12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace; overflow-wrap: anywhere; }
+.mk .unified-copy { margin-top: 14px; cursor: pointer; min-height: 42px; padding: 8px 14px; color: var(--pearl); background: transparent; border: 1px solid var(--line-strong); border-radius: 10px; font-size: 12px; font-weight: 800; }
+.mk .unified-copy:hover { border-color: var(--accent-2); }
+.mk .developer-details { margin-top: 24px; border-top: 1px solid var(--line); }
+.mk .developer-details summary { padding: 22px 0; cursor: pointer; color: #bec5de; font-weight: 600; font-size: 14px; }
+.mk .developer-details p { color: #acb5c7; font-size: 13px; line-height: 1.75; }
+.mk .site-safety { max-width: 850px; margin: 26px 0 0; color: #8f98ad; font-size: 13px; }
+.mk #reserve, .mk #offers, .mk #custom, .mk #connect { scroll-margin-top: 120px; }
+.mk .unified-copy:focus-visible, .mk .custom-panel summary:focus-visible, .mk .developer-details summary:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; }
+@media(max-width: 900px) {
+ .mk .memory-principles { grid-template-columns: 1fr; }
+ .mk .endpoint-grid { grid-template-columns: 1fr; }
+}
+@media(max-width: 640px) {
+ .mk .sales-hero { padding-top: 30px; padding-bottom: 28px; }
+ .mk .sales-hero h1 { font-size: clamp(42px, 11vw, 66px); }
+ .mk .reserve-bottom { padding: 20px; }
+ .mk .custom-panel { padding: 0 15px; }
+ .mk .memory-principles article { padding: 21px; }
+}

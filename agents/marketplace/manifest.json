@@ -2,10 +2,13 @@
   "schema_version": "0.1.0",
   "provider": "ICONIC",
   "marketplace": "ICONIC Agent-Native Suite",
-  "status": "SEVEN_SPECIALIST_OFFERS_ONE_PURCHASABLE",
+  "status": "NINE_CATALOG_OFFERS_THREE_PURCHASABLE",
   "checkout_enabled": true,
   "webhook_ready": false,
-  "offer_count": 7,
+  "offer_count": 9,
+  "original_specialist_offer_count": 7,
+  "purchasable_offer_count": 3,
+  "purchasable_offer_ids": ["dataset-diff-report", "selection-test", "reserve-pass"],
   "remote_mcp_url": "https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp",
   "live_json": "https://patrick-beastmaster.tailf32530.ts.net/marketplace/agents",
   "canonical_manifest": "https://iconic.onl/agents/marketplace/manifest.json",
@@ -16,7 +19,9 @@
     "dataset-diff-report",
     "ai-feasibility",
     "competitor-change-brief",
-    "role-talent-map"
+    "role-talent-map",
+    "selection-test",
+    "reserve-pass"
   ],
   "tools": [
     "marketplace_describe",
@@ -37,7 +42,7 @@
     "marketplace_begin_checkout",
     "marketplace_machine_test_pay"
   ],
-  "commercial_disclosure": "Seven fixed-price specialist offers listed; only Data Discrepancy Report is currently purchasable among them. Two separate services, MCP Selection Test and Reserve Pass, are also purchasable in the nine-offer live catalog. Verify purchasable=true before payment. Stripe hosted Checkout and Stripe MPP SPT are separate methods; ChatGPT Wallet is not MPP SPT. The six draft specialist offers cannot currently be purchased.",
+  "commercial_disclosure": "Nine total offers: three purchasable (Data Discrepancy Report, MCP Selection Test, Reserve Pass) and six custom human-scoped engagements that are not available for instant checkout. Live offers require an authorized purchase, and a checkout link does not prove payment or delivery. Stripe hosted Checkout and Stripe MPP SPT are distinct; ChatGPT Wallet is not MPP SPT.",
   "purchasing_authority": "The agent must act under a human/business-approved spending authorization; no raw card data is accepted.",
   "privacy": "Public tools accept fictional micro-fixtures, authorized public stock IDs and prices, or nonconfidential scope descriptions only; free pricing preview does not retain records.",
   "mpp_catalog_url": "https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers",
@@ -74,7 +79,8 @@
   "erc8004_registration_status": "STAGED_METADATA_ONLY_NOT_ONCHAIN_REGISTERED",
   "erc8004_claims_validation": "No ERC-8004 agent NFT, token ID or on-chain supportedTrust verification is asserted.",
   "active_specialist_offer_count": 1,
+  "active_catalog_offer_count": 3,
   "live_offer_source_of_truth": "https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers",
   "chatgpt_wallet_compatibility": "Existing Stripe checkout route; no end-to-end ChatGPT Wallet charge verified",
-  "last_reviewed": "2026-11-16"
+  "last_reviewed": "2026-11-20"
 }
