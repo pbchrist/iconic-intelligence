@@ -9,7 +9,8 @@
  const dialog=$('purchase-dialog'),form=$('purchase-form'),message=$('purchase-msg');
  const submit=$('purchase-submit');
  let chosen=null,waiting=false;
- const products=[...document.querySelectorAll('.product')];
+ // Only Data Reconciliation uses this inline checkout. Selection Test and Reserve Pass have their own validated purchase forms.
+ const products=[...document.querySelectorAll('.product[data-automated-checkout="true"]')];
  const buttons=[];
  const names=new Map(products.map(card=>[
   card.querySelector('code')?.textContent.trim(),
