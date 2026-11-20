@@ -83,11 +83,11 @@ assert (parsed.live_cards, parsed.custom_cards) == (3, 6), (parsed.live_cards, p
 assert parsed.inline_checkout_cards == 1
 assert parsed.inquiry_links == 6
 assert "The six custom engagements cannot be purchased online" not in page  # old wording removed
-assert "six specialist engagements require a custom quote" in (
-    ROOT / "agents/index.html"
-).read_text().lower() or "six specialist engagements require an inquiry and a custom quote" in (
-    ROOT / "agents/index.html"
-).read_text().lower()
+hub = (ROOT / "agents/index.html").read_text()
+assert 'id="reserve"' in hub and 'id="offers"' in hub and 'id="custom"' in hub
+assert "Three purchasable products · Six custom services." in hub
+assert hub.count('class="product"') == 3
+assert hub.count('class="product custom-product"') == 6
 
 buy_js = (ROOT / "agents/marketplace/buy.js").read_text()
 assert "'.product[data-automated-checkout=" in buy_js
