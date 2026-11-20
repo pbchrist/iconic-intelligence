@@ -85,9 +85,11 @@ assert parsed.inquiry_links == 6
 assert "The six custom engagements cannot be purchased online" not in page  # old wording removed
 hub = (ROOT / "agents/index.html").read_text()
 assert 'id="reserve"' in hub and 'id="offers"' in hub and 'id="custom"' in hub
-assert "Three purchasable products · Six custom services." in hub
+assert "Choose a specific problem." in hub
 assert hub.count('class="product"') == 3
 assert hub.count('class="product custom-product"') == 6
+assert "These are the only three purchasable products in the current nine-offer catalog" not in hub
+assert "fictional sandbox" not in hub.lower()
 
 buy_js = (ROOT / "agents/marketplace/buy.js").read_text()
 assert "'.product[data-automated-checkout=" in buy_js
