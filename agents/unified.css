@@ -9,7 +9,7 @@
 .mk .unified-reserve h2 { max-width: 920px; }
 .mk .unified-reserve h2 em { font-weight: 400; color: var(--accent-2); }
 .mk .unified-deck { max-width: 835px; margin: 24px 0 0; color: #c9ccda; font: 400 clamp(18px, 1.45vw, 22px)/1.6 Georgia, "Times New Roman", serif; }
-.mk .memory-principles { margin-top: 36px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+.mk .reserve-example { max-width: 790px; margin: 18px 0 0; color: #aeb8cc; font-size: 15px; line-height: 1.65; }\n.mk .reserve-example strong { color: var(--pearl); font-weight: 700; }\n.mk .memory-principles { margin-top: 36px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
 .mk .memory-principles article { min-width: 0; padding: 26px; border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(180deg,rgba(255,255,255,.044),rgba(255,255,255,.012)); }
 .mk .memory-principles article small { display: block; color: #9ea6cf; font-size: 10px; font-weight: 800; letter-spacing: .14em; }
 .mk .memory-principles h3 { margin: 19px 0 0; font-family: "Arial Black","Helvetica Neue",Arial,sans-serif; font-size: clamp(25px,2.3vw,36px); font-weight: 900; letter-spacing: -.035em; line-height: 1.16; overflow-wrap: normal; }
