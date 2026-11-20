@@ -60,7 +60,11 @@ def check() -> None:
                 assert local.is_file(), f"Broken local link {url} in {relative_file}"
     hub = (ROOT / "agents/index.html").read_text(encoding="utf-8")
     assert "Paid checkout for the seven-service marketplace is not enabled" not in hub, "Stale Marketplace checkout claim in hub"
-    assert "Three of nine offers are purchasable through authorized checkout" in hub, "Marketplace checkout status missing from hub"
+    assert "One storefront · Two live MCP servers · Three purchasable products · Six custom services." in hub, "Unified storefront commercial disclosure missing"
+    assert '<section id="reserve"' in hub and '<section id="offers"' in hub and '<section id="custom"' in hub, "Reserve and Marketplace must share one public page"
+    assert 'id="unified-demo-btn"' in hub and '/agents/unified.js' in hub, "Unified Reserve demo missing"
+    assert hub.count('class="product custom-product"') == 6, "Six custom engagement cards required"
+    assert hub.count('class="product"') + hub.count('class="product" ') == 0 or hub.count('class="product custom-product"') == 6, "Unified storefront card count mismatch"
     for path in PAGES:
         assert f'href="{path}"' in hub or path == "/agents/", f"Hub missing {path}"
     for page in ("agents/data-reconciliation/index.html", "agents/assurance/index.html"):
