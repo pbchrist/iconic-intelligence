@@ -1,7 +1,9 @@
 /* One-page Reserve free synthetic assessment and endpoint copy. No customer data is submitted. */
 (() => {
   'use strict';
-  const endpoint='https://patrick-beastmaster.tailf32530.ts.net/reserve';
+  // The read-only preview uses a same-origin fictional-data proxy; production uses the Reserve gateway CORS allowlist.
+  const isPreview=location.hostname==='patrick-beastmaster.tailf32530.ts.net' && location.port==='8450';
+  const endpoint=isPreview?location.origin+'/reserve':'https://patrick-beastmaster.tailf32530.ts.net/reserve';
   const demo=document.getElementById('unified-demo-btn');
   const status=document.getElementById('unified-demo-status');
   const result=document.getElementById('unified-demo-result');
