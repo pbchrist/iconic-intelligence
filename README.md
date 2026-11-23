@@ -1,3 +1,13 @@
+## MCP products you can buy from ICONIC
+
+- **[MCP Selection Test — $49](https://iconic.onl/agents/selection-test/):** Enter a public MCP URL to measure whether AI models select your tools over competing services. Receive evidence-backed pick rates, rewritten tool descriptions, and a held-out retest. Automated, no tool execution or credentials required.
+- **[Reserve Pass — $19 / 30 days](https://iconic.onl/agents/reserve/#pass):** Tenant-scoped MCP memory, decisions and outcomes, delivered after checkout.
+- **[Data Discrepancy Report — $29](https://iconic.onl/agents/data-reconciliation/):** Automated, reproducible comparison of authorized datasets.
+
+[Buy or connect through ICONIC's MCP marketplace](https://iconic.onl/agents/marketplace/).
+
+---
+
 > **🚨 FIRST ACTION FOR ANOTHER LLM:** [Read the current ICONIC handoff and $1 LIVE SPT purchase-to-report plan](https://github.com/pbchrist/agent-native-suite/blob/main/START_HERE.md). **Seven live priced offers and real 402 MPP challenges are verified; one actual settled SPT charge and deliverable is NOT yet proven.** The immediate goal is one authorized $1 Data Discrepancy Report transaction with an existing Hermes buyer if it can obtain an appropriately limited SPT wallet. Do not change prices or spend before that capability/authorization exists.
 
 > **NEW CONVERSATION / AGENT? START HERE:** [ICONIC cross-repository architecture and operating rules](https://github.com/pbchrist/agent-native-suite/blob/main/START_HERE.md). This is the canonical map of ownership, current readiness, safety constraints and handoff instructions. Verify live status before acting.
