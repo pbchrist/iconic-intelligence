@@ -109,15 +109,15 @@
     </div>
     <div class="st-checkout">
       <div class="st-checkout-top"><span>RUN YOUR SELECTION TEST</span><span>SECURE STRIPE CHECKOUT</span></div>
-      <form id="buy-form" class="st-form">
+      <form id="buy-form" class="st-form" method="post" action="https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/checkout/form" enctype="application/x-www-form-urlencoded">
         <label for="server">PUBLIC MCP ENDPOINT</label>
-        <input type="url" id="server" required maxlength="300" placeholder="https://mcp.yourcompany.com/mcp" pattern="https://.+">
+        <input type="url" id="server" name="server" required maxlength="300" placeholder="https://mcp.yourcompany.com/mcp" pattern="https://.+">
         <small>Your server must support unauthenticated MCP initialization and <code>tools/list</code>.</small>
         <label for="email">EMAIL FOR YOUR RECEIPT</label>
-        <input type="email" id="email" required maxlength="200" autocomplete="email" placeholder="you@company.com">
-        <div class="st-check"><input type="checkbox" id="consent" required><label for="consent">I authorize this one-time $49 purchase and agree to the <a href="/agents/marketplace/terms.html" target="_blank" rel="noopener">purchase terms</a> and <a href="/refunds/" target="_blank" rel="noopener">refund policy</a>.</label></div>
+        <input type="email" id="email" name="email" required maxlength="200" autocomplete="email" placeholder="you@company.com">
+        <div class="st-check"><input type="checkbox" id="consent" name="consent" value="yes" required><label for="consent">I authorize this one-time $49 purchase and agree to the <a href="/agents/marketplace/terms.html" target="_blank" rel="noopener">purchase terms</a> and <a href="/refunds/" target="_blank" rel="noopener">refund policy</a>.</label></div>
         <p id="msg" role="status" aria-live="polite"></p>
-        <button class="button button-primary" type="submit" id="go" disabled>Checking checkout…</button>
+        <button class="button button-primary" type="submit" id="go">Pay $49 with Stripe</button>
       </form>
       <p class="st-checkout-bottom">ICONIC never collects or stores your card details. Payment is completed on Stripe.</p>
     </div>
@@ -138,7 +138,6 @@
   </section>
 </main>
 <div class="section-shell st-footer"><footer><span>© 2026 ICONIC. · <a href="/">Home</a> · <a href="/agents/">Agent Tools &amp; MCP</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></span><span>OWN YOUR INTELLIGENCE.</span><a href="#top">BACK TO TOP ↑</a></footer></div>
-<script src="/agents/selection-test/buy.js?v=20261111" defer></script>
 <script>
 (function(){
   const trigger=document.getElementById('menuToggle'),nav=document.getElementById('mobileNav');
