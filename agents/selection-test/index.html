@@ -17,10 +17,10 @@
 <meta property="og:description" content="Your MCP tools can be available and still never get chosen. Measure tool selection by real models, then retest clearer descriptions.">
 <meta property="og:url" content="https://iconic.onl/agents/selection-test/">
 <meta property="og:image" content="https://iconic.onl/iconic-share.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","@id":"https://iconic.onl/agents/selection-test/#service","name":"ICONIC MCP Selection Test","serviceType":"Controlled MCP tool selection measurement and description optimization","provider":{"@id":"https://iconic.onl/#org"},"url":"https://iconic.onl/agents/selection-test/","description":"Runs controlled model-driven MCP tool selection trials with model-screened candidate alternatives, explains observed picks, rewrites tool descriptions and retests on held-out requests. Does not observe organic agent traffic.","offers":{"@type":"Offer","price":"49.00","priceCurrency":"USD","url":"https://iconic.onl/agents/selection-test/"},"audience":{"@type":"BusinessAudience","name":"Developers and companies operating public MCP servers"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","@id":"https://iconic.onl/agents/selection-test/#service","name":"ICONIC MCP Selection Test","serviceType":"Controlled MCP tool selection measurement and description optimization","provider":{"@id":"https://iconic.onl/#org"},"url":"https://iconic.onl/agents/selection-test/","description":"Runs controlled model-driven MCP tool selection trials with model-screened candidate alternatives, explains observed picks, rewrites tool descriptions and retests on held-out requests. Does not observe organic agent traffic.","offers":{"@type":"Offer","price":"49.00","priceCurrency":"USD","availability":"https://schema.org/OutOfStock","url":"https://iconic.onl/agents/selection-test/"},"audience":{"@type":"BusinessAudience","name":"Developers and companies operating public MCP servers"}}</script>
 <link rel="stylesheet" href="/styles.css?v=20261117">
 <link rel="stylesheet" href="/mobile-first.css?v=20261110r">
-<link rel="stylesheet" href="/agents/selection-test/selection.css?v=20261123">
+<link rel="stylesheet" href="/agents/selection-test/selection.css?v=20261123b">
 </head>
 <body class="selection-page">
 <div class="noise" aria-hidden="true"></div>
@@ -52,7 +52,7 @@
       <p class="st-hero-deck">Your MCP server can be discoverable, reachable and perfectly valid. <strong>That doesn't mean an AI will choose its tools.</strong></p>
       <p class="st-intro">The Selection Test puts your public tools alongside model-screened candidate alternatives and watches what real language models choose for ordinary requests. Then it rewrites the descriptions and measures the difference.</p>
       <div class="hero-actions st-hero-actions">
-        <a class="button button-primary" href="#buy">TEST MY SERVER · $49</a>
+        <a class="button button-primary" href="#buy">REQUEST A PILOT</a>
         <a class="button button-ghost" href="#method">SEE THE METHOD</a>
       </div>
       <p class="st-hero-note">Controlled experiments. No access to private data. No tools executed.</p>
@@ -108,8 +108,15 @@
       <p class="st-purchase-note">A valid report requires at least three comparable, accessible candidate servers. If a valid measurement cannot be produced, the order is flagged for merchant refund processing under our <a href="/refunds/">refund policy</a>. Refunds are not instant or automatic.</p>
     </div>
     <div class="st-checkout">
-      <div class="st-checkout-top"><span>RUN YOUR SELECTION TEST</span><span>SECURE STRIPE CHECKOUT</span></div>
-      <form id="buy-form" class="st-form" method="post" action="https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/checkout/form" enctype="application/x-www-form-urlencoded">
+      <div class="st-checkout-top"><span>SELECTION TEST / ORDER STATUS</span><span>ORDERS PAUSED</span></div>
+      <div class="st-pause-panel" role="status" aria-live="polite">
+        <span class="st-index">TEMPORARILY UNAVAILABLE</span>
+        <h3>New orders are paused.</h3>
+        <p>We're verifying reliable model capacity before accepting more paid Selection Tests. We aren't collecting payments for this service right now.</p>
+        <a class="button button-primary" href="mailto:patrick@iconic.onl?subject=ICONIC%20MCP%20Selection%20Test%20pilot">REQUEST A PILOT</a>
+        <p class="st-pause-small">Existing ICONIC services remain available. We'll reopen automated checkout after the full report test passes.</p>
+      </div>
+      <form id="buy-form" hidden class="st-form" method="post" action="https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/checkout/form" enctype="application/x-www-form-urlencoded">
         <label for="server">PUBLIC MCP ENDPOINT</label>
         <input type="url" id="server" name="server" required maxlength="300" placeholder="https://mcp.yourcompany.com/mcp" pattern="https://.+">
         <small>Your server must support unauthenticated MCP initialization and <code>tools/list</code>.</small>
@@ -117,7 +124,7 @@
         <input type="email" id="email" name="email" required maxlength="200" autocomplete="email" placeholder="you@company.com">
         <div class="st-check"><input type="checkbox" id="consent" name="consent" value="yes" required><label for="consent">I authorize this one-time $49 purchase and agree to the <a href="/agents/marketplace/terms.html" target="_blank" rel="noopener">purchase terms</a> and <a href="/refunds/" target="_blank" rel="noopener">refund policy</a>.</label></div>
         <p id="msg" role="status" aria-live="polite"></p>
-        <button class="button button-primary" type="submit" id="go">Pay $49 with Stripe</button>
+        <button class="button button-primary" type="submit" id="go" disabled>Checkout paused</button>
       </form>
       <p class="st-checkout-bottom">ICONIC never collects or stores your card details. Payment is completed on Stripe.</p>
     </div>
