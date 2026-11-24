@@ -179,11 +179,19 @@
   .selection-page *{scroll-behavior:auto!important;transition:none!important}
 }
 
-/* Temporary credit-capacity fail-closed status; preserve native brand treatment. */
+/* Partnership inquiry panel; checkout is not part of this page. */
 .selection-page .st-form[hidden]{display:none!important}
-.selection-page .st-pause-panel{padding:42px 32px 37px;display:flex;flex-direction:column;align-items:flex-start;gap:17px}
-.selection-page .st-pause-panel h3{margin:3px 0;font:400 clamp(31px,3vw,46px)/1.12 Georgia,serif;letter-spacing:-.04em}
-.selection-page .st-pause-panel p{margin:0;color:#b4b9d0;font-size:14px;line-height:1.65}
-.selection-page .st-pause-panel .st-pause-small{font-size:11px;color:#898fa7}
-.selection-page .st-pause-panel .button{margin-top:12px}
-@media(max-width:680px){.selection-page .st-pause-panel{padding:25px 22px}.selection-page .st-pause-panel .button{width:100%}}
+.selection-page .st-partner-panel{padding:42px 32px 37px;display:flex;flex-direction:column;align-items:flex-start;gap:17px}
+.selection-page .st-partner-panel h3{margin:3px 0;font:400 clamp(31px,3vw,46px)/1.12 Georgia,serif;letter-spacing:-.04em}
+.selection-page .st-partner-panel p{margin:0;color:#b4b9d0;font-size:14px;line-height:1.65}
+.selection-page .st-partner-panel .st-partner-small{font-size:11px;color:#898fa7}
+.selection-page .st-partner-panel .button{margin-top:12px}
+@media(max-width:680px){.selection-page .st-partner-panel{padding:25px 22px}.selection-page .st-partner-panel .button{width:100%}}
+
+/* Partner pilot details, aligned with the existing ICONIC visual system. */
+.selection-page .st-partner-points{list-style:none;display:grid;gap:12px;margin:4px 0 0;padding:0}
+.selection-page .st-partner-points li{position:relative;padding-left:23px;color:#c4c9db;font-size:13px;line-height:1.6}
+.selection-page .st-partner-points li::before{content:"";position:absolute;left:0;top:.55em;width:7px;height:7px;border-radius:50%;background:var(--accent-2)}
+.selection-page .st-partner-panel .button{max-width:100%;text-align:center}
+.selection-page .st-purchase h2{font-size:clamp(44px,4.6vw,77px)}
+@media(max-width:680px){.selection-page .st-purchase h2{font-size:clamp(39px,9.5vw,57px)}}
