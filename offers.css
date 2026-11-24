@@ -194,7 +194,15 @@ body.home-v2 .live-callback b { color: var(--accent); font-size: 23px; }
 .hero.hero-knight-layout { align-items: center; }
 .hero-knight { margin: 0; width: 100%; max-width: 560px; }
 .hero-knight img { display: block; width: 100%; height: auto; -webkit-mask-image: radial-gradient(ellipse 60% 60% at 48% 50%, #000 30%, transparent 70%); mask-image: radial-gradient(ellipse 60% 60% at 48% 50%, #000 30%, transparent 70%); }
+/* Same space above and below the knight (measured 2026-11-24). */
+@media (max-width: 1179px) {
+  .hero.hero-knight-layout { padding-bottom: 0; }
+  .hero-knight { margin-top: 24px; margin-bottom: -34px; }
+}
+@media (min-width: 768px) and (max-width: 1179px) {
+  .hero-knight { margin-bottom: -22px; }
+}
 @media (min-width: 1180px) {
-  .hero.hero-knight-layout { grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr) !important; gap: 62px; }
+  .hero.hero-knight-layout { grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr) !important; gap: 62px; padding-bottom: 12px; }
   .hero-knight { max-width: none; }
 }

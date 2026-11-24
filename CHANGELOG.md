@@ -3,6 +3,7 @@
 - New preview at /preview/ (not the homepage). Opens with the ad's words: "Move first. Put AI to work inside your business without handing over the keys." Then "I'll teach you AI" in three steps (training from $249, $1,000 evaluation, build by invitation), the dealership proof, "Who holds the keys?" and the demo.
 - Cut from the preview to reduce clutter: the compounding animation, the "their servers, their rules" news strip, the research list and the agents box. The AIpocalypse section moved lower. All of these stay on the live homepage until Patrick approves.
 - Added the knight from the WAC ad (the original art from Patrick's ad folder, no words on it) beside "Move first." on wide screens and under the buttons on phones. Its edges fade into the page.
+- Same space above and below the knight on phones, tablets and computers (it had much more space below).
 - Why: the ad's QR code lands on the homepage, which didn't say what the ad says. Preview has no visitor counter and is hidden from search engines.
 
 ## 2026-11-16 — Branching AI training navigator and complete skill browser
