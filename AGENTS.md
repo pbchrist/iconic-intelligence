@@ -1,6 +1,6 @@
 # ICONIC public website — agent instructions
 
-**READ FIRST:** [Canonical operational handoff and next $1 live-purchase test](https://github.com/pbchrist/agent-native-suite/blob/main/START_HERE.md). Seven ICONIC services are now marked purchasable in the live MPP catalog. Live payment *challenges* were verified, but no successful settled live SPT transaction and report delivery has yet been observed. Do not misstate that distinction.
+**READ FIRST:** [Canonical operational handoff and next $1 live-purchase test](https://github.com/pbchrist/agent-native-suite/blob/main/START_HERE.md). As of 2026-11-24 the live MPP catalog marks only two offers purchasable: `dataset-diff-report` ($29) and `reserve-pass` ($19); the rest are draft or paused (Selection Test). Live payment *challenges* were verified, but no successful settled live SPT transaction and report delivery has yet been observed. Do not misstate that distinction.
 
 The website in this repository is the static GitHub Pages site `iconic.onl`, **not** the live payment backend. The source of truth for live price and payable state is `https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers` (separate `pbchrist/agent-commerce-lab`). Static `agents/marketplace/offers.json` and `manifest.json` must agree with the live API.
 

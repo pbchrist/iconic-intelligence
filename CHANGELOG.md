@@ -1,3 +1,8 @@
+## 2026-11-24 — Homepage no longer sends people to the agent pages
+- Took "For agents" and "MCP" out of the menus, removed the "Already running an agent swarm?" section, and removed the four agent links from the footer (homepage and preview). Patrick: business visitors were landing on pages that looked like a different company.
+- Agent pages now say only what is really for sale today ($29 Data Discrepancy Report, $19 Reserve Pass). Removed the false "seven offers support checkout" lines and the internal notes ("checkout unavailable", "payment processor remains off", "not yet verified"). Other offers now read "coming soon".
+- Same correction in llms.txt, llms-full.txt and the Selection Test entry in offers.json, so AI tools are told the truth too.
+
 ## 2026-11-24 — Preview: homepage that matches the WAC magazine ad
 
 - New preview at /preview/ (not the homepage). Opens with the ad's words: "Move first. Put AI to work inside your business without handing over the keys." Then "I'll teach you AI" in three steps (training from $249, $1,000 evaluation, build by invitation), the dealership proof, "Who holds the keys?" and the demo.
