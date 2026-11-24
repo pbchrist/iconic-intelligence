@@ -1,0 +1,180 @@
+/* Native ICONIC Selection Test: reuses /styles.css + /mobile-first.css tokens,
+   brand header, controls, serif display typography and footer. Page-scoped. */
+.selection-page{color-scheme:dark}
+.selection-page .mobile-nav[hidden]{display:none!important}
+.selection-page .noise,.selection-page .cursor-glow{pointer-events:none}
+.selection-page main{overflow:clip}
+.selection-page .brand{display:flex;align-items:center;width:110px;min-width:90px}
+.selection-page .brand img{display:block;width:100%;height:auto;object-fit:contain}
+.selection-page .st-hero{
+  padding-top:clamp(154px,14vw,206px);padding-bottom:clamp(90px,10vw,160px);
+  display:grid;grid-template-columns:minmax(0,1.18fr) minmax(320px,.82fr);
+  align-items:center;gap:clamp(45px,5vw,90px);
+}
+.selection-page .st-hero h1{
+  font-family:Georgia,"Times New Roman",serif;font-weight:400;
+  font-size:clamp(66px,6.4vw,112px);line-height:.9;letter-spacing:-.062em;
+  margin:24px 0 0;max-width:980px;
+}
+.selection-page h1 em,.selection-page h2 em,.selection-page .st-question em{
+  color:var(--accent-2);font-style:italic;font-weight:400;
+}
+.selection-page .st-hero-deck{
+  max-width:650px;margin:34px 0 0;
+  font:400 clamp(21px,2vw,28px)/1.43 Georgia,"Times New Roman",serif;
+  color:var(--pearl);
+}
+.selection-page .st-hero-deck strong{color:var(--accent-2);font-weight:400}
+.selection-page .st-intro{max-width:620px;margin:18px 0 0;color:#aeb3c7;font-size:15px;line-height:1.72}
+.selection-page .st-hero-actions{margin-top:30px}
+.selection-page .st-hero-note{font-size:11px;letter-spacing:.04em;color:#7f869d;margin-top:22px}
+.selection-page .st-instrument{
+  min-width:0;padding:0;border:1px solid rgba(179,186,255,.23);border-radius:26px;
+  background:linear-gradient(160deg,rgba(52,60,126,.28),rgba(8,10,22,.88) 58%);
+  box-shadow:0 35px 105px rgba(0,0,0,.3);overflow:hidden;
+}
+.selection-page .st-instrument-top{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:19px 22px;border-bottom:1px solid var(--line);
+  font-size:9px;font-weight:800;letter-spacing:.18em;color:#9fa7c9;
+}
+.selection-page .st-on{display:flex;align-items:center;gap:8px;color:var(--success);white-space:nowrap}
+.selection-page .st-on i{width:6px;height:6px;border-radius:50%;background:var(--success);box-shadow:0 0 16px var(--success)}
+.selection-page .st-big-label{padding:44px 36px 0;font-size:10px;font-weight:800;letter-spacing:.22em;color:#8189ac}
+.selection-page .st-question{
+  margin:15px 36px 50px;max-width:440px;
+  font:400 clamp(35px,3.8vw,60px)/1.05 Georgia,"Times New Roman",serif;
+  letter-spacing:-.045em;
+}
+.selection-page .st-measures{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.selection-page .st-measures>div{padding:23px 12px;border-right:1px solid var(--line)}
+.selection-page .st-measures>div:last-child{border:0}
+.selection-page .st-measures strong{display:block;font:400 clamp(36px,3vw,48px)/1 Georgia,serif;color:var(--pearl);letter-spacing:-.05em}
+.selection-page .st-measures span{display:block;margin-top:9px;color:#8f96ad;font-size:9px;font-weight:800;letter-spacing:.13em;line-height:1.5}
+.selection-page .st-instrument-foot{display:flex;align-items:center;gap:10px;padding:28px 24px 14px;font-size:9px;font-weight:800;letter-spacing:.13em;color:#a6add2}
+.selection-page .st-track{min-width:10px;flex:1;height:1px;background:linear-gradient(90deg,var(--accent-2),rgba(185,192,255,.18))}
+.selection-page .st-instrument-disclosure{margin:0;padding:0 24px 28px;font-size:10px;line-height:1.55;color:#787f96}
+.selection-page .st-section{padding-top:94px;padding-bottom:100px;border-top:1px solid var(--line);scroll-margin-top:100px}
+.selection-page .st-section-head{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(240px,.75fr);align-items:end;gap:60px;margin-top:25px}
+.selection-page .st-section h2{
+  margin:0;font:400 clamp(48px,5.3vw,88px)/.99 Georgia,"Times New Roman",serif;
+  letter-spacing:-.055em;
+}
+.selection-page .st-section-head>p,.selection-page .st-developer>p{
+  max-width:550px;margin:0 0 5px;color:#aeb3c7;
+  font:400 clamp(17px,1.25vw,21px)/1.52 Georgia,serif;
+}
+.selection-page .st-steps{list-style:none;margin:65px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.selection-page .st-steps li{
+  min-width:0;padding:25px 24px 31px;border:1px solid var(--line);border-radius:20px;
+  background:linear-gradient(175deg,rgba(255,255,255,.035),rgba(255,255,255,.012));min-height:270px
+}
+.selection-page .st-index{display:block;font-size:10px;letter-spacing:.22em;font-weight:800;color:var(--accent-2)}
+.selection-page .st-steps h3{margin:66px 0 13px;font-weight:900;font-size:17px;letter-spacing:-.025em}
+.selection-page .st-steps p,.selection-page .st-findings p{margin:0;color:#aeb3c7;font-size:13px;line-height:1.73}
+.selection-page code{color:#cdd1ff;font:500 .9em/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
+.selection-page .st-findings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;margin-top:62px}
+.selection-page .st-findings article{min-width:0;border-top:1px solid var(--line-strong);padding-top:22px}
+.selection-page .st-findings h3{margin:33px 0 14px;font:400 clamp(27px,2.3vw,39px)/1.1 Georgia,serif;letter-spacing:-.035em}
+.selection-page .st-boundary{
+  max-width:1060px;border-left:2px solid var(--accent-2);margin:45px 0 0;
+  padding:12px 0 12px 22px;color:#9fa6bc;font-size:13px;line-height:1.65;
+}
+.selection-page .st-boundary strong{color:var(--pearl);font-weight:700}
+.selection-page .st-purchase{
+  display:grid;grid-template-columns:minmax(0,.92fr) minmax(360px,1.08fr);
+  gap:clamp(50px,6.2vw,115px);align-items:start;
+}
+.selection-page .st-purchase h2{margin:30px 0 0}
+.selection-page .st-price{display:flex;align-items:baseline;gap:19px;margin-top:40px}
+.selection-page .st-price span{font:400 clamp(70px,8vw,120px)/1 Georgia,serif;letter-spacing:-.09em}
+.selection-page .st-price small{font-size:10px;letter-spacing:.2em;color:var(--accent-2);font-weight:800}
+.selection-page .st-buy-lead>p{max-width:520px;margin:18px 0;color:#b5bacd;font-size:15px;line-height:1.65}
+.selection-page .st-buy-lead>.st-purchase-note{margin-top:24px;color:#939bb3;font-size:12px}
+.selection-page .st-purchase-note a,.selection-page .st-check a,.selection-page .st-developer a{text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(185,192,255,.4);color:var(--accent-2)}
+.selection-page .st-checkout{
+  overflow:hidden;border:1px solid rgba(181,187,255,.24);border-radius:24px;
+  background:linear-gradient(160deg,rgba(54,63,130,.2),rgba(10,12,24,.85));
+  box-shadow:0 30px 85px rgba(0,0,0,.22)
+}
+.selection-page .st-checkout-top{
+  padding:20px 25px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  border-bottom:1px solid var(--line);font-size:9px;letter-spacing:.16em;font-weight:800;color:#aab0cf
+}
+.selection-page .st-checkout-top span:last-child{color:#7f879d}
+.selection-page .st-form{padding:32px;display:grid;gap:12px}
+.selection-page .st-form>label{
+  margin-top:10px;color:#e7e5e4;font-size:10px;font-weight:800;
+  letter-spacing:.16em
+}
+.selection-page .st-form>input{
+  appearance:none;width:100%;min-width:0;min-height:53px;padding:14px 15px;
+  border:1px solid rgba(185,192,255,.29);border-radius:11px;outline:none;
+  background:rgba(5,7,16,.65);color:var(--pearl);font-size:14px;letter-spacing:0;
+}
+.selection-page .st-form>input:focus-visible{border-color:var(--accent-2);box-shadow:0 0 0 3px rgba(185,192,255,.12)}
+.selection-page .st-form>input::placeholder{color:#676f86}
+.selection-page .st-form>small{margin:0;color:#8890a7;font-size:11px;line-height:1.5}
+.selection-page .st-check{display:flex;align-items:flex-start;gap:11px;margin-top:15px}
+.selection-page .st-check input{flex:none;width:18px;height:18px;margin:2px 0 0;accent-color:var(--accent-2);cursor:pointer}
+.selection-page .st-check label{color:#acb2c8;font-size:12px;line-height:1.55}
+.selection-page #msg{min-height:18px;margin:0;color:var(--warning);font-size:12px;line-height:1.4}
+.selection-page #go{min-height:56px;width:100%;font:900 12px/1.2 Inter,ui-sans-serif,Arial,sans-serif;letter-spacing:.14em}
+.selection-page #go:disabled{opacity:.54;cursor:not-allowed;transform:none;box-shadow:none}
+.selection-page .st-checkout-bottom{margin:0;padding:0 32px 28px;color:#778198;font-size:11px;line-height:1.6}
+.selection-page .st-developer{padding-bottom:90px}
+.selection-page .st-developer h2{margin:25px 0}
+.selection-page .st-developer>p{max-width:700px}
+.selection-page .st-technical{max-width:1000px;margin-top:35px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.025)}
+.selection-page .st-technical summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:24px;align-items:center;padding:23px 26px;color:var(--pearl);font-size:12px;font-weight:800;letter-spacing:.09em}
+.selection-page .st-technical summary::-webkit-details-marker{display:none}
+.selection-page .st-technical summary span{color:var(--accent-2);font-size:22px}
+.selection-page .st-technical[open] summary span{transform:rotate(45deg)}
+.selection-page .st-technical-body{padding:0 26px 24px;overflow-wrap:anywhere;color:#9da6c0;font-size:13px;line-height:1.7}
+.selection-page .st-footer footer{margin-top:0;padding:25px 0 45px;align-items:start;line-height:2}
+.selection-page .st-footer footer span:first-child{max-width:780px}
+.selection-page .st-footer footer a{color:#a9b0c8}
+.selection-page a:focus-visible,.selection-page button:focus-visible,.selection-page summary:focus-visible{outline:2px solid var(--accent-2);outline-offset:4px}
+@media(max-width:1080px){
+  .selection-page .st-hero{grid-template-columns:1fr;gap:48px;padding-top:150px}
+  .selection-page .st-instrument{max-width:720px}
+  .selection-page .st-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .selection-page .st-section-head{gap:25px}
+  .selection-page .st-purchase{grid-template-columns:1fr;gap:38px}
+  .selection-page .st-checkout{max-width:760px}
+}
+@media(max-width:680px){
+  .selection-page .st-hero{padding-top:136px;padding-bottom:70px;gap:38px}
+  .selection-page .st-hero h1{font-size:clamp(47px,11.3vw,75px);line-height:.95;overflow-wrap:normal}
+  .selection-page .st-hero-deck{font-size:20px;margin-top:25px}
+  .selection-page .st-intro{font-size:14px}
+  .selection-page .st-hero-actions{display:grid;grid-template-columns:1fr;gap:10px}
+  .selection-page .st-hero-actions .button{width:100%;margin:0}
+  .selection-page .st-instrument-top{padding:16px;font-size:8px}
+  .selection-page .st-big-label{padding:27px 22px 0}
+  .selection-page .st-question{font-size:clamp(35px,8vw,49px);margin:13px 22px 30px}
+  .selection-page .st-measures{margin:0 10px}
+  .selection-page .st-measures>div{padding:16px 8px}
+  .selection-page .st-measures strong{font-size:34px}
+  .selection-page .st-measures span{font-size:8px;letter-spacing:.05em}
+  .selection-page .st-instrument-foot{padding:21px 15px 12px;gap:6px;font-size:8px}
+  .selection-page .st-instrument-disclosure{padding:0 15px 22px}
+  .selection-page .st-section{padding-top:65px;padding-bottom:70px}
+  .selection-page .st-section h2{font-size:clamp(40px,10vw,64px)}
+  .selection-page .st-section-head{grid-template-columns:1fr;gap:19px}
+  .selection-page .st-section-head>p{font-size:17px}
+  .selection-page .st-steps{grid-template-columns:1fr;margin-top:36px;gap:10px}
+  .selection-page .st-steps li{min-height:0;padding:23px 22px}
+  .selection-page .st-steps h3{margin-top:31px}
+  .selection-page .st-findings{grid-template-columns:1fr;gap:23px;margin-top:38px}
+  .selection-page .st-findings h3{margin-top:20px}
+  .selection-page .st-purchase{gap:31px}
+  .selection-page .st-price span{font-size:75px}
+  .selection-page .st-form{padding:22px}
+  .selection-page .st-checkout-top{padding:18px 22px}
+  .selection-page .st-checkout-bottom{padding:0 22px 23px}
+  .selection-page .st-footer footer{flex-direction:column;gap:15px}
+}
+@media(prefers-reduced-motion:reduce){
+  .selection-page *{scroll-behavior:auto!important;transition:none!important}
+}
