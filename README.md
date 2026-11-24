@@ -1,6 +1,6 @@
 ## MCP products you can buy from ICONIC
 
-- **[MCP Selection Test — $49](https://iconic.onl/agents/selection-test/):** Enter a public MCP URL to measure whether AI models select your tools over competing services. Receive evidence-backed pick rates, rewritten tool descriptions, and a held-out retest. Automated, no tool execution or credentials required.
+- **[MCP Selection Test](https://iconic.onl/agents/selection-test/):** Independent selection intelligence for MCP publishers and platforms. Controlled tool-choice evaluations, actionable findings, and before-and-after validation. Publisher pilots and platform partnerships are scoped commercially; public automated checkout is not offered on this page.
 - **[Reserve Pass — $19 / 30 days](https://iconic.onl/agents/reserve/#pass):** Tenant-scoped MCP memory, decisions and outcomes, delivered after checkout.
 - **[Data Discrepancy Report — $29](https://iconic.onl/agents/data-reconciliation/):** Automated, reproducible comparison of authorized datasets.
 
