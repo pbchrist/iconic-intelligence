@@ -189,3 +189,12 @@ body.home-v2 .ev-trap { margin-top: 72px; }
 .answer-lead h3 em { color: var(--accent-2); }
 
 body.home-v2 .live-callback b { color: var(--accent); font-size: 23px; }
+
+/* Preview hero with the WAC-ad knight (2026-11-24). Only pages that use .hero-knight-layout get this. */
+.hero.hero-knight-layout { align-items: center; }
+.hero-knight { margin: 0; width: 100%; max-width: 560px; }
+.hero-knight img { display: block; width: 100%; height: auto; -webkit-mask-image: radial-gradient(ellipse 60% 60% at 48% 50%, #000 30%, transparent 70%); mask-image: radial-gradient(ellipse 60% 60% at 48% 50%, #000 30%, transparent 70%); }
+@media (min-width: 1180px) {
+  .hero.hero-knight-layout { grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr) !important; gap: 62px; }
+  .hero-knight { max-width: none; }
+}
