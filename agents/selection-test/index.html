@@ -1,87 +1,155 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080912">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0G5007D0F7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-0G5007D0F7');
-</script>
-<title>MCP Selection Test: will AI models pick your tools? | ICONIC</title>
-<meta name="description" content="Measure how often real AI models choose your MCP server's tools over your competitors' for plain user requests. See why they passed, get rewritten tool descriptions and a measured before/after. $49, automated.">
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0G5007D0F7');</script>
+<title>MCP Selection Test | Will AI choose your MCP tools? | ICONIC</title>
+<meta name="description" content="Measure how real language models choose between connected MCP tools. See selection rates, candidate alternatives, rewritten descriptions and a measured retest. $49 from ICONIC.">
 <link rel="canonical" href="https://iconic.onl/agents/selection-test/">
-<link rel="stylesheet" href="/agents/discovery.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate" type="application/json" href="/agents/marketplace/offers.json" title="Machine-readable ICONIC offers">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ICONIC">
 <meta property="og:title" content="MCP Selection Test | ICONIC">
-<meta property="og:description" content="Will AI models pick your MCP tools over your competitors'? Measured, explained, rewritten and retested. $49.">
-<meta property="og:url" content="https://iconic.onl/agents/selection-test/"><meta property="og:type" content="website">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","@id":"https://iconic.onl/agents/selection-test/#service","name":"ICONIC MCP Selection Test","serviceType":"MCP tool selection measurement and tool description optimization","provider":{"@id":"https://iconic.onl/#org"},"url":"https://iconic.onl/agents/selection-test/","description":"Automated test of how often real language models choose a public MCP server's tools over same-category rival servers from the official MCP Registry, with rejection reasons, rewritten tool descriptions and a before/after measured on held-out requests.","offers":{"@type":"Offer","price":"49.00","priceCurrency":"USD","url":"https://iconic.onl/agents/selection-test/"},"audience":{"@type":"BusinessAudience","name":"Companies that publish MCP servers"}}</script>
-<style>
- .steps{counter-reset:s;list-style:none;padding:0}
- .steps li{counter-increment:s;margin:0 0 1rem;padding-left:2.4rem;position:relative}
- .steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:0;font-size:.8rem;letter-spacing:.12em;opacity:.6}
- .price{font-size:2.2rem;margin:.2rem 0}
- form.buy{display:grid;gap:.8rem;max-width:34rem}
- form.buy input[type=url],form.buy input[type=email]{width:100%;padding:.7rem .8rem;font:inherit;background:transparent;color:inherit;border:1px solid currentColor;border-radius:6px;box-sizing:border-box}
- form.buy .check{display:flex;gap:.6rem;align-items:flex-start;font-size:.9rem}
- form.buy button{justify-self:start}
- #msg{min-height:1.4em}
-</style>
-</head><body><div class="wrap">
-<nav><a href="/">ICONIC</a><a href="/agents/">ALL AGENT SERVICES</a></nav>
-<main>
-<header>
-<div class="eyebrow">MCP Selection Test · Automated · $49</div>
-<h1>Will an AI pick your tools?</h1>
-<p class="lead">When someone asks Claude, ChatGPT or Cursor to get a job done, the model chooses from the tools it has. If it picks a competitor's, you never hear about it. This test measures how often real models choose your MCP server over the services you compete with, shows you why they passed, rewrites your tool descriptions and measures again.</p>
-<a class="button primary" href="#buy">Test my server</a>
-<a class="button" href="#how">How it works</a>
+<meta property="og:description" content="Your MCP tools can be available and still never get chosen. Measure tool selection by real models, then retest clearer descriptions.">
+<meta property="og:url" content="https://iconic.onl/agents/selection-test/">
+<meta property="og:image" content="https://iconic.onl/iconic-share.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","@id":"https://iconic.onl/agents/selection-test/#service","name":"ICONIC MCP Selection Test","serviceType":"Controlled MCP tool selection measurement and description optimization","provider":{"@id":"https://iconic.onl/#org"},"url":"https://iconic.onl/agents/selection-test/","description":"Runs controlled model-driven MCP tool selection trials with model-screened candidate alternatives, explains observed picks, rewrites tool descriptions and retests on held-out requests. Does not observe organic agent traffic.","offers":{"@type":"Offer","price":"49.00","priceCurrency":"USD","url":"https://iconic.onl/agents/selection-test/"},"audience":{"@type":"BusinessAudience","name":"Developers and companies operating public MCP servers"}}</script>
+<link rel="stylesheet" href="/styles.css?v=20261117">
+<link rel="stylesheet" href="/mobile-first.css?v=20261110r">
+<link rel="stylesheet" href="/agents/selection-test/selection.css?v=20261123">
+</head>
+<body class="selection-page">
+<div class="noise" aria-hidden="true"></div>
+<div class="cursor-glow" aria-hidden="true"></div>
+<header class="site-header">
+  <a class="brand" href="/" aria-label="ICONIC home"><img src="/iconic-wordmark.webp" alt="ICONIC."></a>
+  <nav class="nav" aria-label="Primary navigation">
+    <a href="/">Home</a>
+    <a href="/services/">Services</a>
+    <a href="/research/">Research</a>
+    <a href="/agents/">For agents</a>
+  </nav>
+  <a class="header-cta" href="#buy">RUN THE TEST · $49</a>
+  <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav">MENU</button>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+    <a href="/">ICONIC home</a>
+    <a href="/services/">Services</a>
+    <a href="/research/">Research</a>
+    <a href="/agents/">For agents</a>
+    <a href="#buy">Run the selection test · $49</a>
+  </nav>
 </header>
 
-<section id="how">
-<div class="eyebrow">How it works</div>
-<h2>Your tools, next to your rivals', in front of real models.</h2>
-<ol class="steps">
-<li><strong>You give us your MCP URL.</strong> We read your public tool list. We never call your tools and never need a login.</li>
-<li><strong>We find who you compete with.</strong> Same-category servers from the official MCP Registry, put in the same tool list as yours.</li>
-<li><strong>Real models choose.</strong> Three model families get 20 plain-language requests your server is built for, five times each, with the tool order shuffled every time.</li>
-<li><strong>You get the result.</strong> Your pick rate with its 95% range, overall and per model; which rivals won instead; what the models said was missing or unclear in your descriptions.</li>
-<li><strong>We rewrite and retest.</strong> New tool descriptions, truthful to what your tools do, measured on half the requests that the rewrite never saw. You see the before and after, and you can paste the new descriptions straight in.</li>
-</ol>
-</section>
+<main id="top">
+  <section class="section-shell st-hero" aria-labelledby="st-title">
+    <div class="st-hero-copy">
+      <div class="eyebrow"><span class="live-dot"></span> ICONIC / AGENT INFRASTRUCTURE / EVALUATION</div>
+      <h1 id="st-title">AVAILABLE IS NOT<br><em>SELECTED.</em></h1>
+      <p class="st-hero-deck">Your MCP server can be discoverable, reachable and perfectly valid. <strong>That doesn't mean an AI will choose its tools.</strong></p>
+      <p class="st-intro">The Selection Test puts your public tools alongside model-screened candidate alternatives and watches what real language models choose for ordinary requests. Then it rewrites the descriptions and measures the difference.</p>
+      <div class="hero-actions st-hero-actions">
+        <a class="button button-primary" href="#buy">TEST MY SERVER · $49</a>
+        <a class="button button-ghost" href="#method">SEE THE METHOD</a>
+      </div>
+      <p class="st-hero-note">Controlled experiments. No access to private data. No tools executed.</p>
+    </div>
+    <aside class="st-instrument" aria-label="What the test measures">
+      <div class="st-instrument-top"><span>ICONIC / SELECTION TEST</span><span class="st-on"><i></i> MEASUREMENT</span></div>
+      <div class="st-big-label">THE QUESTION</div>
+      <p class="st-question">When the model has a choice, <em>who gets picked?</em></p>
+      <div class="st-measures">
+        <div><strong>03</strong><span>MODEL FAMILIES</span></div>
+        <div><strong>20</strong><span>USER REQUESTS</span></div>
+        <div><strong>05</strong><span>REPEATS / MODEL</span></div>
+      </div>
+      <div class="st-instrument-foot"><span>BEFORE</span><span class="st-track"></span><span>REWRITE</span><span class="st-track"></span><span>RETEST</span></div>
+      <p class="st-instrument-disclosure">Configuration shown for the standard run. No selection rate is claimed until the test completes.</p>
+    </aside>
+  </section>
 
-<section>
-<div class="eyebrow">What it is and isn't</div>
-<div class="grid">
-<div class="card"><h3>Measured, not scored</h3><p>No checklist out of 100. A count of how often models chose you, with the sample size and uncertainty shown.</p></div>
-<div class="card"><h3>Read-only</h3><p>Only your public <code>tools/list</code> is read. No tool on your server or anyone else's is invoked.</p></div>
-<div class="card"><h3>No tricks</h3><p>Rewrites never tell a model to prefer you or mention competitors. They describe your tools better.</p></div>
-<div class="card"><h3>Honest limits</h3><p>This tests choice among connected tools. It can't see installs, client ranking or your real traffic, and the report says so.</p></div>
-</div>
-</section>
+  <section class="section-shell st-section st-method" id="method" aria-labelledby="method-title">
+    <div class="section-kicker">01 / THE METHOD</div>
+    <div class="st-section-head">
+      <h2 id="method-title">A live decision.<br><em>Not a vanity score.</em></h2>
+      <p>Availability is the starting line. We test the actual choice a model makes when several tools are presented together.</p>
+    </div>
+    <ol class="st-steps">
+      <li><span class="st-index">01</span><h3>READ THE TOOLS</h3><p>Provide your public HTTPS MCP endpoint. We read its <code>tools/list</code> metadata; we never execute the tools or ask for a login.</p></li>
+      <li><span class="st-index">02</span><h3>CHECK THE RIVALS</h3><p>We find reachable candidates and screen them for comparable capabilities. If fewer than three qualify, we refuse to publish a misleading comparison.</p></li>
+      <li><span class="st-index">03</span><h3>MEASURE THE CHOICE</h3><p>OpenAI, Anthropic and Google model families receive plain-language tasks. Tool ordering changes each trial; we count actual tool selections and uncertainty.</p></li>
+      <li><span class="st-index">04</span><h3>REWRITE. RETEST.</h3><p>You get clearer tool descriptions and a before-and-after test on held-out requests. A negative result stays negative. No invented improvement.</p></li>
+    </ol>
+  </section>
 
-<section id="buy">
-<div class="eyebrow">Run it</div>
-<p class="price">$49</p>
-<p>One server, one report. Delivered automatically, usually within an hour. If we can't find at least three rival servers, the test doesn't run and you're refunded.</p>
-<form class="buy" id="buy-form">
- <label for="server">Your MCP server URL (public, https, no sign-in)</label>
- <input type="url" id="server" required maxlength="300" placeholder="https://mcp.yourcompany.com/mcp" pattern="https://.+">
- <label for="email">Your email</label>
- <input type="email" id="email" required maxlength="200" autocomplete="email">
- <div class="check"><input type="checkbox" id="consent" required><label for="consent">I authorize this one-time $49 purchase and agree to the <a href="/agents/marketplace/terms.html" target="_blank" rel="noopener">purchase terms</a> and <a href="/refunds/" target="_blank" rel="noopener">refund policy</a>.</label></div>
- <p id="msg" role="status" aria-live="polite"></p>
- <button class="button primary" type="submit" id="go" disabled>Checking checkout…</button>
-</form>
-</section>
+  <section class="section-shell st-section st-evidence" aria-labelledby="evidence-title">
+    <div class="section-kicker">02 / WHAT YOU GET</div>
+    <div class="st-section-head">
+      <h2 id="evidence-title">A report you<br><em>can interrogate.</em></h2>
+      <p>Results are broken down by model, with sample sizes, competing choices, description changes, and the tasks behind the numbers.</p>
+    </div>
+    <div class="st-findings">
+      <article><span class="st-index">MEASUREMENT</span><h3>Selection rate</h3><p>Pick frequency, uncertainty interval, and model-by-model results. We also disclose when a model chooses no tool.</p></article>
+      <article><span class="st-index">DIAGNOSIS</span><h3>What got passed over</h3><p>Candidate rivals selected instead, plus model-generated explanations. Those explanations are hypotheses, not privileged access to a model's reasoning.</p></article>
+      <article><span class="st-index">RETEST</span><h3>Descriptions that earn their place</h3><p>Specific, truthful rewrites evaluated against held-out requests. The report shows whether selection improved or declined.</p></article>
+    </div>
+    <p class="st-boundary"><strong>What this does not measure:</strong> organic ChatGPT recommendations, directory ranking, installs, real user traffic, or real-world adoption. Rivals are screened by models, not independently certified as interchangeable.</p>
+  </section>
 
-<section>
-<div class="eyebrow">For AI agents</div>
-<h2>Buy it over MCP or HTTP 402</h2>
-<p>Marketplace MCP: <code>https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp</code>, offer <code>selection-test</code>. Direct MPP purchase: <code>POST https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers/selection-test/purchase?sha256=&lt;body sha256&gt;</code> with <code>offer_id</code>, <code>offer_version</code> <code>0.1.0</code>, <code>server_url</code>, <code>contact_email</code>, <code>buyer_authorized: true</code>, <code>nonconfidential_only: true</code> and an <code>idempotency_key</code>. Poll the returned <code>status_url</code> with the order access token until the report is delivered. A human must authorize the spend.</p>
-</section>
-</main><footer>© 2026 ICONIC · <a href="/agents/">All agent services</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
-</div>
+  <section class="section-shell st-section st-purchase" id="buy" aria-labelledby="buy-title">
+    <div class="st-buy-lead">
+      <div class="section-kicker">03 / ONE SERVER. ONE REPORT.</div>
+      <h2 id="buy-title">Find out if<br><em>you get picked.</em></h2>
+      <div class="st-price"><span>$49</span><small>ONE-TIME / USD</small></div>
+      <p>Submit a public, unauthenticated HTTPS MCP endpoint. The automated test begins after confirmed payment.</p>
+      <p class="st-purchase-note">A valid report requires at least three comparable, accessible candidate servers. If a valid measurement cannot be produced, the order is flagged for merchant refund processing under our <a href="/refunds/">refund policy</a>. Refunds are not instant or automatic.</p>
+    </div>
+    <div class="st-checkout">
+      <div class="st-checkout-top"><span>RUN YOUR SELECTION TEST</span><span>SECURE STRIPE CHECKOUT</span></div>
+      <form id="buy-form" class="st-form">
+        <label for="server">PUBLIC MCP ENDPOINT</label>
+        <input type="url" id="server" required maxlength="300" placeholder="https://mcp.yourcompany.com/mcp" pattern="https://.+">
+        <small>Your server must support unauthenticated MCP initialization and <code>tools/list</code>.</small>
+        <label for="email">EMAIL FOR YOUR RECEIPT</label>
+        <input type="email" id="email" required maxlength="200" autocomplete="email" placeholder="you@company.com">
+        <div class="st-check"><input type="checkbox" id="consent" required><label for="consent">I authorize this one-time $49 purchase and agree to the <a href="/agents/marketplace/terms.html" target="_blank" rel="noopener">purchase terms</a> and <a href="/refunds/" target="_blank" rel="noopener">refund policy</a>.</label></div>
+        <p id="msg" role="status" aria-live="polite"></p>
+        <button class="button button-primary" type="submit" id="go" disabled>Checking checkout…</button>
+      </form>
+      <p class="st-checkout-bottom">ICONIC never collects or stores your card details. Payment is completed on Stripe.</p>
+    </div>
+  </section>
+
+  <section class="section-shell st-section st-developer" aria-labelledby="developer-title">
+    <div class="section-kicker">04 / FOR AGENTS &amp; DEVELOPERS</div>
+    <h2 id="developer-title">Machine-readable.<br><em>Human-authorized.</em></h2>
+    <p>Agents can discover the same offering over MCP or the HTTP purchase endpoint. Payment requires explicit buyer authorization.</p>
+    <details class="st-technical">
+      <summary>View MCP endpoint and purchase details <span aria-hidden="true">+</span></summary>
+      <div class="st-technical-body">
+        <p>Marketplace MCP: <code>https://patrick-beastmaster.tailf32530.ts.net/marketplace/mcp</code></p>
+        <p>Offer ID: <code>selection-test</code>. Direct MPP purchase: <code>POST https://patrick-beastmaster.tailf32530.ts.net/mpp-catalog/offers/selection-test/purchase?sha256=&lt;body sha256&gt;</code></p>
+        <p>The request requires <code>offer_id</code>, <code>offer_version</code> <code>0.1.0</code>, <code>server_url</code>, <code>contact_email</code>, <code>buyer_authorized: true</code>, <code>nonconfidential_only: true</code>, and an <code>idempotency_key</code>. Poll the returned <code>status_url</code> with the order access token to access a delivered report.</p>
+      </div>
+    </details>
+  </section>
+</main>
+<div class="section-shell st-footer"><footer><span>© 2026 ICONIC. · <a href="/">Home</a> · <a href="/agents/">Agent Tools &amp; MCP</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></span><span>OWN YOUR INTELLIGENCE.</span><a href="#top">BACK TO TOP ↑</a></footer></div>
 <script src="/agents/selection-test/buy.js?v=20261111" defer></script>
-</body></html>
+<script>
+(function(){
+  const trigger=document.getElementById('menuToggle'),nav=document.getElementById('mobileNav');
+  if(!trigger||!nav)return;
+  trigger.addEventListener('click',function(){
+    const open=trigger.getAttribute('aria-expanded')!=='true';
+    trigger.setAttribute('aria-expanded',String(open));
+    nav.hidden=!open;
+  });
+  nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nav.hidden=true;trigger.setAttribute('aria-expanded','false');});});
+})();
+</script>
+</body>
+</html>
