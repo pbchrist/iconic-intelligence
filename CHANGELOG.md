@@ -1,3 +1,9 @@
+## 2026-11-24 — Preview: homepage that matches the WAC magazine ad
+
+- New preview at /preview/ (not the homepage). Opens with the ad's words: "Move first. Put AI to work inside your business without handing over the keys." Then "I'll teach you AI" in three steps (training from $249, $1,000 evaluation, build by invitation), the dealership proof, "Who holds the keys?" and the demo.
+- Cut from the preview to reduce clutter: the compounding animation, the "their servers, their rules" news strip, the research list and the agents box. The AIpocalypse section moved lower. All of these stay on the live homepage until Patrick approves.
+- Why: the ad's QR code lands on the homepage, which didn't say what the ad says. Preview has no visitor counter and is hidden from search engines.
+
 ## 2026-11-16 — Branching AI training navigator and complete skill browser
 
 - Replaced homepage training ladder with outcome-led choices that open a branching, keyboard-operable navigator on the AI training page.
