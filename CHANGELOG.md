@@ -1,3 +1,8 @@
+## 2026-11-24 — Selection Test page rewritten in plain words, with real results
+- New headline "Listed isn't picked." Says plainly what the test does: count how often an AI picks your tool against real rivals, show who wins and why, rewrite the descriptions, test again.
+- Real numbers from November testing: a web-search tool picked 3 times out of 48 (top rival 31); after rewriting its descriptions, 2 picks became 6 on new requests; only 6 of 10 tools that claim to read web pages can do it directly; six real tool calls to Microsoft, Twilio, AWS and Context7 all answered on topic.
+- Cut the stack of warnings to one honest line. Old slogan "Own your intelligence" replaced in the footer.
+
 ## 2026-11-24 — Homepage no longer sends people to the agent pages
 - Took "For agents" and "MCP" out of the menus, removed the "Already running an agent swarm?" section, and removed the four agent links from the footer (homepage and preview). Patrick: business visitors were landing on pages that looked like a different company.
 - Agent pages now say only what is really for sale today ($29 Data Discrepancy Report, $19 Reserve Pass). Removed the false "seven offers support checkout" lines and the internal notes ("checkout unavailable", "payment processor remains off", "not yet verified"). Other offers now read "coming soon".
