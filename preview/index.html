@@ -53,13 +53,13 @@
     .ff-panel:before{content:"";position:absolute;top:0;left:0;width:130px;height:2px;background:#abb6ff}
     .ff-topline{padding:23px clamp(22px,4vw,58px);display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid rgba(180,191,255,.14);font:800 10px/1.4 Inter,Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#bcc5f3}
     .ff-topline .ff-index{color:#7984af}
-    .ff-body{padding:clamp(28px,5vw,72px) clamp(22px,4vw,58px);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(265px,.6fr);gap:clamp(24px,4vw,80px);align-items:center}
+    .ff-body{padding:clamp(28px,5vw,72px) clamp(22px,4vw,58px);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.6fr);gap:clamp(24px,4vw,80px);align-items:center}
     .ff-copy h2{margin:0 0 26px;color:#f2f2fb;font:900 clamp(40px,5.7vw,82px)/.94 "Arial Black","Helvetica Neue",Arial,sans-serif;letter-spacing:-.075em;text-wrap:balance}
     .ff-copy p{max-width:740px;font-size:clamp(15px,1.35vw,19px);color:#bac0d6;line-height:1.65;margin:0 0 16px}
     .ff-copy p strong{color:#f4f3fb;font-weight:700}
-    .ff-price-side{border-left:1px solid rgba(181,191,255,.18);padding-left:clamp(24px,3vw,54px)}
+    .ff-price-side{min-width:0;border-left:1px solid rgba(181,191,255,.18);padding-left:clamp(20px,2.4vw,42px)}
     .ff-price-side .ff-caption{font:800 10px Inter,Arial,sans-serif;letter-spacing:.18em;color:#aab5ff;text-transform:uppercase}
-    .ff-price-side .ff-price{display:block;color:#f6f5ff;font:900 clamp(66px,8vw,124px)/1 "Arial Black",Arial,sans-serif;letter-spacing:-.095em;margin:16px 0}
+    .ff-price-side .ff-price{display:block;max-width:100%;white-space:nowrap;color:#f6f5ff;font:900 clamp(47px,4.5vw,70px)/1 "Arial Black",Arial,sans-serif;letter-spacing:-.095em;margin:16px 0}
     .ff-price-side p{color:#b4bad0;font-size:15px;line-height:1.55;margin:0 0 26px}
     .ff-price-side .button{display:block;text-align:center}
     .ff-price-side .ff-note{font:600 11px/1.55 Inter,Arial,sans-serif;color:#858da9;margin-top:14px}
@@ -79,7 +79,7 @@
     .ff-principle h2{font:900 clamp(34px,5.5vw,73px)/1 "Arial Black",Arial,sans-serif;letter-spacing:-.065em;color:#f1f0f9;margin:0}
     .ff-principle p{color:#b5bad0;font-size:17px;line-height:1.65;margin:0 0 19px}
     .ff-principle a{color:#c0c8ff;text-decoration:underline;text-underline-offset:5px}
-    @media(max-width:899px){.ff-body{grid-template-columns:1fr}.ff-price-side{border-left:0;border-top:1px solid rgba(181,191,255,.18);padding:27px 0 0}.ff-price-side .ff-price{font-size:76px}.ff-steps{grid-template-columns:1fr}.ff-step+.ff-step{border-left:0;border-top:1px solid rgba(181,191,255,.14)}.ff-step{min-height:0}.ff-principle-inner{grid-template-columns:1fr;gap:20px}}
+    @media(max-width:899px){.ff-body{grid-template-columns:1fr}.ff-price-side{border-left:0;border-top:1px solid rgba(181,191,255,.18);padding:27px 0 0}.ff-price-side .ff-price{font-size:clamp(54px,8.4vw,72px)}.ff-steps{grid-template-columns:1fr}.ff-step+.ff-step{border-left:0;border-top:1px solid rgba(181,191,255,.14)}.ff-step{min-height:0}.ff-principle-inner{grid-template-columns:1fr;gap:20px}}
     @media(max-width:600px){.hero-problem{font-size:clamp(26px,7.1vw,36px)}.hero.hero-knight-layout .hero-buyer{font-size:15px}.ff-topline{flex-wrap:wrap;gap:5px}.ff-body{padding:26px 21px}.ff-copy h2{font-size:clamp(37px,10.6vw,54px)}.ff-price-side .button{width:100%}#first-fix{padding-top:20px}.ff-steps .ff-step{padding:22px 21px}}
     @media(prefers-reduced-motion:reduce){.ff-panel,.ff-panel *{transition:none!important}}
   </style>
