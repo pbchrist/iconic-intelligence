@@ -1,3 +1,7 @@
+## 2026-11-24 — Selection Test page: the real test grid, plainer words
+- Added the grid: all 48 real requests from the November 23 test, one square each, colored by which tool the AI used (green = the tool tested: 3; top rival: 31). Plus the before-and-after grid for the rewrite (2 became 6).
+- Headline now "Does the AI pick your tool?" Rewrote the rest in plain words. Added the test that was stopped because only two fair rivals existed.
+
 ## 2026-11-24 — Selection Test page rewritten in plain words, with real results
 - New headline "Listed isn't picked." Says plainly what the test does: count how often an AI picks your tool against real rivals, show who wins and why, rewrite the descriptions, test again.
 - Real numbers from November testing: a web-search tool picked 3 times out of 48 (top rival 31); after rewriting its descriptions, 2 picks became 6 on new requests; only 6 of 10 tools that claim to read web pages can do it directly; six real tool calls to Microsoft, Twilio, AWS and Context7 all answered on topic.
