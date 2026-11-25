@@ -263,3 +263,8 @@
 @media (max-width:359px){
   .selection-page .tg-big .tg-c,.selection-page .tg-ba .tg-c{width:13px;height:13px;border-radius:3px}
 }
+
+/* Clearer colors: other rivals grey, no tool hollow (2026-11-24) */
+.selection-page .tg-rb{background:var(--muted);opacity:.45}
+.selection-page .tg-none{background:transparent;border:1px dashed var(--line-strong)}
+.selection-page .st-why{padding-top:0}
