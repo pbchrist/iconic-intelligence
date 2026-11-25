@@ -1,3 +1,7 @@
+## 2026-11-24 — Homepage proof: plainer dealership story, three more clients
+- Dealership story rewritten in plain words, with the Monday/Wednesday/Friday reports added. Dealership not named.
+- Added three short cards under it: Big Shack Entertainment (named), a recruiting firm (name under NDA), a relationship coach (unnamed). No made-up results.
+
 ## 2026-11-24 — LIVE: new homepage "Move first." with The First Fix
 - Patrick said "go live". The approved preview is now the homepage: the WAC-ad headline and knight, The First Fix ($1,000), dealership proof, training/build/ongoing, "Who holds the keys?", the demo, link to /aipocalypse/.
 - Visitor counter (with booking tracking) back on, visible to Google, preview tag removed, preview styling moved into offers.css.
