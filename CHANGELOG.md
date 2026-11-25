@@ -1,3 +1,7 @@
+## 2026-11-24 — Preview: lead with the First Fix, teaching right under it
+- Kept "The First Fix" ($1,000, one problem, one result) as the lead. Added "Rather learn it yourself? Workshops from $249" right under the top buttons.
+- Build price now "From $10,000, by invitation" (matches every other page; was "By quote"). Speaks as "I" in the top lines. Softer wording for the scope line.
+
 ## 2026-11-24 — The AIpocalypse gets its own page
 - New page /aipocalypse/: the homepage's full AIpocalypse section (price hikes, "their servers, their rules") and "The answer: AI you own", word for word, with the moving news strips and the compounding animation.
 - The preview homepage links to it from the menu, the closing "intelligence stays yours" section and the footer. The live homepage is unchanged and still has the section.
