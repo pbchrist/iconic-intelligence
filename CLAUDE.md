@@ -20,3 +20,5 @@ These are Patrick's standing instructions. **His newest instruction wins.** When
 - Hero: "Own your intelligence. Compound your advantage." Keep the "AIpocalypse is coming" section.
 - Prices: Evaluation $1,000; Training $249 workshop / $1,000 private / $3,000 team (flat, no tax added); Builds from $10,000, by invitation. No small single-agent offer.
 - Plain words. No "magic" or "genius". The $4,472 figure is a measured price gap, not revenue recovered.
+- The homepage and preview do not link to the agent pages (/agents/…) — no menu item, section or footer link (Patrick, 2026-11-24: they confused business visitors). The agent pages stay up for AI tools via sitemap, llms.txt and manifests.
+- Agent pages state only what the live catalog says is for sale (check `/mpp-catalog/offers`); no internal status notes ("checkout unavailable", "not yet verified") on public pages.

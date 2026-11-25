@@ -264,7 +264,7 @@
    "proposed_unapproved_price_cents": 4900,
    "approved_price_cents": 4900,
    "lifecycle": "active",
-   "purchasable": true,
+   "purchasable": false,
    "availability": "MPP_SPT_PURCHASABLE",
    "fulfillment_available": true,
    "human_approval_required": true,
