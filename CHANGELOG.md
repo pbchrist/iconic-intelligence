@@ -1,3 +1,9 @@
+## 2026-11-24 — LIVE: new homepage "Move first." with The First Fix
+- Patrick said "go live". The approved preview is now the homepage: the WAC-ad headline and knight, The First Fix ($1,000), dealership proof, training/build/ongoing, "Who holds the keys?", the demo, link to /aipocalypse/.
+- Visitor counter (with booking tracking) back on, visible to Google, preview tag removed, preview styling moved into offers.css.
+- Evaluation page now says how it differs from The First Fix.
+- Restore point: tag live-2026-11-24-before-first-fix / branch rollback/pre-first-fix-2026-11-24.
+
 ## 2026-11-24 — Preview: lead with the First Fix, teaching right under it
 - Kept "The First Fix" ($1,000, one problem, one result) as the lead. Added "Rather learn it yourself? Workshops from $249" right under the top buttons.
 - Build price now "From $10,000, by invitation" (matches every other page; was "By quote"). Speaks as "I" in the top lines. Softer wording for the scope line.
