@@ -1,3 +1,6 @@
+## 2026-11-24 — /agents/ page rebuilt in the site's look
+- Same logo, fonts and menu as the Selection Test page. Selection Test first, then Reserve, Data Check and Agent Audit in plain words. Removed the leftover "seven offers · authorized checkout" claim. Machine files kept at the bottom.
+
 ## 2026-11-24 — Selection Test page: clearer for directory partners
 - Columns and claims now name the exact models (OpenAI GPT-4.1 mini, Anthropic Claude Haiku 4.5, Google Gemini 2.5 Flash) instead of "ChatGPT/Claude/Gemini". Other rivals are grey and "no tool" squares are hollow so they can't be mixed up. New section near the top for directories: "Your listings get skipped. Now you can show them why."
 
