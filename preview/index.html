@@ -34,6 +34,13 @@
   <link rel="stylesheet" href="/offers.css?v=20261124p" />
   <link rel="stylesheet" href="/learning-paths.css?v=20261117b" />
 
+  <style id="preview-version-marker">
+    .preview-version-mark{position:fixed;z-index:150;right:18px;bottom:18px;display:flex;align-items:center;gap:10px;padding:12px 15px;background:#f3f0e7;color:#090b18;border:1px solid #c0c6ff;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.45);font:800 10px/1.2 Inter,Arial,sans-serif;letter-spacing:.12em;text-decoration:none}
+    .preview-version-mark strong{padding:5px 7px;background:#30356f;color:white;border-radius:4px;font-size:9px;letter-spacing:.08em}
+    .preview-version-mark span{white-space:nowrap}
+    .preview-version-mark:hover,.preview-version-mark:focus-visible{outline:2px solid #c0c6ff;outline-offset:2px}
+    @media(max-width:600px){.preview-version-mark{right:10px;bottom:10px;gap:7px;padding:9px 11px;font-size:9px}.preview-version-mark strong{font-size:8px;padding:4px 6px}}
+  </style>
   <style id="first-fix-preview-design">
     /* Preview-only creative and commercial treatment. Production remains unchanged. */
     .hero.hero-knight-layout .hero-copy{position:relative;z-index:1}
@@ -81,6 +88,8 @@
   <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 </head>
 <body class="home-v2">
+  <!-- This version marker is preview-only, so visitors can distinguish drafts. -->
+  <a class="preview-version-mark" href="#first-fix" aria-label="November 24 First Fix preview; jump to the new $1,000 offer"><strong>NEW PREVIEW</strong><span>FIRST FIX · NOV 24</span></a>
   <canvas id="field" aria-hidden="true"></canvas>
   <div class="noise" aria-hidden="true"></div>
   <div class="cursor-glow" aria-hidden="true"></div>
