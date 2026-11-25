@@ -1,3 +1,7 @@
+## 2026-11-24 — Homepage proof: Patrick's final wording for four clients
+- Dealership (not named): market intelligence that compounds every day, 46-day research findings, owner asks it questions from his phone.
+- Recruiting (name under NDA), Big Shack Entertainment (named), a relationship coach (unnamed): wording approved by Patrick in chat.
+
 ## 2026-11-24 — Homepage proof: plainer dealership story, three more clients
 - Dealership story rewritten in plain words, with the Monday/Wednesday/Friday reports added. Dealership not named.
 - Added three short cards under it: Big Shack Entertainment (named), a recruiting firm (name under NDA), a relationship coach (unnamed). No made-up results.
