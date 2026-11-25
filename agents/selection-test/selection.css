@@ -268,3 +268,8 @@
 .selection-page .tg-rb{background:var(--muted);opacity:.45}
 .selection-page .tg-none{background:transparent;border:1px dashed var(--line-strong)}
 .selection-page .st-why{padding-top:0}
+
+/* /agents/ hub cards and links (2026-11-24) */
+.selection-page .st-card-link{margin-top:16px!important}
+.selection-page .st-card-link a,.selection-page .st-grid-note a,.selection-page .st-machine-links a,.selection-page .st-instrument-disclosure a{color:var(--accent-2);text-decoration:underline;text-underline-offset:3px}
+.selection-page .st-machine-links{max-width:900px;color:#aeb3c7;font-size:14px;line-height:1.9}
