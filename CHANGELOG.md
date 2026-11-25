@@ -1,3 +1,6 @@
+## 2026-11-24 — Selection Test page: clearer for directory partners
+- Columns and claims now name the exact models (OpenAI GPT-4.1 mini, Anthropic Claude Haiku 4.5, Google Gemini 2.5 Flash) instead of "ChatGPT/Claude/Gemini". Other rivals are grey and "no tool" squares are hollow so they can't be mixed up. New section near the top for directories: "Your listings get skipped. Now you can show them why."
+
 ## 2026-11-24 — Selection Test page: real ChatGPT, Claude and Gemini results
 - Ran the full test on GPT-4.1 mini, Claude Haiku 4.5 and Gemini 2.5 Flash (750 requests, $3.59, no errors, 4 rivals agreed by all three AIs). Replaced the local-model grid with the 300-request grid: the tool got 10, one rival 169 (ChatGPT 0 of 100). Repeat run: 13. After rewriting its two descriptions: 7 became 18 on 10 unseen requests, 11 gained, none lost.
 
