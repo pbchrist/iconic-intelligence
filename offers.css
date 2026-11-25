@@ -209,3 +209,5 @@ body.home-v2 .live-callback b { color: var(--accent); font-size: 23px; }
 /* Standalone AIpocalypse page (2026-11-24): clear the fixed header like the homepage hero does. */
 .aipocalypse-page #aipocalypse { padding-top: 120px; }
 @media (max-width: 767px) { .aipocalypse-page #aipocalypse { padding-top: 110px; } }
+/* Preview hero: make the workshop link look like a link (2026-11-24). */
+.hero .ff-below a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; }
