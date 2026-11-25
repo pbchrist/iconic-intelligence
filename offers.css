@@ -206,3 +206,6 @@ body.home-v2 .live-callback b { color: var(--accent); font-size: 23px; }
   .hero.hero-knight-layout { grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr) !important; gap: 62px; padding-bottom: 12px; }
   .hero-knight { max-width: none; }
 }
+/* Standalone AIpocalypse page (2026-11-24): clear the fixed header like the homepage hero does. */
+.aipocalypse-page #aipocalypse { padding-top: 120px; }
+@media (max-width: 767px) { .aipocalypse-page #aipocalypse { padding-top: 110px; } }

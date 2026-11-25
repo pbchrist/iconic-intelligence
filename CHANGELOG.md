@@ -1,3 +1,7 @@
+## 2026-11-24 — The AIpocalypse gets its own page
+- New page /aipocalypse/: the homepage's full AIpocalypse section (price hikes, "their servers, their rules") and "The answer: AI you own", word for word, with the moving news strips and the compounding animation.
+- The preview homepage links to it from the menu, the closing "intelligence stays yours" section and the footer. The live homepage is unchanged and still has the section.
+
 ## 2026-11-24 — /agents/ page rebuilt in the site's look
 - Same logo, fonts and menu as the Selection Test page. Selection Test first, then Reserve, Data Check and Agent Audit in plain words. Removed the leftover "seven offers · authorized checkout" claim. Machine files kept at the bottom.
 
