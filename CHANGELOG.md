@@ -1,3 +1,6 @@
+## 2026-11-24 — Selection Test page: real ChatGPT, Claude and Gemini results
+- Ran the full test on GPT-4.1 mini, Claude Haiku 4.5 and Gemini 2.5 Flash (750 requests, $3.59, no errors, 4 rivals agreed by all three AIs). Replaced the local-model grid with the 300-request grid: the tool got 10, one rival 169 (ChatGPT 0 of 100). Repeat run: 13. After rewriting its two descriptions: 7 became 18 on 10 unseen requests, 11 gained, none lost.
+
 ## 2026-11-24 — Selection Test page: the real test grid, plainer words
 - Added the grid: all 48 real requests from the November 23 test, one square each, colored by which tool the AI used (green = the tool tested: 3; top rival: 31). Plus the before-and-after grid for the rewrite (2 became 6).
 - Headline now "Does the AI pick your tool?" Rewrote the rest in plain words. Added the test that was stopped because only two fair rivals existed.
