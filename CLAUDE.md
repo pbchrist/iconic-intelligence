@@ -5,6 +5,7 @@
 These are Patrick's standing instructions. **His newest instruction wins.** When he changes his mind, edit this file in the same commit as the change, replacing the old rule rather than adding a conflicting one.
 
 ## Styling
+- **Read [STYLE_GUIDE.md](STYLE_GUIDE.md) before any copy or design change.** It is the style guide for words, buttons, look, type and color.
 - One design system. All font sizes, colors and spacing come from shared CSS custom properties (tokens) in the shared stylesheet. Do not introduce new font-size, color or spacing values.
 - No per-page `<style>` blocks and no inline `style=""` for anything visual. Fix the shared stylesheet instead of patching a page.
 - Change the system, not the instance: a sitewide look change is made once, in the stylesheet.
