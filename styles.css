@@ -691,7 +691,7 @@ button { color: inherit; }
 .console-top #labStatus.done { color:var(--success); }
 .console-top #labStatus.done i { background:var(--success); box-shadow:0 0 12px currentColor; }
 @keyframes pulse { 50% { opacity:.35; } }
-.trace { flex:1; padding:22px; font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace; font-size:11px; overflow:auto; }
+.trace { flex:1; padding:22px; font-family:Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; font-size:11px; overflow:auto; }
 .trace-idle { color:#4f566c; }
 .trace-line { display:grid; grid-template-columns:68px 112px 1fr; gap:10px; margin-bottom:9px; opacity:0; transform:translateY(5px); animation:traceIn .3s forwards; }
 .trace-line .time { color:#4f566c; }
@@ -835,3 +835,6 @@ footer a:hover { color:var(--pearl); }
   *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
   #field { display:none; }
 }
+
+/* Style guide: three families only (Sans, Serif, Heavy). Code uses the sans, not a monospace. */
+code, pre, kbd, samp { font-family: inherit; }

@@ -19,7 +19,7 @@
 .sg-section { padding-top: clamp(65px, 7vw, 110px); }
 .sg-section > .section-heading { margin-bottom: 40px; }
 .sg-sub { margin: 40px 0 10px; font-family: Georgia, "Times New Roman", serif; font-size: 23px; font-weight: 400; letter-spacing: -.02em; }
-.sg-page code { color: var(--accent-2); font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; overflow-wrap: anywhere; }
+.sg-page code { color: var(--accent-2); font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; font-size: 13px; overflow-wrap: anywhere; }
 
 /* A stage is a plain dark box that holds one real component. */
 .sg-stage { margin: 0; display: flex; align-items: center; justify-content: center; min-width: 0; padding: 28px; border: 1px solid var(--line); border-radius: 20px; background: var(--ink-2); }
