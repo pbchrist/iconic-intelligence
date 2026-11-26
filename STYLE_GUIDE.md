@@ -2,7 +2,7 @@
 
 Patrick's rules for every page, button and line of copy. If this file and an older note disagree, this file wins. If Patrick says something newer, update this file in the same commit.
 
-Last updated 2026-11-26.
+Last updated 2026-11-26. Italics stay: Patrick rejected removing them on 2026-11-17.
 
 ## 1. Who the page is for
 
@@ -38,8 +38,6 @@ Last updated 2026-11-26.
 
 | Don't | Do instead |
 |---|---|
-| Serif headline with one word in colored italic ("Move *first.*") | One weight and one color for the whole headline |
-| Italic second line on headings ("START SMALL. *GO FURTHER*") | A single plain headline line, or a plain subhead under it |
 | Dot or pill badges ("● PRIVATE BY DESIGN") | No badge. If a label is needed, use plain text. |
 | Tiny letter-spaced caps labels on every block ("01 · LEARN IT") | At most one small label per section, only when it helps |
 | Glows, glassy cards, soft gradients | Flat panels, hard 1px rules, solid fills |
@@ -52,8 +50,8 @@ The "ONE PROBLEM." / "BRING ONE PROBLEM." panel is the reference: heavy flat cap
 
 | Use | Font | Size (desktop / phone) |
 |---|---|---|
-| Section headline | "Arial Black", Inter 900, Arial, sans-serif. Caps allowed, never italic. | clamp(40px, 5.7vw, 82px) / 37 to 54px |
-| Subhead / intro | Inter. Georgia only for a long-form intro paragraph, never italic. | 17 to 20px |
+| Section headline | "Arial Black", Inter 900, Arial, sans-serif, or the Georgia serif headline. Italic accent lines are allowed. | clamp(40px, 5.7vw, 82px) / 37 to 54px |
+| Subhead / intro | Inter, or Georgia for a long-form intro paragraph. | 17 to 20px |
 | Body | Inter, Arial, sans-serif | 15px (phone 15px) |
 | Fine print | Inter | 13px |
 
@@ -82,10 +80,9 @@ Use the tokens. Don't introduce a new hex value.
 
 ## 8. Where the live site still breaks this guide (2026-11-26)
 
-1. The hero "Move *first.*" has an italic accent word and a dot badge.
-2. Most section headings have an italic lavender second line.
-3. There are caps labels on nearly every card.
-4. The cards are rounded, glassy and glowing.
-5. The live homepage has "$1,000" in button labels and about six names for the booking button. The /preview/ page fixes this one.
+1. The hero has a dot badge.
+2. There are caps labels on nearly every card.
+3. The cards are rounded, glassy and glowing.
+4. The live homepage has "$1,000" in button labels and about six names for the booking button. The /preview/ page fixes this one.
 
 These need Patrick's go-ahead before anyone fixes them.
