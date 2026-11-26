@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex" />
-  <!-- Preview of the WAC-ad homepage. No visitor counter here, so Patrick's own visits don't count. -->
+<meta name="robots" content="noindex" />
+  <!-- Preview: free call + retainer offer (2026-11-26). No analytics here. -->
 <meta name="theme-color" content="#080912" />
   <title>ICONIC. Move first.</title>
-  <meta name="description" content="You know AI could change your business. Where should you start? ICONIC solves one defined business problem for $1,000, then helps you build intelligence you own." />
+  <meta name="description" content="You know AI could change your business. Where should you start? Bring one problem to a free 30-minute call and leave with it fixed. When it works, ICONIC keeps going on a monthly retainer." />
   <meta property="og:title" content="ICONIC. Move first." />
-  <meta property="og:description" content="Move first. Find one expensive business problem, agree on the result, and put AI to work solving it. The First Fix: $1,000. Built for you. Taught to your team." />
+  <meta property="og:description" content="Move first. Bring one problem. I'll fix it on a free 30-minute call. When it works, I keep going." />
   <link rel="canonical" href="https://iconic.onl/" />
   <meta property="og:url" content="https://iconic.onl/" />
   <meta property="og:type" content="website" />
@@ -22,7 +22,7 @@
   <link rel="alternate" type="text/plain" href="/llms.txt" title="ICONIC for AI agents" />
   <link rel="alternate" type="application/json" href="/agents/reserve/manifest.json" title="ICONIC Intelligence Reserve for AI agents" />
   <link rel="alternate" type="application/json" href="/agents/assurance/manifest.json" title="Agent Assurance for AI agents" />
-  <link rel="alternate" type="application/json" href="/agents/marketplace/manifest.json" title="ICONIC seven-offer agent-native marketplace" />
+  <link rel="alternate" type="application/json" href="/agents/marketplace/manifest.json" title="ICONIC agent marketplace" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <script>
     /* Some in-app browsers (Messenger, Facebook, Instagram on Android) enlarge all text after the page sets its
@@ -31,58 +31,13 @@
   </script>
   <link rel="stylesheet" href="/styles.css?v=20261117" />
   <link rel="stylesheet" href="/mobile-first.css?v=20261110r" />
-  <link rel="stylesheet" href="/offers.css?v=20261124q" />
+  <link rel="stylesheet" href="/offers.css?v=20261124live" />
   <link rel="stylesheet" href="/learning-paths.css?v=20261117b" />
-
-  <style id="preview-version-marker">
-    .preview-version-mark{display:inline-flex;align-items:center;gap:8px;margin:12px 0 0;padding:7px 10px;border:1px solid rgba(192,198,255,.3);border-radius:6px;background:rgba(146,156,255,.09);font:800 9px/1.4 Inter,Arial,sans-serif;letter-spacing:.12em;text-decoration:none;color:#d7dcff}
-    .preview-version-mark strong{font-size:9px;letter-spacing:.09em;color:#f3f0e7}
-    .preview-version-mark span{white-space:nowrap}
-    .preview-version-mark:focus-visible{outline:2px solid #c0c6ff;outline-offset:2px}
-    @media(max-width:600px){.preview-version-mark{gap:7px;padding:6px 9px;font-size:8px}.preview-version-mark strong{font-size:8px}}
-  </style>
-  <style id="first-fix-preview-design">
-    /* Preview-only creative and commercial treatment. Production remains unchanged. */
-    .hero.hero-knight-layout .hero-copy{position:relative;z-index:1}
-    .hero-problem{max-width:690px;margin:26px 0 16px;color:#f0f0f7;font-family:Georgia,"Times New Roman",serif;font-size:clamp(25px,2.75vw,41px);font-style:normal;line-height:1.15;letter-spacing:-.035em;text-wrap:balance}
-    .hero-problem strong{font-weight:400;color:#d9ddff}
-    .hero.hero-knight-layout .hero-buyer{max-width:570px;color:#b6bdd4;font-size:clamp(15px,1.2vw,18px);line-height:1.6}
-    .hero.hero-knight-layout .hero-actions{margin-top:27px}
-    #first-fix{position:relative;padding-top:40px;padding-bottom:clamp(62px,8vw,128px)}
-    .ff-panel{position:relative;overflow:hidden;border:1px solid rgba(181,191,255,.37);background:radial-gradient(ellipse at 100% 0%,rgba(102,117,222,.18),transparent 45%),linear-gradient(145deg,#171c36 2%,#0b0e1d 74%);border-radius:14px;box-shadow:0 24px 90px rgba(0,0,0,.18)}
-    .ff-panel:before{content:"";position:absolute;top:0;left:0;width:130px;height:2px;background:#abb6ff}
-    .ff-topline{padding:23px clamp(22px,4vw,58px);display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid rgba(180,191,255,.14);font:800 10px/1.4 Inter,Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#bcc5f3}
-    .ff-topline .ff-index{color:#7984af}
-    .ff-body{padding:clamp(28px,5vw,72px) clamp(22px,4vw,58px);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.6fr);gap:clamp(24px,4vw,80px);align-items:center}
-    .ff-copy h2{margin:0 0 26px;color:#f2f2fb;font:900 clamp(40px,5.7vw,82px)/.94 "Arial Black","Helvetica Neue",Arial,sans-serif;letter-spacing:-.075em;text-wrap:balance}
-    .ff-copy p{max-width:740px;font-size:clamp(15px,1.35vw,19px);color:#bac0d6;line-height:1.65;margin:0 0 16px}
-    .ff-copy p strong{color:#f4f3fb;font-weight:700}
-    .ff-price-side{min-width:0;border-left:1px solid rgba(181,191,255,.18);padding-left:clamp(20px,2.4vw,42px)}
-    .ff-price-side .ff-caption{font:800 10px Inter,Arial,sans-serif;letter-spacing:.18em;color:#aab5ff;text-transform:uppercase}
-    .ff-price-side .ff-price{display:block;max-width:100%;white-space:nowrap;color:#f6f5ff;font:900 clamp(47px,4.5vw,70px)/1 "Arial Black",Arial,sans-serif;letter-spacing:-.095em;margin:16px 0}
-    .ff-price-side p{color:#b4bad0;font-size:15px;line-height:1.55;margin:0 0 26px}
-    .ff-price-side .button{box-sizing:border-box;display:flex;align-items:center;justify-content:center;min-width:0;width:100%;min-height:49px;padding:12px 15px;white-space:normal;overflow-wrap:break-word;font-size:clamp(9px,.78vw,11px);line-height:1.3;letter-spacing:.08em;text-align:center}
-    .ff-price-side .ff-note{font:600 11px/1.55 Inter,Arial,sans-serif;color:#858da9;margin-top:14px}
-    .ff-below{max-width:900px;margin:21px 0 0;color:#9099b6;font-size:13px;line-height:1.65}
-    .ff-below strong{color:#d6dcfa}
-    #proof{padding-top:clamp(65px,7vw,110px)}
-    #offers .section-heading h2{font-size:clamp(35px,5.5vw,74px)}
-    #offers .of-card.of-lead{border-color:var(--line);background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015))}
-    .ff-principle{padding:60px 0 30px;border-top:1px solid rgba(181,191,255,.12)}
-    .ff-principle-inner{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:start}
-    .ff-principle h2{font:900 clamp(34px,5.5vw,73px)/1 "Arial Black",Arial,sans-serif;letter-spacing:-.065em;color:#f1f0f9;margin:0}
-    .ff-principle p{color:#b5bad0;font-size:17px;line-height:1.65;margin:0 0 19px}
-    .ff-principle a{color:#c0c8ff;text-decoration:underline;text-underline-offset:5px}
-    @media(max-width:899px){.ff-body{grid-template-columns:1fr}.ff-price-side{border-left:0;border-top:1px solid rgba(181,191,255,.18);padding:27px 0 0}.ff-price-side .ff-price{font-size:clamp(54px,8.4vw,72px)}.ff-principle-inner{grid-template-columns:1fr;gap:20px}}
-    @media(max-width:600px){.hero-problem{font-size:clamp(26px,7.1vw,36px)}.hero.hero-knight-layout .hero-buyer{font-size:15px}.ff-topline{flex-wrap:wrap;gap:5px}.ff-body{padding:26px 21px}.ff-copy h2{font-size:clamp(37px,10.6vw,54px)}.ff-price-side .button{width:100%}#first-fix{padding-top:20px}}
-    @media(prefers-reduced-motion:reduce){.ff-panel,.ff-panel *{transition:none!important}}
-  </style>
 
   <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
   <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
 </head>
 <body class="home-v2">
-  <!-- This version marker is preview-only, so visitors can distinguish drafts. -->
 
   <canvas id="field" aria-hidden="true"></canvas>
   <div class="noise" aria-hidden="true"></div>
@@ -91,18 +46,18 @@
   <header class="site-header">
     <a class="brand" href="#top" aria-label="ICONIC home"><img src="/iconic-wordmark.webp" alt="ICONIC." /></a>
     <nav class="nav" aria-label="Primary navigation">
-      <a href="#first-fix">The First Fix</a>
+      <a href="#first-fix">Free call</a>
       <a href="#proof">Proof</a>
       <a href="#box">Who holds the keys</a>
       <a href="#live">Demo</a>
       <a href="/aipocalypse/">AIpocalypse</a>
       <a href="/services/ai-training/">Training</a>
-      <a href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>Free assessment</a>
+      <a href="#retainer">Retainer</a>
     </nav>
-    <a class="header-cta" href="#first-fix">THE $1,000 FIX</a>
+    <a class="header-cta" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK THE FREE CALL</a>
     <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav">MENU</button>
     <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
-      <a href="/services/ai-training/">AI Training</a><a href="#first-fix">First Fix · $1,000</a><a href="/services/build/">Build · by invitation</a><a href="/services/ongoing-intelligence/">Ongoing intelligence</a><a href="#proof">Proof</a><a href="#live">Live demo</a><a href="/aipocalypse/">The AIpocalypse</a><a href="/research/">Research</a>
+      <a href="/services/ai-training/">AI Training</a><a href="#first-fix">Free call</a><a href="#retainer">Retainer</a><a href="/services/build/">Build · by invitation</a><a href="/services/ongoing-intelligence/">Ongoing intelligence</a><a href="#proof">Proof</a><a href="#live">Live demo</a><a href="/aipocalypse/">The AIpocalypse</a><a href="/research/">Research</a>
     </nav>
   </header>
 
@@ -110,13 +65,12 @@
     <section class="hero hero-offers hero-knight-layout section-shell">
       <div class="hero-copy" data-reveal>
         <div class="eyebrow"><span class="live-dot"></span> PRIVATE BY DESIGN · BUILT FOR YOU · TAUGHT TO YOUR TEAM</div>
-        <div class="preview-version-mark"><strong>PREVIEW</strong><span>FIRST FIX · NOV 24</span></div>
         <h1>Move <em>first.</em></h1>
         <p class="hero-problem">You know AI could change your business. <strong>But what should it actually do?</strong></p>
-        <p class="hero-buyer">You have a business to run. You don't have time to test every new AI tool, and you can't afford to invest in the wrong ones. <strong>I find one problem worth solving and put AI to work on it.</strong></p>
+        <p class="hero-buyer">You have a business to run. You don't have time to test every new AI tool, and you can't afford to invest in the wrong ones. <strong>Bring me one problem and I'll fix it with you on a free call.</strong></p>
         <div class="hero-actions hero-actions-threaded">
-          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>FIND YOUR FIRST FIX</a>
-          <a class="button button-ghost" href="#first-fix">SEE THE $1,000 OFFER</a>
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK THE FREE CALL</a>
+          <a class="button button-ghost" href="#live">WATCH IT WORK ON A SAMPLE BUSINESS</a>
         </div>
         <p class="ff-below">Rather learn it yourself? <a href="/services/ai-training/">Workshops from $249 &rarr;</a></p>
       </div>
@@ -125,52 +79,57 @@
 
     <section id="first-fix" class="section-shell first-fix-section" aria-labelledby="first-fix-heading">
       <div class="ff-panel" data-reveal>
-        <div class="ff-topline"><span>THE FIRST FIX / ONE DEFINED PIECE OF WORK</span><span class="ff-index">ICONIC · START HERE</span></div>
+        <div class="ff-topline"><span>THE FREE CALL / ONE PROBLEM, FIXED LIVE</span><span class="ff-index">ICONIC · START HERE</span></div>
         <div class="ff-body">
           <div class="ff-copy">
-            <h2 id="first-fix-heading">ONE PROBLEM.<br>ONE USEFUL RESULT.</h2>
-            <p>Bring me a business question nobody can answer, a recurring task that eats up hours, or information you're tired of finding too late.</p>
-            <p><strong>Before you pay, we agree on one achievable deliverable and how we'll know it's done.</strong> Then I do the work: investigate the question, automate one narrowly defined task, or build a usable proof of concept, depending on what the problem requires.</p>
-            <p>You get the output, the supporting evidence or working handoff, and a clear account of what it would take to go further. If the problem won't fit, I'll tell you before you spend the money.</p>
+            <h2 id="first-fix-heading">BRING ONE PROBLEM.<br>I'LL FIX IT ON THE CALL.</h2>
+            <p>A free 30-minute call for business owners. Bring a task that eats hours or a question nobody can answer. We work on it live, and you leave with something that works.</p>
+            <p><strong>You leave with one thing fixed or answered, using your own example.</strong> You see what AI can do with your own work, not a slide deck.</p>
+            <p>You also get an honest answer on what else is worth doing. If nothing is, I tell you that.</p>
           </div>
-          <aside class="ff-price-side" aria-label="The First Fix price and booking">
-            <span class="ff-caption">FIXED-SCOPE STARTING ENGAGEMENT</span>
-            <strong class="ff-price">$1,000</strong>
-            <p>Not a generic AI strategy deck. One agreed result for one real business problem.</p>
-            <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>DISCUSS YOUR FIRST FIX</a>
-            <p class="ff-note">Start with a free 30-minute conversation. No charge until we've agreed on scope.</p>
+          <aside class="ff-price-side" aria-label="Book the free call">
+            <span class="ff-caption">30 MINUTES · ON VIDEO</span>
+            <strong class="ff-price">Free</strong>
+            <p>One real problem from your business, worked on live.</p>
+            <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK THE FREE CALL</a>
+            <p class="ff-note">No cost and no commitment. Pick a time that suits you.</p>
           </aside>
         </div>
       </div>
-      <p class="ff-below">Bigger jobs, like complex integrations, dedicated hardware or ongoing support, are separate projects.</p>
+      <p class="ff-below">When it works, I keep going on a monthly retainer. <a href="#retainer">How the retainer works &rarr;</a></p>
     </section>
 
     <section id="proof" class="section-shell proof-section proof-feature use-case-section">
       <div class="section-heading split-heading direct-heading" data-reveal>
-        <h2>ONE QUESTION.<br><em>A VERY DIFFERENT ANSWER.</em></h2>
-        <p>A dealership owner thought he knew what competitors were charging. The evidence changed the picture, and the system still watches the market.</p>
+        <h2>CLIENT WORK.<br><em>INTELLIGENCE THAT COMPOUNDS.</em></h2>
+        <p>Four businesses, four systems. Each one gets better the longer it runs.</p>
       </div>
       <div class="case" data-reveal>
         <div class="case-story">
-          <p class="case-label"><span class="live-dot"></span> Client work · An auto dealership · Running now</p>
-          <h3>The owner figured a rival was $500 to $800 cheaper. Truck for truck, the gap was $4,472.</h3>
-          <p>It started with one question from the owner: why are rivals selling more pickups than we are? So the AI read both lots and paired every truck with its exact twin: same year, same trim, same engine, same drive. The rival was cheaper on 20 of the 22 pairs, by <strong>$4,472 a truck</strong> on average. That is the price gap a shopper sees online, not lost revenue. It was more than five times what the owner thought.</p>
-          <p>Now it runs every day. Every morning it reads every pickup on the owner's lot and his rivals' lots, and three times a week it writes him a brief. He can text it a question from his phone any time. He never has to take its word for anything: every price in a brief links to the rival's own web page, so he can tap it and see it for himself before he acts.</p>
+          <p class="case-label"><span class="live-dot"></span> Automotive · An auto dealership · Running now</p>
+          <h3>Market intelligence that compounds every day.</h3>
+          <p>ICONIC built a system that tracks every truck, one by one, across six competing dealerships. In its first 46 days it caught dealers changing prices on the same day, linked price to how fast trucks sell, and found that a single trim explained the entire sales gap between two dealers.</p>
+          <p>The owner asks it questions from his phone, follows new trends as they show up, and explores new questions with his AI. Every question and every day of market history adds to what it knows. Each morning, the dealership knows something it didn't know the day before.</p>
           <p class="case-verdict"><span>The owner's verdict</span>“Exceptional.”</p>
         </div>
         <div class="case-list">
-          <p class="case-label">What it did for him</p>
+          <p class="case-label">What it caught</p>
           <ul class="sv-list sv-plain">
-            <li><b>It stopped a price war before it started.</b>When every dealer repriced on the same day, it flagged a likely factory program, not a rival coming after them.</li>
-            <li><b>It found what sells.</b>Trucks priced $3,000 under market left the lot three times faster.</li>
-            <li><b>It caught the store's own mistake.</b>It spotted a wrong price on the dealership's own website that staff had missed.</li>
+            <li><b>A price war that wasn't.</b>When every dealer cut prices on the same day, it flagged a likely factory program, not a rival coming after him.</li>
+            <li><b>What actually sells.</b>Trucks priced $3,000 under market left the lot three times faster.</li>
+            <li><b>His own mistake.</b>It found a wrong price on the dealership's own website that staff had missed.</li>
           </ul>
         </div>
       </div>
+      <div class="of-grid of-3" data-reveal>
+        <article class="of-step"><span>RECRUITING · NAME UNDER NDA</span><h3>An early warning system for hiring.</h3><p>ICONIC finds businesses that are about to hire before they post a single job. It reads building permits, federal contracts and company news, and predicts who will need people soon, using a forecasting method ICONIC developed itself. That method keeps improving. Every morning the team gets a ranked list of companies to call, each backed by evidence.</p></article>
+        <article class="of-step"><span>ENTERTAINMENT · BIG SHACK ENTERTAINMENT</span><h3>Outreach that runs itself and gets better every round.</h3><p>ICONIC runs the entire outreach cycle. It finds the people who book entertainment, finds a timely reason to contact each one, writes a personal first note, and handles every follow-up. It studies who responds and adjusts who it targets, what it says and when, so every round is sharper than the last.</p></article>
+        <article class="of-step"><span>COACHING · A RELATIONSHIP COACH</span><h3>A sales path that adapts to every reader.</h3><p>ICONIC designed the coach's entire path, from first contact to paying client. Each person's path responds to what they do: what they click, what they watch, where they stop and how close they are to buying. ICONIC tests every version automatically, keeps what converts and rewrites what doesn't, so the path keeps getting better.</p></article>
+      </div>
       <div class="pricing-terms" data-reveal>
         <div class="pricing-actions">
-          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BRING ME YOUR PROBLEM</a>
-          <a class="button button-ghost" href="/research/dealership-pricing-intelligence/">READ THE WHITE PAPER</a>
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK THE FREE CALL</a>
+          <a class="button button-ghost" href="/research/dealership-pricing-intelligence/">READ THE RESEARCH</a>
         </div>
       </div>
     </section>
@@ -190,17 +149,17 @@
         <article class="of-card">
           <small>02 · BUILD WHAT WORKS</small>
           <h3><a href="/services/build/">Build</a></h3>
-          <p>When a first fix justifies more, I can build private AI and agents around your business, your files and your decisions.</p>
+          <p>When a fix proves the point, I can build private AI and agents around your business, your files and your decisions.</p>
           <div class="of-foot"><span class="of-price"><i>By invitation</i>From $10,000</span><a class="button button-ghost" href="/services/build/">SEE BUILDS</a></div>
         </article>
-        <article class="of-card">
-          <small>03 · KEEP GETTING BETTER</small>
-          <h3><a href="/services/ongoing-intelligence/">Keep it working</a></h3>
-          <p>Monitoring, maintenance and improvements so the intelligence keeps doing useful work as your business changes.</p>
-          <div class="of-foot"><span></span><a class="button button-ghost" href="/services/ongoing-intelligence/">ONGOING INTELLIGENCE</a></div>
+        <article class="of-card" id="retainer">
+          <small>03 · RETAINER</small>
+          <h3>When it works, I keep going.</h3>
+          <p>One monthly retainer covers new fixes as they come up, a private AI that learns your business, and keeping all of it running. Cancel any month. Your files and your system stay yours.</p>
+          <div class="of-foot"><span></span><a class="button button-ghost" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>TALK ABOUT A RETAINER</a></div>
         </article>
       </div>
-      <p class="of-note" data-reveal>You don't have to commit to an entire AI transformation. <a href="#first-fix">Start with one defined result →</a></p>
+      <p class="of-note" data-reveal>You don't have to commit to an entire AI transformation. <a href="#first-fix">Start with one free call →</a></p>
     </section>
 
     <section id="box" class="section-shell deployment-section">
@@ -236,7 +195,7 @@
       <p class="compound-note live-callback" id="liveCallback" data-reveal hidden>Every interaction teaches it something. After <b id="liveConv">0</b> conversations, it has figured out <b id="liveConn">0</b> things nobody told it, like the fact that the law firm's partners put off deciding on a software renewal until a meeting after the deadline to cancel it. Ask it something and watch it learn.</p>
       <div class="pricing-terms" data-reveal>
         <div class="pricing-actions">
-          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>TALK ABOUT YOUR FIRST PROBLEM</a>
+          <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK THE FREE CALL</a>
           <a class="button button-ghost" href="#proof">SEE A CLIENT RESULT</a>
         </div>
       </div>
@@ -264,17 +223,17 @@
             </div>
           </div>
           <div class="contact-actions">
-            <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>TALK ABOUT YOUR FIRST PROBLEM</a>
+            <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking>BOOK THE FREE CALL</a>
             <a class="button button-ghost" href="mailto:patrick@iconic.onl?subject=ICONIC%20inquiry">patrick@iconic.onl</a>
           </div>
           <p class="cta-note">Or call <a href="tel:+12067738214">206-773-8214</a>.</p>
         </div>
       </div>
-      <footer><span>© 2026 ICONIC. · <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a> · <a href="/services/ai-training/">AI Training</a> · <a href="/services/ai-training/#inventory">Skills catalog</a> · <a href="#first-fix">The First Fix</a> · <a href="/services/build/">Build</a> · <a href="/services/ongoing-intelligence/">Ongoing Intelligence</a> · <a href="/research/">Research</a> · <a href="/aipocalypse/">The AIpocalypse</a></span><span>ONE PROBLEM · ONE RESULT · MOVE FIRST</span><a href="#top">BACK TO TOP ↑</a></footer>
+      <footer><span>© 2026 ICONIC. · <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Use</a> · <a href="/services/ai-training/">AI Training</a> · <a href="/services/ai-training/#inventory">Skills catalog</a> · <a href="#first-fix">Free call</a> · <a href="#retainer">Retainer</a> · <a href="/services/build/">Build</a> · <a href="/services/ongoing-intelligence/">Ongoing Intelligence</a> · <a href="/research/">Research</a> · <a href="/aipocalypse/">The AIpocalypse</a></span><span>ONE PROBLEM · ONE RESULT · MOVE FIRST</span><a href="#top">BACK TO TOP ↑</a></footer>
     </section>
   </main>
 
-  <a class="sticky-cta" id="stickyCta" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking aria-hidden="true" tabindex="-1">DISCUSS THE FIRST FIX →</a>
+  <a class="sticky-cta" id="stickyCta" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener" data-calendly-booking aria-hidden="true" tabindex="-1">BOOK THE FREE CALL →</a>
   <script src="/app.js?v=20261116a" defer></script>
   <script>
     // Live demo: load it straight away; the demo says "ready" when it's up. If it never does, offer a direct link.
@@ -286,9 +245,9 @@
       var settled = false;
       function fallback() {
         if (settled) return; settled = true;
-        box.innerHTML = '<div class="live-off"><strong>The live demo isn\'t loading here.</strong><p>It runs on one private computer in Seattle. Try opening it directly, or see how the evaluation works.</p><div class="live-off-actions">' +
+        box.innerHTML = '<div class="live-off"><strong>The live demo isn\'t loading here.</strong><p>It runs on one private computer in Seattle. Try opening it directly, or book a free call.</p><div class="live-off-actions">' +
           (url ? '<a class="button button-ghost" href="' + url + '/" target="_blank" rel="noopener">OPEN THE DEMO ↗</a>' : '') +
-          '<a class="button button-primary" href="#first-fix">THE FIRST FIX →</a></div></div>';
+          '<a class="button button-primary" href="#first-fix">THE FREE CALL →</a></div></div>';
       }
       if (!url) { fallback(); return; }
       // Phones: no app squeezed into the page. One card; the demo opens full-screen with a way back.
