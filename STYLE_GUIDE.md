@@ -1,6 +1,12 @@
 # ICONIC style guide (iconic.onl)
 
-Patrick's rules for every page, button and line of copy. If this file and an older note disagree, this file wins. If Patrick says something newer, update this file in the same commit.
+**Three views of one guide, all linked from one page:**
+
+- **Visual guide (people):** https://iconic.onl/preview/style-guide/ shows the logo, colors, type at real size and the real components, with do/don't beside each.
+- **Machine-readable source (AI tools):** [style-guide.yaml](style-guide.yaml), served at https://iconic.onl/style-guide.yaml. The visual page is built from it. **When this file and the YAML differ, the YAML wins.**
+- **This file:** the same rules as plain text.
+
+Patrick's rules for every page, button and line of copy. If Patrick says something newer, update style-guide.yaml (and this file) in the same commit.
 
 Last updated 2026-11-26. Italics stay: Patrick rejected removing them on 2026-11-17.
 
@@ -34,17 +40,13 @@ Last updated 2026-11-26. Italics stay: Patrick rejected removing them on 2026-11
 - **Every button lands on a styled page that matches its label.** Never send a visitor to a raw .md, .txt or .json file. Click every button in a real browser before calling it done.
 - **Each booking button opens the Calendly page,** and the Calendly title matches the offer named on the site.
 
-## 4. Look: no "Claude look"
+## 4. Look
 
-| Don't | Do instead |
-|---|---|
-| Dot or pill badges ("● PRIVATE BY DESIGN") | No badge. If a label is needed, use plain text. |
-| Tiny letter-spaced caps labels on every block ("01 · LEARN IT") | At most one small label per section, only when it helps |
-| Glows, glassy cards, soft gradients | Flat panels, hard 1px rules, solid fills |
-| Rounded pill buttons | Square or near-square buttons (0 to 4px radius) |
-| Cream background | The dark ink background below |
+The site today: a dark ink page, pearl headlines, one lavender accent, flat dark panels with 1px hairlines, 12px button corners, 20 to 22px card corners. The free call panel ("BRING ONE PROBLEM.") is the reference: heavy flat caps sans, hard edges, one idea.
 
-The "ONE PROBLEM." / "BRING ONE PROBLEM." panel is the reference: heavy flat caps sans, hard edges, one idea.
+Current components, shown live at /preview/style-guide/: primary and ghost buttons, header and nav, eyebrow with the green live dot, small caps card labels, the offer panel, offer cards, step cards, quote block, evidence tags, text links.
+
+**Not decided yet:** Patrick called the pulsing dot badge, caps eyebrows and serif-with-one-italic-word headlines part of the "Claude look" (2026-11-22). They stay documented as they are until he decides. Don't add a cream background; don't add new glows.
 
 ## 5. Type
 
@@ -57,15 +59,15 @@ The "ONE PROBLEM." / "BRING ONE PROBLEM." panel is the reference: heavy flat cap
 
 No new font sizes. Use the sizes above (the type-system branch sets the same scale for intros, body and fine print).
 
-## 6. Color (tokens in styles.css :root)
+## 6. Color (tokens: styles.css :root, final values from mobile-first.css :root)
 
 | Token | Value | Use |
 |---|---|---|
-| `--ink` | #070912 | Page background |
-| `--ink-2` / `--ink-3` | #0b0e1b / #10152a | Panels |
+| `--ink` | #070813 | Page background |
+| `--ink-2` / `--ink-3` | #0b0d1a / #11152a | Panels |
 | `--pearl` | #f3f0e7 | Headlines, primary button fill |
 | `--muted` | #a8adc7 | Body text |
-| `--accent` | #8d98ff | Links, one highlight per screen |
+| `--accent` / `--accent-2` | #929cff / #c0c6ff | Links, italic accent lines, one highlight per screen |
 | `--line` / `--line-strong` | pearl at 12% / 22% | Rules and borders |
 | `--success` / `--danger` | #b9ffd2 / #ff9fba | Status only |
 
@@ -78,11 +80,6 @@ Use the tokens. Don't introduce a new hex value.
 - **Design changes go to /preview/ first.** They reach the live site only after Patrick says so.
 - **Check at desktop (1440px) and phone (390px) widths.** There must be no sideways scroll and no overlapping text.
 
-## 8. Where the live site still breaks this guide (2026-11-26)
+## 8. Keeping it true
 
-1. The hero has a dot badge.
-2. There are caps labels on nearly every card.
-3. The cards are rounded, glassy and glowing.
-4. The live homepage has "$1,000" in button labels and about six names for the booking button. The /preview/ page fixes this one.
-
-These need Patrick's go-ahead before anyone fixes them.
+`python3 scripts/check-style-guide.py` checks the YAML colors against the live CSS tokens. The visual page runs the same check in the browser and shows any mismatch in red.
