@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#080912" />
+  <title>ICONIC style guide</title>
+  <meta name="description" content="The ICONIC brand as it is on iconic.onl: logo, colors, type, components, spacing, imagery and voice. Machine-readable version at /style-guide.yaml." />
+  <link rel="alternate" type="application/yaml" href="/style-guide.yaml" title="ICONIC style guide (machine-readable)" />
+  <link rel="alternate" type="text/markdown" href="/STYLE_GUIDE.md" title="ICONIC style guide (text)" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <!-- The site's own stylesheets, same order as the homepage. The guide only adds layout in style-guide.css. -->
+  <link rel="stylesheet" href="/styles.css?v=20261117" />
+  <link rel="stylesheet" href="/mobile-first.css?v=20261110r" />
+  <link rel="stylesheet" href="/offers.css?v=20261124live" />
+  <link rel="stylesheet" href="/preview/style-guide/style-guide.css?v=1" />
+</head>
+<body class="home-v2 sg-page">
+
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="/preview/" aria-label="ICONIC home"><img src="/iconic-wordmark.webp" alt="ICONIC." /></a>
+    <nav class="nav" aria-label="Style guide sections">
+      <a href="#logo">Logo</a>
+      <a href="#color">Color</a>
+      <a href="#type">Type</a>
+      <a href="#components">Components</a>
+      <a href="#layout">Layout</a>
+      <a href="#imagery">Imagery</a>
+      <a href="#voice">Voice</a>
+    </nav>
+    <a class="header-cta" href="/style-guide.yaml">GET THE YAML</a>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileNav">MENU</button>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
+      <a href="#logo">Logo</a><a href="#color">Color</a><a href="#type">Type</a><a href="#components">Components</a><a href="#layout">Layout</a><a href="#imagery">Imagery</a><a href="#voice">Voice</a><a href="#files">Files for AI</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <section class="section-shell sv-hero sg-intro">
+      <div>
+        <p class="sv-crumb"><a href="/preview/">ICONIC</a> / Style guide</p>
+        <h1>The ICONIC <em>style guide.</em></h1>
+        <p class="sg-lead">The brand as it is on the site today. Every color, size and component below is drawn live from the site's own stylesheets, so this page shows exactly what a visitor sees.</p>
+        <div class="sg-files" id="files">
+          <a class="sg-file" href="/style-guide.yaml">
+            <small>For AI tools</small>
+            <strong>style-guide.yaml</strong>
+            <span>The machine-readable source. This page is built from it.</span>
+          </a>
+          <a class="sg-file" href="/STYLE_GUIDE.md">
+            <small>For reading as text</small>
+            <strong>STYLE_GUIDE.md</strong>
+            <span>The same rules written out in plain text.</span>
+          </a>
+          <a class="sg-file" href="#logo">
+            <small>For people</small>
+            <strong>This page</strong>
+            <span>Logo, color, type, components, layout, imagery, voice.</span>
+          </a>
+        </div>
+        <p class="ff-below sg-status" id="sgStatus">Loading the guide from style-guide.yaml…</p>
+      </div>
+    </section>
+
+    <!-- LOGO -->
+    <section id="logo" class="section-shell sg-section">
+      <div class="section-heading split-heading direct-heading">
+        <h2>THE<br><em>WORDMARK.</em></h2>
+        <p data-yaml="logo.wordmark.note"></p>
+      </div>
+      <div class="sg-logo-grid">
+        <figure class="sg-stage sg-logo-main">
+          <img src="/iconic-wordmark.webp" alt="ICONIC." />
+          <figcaption>Wordmark on --ink. <span data-yaml="logo.wordmark.file"></span></figcaption>
+        </figure>
+        <figure class="sg-stage sg-logo-lockup">
+          <div class="contact-brand"><div class="contact-wordmark"><img src="/iconic-wordmark.webp" alt="ICONIC." /></div><p class="contact-tagline">Know more. <em>Move first.</em></p></div>
+          <figcaption>Footer lockup with the tagline.</figcaption>
+        </figure>
+        <figure class="sg-stage sg-logo-small">
+          <img class="sg-favicon" src="/favicon.svg" alt="ICONIC mark" />
+          <figcaption>Mark. <span data-yaml="logo.mark.use"></span></figcaption>
+        </figure>
+        <figure class="sg-stage sg-logo-small">
+          <img class="sg-share" src="/iconic-share.png" alt="ICONIC share image" />
+          <figcaption>Share image. <span data-yaml="logo.share_image.use"></span></figcaption>
+        </figure>
+      </div>
+      <div class="sg-dodont" data-dodont="logo"></div>
+    </section>
+
+    <!-- COLOR -->
+    <section id="color" class="section-shell sg-section">
+      <div class="section-heading split-heading direct-heading">
+        <h2>COLOR.<br><em>DARK, PEARL, ONE ACCENT.</em></h2>
+        <p>Each swatch is painted with the live CSS token and checked against the hex in style-guide.yaml. A mismatch shows in red.</p>
+      </div>
+      <div class="sg-swatches" id="sgSwatches"></div>
+      <h3 class="sg-sub">Also in the stylesheets today</h3>
+      <p class="of-note">Hard-coded values that are not tokens. Listed so nothing is a surprise. Prefer the tokens above.</p>
+      <div class="sg-swatches sg-swatches-small" id="sgAlso"></div>
+      <div class="sg-dodont" data-dodont="colors"></div>
+    </section>
+
+    <!-- TYPE -->
+    <section id="type" class="section-shell sg-section">
+      <div class="section-heading split-heading direct-heading">
+        <h2>TYPE<br><em>AT REAL SIZE.</em></h2>
+        <p>Three families. Each line below uses the real class, and the size it renders at on your screen right now is measured and shown beside it.</p>
+      </div>
+      <div class="sg-families" id="sgFamilies"></div>
+
+      <div class="sg-spec" data-type="display">
+        <div class="hero sg-hero-reset"><div class="hero-copy"><h1 data-sample></h1></div></div>
+      </div>
+      <div class="sg-spec" data-type="heavy">
+        <div class="ff-copy"><h2 data-sample></h2></div>
+      </div>
+      <div class="sg-spec" data-type="section">
+        <div class="section-heading"><h2 data-sample></h2></div>
+      </div>
+      <div class="sg-spec" data-type="subhead">
+        <p class="hero-problem" data-sample></p>
+      </div>
+      <div class="sg-spec" data-type="card-title">
+        <div class="of-step sg-bare"><h3 data-sample></h3></div>
+      </div>
+      <div class="sg-spec" data-type="intro">
+        <div class="split-heading sg-bare-split"><p data-sample></p></div>
+      </div>
+      <div class="sg-spec" data-type="body">
+        <div class="ff-copy"><p data-sample></p></div>
+      </div>
+      <div class="sg-spec" data-type="label">
+        <div class="eyebrow" data-sample></div>
+      </div>
+      <div class="sg-spec" data-type="fine">
+        <p class="ff-below" data-sample></p>
+      </div>
+      <div class="sg-dodont" data-dodont="type"></div>
+    </section>
+
+    <!-- COMPONENTS -->
+    <section id="components" class="section-shell sg-section">
+      <div class="section-heading split-heading direct-heading">
+        <h2>COMPONENTS.<br><em>THE REAL ONES.</em></h2>
+        <p>These are not pictures. Each one is the site's own markup and classes, so it changes the moment the site does.</p>
+      </div>
+
+      <div class="sg-comp" data-component="button-primary">
+        <div class="sg-stage"><a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener">BOOK THE FREE CALL</a></div>
+      </div>
+
+      <div class="sg-comp" data-component="button-ghost">
+        <div class="sg-stage sg-stage-col">
+          <a class="button button-ghost" href="/services/ai-training/">SEE TRAINING</a>
+          <p class="ff-below">Workshops from $249</p>
+        </div>
+      </div>
+
+      <div class="sg-comp sg-comp-wide" data-component="header">
+        <div class="sg-stage sg-stage-header">
+          <div class="site-header sg-header-demo">
+            <a class="brand" href="/preview/" aria-label="ICONIC home"><img src="/iconic-wordmark.webp" alt="ICONIC." /></a>
+            <nav class="nav" aria-label="Example navigation">
+              <a href="/preview/#first-fix">Free call</a>
+              <a href="/preview/#proof">Proof</a>
+              <a href="/preview/#live">Demo</a>
+              <a href="/services/ai-training/">Training</a>
+            </nav>
+            <a class="header-cta" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener">BOOK THE FREE CALL</a>
+            <span class="menu-toggle">MENU</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sg-comp" data-component="eyebrow">
+        <div class="sg-stage"><div class="eyebrow"><span class="live-dot"></span> LIVE DEMONSTRATION · RUNNING ON MY LOCAL AI</div></div>
+      </div>
+
+      <div class="sg-comp" data-component="label">
+        <div class="sg-stage"><article class="of-step sg-fill"><span>01 · ACCESS</span><h3>Can they cut you off?</h3><p>An outage, a price change or a policy update can stop rented AI. Yours keeps running on your own machine.</p></article></div>
+      </div>
+
+      <div class="sg-comp sg-comp-wide" data-component="ff-panel">
+        <div class="ff-panel">
+          <div class="ff-topline"><span>THE FREE CALL / ONE PROBLEM, FIXED LIVE</span><span class="ff-index">ICONIC · START HERE</span></div>
+          <div class="ff-body">
+            <div class="ff-copy">
+              <h2>BRING ONE PROBLEM.<br>I'LL FIX IT ON THE CALL.</h2>
+              <p>A free 30-minute call for business owners. Bring a task that eats hours or a question nobody can answer. We work on it live, and you leave with something that works.</p>
+            </div>
+            <aside class="ff-price-side" aria-label="Book the free call">
+              <span class="ff-caption">30 MINUTES · ON VIDEO</span>
+              <strong class="ff-price">Free</strong>
+              <p>One real problem from your business, worked on live.</p>
+              <a class="button button-primary" href="https://calendly.com/patrick-iconic/30min" target="_blank" rel="noopener">BOOK THE FREE CALL</a>
+              <p class="ff-note">No cost and no commitment. Pick a time that suits you.</p>
+            </aside>
+          </div>
+        </div>
+      </div>
+
+      <div class="sg-comp" data-component="of-card">
+        <div class="sg-stage">
+          <article class="of-card sg-fill">
+            <small>01 · LEARN IT</small>
+            <h3><a href="/services/ai-training/">Learn AI</a></h3>
+            <p>Practical training for you and your team using the work you already do. No technical background required.</p>
+            <div class="of-foot"><span class="of-price"><i>Workshops from</i>$249</span><a class="button button-ghost" href="/services/ai-training/">SEE TRAINING</a></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="sg-comp" data-component="of-step">
+        <div class="sg-stage"><article class="of-step sg-fill"><span>04 · EXIT</span><h3>Can you walk away?</h3><p>Yes. Your files and your system stay yours.</p></article></div>
+      </div>
+
+      <div class="sg-comp" data-component="case-verdict">
+        <div class="sg-stage"><div class="case-story sg-fill"><p class="case-verdict"><span>The owner's verdict</span>“Exceptional.”</p></div></div>
+      </div>
+
+      <div class="sg-comp" data-component="ev-tag">
+        <div class="sg-stage sg-stage-row"><span class="ev-tag ev-client">Client result</span><span class="ev-tag ev-research">Research</span><span class="ev-tag ev-demo">Demo</span></div>
+      </div>
+
+      <div class="sg-comp" data-component="link">
+        <div class="sg-stage"><p class="of-note">You don't have to commit to an entire AI transformation. <a href="/preview/#first-fix">Start with one free call →</a></p></div>
+      </div>
+    </section>
+
+    <!-- LAYOUT -->
+    <section id="layout" class="section-shell sg-section">
+      <div class="section-heading split-heading direct-heading">
+        <h2>LAYOUT<br><em>AND SPACING.</em></h2>
+        <p>One centered column, cards that stack on phones, hairline rules. Checked at 1440px and 390px wide.</p>
+      </div>
+      <dl class="sg-facts" id="sgSpacing"></dl>
+      <h3 class="sg-sub">Corners</h3>
+      <div class="sg-radii" id="sgRadii"></div>
+    </section>
+
+    <!-- IMAGERY -->
+    <section id="imagery" class="section-shell sg-section">
+      <div class="section-heading split-heading direct-heading">
+        <h2>IMAGERY<br><em>AND ICONS.</em></h2>
+        <p data-yaml="imagery.icons"></p>
+      </div>
+      <div class="sg-imagery">
+        <figure class="sg-stage sg-img-knight"><img src="/hero-knight-600.webp" alt="The chess knight from the WAC Magazine ad" /><figcaption data-imagery="0"></figcaption></figure>
+        <figure class="sg-stage sg-img-portrait"><img class="principal-photo" src="/patrick-christell-2026.jpg" alt="Patrick Christell" /><figcaption data-imagery="1"></figcaption></figure>
+        <figure class="sg-stage sg-img-field"><span class="live-dot"></span><figcaption data-imagery="2"></figcaption></figure>
+      </div>
+      <div class="sg-dodont" data-dodont="imagery"></div>
+    </section>
+
+    <!-- VOICE -->
+    <section id="voice" class="section-shell sg-section">
+      <div class="section-heading split-heading direct-heading">
+        <h2>VOICE<br><em>AND COPY.</em></h2>
+        <p data-yaml="voice.summary"></p>
+      </div>
+      <div class="sg-voice" id="sgVoice"></div>
+      <h3 class="sg-sub">Buttons</h3>
+      <ul class="sv-list sv-plain sg-rules" id="sgButtons"></ul>
+      <h3 class="sg-sub">Who it's for</h3>
+      <ul class="sv-list sv-plain sg-rules" id="sgAudience"></ul>
+      <h3 class="sg-sub">Code rules</h3>
+      <ul class="sv-list sv-plain sg-rules" id="sgCode"></ul>
+      <h3 class="sg-sub">Not decided yet</h3>
+      <ul class="sv-list sv-plain sg-rules" id="sgOpen"></ul>
+    </section>
+
+    <section class="section-shell contact-section">
+      <footer><span>© 2026 ICONIC. · <a href="/preview/">Preview homepage</a> · <a href="/style-guide.yaml">style-guide.yaml</a> · <a href="/STYLE_GUIDE.md">STYLE_GUIDE.md</a></span><span id="sgUpdated">STYLE GUIDE</span><a href="#top">BACK TO TOP ↑</a></footer>
+    </section>
+  </main>
+
+  <script src="/app.js?v=20261116a" defer></script>
+  <script src="/preview/style-guide/js-yaml.min.js"></script>
+  <script src="/preview/style-guide/style-guide.js?v=1" defer></script>
+</body>
+</html>

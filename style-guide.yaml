@@ -1,0 +1,322 @@
+# ICONIC brand style guide: machine-readable source.
+#
+# This file is the ONE source for the style guide. The visual page at
+# https://iconic.onl/preview/style-guide/ reads this file in the browser and renders
+# every token, rule and do/don't from it, next to real components drawn with the
+# site's own stylesheets. Edit this file and the page changes with it.
+#
+# Colors below are checked against the live CSS tokens (styles.css :root, overridden
+# by mobile-first.css :root) on every page load; the page shows a mismatch in red.
+# scripts/check-style-guide.py does the same check from the command line.
+#
+# AI tools: read this file before any copy or design change on iconic.onl.
+# Human version of the same rules: /STYLE_GUIDE.md. Visual version: /preview/style-guide/.
+
+meta:
+  brand: ICONIC.
+  site: https://iconic.onl
+  owner: Patrick Christell
+  updated: "2026-11-26"
+  status: Documents the site as it is today (the /preview/ homepage, free call offer).
+  page: https://iconic.onl/preview/style-guide/
+  markdown: https://iconic.onl/STYLE_GUIDE.md
+  yaml: https://iconic.onl/style-guide.yaml
+  precedence: Patrick's newest instruction wins. Update this file in the same commit.
+  stylesheets:
+    - path: /styles.css
+      role: Tokens (:root), base type, buttons, header, eyebrow, live dot.
+    - path: /mobile-first.css
+      role: "Phone-first sizes and overrides. Loaded after styles.css, and its :root resets seven color tokens (those win)."
+    - path: /offers.css
+      role: Homepage sections, offer cards, step cards, free call panel, service pages.
+    - path: /learning-paths.css
+      role: Training page components.
+
+audience:
+  reader: A business owner who saw the WAC Magazine ad. Busy, not technical, skeptical of AI hype.
+  job_of_every_page: Say what they get, why it matters to their business, and the one next step.
+  one_idea: One idea per page or section. The ownership argument lives at /aipocalypse/.
+
+logo:
+  wordmark:
+    file: /iconic-wordmark.webp
+    size_px: [700, 116]
+    reads: "ICONIC."
+    alt: "ICONIC."
+    note: The period is part of the name. Heavy flat sans, pearl on ink.
+    widths:
+      header_phone: 118px
+      header_desktop: "clamp(118px, 12vw, 146px)"
+      footer_lockup: "min(100%, 420px)"
+    tagline: "Know more. Move first."
+    tagline_markup: "Know more. <em>Move first.</em>"
+  mark:
+    file: /favicon.svg
+    description: Four-point star in pearl (#f4f1e8) on an indigo (#30356f) rounded square.
+    use: Browser tab icon only.
+  share_image:
+    file: /iconic-share.png
+    size_px: [600, 600]
+    use: Social link previews (og:image).
+  do:
+    - Use the wordmark image file as it is. Always with alt "ICONIC.".
+    - Place it on the ink background with clear space at least the height of the letters.
+    - In running text, write the name as ICONIC (caps). In a sign-off or tagline, ICONIC. with the period.
+  dont:
+    - Retype the logo in a font. Use the image.
+    - Stretch, recolor, outline or add a glow to it.
+    - Put it on a light or busy background.
+
+colors:
+  # name: CSS custom property. hex: the value a visitor actually gets.
+  # Seven of these are set in styles.css :root and then overridden in mobile-first.css :root,
+  # which loads second and wins. The values here are the winning ones.
+  tokens:
+    - { name: "--ink",         hex: "#070813", role: Page background. }
+    - { name: "--ink-2",       hex: "#0b0d1a", role: Panels and section bands. }
+    - { name: "--ink-3",       hex: "#11152a", role: Raised panels. }
+    - { name: "--card",        hex: "#30345f", role: "Brand indigo. Deep card tints. (The favicon uses #30356f.)" }
+    - { name: "--card-2",      hex: "#4a5188", role: Lighter card blue. }
+    - { name: "--accent",      hex: "#929cff", role: "Accent. Links, live numbers, one highlight per screen." }
+    - { name: "--accent-2",    hex: "#c0c6ff", role: "Soft accent. Italic accent lines, small labels, link text." }
+    - { name: "--pearl",       hex: "#f3f0e7", role: "Headlines, primary button fill, text on dark." }
+    - { name: "--muted",       hex: "#a8adc7", role: Body text. }
+    - { name: "--line",        hex: "rgba(244, 241, 232, .12)", role: Hairline rules and card borders. }
+    - { name: "--line-strong", hex: "rgba(244, 241, 232, .22)", role: Ghost button border and stronger rules. }
+    - { name: "--success",     hex: "#b9ffd2", role: "Status only. The live dot." }
+    - { name: "--warning",     hex: "#ffd9a1", role: Status only. }
+    - { name: "--danger",      hex: "#ff9fba", role: Status only. }
+  also_in_use:
+    # Hard-coded in the stylesheets today. Shown so nobody is surprised by them. Prefer the tokens above.
+    - { hex: "#a7adc1", where: Card and step body text (close to --muted). }
+    - { hex: "#8d94a9", where: "Fine print, notes, price captions." }
+    - { hex: "#c4c8d8", where: Nav links. }
+    - { hex: "#171c36", where: Free call panel gradient start. }
+    - { hex: "#d9bd7a", where: "Gold, only on the Build page's velvet rope." }
+  do:
+    - Use the tokens with var(--name).
+    - Keep the page dark. Ink background, pearl headlines, muted body.
+    - One accent highlight per screen.
+  dont:
+    - Add a new hex value.
+    - Use a cream or white page background.
+    - Use the status colors for decoration.
+
+type:
+  families:
+    - { name: Sans, stack: 'Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif', use: "Body, buttons, labels, nav.", note: "Inter is named but not loaded as a web font, so most visitors see their system sans (San Francisco on Apple, Arial on Windows)." }
+    - { name: Serif, stack: 'Georgia, "Times New Roman", serif', use: "Display headlines, italic accent lines, intros, card titles." }
+    - { name: Heavy, stack: '"Arial Black", "Helvetica Neue", Arial, sans-serif', use: "Heavy caps headlines (free call panel, closing section) and prices." }
+  scale:
+    # id matches a specimen on the visual page.
+    - id: display
+      name: Hero headline
+      family: Serif
+      class: ".hero h1"
+      size: "clamp(72px, 8.8vw, 154px) desktop; about 48 to 64px phone"
+      weight: 400
+      tracking: "-.055em"
+      sample: "Move <em>first.</em>"
+      note: The second word is an italic accent in --accent-2.
+    - id: heavy
+      name: Heavy caps headline
+      family: Heavy
+      class: ".ff-copy h2"
+      size: "54 to 78px desktop, 32 to 46px phone (the homepage's shared section size, --section-h2)"
+      weight: 900
+      tracking: "-.075em"
+      sample: "BRING ONE PROBLEM.<br>I'LL FIX IT ON THE CALL."
+      note: For the one section that carries the offer. Patrick's reference look.
+    - id: section
+      name: Section headline with italic accent line
+      family: Serif
+      class: ".section-heading h2"
+      size: "54 to 78px desktop, 32 to 46px phone (--section-h2)"
+      weight: 400
+      tracking: "-.055em"
+      sample: "WHO HOLDS<br><em>THE KEYS?</em>"
+      note: Caps first line, italic second line in --accent-2. Italics are allowed (Patrick, 2026-11-17).
+    - id: subhead
+      name: Subhead
+      family: Serif
+      class: ".hero-problem"
+      size: "clamp(25px, 2.75vw, 41px)"
+      weight: 400
+      sample: "You know AI could change your business. <strong>But what should it actually do?</strong>"
+    - id: card-title
+      name: Card title
+      family: Serif
+      class: ".of-step h3 / .of-card h3"
+      size: "28 to 44px"
+      weight: 400
+      sample: "Can they cut you off?"
+    - id: intro
+      name: Intro paragraph
+      family: Serif
+      class: ".split-heading p"
+      size: "clamp(17px, 1.25vw, 22px)"
+      weight: 400
+      sample: "\"The cloud\" means someone else's computer. Rented AI runs there, on their terms."
+    - id: body
+      name: Body
+      family: Sans
+      class: ".ff-copy p"
+      size: "15 to 19px"
+      weight: 400
+      sample: "A free 30-minute call for business owners. Bring a task that eats hours or a question nobody can answer. We work on it live, and you leave with something that works."
+    - id: label
+      name: Small caps label
+      family: Sans
+      class: ".eyebrow / .of-step span"
+      size: "9 to 11px, letter-spacing .2em, caps"
+      weight: 800
+      sample: "30 MINUTES · ON VIDEO"
+    - id: fine
+      name: Fine print
+      family: Sans
+      class: ".ff-below / .cta-note"
+      size: 13px
+      weight: 400
+      sample: "No cost and no commitment. Pick a time that suits you."
+  do:
+    - Pair one serif or heavy headline with sans body.
+    - Use italics for the accent line of a headline.
+    - Reuse a size from this scale.
+  dont:
+    - Add a new font size or a new font.
+    - Set long body copy in caps.
+    - Use more than one headline style in one section.
+
+spacing:
+  container: "width min(1380px, 100% - 48px), centered (.section-shell)"
+  gutter_phone: "16px each side under 560px, 22px from 560px, 24 to 28px on tablets"
+  breakpoints: { phone: "under 560px", tablet: "768px", nav_appears: "900px", desktop: "1180px", check_widths: [390, 1440] }
+  grid: "Cards stack on phones; 3 columns from 900px (.of-grid.of-3); 4 columns from 1180px (.of-grid.of-4). Gap 14px."
+  section_rhythm: "About 65 to 110px between sections; 40px from heading to the content under it."
+  radius:
+    - { what: Buttons, value: 12px }
+    - { what: Free call panel, value: 14px }
+    - { what: Header bar, value: 18px }
+    - { what: Step cards, value: 20px }
+    - { what: Offer cards, value: 22px }
+    - { what: Live dot, value: 50% }
+  borders: "1px hairlines in --line. Panels may add a 2px accent bar on the top-left edge (.ff-panel)."
+
+imagery:
+  items:
+    - name: The knight
+      file: /hero-knight.webp
+      use: Homepage hero only. The chess knight from the WAC Magazine ad, faded at the edges into the ink background.
+    - name: Patrick's portrait
+      file: /patrick-christell-2026.jpg
+      use: Contact section, next to his name and the "Principal" label.
+    - name: Background field
+      use: "A faint moving star field (canvas #field), a grain overlay (.noise) and a soft glow that follows the cursor. Site-wide, behind everything. You are looking at it now."
+  icons: "No icon set. Arrows in text (→ ↗ ↑) and the green live dot are the only symbols."
+  do:
+    - Use real images of real things (the knight, Patrick).
+    - Let images fade into the dark background.
+  dont:
+    - Use stock photos of people in offices or glowing robot brains.
+    - Add icon sets or emoji to cards.
+
+components:
+  # id matches a live example on the visual page, drawn with the real site classes.
+  - id: button-primary
+    name: Primary button
+    class: ".button.button-primary"
+    use: "The one main action in a section. Pearl-to-lavender fill, ink text, caps, 12px radius, lifts 2px on hover."
+    do: ["BOOK THE FREE CALL", "One per section."]
+    dont: ["SEE THE $1,000 OFFER (no prices or $ in buttons)", "Find your first fix (only one name for booking)", "Two primary buttons side by side"]
+  - id: button-ghost
+    name: Ghost button
+    class: ".button.button-ghost"
+    use: "The second action. Transparent with a --line-strong border."
+    do: ["SEE TRAINING with \"Workshops from $249\" beside it", "At most one next to a primary button"]
+    dont: ["Using a ghost button for booking the call", "Three or more buttons in a row"]
+  - id: header
+    name: Header and nav
+    class: ".site-header"
+    use: "Fixed glass bar: wordmark left, caps nav links center, BOOK THE FREE CALL right. On phones, the nav folds into a MENU button."
+    do: ["Same header on every page", "The header button always says BOOK THE FREE CALL"]
+    dont: ["A different nav on service or research pages", "Links to /agents/ pages in the header (they confused business visitors)"]
+  - id: eyebrow
+    name: Eyebrow with live dot
+    class: ".eyebrow + .live-dot"
+    use: "A small caps line above a headline. The green live dot marks something that is running right now."
+    do: ["LIVE DEMONSTRATION · RUNNING ON MY LOCAL AI", "Use the dot only for things that are actually live"]
+    dont: ["A dot on something that isn't running", "An eyebrow on every block"]
+  - id: label
+    name: Small caps label
+    class: ".of-step > span / .of-card small"
+    use: "Numbered or category label at the top of a card, in --accent-2."
+    do: ["01 · ACCESS", "RECRUITING · NAME UNDER NDA"]
+    dont: ["A label that repeats the card title", "The dealership's name"]
+  - id: ff-panel
+    name: Offer panel
+    class: ".ff-panel"
+    use: "The one panel that carries the offer. Flat dark gradient, hard 1px border, 2px accent bar top-left, heavy caps headline, price side with the button."
+    do: ["One idea: one problem, fixed on a free call", "Price or \"Free\" in the side column, never on the button"]
+    dont: ["A second offer inside the panel", "More than one panel like this per page"]
+  - id: of-card
+    name: Offer card
+    class: ".of-card"
+    use: "One offer per card: label, serif title, short body, price and a ghost button at the foot."
+    do: ["Price in .of-price with a small caption (\"Workshops from\")", "Button names the page it opens (SEE TRAINING)"]
+    dont: ["A price inside the button", "Bullet lists longer than four lines"]
+  - id: of-step
+    name: Step card
+    class: ".of-step"
+    use: "A point in an argument or a step. Label, serif question or title, one or two plain sentences."
+    do: ["Can they cut you off?", "Answer in one or two sentences"]
+    dont: ["Feature jargon (\"real-time pipeline\")", "Future tense (\"will track\")"]
+  - id: case-verdict
+    name: Quote block
+    class: ".case-verdict"
+    use: "A client's own words, with a 2px accent rule on the left."
+    do: ["The owner's verdict: \"Exceptional.\""]
+    dont: ["Made-up or paraphrased quotes", "Naming the dealership"]
+  - id: ev-tag
+    name: Evidence tag
+    class: ".ev-tag (.ev-client, .ev-research, .ev-demo)"
+    use: "A pill that says what kind of evidence a block is."
+    do: ["CLIENT RESULT for real client work", "DEMO for the sample businesses"]
+    dont: ["Calling a demo result a client result"]
+  - id: link
+    name: Text link
+    class: ".of-note a"
+    use: "--accent-2, underlined, with an arrow when it moves you somewhere. (Links inside .ff-below are only styled this way in the hero; elsewhere they show as plain gray text.)"
+    do: ["Start with one free call →", "Every link lands on a styled page that matches its label"]
+    dont: ["Links to raw .md, .txt or .json files for visitors", "\"Click here\""]
+
+voice:
+  summary: "Plain English, present tense, outcomes first. Patrick talking to an owner across a desk."
+  rules:
+    - { rule: Plain English, do: "We work on it live, and you leave with something that works.", dont: "Leverage agentic workflows to unlock value." }
+    - { rule: Present tense, do: "ICONIC tracks every truck.", dont: "ICONIC will track every truck." }
+    - { rule: "Outcomes, not features", do: "You see a rival's price cut the same day.", dont: "Real-time competitive monitoring pipeline." }
+    - { rule: No em dashes, do: "One problem. One fix.", dont: "One problem — one fix." }
+    - { rule: No hype words, do: "useful, works, pays back", dont: "magic, genius, revolutionary, unlock" }
+    - { rule: "\"Connections\", never \"links\", for what the AI learns", do: "It found 96 connections nobody told it.", dont: "It found 96 links." }
+    - { rule: Never name the dealership client, do: "an auto dealership", dont: "the dealership's name or city" }
+    - { rule: Numbers stay true, do: "$4,472 price gap measured", dont: "$4,472 recovered" }
+    - { rule: No size or startup screens, do: "For business owners.", dont: "For 10 to 200 people. Not for startups." }
+  buttons:
+    booking_label: BOOK THE FREE CALL
+    booking_url: https://calendly.com/patrick-iconic/30min
+    rules:
+      - "One action, one name, everywhere. Booking is always BOOK THE FREE CALL."
+      - "No $ or prices in button labels. Put the price in the text beside the button."
+      - "One primary button per section, plus at most one ghost button."
+      - "Every button lands on a styled page that matches its label. Click it in a real browser before calling it done."
+
+code_rules:
+  - "Use the color tokens (set in styles.css :root; seven get their final value in mobile-first.css :root). No new font-size, color or spacing values."
+  - "No per-page <style> blocks and no inline style=\"\" for anything visual."
+  - "Design changes go to /preview/ first and reach the live site only after Patrick says so."
+  - "Check every change at 1440px and 390px wide: no sideways scroll, no overlapping text."
+
+open_questions:
+  # Shown on the page as undecided. Not rules yet.
+  - "Patrick called the pulsing dot badge, caps eyebrows and serif-with-italic-word headlines part of the \"Claude look\" (2026-11-22). They are documented here as they are today. Nothing is removed until he decides."
+  - "STYLE_GUIDE.md once asked for 0 to 4px button corners. The site uses 12px. This guide shows 12px because that is what is live."

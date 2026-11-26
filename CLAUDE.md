@@ -5,7 +5,7 @@
 These are Patrick's standing instructions. **His newest instruction wins.** When he changes his mind, edit this file in the same commit as the change, replacing the old rule rather than adding a conflicting one.
 
 ## Styling
-- **Read [STYLE_GUIDE.md](STYLE_GUIDE.md) before any copy or design change.** It is the style guide for words, buttons, look, type and color.
+- **Read [style-guide.yaml](style-guide.yaml) before any copy or design change.** It is the machine-readable style guide (logo, color, type, components, spacing, imagery, voice) and the single source: the visual guide at /preview/style-guide/ is rendered from it, and [STYLE_GUIDE.md](STYLE_GUIDE.md) is the same rules as text. If they disagree, the YAML wins. After changing color tokens, run `python3 scripts/check-style-guide.py`.
 - One design system. All font sizes, colors and spacing come from shared CSS custom properties (tokens) in the shared stylesheet. Do not introduce new font-size, color or spacing values.
 - No per-page `<style>` blocks and no inline `style=""` for anything visual. Fix the shared stylesheet instead of patching a page.
 - Change the system, not the instance: a sitewide look change is made once, in the stylesheet.
