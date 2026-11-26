@@ -25,7 +25,7 @@
 .rv-endpoint-label { display: flex; justify-content: space-between; gap: 12px; padding: 12px 16px 0; color: var(--accent-2); font-size: 10px; font-weight: 800; letter-spacing: .2em; }
 .rv-endpoint-label span:last-child { color: #8d94a9; font-weight: 600; letter-spacing: .12em; }
 .rv-endpoint-row { display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 16px; }
-.rv-endpoint code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; color: var(--pearl); font: 500 14px/1.4 "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; scrollbar-width: none; }
+.rv-endpoint code { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; color: var(--pearl); font: 500 14px/1.4 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; scrollbar-width: none; }
 .rv-endpoint code::-webkit-scrollbar { display: none; }
 .rv-disclose { max-width: 760px; margin: 16px 0 0; color: #8d94a9; font-size: 13px; line-height: 1.6; }
 .rv-disclose b { color: #c9ccda; font-weight: 600; }
@@ -123,7 +123,7 @@
 .rv-step .rv-panel p { margin: 12px 0 0; color: #8d94a9; font-size: 13px; line-height: 1.6; }
 
 .rv-code { position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; margin: 12px 0 0; border: 1px solid rgba(255,255,255,.12); border-radius: 14px; background: rgba(4,5,12,.72); }
-.rv-code pre { flex: 1 1 0; min-width: 0; margin: 0; padding: 16px; overflow-x: auto; color: #dfe2ff; font: 500 13px/1.6 "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.rv-code pre { flex: 1 1 0; min-width: 0; margin: 0; padding: 16px; overflow-x: auto; color: #dfe2ff; font: 500 13px/1.6 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; }
 .rv-code .rv-copy { margin: 9px 9px 9px 0; }
 .rv-code pre.rv-wrap { white-space: pre-wrap; overflow-wrap: anywhere; }
 .rv-code-label { display: block; flex-basis: 100%; padding: 10px 16px 0; color: #7f859a; font-size: 9px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
@@ -140,13 +140,13 @@
 .rv-tool summary { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 4px 12px; padding: 14px 20px; cursor: pointer; list-style: none; }
 .rv-tool summary::-webkit-details-marker { display: none; }
 .rv-tool summary:hover { background: rgba(255,255,255,.03); }
-.rv-tool code { color: var(--pearl); font: 500 13px/1.4 "IBM Plex Mono", ui-monospace, Menlo, monospace; overflow-wrap: anywhere; }
+.rv-tool code { color: var(--pearl); font: 500 13px/1.4 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; overflow-wrap: anywhere; }
 .rv-tool summary > span { grid-column: 1; color: #9ea4b9; font-size: 13px; line-height: 1.5; }
 .rv-tool summary > i { grid-row: 1 / span 2; grid-column: 2; align-self: center; color: #7f859a; font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: .16em; white-space: nowrap; }
 .rv-tool[open] summary > i { color: var(--accent-2); }
 .rv-params { margin: 0; padding: 4px 20px 18px; display: grid; gap: 6px; }
 .rv-params div { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; padding: 8px 12px; border-radius: 10px; background: rgba(255,255,255,.03); font-size: 12px; }
-.rv-params dt { color: var(--pearl); font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+.rv-params dt { color: var(--pearl); font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; }
 .rv-params dd { margin: 0; color: #8d94a9; }
 .rv-params dd b { color: var(--warning); font-weight: 600; }
 .rv-params .rv-none { color: #8d94a9; background: none; padding: 4px 0; }
@@ -193,7 +193,7 @@
 .rv-out { border: 1px solid var(--line); border-radius: 20px; background: rgba(4,5,12,.45); overflow: hidden; }
 .rv-out-head { display: grid; gap: 12px; padding: 20px; border-bottom: 1px solid var(--line); }
 .rv-out-head .rv-meta { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; color: #7f859a; font-size: 11px; }
-.rv-out-head .rv-meta code { color: #aeb3c7; font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: 11px; }
+.rv-out-head .rv-meta code { color: #aeb3c7; font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; font-size: 11px; }
 .rv-verdict { margin: 0; font-family: Georgia, serif; font-size: clamp(26px, 6vw, 38px); font-weight: 400; letter-spacing: -.03em; line-height: 1.08; }
 .rv-verdict.no { color: var(--warning); }
 .rv-out-grid { display: grid; grid-template-columns: minmax(0,1fr); }
@@ -207,7 +207,7 @@
 .rv-out-grid dd { margin: 0; color: #d7dae5; font-size: 14px; line-height: 1.5; }
 .rv-raw { border-top: 1px solid var(--line); }
 .rv-raw summary { padding: 14px 20px; color: #aeb3c7; font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; }
-.rv-raw pre { margin: 0; max-height: 420px; overflow: auto; padding: 0 20px 20px; color: #b9c0ff; font: 12px/1.55 "IBM Plex Mono", ui-monospace, Menlo, monospace; white-space: pre; }
+.rv-raw pre { margin: 0; max-height: 420px; overflow: auto; padding: 0 20px 20px; color: #b9c0ff; font: 12px/1.55 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; white-space: pre; }
 
 .rv-error { padding: 16px 18px; border: 1px solid rgba(255,159,186,.35); border-radius: 16px; background: rgba(255,159,186,.06); color: #f3d6de; font-size: 14px; line-height: 1.55; }
 .rv-error strong { display: block; margin-bottom: 4px; color: var(--danger); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
@@ -219,7 +219,7 @@
 .rv-chain li.done::before { background: var(--success); border-color: var(--success); box-shadow: 0 0 10px rgba(185,255,210,.6); }
 .rv-chain b { color: var(--accent-2); font-size: 9px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
 .rv-chain span { color: #d7dae5; font-size: 14px; line-height: 1.5; }
-.rv-chain small { color: #7f859a; font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: 11px; overflow-wrap: anywhere; }
+.rv-chain small { color: #7f859a; font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; font-size: 11px; overflow-wrap: anywhere; }
 .rv-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .rv-compare div { padding: 14px; border: 1px solid var(--line); border-radius: 14px; }
 .rv-compare small { display: block; color: #7f859a; font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
@@ -250,7 +250,7 @@
 .rv-resources { display: grid; grid-template-columns: minmax(0,1fr); gap: 8px; margin-top: 26px; }
 .rv-resources a { display: flex; justify-content: space-between; gap: 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; color: #c9ccda; font-size: 13px; transition: border-color .2s, background .2s; }
 .rv-resources a:hover { border-color: var(--line-strong); background: rgba(255,255,255,.03); }
-.rv-resources a span:last-child { color: #7f859a; font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: 11px; text-align: right; overflow-wrap: anywhere; }
+.rv-resources a span:last-child { color: #7f859a; font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; font-size: 11px; text-align: right; overflow-wrap: anywhere; }
 .rv-close { margin-top: 100px; }
 
 .rv-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -340,7 +340,7 @@
 .rv-pass-agent { margin-top: 18px; display: grid; gap: 12px; }
 .rv-pass-agent small { color: var(--accent-2); font-size: 10px; font-weight: 800; letter-spacing: .2em; }
 .rv-pass-agent p { margin: 0; color: #c9ccda; font-size: 14px; line-height: 1.6; }
-.rv-pass-agent code { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; font-size: 12.5px; color: #dfe2f5; overflow-wrap: anywhere; }
+.rv-pass-agent code { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; font-size: 12.5px; color: #dfe2f5; overflow-wrap: anywhere; }
 @media (min-width: 900px) { .rv-pass { grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); align-items: start; } }
 .rv-pass > *, .rv-pass-agent, .rv-pass-agent > * { min-width: 0; }
 .rv-pass-agent .rv-code pre { overflow-x: auto; }

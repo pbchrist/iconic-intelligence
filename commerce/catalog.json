@@ -16,12 +16,12 @@
   },
   "offerings": [
     {
-      "id": "ai-evaluation",
-      "name": "Business AI Evaluation",
-      "price_usd": 1000,
-      "availability": "scope_and_purchase_arranged_with_merchant",
+      "id": "free-call",
+      "name": "The free call",
+      "price_usd": 0,
+      "availability": "book_online",
       "type": "professional_service",
-      "description": "Evaluate where the business is losing time or revenue, identify viable AI and agent workflows, and deliver a prioritized plan with evidence and feasibility.",
+      "description": "A free 30-minute call where one business problem gets worked on live. If it works, ICONIC continues on a monthly retainer priced with the client.",
       "url": "https://iconic.onl/commerce/#evaluation",
       "next_step": "https://calendly.com/patrick-iconic/30min"
     },

@@ -17,10 +17,10 @@ These are Patrick's standing instructions. **His newest instruction wins.** When
 - Pushing to main rebuilds gh-pages with rsync --delete: port any gh-pages-only commits first.
 - Rollback: branch `rollback/pre-first-fix-2026-11-24` / tag `live-2026-11-24-before-first-fix` (homepage before the First Fix went live); `rollback/pre-golive-2026-11-18` (site before the 2026-11-18 preview went live); older: `rollback/pre-launch-2026-11-17`; old homepage at /classic/.
 
-## Copy and offers (as of 2026-11-17)
-- Homepage (live 2026-11-24, from the approved /preview/): hero "Move first." with the WAC-ad knight, then The First Fix ($1,000, one problem, one agreed result), dealership proof, training/build/ongoing, "Who holds the keys?", demo. Workshops line under the hero buttons. The AIpocalypse lives on /aipocalypse/ and the homepage links to it.
+## Copy and offers (as of 2026-11-26)
+- Homepage (live 2026-11-26): hero "Move first." with the WAC-ad knight, then the free call ("Bring one problem. I'll fix it on the call."), proof, training/build/retainer cards, "Who holds the keys?", demo. Every booking button says BOOK THE FREE CALL and opens Calendly. The $1,000 First Fix and the $1,000 Evaluation are retired; /services/evaluation/ redirects to /#first-fix. Rollback for this change: tag `live-2026-11-26-before-free-call`.
 - The full AIpocalypse + "AI you own" argument also lives at /aipocalypse/ (2026-11-24, copied word for word from the homepage). The /preview/ homepage links to it instead of carrying it. When the preview goes live, the homepage keeps a link to /aipocalypse/; never drop that content.
-- Prices: The First Fix $1,000 (homepage lead offer); Evaluation $1,000 (whole-business review, /services/evaluation/); Training $249 workshop / $1,000 private / $3,000 team (flat, no tax added); Builds from $10,000, by invitation. No small single-agent offer.
+- Prices: the first call is free; the monthly retainer has no published price; Training $249 workshop / $1,000 private / $3,000 team (flat, no tax added); Builds from $10,000, by invitation. No small single-agent offer. Never put a company-size or "not for startups" screen on the page.
 - Plain words. No "magic" or "genius". The $4,472 figure is a measured price gap, not revenue recovered.
 - The homepage and preview do not link to the agent pages (/agents/…) — no menu item, section or footer link (Patrick, 2026-11-24: they confused business visitors). The agent pages stay up for AI tools via sitemap, llms.txt and manifests.
 - Agent pages state only what the live catalog says is for sale (check `/mpp-catalog/offers`); no internal status notes ("checkout unavailable", "not yet verified") on public pages.

@@ -72,7 +72,7 @@
 .selection-page .st-index{display:block;font-size:10px;letter-spacing:.22em;font-weight:800;color:var(--accent-2)}
 .selection-page .st-steps h3{margin:66px 0 13px;font-weight:900;font-size:17px;letter-spacing:-.025em}
 .selection-page .st-steps p,.selection-page .st-findings p{margin:0;color:#aeb3c7;font-size:13px;line-height:1.73}
-.selection-page code{color:#cdd1ff;font:500 .9em/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
+.selection-page code{color:#cdd1ff;font:500 .9em/1.5 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;overflow-wrap:anywhere}
 .selection-page .st-findings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;margin-top:62px}
 .selection-page .st-findings article{min-width:0;border-top:1px solid var(--line-strong);padding-top:22px}
 .selection-page .st-findings h3{margin:33px 0 14px;font:400 clamp(27px,2.3vw,39px)/1.1 Georgia,serif;letter-spacing:-.035em}

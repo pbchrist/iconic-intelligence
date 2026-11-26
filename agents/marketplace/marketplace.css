@@ -24,7 +24,7 @@
 .mk .product p { margin: 0; color: #9ea4b9; font-size: 14px; line-height: 1.6; }
 .mk .product p strong { color: var(--pearl); font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif; font-size: 18px; font-weight: 900; letter-spacing: -.03em; }
 .mk .product .label { color: #7f859a; font-size: 12px; line-height: 1.5; }
-.mk code { color: #c9ccda; font: 500 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow-wrap: anywhere; }
+.mk code { color: #c9ccda; font: 500 12px/1.5 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; overflow-wrap: anywhere; }
 .mk .buy-action { align-self: flex-start; margin-top: auto; min-height: 44px; padding: 0 18px; border: 0; border-radius: 12px; color: #090b14; background: linear-gradient(135deg, #f5f2e9, #d9deff); font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
 .mk .buy-action:disabled { opacity: .45; cursor: default; }
 .mk .buy-action:focus-visible, .mk .form-controls input:focus-visible, .mk .form-controls textarea:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
